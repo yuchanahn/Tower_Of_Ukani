@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Creature
+  - Solid Obj
+  - One Way Obj
+  - Damage Obj
+  - Interactable Obj
+  - IW Creature
+  - IW Solid Obj
+  - IW One Way Obj
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 3047294927
+    locked: 0
+  - name: Tile_Wall
+    uniqueID: 678392091
+    locked: 0
+  - name: Tile_Block
+    uniqueID: 3645757871
+    locked: 0
+  - name: Tile_Object
+    uniqueID: 3587576517
+    locked: 0
+  - name: Creature
+    uniqueID: 2431966231
+    locked: 0
+  - name: Object
+    uniqueID: 3156682297
+    locked: 0
+  - name: Effect
+    uniqueID: 832114591
+    locked: 0
+  - name: FG
+    uniqueID: 3631126793
+    locked: 0

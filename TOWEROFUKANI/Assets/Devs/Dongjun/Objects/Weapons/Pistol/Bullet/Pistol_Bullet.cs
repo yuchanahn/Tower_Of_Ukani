@@ -1,0 +1,79 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Pistol_Bullet : PoolingObj
+{
+    [Header("Projectile Stats")]
+    [SerializeField]
+    private int damage = 1;
+    [SerializeField]
+    private float flySpeed = 50f;
+    [SerializeField]
+    private float maxDist = 20f;
+
+    [Header("Object Detection")]
+    [SerializeField]
+    private Vector2 detectPos;
+    [SerializeField]
+    private Vector2 detectSize;
+    [SerializeField]
+    private LayerMask detectLayers;
+
+    private float curDist = 0;
+
+    protected override void ResetOnActive()
+    {
+        curDist = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        transform.Translate(flySpeed * Time.fixedDeltaTime * transform.right, Space.World);
+        DestoryOnMaxDist();
+        DetectObject();
+    }
+
+    private void DetectObject()
+    {
+        Vector2 pos = (Vector2)transform.position + (transform.right * detectPos) - (Vector2)(transform.right * (flySpeed * Time.fixedDeltaTime));
+        float rot = transform.rotation.eulerAngles.z;
+
+        RaycastHit2D[] hits = 
+            Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, flySpeed * Time.fixedDeltaTime, detectLayers);
+
+        if (hits.Length != 0)
+        {
+            bool hasHit = false;
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                hasHit = false;
+
+                if (hits[i].collider.CompareTag("Player"))
+                    continue;
+
+                hasHit = true;
+
+                // TO DO: 여기서 데미지를 주세요.
+                //IDamageable damageable = hits[i].collider.GetComponent<IDamageable>();
+                //if (damageable == null)
+                //    continue;
+
+                //damageable.TakeDamage(damage);
+                ObjPoolingManager.Sleep(this);
+                return;
+            }
+
+            if (hasHit)
+                ObjPoolingManager.Sleep(this);
+        }
+    }
+    private void DestoryOnMaxDist()
+    {
+        curDist += flySpeed * Time.fixedDeltaTime;
+
+        if (curDist >= maxDist)
+            ObjPoolingManager.Sleep(this);
+    }
+}
