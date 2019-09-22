@@ -75,7 +75,9 @@ public class Player_Movement_Action : CLA_Action,
     {
         // Update Ground Detection Size
         groundDetectionData.size = oneWayCollider.size * transform.localScale;
-
+    }
+    public override void OnLateUpdate()
+    {
         // Look At Mouse
         LookAtMouse_Logic.FlipY(CommonObjs.Inst.MainCam, spriteRoot, transform);
     }
@@ -136,7 +138,7 @@ public class Player_Movement_Action : CLA_Action,
             {
                 animator.Play("Player_Jump");
 
-                if (PlayerInputManager.Inst.Input_Jump)
+                if (jumpData.count_Cur > 0 && PlayerInputManager.Inst.Input_Jump)
                     animator.Play("Player_Jump", 0, 0f);
             }
         }

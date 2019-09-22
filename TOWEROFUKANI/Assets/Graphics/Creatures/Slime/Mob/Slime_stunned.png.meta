@@ -4,16 +4,16 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -3477625420718524681
-    second: Slime_stunned_0
+    second: Slime_Stunned_0
   - first:
       213: 4981831345553158721
-    second: Slime_stunned_1
+    second: Slime_Stunned_1
   - first:
       213: -8070393399774971143
-    second: Slime_stunned_2
+    second: Slime_Stunned_2
   - first:
       213: 2898795114264667309
-    second: Slime_stunned_3
+    second: Slime_Stunned_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slime_stunned_0
+      name: Slime_Stunned_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,7 +118,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,7 +131,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_stunned_1
+      name: Slime_Stunned_1
       rect:
         serializedVersion: 2
         x: 48
@@ -139,7 +139,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,7 +152,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_stunned_2
+      name: Slime_Stunned_2
       rect:
         serializedVersion: 2
         x: 96
@@ -160,7 +160,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_stunned_3
+      name: Slime_Stunned_3
       rect:
         serializedVersion: 2
         x: 144
@@ -181,7 +181,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

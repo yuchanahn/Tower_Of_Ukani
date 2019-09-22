@@ -14,22 +14,26 @@ public abstract class CLA_Main : MonoBehaviour
 
     private void Awake()
     {
+        if (defaultAction == null)
+        {
+            Debug.LogError("It Needs Default Action!");
+        }
+
         Init();
     }
     private void Start()
     {
-        if (defaultAction == null)
-            Debug.LogError("It Needs Default Action!");
-
         CurrentAction = defaultAction;
         CurrentAction?.OnStart();
     }
     private void Update()
     {
         CurrentAction?.OnUpdate();
-
-        if (CurrentAction != null && ConditionLogics.ContainsKey(CurrentAction))
-            ConditionLogics[CurrentAction]?.Invoke();
+        CheckCondition();
+    }
+    private void LateUpdate()
+    {
+        CurrentAction?.OnLateUpdate();
     }
     private void FixedUpdate()
     {
@@ -42,5 +46,10 @@ public abstract class CLA_Main : MonoBehaviour
         CurrentAction?.OnEnd();
         CurrentAction = action;
         CurrentAction?.OnStart();
+    }
+    private void CheckCondition()
+    {
+        if (CurrentAction != null && ConditionLogics.ContainsKey(CurrentAction))
+            ConditionLogics[CurrentAction]?.Invoke();
     }
 }

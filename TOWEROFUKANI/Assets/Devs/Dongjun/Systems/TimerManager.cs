@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-// READ ME:
-// - TimerData의 Init() 함수를 꼭 Awake()에서 실행 시켜 주세요!
-// - 타이머가 최대 시간에 도달하면 자동으로 멈춤니다. 다시 실행하려면 Continue() 함수를 실행하세요.
-
-[System.Serializable]
+[Serializable]
 public class TimerData
 {
     // Timer State
@@ -17,17 +13,20 @@ public class TimerData
 
     // Time Data
     [HideInInspector]
-    public float Timer_Cur = 0;
-    public float Timer_Max = 0;
+    public float Timer_Cur = 0; // 타이머의 현재 시간.
+    public float Timer_Max = 0; // 타이머릐 최대 시간.
 
     // Actions
     private Action OnTimerTick;
     private Action OnTimerMax;
 
-    public void Init(GameObject self)
-    {
-        TimerManager.Inst.AddTimer(self, this);
-    }
+
+    /// <summary>
+    /// 타이머를 사용하려면 이 함수를 무조건 Start()에서 실행 시켜 주세요!!!
+    /// </summary>
+    /// <param name="self">게임오브젝트(자기자신).</param>
+    /// <param name="OnTimerTick">타이머가 틱 될때 마다(LateUpdate) 실행되는 함수.</param>
+    /// <param name="OnTimerMax">타이머가 최대 시간에 도달하면 실행되는 함수.</param>
     public void Init(GameObject self, Action OnTimerTick = null, Action OnTimerMax = null)
     {
         TimerManager.Inst.AddTimer(self, this);
@@ -36,10 +35,29 @@ public class TimerData
         this.OnTimerMax = OnTimerMax;
     }
 
+    /// <summary>
+    /// 타이머 이벤트를 설정하는 함수.
+    /// </summary>
+    /// <param name="OnTimerTick">타이머가 틱 될때 마다(LateUpdate) 실행되는 함수.</param>
+    /// <param name="OnTimerMax">타이머가 최대 시간에 도달하면 실행되는 함수.</param>
+    public void SetOnTimerMethod(Action OnTimerTick = null, Action OnTimerMax = null)
+    {
+        this.OnTimerTick = OnTimerTick;
+        this.OnTimerMax = OnTimerMax;
+    }
+
+    /// <summary>
+    /// 타이머의 현재 상태를 설정하는 함수.
+    /// </summary>
+    /// <param name="active">true: 작동함, false: 멈춤.</param>
     public void SetActive(bool active)
     {
         IsActive = active;
     }
+
+    /// <summary>
+    /// 이 함수는 자동으로 실행됩니다. 외부에서 사용하지 마십시오.
+    /// </summary>
     public void Tick()
     {
         if (!IsActive || IsTimerAtMax)
@@ -55,7 +73,15 @@ public class TimerData
             Timer_Cur = 0;
         }
     }
+
+    /// <summary>
+    /// 타이머가 최대 시간에 도달하면 자동으로 멈춤니다. 다시 시작하려면 이 함수를 실행 시켜주세요.
+    /// </summary>
     public void Continue() => IsTimerAtMax = false;
+
+    /// <summary>
+    /// 현재 타이머를 최대 시간으로 바꿔줍니다. (바로 OnTimerMax에 등록된 함수를 실행하고 싶을 때 쓰면 좋습니다.)
+    /// </summary>
     public void SetToMax() => Timer_Cur = Timer_Max;
 }
 

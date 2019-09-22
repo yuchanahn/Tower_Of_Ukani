@@ -12,23 +12,31 @@ public class ObjPoolingManager : MonoBehaviour
 {
     private static ObjPoolingManager Inst;
 
-    private static Dictionary<PoolingObj, HashSet<PoolingObj>> pool_Active = new Dictionary<PoolingObj, HashSet<PoolingObj>>();
-    private static Dictionary<PoolingObj, Queue<PoolingObj>> pool_Sleeping = new Dictionary<PoolingObj, Queue<PoolingObj>>();
-
-    [Header("Parent of Pooling Objects")]
+    #region Var: Inspector
+    [Header("Default Parent Obj of Pooling Objects")]
     [SerializeField]
-    private Transform poolParent;
+    private Transform defaultPoolParent;
 
     [Header("Spawn Object On Start")]
     [SerializeField]
     private StartPoolData[] startPoolData;
+    #endregion
 
+    #region Var: Pool Data
+    private static Dictionary<PoolingObj, HashSet<PoolingObj>> pool_Active = new Dictionary<PoolingObj, HashSet<PoolingObj>>();
+    private static Dictionary<PoolingObj, Queue<PoolingObj>> pool_Sleeping = new Dictionary<PoolingObj, Queue<PoolingObj>>();
+    #endregion
+
+    #region Method: Unity
     private void Awake()
     {
         Inst = this;
 
         SetUpStartPool();
     }
+    #endregion
+
+    #region Method: Private
     private void SetUpStartPool()
     {
         if (startPoolData != null)
@@ -49,16 +57,16 @@ public class ObjPoolingManager : MonoBehaviour
                     }
 
                     PoolingObj obj = Instantiate(prefab);
-                    obj.prefab = prefab;
+
                     pool_Sleeping[prefab].Enqueue(obj);
 
-                    obj.transform.SetParent(Inst.poolParent);
+                    obj.InitPoolingObj(prefab);
+                    obj.transform.SetParent(Inst.defaultPoolParent);
                     obj.gameObject.SetActive(false);
                 }
             }
         }
     }
-
     private static PoolingObj ActivateObj(PoolingObj prefab)
     {
         if (!pool_Active.ContainsKey(prefab))
@@ -71,34 +79,41 @@ public class ObjPoolingManager : MonoBehaviour
 
         pool_Active[prefab].Add(obj);
 
-        obj.prefab = prefab;
-        obj.transform.SetParent(Inst.poolParent);
+        obj.InitPoolingObj(prefab);
+        obj.transform.SetParent(Inst.defaultPoolParent);
         obj.gameObject.SetActive(true);
 
         return obj;
     }
-    public static void Activate(PoolingObj prefab, Transform transform)
+    #endregion
+
+    #region Method: Public
+    public static GameObject Activate(PoolingObj prefab, Vector2 pos, Quaternion rot)
     {
         PoolingObj obj = ActivateObj(prefab);
-
-        obj.transform.position = transform.position;
-        obj.transform.rotation = transform.rotation;
-    }
-    public static void Activate(PoolingObj prefab, Vector2 pos, Quaternion rot)
-    {
-        PoolingObj obj = ActivateObj(prefab);
-
         obj.transform.position = pos;
         obj.transform.rotation = rot;
+
+        return obj.gameObject;
+    }
+    public static GameObject Activate(PoolingObj prefab, Vector2 pos, Quaternion rot, Transform parent)
+    {
+        PoolingObj obj = ActivateObj(prefab);
+        obj.transform.position = pos;
+        obj.transform.rotation = rot;
+        obj.transform.SetParent(parent);
+
+        return obj.gameObject;
     }
     public static void Sleep(PoolingObj obj)
     {
-        if (!pool_Active.ContainsKey(obj.prefab) ||
-            !pool_Active[obj.prefab].Contains(obj))
+        if (!pool_Active.ContainsKey(obj.Prefab) ||
+            !pool_Active[obj.Prefab].Contains(obj))
             return;
 
-        pool_Active[obj.prefab].Remove(obj);
-        pool_Sleeping[obj.prefab].Enqueue(obj);
+        pool_Active[obj.Prefab].Remove(obj);
+        pool_Sleeping[obj.Prefab].Enqueue(obj);
         obj.gameObject.SetActive(false);
     }
+    #endregion
 }

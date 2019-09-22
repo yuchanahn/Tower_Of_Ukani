@@ -6,18 +6,17 @@ public class Pistol_Main_Action : CLA_Action
 {
     #region Var: Inspector
     [Header("Stats")]
-    [SerializeField]
-    private TimerData shootTimer;
-    [SerializeField]
-    private int magazineSize = 6;
+    [SerializeField] private TimerData shootTimer;
+    [SerializeField] private int magazineSize = 6;
 
     [Header("Points")]
-    [SerializeField]
-    private Transform shootPoint;
+    [SerializeField] private Transform shootPoint;
 
     [Header("Prefabs")]
-    [SerializeField]
-    private PoolingObj bulletPrefab;
+    [SerializeField] private PoolingObj bulletPrefab;
+
+    [Header("Effects")]
+    [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
     #region Var: Shoot
@@ -32,30 +31,38 @@ public class Pistol_Main_Action : CLA_Action
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        pistol_Main = GetComponent<Pistol>();
     }
     private void Start()
     {
-        pistol_Main = GetComponent<Pistol>();
-
         shootTimer.Init(gameObject);
         shootTimer.SetToMax();
-
         loadedBulletCount = magazineSize;
     }
 
     public override void OnUpdate()
     {
-        LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, pistol_Main.SpriteRoot.transform, transform);
-
         if (pistol_Main.IsSelected && shootTimer.IsTimerAtMax)
         {
             if (Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
             {
+                // Spawn Bullet
                 ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
-                animator.SetTrigger("Shoot");
+
+                // Continue Timer
                 shootTimer.Continue();
+
+                // Animation
+                animator.SetTrigger("Shoot");
+
+                // Cam Shake Effect
+                CommonObjs.Inst.CamShake.StartShake(camShakeData_Shoot);
             }
         }
+    }
+    public override void OnLateUpdate()
+    {
+        LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
+        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, pistol_Main.SpriteRoot.transform, transform);
     }
 }

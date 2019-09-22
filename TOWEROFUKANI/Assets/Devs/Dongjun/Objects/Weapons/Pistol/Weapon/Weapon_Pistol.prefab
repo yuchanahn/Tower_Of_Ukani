@@ -166,14 +166,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2da784a7e6f9946b4150546268ac06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate:
-    IsActive: 1
+  shootTimer:
     Timer_Cur: 0
     Timer_Max: 0.1
   magazineSize: 6
   shootPoint: {fileID: 2609116015003256820}
   bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
     type: 3}
+  camShakeData_Shoot:
+    angle: 0
+    strength: 0.05
+    maxSpeed: 20
+    minSpeed: 15
+    duration: 0.05
+    noisePercent: 0.1
+    dampingPercent: 0
+    rotationPercent: 0
 --- !u!1 &2609116015003256821
 GameObject:
   m_ObjectHideFlags: 0
