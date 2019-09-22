@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BT;
 
-public class BT_Slime : BT.BT_Base
+public class BT_Slime : BT_Base
 {
     SlimeBlackBoard Bb;
     override protected void Start() 
@@ -13,32 +14,25 @@ public class BT_Slime : BT.BT_Base
     override protected void BT_Set()
     {
         root.node
-        .AddNode(new BT.Service(Bb.SV_AgroCheck, 0.1f))
-        .AddNode(new BT.Selector())
-            .AddNode(new BT.Decorator(Bb.CN_InHurt))
-                .AddNode(new BT.Task(Bb.TA_Hurt))
-                
-                .End()
-            .End()
-            .AddNode(new BT.Decorator(Bb.CN_InAttackRange))
-                .AddNode(new BT.Task(Bb.TA_Attack))
-                
-                .End()
-                .AddNode(new BT.Task(Bb.TA_Run))
-                
-                .End()
+        .AddNode(new Service(Bb.SV_AgroCheck, 0.1f))
+        .AddNode(new Service(Bb.SV_SetRandomDir, 2f))
+        .AddNode(new Selector())
+
+            .AddNode(new Decorator(Bb.CN_InAttackAble))
+                .AddNode(new Task(Bb.TA_Attack))    .TAEnd()
+                .AddNode(new Task(Bb.TA_AttackRun)) .TAEnd()
             .End()
 
-            .AddNode(new BT.Decorator(Bb.CN_InFollowRange))
-                .AddNode(new BT.Task(Bb.TA_Follow))
-                
-                .End()
+            .AddNode(new Decorator(Bb.CN_InFollowRange))
+                .AddNode(new Task(Bb.TA_Follow))    .TAEnd()
+            .End() 
+
+            .AddNode(new Task(Bb.TA_RandomMove))
             .End()
 
-            .AddNode(new BT.Task(Bb.CN_RandomMove))
-            .End()
-        .End()    
-        .End();
+        .End()
+        .SVEnd()
+        .SVEnd();
 
         base.BT_Set();
     }

@@ -59,10 +59,9 @@ namespace BT
             childrens.Add(children);
             return children;
         }
-        public BT_Component End()
-        {
-            return Parent;
-        }
+        public BT_Component End() => Parent;
+        public BT_Component SVEnd() => Parent;
+        public BT_Component TAEnd() => Parent;
 
         abstract public bool Process();
     }

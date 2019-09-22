@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private Vector2 followOffset = new Vector2(0, 0);
 
-    private void LateUpdate()
+    private void Update()
     {
         FollowTarget();
     }

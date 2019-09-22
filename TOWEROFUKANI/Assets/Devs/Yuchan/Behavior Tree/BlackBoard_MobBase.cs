@@ -4,60 +4,40 @@ using UnityEngine;
 
 public class BlackBoard_MobBase : BlackBoard_Base
 {
-    Mob_Base mob;
+    protected Mob_Base mob;
 
-    private void Awake() 
+    private void Awake()
     {
         mob = GetComponent<Mob_Base>();
     }
 
-    internal void SV_AgroCheck()
-    {
-    }
+    #region Action
+    internal bool TA_Follow() => mob.FollowPlayer();
+    internal bool TA_Attack() => mob.Attack();
+    internal bool TA_Hurt() => true;
+    #endregion
+
+    #region Condition
     internal bool CN_InHurt()
     {
         return false;
     }
-    internal bool CN_InFollowRange()
+    internal bool CN_InFollowRange() => mob.InFollowRange;
+
+    internal bool TA_RandomMove()
     {
-        return false;
-    }
-    internal bool CN_RandomMove()
-    {
-        mob.RandomMove();
         return true;
     }
-    internal bool TA_Attack()
-    {
-        return false;
-    }
-    internal bool TA_Hurt()
-    {
-        return false;
-    }
-    internal bool CN_InAttackRange()
-    {
-        return false;
-    }
-
-    internal bool TA_Run()
-    {
-        return false;
-    }
-
-    internal bool TA_Follow()
-    {
-        return false;
-    }
-    #region Action
-
-    #endregion
-
-    #region Condition
-
+    virtual internal bool CN_InAttackAble() => mob.IsKeepAttack ? true : mob.StartAttacking = mob.InAttackRange;
     #endregion
 
     #region Service
-
+    internal void SV_AgroCheck()
+    {
+    }
+    internal void SV_SetRandomDir()
+    {
+        mob.CurDir = mob.RandomDir;
+    }
     #endregion
 }
