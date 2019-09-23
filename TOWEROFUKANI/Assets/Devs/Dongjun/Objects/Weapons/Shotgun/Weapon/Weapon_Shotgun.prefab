@@ -148,16 +148,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootTimer:
     Timer_Cur: 0
-    Timer_Max: 0.1
+    Timer_Max: 0.8
   magazineSize: 6
   pelletCount: 4
-  pelletAngle: 10
+  pelletAngle: 5
   shootPoint: {fileID: 1077788971055575643}
   bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
     type: 3}
   camShakeData_Shoot:
     angle: 0
-    strength: 0.1
+    strength: 0.25
     maxSpeed: 20
     minSpeed: 15
     duration: 0.05
