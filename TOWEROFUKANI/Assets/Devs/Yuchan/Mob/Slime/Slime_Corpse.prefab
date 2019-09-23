@@ -67,16 +67,16 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -844506671
-  m_SortingLayer: -1
+  m_SortingLayerID: -1863001065
+  m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5921656496000236053, guid: 6e7f1fd0b8f8a334cabec7227377ba48,
+  m_Sprite: {fileID: 5921656496000236053, guid: 8868ddb590ebc2145b922cea3a9f8946,
     type: 3}
   m_Color: {r: 0.41555682, g: 1, b: 0.16037738, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.25, y: 0.25}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -92,7 +92,7 @@ Animator:
   m_GameObject: {fileID: 7426353163162593173}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae001ed56b102cd4187ebdc5b660395b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 95be7cc404a54b44ca27bf4f35e708c1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 7426353163216030879}
   - component: {fileID: 7426353163216030878}
   - component: {fileID: 7426353163216030877}
-  - component: {fileID: 7426353163216030873}
+  - component: {fileID: 1026303488}
   m_Layer: 10
   m_Name: Slime_Corpse
   m_TagString: Untagged
@@ -182,7 +182,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7426353163216030873
+--- !u!114 &1026303488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,25 +191,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7426353163216030876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11ea8fc18678734e94a7ea10cce66dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 50e610c40b43ba64a87b0683dd1de1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _timerData:
-    IsActive: 1
     Timer_Cur: 0
     Timer_Max: 3
   _ani: {fileID: 7426353163162593172}
-  _clip: {fileID: 7400000, guid: 6e1891be58e53ba40afcb19079b8745b, type: 2}
-  _count: 10
-  _FrameNum: 4
-  _countRangeMin: 4
-  _countRangeMax: 5
-  bCountRandom: 1
-  _FrameRangeMin: 0
-  _FrameRangeMax: 4
-  bStartRandom: 1
-  _aniStartFrame: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  size: {x: 0.9, y: 0.9}

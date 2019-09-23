@@ -294,12 +294,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 1642866281}
   camShake: {fileID: 1642866282}
---- !u!61 &431317445 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 7371128404420445771, guid: de8e575bfc7541a4cb26f729cf5133df,
-    type: 3}
-  m_PrefabInstance: {fileID: 7371128403827051998}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &470863346
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,11 +401,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
+    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
-      propertyPath: mGroundDetectionData.ignoreGrounds.Array.data[0]
-      value: 
-      objectReference: {fileID: 431317445}
+      propertyPath: mHP
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1 &630429764
@@ -837,6 +831,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136765240}
   m_CullTransparentMesh: 0
+--- !u!1 &1314419366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1314419367}
+  - component: {fileID: 1314419368}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1314419367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314419366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.4285542, y: -3.2209618, z: -1.7514323}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1314419368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314419366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0873a4a4a03522c468edc8be268a9d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolingObjs:
+  - Object: {fileID: 7426353163216030876, guid: 3eb9ba50ec5f39141a7628c8196b7f4e,
+      type: 3}
+    Count: 10
 --- !u!1 &1392804521
 GameObject:
   m_ObjectHideFlags: 0

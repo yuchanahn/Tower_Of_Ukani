@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IHurt
 {
     void OnHurt();
+    void OnDead();
 }

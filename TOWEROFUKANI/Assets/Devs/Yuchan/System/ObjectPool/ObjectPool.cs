@@ -35,6 +35,7 @@ public class ObjectPool : MonoBehaviour
         for (int j = 0; j < poolingObjs[id].Count; j++)
         {
             GameObject GObj = Instantiate(poolingObjs[id].Object, transform);
+            GObj.name = poolingObjs[id].Object.name;
             Object_ObjectPool_Base Pool_Base = GObj.GetComponent<Object_ObjectPool_Base>();
             Pool_Base.SetID(id);
             Pool_Base.SetOff();

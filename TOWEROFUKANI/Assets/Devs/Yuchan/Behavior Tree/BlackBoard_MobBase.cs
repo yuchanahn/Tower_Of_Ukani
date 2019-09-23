@@ -14,20 +14,13 @@ public class BlackBoard_MobBase : BlackBoard_Base
     #region Action
     internal bool TA_Follow() => mob.FollowPlayer();
     internal bool TA_Attack() => mob.Attack();
-    internal bool TA_Hurt() => true;
+    internal bool TA_Hurt() => mob.IsHurt;
+    internal bool TA_RandomMove() => true;
     #endregion
 
     #region Condition
-    internal bool CN_InHurt()
-    {
-        return false;
-    }
+    internal bool CN_InHurt() => mob.IsHurt;
     internal bool CN_InFollowRange() => mob.InFollowRange;
-
-    internal bool TA_RandomMove()
-    {
-        return true;
-    }
     virtual internal bool CN_InAttackAble() => mob.IsKeepAttack ? true : mob.StartAttacking = mob.InAttackRange;
     #endregion
 

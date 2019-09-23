@@ -8,6 +8,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     [SerializeField] private float mAttackRange;
     [SerializeField] private float mFollowRange;
 
+    [SerializeField] private CorpseData mCompseData;
     [SerializeField] private JumpData mJumpData;
     [SerializeField] private GravityData mGravityData;
     [SerializeField] private BoxCollider2D mOneWayCollider;
@@ -20,7 +21,6 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool mbGrounded;
     protected bool mbJumping;
     protected bool mbHurt;
-    protected bool mbKeepHurt;
     protected bool mbKeepAttack;
     protected bool mbAttackEnd = true;
     protected bool mbJumpPress = false;
@@ -35,7 +35,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     protected float PlayerDis => (GM.PlayerPos - transform.position).magnitude;
 
-    public int RandomDir => Random.Range(0, 2) == 0 ? -1 : 1;
+    virtual public int RandomDir => Random.Range(0, 2) == 0 ? -1 : 1;
     public bool IsHurt { get => mbHurt; set => mbHurt = value; }
 
     public bool InFollowRange => PlayerDis < mFollowRange;
@@ -53,14 +53,6 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     private void Update()
     {
-        if (mbHurt)
-        {
-            mAnimator.Play(gameObject.name + "_Hit");
-            mbHurt = false;
-            mbKeepHurt = true;
-        }
-
-
         mGroundDetectionData.size = mOneWayCollider.size * transform.localScale;
     }
 
@@ -69,6 +61,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         if (!mbAttackEnd)
         {
             mAnimator.Play(gameObject.name + "_Attack");
+        }
+        else if (IsHurt)
+        {
+            mAnimator.Play(gameObject.name + "_Hit");
         }
         else if (mbGrounded)
         {
@@ -106,8 +102,12 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         mbJumpPress = true;
     }
 
-    private void HurtEnd() => mbKeepHurt = false;
+    private void HurtEnd() => mbHurt = false;
 
+    virtual protected void ResetAttack()
+    {
+        mbAttackEnd = true;
+    }
 
     virtual protected void OnAttack()
     {
@@ -120,6 +120,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     public void OnHurt()
     {
+        mAnimator.Play(gameObject.name + "_Hit", 0, 0);
+        ResetAttack();
+        CurDir = 0;
         mbHurt = true;
     }
 
@@ -132,5 +135,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public bool Attack()
     {
         return !mbAttackEnd;
+    }
+
+    public virtual void OnDead()
+    {
+        Destroy(gameObject);
+        CorpseMgr.CreateDeadbody(transform ,mCompseData);
     }
 }

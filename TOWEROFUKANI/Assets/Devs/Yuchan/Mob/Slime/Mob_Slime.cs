@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Mob_Slime : Mob_Base
 {
+    [Header("Mob_Slime")]
+    [SerializeField] float mAddSpeed_;
+
     private bool mbAttacking = false;
     private bool mbKeepAttackRun = true;
     private bool mbOnAttackRun = false;
     private int mDir = 0;
 
     public bool IsAttacking => mbAttacking;
+    public override int RandomDir => IsAttacking ? mDir : base.RandomDir;
 
     public bool AttackRun()
     {
@@ -18,7 +22,7 @@ public class Mob_Slime : Mob_Base
             mbOnAttackRun = false;
             CurDir = mDir;
             Jump();
-            mAddSpeed = 2f;
+            mAddSpeed = mAddSpeed_;
         }
         return IsAttacking;
     }
@@ -30,6 +34,12 @@ public class Mob_Slime : Mob_Base
         mDir = GM.PlayerPos.x > transform.position.x ? -1 : 1;
     }
 
+    protected override void ResetAttack()
+    {
+        base.ResetAttack();
+        mbAttacking = false;
+        mAddSpeed = 0;
+    }
     override public void OnGroundEnter()
     {
         base.OnGroundEnter();

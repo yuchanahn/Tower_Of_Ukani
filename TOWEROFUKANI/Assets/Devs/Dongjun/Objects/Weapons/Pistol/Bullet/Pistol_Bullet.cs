@@ -55,12 +55,9 @@ public class Pistol_Bullet : PoolingObj
 
                 hasHit = true;
 
-                // TO DO: 여기서 데미지를 주세요.
-                //IDamageable damageable = hits[i].collider.GetComponent<IDamageable>();
-                //if (damageable == null)
-                //    continue;
+                var mob = hits[i].collider.GetComponent<IDamage>();
+                mob?.Hit(damage);
 
-                //damageable.TakeDamage(damage);
                 ObjPoolingManager.Sleep(this);
                 return;
             }

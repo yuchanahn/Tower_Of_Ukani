@@ -18,6 +18,9 @@ public class BT_Slime : BT_Base
         .AddNode(new Service(Bb.SV_SetRandomDir, 2f))
         .AddNode(new Selector())
 
+            .AddNode(new Decorator(Bb.CN_InHurt))
+                .AddNode(new Task(Bb.TA_Hurt))      .TAEnd()
+            .End()
             .AddNode(new Decorator(Bb.CN_InAttackAble))
                 .AddNode(new Task(Bb.TA_Attack))    .TAEnd()
                 .AddNode(new Task(Bb.TA_AttackRun)) .TAEnd()
