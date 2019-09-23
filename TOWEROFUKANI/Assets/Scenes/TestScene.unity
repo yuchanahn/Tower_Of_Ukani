@@ -120,6 +120,27 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &65444821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7371128404420445770, guid: de8e575bfc7541a4cb26f729cf5133df,
+    type: 3}
+  m_PrefabInstance: {fileID: 7371128403827051998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &65444822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65444821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a956763f063413942a71427ab688d991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSlot:
+  - {fileID: 340327118}
+  - {fileID: 7129133893895371474}
 --- !u!1 &190219477
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +411,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
+--- !u!114 &340327118 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2820249382209617227, guid: de8e575bfc7541a4cb26f729cf5133df,
+    type: 3}
+  m_PrefabInstance: {fileID: 7371128403827051998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdcbb0f01046da8458cedf5e7b69e829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &426372353
 GameObject:
   m_ObjectHideFlags: 0
@@ -37108,6 +37141,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
+--- !u!114 &7129133893895371474 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4565912263870322834, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7789774740899934515}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c205d6157bf1a8844885ee613a506bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7371128403827051998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37188,7 +37233,7 @@ PrefabInstance:
     - target: {fileID: 7371128404914498171, guid: de8e575bfc7541a4cb26f729cf5133df,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8e575bfc7541a4cb26f729cf5133df, type: 3}
