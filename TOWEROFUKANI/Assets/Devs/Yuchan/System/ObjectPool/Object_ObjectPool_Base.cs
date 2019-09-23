@@ -8,7 +8,9 @@ public class Object_ObjectPool_Base : MonoBehaviour
         return -1;
     }
 
-    public virtual void SetID(int id){
+    public virtual void SetID(int id)
+    {
+        
     }
 
 

@@ -1,25 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ParticleObj : PoolingObj
 {
-    [SerializeField] private ParticleSystem[] particleSystem;
+    [SerializeField] private ParticleSystem[] particleSystems;
     [SerializeField] private TimerData destroyTimer;
 
     private void Start()
     {
-        destroyTimer.Init(gameObject, OnTimerMax: DisableSelf);
+        destroyTimer.Init(gameObject, OnTimerMax: DisableOnFinish);
     }
     protected override void ResetOnActive()
     {
         destroyTimer.Continue();
 
-        for (int i = 0; i < particleSystem.Length; i++)
-            particleSystem[i].Play();
+        for (int i = 0; i < particleSystems.Length; i++)
+            particleSystems[i].Play();
     }
 
-    private void DisableSelf()
+    private void DisableOnFinish()
     {
         ObjPoolingManager.Sleep(this);
     }

@@ -124,15 +124,20 @@ public static class GroundDetection_Logic
     public static void FallThrough(
         ref bool input_FallThrough,
         bool isGrounded,
+        Rigidbody2D rb2D,
         Transform tf,
         Collider2D oneWayCollider,
         GroundDetectionData detectionData)
     {
         #region Overlap Box
         Vector2 detectPos = tf.position;
-        detectPos.y -= detectionData.snapOutterDist * 0.5f;
-
         Vector2 detectSize = detectionData.size;
+        if (rb2D.velocity.x != 0)
+        {
+            detectPos.x += (rb2D.velocity.x) / 2;
+            detectSize.x += Mathf.Abs(rb2D.velocity.x);
+        }
+        detectPos.y -= detectionData.snapOutterDist * 0.5f;
         detectSize.y += detectionData.snapOutterDist;
 
         Collider2D[] overlaps = Physics2D.OverlapBoxAll(detectPos, detectSize, 0f, detectionData.oneWayLayer);

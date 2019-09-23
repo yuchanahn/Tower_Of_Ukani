@@ -21,8 +21,8 @@ public class CorpseMgr : MonoBehaviour
         for (int i = 0; i < MobCount; i++)
         {
             var w = Random.insideUnitCircle;
-            gObj[i] = Compse.Create(mobPos + w * 0.3f);
-            gObj[i].GetComponent<Compse>().Init(corpseData);
+            gObj[i] = Corpse.Create(mobPos + w * 0.3f);
+            gObj[i].GetComponent<Corpse>().Init(corpseData);
         }
 
         return gObj;

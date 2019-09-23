@@ -196,13 +196,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mSpeed: 2
   mAttackRange: 0.55
-  mFollowRange: 5
+  mFollowRange: 3
   mCompseData:
     mCntMin: 4
     mCntMax: 5
     mFCntMin: 0
     mFCntMax: 4
-    mCorpse: {fileID: 1026303488, guid: 3eb9ba50ec5f39141a7628c8196b7f4e, type: 3}
+    mCorpse: {fileID: 3864375849378008672, guid: 3eb9ba50ec5f39141a7628c8196b7f4e,
+      type: 3}
   mJumpData:
     count_Cur: 0
     count_Max: 1

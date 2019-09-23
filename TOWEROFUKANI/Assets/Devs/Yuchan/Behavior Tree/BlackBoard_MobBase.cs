@@ -16,12 +16,18 @@ public class BlackBoard_MobBase : BlackBoard_Base
     internal bool TA_Attack() => mob.Attack();
     internal bool TA_Hurt() => mob.IsHurt;
     internal bool TA_RandomMove() => true;
+    internal bool TA_SetReversDir()
+    {
+        mob.CurDir = -mob.CurDir;
+        return true;
+    }
     #endregion
 
     #region Condition
     internal bool CN_InHurt() => mob.IsHurt;
     internal bool CN_InFollowRange() => mob.InFollowRange;
     virtual internal bool CN_InAttackAble() => mob.IsKeepAttack ? true : mob.StartAttacking = mob.InAttackRange;
+    internal bool CN_OnCliff() => mob.IsOnCliff;
     #endregion
 
     #region Service

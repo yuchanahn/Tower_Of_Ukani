@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Compse : Object_ObjectPool<Compse>
+public class Corpse : Object_ObjectPool<Corpse>
 {
     [SerializeField] Animator _ani;
 

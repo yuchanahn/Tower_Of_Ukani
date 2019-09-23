@@ -11,6 +11,6 @@ public struct CorpseData
     public int mFCntMin;
     public int mFCntMax;
 
-    public Compse mCorpse;
+    public Corpse mCorpse;
     public int Count => mCntMin != mCntMax ? Random.Range(mCntMin, mCntMax + 1) : mCntMin;
 }

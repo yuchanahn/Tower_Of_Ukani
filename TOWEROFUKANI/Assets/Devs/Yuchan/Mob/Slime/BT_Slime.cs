@@ -28,8 +28,12 @@ public class BT_Slime : BT_Base
 
             .AddNode(new Decorator(Bb.CN_InFollowRange))
                 .AddNode(new Task(Bb.TA_Follow))    .TAEnd()
-            .End() 
+            .End()
 
+            .AddNode(new Decorator(Bb.CN_OnCliff))
+                .AddNode(new Task(Bb.TA_SetReversDir))  .TAEnd()
+                .AddNode(new Task(Bb.TA_RandomMove))    .TAEnd()
+            .End()
             .AddNode(new Task(Bb.TA_RandomMove))
             .End()
 

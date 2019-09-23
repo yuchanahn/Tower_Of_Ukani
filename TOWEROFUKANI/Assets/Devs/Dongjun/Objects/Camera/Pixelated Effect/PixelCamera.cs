@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PixelCamera : MonoBehaviour
 {
     [SerializeField] int pixelPerUnit = 16;
-    [SerializeField] int resolution = 900;
+    [SerializeField] Vector2Int resolution = new Vector2Int(1920, 1080);
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform pixelatedQuad;
 
@@ -23,8 +22,8 @@ public class PixelCamera : MonoBehaviour
         pixelCamera = GetComponent<Camera>();
 
         RenderTexture pixelatedRenderTex = pixelCamera.targetTexture;
-        pixelatedRenderTex.width = resolution;
-        pixelatedRenderTex.height = resolution;
+        pixelatedRenderTex.width = resolution.x;
+        pixelatedRenderTex.height = resolution.y;
     }
     void LateUpdate()
     {

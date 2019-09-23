@@ -23,7 +23,6 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool mbGrounded;
     protected bool mbJumping;
     protected bool mbHurt;
-    protected bool mbKeepAttack;
     protected bool mbAttackEnd = true;
     protected bool mbJumpPress = false;
 
@@ -39,13 +38,25 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected float PlayerDis => (GM.PlayerPos - transform.position).magnitude;
 
 
-    virtual public int RandomDir => Random.Range(0, 2) == 0 ? -1 : 1;
+    virtual public int RandomDir => IsKeepAttack ? CurDir : Random.Range(0, 2) == 0 ? -1 : 1;
     public bool IsHurt { get => mbHurt; set => mbHurt = value; }
+    public bool IsOnCliff
+    {
+        get {
+            if (!mbGrounded) return false;
+            var gr = mGroundDetectionData.groundLayers;
+            var hit = Physics2D.RaycastAll(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x, gr);
+            Debug.DrawRay(transform.position, new Vector2(CurDir, -1) * (mOneWayCollider.size.x), Color.red, 0.1f);
 
+            if (hit.Length > 0) return false;
+            return true;
+        }
+    }
+        //=> !Physics2D.Raycast(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x / 2);
     public bool InFollowRange => PlayerDis <= mFollowRange;
     public bool InAttackRange => PlayerDis <= mAttackRange;
     public int CurDir { get => mCurDir; set { mCurDir = value; if(mCurDir != 0) transform.eulerAngles = new Vector2(0, mCurDir == -1 ? 0 : 180); } }
-    public bool IsKeepAttack => mbKeepAttack;
+    public bool IsKeepAttack => !mbAttackEnd;
 
     public bool StartAttacking { get { return StartAttacking; } internal set { if (value) { OnAttack(); } } }
     #endregion
@@ -81,7 +92,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     private void Animation()
     {
-        if (!mbAttackEnd)
+        if (IsKeepAttack)
         {
             mAnimator.Play(string.Concat(gameObject.name, "_Attack"));
         }
@@ -121,8 +132,8 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         mbAttackEnd = true;
     }
-    private void AttackEnd()
-    { mbAttackEnd = true; }
+
+
     public bool Attack()
     {
         return !mbAttackEnd;
@@ -135,13 +146,22 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         CurDir = 0;
         mbHurt = true;
     }
-    private void HurtEnd() => mbHurt = false;
 
     public virtual void OnDead()
     {
         Destroy(gameObject);
         CorpseMgr.CreateDeadbody(transform ,mCompseData);
     }
+
+    public void CliffCheck()
+    {
+
+    }
+
+    #region AniEvent
+    private void AttackEnd() => mbAttackEnd = true;
+    private void HurtEnd() => mbHurt = false;
+    #endregion
 
     #region Interface: ICanDetectGround
     virtual public void OnGroundEnter()
