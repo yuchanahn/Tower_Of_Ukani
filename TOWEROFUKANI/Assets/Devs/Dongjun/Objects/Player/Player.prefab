@@ -382,15 +382,17 @@ MonoBehaviour:
   groundDetectionData:
     size: {x: 0.4, y: 0.85}
     ignoreGrounds: []
-    snapInnerDist: 0.2
-    snapOutterDist: 0.3
-    offsetAmount: 0.01
+    onGroundEnter_Executed: 0
+    onGroundExit_Executed: 0
     groundLayers:
       serializedVersion: 2
       m_Bits: 1536
     oneWayLayer:
       serializedVersion: 2
       m_Bits: 1024
+    snapInnerDist: 0.2
+    snapOutterDist: 0.2
+    offsetAmount: 0.02
   gravityData:
     acceleration: 32
     terminalVelocity: 20

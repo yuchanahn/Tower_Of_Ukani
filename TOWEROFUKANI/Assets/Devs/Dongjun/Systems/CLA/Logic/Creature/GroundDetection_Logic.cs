@@ -5,17 +5,17 @@ using UnityEngine;
 [Serializable]
 public struct GroundDetectionData
 {
-    [HideInInspector]
-    public Vector2 size;
+    [HideInInspector] public Vector2 size;
+    [HideInInspector] public List<Collider2D> ignoreGrounds;
+    [HideInInspector] public bool onGroundEnter_Executed;
+    [HideInInspector] public bool onGroundExit_Executed;
 
-    public List<Collider2D> ignoreGrounds;
+    public LayerMask groundLayers;
+    public LayerMask oneWayLayer;
 
     public float snapInnerDist;
     public float snapOutterDist;
     public float offsetAmount;
-
-    public LayerMask groundLayers;
-    public LayerMask oneWayLayer;
 }
 
 public struct GroundInfo
@@ -97,26 +97,27 @@ public static class GroundDetection_Logic
     public static void ExecuteOnGroundMethod(
         ICanDetectGround canDetectGround, 
         bool isGrounded, 
-        ref bool groundEnter, 
-        ref bool groundExit)
+        ref GroundDetectionData data)
     {
         if (isGrounded)
         {
-            if (!groundEnter)
+            if (!data.onGroundEnter_Executed)
             {
-                groundEnter = true;
-                groundExit = false;
+                // On Ground Enter
                 canDetectGround.OnGroundEnter();
+                data.onGroundEnter_Executed = true;
+                data.onGroundExit_Executed = false;
             }
 
+            // On Ground Stay
             canDetectGround.OnGroundStay();
         }
-        else if (!groundExit)
+        else if (!data.onGroundExit_Executed)
         {
-            groundEnter = false;
-            groundExit = true;
-
+            // On Ground Exit
             canDetectGround.OnGroundExit();
+            data.onGroundEnter_Executed = false;
+            data.onGroundExit_Executed = true;
         }
     }
 
@@ -125,8 +126,7 @@ public static class GroundDetection_Logic
         bool isGrounded,
         Transform tf,
         Collider2D oneWayCollider,
-        GroundDetectionData detectionData,
-        GroundInfo groundInfo)
+        GroundDetectionData detectionData)
     {
         #region Overlap Box
         Vector2 detectPos = tf.position;
@@ -167,60 +167,6 @@ public static class GroundDetection_Logic
 
         input_FallThrough = false;
 
-        if (overlaps == null || !isGrounded)
-            return;
-
-        for (int i = 0; i < overlaps.Length; i++)
-        {
-            if (detectionData.ignoreGrounds.Contains(overlaps[i]))
-                continue;
-
-            Physics2D.IgnoreCollision(oneWayCollider, overlaps[i], true);
-            detectionData.ignoreGrounds.Add(overlaps[i]);
-        }
-        #endregion
-    }
-
-    public static void FallThrough(
-        bool isGrounded,
-        Transform tf,
-        Collider2D oneWayCollider,
-        GroundDetectionData detectionData,
-        GroundInfo groundInfo)
-    {
-        #region Overlap Box
-        Vector2 detectPos = tf.position;
-        detectPos.y -= detectionData.snapOutterDist * 0.5f;
-
-        Vector2 detectSize = detectionData.size;
-        detectSize.y += detectionData.snapOutterDist;
-
-        Collider2D[] overlaps = Physics2D.OverlapBoxAll(detectPos, detectSize, 0f, detectionData.oneWayLayer);
-        #endregion
-
-        #region Enable Collsion
-        if (overlaps != null && detectionData.ignoreGrounds != null)
-        {
-            for (int i = detectionData.ignoreGrounds.Count - 1; i >= 0; i--)
-            {
-                if (Array.Exists(overlaps, col => col == detectionData.ignoreGrounds[i])) continue;
-
-                Physics2D.IgnoreCollision(oneWayCollider, detectionData.ignoreGrounds[i], false);
-                detectionData.ignoreGrounds.Remove(detectionData.ignoreGrounds[i]);
-            }
-        }
-        else
-        {
-            if (overlaps != null)
-            {
-                for (int i = 0; i < detectionData.ignoreGrounds.Count; i++)
-                    Physics2D.IgnoreCollision(oneWayCollider, detectionData.ignoreGrounds[i], false);
-            }
-            detectionData.ignoreGrounds.Clear();
-        }
-        #endregion
-
-        #region Disable Collision
         if (overlaps == null || !isGrounded)
             return;
 

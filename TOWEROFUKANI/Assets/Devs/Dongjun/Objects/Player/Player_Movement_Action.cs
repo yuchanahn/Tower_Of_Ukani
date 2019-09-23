@@ -88,7 +88,7 @@ public class Player_Movement_Action : CLA_Action,
 
         // Detect Ground
         GroundDetection_Logic.DetectGround(!isJumping, rb2D, transform, groundDetectionData, ref isGrounded, ref curGroundInfo);
-        GroundDetection_Logic.ExecuteOnGroundMethod(this, isGrounded, ref onGroundEnter, ref onGroundExit);
+        GroundDetection_Logic.ExecuteOnGroundMethod(this, isGrounded, ref groundDetectionData);
 
         // Fall Through
         GroundDetection_Logic.FallThrough(
@@ -96,8 +96,7 @@ public class Player_Movement_Action : CLA_Action,
             isGrounded, 
             transform, 
             oneWayCollider, 
-            groundDetectionData, 
-            curGroundInfo);
+            groundDetectionData);
 
         // Walk
         rb2D.velocity = new Vector2(walkSpeed * PlayerInputManager.Inst.Input_WalkDir, rb2D.velocity.y);
@@ -149,7 +148,7 @@ public class Player_Movement_Action : CLA_Action,
     public void OnGroundEnter()
     {
         // Reset Jump
-        Jump_Logic.ResetJump(ref isJumping, ref jumpData);
+        Jump_Logic.ResetJump(ref jumpData);
     }
     public void OnGroundStay()
     {

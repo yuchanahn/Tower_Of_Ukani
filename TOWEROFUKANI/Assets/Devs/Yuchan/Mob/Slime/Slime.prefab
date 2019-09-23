@@ -132,7 +132,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 0423d933b7b134f4db5ab786581e8435, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -194,8 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3429f59ac248bb48a1cffcd12fa72d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSpeed: 1
-  mAttackRange: 0.5
+  mSpeed: 2
+  mAttackRange: 0.55
   mFollowRange: 5
   mCompseData:
     mCntMin: 4
@@ -207,24 +207,26 @@ MonoBehaviour:
     count_Cur: 0
     count_Max: 1
     height: 1.5
-    time: 0.5
+    time: 0.22
     apexY: 0
   mGravityData:
-    acceleration: 10
-    terminalVelocity: 0
+    acceleration: 32
+    terminalVelocity: 20
   mOneWayCollider: {fileID: 5555169890968166534}
   mGroundDetectionData:
     size: {x: 0, y: 0}
     ignoreGrounds: []
-    snapInnerDist: 0.2
-    snapOutterDist: 0.3
-    offsetAmount: 0.01
+    onGroundEnter_Executed: 0
+    onGroundExit_Executed: 0
     groundLayers:
       serializedVersion: 2
       m_Bits: 1536
     oneWayLayer:
       serializedVersion: 2
       m_Bits: 1024
+    snapInnerDist: 0.2
+    snapOutterDist: 0.2
+    offsetAmount: 0.02
   mAddSpeed_: 2
 --- !u!114 &2248344777037342470
 MonoBehaviour:
@@ -367,7 +369,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 7363166705265310760, guid: 821a67f733ae90a4e839d6bf1919f8bc,
     type: 3}
-  m_Color: {r: 0.41555682, g: 1, b: 0.16037738, a: 1}
+  m_Color: {r: 0.29495454, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
