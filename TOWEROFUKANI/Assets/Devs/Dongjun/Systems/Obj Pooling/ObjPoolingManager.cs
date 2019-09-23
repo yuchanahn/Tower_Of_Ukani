@@ -57,10 +57,10 @@ public class ObjPoolingManager : MonoBehaviour
                     }
 
                     PoolingObj obj = Instantiate(prefab);
+                    obj.InitPoolingObj(prefab);
 
                     pool_Sleeping[prefab].Enqueue(obj);
 
-                    obj.InitPoolingObj(prefab);
                     obj.transform.SetParent(Inst.defaultPoolParent);
                     obj.gameObject.SetActive(false);
                 }
@@ -76,10 +76,10 @@ public class ObjPoolingManager : MonoBehaviour
         }
 
         PoolingObj obj = pool_Sleeping[prefab].Count == 0 ? Instantiate(prefab) : pool_Sleeping[prefab].Dequeue();
+        obj.InitPoolingObj(prefab);
 
         pool_Active[prefab].Add(obj);
 
-        obj.InitPoolingObj(prefab);
         obj.transform.SetParent(Inst.defaultPoolParent);
         obj.gameObject.SetActive(true);
 

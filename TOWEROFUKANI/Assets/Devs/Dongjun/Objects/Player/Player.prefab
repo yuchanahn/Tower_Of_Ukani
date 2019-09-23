@@ -505,6 +505,11 @@ PrefabInstance:
       propertyPath: attackSpeed.Cooldown
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 485092021999584720, guid: 5f95411add09b9b4c9b9153672129efd,
+        type: 3}
+      propertyPath: camShakeData_Shoot.strength
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f95411add09b9b4c9b9153672129efd, type: 3}
 --- !u!4 &7371128404914498168 stripped

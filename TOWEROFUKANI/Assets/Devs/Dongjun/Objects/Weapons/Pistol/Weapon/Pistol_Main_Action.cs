@@ -56,6 +56,7 @@ public class Pistol_Main_Action : CLA_Action
                 animator.SetTrigger("Shoot");
 
                 // Cam Shake Effect
+                camShakeData_Shoot.angle = transform.eulerAngles.z;
                 CommonObjs.Inst.CamShake.StartShake(camShakeData_Shoot);
             }
         }
