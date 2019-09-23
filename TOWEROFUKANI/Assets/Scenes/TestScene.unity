@@ -1264,7 +1264,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '<Test Version>
 
-    Last Update: 2019-09-22'
+    Last Update: 2019-09-24'
 --- !u!222 &1136765244
 CanvasRenderer:
   m_ObjectHideFlags: 0
