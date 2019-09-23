@@ -9667,7 +9667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c84fd17fffe9c34083a23905425f229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystem:
+  particleSystems:
   - {fileID: 8567307131394727882}
   - {fileID: 297441480826067794}
   destroyTimer:
