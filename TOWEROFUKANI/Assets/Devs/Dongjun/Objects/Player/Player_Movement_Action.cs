@@ -94,6 +94,7 @@ public class Player_Movement_Action : CLA_Action,
         GroundDetection_Logic.FallThrough(
             ref PlayerInputManager.Inst.Input_FallThrough,
             isGrounded, 
+            rb2D,
             transform, 
             oneWayCollider, 
             groundDetectionData);

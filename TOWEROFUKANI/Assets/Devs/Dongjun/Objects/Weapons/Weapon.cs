@@ -34,9 +34,6 @@ public abstract class Weapon : CLA_Main
 
     protected void Awake()
     {
-        // Initialize Value
-        transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
-
         // Test
         IsSelected = true;
     }
@@ -45,5 +42,11 @@ public abstract class Weapon : CLA_Main
     {
         IsSelected = select;
         SpriteRoot.SetActive(select);
+
+        if (select)
+        {
+            // Initialize Position
+            transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
+        }
     }
 }
