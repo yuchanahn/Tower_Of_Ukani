@@ -283,6 +283,7 @@ Transform:
   - {fileID: 7371128403266533315}
   - {fileID: 7371128403513975016}
   - {fileID: 7371128404914498168}
+  - {fileID: 1077788971303260969}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -418,6 +419,81 @@ MonoBehaviour:
   spriteRoot: {fileID: 7371128403266533315}
   dashDist: 4
   dashTime: 0.2
+--- !u!1001 &187652297
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7371128404420445768}
+    m_Modifications:
+    - target: {fileID: 1077788971187178467, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_Name
+      value: Weapon_Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab5ec28e3b385664d9a34ef3a6de12a9, type: 3}
+--- !u!4 &1077788971303260969 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 187652297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4791534285970396215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -484,26 +560,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2609116014577026513, guid: 5f95411add09b9b4c9b9153672129efd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2609116014577026513, guid: 5f95411add09b9b4c9b9153672129efd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2609116014577026513, guid: 5f95411add09b9b4c9b9153672129efd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 485092021999584720, guid: 5f95411add09b9b4c9b9153672129efd,
-        type: 3}
-      propertyPath: attackSpeed.Cooldown
-      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 485092021999584720, guid: 5f95411add09b9b4c9b9153672129efd,
         type: 3}
