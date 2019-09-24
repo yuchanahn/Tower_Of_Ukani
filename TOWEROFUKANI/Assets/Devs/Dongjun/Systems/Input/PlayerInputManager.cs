@@ -58,7 +58,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         Inst = this;
     }
-    private void LateUpdate()
+    private void Update()
     {
         // Movement
         GetInput_Walk();
