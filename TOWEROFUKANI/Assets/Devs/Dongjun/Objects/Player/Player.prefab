@@ -399,12 +399,12 @@ MonoBehaviour:
   gravityData:
     acceleration: 32
     terminalVelocity: 20
-  walkSpeed: 7
+  walkSpeed: 8
   jumpData:
     count_Cur: 0
     count_Max: 2
     height: 3
-    time: 0.35
+    time: 0.3
     apexY: 0
 --- !u!114 &7371128404420445764
 MonoBehaviour:
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRoot: {fileID: 7371128403266533315}
-  dashDist: 4
+  dashDist: 3.5
   dashTime: 0.2
 --- !u!114 &4669326734465565922
 MonoBehaviour:
