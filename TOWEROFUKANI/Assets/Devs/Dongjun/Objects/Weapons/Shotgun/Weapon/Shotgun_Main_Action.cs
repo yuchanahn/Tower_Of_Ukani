@@ -49,8 +49,8 @@ public class Shotgun_Main_Action : CLA_Action
             if (Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
             {
                 // Spawn Bullet
-                Vector3 eRot = transform.rotation.eulerAngles;
-                eRot.z = eRot.z - (((pelletCount / 2) - (pelletCount % 2 == 0 ? 0.5f : 0)) * pelletAngle);
+                Vector3 eRot = transform.eulerAngles;
+                eRot.z -= ((pelletCount / 2) - (pelletCount % 2 == 0 ? 0.5f : 0)) * pelletAngle;
                 for (int i = 0; i < pelletCount; i++)
                 {
                     ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, Quaternion.Euler(eRot));
@@ -64,7 +64,7 @@ public class Shotgun_Main_Action : CLA_Action
                 animator.SetTrigger("Shoot");
 
                 // Cam Shake Effect
-                camShakeData_Shoot.angle = transform.eulerAngles.z;
+                camShakeData_Shoot.angle = transform.eulerAngles.z - 180f;
                 CommonObjs.Inst.CamShake.StartShake(camShakeData_Shoot);
             }
         }

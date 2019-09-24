@@ -34,13 +34,11 @@ public class PlayerInputManager : MonoBehaviour
     #endregion
 
     #region Var: FallThrough
-    [HideInInspector]
-    public bool Input_FallThrough = false;
+    public bool Input_FallThrough { get; private set; } = false;
     #endregion
 
     #region Var: Jump
-    [HideInInspector]
-    public bool Input_Jump = false;
+    public bool Input_Jump { get; private set; } = false;
     #endregion
 
     #region Var: Dash
@@ -69,6 +67,11 @@ public class PlayerInputManager : MonoBehaviour
 
         // Ability
         GetInput_Dash();
+    }
+    private void FixedUpdate()
+    {
+        Input_Jump = false;
+        Input_FallThrough = false;
     }
     #endregion
 

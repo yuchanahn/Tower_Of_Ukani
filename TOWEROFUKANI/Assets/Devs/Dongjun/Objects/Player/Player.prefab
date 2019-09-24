@@ -136,7 +136,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.85}
+  m_Size: {x: 0.4, y: 0.8}
   m_EdgeRadius: 0
 --- !u!1 &7371128403513975019
 GameObject:
@@ -226,7 +226,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.85}
+  m_Size: {x: 0.4, y: 0.8}
   m_EdgeRadius: 0
 --- !u!251 &7371128403577552052
 PlatformEffector2D:
@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 7371128404420445766}
   - component: {fileID: 7371128404420445769}
   - component: {fileID: 7371128404420445764}
+  - component: {fileID: 4669326734465565922}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -351,7 +352,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.85}
+  m_Size: {x: 0.4, y: 0.8}
   m_EdgeRadius: 0
 --- !u!114 &7371128404420445766
 MonoBehaviour:
@@ -381,19 +382,20 @@ MonoBehaviour:
   spriteRoot: {fileID: 7371128403266533315}
   oneWayCollider: {fileID: 7371128403577552055}
   groundDetectionData:
-    size: {x: 0.4, y: 0.85}
-    ignoreGrounds: []
-    onGroundEnter_Executed: 0
-    onGroundExit_Executed: 0
-    groundLayers:
+    Size: {x: 0, y: 0}
+    IgnoreGrounds: []
+    OnGroundEnter_Executed: 0
+    OnGroundExit_Executed: 0
+    GroundLayers:
       serializedVersion: 2
       m_Bits: 1536
-    oneWayLayer:
+    OneWayLayer:
       serializedVersion: 2
       m_Bits: 1024
-    snapInnerDist: 0.2
-    snapOutterDist: 0.2
-    offsetAmount: 0.02
+    IW_Solid: {fileID: 7371128403274205566}
+    InnerSnapDist: 0.2
+    OutterSnapDist: 0.2
+    OffsetAmount: 0.02
   gravityData:
     acceleration: 32
     terminalVelocity: 20
@@ -419,6 +421,21 @@ MonoBehaviour:
   spriteRoot: {fileID: 7371128403266533315}
   dashDist: 4
   dashTime: 0.2
+--- !u!114 &4669326734465565922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a956763f063413942a71427ab688d991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSlot:
+  - {fileID: 2820249382209617227}
+  - {fileID: 4565912263956381787}
 --- !u!1001 &187652297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,6 +503,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3151152317891876062, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+        type: 3}
+      propertyPath: shootTimer.Timer_Max
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5ec28e3b385664d9a34ef3a6de12a9, type: 3}
 --- !u!4 &1077788971303260969 stripped
@@ -494,6 +516,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 187652297}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4565912263956381787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4565912263870322834, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
+    type: 3}
+  m_PrefabInstance: {fileID: 187652297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c205d6157bf1a8844885ee613a506bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4791534285970396215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,3 +608,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4791534285970396215}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2820249382209617227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7304129226058279292, guid: 5f95411add09b9b4c9b9153672129efd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4791534285970396215}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdcbb0f01046da8458cedf5e7b69e829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

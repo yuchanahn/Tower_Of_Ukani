@@ -215,19 +215,20 @@ MonoBehaviour:
     terminalVelocity: 20
   mOneWayCollider: {fileID: 5555169890968166534}
   mGroundDetectionData:
-    size: {x: 0, y: 0}
-    ignoreGrounds: []
-    onGroundEnter_Executed: 0
-    onGroundExit_Executed: 0
-    groundLayers:
+    Size: {x: 0, y: 0}
+    IgnoreGrounds: []
+    OnGroundEnter_Executed: 0
+    OnGroundExit_Executed: 0
+    GroundLayers:
       serializedVersion: 2
       m_Bits: 1536
-    oneWayLayer:
+    OneWayLayer:
       serializedVersion: 2
       m_Bits: 1024
-    snapInnerDist: 0.2
-    snapOutterDist: 0.2
-    offsetAmount: 0.02
+    IW_Solid: {fileID: 658498686114480918}
+    InnerSnapDist: 0.2
+    OutterSnapDist: 0.2
+    OffsetAmount: 0.02
   mAddSpeed_: 2
 --- !u!114 &2248344777037342470
 MonoBehaviour:
@@ -253,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de191e390c18d24a84d41cc835380ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RandomTime: 2
 --- !u!114 &4138764173793614123
 MonoBehaviour:
   m_ObjectHideFlags: 0

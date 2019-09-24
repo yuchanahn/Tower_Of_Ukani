@@ -33,13 +33,15 @@ public class Player_Movement_Action : CLA_Action,
     #region Var: Ground Detection
     private bool isGrounded = false;
     private GroundInfo curGroundInfo = new GroundInfo();
-
-    private bool onGroundEnter = false;
-    private bool onGroundExit = false;
     #endregion
 
     #region Var: Jump
+    private bool jumpKeyPressed = false;
     private bool isJumping = false;
+    #endregion
+
+    #region Var: Fall Through
+    private bool fallThroughKeyPressed = false;
     #endregion
 
     #region Var: Components
@@ -62,8 +64,6 @@ public class Player_Movement_Action : CLA_Action,
         // Reset Ground Data
         isGrounded = false;
         curGroundInfo.Reset();
-        onGroundEnter = false;
-        onGroundExit = false;
 
         // Reset Jump Data
         isJumping = false;
@@ -74,7 +74,7 @@ public class Player_Movement_Action : CLA_Action,
     public override void OnUpdate()
     {
         // Update Ground Detection Size
-        groundDetectionData.size = oneWayCollider.size * transform.localScale;
+        groundDetectionData.Size = oneWayCollider.size * transform.localScale;
     }
     public override void OnLateUpdate()
     {
@@ -91,8 +91,9 @@ public class Player_Movement_Action : CLA_Action,
         GroundDetection_Logic.ExecuteOnGroundMethod(this, isGrounded, ref groundDetectionData);
 
         // Fall Through
+        fallThroughKeyPressed = PlayerInputManager.Inst.Input_FallThrough;
         GroundDetection_Logic.FallThrough(
-            ref PlayerInputManager.Inst.Input_FallThrough,
+            ref fallThroughKeyPressed,
             isGrounded, 
             rb2D,
             transform, 
@@ -103,7 +104,8 @@ public class Player_Movement_Action : CLA_Action,
         rb2D.velocity = new Vector2(walkSpeed * PlayerInputManager.Inst.Input_WalkDir, rb2D.velocity.y);
 
         // Jump
-        Jump_Logic.Jump(ref PlayerInputManager.Inst.Input_Jump, ref isJumping, ref jumpData, rb2D, transform);
+        jumpKeyPressed = PlayerInputManager.Inst.Input_Jump;
+        Jump_Logic.Jump(ref jumpKeyPressed, ref isJumping, ref jumpData, rb2D, transform);
 
         // Gravity
         Gravity_Logic.ApplyGravity(rb2D, isGrounded ? new GravityData(0, 0) : !isJumping ? gravityData : new GravityData(jumpData.jumpGravity, 0));

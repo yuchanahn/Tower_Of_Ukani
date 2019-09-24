@@ -148,7 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootTimer:
     Timer_Cur: 0
-    Timer_Max: 0.8
+    Timer_Max: 0.75
   magazineSize: 6
   pelletCount: 4
   pelletAngle: 5

@@ -44,7 +44,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         get {
             if (!mbGrounded) return false;
-            var gr = mGroundDetectionData.groundLayers;
+            var gr = mGroundDetectionData.GroundLayers;
             var hit = Physics2D.RaycastAll(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x, gr);
             Debug.DrawRay(transform.position, new Vector2(CurDir, -1) * (mOneWayCollider.size.x), Color.red, 0.1f);
 
@@ -69,7 +69,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
     private void Update()
     {
-        mGroundDetectionData.size = mOneWayCollider.size * transform.localScale;
+        mGroundDetectionData.Size = mOneWayCollider.size * transform.localScale;
     }
     private void FixedUpdate()
     {
