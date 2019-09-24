@@ -228,7 +228,7 @@ MonoBehaviour:
     IW_Solid: {fileID: 658498686114480918}
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
-    OffsetAmount: 0.02
+    OffsetAmount: 0
   mAddSpeed_: 2
 --- !u!114 &2248344777037342470
 MonoBehaviour:

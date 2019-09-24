@@ -395,7 +395,7 @@ MonoBehaviour:
     IW_Solid: {fileID: 7371128403274205566}
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
-    OffsetAmount: 0.02
+    OffsetAmount: 0
   gravityData:
     acceleration: 32
     terminalVelocity: 20
