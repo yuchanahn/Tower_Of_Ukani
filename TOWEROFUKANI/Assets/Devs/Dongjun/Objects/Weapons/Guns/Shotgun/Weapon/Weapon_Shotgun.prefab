@@ -134,6 +134,15 @@ MonoBehaviour:
   weaponRange: 1
   pivotPointY: 0.1
   spriteRoot: {fileID: 1077788971484917873}
+  Stats:
+    shootTimer:
+      Timer_Cur: 0
+      Timer_Max: 0.75
+    reloadTimer:
+      Timer_Cur: 0
+      Timer_Max: 0
+    magazineSize: 0
+    loadedBullets: 0
 --- !u!114 &3151152317891876062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,15 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81d87d7841c3a340aeae577e233be2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootTimer:
-    Timer_Cur: 0
-    Timer_Max: 0.75
-  magazineSize: 6
   pelletCount: 4
   pelletAngle: 5
   shootPoint: {fileID: 1077788971055575643}
-  bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
-    type: 3}
+  bulletPrefab: {fileID: 0}
   camShakeData_Shoot:
     angle: 0
     strength: 0.25

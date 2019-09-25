@@ -411,8 +411,8 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Walk: [A], [D]\nJump: [Space]\nFall Down: [S]\n\nDash: \n[A/D + LShift],
-    \n[A/D Double Tap]\n\nShoot: [LMB]\n\nChange Weapon: \n[KeyBoard1 -> Pistol],
-    \ \n[KeyBoard2 -> Shotgun]"
+    \n[A/D Double Tap]\n\nShoot: [LMB]\n\nChange Weapon: \n[Keyboard1 -> Pistol],
+    \ \n[Keyboard2 -> Shotgun],\n[Keyboard3 -> Machine Gun]"
 --- !u!222 &407830749
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1240,6 +1240,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5712989685375629359, guid: de8e575bfc7541a4cb26f729cf5133df,
+        type: 3}
+      propertyPath: defaultAction
+      value: 
+      objectReference: {fileID: 1334092405}
     - target: {fileID: 7371128404420445770, guid: de8e575bfc7541a4cb26f729cf5133df,
         type: 3}
       propertyPath: m_Name
@@ -1308,6 +1313,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1334092403}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1334092405 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5936400698161918639, guid: de8e575bfc7541a4cb26f729cf5133df,
+    type: 3}
+  m_PrefabInstance: {fileID: 1334092403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddccbb3fd0d7ff847b057f4c512127c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1350554777
 GameObject:
   m_ObjectHideFlags: 0

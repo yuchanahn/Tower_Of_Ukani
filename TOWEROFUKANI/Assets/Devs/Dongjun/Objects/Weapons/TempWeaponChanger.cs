@@ -35,5 +35,12 @@ public class TempWeaponChanger : MonoBehaviour
             curWeapon.SelectWeapon(true);
             return;
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3) && curWeapon != weaponSlot[2])
+        {
+            curWeapon.SelectWeapon(false);
+            curWeapon = weaponSlot[2];
+            curWeapon.SelectWeapon(true);
+            return;
+        }
     }
 }

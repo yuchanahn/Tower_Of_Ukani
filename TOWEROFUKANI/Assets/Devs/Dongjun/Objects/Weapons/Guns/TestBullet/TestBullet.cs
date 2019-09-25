@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Pistol_Bullet : PoolingObj
+public class TestBullet : PoolingObj
 {
     [Header("Projectile Stats")]
     [SerializeField] private int damage = 1;

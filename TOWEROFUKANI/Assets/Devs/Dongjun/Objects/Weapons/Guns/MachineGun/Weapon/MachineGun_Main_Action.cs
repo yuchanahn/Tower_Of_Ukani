@@ -1,14 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Pistol_Main_Action : CLA_Action
+public class MachineGun_Main_Action : CLA_Action
 {
     #region Var: Inspector
-    [Header("Stats")]
-    [SerializeField] private TimerData shootTimer;
-    [SerializeField] private int magazineSize = 6;
-
     [Header("Points")]
     [SerializeField] private Transform shootPoint;
 
@@ -19,30 +13,26 @@ public class Pistol_Main_Action : CLA_Action
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Shoot
-    private int loadedBulletCount;
-    #endregion
-
     #region Var: Components
     private Animator animator;
-    private Pistol pistol_Main;
+    private MachineGun machineGun_Main;
     #endregion
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        pistol_Main = GetComponent<Pistol>();
+        machineGun_Main = GetComponent<MachineGun>();
     }
     private void Start()
     {
-        shootTimer.Init(gameObject);
-        shootTimer.SetToMax();
-        loadedBulletCount = magazineSize;
+        machineGun_Main.Stats.shootTimer.Init(gameObject);
+        machineGun_Main.Stats.shootTimer.SetToMax();
+        machineGun_Main.Stats.loadedBullets = machineGun_Main.Stats.magazineSize;
     }
 
     public override void OnUpdate()
     {
-        if (pistol_Main.IsSelected && shootTimer.IsTimerAtMax)
+        if (machineGun_Main.IsSelected && machineGun_Main.Stats.shootTimer.IsTimerAtMax)
         {
             if (Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
             {
@@ -50,20 +40,19 @@ public class Pistol_Main_Action : CLA_Action
                 ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
 
                 // Continue Timer
-                shootTimer.Continue();
+                machineGun_Main.Stats.shootTimer.Continue();
 
                 // Animation
                 animator.SetTrigger("Shoot");
 
                 // Cam Shake Effect
-                camShakeData_Shoot.angle = transform.eulerAngles.z - 180f;
-                CommonObjs.Inst.CamShake.StartShake(camShakeData_Shoot);
+                CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
             }
         }
     }
     public override void OnLateUpdate()
     {
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, pistol_Main.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, machineGun_Main.SpriteRoot.transform, transform);
     }
 }

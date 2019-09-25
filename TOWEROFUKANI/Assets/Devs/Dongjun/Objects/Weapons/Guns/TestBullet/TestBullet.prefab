@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   flySpeed: 40
-  maxDist: 10
+  maxDist: 15
   detectPos: {x: 0.15, y: 0}
   detectSize: {x: 0.3, y: 0.15}
   detectLayers:

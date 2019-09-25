@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shotgun_Main_Action : CLA_Action
 {
     #region Var: Inspector
     [Header("Stats")]
-    [SerializeField] private TimerData shootTimer;
-    [SerializeField] private int magazineSize = 6;
     [SerializeField] private int pelletCount = 2;
     [SerializeField] private float pelletAngle = 10f;
 
@@ -19,10 +15,6 @@ public class Shotgun_Main_Action : CLA_Action
 
     [Header("Effects")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
-    #endregion
-
-    #region Var: Shoot
-    private int loadedBulletCount;
     #endregion
 
     #region Var: Components
@@ -37,16 +29,16 @@ public class Shotgun_Main_Action : CLA_Action
     }
     private void Start()
     {
-        shootTimer.Init(gameObject);
-        shootTimer.SetToMax();
-        loadedBulletCount = magazineSize;
+        shotgun_Main.Stats.shootTimer.Init(gameObject);
+        shotgun_Main.Stats.shootTimer.SetToMax();
+        shotgun_Main.Stats.loadedBullets = shotgun_Main.Stats.magazineSize;
     }
 
     public override void OnUpdate()
     {
-        if (shotgun_Main.IsSelected && shootTimer.IsTimerAtMax)
+        if (shotgun_Main.IsSelected && shotgun_Main.Stats.shootTimer.IsTimerAtMax)
         {
-            if (Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
+            if (Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
             {
                 // Spawn Bullet
                 Vector3 eRot = transform.eulerAngles;
@@ -58,14 +50,13 @@ public class Shotgun_Main_Action : CLA_Action
                 }
 
                 // Continue Timer
-                shootTimer.Continue();
+                shotgun_Main.Stats.shootTimer.Continue();
 
                 // Animation
                 animator.SetTrigger("Shoot");
 
                 // Cam Shake Effect
-                camShakeData_Shoot.angle = transform.eulerAngles.z - 180f;
-                CommonObjs.Inst.CamShake.StartShake(camShakeData_Shoot);
+                CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
             }
         }
     }
@@ -75,3 +66,4 @@ public class Shotgun_Main_Action : CLA_Action
         LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, shotgun_Main.SpriteRoot.transform, transform);
     }
 }
+

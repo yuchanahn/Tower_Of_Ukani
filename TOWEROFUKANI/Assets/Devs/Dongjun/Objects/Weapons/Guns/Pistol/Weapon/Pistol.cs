@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
+    public GunStats Stats;
     private Pistol_Main_Action pistol_Main_Action;
 
     protected override void Init()
