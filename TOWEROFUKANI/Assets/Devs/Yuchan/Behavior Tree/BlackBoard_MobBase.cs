@@ -15,7 +15,7 @@ public class BlackBoard_MobBase : BlackBoard_Base
     internal bool TA_Follow() => mob.FollowPlayer();
     internal bool TA_Attack() => mob.Attack();
     internal bool TA_Hurt() => mob.IsHurt;
-    internal bool TA_Idle() => mob.Idle();
+    //internal bool TA_Idle() => mob.Idle();
     internal bool TA_RandomMove() => true;
     internal bool TA_SetReversDir()
     {
