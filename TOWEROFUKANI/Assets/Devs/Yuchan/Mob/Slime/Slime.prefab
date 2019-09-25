@@ -211,7 +211,8 @@ MonoBehaviour:
     time: 0.22
     apexY: 0
   mGravityData:
-    acceleration: 32
+    useGravity: 1
+    acceleration: 40
     terminalVelocity: 20
   mOneWayCollider: {fileID: 5555169890968166534}
   mGroundDetectionData:

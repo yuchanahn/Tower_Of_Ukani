@@ -86,7 +86,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         Jump_Logic.ResetJumpingState(ref mbJumping, ref mJumpData, mRb2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(mRb2D, mbGrounded ? new GravityData(0, 0) : !mbJumping ? mGravityData : new GravityData(mJumpData.jumpGravity, 0));
+        Gravity_Logic.ApplyGravity(mRb2D, mbGrounded ? new GravityData(false, 0, 0) : !mbJumping ? mGravityData : new GravityData(true, mJumpData.jumpGravity, 0));
     }
     #endregion
 

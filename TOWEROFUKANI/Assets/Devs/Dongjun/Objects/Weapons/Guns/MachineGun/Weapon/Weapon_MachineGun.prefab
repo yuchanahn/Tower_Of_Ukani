@@ -163,7 +163,7 @@ MonoBehaviour:
     strength: 0.05
     maxSpeed: 15
     minSpeed: 10
-    duration: 0.05
+    duration: 0.02
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0

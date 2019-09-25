@@ -398,6 +398,7 @@ MonoBehaviour:
     OutterSnapDist: 0.2
     OffsetAmount: 0
   gravityData:
+    useGravity: 1
     acceleration: 40
     terminalVelocity: 20
   walkSpeed: 7.5

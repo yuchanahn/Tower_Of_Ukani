@@ -108,7 +108,7 @@ public class Player_Movement_Action : CLA_Action,
         Jump_Logic.Jump(ref jumpKeyPressed, ref isJumping, ref jumpData, rb2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(rb2D, isGrounded ? new GravityData(0, 0) : !isJumping ? gravityData : new GravityData(jumpData.jumpGravity, 0));
+        Gravity_Logic.ApplyGravity(rb2D, isGrounded ? new GravityData(false, 0, 0) : !isJumping ? gravityData : new GravityData(true, jumpData.jumpGravity, 0));
     }
     #endregion
 

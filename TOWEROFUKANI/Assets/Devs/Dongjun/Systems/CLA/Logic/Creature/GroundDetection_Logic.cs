@@ -104,8 +104,15 @@ public static class GroundDetection_Logic
         isGrounded = true;
 
         // Snap To Highest Point
-        rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
-        tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (detectionData.Size.y * 0.5f) + detectionData.OffsetAmount);
+        if (rb2D.velocity.y < 0)
+        {
+            rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
+            tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (detectionData.Size.y * 0.5f) + detectionData.OffsetAmount);
+        }
+
+        Rigidbody2D groundRB = groundInfo.GO.GetComponent<Rigidbody2D>();
+        if (groundRB)
+            rb2D.velocity = new Vector2(rb2D.velocity.x, groundRB.velocity.y);
         #endregion
     }
 
