@@ -104,7 +104,7 @@ public static class GroundDetection_Logic
         isGrounded = true;
 
         // Snap To Highest Point
-        if (rb2D.velocity.y < 0)
+        if (rb2D.velocity.y <= 0)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
             tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (detectionData.Size.y * 0.5f) + detectionData.OffsetAmount);
