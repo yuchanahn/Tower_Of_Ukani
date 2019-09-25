@@ -118,7 +118,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     public bool FollowPlayer()
     {
-        CurDir = GM.PlayerPos.x > transform.position.x ? 1 : -1;
+        CurDir = Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f? 0 : GM.PlayerPos.x > transform.position.x ? 1 : -1;
         return true;
     }
 
