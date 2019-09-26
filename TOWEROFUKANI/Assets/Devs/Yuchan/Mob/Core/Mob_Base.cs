@@ -9,6 +9,15 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     [SerializeField] private float mAttackRange;
     [SerializeField] private float mFollowRange;
 
+    [Header("Collision")]
+    [SerializeField]
+    private BoxCollider2D oneWayCollider;
+
+    [Header("MoveAbleGroundLayers")]
+    [SerializeField]
+    private LayerMask MoveAbleGroundLayers;
+
+
     [SerializeField] private CorpseData mCompseData;
     [SerializeField] private JumpData mJumpData;
     [SerializeField] private GravityData mGravityData;
@@ -23,10 +32,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool mbGrounded;
     protected bool mbJumping;
     protected bool mbHurt;
+    protected bool mbFollowAble = true;
     protected bool mbAttackEnd = true;
     protected bool mbJumpPress = false;
 
-    private GroundInfo curGroundInfo = new GroundInfo();
+    private GroundInfo mCurGroundInfo = new GroundInfo();
 
     private bool onGroundEnter = false;
     private bool onGroundExit = false;
@@ -36,6 +46,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     #region Var: Properties
     protected float PlayerDis => (GM.PlayerPos - transform.position).magnitude;
+    protected float PlayerDisX => Mathf.Abs(GM.PlayerPos.x - transform.position.x);
+    protected float PlayerDisY => Mathf.Abs(GM.PlayerPos.y - transform.position.y);
+    protected LayerMask GroundLayers => mGroundDetectionData.GroundLayers;
+    protected Vector2 Size => (mOneWayCollider.size * transform.localScale.normalized);
+
 
 
     virtual public int RandomDir => IsKeepAttack ? CurDir : Random.Range(0, 2) == 0 ? -1 : 1;
@@ -44,8 +59,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         get {
             if (!mbGrounded) return false;
-            var gr = mGroundDetectionData.GroundLayers;
-            var hit = Physics2D.RaycastAll(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x, gr);
+            var hit = Physics2D.RaycastAll(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x, GroundLayers);
             Debug.DrawRay(transform.position, new Vector2(CurDir, -1) * (mOneWayCollider.size.x), Color.red, 0.1f);
 
             if (hit.Length > 0) return false;
@@ -54,9 +68,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
         //=> !Physics2D.Raycast(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x / 2);
     public bool InFollowRange => PlayerDis <= mFollowRange;
-    public bool InAttackRange => PlayerDis <= mAttackRange;
+    public bool InAttackRange => mbGrounded && PlayerDis <= mAttackRange;
     public int CurDir { get => mCurDir; set { mCurDir = value; if(mCurDir != 0) transform.eulerAngles = new Vector2(0, mCurDir == -1 ? 0 : 180); } }
     public bool IsKeepAttack => !mbAttackEnd;
+
 
     public bool StartAttacking { get { return StartAttacking; } internal set { if (value) { OnAttack(); } } }
     #endregion
@@ -76,7 +91,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         Animation();
 
         // Detect Ground
-        GroundDetection_Logic.DetectGround(!mbJumping, mRb2D, transform, mGroundDetectionData, ref mbGrounded, ref curGroundInfo);
+        GroundDetection_Logic.DetectGround(!mbJumping, mRb2D, transform, mGroundDetectionData, ref mbGrounded, ref mCurGroundInfo);
         GroundDetection_Logic.ExecuteOnGroundMethod(this, mbGrounded, ref mGroundDetectionData);
 
         // Walk
@@ -110,15 +125,39 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         }
     }
 
-    protected void Jump()
+    protected int Jump()
     {
         Jump_Logic.Jump(ref mbJumping, ref mJumpData, mRb2D, transform);
-        //mbJumpPress = true;
+        return 1;
     }
+    protected int DownJump()
+    {
+        bool fall = true;
+        GroundDetection_Logic.FallThrough(ref fall, mbGrounded, mRb2D, transform, oneWayCollider, mGroundDetectionData);
+        return -1;
+    }
+
+    void FollowJumpCoolTime() => mbFollowAble = true;
 
     public bool FollowPlayer()
     {
-        CurDir = Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f? 0 : GM.PlayerPos.x > transform.position.x ? 1 : -1;
+        if(mbGrounded && mbFollowAble && PlayerDisY > Size.y)
+        {
+            var dir = GM.PlayerPos.y > transform.position.y ? 1 : -1;
+            var hit = Physics2D.RaycastAll(transform.position, new Vector2(0, dir), mOneWayCollider.size.x, MoveAbleGroundLayers);
+            Debug.DrawRay(transform.position, new Vector2(0, dir) * (mOneWayCollider.size.x), Color.red, 0.1f);
+
+            if (hit.Length > 0)
+            {
+                     if (dir ==  1) Jump();
+                else if (dir == -1) DownJump();
+
+                Invoke("FollowJumpCoolTime", 1f);
+                mbFollowAble = false;
+            }
+        }
+        else CurDir = Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f ? 0 : GM.PlayerPos.x > transform.position.x ? 1 : -1;
+
         return true;
     }
 

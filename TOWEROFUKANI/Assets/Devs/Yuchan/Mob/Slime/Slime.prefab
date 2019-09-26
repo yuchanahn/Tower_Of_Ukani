@@ -197,6 +197,10 @@ MonoBehaviour:
   mSpeed: 2
   mAttackRange: 0.55
   mFollowRange: 3
+  oneWayCollider: {fileID: 5555169890968166534}
+  MoveAbleGroundLayers:
+    serializedVersion: 2
+    m_Bits: 1024
   mCompseData:
     mCntMin: 4
     mCntMax: 5
