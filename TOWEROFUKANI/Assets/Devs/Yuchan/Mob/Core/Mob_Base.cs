@@ -18,6 +18,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     private LayerMask MoveAbleGroundLayers;
 
 
+    [SerializeField] private FollowData mFollowData;
     [SerializeField] private CorpseData mCompseData;
     [SerializeField] private JumpData mJumpData;
     [SerializeField] private GravityData mGravityData;
@@ -137,27 +138,23 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         return -1;
     }
 
-    void FollowJumpCoolTime() => mbFollowAble = true;
+
 
     public bool FollowPlayer()
     {
-        if(mbGrounded && mbFollowAble && PlayerDisY > Size.y)
+        if(mbGrounded)
+        switch (MobFollow_Logic.Follow(transform.position, mFollowData))
         {
-            var dir = GM.PlayerPos.y > transform.position.y ? 1 : -1;
-            var hit = Physics2D.RaycastAll(transform.position, new Vector2(0, dir), mOneWayCollider.size.x, MoveAbleGroundLayers);
-            Debug.DrawRay(transform.position, new Vector2(0, dir) * (mOneWayCollider.size.x), Color.red, 0.1f);
-
-            if (hit.Length > 0)
-            {
-                     if (dir ==  1) Jump();
-                else if (dir == -1) DownJump();
-
-                Invoke("FollowJumpCoolTime", 1f);
-                mbFollowAble = false;
-            }
+            case MobFollow_Logic.eFollowState.Jump:
+                Jump();
+                break;
+            case MobFollow_Logic.eFollowState.DownJump:
+                DownJump();
+                break;
+            default:
+                break;
         }
-        else CurDir = Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f ? 0 : GM.PlayerPos.x > transform.position.x ? 1 : -1;
-
+        CurDir = Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f ? 0 : GM.PlayerPos.x > transform.position.x ? 1 : -1;
         return true;
     }
 

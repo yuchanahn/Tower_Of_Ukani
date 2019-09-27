@@ -201,6 +201,13 @@ MonoBehaviour:
   MoveAbleGroundLayers:
     serializedVersion: 2
     m_Bits: 1024
+  mFollowData:
+    followAble: 1
+    dis: 1
+    size: {x: 0.9, y: 0.9}
+    moveAbleGroundLayers:
+      serializedVersion: 2
+      m_Bits: 1024
   mCompseData:
     mCntMin: 4
     mCntMax: 5
