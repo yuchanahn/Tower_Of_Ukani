@@ -18,6 +18,7 @@ public class ATimer : MonoBehaviour
     public static void Pop(string key)
     {
         mTimerEvent.Remove(key);
+        mTimer.Remove(key);
     }
 
 
@@ -29,7 +30,7 @@ public class ATimer : MonoBehaviour
             if (mTimer[i.Key].Item1 < mTimer[i.Key].Item2)
             {
                 i.Value();
-                mTimer[i.Key] = (mTimer[i.Key].Item1, 0);
+                Pop(i.Key);
             }
         }
     }
