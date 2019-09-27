@@ -22,10 +22,10 @@ public static class Jump_Logic
         {
             input_Jump = false;
 
-            if (jumpData.count_Cur > 0)
+            if (jumpData.count_Cur < jumpData.count_Max)
             {
                 isJumping = true;
-                jumpData.count_Cur--;
+                jumpData.count_Cur++;
                 jumpData.apexY = tf.position.y + jumpData.height;
 
                 // Apply Jump Velocity
@@ -45,10 +45,10 @@ public static class Jump_Logic
     }
     public static void Jump(ref bool isJumping, ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
     {
-        if (jumpData.count_Cur > 0)
+        if (jumpData.count_Cur < jumpData.count_Max)
         {
             isJumping = true;
-            jumpData.count_Cur--;
+            jumpData.count_Cur++;
             jumpData.apexY = tf.position.y + jumpData.height;
 
             // Apply Jump Velocity
@@ -69,6 +69,6 @@ public static class Jump_Logic
     }
     public static void ResetJump(ref JumpData jumpData)
     {
-        jumpData.count_Cur = jumpData.count_Max;
+        jumpData.count_Cur = 0;
     }
 }

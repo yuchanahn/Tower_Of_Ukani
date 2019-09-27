@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 31f3233ce22d63e4eaca0150fc6d7bb8
+guid: 86bb47f566268364695c1e12ccd6b001
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4142276880962872504
-    second: Player_Jump_0
+      213: -6743162933250910555
+    second: Player_Airborne_0
   - first:
-      213: -2833288000470796695
-    second: Player_Jump_1
+      213: -7110606880450802433
+    second: Player_Airborne_1
   - first:
-      213: -560937678416875687
-    second: Player_Jump_2
+      213: -548694634090972388
+    second: Player_Airborne_2
   - first:
-      213: -1627450272019776505
-    second: Player_Jump_3
+      213: -3322778225564879578
+    second: Player_Airborne_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Jump_0
+      name: Player_Airborne_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85536a07abca8794081f61b7d753d50c
-      internalID: -4142276880962872504
+      spriteID: f36714b70f0cc614aa6234eb29587322
+      internalID: -6743162933250910555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_1
+      name: Player_Airborne_1
       rect:
         serializedVersion: 2
         x: 16
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2619f2140b5506147b3b776900591909
-      internalID: -2833288000470796695
+      spriteID: 5ca2d25cc83bcac46898ab8c26f32822
+      internalID: -7110606880450802433
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_2
+      name: Player_Airborne_2
       rect:
         serializedVersion: 2
         x: 32
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1dac8f236b6f654b936a968e80be4ac
-      internalID: -560937678416875687
+      spriteID: e2f8c487c46c3a442be96258ebe6522a
+      internalID: -548694634090972388
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_3
+      name: Player_Airborne_3
       rect:
         serializedVersion: 2
         x: 48
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2401c01f85cb3e4a9da643cc45c8400
-      internalID: -1627450272019776505
+      spriteID: 4c66cf065eafa1544b224f9278184a86
+      internalID: -3322778225564879578
       vertices: []
       indices: 
       edges: []

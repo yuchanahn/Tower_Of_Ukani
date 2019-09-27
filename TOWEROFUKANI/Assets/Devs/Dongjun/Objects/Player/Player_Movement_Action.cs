@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player_Movement_Action : CLA_Action,
     ICanDetectGround
@@ -38,6 +37,7 @@ public class Player_Movement_Action : CLA_Action,
     #region Var: Jump
     private bool jumpKeyPressed = false;
     private bool isJumping = false;
+    private bool canPlayJumpAnim = true;
     #endregion
 
     #region Var: Fall Through
@@ -83,9 +83,6 @@ public class Player_Movement_Action : CLA_Action,
     }
     public override void OnFixedUpdate()
     {
-        // Animation
-        UpdateAnimation();
-
         // Detect Ground
         GroundDetection_Logic.DetectGround(!isJumping, rb2D, transform, groundDetectionData, ref isGrounded, ref curGroundInfo);
         GroundDetection_Logic.ExecuteOnGroundMethod(this, isGrounded, ref groundDetectionData);
@@ -109,6 +106,9 @@ public class Player_Movement_Action : CLA_Action,
 
         // Gravity
         Gravity_Logic.ApplyGravity(rb2D, isGrounded ? new GravityData(false, 0, 0) : !isJumping ? gravityData : new GravityData(true, jumpData.jumpGravity, 0));
+
+        // Animation
+        UpdateAnimation();
     }
     #endregion
 
@@ -136,13 +136,14 @@ public class Player_Movement_Action : CLA_Action,
             {
                 animator.Play("Player_Airborne");
             }
-            else
+            else if (canPlayJumpAnim)
             {
-                animator.Play("Player_Jump");
+                animator.Play(jumpData.count_Cur < 2 ? "Player_Jump" : "Player_AirJump");
 
-                if (jumpData.count_Cur > 0 && PlayerInputManager.Inst.Input_Jump)
-                    animator.Play("Player_Jump", 0, 0f);
+                if (PlayerInputManager.Inst.Input_Jump)
+                    animator.Play(jumpData.count_Cur < 2 ? "Player_Jump" : "Player_AirJump", 0, 0f);
             }
+            canPlayJumpAnim = jumpData.count_Cur < jumpData.count_Max;
         }
     }
     #endregion

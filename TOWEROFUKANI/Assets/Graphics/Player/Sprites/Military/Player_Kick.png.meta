@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: 31f3233ce22d63e4eaca0150fc6d7bb8
+guid: cbf54cb6674632f4aabe031eccc05263
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4142276880962872504
-    second: Player_Jump_0
+      213: 812218010815213907
+    second: Player_Kick_0
   - first:
-      213: -2833288000470796695
-    second: Player_Jump_1
+      213: 4020472550961195053
+    second: Player_Kick_1
   - first:
-      213: -560937678416875687
-    second: Player_Jump_2
+      213: 8980226827698817317
+    second: Player_Kick_2
   - first:
-      213: -1627450272019776505
-    second: Player_Jump_3
+      213: 3318512622199725028
+    second: Player_Kick_3
+  - first:
+      213: 928312754388996253
+    second: Player_Kick_4
+  - first:
+      213: -1471155738431841034
+    second: Player_Kick_5
+  - first:
+      213: -3917594732401081876
+    second: Player_Kick_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -110,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Jump_0
+      name: Player_Kick_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85536a07abca8794081f61b7d753d50c
-      internalID: -4142276880962872504
+      spriteID: bfa33f1d8b1fa384e9f72768d8e7ed4b
+      internalID: 812218010815213907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_1
+      name: Player_Kick_1
       rect:
         serializedVersion: 2
         x: 16
@@ -145,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2619f2140b5506147b3b776900591909
-      internalID: -2833288000470796695
+      spriteID: 787eee2bba27eb745b74de8285b08f21
+      internalID: 4020472550961195053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_2
+      name: Player_Kick_2
       rect:
         serializedVersion: 2
         x: 32
@@ -166,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1dac8f236b6f654b936a968e80be4ac
-      internalID: -560937678416875687
+      spriteID: 25b948d2a4d6ac24793581ab773cdbdf
+      internalID: 8980226827698817317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Jump_3
+      name: Player_Kick_3
       rect:
         serializedVersion: 2
         x: 48
@@ -187,8 +196,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2401c01f85cb3e4a9da643cc45c8400
-      internalID: -1627450272019776505
+      spriteID: da04850f753aaca40bb0793b5557ca06
+      internalID: 3318512622199725028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Kick_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d29cd650b07588549bbc5a246b6d538c
+      internalID: 928312754388996253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Kick_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18364e29116114e4eb969112e761e056
+      internalID: -1471155738431841034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Kick_6
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1ceec11370f48f49849a2974dc4dbed
+      internalID: -3917594732401081876
       vertices: []
       indices: 
       edges: []
