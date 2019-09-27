@@ -16,15 +16,19 @@ public class Gun_Reload_Action : CLA_Action
     public override void OnStart()
     {
         animator.ResetTrigger("Shoot");
-        animator.Play("Pistol_Reload");
+        animator.Play("Pistol_Reload", 0, 0);
 
         gun_Main.Stats.reloadTimer.Timer_Cur = 0;
+        gun_Main.Stats.reloadTimer.SetActive(true);
         gun_Main.Stats.reloadTimer.Continue();
     }
     public override void OnEnd()
     {
         animator.Play("Pistol_Idle");
-        gun_Main.Stats.loadedBullets = gun_Main.Stats.magazineSize;
+
+        gun_Main.Stats.reloadTimer.SetActive(false);
+        if (gun_Main.Stats.reloadTimer.IsTimerAtMax)
+            gun_Main.Stats.loadedBullets = gun_Main.Stats.magazineSize;
     }
     public override void OnLateUpdate()
     {

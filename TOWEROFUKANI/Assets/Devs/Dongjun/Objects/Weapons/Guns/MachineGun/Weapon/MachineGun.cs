@@ -25,6 +25,12 @@ public class MachineGun : Gun
 
     private void CL_Gun()
     {
+        if (!IsSelected)
+        {
+            ChangeAction(main_Action);
+            return;
+        }
+
         if (CurrentAction == reload_Action && Stats.reloadTimer.IsTimerAtMax)
         {
             ChangeAction(main_Action);
