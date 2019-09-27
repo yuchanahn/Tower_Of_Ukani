@@ -34,8 +34,8 @@ public abstract class Weapon : CLA_Main
 
     protected void Awake()
     {
-        // Initialize Position
         transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
+        SpriteRoot.SetActive(false);
     }
 
     public void SelectWeapon(bool select)
