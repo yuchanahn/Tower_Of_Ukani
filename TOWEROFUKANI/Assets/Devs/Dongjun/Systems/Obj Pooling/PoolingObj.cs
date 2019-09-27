@@ -6,11 +6,7 @@ public abstract class PoolingObj : MonoBehaviour
 {
     public PoolingObj Prefab { get; private set; }
 
-    protected virtual void OnEnable()
-    {
-        ResetOnActive();
-    }
-    protected abstract void ResetOnActive();
+    public abstract void ResetOnActive();
 
     public void InitPoolingObj(PoolingObj prefab)
     {

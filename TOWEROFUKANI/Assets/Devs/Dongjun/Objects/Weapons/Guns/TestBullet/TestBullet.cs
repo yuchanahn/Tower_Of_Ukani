@@ -17,7 +17,7 @@ public class TestBullet : PoolingObj
 
     private float curDist = 0;
 
-    protected override void ResetOnActive()
+    public override void ResetOnActive()
     {
         curDist = 0;
     }

@@ -82,6 +82,7 @@ public class ObjPoolingManager : MonoBehaviour
 
         obj.transform.SetParent(Inst.defaultPoolParent);
         obj.gameObject.SetActive(true);
+        obj.ResetOnActive();
 
         return obj;
     }
