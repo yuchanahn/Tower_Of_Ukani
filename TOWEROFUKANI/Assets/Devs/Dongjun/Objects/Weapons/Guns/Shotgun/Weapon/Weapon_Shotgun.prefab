@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 254864248874405640}
   - component: {fileID: 4565912263870322834}
   - component: {fileID: 3151152317891876062}
+  - component: {fileID: 3279843825506418640}
   m_Layer: 0
   m_Name: Weapon_Shotgun
   m_TagString: Untagged
@@ -142,8 +143,8 @@ MonoBehaviour:
     reloadTimer:
       MaxOnStart: 0
       Timer_Cur: 0
-      Timer_Max: 0
-    magazineSize: 0
+      Timer_Max: 2
+    magazineSize: 2
     loadedBullets: 0
 --- !u!114 &3151152317891876062
 MonoBehaviour:
@@ -170,6 +171,18 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
+--- !u!114 &3279843825506418640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077788971187178467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1b02515cb99d94489c0bf2cc341155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1077788971484917873
 GameObject:
   m_ObjectHideFlags: 0

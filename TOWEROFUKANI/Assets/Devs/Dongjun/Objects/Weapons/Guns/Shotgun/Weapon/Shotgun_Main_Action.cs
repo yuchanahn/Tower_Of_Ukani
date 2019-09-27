@@ -27,11 +27,6 @@ public class Shotgun_Main_Action : CLA_Action
         animator = GetComponent<Animator>();
         shotgun_Main = GetComponent<Shotgun>();
     }
-    private void Start()
-    {
-        shotgun_Main.Stats.shootTimer.Init(gameObject);
-        shotgun_Main.Stats.loadedBullets = shotgun_Main.Stats.magazineSize;
-    }
 
     public override void OnUpdate()
     {
@@ -47,6 +42,9 @@ public class Shotgun_Main_Action : CLA_Action
                     ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, Quaternion.Euler(eRot));
                     eRot.z += pelletAngle;
                 }
+
+                // Use Bullet
+                shotgun_Main.Stats.loadedBullets -= 1;
 
                 // Continue Timer
                 shotgun_Main.Stats.shootTimer.Continue();

@@ -2,17 +2,47 @@
 
 public class Shotgun : Gun
 {
-    private Shotgun_Main_Action pistol_Main_Action;
+    private Shotgun_Main_Action main_Action;
+    private Gun_Reload_Action reload_Action;
+
 
     protected override void Init()
     {
-        pistol_Main_Action = GetComponent<Shotgun_Main_Action>();
+        main_Action = GetComponent<Shotgun_Main_Action>();
+        reload_Action = GetComponent<Gun_Reload_Action>();
 
-        ConditionLogics.Add(pistol_Main_Action, CL_MainAction);
+        ConditionLogics.Add(main_Action, CL_Gun);
+        ConditionLogics.Add(reload_Action, CL_Gun);
+    }
+    protected override void Start()
+    {
+        base.Start();
+        Stats.shootTimer.Init(gameObject);
+        Stats.reloadTimer.Init(gameObject);
+
+        Stats.loadedBullets = Stats.magazineSize;
     }
 
-    private void CL_MainAction()
+    private void CL_Gun()
     {
-        // Write Condition Logic Here
+        if (CurrentAction == reload_Action && Stats.reloadTimer.IsTimerAtMax)
+        {
+            ChangeAction(main_Action);
+            return;
+        }
+
+        if (CurrentAction == main_Action && Stats.loadedBullets <= 0)
+        {
+            ChangeAction(reload_Action);
+            return;
+        }
+
+        if (CurrentAction != reload_Action &&
+            Stats.loadedBullets < Stats.magazineSize &&
+            Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
+        {
+            ChangeAction(reload_Action);
+            return;
+        }
     }
 }

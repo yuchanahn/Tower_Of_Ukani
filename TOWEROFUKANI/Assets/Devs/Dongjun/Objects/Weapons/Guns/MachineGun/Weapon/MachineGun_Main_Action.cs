@@ -23,11 +23,6 @@ public class MachineGun_Main_Action : CLA_Action
         animator = GetComponent<Animator>();
         machineGun_Main = GetComponent<MachineGun>();
     }
-    private void Start()
-    {
-        machineGun_Main.Stats.shootTimer.Init(gameObject);
-        machineGun_Main.Stats.loadedBullets = machineGun_Main.Stats.magazineSize;
-    }
 
     public override void OnUpdate()
     {
@@ -37,6 +32,9 @@ public class MachineGun_Main_Action : CLA_Action
             {
                 // Spawn Bullet
                 ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
+
+                // Use Bullet
+                machineGun_Main.Stats.loadedBullets -= 1;
 
                 // Continue Timer
                 machineGun_Main.Stats.shootTimer.Continue();

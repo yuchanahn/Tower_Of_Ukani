@@ -12,7 +12,7 @@ public abstract class CLA_Main : MonoBehaviour
     protected Dictionary<CLA_Action, Action> ConditionLogics = new Dictionary<CLA_Action, Action>();
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (defaultAction == null)
         {
@@ -21,7 +21,7 @@ public abstract class CLA_Main : MonoBehaviour
 
         Init();
     }
-    private void Start()
+    protected virtual void Start()
     {
         CurrentAction = defaultAction;
         CurrentAction?.OnStart();

@@ -32,8 +32,9 @@ public abstract class Weapon : CLA_Main
     #endregion
 
 
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
         SpriteRoot.SetActive(false);
     }

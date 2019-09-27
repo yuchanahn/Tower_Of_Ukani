@@ -23,11 +23,6 @@ public class Pistol_Main_Action : CLA_Action
         animator = GetComponent<Animator>();
         pistol_Main = GetComponent<Pistol>();
     }
-    private void Start()
-    {
-        pistol_Main.Stats.shootTimer.Init(gameObject);
-        pistol_Main.Stats.loadedBullets = pistol_Main.Stats.magazineSize;
-    }
 
     public override void OnUpdate()
     {
@@ -37,6 +32,9 @@ public class Pistol_Main_Action : CLA_Action
             {
                 // Spawn Bullet
                 ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
+
+                // Use Bullet
+                pistol_Main.Stats.loadedBullets -= 1;
 
                 // Continue Timer
                 pistol_Main.Stats.shootTimer.Continue();

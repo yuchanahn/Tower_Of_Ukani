@@ -609,6 +609,11 @@ PrefabInstance:
       propertyPath: Stats.shootTimer.Timer_Max
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 7304129226058279292, guid: 5f95411add09b9b4c9b9153672129efd,
+        type: 3}
+      propertyPath: Stats.loadedBullets
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 485092021999584720, guid: 5f95411add09b9b4c9b9153672129efd,
         type: 3}
       propertyPath: camShakeData_Shoot.strength
@@ -647,11 +652,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7371128404420445768}
     m_Modifications:
-    - target: {fileID: 4770636179610790158, guid: 102a22639131d7d42bc9cbc79bf84005,
-        type: 3}
-      propertyPath: weaponName
-      value: Machine Gun
-      objectReference: {fileID: 0}
     - target: {fileID: 4450316997164171681, guid: 102a22639131d7d42bc9cbc79bf84005,
         type: 3}
       propertyPath: m_Name
@@ -711,6 +711,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4770636179610790158, guid: 102a22639131d7d42bc9cbc79bf84005,
+        type: 3}
+      propertyPath: weaponName
+      value: Machine Gun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 102a22639131d7d42bc9cbc79bf84005, type: 3}
