@@ -26,7 +26,6 @@ public class Pistol_Main_Action : CLA_Action
     private void Start()
     {
         pistol_Main.Stats.shootTimer.Init(gameObject);
-        pistol_Main.Stats.shootTimer.SetToMax();
         pistol_Main.Stats.loadedBullets = pistol_Main.Stats.magazineSize;
     }
 

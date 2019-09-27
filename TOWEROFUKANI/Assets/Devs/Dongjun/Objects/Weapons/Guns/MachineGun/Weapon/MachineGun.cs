@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
-public class MachineGun : Weapon
+public class MachineGun : Gun
 {
-    public GunStats Stats;
     private MachineGun_Main_Action machineGun_Main_Action;
 
     protected override void Init()

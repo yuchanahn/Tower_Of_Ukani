@@ -7,7 +7,8 @@ using UnityEngine;
 public class TimerData
 {
     // Timer State
-    [HideInInspector]
+    [SerializeField]
+    private bool MaxOnStart = false;
     public bool IsActive { get; private set; } = true;
     public bool IsTimerAtMax { get; private set; } = false;
 
@@ -33,6 +34,9 @@ public class TimerData
 
         this.OnTimerTick = OnTimerTick;
         this.OnTimerMax = OnTimerMax;
+
+        if (MaxOnStart) SetToMax();
+
     }
 
     /// <summary>

@@ -30,7 +30,6 @@ public class Shotgun_Main_Action : CLA_Action
     private void Start()
     {
         shotgun_Main.Stats.shootTimer.Init(gameObject);
-        shotgun_Main.Stats.shootTimer.SetToMax();
         shotgun_Main.Stats.loadedBullets = shotgun_Main.Stats.magazineSize;
     }
 

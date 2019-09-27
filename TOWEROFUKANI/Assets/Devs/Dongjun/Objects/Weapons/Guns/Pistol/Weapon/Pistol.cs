@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Pistol : Weapon
+public class Pistol : Gun
 {
-    public GunStats Stats;
     private Pistol_Main_Action pistol_Main_Action;
 
     protected override void Init()
