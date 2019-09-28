@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6147256514113062377}
   - component: {fileID: 6147256514113062374}
   - component: {fileID: 2394614046180044400}
-  m_Layer: 14
+  m_Layer: 16
   m_Name: Pistol_Effect_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
