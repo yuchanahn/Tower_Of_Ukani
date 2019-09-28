@@ -4,31 +4,31 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 6592551017592506455
-    second: Effect_Pistol_0
+    second: Pistol_Effect_Shot_0
   - first:
       213: 304428712087886837
-    second: Effect_Pistol_1
+    second: Pistol_Effect_Shot_1
   - first:
       213: -630605888862334977
-    second: Effect_Pistol_2
+    second: Pistol_Effect_Shot_2
   - first:
       213: 4672115540036203319
-    second: Effect_Pistol_3
+    second: Pistol_Effect_Shot_3
   - first:
       213: -9182316028354521522
-    second: Effect_Pistol_4
+    second: Pistol_Effect_Shot_4
   - first:
       213: 3385185531682068838
-    second: Effect_Pistol_5
+    second: Pistol_Effect_Shot_5
   - first:
       213: 2254357839812784793
-    second: Effect_Pistol_6
+    second: Pistol_Effect_Shot_6
   - first:
       213: 6781546167992612727
-    second: Effect_Pistol_7
+    second: Pistol_Effect_Shot_7
   - first:
       213: -1798673215576429327
-    second: Effect_Pistol_8
+    second: Pistol_Effect_Shot_8
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -125,7 +125,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Effect_Pistol_0
+      name: Pistol_Effect_Shot_0
       rect:
         serializedVersion: 2
         x: 0
@@ -133,7 +133,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,7 +146,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_Pistol_1
+      name: Pistol_Effect_Shot_1
       rect:
         serializedVersion: 2
         x: 12
@@ -154,7 +154,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,7 +167,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_Pistol_2
+      name: Pistol_Effect_Shot_2
       rect:
         serializedVersion: 2
         x: 24
@@ -175,7 +175,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -188,7 +188,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_Pistol_3
+      name: Pistol_Effect_Shot_3
       rect:
         serializedVersion: 2
         x: 36
@@ -196,7 +196,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -209,7 +209,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_Pistol_4
+      name: Pistol_Effect_Shot_4
       rect:
         serializedVersion: 2
         x: 48
@@ -217,7 +217,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -230,7 +230,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_Pistol_5
+      name: Pistol_Effect_Shot_5
       rect:
         serializedVersion: 2
         x: 60
@@ -238,7 +238,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -251,7 +251,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_Pistol_6
+      name: Pistol_Effect_Shot_6
       rect:
         serializedVersion: 2
         x: 72
@@ -259,7 +259,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -272,7 +272,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_Pistol_7
+      name: Pistol_Effect_Shot_7
       rect:
         serializedVersion: 2
         x: 84
@@ -280,7 +280,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -293,7 +293,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Effect_Pistol_8
+      name: Pistol_Effect_Shot_8
       rect:
         serializedVersion: 2
         x: 96
@@ -301,7 +301,7 @@ TextureImporter:
         width: 12
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

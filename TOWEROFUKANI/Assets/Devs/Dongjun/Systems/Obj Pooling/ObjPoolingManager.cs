@@ -100,9 +100,9 @@ public class ObjPoolingManager : MonoBehaviour
     public static GameObject Activate(PoolingObj prefab, Vector2 pos, Quaternion rot, Transform parent)
     {
         PoolingObj obj = ActivateObj(prefab);
-        obj.transform.position = pos;
-        obj.transform.rotation = rot;
         obj.transform.SetParent(parent);
+        obj.transform.localPosition = pos;
+        obj.transform.localRotation = rot;
 
         return obj.gameObject;
     }

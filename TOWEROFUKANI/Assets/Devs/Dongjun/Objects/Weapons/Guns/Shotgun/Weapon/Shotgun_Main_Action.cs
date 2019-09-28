@@ -15,6 +15,8 @@ public class Shotgun_Main_Action : CLA_Action
 
     [Header("Effects")]
     [SerializeField] private float maxShootAnimTime;
+    [SerializeField] private Transform shootParticleParent;
+    [SerializeField] private PoolingObj shootParticlePrefab;
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
@@ -56,6 +58,9 @@ public class Shotgun_Main_Action : CLA_Action
 
                 // Animation
                 animator.SetTrigger("Shoot");
+
+                // Particle
+                ObjPoolingManager.Activate(shootParticlePrefab, new Vector2(0, 0), Quaternion.identity, shootParticleParent);
 
                 // Cam Shake Effect
                 CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);

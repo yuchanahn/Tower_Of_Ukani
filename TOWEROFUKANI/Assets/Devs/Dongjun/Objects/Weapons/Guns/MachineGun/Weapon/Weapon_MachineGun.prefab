@@ -162,6 +162,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
     type: 3}
   maxShootAnimTime: 0.15
+  shootParticleParent: {fileID: 2350962554968379260}
+  shootParticlePrefab: {fileID: 7190664309250040938, guid: fc45d6df91e980e4d90c006610728338,
+    type: 3}
   camShakeData_Shoot:
     angle: 0
     strength: 0.05
@@ -289,7 +292,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5968888360875319832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.66, y: 0.03, z: 0}
+  m_LocalPosition: {x: 0, y: 0.062, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4450316997529025084}
