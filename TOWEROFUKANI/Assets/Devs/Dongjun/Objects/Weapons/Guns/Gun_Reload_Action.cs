@@ -2,6 +2,11 @@
 
 public class Gun_Reload_Action : CLA_Action
 {
+    #region Var: Inspector
+    [SerializeField] private Transform magazineDropPos;
+    [SerializeField] private PoolingObj droppedMagazine;
+    #endregion
+
     #region Var: Components
     private Animator animator;
     private Gun gun_Main;
@@ -15,19 +20,28 @@ public class Gun_Reload_Action : CLA_Action
 
     public override void OnStart()
     {
+        // Start Timer
         gun_Main.Stats.reloadTimer.Timer_Cur = 0;
         gun_Main.Stats.reloadTimer.SetActive(true);
         gun_Main.Stats.reloadTimer.Continue();
 
+        // Drop Magazine
+        ObjPoolingManager.Activate(droppedMagazine, magazineDropPos.position, transform.rotation);
+
+        // Animation
         animator.ResetTrigger("Shoot");
         animator.Play("Pistol_Reload", 0, 0);
     }
     public override void OnEnd()
     {
+        // Stop Timer
         gun_Main.Stats.reloadTimer.SetActive(false);
+
+        // Load Bullets
         if (gun_Main.Stats.reloadTimer.IsTimerAtMax)
             gun_Main.Stats.loadedBullets = gun_Main.Stats.magazineSize;
 
+        // Animation
         animator.speed = 1;
         animator.Play("Pistol_Idle");
     }

@@ -1253,6 +1253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 568072821}
   camShake: {fileID: 568072823}
+  playerRB2D: {fileID: 1588353896}
 --- !u!114 &1314949022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,6 +1584,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1588353896 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7371128404420445760, guid: de8e575bfc7541a4cb26f729cf5133df,
+    type: 3}
+  m_PrefabInstance: {fileID: 1334092403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1627409617
 GameObject:
   m_ObjectHideFlags: 0
