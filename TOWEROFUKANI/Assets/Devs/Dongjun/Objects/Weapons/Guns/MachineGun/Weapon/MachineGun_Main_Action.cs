@@ -9,59 +9,72 @@ public class MachineGun_Main_Action : CLA_Action
     [Header("Prefabs")]
     [SerializeField] private PoolingObj bulletPrefab;
 
-    [Header("Effects")]
+    [Header("Animation")]
     [SerializeField] private float maxShootAnimTime;
+
+    [Header("Effects")]
     [SerializeField] private Transform shootParticleParent;
     [SerializeField] private PoolingObj shootParticlePrefab;
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
+    #region Var: Properties
+    public bool AnimEnd_Shoot { get; private set; } = false;
+    #endregion
+
     #region Var: Components
     private Animator animator;
-    private MachineGun machineGun_Main;
+    private MachineGun gun_Main;
     #endregion
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        machineGun_Main = GetComponent<MachineGun>();
+        gun_Main = GetComponent<MachineGun>();
     }
 
     public override void OnEnd()
     {
+        AnimEnd_Shoot = false;
         animator.speed = 1;
+        animator.ResetTrigger("Shoot");
     }
     public override void OnUpdate()
     {
-        if (machineGun_Main.IsSelected && machineGun_Main.Stats.shootTimer.IsTimerAtMax)
+        if (!gun_Main.IsSelected)
+            return;
+
+        if (gun_Main.Stats.shootTimer.IsTimerAtMax && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
         {
-            if (Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
-            {
-                // Spawn Bullet
-                ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
+            // Spawn Bullet
+            ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
 
-                // Use Bullet
-                machineGun_Main.Stats.loadedBullets -= 1;
+            // Use Bullet
+            gun_Main.Stats.loadedBullets -= 1;
 
-                // Continue Timer
-                machineGun_Main.Stats.shootTimer.Continue();
+            // Continue Timer
+            gun_Main.Stats.shootTimer.Continue();
 
-                // Animation
-                animator.SetTrigger("Shoot");
+            // Animation
+            AnimEnd_Shoot = false;
+            animator.SetTrigger("Shoot");
 
-                // Particle
-                ObjPoolingManager.Activate(shootParticlePrefab, new Vector2(0, 0), Quaternion.identity, shootParticleParent);
+            // Particle Effect
+            ObjPoolingManager.Activate(shootParticlePrefab, shootParticleParent, new Vector2(0, 0), Quaternion.identity);
 
-                // Cam Shake Effect
-                CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
-            }
+            // Cam Shake Effect
+            CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
         }
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, machineGun_Main.Stats.shootTimer.Timer_Max, maxShootAnimTime, "Pistol_Shoot");
-
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.Stats.shootTimer.Timer_Max, maxShootAnimTime, "Pistol_Shoot");
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, machineGun_Main.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
+    }
+
+    private void OnAnimEnd_Shoot()
+    {
+        AnimEnd_Shoot = true;
     }
 }

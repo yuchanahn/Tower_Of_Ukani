@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 7304129226058279292}
   - component: {fileID: 485092021999584720}
   - component: {fileID: 5268007107109623267}
+  - component: {fileID: 7382682907516775890}
   m_Layer: 0
   m_Name: Weapon_Pistol
   m_TagString: Untagged
@@ -163,7 +164,11 @@ MonoBehaviour:
     reloadTimer:
       MaxOnStart: 0
       Timer_Cur: 0
-      Timer_Max: 1
+      Timer_Max: 0.4
+    swapMagazineTimer:
+      MaxOnStart: 0
+      Timer_Cur: 0
+      Timer_Max: 0.8
     magazineSize: 6
     loadedBullets: 0
 --- !u!114 &485092021999584720
@@ -206,8 +211,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1b02515cb99d94489c0bf2cc341155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: Pistol
+  reloadAll: 1
+  reloadAmount: 0
+--- !u!114 &7382682907516775890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2609116014883290700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4086de91c7659fe43b01fde20be2d958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: Pistol
+  reloadAll: 0
+  reloadAmount: 0
   magazineDropPos: {fileID: 6979050557962841422}
-  droppedMagazine: {fileID: 2394614046180044400, guid: 1d3d4c5d905af5649b448c3691ca16d1,
+  droppedMagazinePrefab: {fileID: 2394614046180044400, guid: 1d3d4c5d905af5649b448c3691ca16d1,
     type: 3}
 --- !u!1 &2609116015003256821
 GameObject:
@@ -282,7 +305,7 @@ GameObject:
   - component: {fileID: 4131922327667388561}
   - component: {fileID: 5760504305917574235}
   m_Layer: 0
-  m_Name: 'Effect: Muzzle Flash'
+  m_Name: Muzzle Flash Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,7 +318,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5413892850277670389}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.062, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

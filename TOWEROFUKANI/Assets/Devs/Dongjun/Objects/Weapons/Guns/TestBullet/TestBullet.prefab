@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1202492219089843866}
   - component: {fileID: -8096460851070030879}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TestBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

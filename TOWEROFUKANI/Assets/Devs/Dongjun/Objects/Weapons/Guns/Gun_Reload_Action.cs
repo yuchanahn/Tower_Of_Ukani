@@ -3,52 +3,52 @@
 public class Gun_Reload_Action : CLA_Action
 {
     #region Var: Inspector
-    [SerializeField] private Transform magazineDropPos;
-    [SerializeField] private PoolingObj droppedMagazine;
+    [Header("Weapon Data")]
+    [SerializeField] private string weaponName;
+
+    [Header("Ammo")]
+    [SerializeField] private bool reloadAll = true;
+    [SerializeField] private int reloadAmount;
     #endregion
 
     #region Var: Components
     private Animator animator;
-    private Gun gun_Main;
+    private Gun gun;
     #endregion
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        gun_Main = GetComponent<Gun>();
+        gun = GetComponent<Gun>();
     }
 
     public override void OnStart()
     {
         // Start Timer
-        gun_Main.Stats.reloadTimer.Timer_Cur = 0;
-        gun_Main.Stats.reloadTimer.SetActive(true);
-        gun_Main.Stats.reloadTimer.Continue();
-
-        // Drop Magazine
-        ObjPoolingManager.Activate(droppedMagazine, magazineDropPos.position, transform.rotation);
+        gun.Stats.reloadTimer.Timer_Cur = 0;
+        gun.Stats.reloadTimer.SetActive(true);
+        gun.Stats.reloadTimer.Continue();
 
         // Animation
-        animator.ResetTrigger("Shoot");
-        animator.Play("Pistol_Reload", 0, 0);
+        animator.Play(weaponName + "_Reload", 0, 0);
     }
     public override void OnEnd()
     {
         // Stop Timer
-        gun_Main.Stats.reloadTimer.SetActive(false);
+        gun.Stats.reloadTimer.SetActive(false);
 
         // Load Bullets
-        if (gun_Main.Stats.reloadTimer.IsTimerAtMax)
-            gun_Main.Stats.loadedBullets = gun_Main.Stats.magazineSize;
+        if (gun.Stats.reloadTimer.IsTimerAtMax)
+            gun.Stats.loadedBullets = reloadAll ? gun.Stats.magazineSize : gun.Stats.loadedBullets + reloadAmount;
 
         // Animation
         animator.speed = 1;
-        animator.Play("Pistol_Idle");
+        animator.Play(weaponName + "_Idle");
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.Stats.reloadTimer.Timer_Max, "Pistol_Reload");
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.reloadTimer.Timer_Max, weaponName + "_Reload");
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun.SpriteRoot.transform, transform);
     }
 }

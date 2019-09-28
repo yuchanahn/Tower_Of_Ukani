@@ -29,11 +29,11 @@ public abstract class CLA_Main : MonoBehaviour
     private void Update()
     {
         CurrentAction?.OnUpdate();
-        CheckCondition();
     }
     private void LateUpdate()
     {
         CurrentAction?.OnLateUpdate();
+        CheckCondition();
     }
     private void FixedUpdate()
     {
@@ -42,6 +42,15 @@ public abstract class CLA_Main : MonoBehaviour
 
     protected abstract void Init();
     protected void ChangeAction(CLA_Action action)
+    {
+        if (action == CurrentAction)
+            return;
+
+        CurrentAction?.OnEnd();
+        CurrentAction = action;
+        CurrentAction?.OnStart();
+    }
+    protected void ForceChangeAction(CLA_Action action)
     {
         CurrentAction?.OnEnd();
         CurrentAction = action;
