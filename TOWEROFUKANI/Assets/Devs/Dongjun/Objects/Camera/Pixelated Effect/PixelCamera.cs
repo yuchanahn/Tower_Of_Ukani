@@ -41,8 +41,8 @@ public class PixelCamera : MonoBehaviour
         mainCamSizeY = mainOrthoSize * 2;
 
         // Set Pixel Camera's Width and Height
-        pixelRender_Width = Mathf.RoundToInt(mainCamSizeX * pixelPerUnit);
-        pixelRender_Height = Mathf.RoundToInt(mainCamSizeY * pixelPerUnit);
+        pixelRender_Width = Mathf.CeilToInt(mainCamSizeX * pixelPerUnit);
+        pixelRender_Height = Mathf.CeilToInt(mainCamSizeY * pixelPerUnit);
 
         // Set Pixelated Quad's Scale
         pixelatedQuad.localScale = new Vector2(mainCamSizeX, mainCamSizeY);

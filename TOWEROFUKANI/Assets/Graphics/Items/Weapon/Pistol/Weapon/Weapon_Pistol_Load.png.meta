@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: c8b7ed241526d7c4c903742b2cad2a46
+guid: 213401b6d35236740b2941f0ee72c6cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6743162933250910555
-    second: Player_Airborne_0
+      213: -829360476163302263
+    second: Weapon_Pistol_Load_0
   - first:
-      213: -7110606880450802433
-    second: Player_Airborne_1
+      213: 3286856267762810441
+    second: Weapon_Pistol_Load_1
   - first:
-      213: -548694634090972388
-    second: Player_Airborne_2
+      213: -5122399626370715385
+    second: Weapon_Pistol_Load_2
   - first:
-      213: -3322778225564879578
-    second: Player_Airborne_3
+      213: -4979939311549231470
+    second: Weapon_Pistol_Load_3
+  - first:
+      213: 7984076463333372173
+    second: Weapon_Pistol_Load_4
+  - first:
+      213: -4915552386701461929
+    second: Weapon_Pistol_Load_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -57,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -81,7 +87,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
@@ -93,7 +99,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
@@ -105,18 +111,18 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Airborne_0
+      name: Weapon_Pistol_Load_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +130,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 224e1e55beb26f54c98ce7999e6095c6
-      internalID: -6743162933250910555
+      spriteID: c8dc30a197d07f747b4bd214d545a399
+      internalID: -829360476163302263
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Airborne_1
+      name: Weapon_Pistol_Load_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 997ef9c303fc9264bb417c06392f6a53
+      internalID: 3286856267762810441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapon_Pistol_Load_2
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +172,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 409659de966542c41917f83b448edebb
-      internalID: -7110606880450802433
+      spriteID: ad809a39cf330e842aab683f604f3ee6
+      internalID: -5122399626370715385
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Airborne_2
+      name: Weapon_Pistol_Load_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cd64364ee08c6947be0f0edc73c0fb3
+      internalID: -4979939311549231470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapon_Pistol_Load_4
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +214,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e3729df1d7f4954f994ff067cb3275d
-      internalID: -548694634090972388
+      spriteID: 693fc17eef0d8fc4688a4d18e3d4406e
+      internalID: 7984076463333372173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Airborne_3
+      name: Weapon_Pistol_Load_5
       rect:
         serializedVersion: 2
-        x: 96
+        x: 80
         y: 0
-        width: 32
-        height: 32
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +235,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5ad06ecca071ce4419519ce5c7e12eca
-      internalID: -3322778225564879578
+      spriteID: f1abe18ba6a2f5a4aa3b9b84bac4f2e4
+      internalID: -4915552386701461929
       vertices: []
       indices: 
       edges: []
@@ -196,7 +244,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 283dcf2dc1b43314b915a527e865144f
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

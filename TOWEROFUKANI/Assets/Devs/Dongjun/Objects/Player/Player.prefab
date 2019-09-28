@@ -136,7 +136,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.8}
+  m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
 --- !u!1 &7371128403513975019
 GameObject:
@@ -226,7 +226,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.8}
+  m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
 --- !u!251 &7371128403577552052
 PlatformEffector2D:
@@ -353,7 +353,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.8}
+  m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
 --- !u!114 &7371128404420445766
 MonoBehaviour:
@@ -511,12 +511,6 @@ PrefabInstance:
       propertyPath: shootTimer.Timer_Max
       value: 0.75
       objectReference: {fileID: 0}
-    - target: {fileID: 3151152317891876062, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
-        type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5ec28e3b385664d9a34ef3a6de12a9, type: 3}
 --- !u!4 &1077788971303260969 stripped
@@ -604,27 +598,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7304129226058279292, guid: 5f95411add09b9b4c9b9153672129efd,
-        type: 3}
-      propertyPath: Stats.shootTimer.Timer_Max
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7304129226058279292, guid: 5f95411add09b9b4c9b9153672129efd,
-        type: 3}
-      propertyPath: Stats.loadedBullets
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 485092021999584720, guid: 5f95411add09b9b4c9b9153672129efd,
-        type: 3}
-      propertyPath: camShakeData_Shoot.strength
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 485092021999584720, guid: 5f95411add09b9b4c9b9153672129efd,
-        type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f95411add09b9b4c9b9153672129efd, type: 3}
 --- !u!4 &7371128404914498168 stripped
@@ -711,11 +684,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4770636179610790158, guid: 102a22639131d7d42bc9cbc79bf84005,
-        type: 3}
-      propertyPath: weaponName
-      value: Machine Gun
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 102a22639131d7d42bc9cbc79bf84005, type: 3}

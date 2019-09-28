@@ -1,19 +1,34 @@
 fileFormatVersion: 2
-guid: 23602a7062df1ed429d8636cdff99efa
+guid: 3add93a179daa34438402a9951400956
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8295655729572904056
-    second: Pistol_Effect_Shot_0
+      213: 6592551017592506455
+    second: Effect_Pistol_0
   - first:
-      213: -7832544933641513760
-    second: Pistol_Effect_Shot_1
+      213: 304428712087886837
+    second: Effect_Pistol_1
   - first:
-      213: -4289591936774484241
-    second: Pistol_Effect_Shot_2
+      213: -630605888862334977
+    second: Effect_Pistol_2
   - first:
-      213: 2271190718428549534
-    second: Pistol_Effect_Shot_3
+      213: 4672115540036203319
+    second: Effect_Pistol_3
+  - first:
+      213: -9182316028354521522
+    second: Effect_Pistol_4
+  - first:
+      213: 3385185531682068838
+    second: Effect_Pistol_5
+  - first:
+      213: 2254357839812784793
+    second: Effect_Pistol_6
+  - first:
+      213: 6781546167992612727
+    second: Effect_Pistol_7
+  - first:
+      213: -1798673215576429327
+    second: Effect_Pistol_8
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -57,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +125,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pistol_Effect_Shot_0
+      name: Effect_Pistol_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc145700194854349989c565542ea121
-      internalID: 8295655729572904056
+      spriteID: 5407bea240a78be4bb6c6d0af565596e
+      internalID: 6592551017592506455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pistol_Effect_Shot_1
+      name: Effect_Pistol_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 12
         y: 0
-        width: 32
-        height: 32
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4597a3b617193343a2ea36134e2d2dc
-      internalID: -7832544933641513760
+      spriteID: 0de6244cddb170846ab4115e918b8fcd
+      internalID: 304428712087886837
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pistol_Effect_Shot_2
+      name: Effect_Pistol_2
       rect:
         serializedVersion: 2
-        x: 64
+        x: 24
         y: 0
-        width: 32
-        height: 32
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +181,125 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 763b17efef6c6d94490f416792714c4c
-      internalID: -4289591936774484241
+      spriteID: 44ddab6e36997944cbc14d6549d852cf
+      internalID: -630605888862334977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pistol_Effect_Shot_3
+      name: Effect_Pistol_3
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c91adf00ec1449a47ae53af61150497b
+      internalID: 4672115540036203319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_Pistol_4
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a622ce75a74eff4490f688d1777249a
+      internalID: -9182316028354521522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_Pistol_5
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30e58599d5991ca47b4b72077118803d
+      internalID: 3385185531682068838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_Pistol_6
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21cacf896291834468044aa8885d17e7
+      internalID: 2254357839812784793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_Pistol_7
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ec9b8abd19b4854e9c87be37221fe9b
+      internalID: 6781546167992612727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Effect_Pistol_8
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 32
-        height: 32
+        width: 12
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +307,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 686b09fce4e1baf4a9414908d82c8475
-      internalID: 2271190718428549534
+      spriteID: 0bf5b4811d1d0f840be369e5a4eb653f
+      internalID: -1798673215576429327
       vertices: []
       indices: 
       edges: []
@@ -196,7 +316,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a303223beea36334ebcac5f556748e3f
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 73dd3ba68e522a94c8afe21f5777dfd8
+guid: 1994995c61dade642894196863be6b41
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3405994083243672255
-    second: Player_Walk_Backward_0
+      213: -1301484015583928882
+    second: Weapon_Pistol_Shot_0
   - first:
-      213: -2396436690127119449
-    second: Player_Walk_Backward_1
+      213: -429611616791171807
+    second: Weapon_Pistol_Shot_1
   - first:
-      213: 2611177597618021728
-    second: Player_Walk_Backward_2
+      213: -989609445192097305
+    second: Weapon_Pistol_Shot_2
   - first:
-      213: -1229347619255871821
-    second: Player_Walk_Backward_3
-  - first:
-      213: -8467186310546235251
-    second: Player_Walk_Backward_4
-  - first:
-      213: -1449166461798011669
-    second: Player_Walk_Backward_5
+      213: -679387533158820111
+    second: Weapon_Pistol_Shot_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -116,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Walk_Backward_0
+      name: Weapon_Pistol_Shot_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3b1f4e3c5ae9394c98215db30aef0cd
-      internalID: -3405994083243672255
+      spriteID: 36cd0bb4cc8d5df44b35da6b168c3b9f
+      internalID: -1301484015583928882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walk_Backward_1
+      name: Weapon_Pistol_Shot_1
       rect:
         serializedVersion: 2
         x: 16
@@ -151,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 265835d11ec4cf2479ff2d25b40bc25b
-      internalID: -2396436690127119449
+      spriteID: 4b8399878dbcc4c4a8bbea82d9f08c51
+      internalID: -429611616791171807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walk_Backward_2
+      name: Weapon_Pistol_Shot_2
       rect:
         serializedVersion: 2
         x: 32
@@ -172,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb646d4cdfe800244b23994a9fddcb29
-      internalID: 2611177597618021728
+      spriteID: 7dd380879229ffd49b6fbca5f5bd6aff
+      internalID: -989609445192097305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walk_Backward_3
+      name: Weapon_Pistol_Shot_3
       rect:
         serializedVersion: 2
         x: 48
@@ -193,50 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fb6e36d95674944d8e8230c4e18c4ad
-      internalID: -1229347619255871821
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Walk_Backward_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7417acc9b7b0a1a4980e069a869ce403
-      internalID: -8467186310546235251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Walk_Backward_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6330a6411a2073047b668f8565c794e5
-      internalID: -1449166461798011669
+      spriteID: 4c3e7b1113a19cf4c806ac68975e96ca
+      internalID: -679387533158820111
       vertices: []
       indices: 
       edges: []

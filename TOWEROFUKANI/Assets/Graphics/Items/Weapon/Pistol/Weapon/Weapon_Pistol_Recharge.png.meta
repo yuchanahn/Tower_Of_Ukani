@@ -1,37 +1,52 @@
 fileFormatVersion: 2
-guid: ec5cbb482a9e76f40b36e500158a5c32
+guid: 74dfa4a8399393244809ea663dd90cb4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5392051366176270926
-    second: Player_Stunned_0
+      213: 8282489429756949404
+    second: Weapon_Pistol_Recharge_0
   - first:
-      213: 2409467127754128238
-    second: Player_Stunned_1
+      213: 5927467953979865076
+    second: Weapon_Pistol_Recharge_1
   - first:
-      213: 1179826758417960649
-    second: Player_Stunned_2
+      213: -547133069812063247
+    second: Weapon_Pistol_Recharge_2
   - first:
-      213: 7669629440600244784
-    second: Player_Stunned_3
+      213: -8891158808662451736
+    second: Weapon_Pistol_Recharge_3
   - first:
-      213: -1644389405108670914
-    second: Player_Stunned_4
+      213: -1226010754798239170
+    second: Weapon_Pistol_Recharge_4
   - first:
-      213: -5824599296591896710
-    second: Player_Stunned_5
+      213: -3435286360637008811
+    second: Weapon_Pistol_Recharge_5
   - first:
-      213: -254072944171133643
-    second: Player_Stunned_6
+      213: -5345864733009879517
+    second: Weapon_Pistol_Recharge_6
   - first:
-      213: 8211257593473235490
-    second: Player_Stunned_7
+      213: -9155423901186159090
+    second: Weapon_Pistol_Recharge_7
   - first:
-      213: -90363001621776018
-    second: Player_Stunned_8
+      213: -7576578143761078826
+    second: Weapon_Pistol_Recharge_8
   - first:
-      213: -9217259234697693852
-    second: Player_Stunned_9
+      213: -2609193907838640252
+    second: Weapon_Pistol_Recharge_9
+  - first:
+      213: -1653806405183797943
+    second: Weapon_Pistol_Recharge_10
+  - first:
+      213: 4290105267728273989
+    second: Weapon_Pistol_Recharge_11
+  - first:
+      213: 2049145075617994489
+    second: Weapon_Pistol_Recharge_12
+  - first:
+      213: 5884320550111773711
+    second: Weapon_Pistol_Recharge_13
+  - first:
+      213: -2806494759861314431
+    second: Weapon_Pistol_Recharge_14
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -128,7 +143,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Stunned_0
+      name: Weapon_Pistol_Recharge_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ae6d7f7778f82849bf86f1b16f08f63
-      internalID: -5392051366176270926
+      spriteID: 1cc5d952495b0664fadf8b3b0f96aebe
+      internalID: 8282489429756949404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_1
+      name: Weapon_Pistol_Recharge_1
       rect:
         serializedVersion: 2
         x: 16
@@ -163,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2eae54f650b4d0c4caa6ee170f84b223
-      internalID: 2409467127754128238
+      spriteID: 2f395af0d0579da47aaa7ebd568d5183
+      internalID: 5927467953979865076
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_2
+      name: Weapon_Pistol_Recharge_2
       rect:
         serializedVersion: 2
         x: 32
@@ -184,14 +199,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 710f52d1d96ce0c41867f009352e215e
-      internalID: 1179826758417960649
+      spriteID: 9d8755d053b8ac34bbf71234f0c83ff5
+      internalID: -547133069812063247
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_3
+      name: Weapon_Pistol_Recharge_3
       rect:
         serializedVersion: 2
         x: 48
@@ -205,14 +220,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8eabeeb4ed23ea4e90867b352f7b4b6
-      internalID: 7669629440600244784
+      spriteID: 89d973f440dc87b43bc4c22e809eba91
+      internalID: -8891158808662451736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_4
+      name: Weapon_Pistol_Recharge_4
       rect:
         serializedVersion: 2
         x: 64
@@ -226,14 +241,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbbd3b61355e9234b9004595d36e1f80
-      internalID: -1644389405108670914
+      spriteID: 36d3e593fc9fab446ba6a7d7e87abd39
+      internalID: -1226010754798239170
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_5
+      name: Weapon_Pistol_Recharge_5
       rect:
         serializedVersion: 2
         x: 80
@@ -247,14 +262,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 022e0e98c523df0449f38de43a65c5c2
-      internalID: -5824599296591896710
+      spriteID: 6d366adc561175742b9b65a9a322390f
+      internalID: -3435286360637008811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_6
+      name: Weapon_Pistol_Recharge_6
       rect:
         serializedVersion: 2
         x: 96
@@ -268,14 +283,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4be518380b206504b85ab7563e6f02c2
-      internalID: -254072944171133643
+      spriteID: 82cc79faa7b7926499d53c85fd954216
+      internalID: -5345864733009879517
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_7
+      name: Weapon_Pistol_Recharge_7
       rect:
         serializedVersion: 2
         x: 112
@@ -289,14 +304,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3733ffb1f362f9438e96e4f225ccfa1
-      internalID: 8211257593473235490
+      spriteID: 6913b36ff5faf99488b23f5485d91632
+      internalID: -9155423901186159090
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_8
+      name: Weapon_Pistol_Recharge_8
       rect:
         serializedVersion: 2
         x: 128
@@ -310,14 +325,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ed306154b19aba429a0ba823ad4cd94
-      internalID: -90363001621776018
+      spriteID: 02842130f9adcea40a738764e76873ee
+      internalID: -7576578143761078826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Stunned_9
+      name: Weapon_Pistol_Recharge_9
       rect:
         serializedVersion: 2
         x: 144
@@ -331,8 +346,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b58c34283131b748a74b6d324941152
-      internalID: -9217259234697693852
+      spriteID: c26cb7e6394bd6641a1c4b93eb7560bf
+      internalID: -2609193907838640252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapon_Pistol_Recharge_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8683a753fc6d116448645c0e5eb67d07
+      internalID: -1653806405183797943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapon_Pistol_Recharge_11
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5057de371f05664dbe2e6430c2b6c70
+      internalID: 4290105267728273989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapon_Pistol_Recharge_12
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3d75e185a170b14f848c34dbf39cd7e
+      internalID: 2049145075617994489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapon_Pistol_Recharge_13
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df62e25b61db11e488e80f93cf68e839
+      internalID: 5884320550111773711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Weapon_Pistol_Recharge_14
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6ae9e13974ed5d45a0198f1feb2c2d2
+      internalID: -2806494759861314431
       vertices: []
       indices: 
       edges: []

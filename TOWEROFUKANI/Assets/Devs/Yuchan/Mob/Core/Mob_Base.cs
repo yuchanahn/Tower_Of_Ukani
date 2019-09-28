@@ -61,7 +61,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         get {
             if (!mbGrounded) return false;
             var hit = Physics2D.RaycastAll(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x, GroundLayers);
-            Debug.DrawRay(transform.position, new Vector2(CurDir, -1) * (mOneWayCollider.size.x), Color.red, 0.1f);
+            Debug.DrawRay(transform.position, new Vector2(CurDir, -1) * (mOneWayCollider.size.x), Color.red);
 
             if (hit.Length > 0) return false;
             return true;

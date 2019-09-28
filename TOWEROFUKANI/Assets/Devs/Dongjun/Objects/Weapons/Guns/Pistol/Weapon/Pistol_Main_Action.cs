@@ -10,6 +10,7 @@ public class Pistol_Main_Action : CLA_Action
     [SerializeField] private PoolingObj bulletPrefab;
 
     [Header("Effects")]
+    [SerializeField] private float maxShootAnimTime;
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
@@ -24,6 +25,10 @@ public class Pistol_Main_Action : CLA_Action
         pistol_Main = GetComponent<Pistol>();
     }
 
+    public override void OnEnd()
+    {
+        animator.speed = 1;
+    }
     public override void OnUpdate()
     {
         if (pistol_Main.IsSelected && pistol_Main.Stats.shootTimer.IsTimerAtMax)
@@ -49,6 +54,8 @@ public class Pistol_Main_Action : CLA_Action
     }
     public override void OnLateUpdate()
     {
+        AnimSpeed_Logic.SetAnimSpeed(animator, pistol_Main.Stats.shootTimer.Timer_Max, maxShootAnimTime, "Pistol_Shoot");
+
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, pistol_Main.SpriteRoot.transform, transform);
     }

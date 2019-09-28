@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultAction: {fileID: 1243003119494043728}
-  weaponName: Weapon
+  weaponName: Machine Gun
   weaponDesc: This is a Machine Gun
   weaponType: 0
   weaponRange: 1
@@ -161,6 +161,7 @@ MonoBehaviour:
   shootPoint: {fileID: 4450316996750440473}
   bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
     type: 3}
+  maxShootAnimTime: 0.15
   camShakeData_Shoot:
     angle: 0
     strength: 0.05
@@ -207,7 +208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4450316997529025075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: 0, z: 0}
+  m_LocalPosition: {x: 0.6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2350962554968379260}
@@ -260,7 +261,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5968888360875319832
