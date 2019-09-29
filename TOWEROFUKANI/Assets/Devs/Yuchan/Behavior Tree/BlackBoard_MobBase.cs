@@ -12,32 +12,24 @@ public class BlackBoard_MobBase : BlackBoard_Base
     }
 
     #region Action
-    internal bool TA_Follow() => mob.FollowPlayer();
-    internal bool TA_Attack() => mob.Attack();
-    internal bool TA_Hurt() => mob.IsHurt;
-    //internal bool TA_Idle() => mob.Idle();
-    internal bool TA_RandomMove() => true;
-    internal bool TA_SetReversDir()
-    {
-        mob.CurDir = -mob.CurDir;
-        return true;
-    }
+
+    public bool TA_RandMove()   => mob.MoveRandom();
+    public bool TA_Attack()     => false;
+    public bool TA_Idle()       => mob.IdleRandom();
+    public bool TA_Follow()     => false;
+    public bool TA_Hurt()       => false;
+
     #endregion
 
     #region Condition
-    internal bool CN_InHurt() => mob.IsHurt;
-    internal bool CN_InFollowRange() => mob.InFollowRange;
-    virtual internal bool CN_InAttackAble() => mob.IsKeepAttack ? true : mob.StartAttacking = mob.InAttackRange;
-    internal bool CN_OnCliff() => mob.IsOnCliff;
+
+    public bool CN_IsFollow() => false;
+    public bool CN_IsAttack() => false;
+    public bool CN_IsHurted() => false;
+
     #endregion
 
     #region Service
-    internal void SV_AgroCheck()
-    {
-    }
-    internal void SV_SetRandomDir()
-    {
-        mob.CurDir = mob.RandomDir;
-    }
+
     #endregion
 }

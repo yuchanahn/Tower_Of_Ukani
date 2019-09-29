@@ -86,9 +86,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5171003076785061115}
+  - component: {fileID: 73912363867703344}
   - component: {fileID: 4622151206526484547}
   - component: {fileID: 2631462170308868841}
-  - component: {fileID: 73912363867703344}
   - component: {fileID: 3872322163839645563}
   - component: {fileID: 2248344777037342470}
   - component: {fileID: 5191352046215374395}
@@ -116,6 +116,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &73912363867703344
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569291923833692112}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a96d2042bb6e5894aa30333309bea67a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &4622151206526484547
 Rigidbody2D:
   serializedVersion: 4
@@ -163,25 +182,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!95 &73912363867703344
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3569291923833692112}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a96d2042bb6e5894aa30333309bea67a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &3872322163839645563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,39 +194,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3429f59ac248bb48a1cffcd12fa72d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSpeed: 2
-  mAttackRange: 0.55
-  mFollowRange: 3
-  oneWayCollider: {fileID: 5555169890968166534}
-  MoveAbleGroundLayers:
-    serializedVersion: 2
-    m_Bits: 1024
-  mFollowData:
+  m_OneWayCollider: {fileID: 5555169890968166534}
+  m_MoveData:
+    Speed: 1
+    Dir: 1
+    JumpHeight: 1
+    MoveT:
+      min: 1
+      max: 2
+    IdleT:
+      min: 1
+      max: 2
+    State: 0
+  m_followData:
     followAble: 1
     dis: 1
-    size: {x: 0.9, y: 0.9}
     moveAbleGroundLayers:
       serializedVersion: 2
-      m_Bits: 1024
-  mCompseData:
-    mCntMin: 4
-    mCntMax: 5
+      m_Bits: 0
+  m_compseData:
+    mCntMin: 0
+    mCntMax: 0
     mFCntMin: 0
-    mFCntMax: 4
-    mCorpse: {fileID: 3864375849378008672, guid: 3eb9ba50ec5f39141a7628c8196b7f4e,
-      type: 3}
-  mJumpData:
+    mFCntMax: 0
+    mCorpse: {fileID: 0}
+  m_jumpData:
     count_Cur: 0
     count_Max: 1
     height: 1.5
-    time: 0.22
+    time: 0.5
     apexY: 0
-  mGravityData:
+  m_gravityData:
     useGravity: 1
-    acceleration: 40
-    terminalVelocity: 20
-  mOneWayCollider: {fileID: 5555169890968166534}
-  mGroundDetectionData:
+    acceleration: 1
+    terminalVelocity: 2
+  m_groundDetectionData:
     Size: {x: 0, y: 0}
     IgnoreGrounds: []
     OnGroundEnter_Executed: 0
@@ -241,7 +243,6 @@ MonoBehaviour:
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
     OffsetAmount: 0
-  mAddSpeed_: 2
 --- !u!114 &2248344777037342470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de191e390c18d24a84d41cc835380ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RandomTime: 2
 --- !u!114 &4138764173793614123
 MonoBehaviour:
   m_ObjectHideFlags: 0

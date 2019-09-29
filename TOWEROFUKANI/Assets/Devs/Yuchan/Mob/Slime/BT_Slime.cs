@@ -14,32 +14,26 @@ public class BT_Slime : BT_Base
     override protected void BT_Set()
     {
         root.node
-        .AddNode(new Service(Bb.SV_AgroCheck, 0.1f))
-        .AddNode(new Service(Bb.SV_SetRandomDir, 2f))
         .AddNode(new Selector())
-
-            .AddNode(new Decorator(Bb.CN_InHurt))
-                .AddNode(new Task(Bb.TA_Hurt))      .TAEnd()
+            .AddNode(new Decorator(Bb.CN_IsHurted))
+                .AddNode(new Task(Bb.TA_Hurt))
+                .End()
             .End()
-            .AddNode(new Decorator(Bb.CN_InAttackAble))
-                .AddNode(new Task(Bb.TA_Attack))    .TAEnd()
-                .AddNode(new Task(Bb.TA_AttackRun)) .TAEnd()
+            .AddNode(new Decorator(Bb.CN_IsAttack))
+                .AddNode(new Task(Bb.TA_Attack))
+                .End()
             .End()
-
-            .AddNode(new Decorator(Bb.CN_InFollowRange))
-                .AddNode(new Task(Bb.TA_Follow))    .TAEnd()
+            .AddNode(new Decorator(Bb.CN_IsFollow))
+                .AddNode(new Task(Bb.TA_Follow))
+                .End()
             .End()
-
-            .AddNode(new Decorator(Bb.CN_OnCliff))
-                .AddNode(new Task(Bb.TA_SetReversDir))  .TAEnd()
-                .AddNode(new Task(Bb.TA_RandomMove))    .TAEnd()
+            .AddNode(new Sequence())
+                .AddNode(new Task(Bb.TA_RandMove))
+                .End()
+                .AddNode(new Task(Bb.TA_Idle))
+                .End()
             .End()
-            .AddNode(new Task(Bb.TA_RandomMove))
-            .End()
-
-        .End()
-        .SVEnd()
-        .SVEnd();
+        .End();
 
         base.BT_Set();
     }

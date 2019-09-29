@@ -24,14 +24,16 @@ public class ATimer : MonoBehaviour
 
     void Update()
     {
+        Queue<string> keys = new Queue<string>();
         foreach(var i in mTimerEvent)
         {
             mTimer[i.Key] = (mTimer[i.Key].Item1, mTimer[i.Key].Item2+Time.deltaTime);
             if (mTimer[i.Key].Item1 < mTimer[i.Key].Item2)
             {
                 i.Value();
-                Pop(i.Key);
+                keys.Enqueue(i.Key);
             }
         }
+        while (keys.Count > 0) Pop(keys.Dequeue());
     }
 }

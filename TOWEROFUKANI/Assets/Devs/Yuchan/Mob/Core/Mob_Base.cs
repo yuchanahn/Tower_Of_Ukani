@@ -5,205 +5,140 @@ using UnityEngine;
 public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 {
     #region Var: Inspector
-    [SerializeField] private int mSpeed;
-    [SerializeField] private float mAttackRange;
-    [SerializeField] private float mFollowRange;
 
     [Header("Collision")]
     [SerializeField]
-    private BoxCollider2D oneWayCollider;
-
-    [Header("MoveAbleGroundLayers")]
-    [SerializeField]
-    private LayerMask MoveAbleGroundLayers;
+    private BoxCollider2D m_OneWayCollider;
 
 
-    [SerializeField] private FollowData mFollowData;
-    [SerializeField] private CorpseData mCompseData;
-    [SerializeField] private JumpData mJumpData;
-    [SerializeField] private GravityData mGravityData;
-    [SerializeField] private BoxCollider2D mOneWayCollider;
-    [SerializeField] private GroundDetectionData mGroundDetectionData;
+    [SerializeField] MobMoveData m_MoveData;
+    [SerializeField] FollowData m_followData;
+    [SerializeField] CorpseData m_compseData;
+    [SerializeField] JumpData m_jumpData;
+    [SerializeField] GravityData m_gravityData;
+    [SerializeField] GroundDetectionData m_groundDetectionData;
+    [SerializeField] CliffDetectionData m_cliffDetectionData;
+
     #endregion
 
-    private int mCurDir;
+    GroundInfo mCurGroundInfo = new GroundInfo();
 
-    protected float mAddSpeed = 0;
+    protected Rigidbody2D m_rb;
+    protected Animator m_ani;
 
-    protected bool mbGrounded;
-    protected bool mbJumping;
-    protected bool mbHurt;
-    protected bool mbFollowAble = true;
-    protected bool mbAttackEnd = true;
-    protected bool mbJumpPress = false;
+    protected bool m_bGrounded = false;
+    protected bool m_bJumping = false;
+    protected bool m_bJumpStart = false;
+    protected bool m_bFallStart = false;
 
-    private GroundInfo mCurGroundInfo = new GroundInfo();
-
-    private bool onGroundEnter = false;
-    private bool onGroundExit = false;
-
-    protected Rigidbody2D mRb2D;
-    protected Animator mAnimator;
-
-    #region Var: Properties
-    protected float PlayerDis => (GM.PlayerPos - transform.position).magnitude;
-    protected float PlayerDisX => Mathf.Abs(GM.PlayerPos.x - transform.position.x);
-    protected float PlayerDisY => Mathf.Abs(GM.PlayerPos.y - transform.position.y);
-    protected LayerMask GroundLayers => mGroundDetectionData.GroundLayers;
-    protected Vector2 Size => (mOneWayCollider.size * transform.localScale.normalized);
+    float t = 0;
+    float rt;
 
 
+    float VelX => m_MoveData.Speed * m_MoveData.Dir;
+    float VelY => m_rb.velocity.y;
 
-    virtual public int RandomDir => IsKeepAttack ? CurDir : Random.Range(0, 2) == 0 ? -1 : 1;
-    public bool IsHurt { get => mbHurt; set => mbHurt = value; }
-    public bool IsOnCliff
-    {
-        get {
-            if (!mbGrounded) return false;
-            var hit = Physics2D.RaycastAll(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x, GroundLayers);
-            Debug.DrawRay(transform.position, new Vector2(CurDir, -1) * (mOneWayCollider.size.x), Color.red);
-
-            if (hit.Length > 0) return false;
-            return true;
-        }
-    }
-        //=> !Physics2D.Raycast(transform.position, new Vector2(CurDir, -1), mOneWayCollider.size.x / 2);
-    public bool InFollowRange => PlayerDis <= mFollowRange;
-    public bool InAttackRange => mbGrounded && PlayerDis <= mAttackRange;
-    public int CurDir { get => mCurDir; set { mCurDir = value; if(mCurDir != 0) transform.eulerAngles = new Vector2(0, mCurDir == -1 ? 0 : 180); } }
-    public bool IsKeepAttack => !mbAttackEnd;
-
-
-    public bool StartAttacking { get { return StartAttacking; } internal set { if (value) { OnAttack(); } } }
-    #endregion
-
-    #region Method: Unity
     private void Awake()
     {
-        mRb2D = GetComponent<Rigidbody2D>();
-        mAnimator = GetComponent<Animator>();
+        m_rb = GetComponent<Rigidbody2D>();
+        m_ani = GetComponent<Animator>();
     }
     private void Update()
     {
-        mGroundDetectionData.Size = mOneWayCollider.size * transform.localScale;
+        m_groundDetectionData.Size = m_OneWayCollider.size * transform.localScale;
     }
     private void FixedUpdate()
     {
+        GroundDetection_Logic.DetectGround(!m_bJumping, m_rb, transform, m_groundDetectionData, ref m_bGrounded, ref mCurGroundInfo);
+        GroundDetection_Logic.ExecuteOnGroundMethod(this, m_bGrounded, ref m_groundDetectionData);
+
+        m_rb.velocity = new Vector2(VelX, VelY);
+
+        GroundDetection_Logic.FallThrough(ref m_bFallStart, m_bGrounded, m_rb, transform, m_OneWayCollider, m_groundDetectionData);
+
+        Jump_Logic.Jump(ref m_bJumpStart, ref m_bJumping, ref m_jumpData, m_rb, transform);
+
+        Gravity_Logic.ApplyGravity(m_rb, m_bGrounded ? new GravityData(false, 0, 0) : !m_bJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
+
         Animation();
-
-        // Detect Ground
-        GroundDetection_Logic.DetectGround(!mbJumping, mRb2D, transform, mGroundDetectionData, ref mbGrounded, ref mCurGroundInfo);
-        GroundDetection_Logic.ExecuteOnGroundMethod(this, mbGrounded, ref mGroundDetectionData);
-
-        // Walk
-        mRb2D.velocity = new Vector2((mSpeed+mAddSpeed) * CurDir, mRb2D.velocity.y);
-
-        // Jump
-        Jump_Logic.ResetJumpingState(ref mbJumping, ref mJumpData, mRb2D, transform);
-
-        // Gravity
-        Gravity_Logic.ApplyGravity(mRb2D, mbGrounded ? new GravityData(false, 0, 0) : !mbJumping ? mGravityData : new GravityData(true, mJumpData.jumpGravity, 0));
     }
-    #endregion
+
+
 
     private void Animation()
     {
-        if (IsKeepAttack)
-        {
-            mAnimator.Play(string.Concat(gameObject.name, "_Attack"));
-        }
-        else if (IsHurt)
-        {
-            mAnimator.Play(string.Concat(gameObject.name, "_Hit"));
-        }
-        else if (mbGrounded)
-        {
-            mAnimator.Play(string.Concat(gameObject.name, CurDir != 0 ? "_Walk" : "_Idle"));
-        }
-        else
-        {
-            mAnimator.Play(string.Concat(gameObject.name, mRb2D.velocity.y <= 0 ? "_AirborneDown" : "_AirborneUp"));
-        }
+
+    }
+    public void OnMoveRandom()
+    {
+        rt = m_MoveData.MoveT.Get;
+        m_MoveData.State = MobMoveData.eState.Move;
+        m_MoveData.Dir = ARandom.Dir;
+    }
+    public void OnIdleRandom()
+    {
+        rt = m_MoveData.IdleT.Get;
+        m_MoveData.State = MobMoveData.eState.Idle;
+        m_MoveData.Dir = 0;
     }
 
-    protected int Jump()
+    public bool MoveRandom()
     {
-        Jump_Logic.Jump(ref mbJumping, ref mJumpData, mRb2D, transform);
-        return 1;
-    }
-    protected int DownJump()
-    {
-        bool fall = true;
-        GroundDetection_Logic.FallThrough(ref fall, mbGrounded, mRb2D, transform, oneWayCollider, mGroundDetectionData);
-        return -1;
-    }
-
-
-
-    public bool FollowPlayer()
-    {
-        if(mbGrounded)
-        switch (MobFollow_Logic.Follow(transform.position, mFollowData))
+        t += Time.deltaTime;
+        if (m_MoveData.State == MobMoveData.eState.Move && rt < t)
         {
-            case MobFollow_Logic.eFollowState.Jump:
-                Jump();
-                break;
-            case MobFollow_Logic.eFollowState.DownJump:
-                DownJump();
-                break;
-            default:
-                break;
+            t = 0;
+            OnIdleRandom();
         }
-        CurDir = Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f ? 0 : GM.PlayerPos.x > transform.position.x ? 1 : -1;
         return true;
     }
 
-    virtual protected void OnAttack()
+    public bool IdleRandom()
     {
-        CurDir = GM.PlayerPos.x > transform.position.x ? 1 : -1;
-        CurDir = 0;
-        mbAttackEnd = false;
-    }
-    virtual protected void ResetAttack()
-    {
-        mbAttackEnd = true;
-    }
-
-
-    public bool Attack()
-    {
-        return !mbAttackEnd;
+        if (m_MoveData.State == MobMoveData.eState.Idle && rt < t)
+        {
+            t = 0;
+            OnMoveRandom();
+        }
+        return true;
     }
 
-    public void OnHurt()
+    private void OnDestroy()
     {
-        mAnimator.Play(gameObject.name + "_Hit", 0, 0);
-        ResetAttack();
-        CurDir = 0;
-        mbHurt = true;
     }
 
+    public bool Idle() => true;
+
+
+    public bool DetectCliff() => true;
+
+    public bool Follow() => true;
+    public bool Attack() => true;
+    private void AttackEnd() { }
+
+
+    public bool Hurting() => true;
+    private void HurtEnd() { }
+
+
+
+
+    #region Interface: IHurt
+    public virtual void OnHurt()
+    {
+
+    }
     public virtual void OnDead()
     {
         Destroy(gameObject);
-        CorpseMgr.CreateDeadbody(transform ,mCompseData);
+        CorpseMgr.CreateDeadbody(transform, m_compseData);
     }
-
-    public void CliffCheck()
-    {
-
-    }
-
-    #region AniEvent
-    private void AttackEnd() => mbAttackEnd = true;
-    private void HurtEnd() => mbHurt = false;
     #endregion
 
     #region Interface: ICanDetectGround
     virtual public void OnGroundEnter()
     {
-        // Reset Jump
-        Jump_Logic.ResetJump(ref mJumpData);
+        Jump_Logic.ResetJump(ref m_jumpData);
     }
     virtual public void OnGroundStay()
     {
