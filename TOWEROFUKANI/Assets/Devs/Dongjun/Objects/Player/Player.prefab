@@ -242,7 +242,7 @@ PlatformEffector2D:
     m_Bits: 1024
   m_RotationalOffset: 180
   m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
+  m_UseOneWayGrouping: 1
   m_SurfaceArc: 170
   m_UseSideFriction: 0
   m_UseSideBounce: 0
@@ -380,6 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3bbcf596a7cd3a43813159c6b623dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanExecuteOnStart: 1
   spriteRoot: {fileID: 7371128403266533315}
   oneWayCollider: {fileID: 7371128403577552055}
   groundDetectionData:
@@ -420,6 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721e3bb0108e07349ad32779597b3cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanExecuteOnStart: 1
   spriteRoot: {fileID: 7371128403266533315}
   dashDist: 3.5
   dashTime: 0.2
