@@ -234,6 +234,9 @@ MonoBehaviour:
   magazineDropPos: {fileID: 6979050557962841422}
   droppedMagazinePrefab: {fileID: 2394614046180044400, guid: 1d3d4c5d905af5649b448c3691ca16d1,
     type: 3}
+  magazineDropPoolData:
+    prefab: {fileID: 0}
+    count: 0
 --- !u!1 &2609116015003256821
 GameObject:
   m_ObjectHideFlags: 0

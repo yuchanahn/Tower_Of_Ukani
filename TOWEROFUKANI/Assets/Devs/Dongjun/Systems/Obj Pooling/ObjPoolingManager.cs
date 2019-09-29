@@ -6,7 +6,7 @@ using UnityEngine;
 public struct StartPoolData
 {
     public PoolingObj prefab;
-    public uint count;
+    public uint initCount;
 }
 
 public class ObjPoolingManager : MonoBehaviour
@@ -24,9 +24,10 @@ public class ObjPoolingManager : MonoBehaviour
     #endregion
 
     #region Var: Pool Data
-    private static Dictionary<PoolingObj, HashSet<PoolingObj>> pool_Active = new Dictionary<PoolingObj, HashSet<PoolingObj>>();
+    private static Dictionary<PoolingObj, List<PoolingObj>> pool_Active = new Dictionary<PoolingObj, List<PoolingObj>>();
     private static Dictionary<PoolingObj, Queue<PoolingObj>> pool_Sleeping = new Dictionary<PoolingObj, Queue<PoolingObj>>();
     #endregion
+
 
     #region Method: Unity
     private void Awake()
@@ -45,16 +46,16 @@ public class ObjPoolingManager : MonoBehaviour
 
         for (int i = 0; i < startPoolData.Length; i++)
         {
-            for (int count = 0; count < startPoolData[i].count; count++)
+            for (int count = 0; count < startPoolData[i].initCount; count++)
             {
-                if (startPoolData[i].prefab == null || startPoolData[i].count <= 0)
+                if (startPoolData[i].prefab == null || startPoolData[i].initCount <= 0)
                     continue;
 
                 PoolingObj prefab = startPoolData[i].prefab;
 
                 if (!pool_Active.ContainsKey(prefab))
                 {
-                    pool_Active.Add(prefab, new HashSet<PoolingObj>());
+                    pool_Active.Add(prefab, new List<PoolingObj>());
                     pool_Sleeping.Add(prefab, new Queue<PoolingObj>());
                 }
 
@@ -72,30 +73,20 @@ public class ObjPoolingManager : MonoBehaviour
     {
         if (!pool_Active.ContainsKey(prefab))
         {
-            pool_Active.Add(prefab, new HashSet<PoolingObj>());
+            pool_Active.Add(prefab, new List<PoolingObj>());
             pool_Sleeping.Add(prefab, new Queue<PoolingObj>());
             pool_Sleeping[prefab].Enqueue(Instantiate(prefab));
         }
 
-        PoolingObj obj;
-
-        if (pool_Sleeping[prefab].Count != 0)
-        {
-            obj = pool_Sleeping[prefab].Dequeue();
-        }
-        else
-        {
-            obj = canCreateNew ? Instantiate(prefab) : pool_Active[prefab].FirstOrDefault();
-        }
-
+        PoolingObj obj = pool_Sleeping[prefab].Count != 0 ? pool_Sleeping[prefab].Dequeue() : canCreateNew ? Instantiate(prefab) : pool_Active[prefab][0];
         obj.InitPoolingObj(prefab);
 
-        if (!canCreateNew && pool_Active[prefab].Contains(obj))
-            pool_Active[prefab].Remove(obj);
-
+        pool_Active[prefab].Remove(obj);
         pool_Active[prefab].Add(obj);
+
         obj.gameObject.SetActive(true);
         obj.ResetOnActive();
+
         return obj;
     }
     #endregion
@@ -103,16 +94,19 @@ public class ObjPoolingManager : MonoBehaviour
     #region Method: Public
     public static void SetUpObjPool(StartPoolData startPoolData)
     {
-        for (int count = 0; count < startPoolData.count; count++)
+        if (startPoolData.prefab == null || pool_Active.ContainsKey(startPoolData.prefab))
+            return;
+
+        for (int count = 0; count < startPoolData.initCount; count++)
         {
-            if (startPoolData.prefab == null || startPoolData.count <= 0)
+            if (startPoolData.prefab == null || startPoolData.initCount <= 0)
                 continue;
 
             PoolingObj prefab = startPoolData.prefab;
 
             if (!pool_Active.ContainsKey(prefab))
             {
-                pool_Active.Add(prefab, new HashSet<PoolingObj>());
+                pool_Active.Add(prefab, new List<PoolingObj>());
                 pool_Sleeping.Add(prefab, new Queue<PoolingObj>());
             }
 
