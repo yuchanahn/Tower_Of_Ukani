@@ -4858,6 +4858,6 @@ MonoBehaviour:
   particleSystems:
   - {fileID: 8567307131394727882}
   destroyTimer:
-    MaxOnStart: 0
-    Timer_Cur: 0
-    Timer_Max: 0.12
+    StartWithMax: 0
+    curTime: 0
+    endTime: 0.1

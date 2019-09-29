@@ -106,17 +106,17 @@ MonoBehaviour:
   spriteRoot: {fileID: 1077788971484917873}
   Stats:
     shootTimer:
-      MaxOnStart: 1
-      Timer_Cur: 0
-      Timer_Max: 0.5
+      StartWithMax: 1
+      curTime: 0
+      endTime: 0.22
     reloadTimer:
-      MaxOnStart: 0
-      Timer_Cur: 0
-      Timer_Max: 0.4
+      StartWithMax: 0
+      curTime: 0
+      endTime: 0.4
     swapMagazineTimer:
-      MaxOnStart: 0
-      Timer_Cur: 0
-      Timer_Max: 1.2
+      StartWithMax: 0
+      curTime: 0
+      endTime: 1
     magazineSize: 2
     loadedBullets: 0
 --- !u!114 &3151152317891876062
@@ -131,12 +131,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81d87d7841c3a340aeae577e233be2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanExecuteOnStart: 1
   pelletCount: 4
   pelletAngle: 5
   shootPoint: {fileID: 1077788971055575643}
   bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
     type: 3}
-  maxShootAnimTime: 0.22
+  maxShootAnimTime: 0.2
   shootParticleParent: {fileID: 1411855521925432638}
   shootParticlePrefab: {fileID: 7190664309250040938, guid: 179a6208adf6eab45b4e01bea6d11926,
     type: 3}
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1b02515cb99d94489c0bf2cc341155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanExecuteOnStart: 1
   reloadAll: 0
   reloadAmount: 0
 --- !u!114 &8535310993619034738
@@ -175,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4086de91c7659fe43b01fde20be2d958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanExecuteOnStart: 1
   reloadAll: 1
   reloadAmount: 0
   magazineDropPos: {fileID: 0}

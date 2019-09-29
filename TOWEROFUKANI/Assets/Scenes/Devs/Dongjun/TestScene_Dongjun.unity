@@ -1413,6 +1413,12 @@ PrefabInstance:
       propertyPath: weaponName
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 4955533628294009319, guid: de8e575bfc7541a4cb26f729cf5133df,
+        type: 3}
+      propertyPath: shootParticlePrefab
+      value: 
+      objectReference: {fileID: 7190664309250040938, guid: fc45d6df91e980e4d90c006610728338,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8e575bfc7541a4cb26f729cf5133df, type: 3}
 --- !u!4 &1334092404 stripped

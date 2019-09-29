@@ -7,7 +7,6 @@ public struct StartPoolData
 {
     public PoolingObj prefab;
     public uint count;
-    public bool unlimited;
 }
 
 public class ObjPoolingManager : MonoBehaviour
@@ -71,25 +70,28 @@ public class ObjPoolingManager : MonoBehaviour
     }
     private static PoolingObj ActivateObj(PoolingObj prefab, bool canCreateNew)
     {
-        PoolingObj obj;
-
         if (!pool_Active.ContainsKey(prefab))
         {
             pool_Active.Add(prefab, new HashSet<PoolingObj>());
             pool_Sleeping.Add(prefab, new Queue<PoolingObj>());
-
-            obj = Instantiate(prefab);
-            obj.InitPoolingObj(prefab);
-
-            pool_Active[prefab].Add(obj);
-            obj.gameObject.SetActive(true);
-            obj.ResetOnActive();
-            return obj;
+            pool_Sleeping[prefab].Enqueue(Instantiate(prefab));
         }
 
-        obj = pool_Sleeping[prefab].Count == 0 ? (canCreateNew ? Instantiate(prefab) : pool_Active[prefab].FirstOrDefault()) : pool_Sleeping[prefab].Dequeue();
+        PoolingObj obj;
+
+        if (pool_Sleeping[prefab].Count != 0)
+        {
+            obj = pool_Sleeping[prefab].Dequeue();
+        }
+        else
+        {
+            obj = canCreateNew ? Instantiate(prefab) : pool_Active[prefab].FirstOrDefault();
+        }
 
         obj.InitPoolingObj(prefab);
+
+        if (!canCreateNew && pool_Active[prefab].Contains(obj))
+            pool_Active[prefab].Remove(obj);
 
         pool_Active[prefab].Add(obj);
         obj.gameObject.SetActive(true);
