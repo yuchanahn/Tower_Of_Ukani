@@ -7,20 +7,23 @@ using UnityEngine.Serialization;
 [Serializable]
 public class TimerData
 {
-    // Timer State
+    #region Var: State
     [SerializeField]
     private bool StartWithMax = false;
     public bool IsActive { get; private set; } = true;
     public bool IsTimerAtMax { get; private set; } = false;
+    #endregion
 
-    // Time Data
+    #region Var: Data
     [HideInInspector]
     public float curTime = 0; // 타이머의 현재 시간.
     public float endTime = 0; // 타이머릐 최대 시간.
+    #endregion
 
-    // Actions
+    #region Var: Action
     private Action OnTimerTick;
     private Action OnTimerMax;
+    #endregion
 
 
     /// <summary>
@@ -60,7 +63,7 @@ public class TimerData
     {
         if (use)
         {
-            Init(self);
+            TimerManager.Inst.AddTimer(self, this);
         }
         else
         {
@@ -110,6 +113,7 @@ public class TimerData
     /// 현재 타이머를 0으로 바꿔줍니다.
     /// </summary>
     public void SetZero() => curTime = 0;
+
     /// <summary>
     /// 현재 타이머를 최대 시간으로 바꿔줍니다. (바로 OnTimerMax에 등록된 함수를 실행하고 싶을 때 쓰면 좋습니다.)
     /// </summary>

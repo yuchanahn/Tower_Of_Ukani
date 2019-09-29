@@ -21,7 +21,10 @@ public class Player : CLA_Main
     }
     private void CL_Dash()
     {
+        if (movement_Action.JumpData.canJump && PlayerInputManager.Inst.Input_Jump)
+            ChangeAction(movement_Action);
+
         if (!dash_Action.IsDasing)
-            ChangeAction(DefaultAction);
+            ChangeAction(movement_Action);
     }
 }

@@ -8,7 +8,9 @@ public struct JumpData
     public float count_Max;
     public float height;
     public float time;
+
     public float jumpGravity => (2 * height) / (time * time);
+    public bool canJump => count_Cur < count_Max;
 
     [HideInInspector]
     public float apexY;

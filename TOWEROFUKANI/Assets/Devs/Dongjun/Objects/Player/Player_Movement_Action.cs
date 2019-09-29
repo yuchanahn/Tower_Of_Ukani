@@ -49,6 +49,10 @@ public class Player_Movement_Action : CLA_Action,
     private Rigidbody2D rb2D;
     #endregion
 
+    #region Var: Properties
+    public JumpData JumpData => jumpData;
+    #endregion
+
 
     #region Method: Unity
     private void Awake()
@@ -146,7 +150,7 @@ public class Player_Movement_Action : CLA_Action,
                 if (PlayerInputManager.Inst.Input_Jump)
                     animator.Play(jumpData.count_Cur < 2 ? "Player_Jump" : "Player_AirJump", 0, 0f);
             }
-            canPlayJumpAnim = jumpData.count_Cur < jumpData.count_Max;
+            canPlayJumpAnim = jumpData.canJump;
         }
     }
     #endregion
