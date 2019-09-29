@@ -43,21 +43,6 @@ public class MachineGun : Gun
         if (!IsSelected)
         { ChangeAction(main_AC); return true; }
 
-        //if (CurrentAction == reload_AC && Stats.reloadTimer.IsTimerAtMax)
-        //{ ChangeAction(main_AC); return; }
-
-        //if (CurrentAction == swapMagazine_AC && Stats.swapMagazineTimer.IsTimerAtMax)
-        //{ ChangeAction(reload_AC); return; }
-
-        //if (CurrentAction == main_AC && Stats.loadedBullets <= 0)
-        //{
-        //    if (main_AC.AnimEnd_Shoot)
-        //    { ChangeAction(swapMagazine_AC); return; }
-
-        //    if (swapMagazine_AC.AnimStart_SwapMagazine && !swapMagazine_AC.AnimEnd_SwapMagazine)
-        //    { ChangeAction(swapMagazine_AC); return; }
-        //}
-
         return false;
     }
     private void CL_Main_AC()
@@ -72,9 +57,12 @@ public class MachineGun : Gun
             if (swapMagazine_AC.AnimStart_SwapMagazine && !swapMagazine_AC.AnimEnd_SwapMagazine)
             { ChangeAction(swapMagazine_AC); return; }
 
-            if (Stats.loadedBullets < Stats.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
-            { ChangeAction(swapMagazine_AC); return; }
+            if (swapMagazine_AC.AnimEnd_SwapMagazine && !Stats.reloadTimer.IsTimerAtMax)
+            { ChangeAction(reload_AC); return; }
         }
+
+        if (Stats.loadedBullets < Stats.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
+        { ChangeAction(swapMagazine_AC); return; }
     }
     private void CL_Reload_AC()
     {
