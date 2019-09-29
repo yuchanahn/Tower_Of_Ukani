@@ -17,6 +17,21 @@ TextureImporter:
   - first:
       213: -3389085218081091885
     second: Shotgun_Shot_4
+  - first:
+      213: 1035660084198213846
+    second: Shotgun_Shoot_0
+  - first:
+      213: 5367286833401427536
+    second: Shotgun_Shoot_1
+  - first:
+      213: -6724797320297137410
+    second: Shotgun_Shoot_2
+  - first:
+      213: 9147788628552611931
+    second: Shotgun_Shoot_3
+  - first:
+      213: -4929973434998106375
+    second: Shotgun_Shoot_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -113,106 +128,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shotgun_Shot_0
+      name: Shotgun_Shoot_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 23
+        width: 26
         height: 16
-      alignment: 9
-      pivot: {x: 0.5652174, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90593ad9b6480f44e99811acd88944e0
-      internalID: -6057293701274465165
+      spriteID: 42e8ba22f2680994f86868cb2286bbfa
+      internalID: 1035660084198213846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shotgun_Shot_1
+      name: Shotgun_Shoot_1
       rect:
         serializedVersion: 2
-        x: 23
+        x: 26
         y: 0
-        width: 23
+        width: 26
         height: 16
-      alignment: 9
-      pivot: {x: 0.5652174, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e638091424f242428c3d1b393a60ac1
-      internalID: 8154688210876112741
+      spriteID: bba47d6d414705b45959ea294425c6fd
+      internalID: 5367286833401427536
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shotgun_Shot_2
+      name: Shotgun_Shoot_2
       rect:
         serializedVersion: 2
-        x: 46
+        x: 52
         y: 0
-        width: 23
+        width: 26
         height: 16
-      alignment: 9
-      pivot: {x: 0.5652174, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 17f5f573d539bf947958007d35d8d176
-      internalID: 9128055571304490323
+      spriteID: 823b1a58bf4b7c8439716d3b5e8f3222
+      internalID: -6724797320297137410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shotgun_Shot_3
+      name: Shotgun_Shoot_3
       rect:
         serializedVersion: 2
-        x: 69
+        x: 78
         y: 0
-        width: 23
+        width: 26
         height: 16
-      alignment: 9
-      pivot: {x: 0.5652174, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 781cdfefcc79d9449ad6052e105e13f5
-      internalID: 3220902992531799878
+      spriteID: a29c5b140f2c4d94bb69c7173ebab302
+      internalID: 9147788628552611931
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shotgun_Shot_4
+      name: Shotgun_Shoot_4
       rect:
         serializedVersion: 2
-        x: 92
+        x: 104
         y: 0
-        width: 23
+        width: 26
         height: 16
-      alignment: 9
-      pivot: {x: 0.5652174, y: 0.5}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9278a97fad0738e4a8d895143fe4afdc
-      internalID: -3389085218081091885
+      spriteID: d33e78dab4762c145a1c713326853b25
+      internalID: -4929973434998106375
       vertices: []
       indices: 
       edges: []

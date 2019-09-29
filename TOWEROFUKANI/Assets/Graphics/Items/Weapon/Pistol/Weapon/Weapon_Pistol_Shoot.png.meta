@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -679387533158820111
     second: Weapon_Pistol_Shot_3
+  - first:
+      213: -5828076422290683702
+    second: Weapon_Pistol_Shoot_0
+  - first:
+      213: -6281018917712661698
+    second: Weapon_Pistol_Shoot_1
+  - first:
+      213: -2865208833864788251
+    second: Weapon_Pistol_Shoot_2
+  - first:
+      213: 3467732951753747994
+    second: Weapon_Pistol_Shoot_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -110,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Weapon_Pistol_Shot_0
+      name: Weapon_Pistol_Shoot_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +136,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36cd0bb4cc8d5df44b35da6b168c3b9f
-      internalID: -1301484015583928882
+      spriteID: 26af1ffa234a5e7459388394a5f5704a
+      internalID: -5828076422290683702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapon_Pistol_Shot_1
+      name: Weapon_Pistol_Shoot_1
       rect:
         serializedVersion: 2
         x: 16
@@ -145,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b8399878dbcc4c4a8bbea82d9f08c51
-      internalID: -429611616791171807
+      spriteID: 3efb555e213acdc4a93fb3ce7dfb1297
+      internalID: -6281018917712661698
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapon_Pistol_Shot_2
+      name: Weapon_Pistol_Shoot_2
       rect:
         serializedVersion: 2
         x: 32
@@ -166,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7dd380879229ffd49b6fbca5f5bd6aff
-      internalID: -989609445192097305
+      spriteID: cbd980997bf790841bceff093aa63b02
+      internalID: -2865208833864788251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Weapon_Pistol_Shot_3
+      name: Weapon_Pistol_Shoot_3
       rect:
         serializedVersion: 2
         x: 48
@@ -187,8 +199,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c3e7b1113a19cf4c806ac68975e96ca
-      internalID: -679387533158820111
+      spriteID: f89fbdcce8f562043897623ad94602b4
+      internalID: 3467732951753747994
       vertices: []
       indices: 
       edges: []
