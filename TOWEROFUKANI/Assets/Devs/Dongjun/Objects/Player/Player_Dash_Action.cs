@@ -4,14 +4,11 @@ public class Player_Dash_Action : CLA_Action
 {
     #region Var: Inspector
     [Header("Visual")]
-    [SerializeField]
-    private Transform spriteRoot;
+    [SerializeField] private Transform spriteRoot;
 
     [Header("Dash")]
-    [SerializeField]
-    private float dashDist;
-    [SerializeField]
-    private float dashTime;
+    [SerializeField] private float dashDist;
+    [SerializeField] private float dashTime;
     #endregion
 
     #region Var: Dash

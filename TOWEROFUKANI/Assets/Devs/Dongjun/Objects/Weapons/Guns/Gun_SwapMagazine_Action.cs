@@ -35,7 +35,7 @@ public class Gun_SwapMagazine_Action : CLA_Action
     public override void OnChange()
     {
         // Start Timer
-        gun.Stats.swapMagazineTimer.UseAutoTick(true);
+        gun.Stats.swapMagazineTimer.SetActive(true);
         gun.Stats.swapMagazineTimer.Restart();
 
         // Animation
@@ -44,12 +44,12 @@ public class Gun_SwapMagazine_Action : CLA_Action
     public override void OnStart()
     {
         // Set Animation Speed
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.swapMagazineTimer.Timer_Max, gun.WeaponNameTrimed + "_SwapMagazine");
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.swapMagazineTimer.endTime, gun.WeaponNameTrimed + "_SwapMagazine");
     }
     public override void OnEnd()
     {
         // Stop Timer
-        gun.Stats.swapMagazineTimer.UseAutoTick(false);
+        gun.Stats.swapMagazineTimer.SetActive(false);
 
         // Animation
         animator.speed = 1;

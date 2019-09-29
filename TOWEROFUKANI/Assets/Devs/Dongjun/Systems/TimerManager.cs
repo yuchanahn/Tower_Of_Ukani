@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class TimerData
 {
     // Timer State
     [SerializeField]
-    private bool MaxOnStart = false;
-    public bool AutoTick { get; private set; } = true;
+    private bool StartWithMax = false;
+    public bool IsActive { get; private set; } = true;
     public bool IsTimerAtMax { get; private set; } = false;
 
     // Time Data
     [HideInInspector]
-    public float Timer_Cur = 0; // 타이머의 현재 시간.
-    public float Timer_Max = 0; // 타이머릐 최대 시간.
+    public float curTime = 0; // 타이머의 현재 시간.
+    public float endTime = 0; // 타이머릐 최대 시간.
 
     // Actions
     private Action OnTimerTick;
@@ -35,8 +36,8 @@ public class TimerData
         this.OnTimerTick = OnTimerTick;
         this.OnTimerMax = OnTimerMax;
 
-        if (MaxOnStart) SetToMax();
-
+        if (StartWithMax)
+            SetMax();
     }
 
     /// <summary>
@@ -51,12 +52,29 @@ public class TimerData
     }
 
     /// <summary>
-    /// 타이머를 자동으로 실행할지 결정하는 함수
+    /// 타이머를 자동으로 실행할지 결정하는 함수.
     /// </summary>
+    /// <param name="self">게임오브젝트(자기자신).</param>
     /// <param name="use">true: 자동으로 실행(LateUpdate()에서), false: 자동으로 실행 안됨.</param>
-    public void UseAutoTick(bool use)
+    public void UseAutoTick(GameObject self, bool use)
     {
-        AutoTick = use;
+        if (use)
+        {
+            Init(self);
+        }
+        else
+        {
+            TimerManager.Inst.RemoveTimer(self, this);
+        }
+    }
+
+    /// <summary>
+    /// 타이머의 활성화 상태를 정하는 함수.
+    /// </summary>
+    /// <param name="active">true: 활성화 됨., false: 비활성화 됨.</param>
+    public void SetActive(bool active)
+    {
+        IsActive = active;
     }
 
     /// <summary>
@@ -65,36 +83,44 @@ public class TimerData
     /// </summary>
     public void Tick()
     {
-        if (!AutoTick || IsTimerAtMax)
+        if (!IsActive || IsTimerAtMax)
             return;
 
-        Timer_Cur += Time.deltaTime;
+        curTime += Time.deltaTime;
         OnTimerTick?.Invoke();
 
-        if (Timer_Cur >= Timer_Max)
+        if (curTime >= endTime)
         {
             IsTimerAtMax = true;
             OnTimerMax?.Invoke();
-            Timer_Cur = 0;
+            curTime = 0;
         }
     }
 
     /// <summary>
     /// 타이머가 최대 시간에 도달하면 자동으로 멈춤니다. 다시 시작하려면 이 함수를 실행 시켜주세요.
     /// </summary>
-    public void Restart() { IsTimerAtMax = false; Timer_Cur = 0; }
+    public void Restart()
+    {
+        IsTimerAtMax = false;
+        curTime = 0;
+    }
 
+    /// <summary>
+    /// 현재 타이머를 0으로 바꿔줍니다.
+    /// </summary>
+    public void SetZero() => curTime = 0;
     /// <summary>
     /// 현재 타이머를 최대 시간으로 바꿔줍니다. (바로 OnTimerMax에 등록된 함수를 실행하고 싶을 때 쓰면 좋습니다.)
     /// </summary>
-    public void SetToMax() => Timer_Cur = Timer_Max;
+    public void SetMax() => curTime = endTime;
 }
 
 public class TimerManager : MonoBehaviour
 {
     public static TimerManager Inst { get; private set; }
 
-    private Dictionary<GameObject, List<TimerData>> cooldowns = new Dictionary<GameObject, List<TimerData>>();
+    private Dictionary<GameObject, List<TimerData>> timers = new Dictionary<GameObject, List<TimerData>>();
     private GameObject curTickingObj;
 
     private void Awake()
@@ -108,32 +134,44 @@ public class TimerManager : MonoBehaviour
 
     public void AddTimer(GameObject go, TimerData data)
     {
-        if (cooldowns.ContainsKey(go))
+        if (timers.ContainsKey(go))
         {
-            cooldowns[go].Add(data);
+            timers[go].Add(data);
             return;
         }
 
-        cooldowns.Add(go, new List<TimerData>());
-        cooldowns[go].Add(data);
+        if (timers.ContainsKey(go) && timers[go].Contains(data))
+            return;
+
+        if (!timers.ContainsKey(go))
+            timers.Add(go, new List<TimerData>());
+
+        timers[go].Add(data);
+    }
+    public void RemoveTimer(GameObject go, TimerData data)
+    {
+        if (!timers.ContainsKey(go) || !timers[go].Contains(data))
+            return;
+
+        timers[go].Remove(data);
     }
     public void TickTimers()
     {
-        if (cooldowns.Count == 0)
+        if (timers.Count == 0)
             return;
 
-        for (int i = cooldowns.Count - 1; i >= 0; i--)
+        for (int i = timers.Count - 1; i >= 0; i--)
         {
-            curTickingObj = cooldowns.ElementAt(i).Key;
+            curTickingObj = timers.ElementAt(i).Key;
 
             if (curTickingObj == null)
             {
-                cooldowns.Remove(curTickingObj);
+                timers.Remove(curTickingObj);
                 continue;
             }
 
-            for (int j = cooldowns[curTickingObj].Count - 1; j >= 0; j--)
-                cooldowns[curTickingObj][j].Tick();
+            for (int j = timers[curTickingObj].Count - 1; j >= 0; j--)
+                timers[curTickingObj][j].Tick();
         }
     }
 }
