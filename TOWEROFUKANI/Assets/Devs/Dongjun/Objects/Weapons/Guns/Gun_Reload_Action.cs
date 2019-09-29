@@ -54,8 +54,8 @@ public class Gun_Reload_Action : CLA_Action
     public override void OnLateUpdate()
     {
         // Rotate And Filp
-        LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
+        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
     }
     #endregion
 }

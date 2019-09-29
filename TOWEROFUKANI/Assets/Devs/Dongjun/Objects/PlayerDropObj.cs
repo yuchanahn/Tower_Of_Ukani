@@ -11,7 +11,7 @@ public class PlayerDropObj : SelfSleepObj
         base.ResetOnActive();
 
         if (rb2D != null)
-            rb2D.velocity = CommonObjs.Inst.PlayerRB2D.velocity;
+            rb2D.velocity = Global.Inst.PlayerRB2D.velocity;
     }
     private void Awake()
     {

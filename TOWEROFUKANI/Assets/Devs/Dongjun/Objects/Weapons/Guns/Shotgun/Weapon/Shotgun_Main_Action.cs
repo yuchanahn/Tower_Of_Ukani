@@ -83,8 +83,8 @@ public class Shotgun_Main_Action : CLA_Action
     public override void OnLateUpdate()
     {
         AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.Stats.shootTimer.Timer_Max, maxShootAnimTime, "Shotgun_Shoot");
-        LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
+        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
     }
     #endregion
 

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class CommonObjs : MonoBehaviour
+public class Global : MonoBehaviour
 {
-    public static CommonObjs Inst;
+    public static Global Inst;
 
     [SerializeField] private Camera mainCam;
     [SerializeField] private CameraShake camShake;
