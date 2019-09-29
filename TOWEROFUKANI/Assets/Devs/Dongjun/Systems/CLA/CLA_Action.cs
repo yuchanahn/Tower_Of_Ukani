@@ -2,6 +2,7 @@
 
 public abstract class CLA_Action : MonoBehaviour
 {
+    [HideInInspector]
     public bool CanExecuteOnStart = true;
 
     public virtual void OnChange() { }

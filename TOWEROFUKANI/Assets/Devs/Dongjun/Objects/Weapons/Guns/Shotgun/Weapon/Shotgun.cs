@@ -28,12 +28,12 @@ public class Shotgun : Gun
         base.Start();
 
         // Init Timer
-        Stats.shootTimer.Init(gameObject);
-        Stats.reloadTimer.Init(gameObject);
-        Stats.swapMagazineTimer.Init(gameObject);
+        gunData.shootTimer.Init(gameObject);
+        gunData.reloadTimer.Init(gameObject);
+        gunData.swapMagazineTimer.Init(gameObject);
 
         // Init Ammo
-        Stats.loadedBullets = Stats.magazineSize;
+        gunData.loadedBullets = gunData.magazineSize;
     }
     #endregion
 
@@ -49,10 +49,10 @@ public class Shotgun : Gun
     {
         if (CL_Gun()) return;
 
-        if (main_AC.AnimEnd_Shoot && Stats.loadedBullets > 0)
+        if (main_AC.AnimEnd_Shoot && gunData.loadedBullets > 0)
         { ChangeAction(reload_AC); return; }
 
-        if (Stats.loadedBullets <= 0)
+        if (gunData.loadedBullets <= 0)
         {
             if (main_AC.AnimEnd_Shoot)
             { ChangeAction(swapMagazine_AC); return; }
@@ -61,21 +61,21 @@ public class Shotgun : Gun
             { ChangeAction(swapMagazine_AC); return; }
         }
 
-        if (Stats.loadedBullets < Stats.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
+        if (gunData.loadedBullets < gunData.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
         { ChangeAction(swapMagazine_AC); return; }
     }
     private void CL_Reload_AC()
     {
         if (CL_Gun()) return;
 
-        if (Stats.reloadTimer.IsTimerAtMax)
+        if (gunData.reloadTimer.IsTimerAtMax)
         { ChangeAction(main_AC); return; }
     }
     private void CL_SwapMagazine_AC()
     {
         if (CL_Gun()) return;
 
-        if (Stats.swapMagazineTimer.IsTimerAtMax)
+        if (gunData.swapMagazineTimer.IsTimerAtMax)
         { ChangeAction(reload_AC); return; }
     }
     #endregion

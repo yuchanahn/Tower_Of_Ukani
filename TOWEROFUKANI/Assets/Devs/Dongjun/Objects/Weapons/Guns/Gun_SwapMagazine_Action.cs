@@ -35,8 +35,10 @@ public class Gun_SwapMagazine_Action : CLA_Action
     public override void OnChange()
     {
         // Start Timer
-        gun.Stats.swapMagazineTimer.SetActive(true);
-        gun.Stats.swapMagazineTimer.Restart();
+        gun.gunData.swapMagazineTimer.Restart();
+
+        AnimStart_SwapMagazine = true;
+        AnimEnd_SwapMagazine = false;
 
         // Animation
         animator.Play(gun.WeaponNameTrimed + "_SwapMagazine", 0, 0);
@@ -44,16 +46,29 @@ public class Gun_SwapMagazine_Action : CLA_Action
     public override void OnStart()
     {
         // Set Animation Speed
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.swapMagazineTimer.endTime, gun.WeaponNameTrimed + "_SwapMagazine");
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun.gunData.swapMagazineTimer.endTime, gun.WeaponNameTrimed + "_SwapMagazine");
     }
     public override void OnEnd()
     {
         // Stop Timer
-        gun.Stats.swapMagazineTimer.SetActive(false);
+        gun.gunData.swapMagazineTimer.SetActive(false);
+
+        if (gun.gunData.swapMagazineTimer.IsTimerAtMax)
+        {
+            AnimStart_SwapMagazine = false;
+            AnimEnd_SwapMagazine = true;
+
+            // Load Bullets
+            gun.gunData.loadedBullets = reloadAll ? gun.gunData.magazineSize : gun.gunData.loadedBullets + reloadAmount;
+        }
 
         // Animation
         animator.speed = 1;
         animator.Play(gun.WeaponNameTrimed + "_Idle");
+    }
+    public override void OnUpdate()
+    {
+        gun.gunData.swapMagazineTimer.SetActive(gun.IsSelected);
     }
     public override void OnLateUpdate()
     {
@@ -64,19 +79,6 @@ public class Gun_SwapMagazine_Action : CLA_Action
     #endregion
 
     #region Method: AnimEvent
-    private void OnAnimStart_SwapMagazine()
-    {
-        AnimStart_SwapMagazine = true;
-        AnimEnd_SwapMagazine = false;
-    }
-    private void OnAnimEnd_SwapMagazine()
-    {
-        AnimStart_SwapMagazine = false;
-        AnimEnd_SwapMagazine = true;
-
-        // Load Bullets
-        gun.Stats.loadedBullets = reloadAll ? gun.Stats.magazineSize : gun.Stats.loadedBullets + reloadAmount;
-    }
     private void DropMagazine()
     {
         ObjPoolingManager.Activate(droppedMagazinePrefab, magazineDropPos.position, transform.rotation);
