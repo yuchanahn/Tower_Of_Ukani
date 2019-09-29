@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
   shootPoint: {fileID: 4450316996750440473}
-  bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
+  bulletPrefab: {fileID: 3522369012486736103, guid: 4516c39aa90b59146a00c293b77a065b,
     type: 3}
   maxShootAnimTime: 0.15
   shootParticleParent: {fileID: 2350962554968379260}

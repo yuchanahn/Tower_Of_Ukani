@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
   shootPoint: {fileID: 2609116015003256820}
-  bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
+  bulletPrefab: {fileID: 3884733660367707162, guid: 669013e116ca93843a65a5f56b89838a,
     type: 3}
   maxShootAnimTime: 0.15
   shootParticleParent: {fileID: 4131922327667388561}
@@ -234,9 +234,6 @@ MonoBehaviour:
   magazineDropPos: {fileID: 6979050557962841422}
   droppedMagazinePrefab: {fileID: 2394614046180044400, guid: 1d3d4c5d905af5649b448c3691ca16d1,
     type: 3}
-  magazineDropPoolData:
-    prefab: {fileID: 0}
-    count: 0
 --- !u!1 &2609116015003256821
 GameObject:
   m_ObjectHideFlags: 0

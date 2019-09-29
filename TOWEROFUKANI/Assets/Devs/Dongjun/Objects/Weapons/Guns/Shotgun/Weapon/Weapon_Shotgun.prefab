@@ -135,7 +135,7 @@ MonoBehaviour:
   pelletCount: 4
   pelletAngle: 5
   shootPoint: {fileID: 1077788971055575643}
-  bulletPrefab: {fileID: -8096460851070030879, guid: 1d995c2f89fef6c4badb22e5b17f1ec3,
+  bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
   maxShootAnimTime: 0.2
   shootParticleParent: {fileID: 1411855521925432638}
