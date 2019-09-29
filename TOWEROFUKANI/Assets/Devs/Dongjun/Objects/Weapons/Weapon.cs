@@ -28,6 +28,12 @@ public abstract class Weapon : CLA_Main
 
     #region Var: Properties
     public bool IsSelected { get; protected set; } = false;
+
+    public string WeaponName => weaponName;
+    public string WeaponDesc => weaponDesc;
+    public WeaponType WeaponType => weaponType;
+    public WeaponRange WeaponRange => weaponRange;
+
     public GameObject SpriteRoot => spriteRoot;
     #endregion
 

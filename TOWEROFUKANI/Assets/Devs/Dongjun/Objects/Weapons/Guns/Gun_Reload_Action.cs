@@ -3,9 +3,6 @@
 public class Gun_Reload_Action : CLA_Action
 {
     #region Var: Inspector
-    [Header("Weapon Data")]
-    [SerializeField] private string weaponName;
-
     [Header("Ammo")]
     [SerializeField] private bool reloadAll = true;
     [SerializeField] private int reloadAmount;
@@ -30,7 +27,7 @@ public class Gun_Reload_Action : CLA_Action
         gun.Stats.reloadTimer.Continue();
 
         // Animation
-        animator.Play(weaponName + "_Reload", 0, 0);
+        animator.Play(gun.WeaponName + "_Reload", 0, 0);
     }
     public override void OnEnd()
     {
@@ -43,11 +40,11 @@ public class Gun_Reload_Action : CLA_Action
 
         // Animation
         animator.speed = 1;
-        animator.Play(weaponName + "_Idle");
+        animator.Play(gun.WeaponName + "_Idle");
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.reloadTimer.Timer_Max, weaponName + "_Reload");
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.reloadTimer.Timer_Max, gun.WeaponName + "_Reload");
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun.SpriteRoot.transform, transform);
     }

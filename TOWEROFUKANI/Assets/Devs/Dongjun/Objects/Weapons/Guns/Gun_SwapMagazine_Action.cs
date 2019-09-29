@@ -3,9 +3,6 @@
 public class Gun_SwapMagazine_Action : CLA_Action
 {
     #region Var: Inspector
-    [Header("Weapon Data")]
-    [SerializeField] private string weaponName;
-
     [Header("Ammo")]
     [SerializeField] private bool reloadAll = false;
     [SerializeField] private int reloadAmount;
@@ -39,7 +36,7 @@ public class Gun_SwapMagazine_Action : CLA_Action
         gun.Stats.swapMagazineTimer.Continue();
 
         // Animation
-        animator.Play(weaponName + "_SwapMagazine", 0, 0);
+        animator.Play(gun.WeaponName + "_SwapMagazine", 0, 0);
     }
     public override void OnEnd()
     {
@@ -52,11 +49,11 @@ public class Gun_SwapMagazine_Action : CLA_Action
 
         // Animation
         animator.speed = 1;
-        animator.Play(weaponName + "_Idle");
+        animator.Play(gun.WeaponName + "_Idle");
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.swapMagazineTimer.Timer_Max, weaponName + "_SwapMagazine");
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.swapMagazineTimer.Timer_Max, gun.WeaponName + "_SwapMagazine");
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun.SpriteRoot.transform, transform);
     }

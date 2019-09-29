@@ -411,8 +411,8 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Walk: [A], [D]\nJump: [Space]\nFall Down: [S]\n\nDash: \n[A/D + LShift],
-    \n[A/D Double Tap]\n\nShoot: [LMB]\n\nChange Weapon: \n[Keyboard1 -> Pistol],
-    \ \n[Keyboard2 -> Shotgun],\n[Keyboard3 -> Machine Gun]"
+    \n[A/D Double Tap]\n\nShoot: [LMB]\nReload: [R]\n\nChange Weapon: \n[Keyboard1
+    -> Pistol],  \n[Keyboard2 -> Shotgun],\n[Keyboard3 -> Machine Gun]"
 --- !u!222 &407830749
 CanvasRenderer:
   m_ObjectHideFlags: 0
