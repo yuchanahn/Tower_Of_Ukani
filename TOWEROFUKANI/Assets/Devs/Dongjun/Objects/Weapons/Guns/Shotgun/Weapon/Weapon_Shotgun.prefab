@@ -104,19 +104,19 @@ MonoBehaviour:
   weaponRange: 1
   pivotPointY: 0.162
   spriteRoot: {fileID: 1077788971484917873}
-  Stats:
+  gunData:
     shootTimer:
       StartWithMax: 1
       curTime: 0
-      endTime: 0.22
+      endTime: 0.2
     reloadTimer:
       StartWithMax: 0
       curTime: 0
-      endTime: 0.4
+      endTime: 0.5
     swapMagazineTimer:
       StartWithMax: 0
       curTime: 0
-      endTime: 1
+      endTime: 0.8
     magazineSize: 2
     loadedBullets: 0
 --- !u!114 &3151152317891876062
@@ -143,7 +143,7 @@ MonoBehaviour:
     type: 3}
   camShakeData_Shoot:
     angle: 0
-    strength: 0.25
+    strength: 0.4
     maxSpeed: 20
     minSpeed: 15
     duration: 0.05

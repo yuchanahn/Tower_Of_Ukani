@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Gun : Weapon
 {
-    public GunData Stats;
+    public GunData gunData;
 }

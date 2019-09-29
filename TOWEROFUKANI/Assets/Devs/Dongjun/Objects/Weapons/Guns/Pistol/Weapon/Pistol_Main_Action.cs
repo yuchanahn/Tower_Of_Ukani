@@ -48,16 +48,16 @@ public class Pistol_Main_Action : CLA_Action
         if (!gun_Main.IsSelected)
             return;
 
-        if (gun_Main.Stats.shootTimer.IsTimerAtMax && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
+        if (gun_Main.gunData.shootTimer.IsTimerAtMax && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
         {
             // Spawn Bullet
             ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
 
             // Use Bullet
-            gun_Main.Stats.loadedBullets -= 1;
+            gun_Main.gunData.loadedBullets -= 1;
 
             // Continue Timer
-            gun_Main.Stats.shootTimer.Restart();
+            gun_Main.gunData.shootTimer.Restart();
 
             // Animation
             AnimEnd_Shoot = false;
@@ -72,7 +72,7 @@ public class Pistol_Main_Action : CLA_Action
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.Stats.shootTimer.endTime, maxShootAnimTime, "Pistol_Shoot");
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Pistol_Shoot");
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
     }
