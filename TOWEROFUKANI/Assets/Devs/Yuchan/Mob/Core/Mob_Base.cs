@@ -21,27 +21,32 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     #endregion
 
-    GroundInfo mCurGroundInfo = new GroundInfo();
-
+    #region Component
     protected Rigidbody2D m_rb;
     protected Animator m_ani;
+    #endregion
+
+    GroundInfo mCurGroundInfo = new GroundInfo();
 
     protected bool m_bGrounded = false;
     protected bool m_bJumping = false;
     protected bool m_bJumpStart = false;
     protected bool m_bFallStart = false;
 
-    float t = 0;
-    float rt;
+
 
 
     float VelX => m_MoveData.Speed * m_MoveData.Dir;
     float VelY => m_rb.velocity.y;
 
+
+    #region Method:
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody2D>();
         m_ani = GetComponent<Animator>();
+        if (m_MoveData.State == MobMoveData.eState.Move) OnMoveRandom();
+        if (m_MoveData.State == MobMoveData.eState.Idle) OnIdleRandom();
     }
     private void Update()
     {
@@ -62,53 +67,36 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
         Animation();
     }
-
-
+    #endregion
 
     private void Animation()
     {
 
     }
+
+    #region Method: Move
     public void OnMoveRandom()
     {
-        rt = m_MoveData.MoveT.Get;
+        ATimer.Set(this, m_MoveData.MoveT.Get, OnIdleRandom);
         m_MoveData.State = MobMoveData.eState.Move;
         m_MoveData.Dir = ARandom.Dir;
     }
     public void OnIdleRandom()
     {
-        rt = m_MoveData.IdleT.Get;
+        ATimer.Set(this, m_MoveData.IdleT.Get, OnMoveRandom);
         m_MoveData.State = MobMoveData.eState.Idle;
         m_MoveData.Dir = 0;
     }
-
     public bool MoveRandom()
     {
-        t += Time.deltaTime;
-        if (m_MoveData.State == MobMoveData.eState.Move && rt < t)
-        {
-            t = 0;
-            OnIdleRandom();
-        }
+        ATimer.Tick(this);
         return true;
     }
-
     public bool IdleRandom()
     {
-        if (m_MoveData.State == MobMoveData.eState.Idle && rt < t)
-        {
-            t = 0;
-            OnMoveRandom();
-        }
         return true;
     }
-
-    private void OnDestroy()
-    {
-    }
-
-    public bool Idle() => true;
-
+    #endregion
 
     public bool DetectCliff() => true;
 
@@ -116,7 +104,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public bool Attack() => true;
     private void AttackEnd() { }
 
-
+    public virtual void OnHurt() { }
     public bool Hurting() => true;
     private void HurtEnd() { }
 
@@ -124,14 +112,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
 
     #region Interface: IHurt
-    public virtual void OnHurt()
-    {
 
-    }
     public virtual void OnDead()
     {
         Destroy(gameObject);
-        CorpseMgr.CreateDeadbody(transform, m_compseData);
+        //CorpseMgr.CreateDeadbody(transform, m_compseData);
     }
     #endregion
 

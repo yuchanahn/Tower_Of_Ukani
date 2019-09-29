@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CorpseMgr : MonoBehaviour
 {
-    public static GameObject[] CreateDeadbody(Transform __mobPos, CorpseData corpseData)
+    public static GameObject[] CreateCorpseOrNull(Transform __mobPos, CorpseData corpseData)
     {
+        if (corpseData.Count == 0) return null;
         var corpse = corpseData.mCorpse;
 
         Vector2 mobPos = __mobPos.position;
