@@ -57,7 +57,7 @@ public class MachineGun_Main_Action : CLA_Action
             gun_Main.Stats.loadedBullets -= 1;
 
             // Continue Timer
-            gun_Main.Stats.shootTimer.Continue();
+            gun_Main.Stats.shootTimer.Restart();
 
             // Animation
             AnimEnd_Shoot = false;

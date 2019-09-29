@@ -57,9 +57,12 @@ public class Pistol : Gun
             if (swapMagazine_AC.AnimStart_SwapMagazine && !swapMagazine_AC.AnimEnd_SwapMagazine)
             { ChangeAction(swapMagazine_AC); return; }
 
-            if (Stats.loadedBullets < Stats.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
-            { ChangeAction(swapMagazine_AC); return; }
+            if (swapMagazine_AC.AnimEnd_SwapMagazine && !Stats.reloadTimer.IsTimerAtMax)
+            { ChangeAction(reload_AC); return; }
         }
+
+        if (Stats.loadedBullets < Stats.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
+        { ChangeAction(swapMagazine_AC); return; }
     }
     private void CL_Reload_AC()
     {

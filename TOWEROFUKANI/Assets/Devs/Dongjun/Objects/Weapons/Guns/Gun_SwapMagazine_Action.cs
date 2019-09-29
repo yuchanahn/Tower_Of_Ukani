@@ -35,9 +35,8 @@ public class Gun_SwapMagazine_Action : CLA_Action
     public override void OnChange()
     {
         // Start Timer
-        gun.Stats.swapMagazineTimer.Timer_Cur = 0;
-        gun.Stats.swapMagazineTimer.SetActive(true);
-        gun.Stats.swapMagazineTimer.Continue();
+        gun.Stats.swapMagazineTimer.UseAutoTick(true);
+        gun.Stats.swapMagazineTimer.Restart();
 
         // Animation
         animator.Play(gun.WeaponNameTrimed + "_SwapMagazine", 0, 0);
@@ -50,11 +49,7 @@ public class Gun_SwapMagazine_Action : CLA_Action
     public override void OnEnd()
     {
         // Stop Timer
-        gun.Stats.swapMagazineTimer.SetActive(false);
-
-        // Load Bullets
-        if (gun.Stats.swapMagazineTimer.IsTimerAtMax)
-            gun.Stats.loadedBullets = reloadAll ? gun.Stats.magazineSize : gun.Stats.loadedBullets + reloadAmount;
+        gun.Stats.swapMagazineTimer.UseAutoTick(false);
 
         // Animation
         animator.speed = 1;
@@ -78,6 +73,9 @@ public class Gun_SwapMagazine_Action : CLA_Action
     {
         AnimStart_SwapMagazine = false;
         AnimEnd_SwapMagazine = true;
+
+        // Load Bullets
+        gun.Stats.loadedBullets = reloadAll ? gun.Stats.magazineSize : gun.Stats.loadedBullets + reloadAmount;
     }
     private void DropMagazine()
     {

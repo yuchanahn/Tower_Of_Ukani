@@ -7,7 +7,7 @@ public class SelfSleepObj : PoolingObj
     public override void ResetOnActive()
     {
         sleepTimer.Timer_Cur = 0;
-        sleepTimer.Continue();
+        sleepTimer.Restart();
     }
 
     protected virtual void Start()

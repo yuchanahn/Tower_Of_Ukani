@@ -26,9 +26,8 @@ public class Gun_Reload_Action : CLA_Action
     public override void OnChange()
     {
         // Start Timer
-        gun.Stats.reloadTimer.Timer_Cur = 0;
-        gun.Stats.reloadTimer.SetActive(true);
-        gun.Stats.reloadTimer.Continue();
+        gun.Stats.reloadTimer.UseAutoTick(true);
+        gun.Stats.reloadTimer.Restart();
 
         // Animation
         animator.Play(gun.WeaponNameTrimed + "_Reload", 0, 0);
@@ -41,7 +40,7 @@ public class Gun_Reload_Action : CLA_Action
     public override void OnEnd()
     {
         // Stop Timer
-        gun.Stats.reloadTimer.SetActive(false);
+        gun.Stats.reloadTimer.UseAutoTick(false);
 
         // Load Bullets
         if (gun.Stats.reloadTimer.IsTimerAtMax)
