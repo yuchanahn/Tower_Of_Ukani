@@ -54,6 +54,7 @@ MonoBehaviour:
     m_Bits: 768
   particle_Hit: {fileID: 1036255023471385981, guid: 29a4720308044564a9f0ee58eed9cb7c,
     type: 3}
+  particle_HitOffset: 0.15
 --- !u!1 &2747505995723149081
 GameObject:
   m_ObjectHideFlags: 0

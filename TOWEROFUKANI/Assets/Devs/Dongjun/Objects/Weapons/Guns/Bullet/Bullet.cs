@@ -14,6 +14,7 @@ public class Bullet : PoolingObj
 
     [Header("Effects")]
     [SerializeField] protected PoolingObj particle_Hit;
+    [SerializeField] protected float particle_HitOffset;
 
     protected float curTravelDist = 0;
 
@@ -77,6 +78,8 @@ public class Bullet : PoolingObj
     protected virtual void OnHit(Vector2 hitPos)
     {
         ObjPoolingManager.Sleep(this);
-        ObjPoolingManager.Activate(particle_Hit, hitPos, Quaternion.identity).transform.right = -transform.right;
+        GameObject hitParticle = ObjPoolingManager.Activate(particle_Hit, hitPos, Quaternion.identity);
+        hitParticle.transform.right = -transform.right;
+        hitParticle.transform.position -= transform.right * particle_HitOffset;
     }
 }
