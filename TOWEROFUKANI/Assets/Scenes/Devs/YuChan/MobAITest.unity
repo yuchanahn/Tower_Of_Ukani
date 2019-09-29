@@ -120,11 +120,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!61 &1561633136 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 5555169890968166534, guid: 2f05f784829525c47b67d27b41cf2622,
+--- !u!4 &1648683777 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7268275018201367325, guid: 2f05f784829525c47b67d27b41cf2622,
     type: 3}
   m_PrefabInstance: {fileID: 1616543990343457599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1792668251 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7371128404420445760, guid: de8e575bfc7541a4cb26f729cf5133df,
+    type: 3}
+  m_PrefabInstance: {fileID: 1616543990949619509}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1852705371
 GameObject:
@@ -1010,7 +1016,7 @@ PrefabInstance:
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.07
+      value: 1.95
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -1059,9 +1065,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
-      propertyPath: m_OneWayCollider
+      propertyPath: m_gravityData.acceleration
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_MoveData.Speed
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_MoveData.MoveT.min
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_MoveData.IdleT.min
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_MoveData.IdleT.max
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_MoveData.SprTr
       value: 
-      objectReference: {fileID: 1561633136}
+      objectReference: {fileID: 1648683777}
+    - target: {fileID: 7268275018201367324, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!212 &1616543990387886482
@@ -1329,6 +1365,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1116218772340216848, guid: de8e575bfc7541a4cb26f729cf5133df,
+        type: 3}
+      propertyPath: weaponName
+      value: Pistol
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8e575bfc7541a4cb26f729cf5133df, type: 3}
 --- !u!4 &1616543990949619510 stripped
@@ -1376,7 +1417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 1616543989299715891}
   camShake: {fileID: 1616543989299715889}
-  playerRB2D: {fileID: 0}
+  playerRB2D: {fileID: 1792668251}
 --- !u!4 &1616543990972941020
 Transform:
   m_ObjectHideFlags: 0

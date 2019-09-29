@@ -195,9 +195,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_OneWayCollider: {fileID: 5555169890968166534}
+  m_CurAniST: 2
+  m_AniSpeedData:
+  - ST: 1
+    t: 0.3
   m_MoveData:
-    Speed: 1
-    Dir: 1
+    Speed: 5
+    SprTr: {fileID: 5171003076785061115}
     JumpHeight: 1
     MoveT:
       min: 1
@@ -226,8 +230,8 @@ MonoBehaviour:
     apexY: 0
   m_gravityData:
     useGravity: 1
-    acceleration: 1
-    terminalVelocity: 2
+    acceleration: 20
+    terminalVelocity: 0
   m_groundDetectionData:
     Size: {x: 0, y: 0}
     IgnoreGrounds: []
@@ -243,6 +247,8 @@ MonoBehaviour:
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
     OffsetAmount: 0
+  m_cliffData:
+    FallHeight: 10
 --- !u!114 &2248344777037342470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45184536e1c4dff438300eb6ff5b4019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mHP: 10
+  mHP: 1000
 --- !u!1 &6529837628258330815
 GameObject:
   m_ObjectHideFlags: 0
