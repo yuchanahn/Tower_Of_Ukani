@@ -24,7 +24,7 @@ public abstract class CLA_Main : MonoBehaviour
     protected virtual void Start()
     {
         CurrentAction = defaultAction;
-        CurrentAction?.OnStart();
+        CurrentAction?.OnChange();
     }
     private void Update()
     {
@@ -32,6 +32,12 @@ public abstract class CLA_Main : MonoBehaviour
     }
     private void LateUpdate()
     {
+        if (CurrentAction.CanExecuteOnStart)
+        {
+            CurrentAction?.OnStart();
+            CurrentAction.CanExecuteOnStart = false;
+        }
+
         CurrentAction?.OnLateUpdate();
         CheckCondition();
     }
@@ -48,13 +54,15 @@ public abstract class CLA_Main : MonoBehaviour
 
         CurrentAction?.OnEnd();
         CurrentAction = action;
-        CurrentAction?.OnStart();
+        CurrentAction?.OnChange();
+        CurrentAction.CanExecuteOnStart = true;
     }
     protected void ForceChangeAction(CLA_Action action)
     {
         CurrentAction?.OnEnd();
         CurrentAction = action;
-        CurrentAction?.OnStart();
+        CurrentAction?.OnChange();
+        CurrentAction.CanExecuteOnStart = true;
     }
     private void CheckCondition()
     {

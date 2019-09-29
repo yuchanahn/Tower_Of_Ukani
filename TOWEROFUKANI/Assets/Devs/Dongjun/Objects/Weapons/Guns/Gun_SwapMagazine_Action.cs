@@ -22,13 +22,17 @@ public class Gun_SwapMagazine_Action : CLA_Action
     private Gun gun;
     #endregion
 
+
+    #region Method: Unity
     private void Awake()
     {
         animator = GetComponent<Animator>();
         gun = GetComponent<Gun>();
     }
+    #endregion
 
-    public override void OnStart()
+    #region Method: CLA_Action
+    public override void OnChange()
     {
         // Start Timer
         gun.Stats.swapMagazineTimer.Timer_Cur = 0;
@@ -36,7 +40,12 @@ public class Gun_SwapMagazine_Action : CLA_Action
         gun.Stats.swapMagazineTimer.Continue();
 
         // Animation
-        animator.Play(gun.WeaponName + "_SwapMagazine", 0, 0);
+        animator.Play(gun.WeaponNameTrimed + "_SwapMagazine", 0, 0);
+    }
+    public override void OnStart()
+    {
+        // Set Animation Speed
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.swapMagazineTimer.Timer_Max, gun.WeaponNameTrimed + "_SwapMagazine");
     }
     public override void OnEnd()
     {
@@ -49,15 +58,17 @@ public class Gun_SwapMagazine_Action : CLA_Action
 
         // Animation
         animator.speed = 1;
-        animator.Play(gun.WeaponName + "_Idle");
+        animator.Play(gun.WeaponNameTrimed + "_Idle");
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.swapMagazineTimer.Timer_Max, gun.WeaponName + "_SwapMagazine");
+        // Rotate And Filp
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun.SpriteRoot.transform, transform);
     }
+    #endregion
 
+    #region Method: AnimEvent
     private void OnAnimStart_SwapMagazine()
     {
         AnimStart_SwapMagazine = true;
@@ -72,4 +83,5 @@ public class Gun_SwapMagazine_Action : CLA_Action
     {
         ObjPoolingManager.Activate(droppedMagazinePrefab, magazineDropPos.position, transform.rotation);
     }
+    #endregion
 }

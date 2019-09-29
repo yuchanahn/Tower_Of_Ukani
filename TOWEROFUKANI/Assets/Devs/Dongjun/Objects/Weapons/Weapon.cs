@@ -26,10 +26,15 @@ public abstract class Weapon : CLA_Main
     [SerializeField] private GameObject spriteRoot;
     #endregion
 
+    #region Var: Weapon Info
+    private string weaponNameTrimed;
+    #endregion
+
     #region Var: Properties
     public bool IsSelected { get; protected set; } = false;
 
     public string WeaponName => weaponName;
+    public string WeaponNameTrimed => weaponNameTrimed;
     public string WeaponDesc => weaponDesc;
     public WeaponType WeaponType => weaponType;
     public WeaponRange WeaponRange => weaponRange;
@@ -41,6 +46,9 @@ public abstract class Weapon : CLA_Main
     protected override void Awake()
     {
         base.Awake();
+
+        weaponNameTrimed = weaponName.Replace(" ", string.Empty);
+
         transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
         SpriteRoot.SetActive(false);
     }

@@ -13,13 +13,17 @@ public class Gun_Reload_Action : CLA_Action
     private Gun gun;
     #endregion
 
+
+    #region Method: Unity
     private void Awake()
     {
         animator = GetComponent<Animator>();
         gun = GetComponent<Gun>();
     }
+    #endregion
 
-    public override void OnStart()
+    #region Method: CLA_Action
+    public override void OnChange()
     {
         // Start Timer
         gun.Stats.reloadTimer.Timer_Cur = 0;
@@ -27,7 +31,12 @@ public class Gun_Reload_Action : CLA_Action
         gun.Stats.reloadTimer.Continue();
 
         // Animation
-        animator.Play(gun.WeaponName + "_Reload", 0, 0);
+        animator.Play(gun.WeaponNameTrimed + "_Reload", 0, 0);
+    }
+    public override void OnStart()
+    {
+        // Set Animation Speed
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.reloadTimer.Timer_Max, gun.WeaponNameTrimed + "_Reload");
     }
     public override void OnEnd()
     {
@@ -40,12 +49,13 @@ public class Gun_Reload_Action : CLA_Action
 
         // Animation
         animator.speed = 1;
-        animator.Play(gun.WeaponName + "_Idle");
+        animator.Play(gun.WeaponNameTrimed + "_Idle");
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun.Stats.reloadTimer.Timer_Max, gun.WeaponName + "_Reload");
+        // Rotate And Filp
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun.SpriteRoot.transform, transform);
     }
+    #endregion
 }

@@ -36,8 +36,8 @@ public class Player_Dash_Action : CLA_Action
     }
     #endregion
 
-    #region Method: Action
-    public override void OnStart()
+    #region Method: CLA_Action
+    public override void OnChange()
     {
         Animation();
         IsDasing = true;

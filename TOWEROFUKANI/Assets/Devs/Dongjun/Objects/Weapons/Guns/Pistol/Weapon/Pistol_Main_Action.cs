@@ -27,12 +27,16 @@ public class Pistol_Main_Action : CLA_Action
     private Pistol gun_Main;
     #endregion
 
+
+    #region Method: Unity
     private void Awake()
     {
         animator = GetComponent<Animator>();
         gun_Main = GetComponent<Pistol>();
     }
+    #endregion
 
+    #region Method: CLA_Action
     public override void OnEnd()
     {
         AnimEnd_Shoot = false;
@@ -72,9 +76,12 @@ public class Pistol_Main_Action : CLA_Action
         LookAtMouse_Logic.Rotate(CommonObjs.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(CommonObjs.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
     }
+    #endregion
 
+    #region Method: AnimEvent
     private void OnAnimEnd_Shoot()
     {
         AnimEnd_Shoot = true;
     }
+    #endregion
 }
