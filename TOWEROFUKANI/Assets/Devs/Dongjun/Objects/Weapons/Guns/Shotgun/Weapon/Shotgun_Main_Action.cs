@@ -3,32 +3,24 @@
 public class Shotgun_Main_Action : CLA_Action
 {
     #region Var: Inspector
-    [Header("Stats")]
+    [Header("Shoot")]
+    [SerializeField] private Transform shootPoint;
+    [SerializeField] private PoolingObj bulletPrefab;
+    [SerializeField] private float maxShootAnimTime;
     [SerializeField] private int pelletCount = 2;
     [SerializeField] private float pelletAngle = 10f;
 
-    [Header("Points")]
-    [SerializeField] private Transform shootPoint;
+    [Header("Muzzle Flash")]
+    [SerializeField] private Transform muzzleFlashParent;
+    [SerializeField] private PoolingObj muzzleFlashPrefab;
 
-    [Header("Prefabs")]
-    [SerializeField] private PoolingObj bulletPrefab;
-
-    [Header("Animation")]
-    [SerializeField] private float maxShootAnimTime;
-
-    [Header("Effects")]
-    [SerializeField] private Transform shootParticleParent;
-    [SerializeField] private PoolingObj shootParticlePrefab;
+    [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
     #region Var: Components
     private Animator animator;
     private Shotgun gun_Main;
-    #endregion
-
-    #region Var: Properties
-    public bool AnimEnd_Shoot { get; private set; } = false;
     #endregion
 
 
@@ -53,28 +45,28 @@ public class Shotgun_Main_Action : CLA_Action
 
         if (gun_Main.gunData.shootTimer.IsTimerAtMax && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
         {
+            // Restart Timer
+            gun_Main.gunData.shootTimer.Restart();
+
             // Spawn Bullets
             Vector3 eRot = transform.eulerAngles;
             eRot.z -= ((pelletCount / 2) - (pelletCount % 2 == 0 ? 0.5f : 0)) * pelletAngle;
+
             for (int i = 0; i < pelletCount; i++)
             {
-                ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, Quaternion.Euler(eRot));
+                bulletPrefab.Activate(shootPoint.position, Quaternion.Euler(eRot));
                 eRot.z += pelletAngle;
             }
 
-            // Use a Bullet
+            // Consume Bullet
             gun_Main.gunData.loadedBullets -= 1;
             gun_Main.gunData.isBulletLoaded = false;
 
-            // Continue Timer
-            gun_Main.gunData.shootTimer.Restart();
+            // Muzzle Flash
+            muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
 
             // Animation
-            AnimEnd_Shoot = false;
             animator.SetTrigger("Shoot");
-
-            // Particle Effect
-            ObjPoolingManager.Activate(shootParticlePrefab, shootParticleParent, new Vector2(0, 0), Quaternion.identity);
 
             // Cam Shake Effect
             CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
@@ -82,13 +74,14 @@ public class Shotgun_Main_Action : CLA_Action
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Shotgun_Shoot");
-
-        if (gun_Main.gunData.shootTimer.IsTimerAtMax)
-            AnimEnd_Shoot = true;
-
+        // Lool At Mouse
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
+
+        if (gun_Main.IsSelected)
+        {
+            AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Shotgun_Shoot");
+        }
     }
     #endregion
 }

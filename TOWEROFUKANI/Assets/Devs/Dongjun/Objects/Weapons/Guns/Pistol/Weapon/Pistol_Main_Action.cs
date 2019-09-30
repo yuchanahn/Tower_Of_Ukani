@@ -3,18 +3,16 @@
 public class Pistol_Main_Action : CLA_Action
 {
     #region Var: Inspector
-    [Header("Points")]
+    [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
-
-    [Header("Prefabs")]
     [SerializeField] private PoolingObj bulletPrefab;
-
-    [Header("Animation")]
     [SerializeField] private float maxShootAnimTime;
 
-    [Header("Effects")]
+    [Header("Muzzle Flash")]
     [SerializeField] private Transform muzzleFlashParent;
     [SerializeField] private PoolingObj muzzleFlashPrefab;
+
+    [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
@@ -45,30 +43,35 @@ public class Pistol_Main_Action : CLA_Action
 
         if (gun_Main.gunData.shootTimer.IsTimerAtMax && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
         {
-            // Spawn Bullet
-            ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
+            // Restart Timer
+            gun_Main.gunData.shootTimer.Restart();
 
-            // Use Bullet
+            // Spawn Bullet
+            bulletPrefab.Activate(shootPoint.position, transform.rotation);
+
+            // Consume Bullet
             gun_Main.gunData.loadedBullets -= 1;
 
-            // Continue Timer
-            gun_Main.gunData.shootTimer.Restart();
+            // Muzzle Flash
+            muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
 
             // Animation
             animator.SetTrigger("Shoot");
 
-            // Particle Effect
-            ObjPoolingManager.Activate(muzzleFlashPrefab, muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
-
-            // Cam Shake Effect
+            // Cam Shake
             CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
         }
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Pistol_Shoot");
+        // Lool At Mouse
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
+
+        if (gun_Main.IsSelected)
+        {
+            AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Pistol_Shoot");
+        }
     }
     #endregion
 }

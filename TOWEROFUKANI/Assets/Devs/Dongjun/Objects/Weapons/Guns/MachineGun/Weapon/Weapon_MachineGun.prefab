@@ -245,11 +245,11 @@ MonoBehaviour:
   shootPoint: {fileID: 4450316996750440473}
   bulletPrefab: {fileID: 3522369012486736103, guid: 4516c39aa90b59146a00c293b77a065b,
     type: 3}
+  maxShootAnimTime: 0.15
   acry_YPosOffset: 0.2
   acry_ZRotOffset: 5
-  maxShootAnimTime: 0.15
-  shootParticleParent: {fileID: 4450316996750440473}
-  shootParticlePrefab: {fileID: 183118761886031892, guid: 8fb702bfb2eda0847ab717287666cacb,
+  muzzleFlashParent: {fileID: 4450316996750440473}
+  muzzleFlashPrefab: {fileID: 183118761886031892, guid: 8fb702bfb2eda0847ab717287666cacb,
     type: 3}
   emptyShellSpawnPos: {fileID: 211503556863373062}
   emptyShellPrefab: {fileID: -2768639589848062273, guid: 60c7580ed03cb5b468ac12a59cce3813,

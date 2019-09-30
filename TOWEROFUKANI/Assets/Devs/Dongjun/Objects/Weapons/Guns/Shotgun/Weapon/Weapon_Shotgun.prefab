@@ -133,14 +133,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
-  pelletCount: 4
-  pelletAngle: 5
   shootPoint: {fileID: 1077788971055575643}
   bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
   maxShootAnimTime: 0.2
-  shootParticleParent: {fileID: 1077788971055575643}
-  shootParticlePrefab: {fileID: 9204822279717750706, guid: 179a6208adf6eab45b4e01bea6d11926,
+  pelletCount: 4
+  pelletAngle: 5
+  muzzleFlashParent: {fileID: 1077788971055575643}
+  muzzleFlashPrefab: {fileID: 9204822279717750706, guid: 179a6208adf6eab45b4e01bea6d11926,
     type: 3}
   camShakeData_Shoot:
     angle: 0

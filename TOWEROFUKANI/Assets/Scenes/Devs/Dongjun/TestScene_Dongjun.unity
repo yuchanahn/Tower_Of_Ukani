@@ -2551,6 +2551,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6631875473196508494, guid: de8e575bfc7541a4cb26f729cf5133df,
+        type: 3}
+      propertyPath: camShakeData_Shoot.strength
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8109748047406466311, guid: de8e575bfc7541a4cb26f729cf5133df,
         type: 3}
       propertyPath: m_LocalPosition.x

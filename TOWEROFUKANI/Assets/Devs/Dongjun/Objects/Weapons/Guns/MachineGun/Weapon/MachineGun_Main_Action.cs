@@ -6,17 +6,15 @@ public class MachineGun_Main_Action : CLA_Action
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private PoolingObj bulletPrefab;
+    [SerializeField] private float maxShootAnimTime;
 
     [Header("Accuracy")]
     [SerializeField] private float acry_YPosOffset;
     [SerializeField] private float acry_ZRotOffset;
 
-    [Header("Animation")]
-    [SerializeField] private float maxShootAnimTime;
-
     [Header("Muzzle Flash")]
-    [SerializeField] private Transform shootParticleParent;
-    [SerializeField] private PoolingObj shootParticlePrefab;
+    [SerializeField] private Transform muzzleFlashParent;
+    [SerializeField] private PoolingObj muzzleFlashPrefab;
 
     [Header("Empty Shell")]
     [SerializeField] private Transform emptyShellSpawnPos;
@@ -62,7 +60,7 @@ public class MachineGun_Main_Action : CLA_Action
 
         if (gun_Main.gunData.shootTimer.IsTimerAtMax && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
         {
-            // Continue Timer
+            // Restart Timer
             gun_Main.gunData.shootTimer.Restart();
 
             // Spawn Bullet
@@ -70,11 +68,8 @@ public class MachineGun_Main_Action : CLA_Action
             bullet.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
             bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
 
-            // Use Bullet
+            // Consume Bullet
             gun_Main.gunData.loadedBullets -= 1;
-
-            // Animation
-            animator.SetTrigger("Shoot");
 
             // Update Ammo Belt Pos
             ammoBelt.localPosition 
@@ -84,18 +79,26 @@ public class MachineGun_Main_Action : CLA_Action
             emptyShellPrefab.Activate(emptyShellSpawnPos.position, transform.rotation);
 
             // Muzzle Flash
-            shootParticlePrefab.Activate(shootParticleParent, new Vector2(0, 0), Quaternion.identity).transform.position 
+            muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity).transform.position 
                 = bullet.position;
 
-            // Cam Shake Effect
+            // Animation
+            animator.SetTrigger("Shoot");
+
+            // Cam Shake
             CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
         }
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, gun_Main.WeaponNameTrimed + "_Shoot");
+        // Lool At Mouse
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
+
+        if (gun_Main.IsSelected)
+        {
+            AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, gun_Main.WeaponNameTrimed + "_Shoot");
+        }
     }
     #endregion
 }

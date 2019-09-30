@@ -49,7 +49,7 @@ public class Shotgun : Gun
     {
         if (CL_Gun()) return;
 
-        if (!gunData.isBulletLoaded && main_AC.AnimEnd_Shoot && gunData.loadedBullets > 0)
+        if (!gunData.isBulletLoaded && gunData.shootTimer.IsTimerAtMax && gunData.loadedBullets > 0)
         { ChangeAction(reload_AC);  return; }
 
         if (gunData.loadedBullets <= 0)
