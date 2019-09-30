@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   moveSpeed: 50
-  maxDist: 10
+  maxDist: 20
   detectSize: {x: 1, y: 0.2}
   detectLayers:
     serializedVersion: 2

@@ -3,10 +3,8 @@
 public class MachineGun_Main_Action : CLA_Action
 {
     #region Var: Inspector
-    [Header("Points")]
+    [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
-
-    [Header("Prefabs")]
     [SerializeField] private PoolingObj bulletPrefab;
 
     [Header("Accuracy")]
@@ -16,9 +14,19 @@ public class MachineGun_Main_Action : CLA_Action
     [Header("Animation")]
     [SerializeField] private float maxShootAnimTime;
 
-    [Header("Effects")]
+    [Header("Muzzle Flash")]
     [SerializeField] private Transform shootParticleParent;
     [SerializeField] private PoolingObj shootParticlePrefab;
+
+    [Header("Empty Shell")]
+    [SerializeField] private Transform emptyShellSpawnPos;
+    [SerializeField] private PoolingObj emptyShellPrefab;
+
+    [Header("Ammo Belt")]
+    [SerializeField] private Transform ammoBelt;
+    [SerializeField] private float ammoBeltAmmoCount;
+
+    [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
@@ -37,6 +45,11 @@ public class MachineGun_Main_Action : CLA_Action
     #endregion
 
     #region Method: CLA_Action
+    public override void OnStart()
+    {
+        if (gun_Main.gunData.loadedBullets == gun_Main.gunData.magazineSize)
+            ammoBelt.localPosition = Vector3.zero;
+    }
     public override void OnEnd()
     {
         animator.speed = 1;
@@ -49,6 +62,9 @@ public class MachineGun_Main_Action : CLA_Action
 
         if (gun_Main.gunData.shootTimer.IsTimerAtMax && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
         {
+            // Continue Timer
+            gun_Main.gunData.shootTimer.Restart();
+
             // Spawn Bullet
             Transform bullet = ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation).transform;
             bullet.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
@@ -57,11 +73,12 @@ public class MachineGun_Main_Action : CLA_Action
             // Use Bullet
             gun_Main.gunData.loadedBullets -= 1;
 
-            // Continue Timer
-            gun_Main.gunData.shootTimer.Restart();
-
             // Animation
             animator.SetTrigger("Shoot");
+
+            // Update Ammo Belt Pos
+            ammoBelt.localPosition = 
+                new Vector2(0, Mathf.Lerp(0, 0.0625f * ammoBeltAmmoCount, 1 - ((float)gun_Main.gunData.loadedBullets / gun_Main.gunData.magazineSize)));
 
             // Particle Effect
             ObjPoolingManager.Activate(shootParticlePrefab, shootParticleParent, new Vector2(0, 0), Quaternion.identity).transform.position = bullet.position;
