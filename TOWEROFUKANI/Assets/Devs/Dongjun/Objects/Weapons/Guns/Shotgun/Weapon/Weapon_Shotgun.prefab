@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077788971055575642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0, z: 0}
+  m_LocalPosition: {x: 0.63, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1077788971484917886}
@@ -138,8 +138,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
   maxShootAnimTime: 0.2
-  shootParticleParent: {fileID: 1411855521925432638}
-  shootParticlePrefab: {fileID: 7190664309250040938, guid: 179a6208adf6eab45b4e01bea6d11926,
+  shootParticleParent: {fileID: 1077788971055575643}
+  shootParticlePrefab: {fileID: 9204822279717750706, guid: 179a6208adf6eab45b4e01bea6d11926,
     type: 3}
   camShakeData_Shoot:
     angle: 0
@@ -211,7 +211,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1077788971055575643}
-  - {fileID: 1411855521925432638}
   - {fileID: 510434050322085102}
   m_Father: {fileID: 1077788971187178464}
   m_RootOrder: 0
@@ -290,36 +289,6 @@ Transform:
   m_GameObject: {fileID: 5808045877969805460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.19, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1077788971484917886}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7053306309776992346
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1411855521925432638}
-  m_Layer: 0
-  m_Name: Muzzle Flash Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1411855521925432638
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7053306309776992346}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.20999998, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1077788971484917886}

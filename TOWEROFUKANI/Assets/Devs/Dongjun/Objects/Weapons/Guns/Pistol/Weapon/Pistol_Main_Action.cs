@@ -13,8 +13,8 @@ public class Pistol_Main_Action : CLA_Action
     [SerializeField] private float maxShootAnimTime;
 
     [Header("Effects")]
-    [SerializeField] private Transform shootParticleParent;
-    [SerializeField] private PoolingObj shootParticlePrefab;
+    [SerializeField] private Transform muzzleFlashParent;
+    [SerializeField] private PoolingObj muzzleFlashPrefab;
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
@@ -64,7 +64,7 @@ public class Pistol_Main_Action : CLA_Action
             animator.SetTrigger("Shoot");
 
             // Particle Effect
-            ObjPoolingManager.Activate(shootParticlePrefab, shootParticleParent, new Vector2(0, 0), Quaternion.identity);
+            ObjPoolingManager.Activate(muzzleFlashPrefab, muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
 
             // Cam Shake Effect
             CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
