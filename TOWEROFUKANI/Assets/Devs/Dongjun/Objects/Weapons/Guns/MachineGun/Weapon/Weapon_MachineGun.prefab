@@ -165,6 +165,8 @@ MonoBehaviour:
   shootPoint: {fileID: 4450316996750440473}
   bulletPrefab: {fileID: 3522369012486736103, guid: 4516c39aa90b59146a00c293b77a065b,
     type: 3}
+  acry_YPosOffset: 0.2
+  acry_ZRotOffset: 5
   maxShootAnimTime: 0.15
   shootParticleParent: {fileID: 2350962554968379260}
   shootParticlePrefab: {fileID: 7190664309250040938, guid: fc45d6df91e980e4d90c006610728338,

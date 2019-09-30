@@ -50,7 +50,12 @@ public abstract class Weapon : CLA_Main
         weaponNameTrimed = weaponName.Replace(" ", string.Empty);
 
         transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
-        SpriteRoot.SetActive(false);
+    }
+    protected override void Start()
+    {
+        base.Start();
+
+        SpriteRoot.SetActive(IsSelected);
     }
 
     public void SelectWeapon(bool select)

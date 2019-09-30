@@ -9,6 +9,10 @@ public class MachineGun_Main_Action : CLA_Action
     [Header("Prefabs")]
     [SerializeField] private PoolingObj bulletPrefab;
 
+    [Header("Accuracy")]
+    [SerializeField] private float acry_YPosOffset;
+    [SerializeField] private float acry_ZRotOffset;
+
     [Header("Animation")]
     [SerializeField] private float maxShootAnimTime;
 
@@ -51,7 +55,9 @@ public class MachineGun_Main_Action : CLA_Action
         if (gun_Main.gunData.shootTimer.IsTimerAtMax && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
         {
             // Spawn Bullet
-            ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation);
+            Transform bullet = ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation).transform;
+            bullet.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
+            bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
 
             // Use Bullet
             gun_Main.gunData.loadedBullets -= 1;
