@@ -169,7 +169,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     #region Interface: ICanDetectGround
     virtual public void OnGroundEnter()
     {
-        Jump_Logic.ResetJump(ref m_jumpData);
+        Jump_Logic.ResetJumpCount(ref m_jumpData);
     }
     virtual public void OnGroundStay()
     {

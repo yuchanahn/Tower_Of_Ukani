@@ -159,7 +159,7 @@ public class Player_Movement_Action : CLA_Action,
     public void OnGroundEnter()
     {
         // Reset Jump
-        Jump_Logic.ResetJump(ref jumpData);
+        Jump_Logic.ResetJumpCount(ref jumpData);
     }
     public void OnGroundStay()
     {
