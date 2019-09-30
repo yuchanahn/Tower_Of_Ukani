@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class PlayerDropObj : SelfSleepObj
 {
-    Rigidbody2D rb2D;
+    protected Rigidbody2D rb2D;
 
+    protected virtual void Awake()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+    }
     public override void ResetOnActive()
     {
         base.ResetOnActive();
 
-        if (rb2D != null)
-            rb2D.velocity = Global.Inst.PlayerRB2D.velocity;
-    }
-    private void Awake()
-    {
-        rb2D = GetComponent<Rigidbody2D>();
+        rb2D.velocity = Global.Inst.PlayerRB2D.velocity;
     }
 }

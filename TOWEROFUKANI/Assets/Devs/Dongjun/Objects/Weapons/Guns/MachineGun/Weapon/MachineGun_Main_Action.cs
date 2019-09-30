@@ -66,7 +66,7 @@ public class MachineGun_Main_Action : CLA_Action
             gun_Main.gunData.shootTimer.Restart();
 
             // Spawn Bullet
-            Transform bullet = ObjPoolingManager.Activate(bulletPrefab, shootPoint.position, transform.rotation).transform;
+            Transform bullet = bulletPrefab.Activate(shootPoint.position, transform.rotation).transform;
             bullet.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
             bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
 
@@ -77,11 +77,15 @@ public class MachineGun_Main_Action : CLA_Action
             animator.SetTrigger("Shoot");
 
             // Update Ammo Belt Pos
-            ammoBelt.localPosition = 
-                new Vector2(0, Mathf.Lerp(0, 0.0625f * ammoBeltAmmoCount, 1 - ((float)gun_Main.gunData.loadedBullets / gun_Main.gunData.magazineSize)));
+            ammoBelt.localPosition 
+                = new Vector2(0, Mathf.Lerp(0, 0.0625f * ammoBeltAmmoCount, 1 - ((float)gun_Main.gunData.loadedBullets / gun_Main.gunData.magazineSize)));
 
-            // Particle Effect
-            ObjPoolingManager.Activate(shootParticlePrefab, shootParticleParent, new Vector2(0, 0), Quaternion.identity).transform.position = bullet.position;
+            // Empty Shell
+            emptyShellPrefab.Activate(emptyShellSpawnPos.position, transform.rotation);
+
+            // Muzzle Flash
+            shootParticlePrefab.Activate(shootParticleParent, new Vector2(0, 0), Quaternion.identity).transform.position 
+                = bullet.position;
 
             // Cam Shake Effect
             CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);

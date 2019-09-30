@@ -85,7 +85,6 @@ public class ObjPoolingManager : MonoBehaviour
         pool_Active[prefab].Add(obj);
 
         obj.gameObject.SetActive(true);
-        obj.ResetOnActive();
 
         return obj;
     }
@@ -125,6 +124,7 @@ public class ObjPoolingManager : MonoBehaviour
         obj.transform.SetParent(Inst.defaultPoolParent);
         obj.transform.position = pos;
         obj.transform.rotation = rot;
+        obj.ResetOnActive();
 
         return obj.gameObject;
     }
@@ -134,6 +134,7 @@ public class ObjPoolingManager : MonoBehaviour
         obj.transform.SetParent(parent);
         obj.transform.localPosition = localPos;
         obj.transform.localRotation = localRot;
+        obj.ResetOnActive();
 
         return obj.gameObject;
     }
@@ -148,4 +149,20 @@ public class ObjPoolingManager : MonoBehaviour
         obj.gameObject.SetActive(false);
     }
     #endregion
+}
+
+public static class ObjPoolingExtension
+{
+    public static GameObject Activate(this PoolingObj prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true)
+    {
+        return ObjPoolingManager.Activate(prefab, pos, rot, canCreateNew);
+    }
+    public static GameObject Activate(this PoolingObj prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true)
+    {
+        return ObjPoolingManager.Activate(prefab, parent, localPos, localRot, canCreateNew);
+    }
+    public static void Sleep(this PoolingObj obj)
+    {
+        ObjPoolingManager.Sleep(obj);
+    }
 }
