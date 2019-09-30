@@ -4,7 +4,6 @@ public class MachineGun : Gun
 {
     #region Var: CLA_Action
     private MachineGun_Main_Action main_AC;
-    private Gun_Reload_Action reload_AC;
     private Gun_SwapMagazine_Action swapMagazine_AC;
     #endregion
 
@@ -13,11 +12,9 @@ public class MachineGun : Gun
     protected override void Init()
     {
         main_AC = GetComponent<MachineGun_Main_Action>();
-        reload_AC = GetComponent<Gun_Reload_Action>();
         swapMagazine_AC = GetComponent<Gun_SwapMagazine_Action>();
 
         ConditionLogics.Add(main_AC, CL_Main_AC);
-        ConditionLogics.Add(reload_AC, CL_Reload_AC);
         ConditionLogics.Add(swapMagazine_AC, CL_SwapMagazine_AC);
     }
     #endregion
@@ -29,7 +26,6 @@ public class MachineGun : Gun
 
         // Init Timer
         gunData.shootTimer.Init(gameObject);
-        gunData.reloadTimer.Init(gameObject);
         gunData.swapMagazineTimer.Init(gameObject);
 
         // Init Ammo
@@ -51,32 +47,22 @@ public class MachineGun : Gun
 
         if (gunData.loadedBullets <= 0)
         {
-            if (main_AC.AnimEnd_Shoot)
+            if (gunData.shootTimer.IsTimerAtMax)
             { ChangeAction(swapMagazine_AC); return; }
 
             if (swapMagazine_AC.AnimStart_SwapMagazine && !swapMagazine_AC.AnimEnd_SwapMagazine)
             { ChangeAction(swapMagazine_AC); return; }
-
-            if (swapMagazine_AC.AnimEnd_SwapMagazine && !gunData.reloadTimer.IsTimerAtMax)
-            { ChangeAction(reload_AC); return; }
         }
 
         if (gunData.loadedBullets < gunData.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
         { ChangeAction(swapMagazine_AC); return; }
-    }
-    private void CL_Reload_AC()
-    {
-        if (CL_Gun()) return;
-
-        if (gunData.reloadTimer.IsTimerAtMax)
-        { ChangeAction(main_AC); return; }
     }
     private void CL_SwapMagazine_AC()
     {
         if (CL_Gun()) return;
 
         if (gunData.swapMagazineTimer.IsTimerAtMax)
-        { ChangeAction(reload_AC); return; }
+        { ChangeAction(main_AC); return; }
     }
     #endregion
 }

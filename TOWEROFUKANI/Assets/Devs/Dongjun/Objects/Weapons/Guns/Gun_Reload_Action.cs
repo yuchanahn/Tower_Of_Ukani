@@ -44,7 +44,10 @@ public class Gun_Reload_Action : CLA_Action
 
         // Load Bullets
         if (gun.gunData.reloadTimer.IsTimerAtMax)
+        {
             gun.gunData.loadedBullets = reloadAll ? gun.gunData.magazineSize : gun.gunData.loadedBullets + reloadAmount;
+            gun.gunData.isBulletLoaded = true;
+        }
 
         // Animation
         animator.speed = 1;

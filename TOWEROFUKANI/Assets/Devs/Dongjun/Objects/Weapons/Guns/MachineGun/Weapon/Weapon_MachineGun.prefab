@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 211503556863373062}
   m_Layer: 0
-  m_Name: Magazine Drop Point
+  m_Name: Shell Drop Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4060487950417184522}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.120000035, y: -0.125, z: 0}
+  m_LocalPosition: {x: 0.6, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4450316997529025084}
@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 3512479290777371978}
   - component: {fileID: 4770636179610790158}
   - component: {fileID: 1243003119494043728}
-  - component: {fileID: 882669361769085378}
   - component: {fileID: 4190955281818869365}
   m_Layer: 0
   m_Name: Weapon_MachineGun
@@ -89,7 +88,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4450316997164171681}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: -0.025, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4450316997529025084}
@@ -106,7 +105,7 @@ Animator:
   m_GameObject: {fileID: 4450316997164171681}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 46f1d0be24c4ff049baa48e5460e1589, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1de96915c3f5a844395463a4bfa43920, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -132,7 +131,7 @@ MonoBehaviour:
   weaponDesc: This is a Machine Gun
   weaponType: 0
   weaponRange: 1
-  pivotPointY: 0.1
+  pivotPointY: -0.025
   spriteRoot: {fileID: 4450316997529025075}
   gunData:
     shootTimer:
@@ -149,6 +148,7 @@ MonoBehaviour:
       endTime: 1.5
     magazineSize: 20
     loadedBullets: 0
+    isBulletLoaded: 0
 --- !u!114 &1243003119494043728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   acry_ZRotOffset: 5
   maxShootAnimTime: 0.15
   shootParticleParent: {fileID: 4450316996750440473}
-  shootParticlePrefab: {fileID: 3546313596656909244, guid: fc45d6df91e980e4d90c006610728338,
+  shootParticlePrefab: {fileID: 183118761886031892, guid: 8fb702bfb2eda0847ab717287666cacb,
     type: 3}
   camShakeData_Shoot:
     angle: 0
@@ -180,21 +180,6 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
---- !u!114 &882669361769085378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4450316997164171681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea1b02515cb99d94489c0bf2cc341155, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
-  reloadAll: 1
-  reloadAmount: 0
 --- !u!114 &4190955281818869365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,11 +193,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
-  reloadAll: 0
+  reloadAll: 1
   reloadAmount: 0
-  magazineDropPos: {fileID: 211503556863373062}
-  droppedMagazinePrefab: {fileID: 2394614046180044400, guid: 1d3d4c5d905af5649b448c3691ca16d1,
-    type: 3}
+  magazineDropPos: {fileID: 0}
+  droppedMagazinePrefab: {fileID: 0}
 --- !u!1 &4450316997529025075
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4450316997529025075}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 0, z: 0}
+  m_LocalPosition: {x: 0.625, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4450316996750440473}
@@ -284,7 +268,7 @@ SpriteRenderer:
   m_SortingLayerID: -1138284999
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1263e5ca3a1faba4486a29ba137aa8f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4d8cc57dc2e772741ab6d0921736e878, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

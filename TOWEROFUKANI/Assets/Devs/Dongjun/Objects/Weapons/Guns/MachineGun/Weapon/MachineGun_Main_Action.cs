@@ -22,10 +22,6 @@ public class MachineGun_Main_Action : CLA_Action
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Properties
-    public bool AnimEnd_Shoot { get; private set; } = false;
-    #endregion
-
     #region Var: Components
     private Animator animator;
     private MachineGun gun_Main;
@@ -43,7 +39,6 @@ public class MachineGun_Main_Action : CLA_Action
     #region Method: CLA_Action
     public override void OnEnd()
     {
-        AnimEnd_Shoot = false;
         animator.speed = 1;
         animator.ResetTrigger("Shoot");
     }
@@ -66,11 +61,10 @@ public class MachineGun_Main_Action : CLA_Action
             gun_Main.gunData.shootTimer.Restart();
 
             // Animation
-            AnimEnd_Shoot = false;
             animator.SetTrigger("Shoot");
 
             // Particle Effect
-            ObjPoolingManager.Activate(shootParticlePrefab, shootParticleParent, new Vector2(0, 0), Quaternion.identity);
+            ObjPoolingManager.Activate(shootParticlePrefab, shootParticleParent, new Vector2(0, 0), Quaternion.identity).transform.position = bullet.position;
 
             // Cam Shake Effect
             CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
@@ -78,16 +72,9 @@ public class MachineGun_Main_Action : CLA_Action
     }
     public override void OnLateUpdate()
     {
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Pistol_Shoot");
+        AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, gun_Main.WeaponNameTrimed + "_Shoot");
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
-    }
-    #endregion
-
-    #region Method: AnimEvent
-    private void OnAnimEnd_Shoot()
-    {
-        AnimEnd_Shoot = true;
     }
     #endregion
 }

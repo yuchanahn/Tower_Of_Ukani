@@ -13,4 +13,5 @@ public struct GunData
     [Header("Ammo")]
     public int magazineSize;
     public int loadedBullets;
+    public bool isBulletLoaded;
 }

@@ -18,10 +18,6 @@ public class Pistol_Main_Action : CLA_Action
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Properties
-    public bool AnimEnd_Shoot { get; private set; } = false;
-    #endregion
-
     #region Var: Components
     private Animator animator;
     private Pistol gun_Main;
@@ -39,7 +35,6 @@ public class Pistol_Main_Action : CLA_Action
     #region Method: CLA_Action
     public override void OnEnd()
     {
-        AnimEnd_Shoot = false;
         animator.speed = 1;
         animator.ResetTrigger("Shoot");
     }
@@ -60,7 +55,6 @@ public class Pistol_Main_Action : CLA_Action
             gun_Main.gunData.shootTimer.Restart();
 
             // Animation
-            AnimEnd_Shoot = false;
             animator.SetTrigger("Shoot");
 
             // Particle Effect
@@ -75,13 +69,6 @@ public class Pistol_Main_Action : CLA_Action
         AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Pistol_Shoot");
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
-    }
-    #endregion
-
-    #region Method: AnimEvent
-    private void OnAnimEnd_Shoot()
-    {
-        AnimEnd_Shoot = true;
     }
     #endregion
 }

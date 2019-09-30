@@ -51,7 +51,7 @@ public class Pistol : Gun
 
         if (gunData.loadedBullets <= 0)
         {
-            if (main_AC.AnimEnd_Shoot)
+            if (gunData.shootTimer.IsTimerAtMax)
             { ChangeAction(swapMagazine_AC); return; }
 
             if (swapMagazine_AC.AnimStart_SwapMagazine && !swapMagazine_AC.AnimEnd_SwapMagazine)

@@ -22,13 +22,13 @@ public class Shotgun_Main_Action : CLA_Action
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Properties
-    public bool AnimEnd_Shoot { get; private set; } = false;
-    #endregion
-
     #region Var: Components
     private Animator animator;
     private Shotgun gun_Main;
+    #endregion
+
+    #region Var: Properties
+    public bool AnimEnd_Shoot { get; private set; } = false;
     #endregion
 
 
@@ -43,7 +43,6 @@ public class Shotgun_Main_Action : CLA_Action
     #region Method: CLA_Action
     public override void OnEnd()
     {
-        AnimEnd_Shoot = false;
         animator.speed = 1;
         animator.ResetTrigger("Shoot");
     }
@@ -65,6 +64,7 @@ public class Shotgun_Main_Action : CLA_Action
 
             // Use a Bullet
             gun_Main.gunData.loadedBullets -= 1;
+            gun_Main.gunData.isBulletLoaded = false;
 
             // Continue Timer
             gun_Main.gunData.shootTimer.Restart();
@@ -83,15 +83,12 @@ public class Shotgun_Main_Action : CLA_Action
     public override void OnLateUpdate()
     {
         AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Shotgun_Shoot");
+
+        if (gun_Main.gunData.shootTimer.IsTimerAtMax)
+            AnimEnd_Shoot = true;
+
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
         LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
-    }
-    #endregion
-
-    #region Method: AnimEvent
-    private void OnAnimEnd_Shoot()
-    {
-        AnimEnd_Shoot = true;
     }
     #endregion
 }

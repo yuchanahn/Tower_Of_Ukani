@@ -8,7 +8,6 @@ public class Bullet : PoolingObj
     [SerializeField] protected float maxDist = 20f;
 
     [Header("Object Detection")]
-    [SerializeField] protected Vector2 detectPos;
     [SerializeField] protected Vector2 detectSize;
     [SerializeField] protected LayerMask detectLayers;
 
@@ -42,7 +41,7 @@ public class Bullet : PoolingObj
     }
     protected virtual void DetectObject()
     {
-        Vector2 pos = (Vector2)transform.position + (transform.right * detectPos) - (Vector2)(transform.right * (moveSpeed * Time.fixedDeltaTime));
+        Vector2 pos = (transform.position + (transform.right * detectSize.x * 0.5f)) - (transform.right * (moveSpeed * Time.fixedDeltaTime));
         float rot = transform.rotation.eulerAngles.z;
 
         RaycastHit2D[] hits = 
