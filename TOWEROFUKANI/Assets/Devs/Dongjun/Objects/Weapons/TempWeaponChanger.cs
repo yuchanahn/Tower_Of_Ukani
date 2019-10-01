@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TempWeaponChanger : MonoBehaviour
 {
+    [SerializeField] private Text nameText;
     [SerializeField] private Text ammoText;
     [SerializeField] private Weapon[] weaponSlot = new Weapon[3];
 
@@ -46,6 +47,9 @@ public class TempWeaponChanger : MonoBehaviour
             return;
         }
 
-        ammoText.text = $"{(curWeapon as Gun).gunData.loadedBullets} / {(curWeapon as Gun).gunData.magazineSize}";
+        nameText.text = curWeapon.WeaponName;
+
+        if (curWeapon as Gun)
+            ammoText.text = $"{(curWeapon as Gun).gunData.loadedBullets} / {(curWeapon as Gun).gunData.magazineSize}";
     }
 }
