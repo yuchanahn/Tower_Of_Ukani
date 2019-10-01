@@ -53,7 +53,7 @@ public class Pistol_Main_Action : CLA_Action
         if (!gun.IsSelected || gun.gunData.loadedBullets <= 0)
             return;
 
-        if (gun.gunData.shootTimer.IsEnded && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
+        if (gun.gunData.shootTimer.IsEnded && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
         {
             // Restart Timer
             gun.gunData.shootTimer.Restart();

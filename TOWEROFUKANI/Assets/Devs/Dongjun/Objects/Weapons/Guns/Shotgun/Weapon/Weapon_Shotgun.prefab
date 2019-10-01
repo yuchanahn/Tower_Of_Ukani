@@ -108,15 +108,15 @@ MonoBehaviour:
     shootTimer:
       StartAsEnded: 1
       CurTime: 0
-      EndTime: 0.2
+      EndTime: 0.1
     reloadTimer:
       StartAsEnded: 0
       CurTime: 0
-      EndTime: 0.4
+      EndTime: 0.22
     swapMagazineTimer:
       StartAsEnded: 0
       CurTime: 0
-      EndTime: 0.9
+      EndTime: 1.2
     magazineSize: 2
     loadedBullets: 0
     isBulletLoaded: 1
