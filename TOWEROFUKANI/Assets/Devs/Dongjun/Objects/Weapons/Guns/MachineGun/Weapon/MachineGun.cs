@@ -47,7 +47,7 @@ public class MachineGun : Gun
 
         if (gunData.loadedBullets <= 0)
         {
-            if (gunData.shootTimer.IsTimerAtMax)
+            if (main_AC.IsAnimEnded_Shoot)
             { ChangeAction(swapMagazine_AC); return; }
 
             if (swapMagazine_AC.AnimStart_SwapMagazine && !swapMagazine_AC.AnimEnd_SwapMagazine)
@@ -61,7 +61,7 @@ public class MachineGun : Gun
     {
         if (CL_Gun()) return;
 
-        if (gunData.swapMagazineTimer.IsTimerAtMax)
+        if (gunData.swapMagazineTimer.IsEnded)
         { ChangeAction(main_AC); return; }
     }
     #endregion

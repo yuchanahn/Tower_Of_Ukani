@@ -32,7 +32,7 @@ public class Gun_SwapMagazine_Action : CLA_Action
     #endregion
 
     #region Method: CLA_Action
-    public override void OnChange()
+    public override void OnEnter()
     {
         // Start Timer
         gun.gunData.swapMagazineTimer.Restart();
@@ -43,17 +43,17 @@ public class Gun_SwapMagazine_Action : CLA_Action
         // Animation
         animator.Play(gun.WeaponNameTrimed + "_SwapMagazine", 0, 0);
     }
-    public override void OnStart()
+    public override void OnLateEnter()
     {
         // Set Animation Speed
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun.gunData.swapMagazineTimer.endTime, gun.WeaponNameTrimed + "_SwapMagazine");
+        Anim_Logic.SetAnimSpeed(animator, gun.gunData.swapMagazineTimer.EndTime, gun.WeaponNameTrimed + "_SwapMagazine");
     }
-    public override void OnEnd()
+    public override void OnExit()
     {
         // Stop Timer
         gun.gunData.swapMagazineTimer.SetActive(false);
 
-        if (gun.gunData.swapMagazineTimer.IsTimerAtMax)
+        if (gun.gunData.swapMagazineTimer.IsEnded)
         {
             AnimStart_SwapMagazine = false;
             AnimEnd_SwapMagazine = true;

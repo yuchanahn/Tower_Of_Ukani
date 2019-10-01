@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public static class AnimSpeed_Logic
+public static class Anim_Logic
 {
     public static void SetAnimSpeed(Animator animator, float duration, string animName = null)
     {
-        if (animName != null && animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != animName)
+        if (animName != null && !animator.CheckCurAnimName(animName))
         {
             animator.speed = 1;
             return;
@@ -17,7 +17,7 @@ public static class AnimSpeed_Logic
     }
     public static void SetAnimSpeed(Animator animator, float duration, float maxDuration, string animName = null)
     {
-        if (animName != null && animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != animName)
+        if (animName != null && !animator.CheckCurAnimName(animName))
         {
             animator.speed = 1;
             return;
@@ -27,5 +27,14 @@ public static class AnimSpeed_Logic
             return;
 
         animator.speed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / (duration > maxDuration ? maxDuration : duration);
+    }
+
+    public static bool CheckCurAnimName(this Animator animator, string nameToCompare)
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName(nameToCompare);
+    }
+    public static float GetNormalizedTime(this Animator animator)
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
 }

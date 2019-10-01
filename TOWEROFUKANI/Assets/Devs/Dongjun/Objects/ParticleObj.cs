@@ -7,7 +7,7 @@ public class ParticleObj : PoolingObj
 
     private void Start()
     {
-        destroyTimer.Init(gameObject, OnTimerMax: DisableOnFinish);
+        destroyTimer.Init(gameObject, OnEnd: DisableOnFinish);
     }
     public override void ResetOnActive()
     {

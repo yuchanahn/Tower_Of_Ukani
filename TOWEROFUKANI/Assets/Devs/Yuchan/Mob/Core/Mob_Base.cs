@@ -100,7 +100,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
         Gravity_Logic.ApplyGravity(m_rb, m_bGrounded ? new GravityData(false, 0, 0) : !m_bJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
 
-        AnimSpeed_Logic.SetAnimSpeed(m_ani, m_Ani[m_CurAniST].Item2);
+        Anim_Logic.SetAnimSpeed(m_ani, m_Ani[m_CurAniST].Item2);
         if (m_bAniStart) { m_ani.Play(m_Ani[m_CurAniST].Item1, 0, 0); m_bAniStart = false; }
         else m_ani.Play(m_Ani[m_CurAniST].Item1);
     }

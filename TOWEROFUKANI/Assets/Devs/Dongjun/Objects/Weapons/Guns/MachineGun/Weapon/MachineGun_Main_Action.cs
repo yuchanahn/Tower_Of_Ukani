@@ -28,9 +28,18 @@ public class MachineGun_Main_Action : CLA_Action
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
+    #region Var: Animation
+    const string ANIM_T_Shoot = "Shoot";
+    const string ANIM_S_Shoot = "MachineGun_Shoot";
+    #endregion
+
     #region Var: Components
     private Animator animator;
-    private MachineGun gun_Main;
+    private MachineGun gun;
+    #endregion
+
+    #region Var: Properties
+    public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
 
 
@@ -38,30 +47,33 @@ public class MachineGun_Main_Action : CLA_Action
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        gun_Main = GetComponent<MachineGun>();
+        gun = GetComponent<MachineGun>();
+
+        maxShootAnimTime = maxShootAnimTime <= 0 ? gun.gunData.shootTimer.EndTime : maxShootAnimTime;
     }
     #endregion
 
     #region Method: CLA_Action
-    public override void OnStart()
+    public override void OnLateEnter()
     {
-        if (gun_Main.gunData.loadedBullets == gun_Main.gunData.magazineSize)
+        if (gun.gunData.loadedBullets == gun.gunData.magazineSize)
             ammoBelt.localPosition = Vector3.zero;
     }
-    public override void OnEnd()
+    public override void OnExit()
     {
+        IsAnimEnded_Shoot = false;
         animator.speed = 1;
-        animator.ResetTrigger("Shoot");
+        animator.ResetTrigger(ANIM_T_Shoot);
     }
     public override void OnUpdate()
     {
-        if (!gun_Main.IsSelected)
+        if (!gun.IsSelected || gun.gunData.loadedBullets <= 0)
             return;
 
-        if (gun_Main.gunData.shootTimer.IsTimerAtMax && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
+        if (gun.gunData.shootTimer.IsEnded && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
         {
             // Restart Timer
-            gun_Main.gunData.shootTimer.Restart();
+            gun.gunData.shootTimer.Restart();
 
             // Spawn Bullet
             Transform bullet = bulletPrefab.Activate(shootPoint.position, transform.rotation).transform;
@@ -69,11 +81,11 @@ public class MachineGun_Main_Action : CLA_Action
             bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
 
             // Consume Bullet
-            gun_Main.gunData.loadedBullets -= 1;
+            gun.gunData.loadedBullets -= 1;
 
             // Update Ammo Belt Pos
             ammoBelt.localPosition 
-                = new Vector2(0, Mathf.Lerp(0, 0.0625f * ammoBeltAmmoCount, 1 - ((float)gun_Main.gunData.loadedBullets / gun_Main.gunData.magazineSize)));
+                = new Vector2(0, Mathf.Lerp(0, 0.0625f * ammoBeltAmmoCount, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
 
             // Empty Shell
             emptyShellPrefab.Activate(emptyShellSpawnPos.position, transform.rotation);
@@ -83,7 +95,8 @@ public class MachineGun_Main_Action : CLA_Action
                 = bullet.position;
 
             // Animation
-            animator.SetTrigger("Shoot");
+            IsAnimEnded_Shoot = false;
+            animator.SetTrigger(ANIM_T_Shoot);
 
             // Cam Shake
             CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
@@ -93,12 +106,18 @@ public class MachineGun_Main_Action : CLA_Action
     {
         // Lool At Mouse
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
 
-        if (gun_Main.IsSelected)
-        {
-            AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, gun_Main.WeaponNameTrimed + "_Shoot");
-        }
+        // Set Animation Speed
+        if (gun.IsSelected)
+            Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime, ANIM_S_Shoot);
+    }
+    #endregion
+
+    #region Method: Anim Event
+    private void OnAnimEnd_Shoot()
+    {
+        IsAnimEnded_Shoot = true;
     }
     #endregion
 }

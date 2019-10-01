@@ -63,7 +63,7 @@ public class Player_Movement_Action : CLA_Action,
     #endregion
 
     #region Method: CLA_Action
-    public override void OnEnd()
+    public override void OnExit()
     {
         // Reset Ground Data
         isGrounded = false;

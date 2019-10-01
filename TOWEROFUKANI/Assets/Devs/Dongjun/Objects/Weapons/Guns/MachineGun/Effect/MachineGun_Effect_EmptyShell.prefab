@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sleepTimer:
-    StartWithMax: 0
-    curTime: 0
-    endTime: 4
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime: 5
   forceMin: 5
   forceMax: 10
