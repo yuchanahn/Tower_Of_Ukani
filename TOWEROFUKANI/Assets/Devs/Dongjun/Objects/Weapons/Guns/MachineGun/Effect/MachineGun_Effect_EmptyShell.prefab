@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 914418990911552359}
   - component: {fileID: 914418990911552352}
   - component: {fileID: 914418990911552357}
-  - component: {fileID: 914418990911552358}
+  - component: {fileID: 8393381107520443826}
   - component: {fileID: -2768639589848062273}
   m_Layer: 14
   m_Name: MachineGun_Effect_EmptyShell
@@ -104,8 +104,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &914418990911552358
-BoxCollider2D:
+--- !u!70 &8393381107520443826
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,18 +118,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.1875, y: 0.0625}
-    newSize: {x: 0.1875, y: 0.0625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 0.1875, y: 0.0625}
-  m_EdgeRadius: 0
+  m_Direction: 1
 --- !u!114 &-2768639589848062273
 MonoBehaviour:
   m_ObjectHideFlags: 0
