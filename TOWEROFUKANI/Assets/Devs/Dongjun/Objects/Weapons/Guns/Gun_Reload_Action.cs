@@ -27,6 +27,7 @@ public class Gun_Reload_Action : CLA_Action
     {
         // Start Timer
         gun.gunData.reloadTimer.SetActive(true);
+        gun.gunData.reloadTimer.ToZero();
         gun.gunData.reloadTimer.Restart();
 
         // Animation

@@ -46,7 +46,6 @@ public class Shotgun_Main_Action : CLA_Action
     #region Method: CLA_Action
     public override void OnExit()
     {
-        IsAnimEnded_Shoot = false;
         animator.speed = 1;
         animator.ResetTrigger(ANIM_T_Shoot);
     }

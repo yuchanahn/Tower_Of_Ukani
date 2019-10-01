@@ -35,6 +35,8 @@ public class Gun_SwapMagazine_Action : CLA_Action
     public override void OnEnter()
     {
         // Start Timer
+        gun.gunData.swapMagazineTimer.SetActive(true);
+        gun.gunData.swapMagazineTimer.ToZero();
         gun.gunData.swapMagazineTimer.Restart();
 
         IsAnimStarted_SwapMagazine = true;

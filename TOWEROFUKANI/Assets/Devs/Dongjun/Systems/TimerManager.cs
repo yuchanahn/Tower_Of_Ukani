@@ -112,7 +112,7 @@ public class TimerData
     public void ToZero() => CurTime = 0;
 
     /// <summary>
-    /// 현재 타이머를 최대 시간으로 바꿔줍니다. (바로 OnTimerMax에 등록된 함수를 실행하고 싶을 때 쓰면 좋습니다.)
+    /// 현재 타이머를 최대 시간으로 바꿔줍니다. (바로 OnEnd에 등록된 함수를 실행하고 싶을 때 쓰면 좋습니다.)
     /// </summary>
     public void ToEnd() => CurTime = EndTime;
 }
