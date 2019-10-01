@@ -27,7 +27,6 @@ public struct MobMoveData
         Idle
     }
 
-    
     public int SprDir
     {
         get
@@ -39,7 +38,7 @@ public struct MobMoveData
             SprTr.eulerAngles = new Vector2(0, value == -1 ? 180 : 0);
         }
     }
-    public float Speed;
+
     public int Dir {
         get
         {
@@ -53,8 +52,37 @@ public struct MobMoveData
         }
     }
     public Transform SprTr;
-    public float JumpHeight;
+
+    public float Speed;
+
+
+    [Range(0,10)] public float CoolTime;
+    public float JumpAbleDist;
+    public float FallAbleDist;
+    public LayerMask FallAbleLayer;
+    public LayerMask JumpAbleLayer;
+
+
     public RandRange MoveT;
     public RandRange IdleT;
+
+    public float FallHeight;
     public eState State;
+}
+
+
+public class MobYMoveDetect_Logic
+{
+    public static bool UP(Vector2 pos, ref JumpData jdata, ref MobMoveData data)
+    {
+        var hit = Physics2D.RaycastAll(pos, new Vector2(data.Dir, jdata.height), data.JumpAbleDist, data.JumpAbleLayer);
+        //Debug.DrawRay(pos, new Vector2(data.Dir, jdata.height + data.JumpAbleDist), Color.red);
+        return hit.Length > 0;
+    }
+    public static bool Down(Vector2 pos, Vector2 size, ref MobMoveData data)
+    {
+        var hit = Physics2D.RaycastAll(pos - new Vector2(0, size.y * 0.5f), Vector2.down , data.FallAbleDist, data.FallAbleLayer);
+        Debug.DrawRay(pos - new Vector2(0, size.y * 0.5f), Vector2.down * new Vector2(0, data.FallAbleDist), Color.red);
+        return hit.Length > 0;
+    }
 }

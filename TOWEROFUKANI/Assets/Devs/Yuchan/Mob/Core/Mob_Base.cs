@@ -38,7 +38,6 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     [SerializeField] JumpData m_jumpData;
     [SerializeField] GravityData m_gravityData;
     [SerializeField] GroundDetectionData m_groundDetectionData;
-    [SerializeField] CliffDetectionData m_cliffData;
 
     #endregion
 
@@ -48,6 +47,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     #endregion
 
     #region Var:
+    Dictionary<eMobAniST, (string, float)> m_Ani = new Dictionary<eMobAniST, (string, float)>();
     GroundInfo mCurGroundInfo = new GroundInfo();
 
     protected bool m_bGrounded = false;
@@ -56,15 +56,16 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool m_bFallStart = false;
     protected bool m_bHurting = false;
     protected bool m_bAniStart = false;
-    protected int m_bPrevDir = 0;
+    protected bool m_bYMoveCoolTime = false;
+    protected bool m_bMoveAble = true;
 
-    Dictionary<eMobAniST, (string, float)> m_Ani = new Dictionary<eMobAniST, (string, float)>();
+    protected int m_bPrevDir = 0;
     #endregion
 
     #region Var: Properties
     float VelX =>
     m_bHurting || !m_bGrounded ? 0
-    : !CliffDetect_Logic.CanFall(m_cliffData,transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0 
+    : !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0 
     : m_MoveData.Speed * m_MoveData.Dir;
 
     float VelY => m_rb.velocity.y;
@@ -104,6 +105,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         if (m_bAniStart) { m_ani.Play(m_Ani[m_CurAniST].Item1, 0, 0); m_bAniStart = false; }
         else m_ani.Play(m_Ani[m_CurAniST].Item1);
     }
+    private void OnDestroy()
+    {
+        ATimer.Pop("JumpFall" + GetInstanceID());
+    }
     #endregion
 
     #region Method: Move
@@ -120,8 +125,15 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
     public bool MoveRandom()
     {
+        if(!m_bGrounded) return false;
+        m_MoveData.State = MobMoveData.eState.Move;
         ATimer.Tick(this);
-        m_CurAniST = eMobAniST.Walk;
+        if (!m_bYMoveCoolTime)
+        {
+            m_bYMoveCoolTime = ARandom.Get(70) ? true : ARandom.Get(50) ? Jump() : Fall();
+            m_bYMoveCoolTime = true;
+            ATimer.Set("JumpFall"+GetInstanceID(), m_MoveData.CoolTime, () => { m_bYMoveCoolTime = false; });
+        }
         return true;
     }
     public bool IdleRandom()
@@ -133,6 +145,22 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         }
         return true;
     }
+    public bool Falling() { if(!m_bJumping) m_CurAniST = eMobAniST.AirborneDown; return true; }
+    public bool Jump()
+    {
+        if (m_bJumpStart = MobYMoveDetect_Logic.UP(transform.position, ref m_jumpData, ref m_MoveData))
+            m_CurAniST = eMobAniST.AirborneUp;
+        
+        return m_bJumpStart;
+    }
+    public bool Fall()
+    {
+        if (m_bFallStart = MobYMoveDetect_Logic.Down(transform.position, m_groundDetectionData.Size, ref m_MoveData))
+            m_CurAniST = eMobAniST.AirborneDown;
+
+        return m_bFallStart;
+    }
+
     #endregion
 
     // TODO : 
@@ -162,7 +190,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public virtual void OnDead()
     {
         Destroy(gameObject);
-        //CorpseMgr.CreateDeadbody(transform, m_compseData);
+        CorpseMgr.CreateCorpseOrNull(transform, m_compseData);
     }
     #endregion
 
@@ -170,6 +198,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     virtual public void OnGroundEnter()
     {
         Jump_Logic.ResetJumpCount(ref m_jumpData);
+        m_CurAniST = eMobAniST.Idle;
     }
     virtual public void OnGroundStay()
     {

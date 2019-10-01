@@ -39,6 +39,7 @@ public class ATimer : MonoBehaviour
 
         mT[key] = (mT[key].Item1, mT[key].Item2+Time.deltaTime, mT[key].Item3);
     }
+
     void Update()
     {
         Queue<string> keys = new Queue<string>();

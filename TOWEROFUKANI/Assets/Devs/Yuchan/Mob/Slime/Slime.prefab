@@ -200,15 +200,24 @@ MonoBehaviour:
   - ST: 1
     t: 0.3
   m_MoveData:
-    Speed: 5
-    SprTr: {fileID: 5171003076785061115}
-    JumpHeight: 1
+    SprTr: {fileID: 7268275018201367325}
+    Speed: 1.5
+    CoolTime: 1
+    JumpAbleDist: 0.5
+    FallAbleDist: 1
+    FallAbleLayer:
+      serializedVersion: 2
+      m_Bits: 1024
+    JumpAbleLayer:
+      serializedVersion: 2
+      m_Bits: 1024
     MoveT:
       min: 1
       max: 2
     IdleT:
-      min: 1
-      max: 2
+      min: 0.5
+      max: 1
+    FallHeight: 2
     State: 0
   m_followData:
     followAble: 1
@@ -217,11 +226,12 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 0
   m_compseData:
-    mCntMin: 0
-    mCntMax: 0
+    mCntMin: 4
+    mCntMax: 5
     mFCntMin: 0
-    mFCntMax: 0
-    mCorpse: {fileID: 0}
+    mFCntMax: 4
+    mCorpse: {fileID: 3864375849378008672, guid: 3eb9ba50ec5f39141a7628c8196b7f4e,
+      type: 3}
   m_jumpData:
     count_Cur: 0
     count_Max: 1
@@ -246,9 +256,7 @@ MonoBehaviour:
     IW_Solid: {fileID: 658498686114480918}
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
-    OffsetAmount: 0
-  m_cliffData:
-    FallHeight: 10
+    OffsetAmount: 0.01
 --- !u!114 &2248344777037342470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +293,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45184536e1c4dff438300eb6ff5b4019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mHP: 1000
+  mHP: 1
 --- !u!1 &6529837628258330815
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class BlackBoard_MobBase : BlackBoard_Base
     public bool TA_RandMove()   => mob.MoveRandom();
     public bool TA_Attack()     => false;
     public bool TA_Idle()       => mob.IdleRandom();
+    public bool TA_Falling() => mob.Falling();
     public bool TA_Follow()     => false;
     public bool TA_Hurt()       => true;
 

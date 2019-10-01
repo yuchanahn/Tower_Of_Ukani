@@ -33,6 +33,8 @@ public class BT_Slime : BT_Base
                 .AddNode(new Task(Bb.TA_Idle))
                 .End()
             .End()
+            .AddNode(new Task(Bb.TA_Falling))
+            .End()
         .End();
 
         base.BT_Set();
