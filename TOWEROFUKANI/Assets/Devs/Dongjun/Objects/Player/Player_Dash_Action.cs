@@ -34,16 +34,19 @@ public class Player_Dash_Action : CLA_Action
     #endregion
 
     #region Method: CLA_Action
-    public override void OnChange()
+    public override void OnEnter()
     {
-        Animation();
         IsDasing = true;
+        dashTime_Cur = 0;
         rb2D.velocity = new Vector2(PlayerInputManager.Inst.Input_DashDir * (dashDist / dashTime), 0);
+
+        Animation();
     }
-    public override void OnEnd()
+    public override void OnExit()
     {
         PlayerInputManager.Inst.Input_DashDir = 0;
-        dashTime_Cur = 0;
+
+        IsDasing = false;
         rb2D.velocity = new Vector2(0, 0);
     }
     public override void OnFixedUpdate()

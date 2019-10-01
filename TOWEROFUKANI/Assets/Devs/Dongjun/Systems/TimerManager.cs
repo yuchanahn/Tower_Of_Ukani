@@ -2,56 +2,56 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [Serializable]
 public class TimerData
 {
-    #region Var: State
+    #region Var: States
     [SerializeField]
-    private bool StartWithMax = false;
+    private bool StartAsEnded = false;
     public bool IsActive { get; private set; } = true;
-    public bool IsTimerAtMax { get; private set; } = false;
+    public bool IsEnded { get; private set; } = false;
+    public bool IsZero => CurTime == 0;
     #endregion
 
     #region Var: Data
     [HideInInspector]
-    public float curTime = 0; // 타이머의 현재 시간.
-    public float endTime = 0; // 타이머릐 최대 시간.
+    public float CurTime = 0; // 타이머의 현재 시간.
+    public float EndTime = 0; // 타이머릐 최대 시간.
     #endregion
 
     #region Var: Action
-    private Action OnTimerTick;
-    private Action OnTimerMax;
+    private Action OnTick;
+    private Action OnEnd;
     #endregion
 
 
     /// <summary>
-    /// 타이머를 사용하려면 이 함수를 무조건 Start()에서 실행 시켜 주세요!!!
+    /// 자동 타이머를 사용하려면 이 함수를 무조건 Start()에서 실행 시켜 주세요!!!
     /// </summary>
     /// <param name="self">게임오브젝트(자기자신).</param>
     /// <param name="OnTimerTick">타이머가 틱 될때 마다(LateUpdate()에서) 실행되는 함수.</param>
     /// <param name="OnTimerMax">타이머가 최대 시간에 도달하면 실행되는 함수.</param>
-    public void Init(GameObject self, Action OnTimerTick = null, Action OnTimerMax = null)
+    public void Init(GameObject self, Action OnTick = null, Action OnEnd = null)
     {
         TimerManager.Inst.AddTimer(self, this);
 
-        this.OnTimerTick = OnTimerTick;
-        this.OnTimerMax = OnTimerMax;
+        this.OnTick = OnTick;
+        this.OnEnd = OnEnd;
 
-        if (StartWithMax)
-            SetMax();
+        if (StartAsEnded)
+            ToEnd();
     }
 
     /// <summary>
     /// 타이머 이벤트를 설정하는 함수.
     /// </summary>
-    /// <param name="OnTimerTick">타이머가 틱 될때 마다(LateUpdate()에서) 실행되는 함수.</param>
-    /// <param name="OnTimerMax">타이머가 최대 시간에 도달하면 실행되는 함수.</param>
-    public void SetOnTimerMethod(Action OnTimerTick = null, Action OnTimerMax = null)
+    /// <param name="OnTick">타이머가 틱 될때 마다(LateUpdate()에서) 실행되는 함수.</param>
+    /// <param name="OnEnd">타이머가 최대 시간에 도달하면 실행되는 함수.</param>
+    public void SetAction(Action OnTick = null, Action OnEnd = null)
     {
-        this.OnTimerTick = OnTimerTick;
-        this.OnTimerMax = OnTimerMax;
+        this.OnTick = OnTick;
+        this.OnEnd = OnEnd;
     }
 
     /// <summary>
@@ -62,13 +62,9 @@ public class TimerData
     public void UseAutoTick(GameObject self, bool use)
     {
         if (use)
-        {
             TimerManager.Inst.AddTimer(self, this);
-        }
         else
-        {
             TimerManager.Inst.RemoveTimer(self, this);
-        }
     }
 
     /// <summary>
@@ -86,38 +82,39 @@ public class TimerData
     /// </summary>
     public void Tick()
     {
-        if (!IsActive || IsTimerAtMax)
+        if (!IsActive || IsEnded)
             return;
 
-        curTime += Time.deltaTime;
-        OnTimerTick?.Invoke();
+        CurTime += Time.deltaTime;
+        OnTick?.Invoke();
 
-        if (curTime >= endTime)
+        if (CurTime >= EndTime)
         {
-            IsTimerAtMax = true;
-            OnTimerMax?.Invoke();
-            curTime = 0;
+            IsEnded = true;
+            OnEnd?.Invoke();
+            CurTime = 0;
         }
     }
 
     /// <summary>
-    /// 타이머가 최대 시간에 도달하면 자동으로 멈춤니다. 다시 시작하려면 이 함수를 실행 시켜주세요.
+    /// 실행하면 IsEnded를 false로 바꿔 줍니다.
+    /// 타이머는 최대 시간에 도달하면 더 이상 Tick()을 실행하지 않습니다.
+    /// 다시 시작하려면 이 함수를 실행 시켜주세요.
     /// </summary>
     public void Restart()
     {
-        IsTimerAtMax = false;
-        curTime = 0;
+        IsEnded = false;
     }
 
     /// <summary>
     /// 현재 타이머를 0으로 바꿔줍니다.
     /// </summary>
-    public void SetZero() => curTime = 0;
+    public void ToZero() => CurTime = 0;
 
     /// <summary>
-    /// 현재 타이머를 최대 시간으로 바꿔줍니다. (바로 OnTimerMax에 등록된 함수를 실행하고 싶을 때 쓰면 좋습니다.)
+    /// 현재 타이머를 최대 시간으로 바꿔줍니다. (바로 OnEnd에 등록된 함수를 실행하고 싶을 때 쓰면 좋습니다.)
     /// </summary>
-    public void SetMax() => curTime = endTime;
+    public void ToEnd() => CurTime = EndTime;
 }
 
 public class TimerManager : MonoBehaviour

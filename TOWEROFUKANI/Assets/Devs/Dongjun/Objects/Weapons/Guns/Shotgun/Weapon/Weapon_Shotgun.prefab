@@ -106,17 +106,17 @@ MonoBehaviour:
   spriteRoot: {fileID: 1077788971484917873}
   gunData:
     shootTimer:
-      StartWithMax: 1
-      curTime: 0
-      endTime: 0.2
+      StartAsEnded: 1
+      CurTime: 0
+      EndTime: 0.1
     reloadTimer:
-      StartWithMax: 0
-      curTime: 0
-      endTime: 0.5
+      StartAsEnded: 0
+      CurTime: 0
+      EndTime: 0.22
     swapMagazineTimer:
-      StartWithMax: 0
-      curTime: 0
-      endTime: 0.8
+      StartAsEnded: 0
+      CurTime: 0
+      EndTime: 1.2
     magazineSize: 2
     loadedBullets: 0
     isBulletLoaded: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   shootPoint: {fileID: 1077788971055575643}
   bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
-  maxShootAnimTime: 0.2
+  maxShootAnimTime: 0
   pelletCount: 4
   pelletAngle: 5
   muzzleFlashParent: {fileID: 1077788971055575643}

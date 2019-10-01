@@ -18,9 +18,18 @@ public class Shotgun_Main_Action : CLA_Action
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
+    #region Var: Animation
+    const string ANIM_T_Shoot = "Shoot";
+    const string ANIM_S_Shoot = "Shotgun_Shoot";
+    #endregion
+
     #region Var: Components
     private Animator animator;
-    private Shotgun gun_Main;
+    private Shotgun gun;
+    #endregion
+
+    #region Var: Properties
+    public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
 
 
@@ -28,25 +37,27 @@ public class Shotgun_Main_Action : CLA_Action
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        gun_Main = GetComponent<Shotgun>();
+        gun = GetComponent<Shotgun>();
+
+        maxShootAnimTime = maxShootAnimTime <= 0 ? gun.gunData.shootTimer.EndTime : maxShootAnimTime;
     }
     #endregion
 
     #region Method: CLA_Action
-    public override void OnEnd()
+    public override void OnExit()
     {
         animator.speed = 1;
-        animator.ResetTrigger("Shoot");
+        animator.ResetTrigger(ANIM_T_Shoot);
     }
     public override void OnUpdate()
     {
-        if (!gun_Main.IsSelected)
+        if (!gun.IsSelected || !gun.gunData.isBulletLoaded)
             return;
 
-        if (gun_Main.gunData.shootTimer.IsTimerAtMax && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
+        if (gun.gunData.shootTimer.IsEnded && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
         {
             // Restart Timer
-            gun_Main.gunData.shootTimer.Restart();
+            gun.gunData.shootTimer.Restart();
 
             // Spawn Bullets
             Vector3 eRot = transform.eulerAngles;
@@ -59,14 +70,14 @@ public class Shotgun_Main_Action : CLA_Action
             }
 
             // Consume Bullet
-            gun_Main.gunData.loadedBullets -= 1;
-            gun_Main.gunData.isBulletLoaded = false;
+            gun.gunData.loadedBullets -= 1;
+            gun.gunData.isBulletLoaded = false;
 
             // Muzzle Flash
             muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
 
             // Animation
-            animator.SetTrigger("Shoot");
+            animator.SetTrigger(ANIM_T_Shoot);
 
             // Cam Shake Effect
             CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
@@ -76,12 +87,18 @@ public class Shotgun_Main_Action : CLA_Action
     {
         // Lool At Mouse
         LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun_Main.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
 
-        if (gun_Main.IsSelected)
-        {
-            AnimSpeed_Logic.SetAnimSpeed(animator, gun_Main.gunData.shootTimer.endTime, maxShootAnimTime, "Shotgun_Shoot");
-        }
+        // Set Animation Speed
+        if (gun.IsSelected)
+            Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime, ANIM_S_Shoot);
+    }
+    #endregion
+
+    #region Method: Anim Event
+    private void OnAnimEnd_Shoot()
+    {
+        IsAnimEnded_Shoot = true;
     }
     #endregion
 }

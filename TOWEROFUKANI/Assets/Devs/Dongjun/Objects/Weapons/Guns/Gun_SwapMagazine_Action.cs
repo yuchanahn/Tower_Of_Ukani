@@ -4,27 +4,27 @@ public class Gun_SwapMagazine_Action : CLA_Action
 {
     #region Var: Inspector
     [Header("Ammo")]
-    [SerializeField] private bool reloadAll = false;
-    [SerializeField] private int reloadAmount;
+    [SerializeField] protected bool reloadAll = false;
+    [SerializeField] protected int reloadAmount;
 
     [Header("Effect")]
-    [SerializeField] private Transform magazineDropPos;
-    [SerializeField] private PoolingObj droppedMagazinePrefab;
+    [SerializeField] protected Transform magazineDropPos;
+    [SerializeField] protected PoolingObj droppedMagazinePrefab;
     #endregion
 
     #region Var: Properties
-    public bool AnimStart_SwapMagazine { get; private set; } = false;
-    public bool AnimEnd_SwapMagazine { get; private set; } = false;
+    public bool IsAnimStarted_SwapMagazine { get; private set; } = false;
+    public bool IsAnimEnded_SwapMagazine { get; private set; } = false;
     #endregion
 
     #region Var: Components
-    private Animator animator;
-    private Gun gun;
+    protected Animator animator;
+    protected Gun gun;
     #endregion
 
 
     #region Method: Unity
-    private void Awake()
+    protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
         gun = GetComponent<Gun>();
@@ -32,31 +32,33 @@ public class Gun_SwapMagazine_Action : CLA_Action
     #endregion
 
     #region Method: CLA_Action
-    public override void OnChange()
+    public override void OnEnter()
     {
         // Start Timer
+        gun.gunData.swapMagazineTimer.SetActive(true);
+        gun.gunData.swapMagazineTimer.ToZero();
         gun.gunData.swapMagazineTimer.Restart();
 
-        AnimStart_SwapMagazine = true;
-        AnimEnd_SwapMagazine = false;
+        IsAnimStarted_SwapMagazine = true;
+        IsAnimEnded_SwapMagazine = false;
 
         // Animation
         animator.Play(gun.WeaponNameTrimed + "_SwapMagazine", 0, 0);
     }
-    public override void OnStart()
+    public override void OnLateEnter()
     {
         // Set Animation Speed
-        AnimSpeed_Logic.SetAnimSpeed(animator, gun.gunData.swapMagazineTimer.endTime, gun.WeaponNameTrimed + "_SwapMagazine");
+        Anim_Logic.SetAnimSpeed(animator, gun.gunData.swapMagazineTimer.EndTime, gun.WeaponNameTrimed + "_SwapMagazine");
     }
-    public override void OnEnd()
+    public override void OnExit()
     {
         // Stop Timer
         gun.gunData.swapMagazineTimer.SetActive(false);
 
-        if (gun.gunData.swapMagazineTimer.IsTimerAtMax)
+        if (gun.gunData.swapMagazineTimer.IsEnded)
         {
-            AnimStart_SwapMagazine = false;
-            AnimEnd_SwapMagazine = true;
+            IsAnimStarted_SwapMagazine = false;
+            IsAnimEnded_SwapMagazine = true;
 
             // Load Bullets
             gun.gunData.loadedBullets = reloadAll ? gun.gunData.magazineSize : gun.gunData.loadedBullets + reloadAmount;
@@ -79,7 +81,7 @@ public class Gun_SwapMagazine_Action : CLA_Action
     #endregion
 
     #region Method: AnimEvent
-    private void DropMagazine()
+    protected virtual void DropMagazine()
     {
         ObjPoolingManager.Activate(droppedMagazinePrefab, magazineDropPos.position, transform.rotation);
     }

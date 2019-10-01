@@ -51,13 +51,13 @@ public class Pistol : Gun
 
         if (gunData.loadedBullets <= 0)
         {
-            if (gunData.shootTimer.IsTimerAtMax)
+            if (main_AC.IsAnimEnded_Shoot)
             { ChangeAction(swapMagazine_AC); return; }
 
-            if (swapMagazine_AC.AnimStart_SwapMagazine && !swapMagazine_AC.AnimEnd_SwapMagazine)
+            if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
             { ChangeAction(swapMagazine_AC); return; }
 
-            if (swapMagazine_AC.AnimEnd_SwapMagazine && !gunData.reloadTimer.IsTimerAtMax)
+            if (swapMagazine_AC.IsAnimEnded_SwapMagazine && !gunData.reloadTimer.IsEnded)
             { ChangeAction(reload_AC); return; }
         }
 
@@ -68,14 +68,14 @@ public class Pistol : Gun
     {
         if (CL_Gun()) return;
 
-        if (gunData.reloadTimer.IsTimerAtMax)
+        if (gunData.reloadTimer.IsEnded)
         { ChangeAction(main_AC); return; }
     }
     private void CL_SwapMagazine_AC()
     {
         if (CL_Gun()) return;
 
-        if (gunData.swapMagazineTimer.IsTimerAtMax)
+        if (gunData.swapMagazineTimer.IsEnded)
         { ChangeAction(reload_AC); return; }
     }
     #endregion
