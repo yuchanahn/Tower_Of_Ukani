@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 3512479290777371978}
   - component: {fileID: 4770636179610790158}
   - component: {fileID: 1243003119494043728}
-  - component: {fileID: 4190955281818869365}
+  - component: {fileID: 5483000496705353710}
   m_Layer: 0
   m_Name: Weapon_MachineGun
   m_TagString: Untagged
@@ -251,11 +251,11 @@ MonoBehaviour:
   muzzleFlashParent: {fileID: 4450316996750440473}
   muzzleFlashPrefab: {fileID: 183118761886031892, guid: 8fb702bfb2eda0847ab717287666cacb,
     type: 3}
+  ammoBelt: {fileID: 0}
+  ammoBeltAmmoCount: 0
   emptyShellSpawnPos: {fileID: 211503556863373062}
   emptyShellPrefab: {fileID: -2768639589848062273, guid: 60c7580ed03cb5b468ac12a59cce3813,
     type: 3}
-  ammoBelt: {fileID: 1315789236824654805}
-  ammoBeltAmmoCount: 7
   camShakeData_Shoot:
     angle: 0
     strength: 0.1
@@ -265,7 +265,7 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
---- !u!114 &4190955281818869365
+--- !u!114 &5483000496705353710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4450316997164171681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4086de91c7659fe43b01fde20be2d958, type: 3}
+  m_Script: {fileID: 11500000, guid: e70f38c9fb6da574692860c3f8364269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
@@ -282,6 +282,8 @@ MonoBehaviour:
   reloadAmount: 0
   magazineDropPos: {fileID: 0}
   droppedMagazinePrefab: {fileID: 0}
+  ammoBelt: {fileID: 1315789236824654805}
+  ammoBeltAmmoCount: 7
 --- !u!1 &4450316997529025075
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,13 +16,13 @@ public class MachineGun_Main_Action : CLA_Action
     [SerializeField] private Transform muzzleFlashParent;
     [SerializeField] private PoolingObj muzzleFlashPrefab;
 
-    [Header("Empty Shell")]
-    [SerializeField] private Transform emptyShellSpawnPos;
-    [SerializeField] private PoolingObj emptyShellPrefab;
-
     [Header("Ammo Belt")]
     [SerializeField] private Transform ammoBelt;
     [SerializeField] private float ammoBeltAmmoCount;
+
+    [Header("Empty Shell")]
+    [SerializeField] private Transform emptyShellSpawnPos;
+    [SerializeField] private PoolingObj emptyShellPrefab;
 
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
@@ -58,6 +58,9 @@ public class MachineGun_Main_Action : CLA_Action
     {
         if (gun.gunData.loadedBullets == gun.gunData.magazineSize)
             ammoBelt.localPosition = Vector3.zero;
+        else
+            ammoBelt.localPosition
+                = new Vector2(0, Mathf.Lerp(0, 0.0625f * ammoBeltAmmoCount, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
     }
     public override void OnExit()
     {

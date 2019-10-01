@@ -50,7 +50,7 @@ public class MachineGun : Gun
             if (main_AC.IsAnimEnded_Shoot)
             { ChangeAction(swapMagazine_AC); return; }
 
-            if (swapMagazine_AC.AnimStart_SwapMagazine && !swapMagazine_AC.AnimEnd_SwapMagazine)
+            if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
             { ChangeAction(swapMagazine_AC); return; }
         }
 

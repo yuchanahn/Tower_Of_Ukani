@@ -2046,6 +2046,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!4 &916280571 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6848761230418689739, guid: de8e575bfc7541a4cb26f729cf5133df,
+    type: 3}
+  m_PrefabInstance: {fileID: 1334092403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &977963181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,6 +2566,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631875473196508494, guid: de8e575bfc7541a4cb26f729cf5133df,
+        type: 3}
+      propertyPath: ammoBelt
+      value: 
+      objectReference: {fileID: 916280571}
+    - target: {fileID: 6631875473196508494, guid: de8e575bfc7541a4cb26f729cf5133df,
+        type: 3}
+      propertyPath: ammoBeltAmmoCount
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8e575bfc7541a4cb26f729cf5133df, type: 3}
