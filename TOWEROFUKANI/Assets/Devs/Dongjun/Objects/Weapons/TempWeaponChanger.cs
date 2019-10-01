@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TempWeaponChanger : MonoBehaviour
 {
+    [SerializeField] private Text ammoText;
     [SerializeField] private Weapon[] weaponSlot = new Weapon[3];
+
     private Weapon curWeapon;
 
     private void Awake()
@@ -42,5 +45,7 @@ public class TempWeaponChanger : MonoBehaviour
             curWeapon.SelectWeapon(true);
             return;
         }
+
+        ammoText.text = $"{(curWeapon as Gun).gunData.loadedBullets} / {(curWeapon as Gun).gunData.magazineSize}";
     }
 }
