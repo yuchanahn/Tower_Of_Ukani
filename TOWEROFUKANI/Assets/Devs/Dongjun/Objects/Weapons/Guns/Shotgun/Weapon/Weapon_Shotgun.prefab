@@ -108,7 +108,7 @@ MonoBehaviour:
     shootTimer:
       StartAsEnded: 1
       CurTime: 0
-      EndTime: 0.1
+      EndTime: 0.15
     reloadTimer:
       StartAsEnded: 0
       CurTime: 0

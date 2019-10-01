@@ -77,6 +77,7 @@ public class Shotgun_Main_Action : CLA_Action
             muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
 
             // Animation
+            IsAnimEnded_Shoot = false;
             animator.SetTrigger(ANIM_T_Shoot);
 
             // Cam Shake Effect
