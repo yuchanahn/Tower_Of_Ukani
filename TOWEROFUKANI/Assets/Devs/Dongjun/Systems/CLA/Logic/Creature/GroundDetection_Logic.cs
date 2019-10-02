@@ -66,6 +66,8 @@ public static class GroundDetection_Logic
         }
 
         if (!canDetect) return;
+
+        detectionData.ScaledSize = detectionData.Size * tf.localScale;
         #endregion
 
         #region Box Cast

@@ -84,9 +84,6 @@ public class Player_Movement_Action : CLA_Action,
     }
     public override void OnFixedUpdate()
     {
-        // Update Scaled Size
-        groundDetectionData.ScaledSize = oneWayCollider.size * transform.localScale;
-
         // Detect Ground
         GroundDetection_Logic.DetectGround(!isJumping, rb2D, transform, groundDetectionData, ref isGrounded, ref curGroundInfo);
         GroundDetection_Logic.ExecuteOnGroundMethod(this, isGrounded, ref groundDetectionData);
