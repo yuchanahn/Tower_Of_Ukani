@@ -71,7 +71,9 @@ public static class GroundDetection_Logic
         #region Box Cast
         Vector2 castPos = new Vector2(tf.position.x, tf.position.y + detectionData.ScaledSize.y);
         float offset = detectionData.OutterSnapDist + detectionData.OffsetAmount;
-        float castDist = detectionData.ScaledSize.y + offset;
+
+        float deltaYDist = -rb2D.velocity.y * Time.fixedDeltaTime;
+        float castDist = detectionData.ScaledSize.y + (deltaYDist > offset ? deltaYDist : offset);
 
         RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, detectionData.ScaledSize, 0f, detectDir, castDist, detectionData.GroundLayers);
         if (hits == null) return;
