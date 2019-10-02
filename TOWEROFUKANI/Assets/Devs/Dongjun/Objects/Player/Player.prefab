@@ -396,7 +396,7 @@ MonoBehaviour:
       m_Bits: 1024
     IW_Solid: {fileID: 7371128403274205566}
     InnerSnapDist: 0.2
-    OutterSnapDist: 0.2
+    OutterSnapDist: 0.05
     OffsetAmount: 0
   gravityData:
     useGravity: 1

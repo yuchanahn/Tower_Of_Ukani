@@ -75,7 +75,7 @@ public static class GroundDetection_Logic
         #endregion
 
         #region Box Cast
-        Vector2 castPos = new Vector2(tf.position.x, tf.position.y + detectionData.Size.y);
+        Vector2 castPos = new Vector2(tf.position.x, tf.position.y + (detectionData.Size.y / 2));
         float offset = detectionData.OutterSnapDist + detectionData.OffsetAmount;
         float castDist = detectionData.Size.y + (-rb2D.velocity.y * Time.fixedDeltaTime > offset ? -rb2D.velocity.y * Time.fixedDeltaTime : offset);
 

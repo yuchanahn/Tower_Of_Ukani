@@ -247,7 +247,7 @@ MonoBehaviour:
     type: 3}
   maxShootAnimTime: 0
   acry_YPosOffset: 0.2
-  acry_ZRotOffset: 5
+  acry_ZRotOffset: 8
   muzzleFlashParent: {fileID: 4450316996750440473}
   muzzleFlashPrefab: {fileID: 183118761886031892, guid: 8fb702bfb2eda0847ab717287666cacb,
     type: 3}
