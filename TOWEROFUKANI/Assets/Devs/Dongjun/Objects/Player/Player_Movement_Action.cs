@@ -59,6 +59,8 @@ public class Player_Movement_Action : CLA_Action,
     {
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+
+        groundDetectionData.Size = oneWayCollider.size;
     }
     #endregion
 
@@ -75,11 +77,6 @@ public class Player_Movement_Action : CLA_Action,
         // Reset Velocity
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
     }
-    public override void OnUpdate()
-    {
-        // Update Ground Detection Size
-        groundDetectionData.Size = oneWayCollider.size * transform.localScale;
-    }
     public override void OnLateUpdate()
     {
         // Look At Mouse
@@ -87,6 +84,9 @@ public class Player_Movement_Action : CLA_Action,
     }
     public override void OnFixedUpdate()
     {
+        // Update Scaled Size
+        groundDetectionData.ScaledSize = oneWayCollider.size * transform.localScale;
+
         // Detect Ground
         GroundDetection_Logic.DetectGround(!isJumping, rb2D, transform, groundDetectionData, ref isGrounded, ref curGroundInfo);
         GroundDetection_Logic.ExecuteOnGroundMethod(this, isGrounded, ref groundDetectionData);

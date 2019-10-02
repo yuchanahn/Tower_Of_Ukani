@@ -6,7 +6,9 @@ using UnityEngine;
 public struct GroundDetectionData
 {
     [HideInInspector] public Vector2 Size;
+    [HideInInspector] public Vector2 ScaledSize;
     [HideInInspector] public List<Collider2D> IgnoreGrounds;
+
     [HideInInspector] public bool OnGroundEnter_Executed;
     [HideInInspector] public bool OnGroundExit_Executed;
 
@@ -43,6 +45,8 @@ public interface ICanDetectGround
 
 public static class GroundDetection_Logic
 {
+    public static Vector2 detectDir = Vector2.down;
+
     public static void DetectGround(
         bool canDetect,
         Rigidbody2D rb2D,
@@ -55,39 +59,29 @@ public static class GroundDetection_Logic
         groundInfo.Reset();
         isGrounded = false;
 
-        if (!canDetect)
+        if (detectionData.IW_Solid != null)
         {
-            if (detectionData.IW_Solid != null)
-            {
-                detectionData.IW_Solid.size = new Vector2(detectionData.Size.x, detectionData.Size.y);
-                detectionData.IW_Solid.offset = new Vector2(0, 0);
-            }
-            return;
+            detectionData.IW_Solid.size = !canDetect ? detectionData.Size : new Vector2(detectionData.Size.x, detectionData.Size.y - (detectionData.InnerSnapDist / tf.localScale.y));
+            detectionData.IW_Solid.offset = !canDetect ? new Vector2(0, 0) : new Vector2(0, (detectionData.InnerSnapDist / tf.localScale.y) * 0.5f);
         }
-        else
-        {
-            if (detectionData.IW_Solid != null)
-            {
-                detectionData.IW_Solid.size = new Vector2(detectionData.Size.x, detectionData.Size.y - detectionData.InnerSnapDist);
-                detectionData.IW_Solid.offset = new Vector2(0, detectionData.InnerSnapDist * 0.5f);
-            }
-        }
+
+        if (!canDetect) return;
         #endregion
 
         #region Box Cast
-        Vector2 castPos = new Vector2(tf.position.x, tf.position.y + (detectionData.Size.y / 2));
+        Vector2 castPos = new Vector2(tf.position.x, tf.position.y + detectionData.ScaledSize.y);
         float offset = detectionData.OutterSnapDist + detectionData.OffsetAmount;
-        float castDist = detectionData.Size.y + (-rb2D.velocity.y * Time.fixedDeltaTime > offset ? -rb2D.velocity.y * Time.fixedDeltaTime : offset);
+        float castDist = detectionData.ScaledSize.y + offset;
 
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, detectionData.Size, 0f, Vector2.down, castDist, detectionData.GroundLayers);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, detectionData.ScaledSize, 0f, detectDir, castDist, detectionData.GroundLayers);
         if (hits == null) return;
         #endregion
 
         #region Get Highest Hit Point
         for (int i = 0; i < hits.Length; i++)
         {
-            if (detectionData.IgnoreGrounds.Contains(hits[i].collider) || 
-                hits[i].point.y > tf.position.y - (detectionData.Size.y * 0.5f) + detectionData.InnerSnapDist)
+            if (detectionData.IgnoreGrounds.Contains(hits[i].collider) ||
+                hits[i].point.y > tf.position.y - (detectionData.ScaledSize.y * 0.5f) + detectionData.InnerSnapDist)
                 continue;
 
             if (groundInfo.Col == null || groundInfo.HitPointY < hits[i].point.y)
@@ -107,18 +101,17 @@ public static class GroundDetection_Logic
         if (rb2D.velocity.y <= 0)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
-            tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (detectionData.Size.y * 0.5f) + detectionData.OffsetAmount);
+            tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (detectionData.ScaledSize.y * 0.5f) + detectionData.OffsetAmount);
         }
 
         Rigidbody2D groundRB = groundInfo.GO.GetComponent<Rigidbody2D>();
-        if (groundRB)
-            rb2D.velocity = new Vector2(rb2D.velocity.x, groundRB.velocity.y);
+        if (groundRB) rb2D.velocity = new Vector2(rb2D.velocity.x, groundRB.velocity.y);
         #endregion
     }
 
     public static void ExecuteOnGroundMethod(
-        ICanDetectGround canDetectGround, 
-        bool isGrounded, 
+        ICanDetectGround canDetectGround,
+        bool isGrounded,
         ref GroundDetectionData data)
     {
         if (isGrounded)
