@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MachineGun_Main_Action : CLA_Action
+public class MachineGun_Main_Action : GunAction_Base<MachineGun>
 {
     #region Var: Inspector
     [Header("Shoot")]
@@ -16,10 +16,6 @@ public class MachineGun_Main_Action : CLA_Action
     [SerializeField] private Transform muzzleFlashParent;
     [SerializeField] private PoolingObj muzzleFlashPrefab;
 
-    [Header("Ammo Belt")]
-    [SerializeField] private Transform ammoBelt;
-    [SerializeField] private float ammoBeltAmmoCount;
-
     [Header("Empty Shell")]
     [SerializeField] private Transform emptyShellSpawnPos;
     [SerializeField] private PoolingObj emptyShellPrefab;
@@ -33,86 +29,97 @@ public class MachineGun_Main_Action : CLA_Action
     const string ANIM_S_Shoot = "MachineGun_Shoot";
     #endregion
 
-    #region Var: Components
-    private Animator animator;
-    private MachineGun gun;
-    #endregion
-
     #region Var: Properties
     public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
 
 
-    #region Method: Unity
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-        gun = GetComponent<MachineGun>();
-
-        maxShootAnimTime = maxShootAnimTime <= 0 ? gun.gunData.shootTimer.EndTime : maxShootAnimTime;
-    }
-    #endregion
-
     #region Method: CLA_Action
     public override void OnLateEnter()
     {
-        if (gun.gunData.loadedBullets == gun.gunData.magazineSize)
-            ammoBelt.localPosition = Vector3.zero;
-        else
-            ammoBelt.localPosition
-                = new Vector2(0, Mathf.Lerp(0, 0.0625f * ammoBeltAmmoCount, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
+        UpdateAmmoBeltPos();
     }
     public override void OnExit()
     {
-        animator.speed = 1;
-        animator.ResetTrigger(ANIM_T_Shoot);
+        AnimReset_Shoot();
     }
     public override void OnUpdate()
     {
         if (!gun.IsSelected || gun.gunData.loadedBullets <= 0)
             return;
 
+        // Temp!
+        // 공격 속도를 업데이트 할 때만 실행되도록 해야함.
+        maxShootAnimTime = maxShootAnimTime <= 0 ? gun.gunData.shootTimer.EndTime : maxShootAnimTime;
+
+        // Shoot
         if (gun.gunData.shootTimer.IsEnded && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
         {
-            // Restart Timer
             gun.gunData.shootTimer.Restart();
 
-            // Spawn Bullet
-            Transform bullet = bulletPrefab.Activate(shootPoint.position, transform.rotation).transform;
-            bullet.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
-            bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
-
-            // Consume Bullet
-            gun.gunData.loadedBullets -= 1;
-
-            // Update Ammo Belt Pos
-            ammoBelt.localPosition 
-                = new Vector2(0, Mathf.Lerp(0, 0.0625f * ammoBeltAmmoCount, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
-
-            // Empty Shell
-            emptyShellPrefab.Activate(emptyShellSpawnPos.position, transform.rotation);
-
-            // Muzzle Flash
-            muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity).transform.position 
-                = bullet.position;
-
-            // Animation
-            IsAnimEnded_Shoot = false;
-            animator.SetTrigger(ANIM_T_Shoot);
-
-            // Cam Shake
-            CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
+            Shoot();
+            ShootEffects();
+            AnimPlay_Shoot();
         }
     }
     public override void OnLateUpdate()
     {
-        // Lool At Mouse
-        LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
+        if (!gun.IsSelected)
+            return;
 
-        // Set Animation Speed
-        if (gun.IsSelected)
-            Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime, ANIM_S_Shoot);
+        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
+        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime, ANIM_S_Shoot);
+    }
+    #endregion
+
+    #region Method: Shoot
+    private void Shoot()
+    {
+        // Spawn Bullet
+        Transform bullet = bulletPrefab.Activate(shootPoint.position, transform.rotation).transform;
+        bullet.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
+        bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
+
+        // Consume Bullet
+        gun.gunData.loadedBullets -= 1;
+    }
+    private void ShootEffects()
+    {
+        // Update Ammo Belt Pos
+        UpdateAmmoBeltPos();
+
+        // Empty Shell
+        emptyShellPrefab.Activate(emptyShellSpawnPos.position, transform.rotation);
+
+        // Muzzle Flash
+        muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
+
+        // Cam Shake
+        CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
+    }
+
+    // Animation
+    private void AnimPlay_Shoot()
+    {
+        IsAnimEnded_Shoot = false;
+        animator.SetTrigger(ANIM_T_Shoot);
+    }
+    private void AnimSetSpeed_Shoot()
+    {
+        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime, ANIM_S_Shoot);
+    }
+    private void AnimReset_Shoot()
+    {
+        IsAnimEnded_Shoot = false;
+        animator.ResetTrigger(ANIM_T_Shoot);
+    }
+    #endregion
+
+    #region Method: Ammo Belt
+    private void UpdateAmmoBeltPos()
+    {
+        gun.ammoBelt.localPosition = 
+            new Vector2(0, Mathf.Lerp(0, 0.0625f * gun.ammoBeltAmmoCount, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
     }
     #endregion
 

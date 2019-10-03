@@ -80,7 +80,7 @@ public class Player_Movement_Action : CLA_Action,
     public override void OnLateUpdate()
     {
         // Look At Mouse
-        LookAtMouse_Logic.FlipY(Global.Inst.MainCam, spriteRoot, transform);
+        spriteRoot.LookAtMouseY(Global.Inst.MainCam, transform);
     }
     public override void OnFixedUpdate()
     {

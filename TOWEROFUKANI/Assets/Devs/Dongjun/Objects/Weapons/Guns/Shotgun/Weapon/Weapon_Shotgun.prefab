@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 254864248874405640}
   - component: {fileID: 4565912263870322834}
   - component: {fileID: 3151152317891876062}
-  - component: {fileID: 3279843825506418640}
-  - component: {fileID: 8535310993619034738}
+  - component: {fileID: 106689858320826181}
+  - component: {fileID: 2776416182083292487}
   m_Layer: 0
   m_Name: Weapon_Shotgun
   m_TagString: Untagged
@@ -151,7 +151,7 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
---- !u!114 &3279843825506418640
+--- !u!114 &106689858320826181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,13 +160,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1077788971187178467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea1b02515cb99d94489c0bf2cc341155, type: 3}
+  m_Script: {fileID: 11500000, guid: dad004a6c9378b646b4672c9ab6708b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
   reloadAll: 0
   reloadAmount: 0
---- !u!114 &8535310993619034738
+--- !u!114 &2776416182083292487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1077788971187178467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4086de91c7659fe43b01fde20be2d958, type: 3}
+  m_Script: {fileID: 11500000, guid: d144761646991784a8096cdc914ecd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1

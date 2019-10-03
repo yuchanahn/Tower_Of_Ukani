@@ -1,26 +1,32 @@
 ﻿using UnityEngine;
 
-public class LookAtMouse_Logic
+public static class LookAtMouse_Logic
 {
-    public static void FlipY(Camera mainCam, Transform tf_Target, Transform tf_Pivot)
+    public static void LookAtMouseY(this Transform target, Camera mainCam, Transform pivot)
     {
         Vector3 newRot = Vector3.zero;
-        newRot.y = mainCam.ScreenToWorldPoint(Input.mousePosition).x - tf_Pivot.position.x > 0 ? 0f : 180f;
+        newRot.y = mainCam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x > 0 ? 0f : 180f;
 
-        tf_Target.localRotation = Quaternion.Euler(newRot);
+        target.localRotation = Quaternion.Euler(newRot);
     }
-    public static void FlipX(Camera mainCam, Transform tf_Target, Transform tf_Pivot)
+    public static void LookAtMouseX(this Transform target, Camera mainCam, Transform pivot)
     {
         Vector3 newRot = Vector3.zero;
-        newRot.x = mainCam.ScreenToWorldPoint(Input.mousePosition).x - tf_Pivot.position.x > 0 ? 0f : 180f;
+        newRot.x = mainCam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x > 0 ? 0f : 180f;
 
-        tf_Target.localRotation = Quaternion.Euler(newRot);
+        target.localRotation = Quaternion.Euler(newRot);
     }
-    public static void Rotate(Camera mainCam, Transform tf_Target, Transform tf_Pivot)
+    public static void LookAtMouse(this Transform target, Camera mainCam, Transform pivot)
     {
-        tf_Target.right = (Vector2)(mainCam.ScreenToWorldPoint(Input.mousePosition) - tf_Pivot.position).normalized;
+        target.right = (Vector2)(mainCam.ScreenToWorldPoint(Input.mousePosition) - pivot.position).normalized;
 
-        if ((Vector2)tf_Target.right == Vector2.left)
-            tf_Target.localRotation = Quaternion.Euler(0f, 0f, 180f);
+        if ((Vector2)target.right == Vector2.left)
+            target.localRotation = Quaternion.Euler(0f, 0f, 180f);
+    }
+
+    public static void AimedWeapon(Camera mainCam, Transform spriteRoot, Transform pivot)
+    {
+        pivot.LookAtMouse(mainCam, pivot);
+        spriteRoot.LookAtMouseX(mainCam, pivot);
     }
 }

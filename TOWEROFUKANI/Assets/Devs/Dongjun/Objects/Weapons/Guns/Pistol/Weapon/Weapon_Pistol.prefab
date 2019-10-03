@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 2974935167531989671}
   - component: {fileID: 7304129226058279292}
   - component: {fileID: 485092021999584720}
-  - component: {fileID: 5268007107109623267}
-  - component: {fileID: 7382682907516775890}
+  - component: {fileID: 3987485339869694392}
+  - component: {fileID: 8938583646591096550}
   m_Layer: 0
   m_Name: Weapon_Pistol
   m_TagString: Untagged
@@ -201,7 +201,7 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
---- !u!114 &5268007107109623267
+--- !u!114 &3987485339869694392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,13 +210,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2609116014883290700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea1b02515cb99d94489c0bf2cc341155, type: 3}
+  m_Script: {fileID: 11500000, guid: dad004a6c9378b646b4672c9ab6708b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
   reloadAll: 1
   reloadAmount: 0
---- !u!114 &7382682907516775890
+--- !u!114 &8938583646591096550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2609116014883290700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4086de91c7659fe43b01fde20be2d958, type: 3}
+  m_Script: {fileID: 11500000, guid: d144761646991784a8096cdc914ecd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1

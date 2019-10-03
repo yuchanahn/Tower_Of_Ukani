@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Gun_SwapMagazine_Action : CLA_Action
+public class GunSwapMagazine_Base<GunMain> : GunAction_Base<GunMain> 
+    where GunMain : Gun
 {
     #region Var: Inspector
     [Header("Ammo")]
@@ -17,19 +18,6 @@ public class Gun_SwapMagazine_Action : CLA_Action
     public bool IsAnimEnded_SwapMagazine { get; private set; } = false;
     #endregion
 
-    #region Var: Components
-    protected Animator animator;
-    protected Gun gun;
-    #endregion
-
-
-    #region Method: Unity
-    protected virtual void Awake()
-    {
-        animator = GetComponent<Animator>();
-        gun = GetComponent<Gun>();
-    }
-    #endregion
 
     #region Method: CLA_Action
     public override void OnEnter()
@@ -47,7 +35,6 @@ public class Gun_SwapMagazine_Action : CLA_Action
     }
     public override void OnLateEnter()
     {
-        // Set Animation Speed
         Anim_Logic.SetAnimSpeed(animator, gun.gunData.swapMagazineTimer.EndTime, gun.WeaponNameTrimed + "_SwapMagazine");
     }
     public override void OnExit()
@@ -55,6 +42,7 @@ public class Gun_SwapMagazine_Action : CLA_Action
         // Stop Timer
         gun.gunData.swapMagazineTimer.SetActive(false);
 
+        // On Timer End
         if (gun.gunData.swapMagazineTimer.IsEnded)
         {
             IsAnimStarted_SwapMagazine = false;
@@ -68,15 +56,9 @@ public class Gun_SwapMagazine_Action : CLA_Action
         animator.speed = 1;
         animator.Play(gun.WeaponNameTrimed + "_Idle");
     }
-    public override void OnUpdate()
-    {
-        gun.gunData.swapMagazineTimer.SetActive(gun.IsSelected);
-    }
     public override void OnLateUpdate()
     {
-        // Rotate And Filp
-        LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
     }
     #endregion
 

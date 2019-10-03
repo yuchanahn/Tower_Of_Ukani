@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class Gun_Reload_Action : CLA_Action
+public class GunReload_Base<GunMain> : GunAction_Base<GunMain> 
+    where GunMain : Gun
 {
     #region Var: Inspector
     [Header("Ammo")]
@@ -8,19 +9,6 @@ public class Gun_Reload_Action : CLA_Action
     [SerializeField] protected int reloadAmount;
     #endregion
 
-    #region Var: Components
-    protected Animator animator;
-    protected Gun gun;
-    #endregion
-
-
-    #region Method: Unity
-    protected virtual void Awake()
-    {
-        animator = GetComponent<Animator>();
-        gun = GetComponent<Gun>();
-    }
-    #endregion
 
     #region Method: CLA_Action
     public override void OnEnter()
@@ -56,9 +44,11 @@ public class Gun_Reload_Action : CLA_Action
     }
     public override void OnLateUpdate()
     {
+        if (!gun.IsSelected)
+            return;
+
         // Look At Mouse
-        LookAtMouse_Logic.Rotate(Global.Inst.MainCam, transform, transform);
-        LookAtMouse_Logic.FlipX(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
+        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
     }
     #endregion
 }

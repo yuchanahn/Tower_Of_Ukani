@@ -2,9 +2,15 @@
 
 public class MachineGun : Gun
 {
+    #region Var: Inspector
+    [Header("Ammo Belt")]
+    [SerializeField] public Transform ammoBelt;
+    [SerializeField] public float ammoBeltAmmoCount;
+    #endregion
+
     #region Var: CLA_Action
     private MachineGun_Main_Action main_AC;
-    private Gun_SwapMagazine_Action swapMagazine_AC;
+    private MachineGun_SwapMagazine_Action swapMagazine_AC;
     #endregion
 
 
@@ -12,7 +18,7 @@ public class MachineGun : Gun
     protected override void Init()
     {
         main_AC = GetComponent<MachineGun_Main_Action>();
-        swapMagazine_AC = GetComponent<Gun_SwapMagazine_Action>();
+        swapMagazine_AC = GetComponent<MachineGun_SwapMagazine_Action>();
 
         ConditionLogics.Add(main_AC, CL_Main_AC);
         ConditionLogics.Add(swapMagazine_AC, CL_SwapMagazine_AC);
