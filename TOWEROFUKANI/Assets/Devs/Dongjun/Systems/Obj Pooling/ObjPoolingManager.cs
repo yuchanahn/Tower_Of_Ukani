@@ -124,7 +124,7 @@ public class ObjPoolingManager : MonoBehaviour
         obj.transform.SetParent(Inst.defaultPoolParent);
         obj.transform.position = pos;
         obj.transform.rotation = rot;
-        obj.ResetOnActive();
+        obj.ResetOnSpawn();
 
         return obj.gameObject;
     }
@@ -134,7 +134,7 @@ public class ObjPoolingManager : MonoBehaviour
         obj.transform.SetParent(parent);
         obj.transform.localPosition = localPos;
         obj.transform.localRotation = localRot;
-        obj.ResetOnActive();
+        obj.ResetOnSpawn();
 
         return obj.gameObject;
     }

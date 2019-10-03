@@ -17,7 +17,7 @@ public class Bullet : PoolingObj
 
     protected float curTravelDist = 0;
 
-    public override void ResetOnActive()
+    public override void ResetOnSpawn()
     {
         curTravelDist = 0;
     }
