@@ -22,13 +22,16 @@ public class Bullet : PoolingObj
         curTravelDist = 0;
     }
 
+    #region Method: Unity
     protected virtual void FixedUpdate()
     {
         Move();
         OnMaxDist();
         DetectObject();
     }
+    #endregion
 
+    #region Method: Projectile
     protected virtual void Move()
     {
         transform.Translate(moveSpeed * Time.fixedDeltaTime * transform.right, Space.World);
@@ -81,4 +84,12 @@ public class Bullet : PoolingObj
         hitParticle.right = -transform.right;
         hitParticle.position -= transform.right * particle_HitOffset;
     }
+    #endregion
+
+    #region Method: Public
+    public void SetDamage(int amount)
+    {
+        damage = amount;
+    }
+    #endregion
 }
