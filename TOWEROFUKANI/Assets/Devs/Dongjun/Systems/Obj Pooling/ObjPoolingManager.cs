@@ -69,7 +69,7 @@ public class ObjPoolingManager : MonoBehaviour
             }
         }
     }
-    private static PoolingObj ActivateObj(PoolingObj prefab, bool canCreateNew)
+    private static T ActivateObj<T>(T prefab, bool canCreateNew) where T : PoolingObj
     {
         if (!pool_Active.ContainsKey(prefab))
         {
@@ -78,7 +78,7 @@ public class ObjPoolingManager : MonoBehaviour
             pool_Sleeping[prefab].Enqueue(Instantiate(prefab));
         }
 
-        PoolingObj obj = pool_Sleeping[prefab].Count != 0 ? pool_Sleeping[prefab].Dequeue() : canCreateNew ? Instantiate(prefab) : pool_Active[prefab][0];
+        T obj = (pool_Sleeping[prefab].Count != 0 ? pool_Sleeping[prefab].Dequeue() : canCreateNew ? Instantiate(prefab) : pool_Active[prefab][0]) as T;
         obj.InitPoolingObj(prefab);
 
         pool_Active[prefab].Remove(obj);
@@ -118,25 +118,25 @@ public class ObjPoolingManager : MonoBehaviour
             obj.gameObject.SetActive(false);
         }
     }
-    public static GameObject Spawn(PoolingObj prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true)
+    public static T Spawn<T>(T prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true) where T : PoolingObj
     {
-        PoolingObj obj = ActivateObj(prefab, canCreateNew);
+        T obj = ActivateObj(prefab, canCreateNew);
         obj.transform.SetParent(Inst.defaultPoolParent);
         obj.transform.position = pos;
         obj.transform.rotation = rot;
         obj.ResetOnSpawn();
 
-        return obj.gameObject;
+        return obj;
     }
-    public static GameObject Spawn(PoolingObj prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true)
+    public static T Spawn<T>(T prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true) where T : PoolingObj
     {
-        PoolingObj obj = ActivateObj(prefab, canCreateNew);
+        T obj = ActivateObj(prefab, canCreateNew);
         obj.transform.SetParent(parent);
         obj.transform.localPosition = localPos;
         obj.transform.localRotation = localRot;
         obj.ResetOnSpawn();
 
-        return obj.gameObject;
+        return obj;
     }
     public static void Sleep(PoolingObj obj)
     {
@@ -153,11 +153,11 @@ public class ObjPoolingManager : MonoBehaviour
 
 public static class ObjPoolingExtension
 {
-    public static GameObject Spawn(this PoolingObj prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true)
+    public static T Spawn<T>(this T prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true) where T : PoolingObj
     {
         return ObjPoolingManager.Spawn(prefab, pos, rot, canCreateNew);
     }
-    public static GameObject Spawn(this PoolingObj prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true)
+    public static T Spawn<T>(this T prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true) where T : PoolingObj
     {
         return ObjPoolingManager.Spawn(prefab, parent, localPos, localRot, canCreateNew);
     }

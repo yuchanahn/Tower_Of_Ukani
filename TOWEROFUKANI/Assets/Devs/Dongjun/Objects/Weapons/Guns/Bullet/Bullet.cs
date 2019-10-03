@@ -77,8 +77,8 @@ public class Bullet : PoolingObj
     protected virtual void OnHit(Vector2 hitPos)
     {
         ObjPoolingManager.Sleep(this);
-        GameObject hitParticle = ObjPoolingManager.Spawn(particle_Hit, hitPos, Quaternion.identity);
-        hitParticle.transform.right = -transform.right;
-        hitParticle.transform.position -= transform.right * particle_HitOffset;
+        Transform hitParticle = ObjPoolingManager.Spawn(particle_Hit, hitPos, Quaternion.identity).transform;
+        hitParticle.right = -transform.right;
+        hitParticle.position -= transform.right * particle_HitOffset;
     }
 }
