@@ -105,7 +105,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     }
     private void AnimReset_Shoot()
     {
-        IsAnimEnded_Shoot = false;
+        animator.speed = 1;
         animator.ResetTrigger(ANIM_T_Shoot);
     }
     #endregion

@@ -38,7 +38,7 @@ public class Shotgun : Gun
     #endregion
 
     #region Method: Condition Logic
-    private bool CL_Gun()
+    private bool CL_Base()
     {
         if (!IsSelected)
         { ChangeAction(main_AC); return true; }
@@ -47,7 +47,7 @@ public class Shotgun : Gun
     }
     private void CL_Main_AC()
     {
-        if (CL_Gun()) return;
+        if (CL_Base()) return;
 
         if (!gunData.isBulletLoaded && main_AC.IsAnimEnded_Shoot && gunData.loadedBullets > 0)
         { ChangeAction(reload_AC);  return; }
@@ -66,14 +66,14 @@ public class Shotgun : Gun
     }
     private void CL_Reload_AC()
     {
-        if (CL_Gun()) return;
+        if (CL_Base()) return;
 
         if (gunData.reloadTimer.IsEnded)
         { ChangeAction(main_AC); return; }
     }
     private void CL_SwapMagazine_AC()
     {
-        if (CL_Gun()) return;
+        if (CL_Base()) return;
 
         if (gunData.swapMagazineTimer.IsEnded)
         { ChangeAction(reload_AC); return; }

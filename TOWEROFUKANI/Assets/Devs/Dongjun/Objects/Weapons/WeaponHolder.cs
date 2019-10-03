@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class TempWeaponChanger : MonoBehaviour
+public class WeaponHolder : MonoBehaviour
 {
     #region Var: Inspector
     [SerializeField] private Text nameText;

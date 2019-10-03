@@ -44,7 +44,7 @@ public class MachineGun : Gun
     #endregion
 
     #region Method: Condition Logic
-    private bool CL_Gun()
+    private bool CL_Base()
     {
         if (!IsSelected)
         { ChangeAction(main_AC); return true; }
@@ -53,18 +53,18 @@ public class MachineGun : Gun
     }
     private void CL_Main_AC()
     {
-        if (CL_Gun()) return;
+        if (CL_Base()) return;
 
         if (gunData.loadedBullets <= 0)
         {
+            if (swapMagazine_AC.IsAnimEnded_SwapMagazine && !gunData.reloadTimer.IsEnded)
+            { ChangeAction(reload_AC); return; }
+
             if (main_AC.IsAnimEnded_Shoot)
             { ChangeAction(swapMagazine_AC); return; }
 
             if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
             { ChangeAction(swapMagazine_AC); return; }
-
-            if (swapMagazine_AC.IsAnimEnded_SwapMagazine && !gunData.reloadTimer.IsEnded)
-            { ChangeAction(reload_AC); return; }
         }
 
         if (gunData.loadedBullets < gunData.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
@@ -72,14 +72,14 @@ public class MachineGun : Gun
     }
     private void CL_Reload_AC()
     {
-        if (CL_Gun()) return;
+        if (CL_Base()) return;
 
         if (gunData.reloadTimer.IsEnded)
         { ChangeAction(main_AC); return; }
     }
     private void CL_SwapMagazine_AC()
     {
-        if (CL_Gun()) return;
+        if (CL_Base()) return;
 
         if (gunData.swapMagazineTimer.IsEnded)
         { ChangeAction(reload_AC); return; }
