@@ -14,6 +14,10 @@ public class MachineGun : Gun
     private MachineGun_SwapMagazine_Action swapMagazine_AC;
     #endregion
 
+    #region Var: Properties
+    public float AmmoBeltMaxY => 0.0625f * ammoBeltAmmoCount;
+    #endregion
+
 
     #region Method: Init CLA_Main
     protected override void Init()

@@ -114,7 +114,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     private void UpdateAmmoBeltPos()
     {
         gun.ammoBelt.localPosition = 
-            new Vector2(0, Mathf.Lerp(0, 0.0625f * gun.ammoBeltAmmoCount, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
+            new Vector2(0, Mathf.Lerp(0, gun.AmmoBeltMaxY, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
     }
     #endregion
 
