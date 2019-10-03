@@ -44,13 +44,13 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     }
     public override void OnUpdate()
     {
-        if (!gun.IsSelected || gun.gunData.loadedBullets <= 0)
+        if (!gun.IsSelected || gun.loadedBullets <= 0)
             return;
 
         // Shoot
-        if (gun.gunData.shootTimer.IsEnded && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
+        if (gun.shootTimer.IsEnded && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
         {
-            gun.gunData.shootTimer.Restart();
+            gun.shootTimer.Restart();
 
             Shoot();
             ShootEffects();
@@ -76,7 +76,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
         bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
 
         // Consume Bullet
-        gun.gunData.loadedBullets -= 1;
+        gun.loadedBullets -= 1;
     }
     private void ShootEffects()
     {
@@ -95,7 +95,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     private void UpdateAmmoBeltPos()
     {
         gun.ammoBelt.localPosition =
-            new Vector2(0, Mathf.Lerp(0, gun.AmmoBeltMaxY, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
+            new Vector2(0, Mathf.Lerp(0, gun.AmmoBeltMaxY, 1 - ((float)gun.loadedBullets / gun.magazineSize)));
     }
 
     // Animation
@@ -106,8 +106,8 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     }
     private void AnimSetSpeed_Shoot()
     {
-        float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : gun.gunData.shootTimer.EndTime;
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxDuration, ANIM_S_Shoot);
+        float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : gun.shootTimer.EndTime;
+        Anim_Logic.SetAnimSpeed(animator, gun.shootTimer.EndTime, maxDuration, ANIM_S_Shoot);
     }
     private void AnimReset_Shoot()
     {

@@ -1,17 +1,27 @@
-﻿public abstract class Gun : Weapon
+﻿using UnityEngine;
+
+public abstract class Gun : Weapon
 {
-    public GunData gunData;
+    [Header("Timer")]
+    public TimerData shootTimer;
+    public TimerData reloadTimer;
+    public TimerData swapMagazineTimer;
+
+    [Header("Ammo")]
+    public int magazineSize;
+    public int loadedBullets;
+    public bool isBulletLoaded;
 
     protected override void Start()
     {
         base.Start();
 
         // Init Timer
-        gunData.shootTimer.Init(gameObject);
-        gunData.reloadTimer.Init(gameObject);
-        gunData.swapMagazineTimer.Init(gameObject);
+        shootTimer.Init(gameObject);
+        reloadTimer.Init(gameObject);
+        swapMagazineTimer.Init(gameObject);
 
         // Init Ammo
-        gunData.loadedBullets = gunData.magazineSize;
+        loadedBullets = magazineSize;
     }
 }

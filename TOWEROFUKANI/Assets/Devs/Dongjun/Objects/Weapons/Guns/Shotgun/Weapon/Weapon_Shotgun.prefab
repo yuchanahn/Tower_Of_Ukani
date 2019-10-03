@@ -104,22 +104,21 @@ MonoBehaviour:
   weaponRange: 1
   pivotPointY: 0.162
   spriteRoot: {fileID: 1077788971484917873}
-  gunData:
-    shootTimer:
-      StartAsEnded: 1
-      CurTime: 0
-      EndTime: 0.15
-    reloadTimer:
-      StartAsEnded: 0
-      CurTime: 0
-      EndTime: 0.22
-    swapMagazineTimer:
-      StartAsEnded: 0
-      CurTime: 0
-      EndTime: 1.2
-    magazineSize: 2
-    loadedBullets: 0
-    isBulletLoaded: 1
+  shootTimer:
+    StartAsEnded: 1
+    CurTime: 0
+    EndTime: 0.1
+  reloadTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime: 0.22
+  swapMagazineTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime: 1.2
+  magazineSize: 2
+  loadedBullets: 0
+  isBulletLoaded: 1
 --- !u!114 &3151152317891876062
 MonoBehaviour:
   m_ObjectHideFlags: 0

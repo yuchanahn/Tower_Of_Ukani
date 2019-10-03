@@ -14,9 +14,9 @@ public class GunReload_Base<GunMain> : GunAction_Base<GunMain>
     public override void OnEnter()
     {
         // Start Timer
-        gun.gunData.reloadTimer.SetActive(true);
-        gun.gunData.reloadTimer.ToZero();
-        gun.gunData.reloadTimer.Restart();
+        gun.reloadTimer.SetActive(true);
+        gun.reloadTimer.ToZero();
+        gun.reloadTimer.Restart();
 
         // Animation
         animator.Play(gun.WeaponNameTrimed + "_Reload", 0, 0);
@@ -24,18 +24,18 @@ public class GunReload_Base<GunMain> : GunAction_Base<GunMain>
     public override void OnLateEnter()
     {
         // Set Animation Speed
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.reloadTimer.EndTime, gun.WeaponNameTrimed + "_Reload");
+        Anim_Logic.SetAnimSpeed(animator, gun.reloadTimer.EndTime, gun.WeaponNameTrimed + "_Reload");
     }
     public override void OnExit()
     {
         // Stop Timer
-        gun.gunData.reloadTimer.SetActive(false);
+        gun.reloadTimer.SetActive(false);
 
         // Load Bullets
-        if (gun.gunData.reloadTimer.IsEnded)
+        if (gun.reloadTimer.IsEnded)
         {
-            gun.gunData.loadedBullets = reloadAll ? gun.gunData.magazineSize : gun.gunData.loadedBullets + reloadAmount;
-            gun.gunData.isBulletLoaded = true;
+            gun.loadedBullets = reloadAll ? gun.magazineSize : gun.loadedBullets + reloadAmount;
+            gun.isBulletLoaded = true;
         }
 
         // Animation

@@ -9,7 +9,7 @@ public class Pistol : Gun
     #endregion
 
 
-    #region Method: Init CLA_Main
+    #region Method: Init
     protected override void Init()
     {
         main_AC = GetComponent<Pistol_Main_Action>();
@@ -28,9 +28,9 @@ public class Pistol : Gun
         if (CL_NotSelected())
             return;
 
-        if (gunData.loadedBullets <= 0)
+        if (loadedBullets <= 0)
         {
-            if (swapMagazine_AC.IsAnimEnded_SwapMagazine && !gunData.reloadTimer.IsEnded)
+            if (swapMagazine_AC.IsAnimEnded_SwapMagazine && !reloadTimer.IsEnded)
                 ChangeAction(reload_AC);
             else if (main_AC.IsAnimEnded_Shoot)
                 ChangeAction(swapMagazine_AC);
@@ -48,7 +48,7 @@ public class Pistol : Gun
         if (CL_NotSelected())
             return;
 
-        if (gunData.reloadTimer.IsEnded)
+        if (reloadTimer.IsEnded)
             ChangeAction(main_AC);
     }
     private void CL_SwapMagazine_AC()
@@ -56,7 +56,7 @@ public class Pistol : Gun
         if (CL_NotSelected())
             return;
 
-        if (gunData.swapMagazineTimer.IsEnded)
+        if (swapMagazineTimer.IsEnded)
             ChangeAction(reload_AC);
     }
     #endregion
