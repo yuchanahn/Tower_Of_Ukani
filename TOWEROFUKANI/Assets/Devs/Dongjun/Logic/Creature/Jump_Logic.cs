@@ -4,8 +4,8 @@
 public struct JumpData
 {
     [HideInInspector]
-    public int count_Cur;
-    public int count_Max;
+    public int curCount;
+    public int maxCount;
     public float height;
     public float time;
 
@@ -13,7 +13,7 @@ public struct JumpData
     public float apexY;
 
     public float jumpGravity => (2 * height) / (time * time);
-    public bool canJump => count_Cur < count_Max;
+    public bool canJump => curCount < maxCount;
 }
 
 public static class Jump_Logic
@@ -31,7 +31,7 @@ public static class Jump_Logic
             return;
 
         isJumping = true;
-        jumpData.count_Cur++;
+        jumpData.curCount++;
         jumpData.apexY = tf.position.y + jumpData.height;
 
         // Apply Jump Velocity
@@ -43,7 +43,7 @@ public static class Jump_Logic
             return;
 
         isJumping = true;
-        jumpData.count_Cur++;
+        jumpData.curCount++;
         jumpData.apexY = tf.position.y + jumpData.height;
 
         // Apply Jump Velocity
@@ -64,6 +64,6 @@ public static class Jump_Logic
     }
     public static void ResetJumpCount(ref JumpData jumpData)
     {
-        jumpData.count_Cur = 0;
+        jumpData.curCount = 0;
     }
 }

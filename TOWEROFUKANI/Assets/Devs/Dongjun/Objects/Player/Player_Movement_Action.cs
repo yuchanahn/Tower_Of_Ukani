@@ -142,10 +142,10 @@ public class Player_Movement_Action : CLA_Action,
             }
             else if (canPlayJumpAnim)
             {
-                animator.Play(jumpData.count_Cur < 2 ? "Player_Jump" : "Player_AirJump");
+                animator.Play(jumpData.curCount < 2 ? "Player_Jump" : "Player_AirJump");
 
                 if (PlayerInputManager.Inst.Input_Jump)
-                    animator.Play(jumpData.count_Cur < 2 ? "Player_Jump" : "Player_AirJump", 0, 0f);
+                    animator.Play(jumpData.curCount < 2 ? "Player_Jump" : "Player_AirJump", 0, 0f);
             }
             canPlayJumpAnim = jumpData.canJump;
         }

@@ -47,10 +47,6 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
         if (!gun.IsSelected || gun.gunData.loadedBullets <= 0)
             return;
 
-        // Temp!
-        // 공격 속도를 업데이트 할 때만 실행되도록 해야함.
-        maxShootAnimTime = maxShootAnimTime <= 0 ? gun.gunData.shootTimer.EndTime : maxShootAnimTime;
-
         // Shoot
         if (gun.gunData.shootTimer.IsEnded && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
         {
@@ -75,7 +71,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     private void Shoot()
     {
         // Spawn Bullet
-        Transform bullet = bulletPrefab.Activate(shootPoint.position, transform.rotation).transform;
+        Transform bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation).transform;
         bullet.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
         bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
 
@@ -88,10 +84,10 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
         UpdateAmmoBeltPos();
 
         // Empty Shell
-        emptyShellPrefab.Activate(emptyShellSpawnPos.position, transform.rotation);
+        emptyShellPrefab.Spawn(emptyShellSpawnPos.position, transform.rotation);
 
         // Muzzle Flash
-        muzzleFlashPrefab.Activate(shootPoint, new Vector2(0, 0), Quaternion.identity);
+        muzzleFlashPrefab.Spawn(shootPoint, new Vector2(0, 0), Quaternion.identity);
 
         // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
@@ -105,7 +101,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     }
     private void AnimSetSpeed_Shoot()
     {
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime, ANIM_S_Shoot);
+        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime > 0 ? maxShootAnimTime : gun.gunData.shootTimer.EndTime, ANIM_S_Shoot);
     }
     private void AnimReset_Shoot()
     {

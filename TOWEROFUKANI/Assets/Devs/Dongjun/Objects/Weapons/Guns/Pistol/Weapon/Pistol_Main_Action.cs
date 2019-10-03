@@ -35,10 +35,6 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
         if (!gun.IsSelected || gun.gunData.loadedBullets <= 0)
             return;
 
-        // Temp!
-        // 공격 속도를 업데이트 할 때만 실행되도록 해야함.
-        maxShootAnimTime = maxShootAnimTime <= 0 ? gun.gunData.shootTimer.EndTime : maxShootAnimTime;
-
         // Shoot
         if (gun.gunData.shootTimer.IsEnded && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
         {
@@ -63,7 +59,7 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     private void Shoot()
     {
         // Spawn Bullet
-        bulletPrefab.Activate(shootPoint.position, transform.rotation);
+        bulletPrefab.Spawn(shootPoint.position, transform.rotation);
 
         // Consume Bullet
         gun.gunData.loadedBullets -= 1;
@@ -71,7 +67,7 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     private void ShootEffects()
     {
         // Muzzle Flash
-        muzzleFlashPrefab.Activate(shootPoint, new Vector2(0, 0), Quaternion.identity);
+        muzzleFlashPrefab.Spawn(shootPoint, new Vector2(0, 0), Quaternion.identity);
 
         // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
@@ -85,7 +81,7 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     }
     private void AnimSetSpeed_Shoot()
     {
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime, ANIM_S_Shoot);
+        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime > 0 ? maxShootAnimTime : gun.gunData.shootTimer.EndTime, ANIM_S_Shoot);
     }
     private void AnimReset_Shoot()
     {

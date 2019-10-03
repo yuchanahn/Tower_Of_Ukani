@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 3512479290777371978}
   - component: {fileID: 4770636179610790158}
   - component: {fileID: 1243003119494043728}
+  - component: {fileID: 3376335330108281838}
   - component: {fileID: 5483000496705353710}
   m_Layer: 0
   m_Name: Weapon_MachineGun
@@ -221,11 +222,11 @@ MonoBehaviour:
     reloadTimer:
       StartAsEnded: 0
       CurTime: 0
-      EndTime: 0
+      EndTime: 0.5
     swapMagazineTimer:
       StartAsEnded: 0
       CurTime: 0
-      EndTime: 1.5
+      EndTime: 1
     magazineSize: 20
     loadedBullets: 0
     isBulletLoaded: 0
@@ -250,7 +251,6 @@ MonoBehaviour:
   maxShootAnimTime: 0
   acry_YPosOffset: 0.2
   acry_ZRotOffset: 8
-  muzzleFlashParent: {fileID: 4450316996750440473}
   muzzleFlashPrefab: {fileID: 183118761886031892, guid: 8fb702bfb2eda0847ab717287666cacb,
     type: 3}
   emptyShellSpawnPos: {fileID: 211503556863373062}
@@ -265,6 +265,21 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
+--- !u!114 &3376335330108281838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450316997164171681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dad004a6c9378b646b4672c9ab6708b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanExecuteOnStart: 1
+  reloadAll: 1
+  reloadAmount: 0
 --- !u!114 &5483000496705353710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,12 +293,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
-  reloadAll: 1
+  reloadAll: 0
   reloadAmount: 0
   magazineDropPos: {fileID: 0}
   droppedMagazinePrefab: {fileID: 0}
-  ammoBelt: {fileID: 1315789236824654805}
-  ammoBeltAmmoCount: 7
 --- !u!1 &4450316997529025075
 GameObject:
   m_ObjectHideFlags: 0

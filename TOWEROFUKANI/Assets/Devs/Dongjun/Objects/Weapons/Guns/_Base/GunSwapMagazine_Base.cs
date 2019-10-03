@@ -65,7 +65,7 @@ public class GunSwapMagazine_Base<GunMain> : GunAction_Base<GunMain>
     #region Method: AnimEvent
     protected virtual void DropMagazine()
     {
-        ObjPoolingManager.Activate(droppedMagazinePrefab, magazineDropPos.position, transform.rotation);
+        ObjPoolingManager.Spawn(droppedMagazinePrefab, magazineDropPos.position, transform.rotation);
     }
     #endregion
 }

@@ -93,7 +93,7 @@ public class ObjPoolingManager : MonoBehaviour
     #region Method: Public
     public static void SetUpObjPool(StartPoolData startPoolData)
     {
-        if (startPoolData.prefab == null || pool_Active.ContainsKey(startPoolData.prefab))
+        if (startPoolData.prefab == null)
             return;
 
         for (int count = 0; count < startPoolData.initCount; count++)
@@ -118,7 +118,7 @@ public class ObjPoolingManager : MonoBehaviour
             obj.gameObject.SetActive(false);
         }
     }
-    public static GameObject Activate(PoolingObj prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true)
+    public static GameObject Spawn(PoolingObj prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true)
     {
         PoolingObj obj = ActivateObj(prefab, canCreateNew);
         obj.transform.SetParent(Inst.defaultPoolParent);
@@ -128,7 +128,7 @@ public class ObjPoolingManager : MonoBehaviour
 
         return obj.gameObject;
     }
-    public static GameObject Activate(PoolingObj prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true)
+    public static GameObject Spawn(PoolingObj prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true)
     {
         PoolingObj obj = ActivateObj(prefab, canCreateNew);
         obj.transform.SetParent(parent);
@@ -153,13 +153,13 @@ public class ObjPoolingManager : MonoBehaviour
 
 public static class ObjPoolingExtension
 {
-    public static GameObject Activate(this PoolingObj prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true)
+    public static GameObject Spawn(this PoolingObj prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true)
     {
-        return ObjPoolingManager.Activate(prefab, pos, rot, canCreateNew);
+        return ObjPoolingManager.Spawn(prefab, pos, rot, canCreateNew);
     }
-    public static GameObject Activate(this PoolingObj prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true)
+    public static GameObject Spawn(this PoolingObj prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true)
     {
-        return ObjPoolingManager.Activate(prefab, parent, localPos, localRot, canCreateNew);
+        return ObjPoolingManager.Spawn(prefab, parent, localPos, localRot, canCreateNew);
     }
     public static void Sleep(this PoolingObj obj)
     {
