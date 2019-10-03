@@ -7,11 +7,12 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     [SerializeField] private Transform shootPoint;
     [SerializeField] private PoolingObj bulletPrefab;
     [SerializeField] private float maxShootAnimTime;
+
+    [Header("Pellets")]
     [SerializeField] private int pelletCount = 2;
     [SerializeField] private float pelletAngle = 10f;
 
     [Header("Muzzle Flash")]
-    [SerializeField] private Transform muzzleFlashParent;
     [SerializeField] private PoolingObj muzzleFlashPrefab;
 
     [Header("Camera Shake")]
@@ -82,7 +83,7 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     private void ShootEffects()
     {
         // Muzzle Flash
-        muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
+        muzzleFlashPrefab.Activate(shootPoint, new Vector2(0, 0), Quaternion.identity);
 
         // Cam Shake Effect
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);

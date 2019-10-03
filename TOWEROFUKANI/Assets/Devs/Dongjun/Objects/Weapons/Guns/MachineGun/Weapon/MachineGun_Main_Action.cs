@@ -13,7 +13,6 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     [SerializeField] private float acry_ZRotOffset;
 
     [Header("Muzzle Flash")]
-    [SerializeField] private Transform muzzleFlashParent;
     [SerializeField] private PoolingObj muzzleFlashPrefab;
 
     [Header("Empty Shell")]
@@ -92,7 +91,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
         emptyShellPrefab.Activate(emptyShellSpawnPos.position, transform.rotation);
 
         // Muzzle Flash
-        muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
+        muzzleFlashPrefab.Activate(shootPoint, new Vector2(0, 0), Quaternion.identity);
 
         // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);

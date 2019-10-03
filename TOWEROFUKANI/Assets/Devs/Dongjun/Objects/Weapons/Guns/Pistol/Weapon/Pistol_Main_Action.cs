@@ -9,7 +9,6 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     [SerializeField] private float maxShootAnimTime;
 
     [Header("Muzzle Flash")]
-    [SerializeField] private Transform muzzleFlashParent;
     [SerializeField] private PoolingObj muzzleFlashPrefab;
 
     [Header("Camera Shake")]
@@ -72,7 +71,7 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     private void ShootEffects()
     {
         // Muzzle Flash
-        muzzleFlashPrefab.Activate(muzzleFlashParent, new Vector2(0, 0), Quaternion.identity);
+        muzzleFlashPrefab.Activate(shootPoint, new Vector2(0, 0), Quaternion.identity);
 
         // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);

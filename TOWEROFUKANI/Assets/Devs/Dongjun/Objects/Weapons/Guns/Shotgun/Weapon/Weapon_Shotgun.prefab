@@ -139,12 +139,11 @@ MonoBehaviour:
   maxShootAnimTime: 0
   pelletCount: 4
   pelletAngle: 5
-  muzzleFlashParent: {fileID: 1077788971055575643}
   muzzleFlashPrefab: {fileID: 9204822279717750706, guid: 179a6208adf6eab45b4e01bea6d11926,
     type: 3}
   camShakeData_Shoot:
     angle: 0
-    strength: 0.5
+    strength: 0.35
     maxSpeed: 40
     minSpeed: 35
     duration: 0.05
