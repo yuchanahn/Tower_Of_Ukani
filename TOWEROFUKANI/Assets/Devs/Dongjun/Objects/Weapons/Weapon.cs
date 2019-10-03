@@ -43,6 +43,7 @@ public abstract class Weapon : CLA_Main
     #endregion
 
 
+    #region Method: Unity
     protected override void Awake()
     {
         base.Awake();
@@ -57,10 +58,13 @@ public abstract class Weapon : CLA_Main
 
         SpriteRoot.SetActive(IsSelected);
     }
+    #endregion
 
+    #region Method: Select Weapon
     public void SelectWeapon(bool select)
     {
         IsSelected = select;
         SpriteRoot.SetActive(select);
     }
+    #endregion
 }
