@@ -37,7 +37,7 @@ public class Pistol : Gun
             else if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
                 ChangeAction(swapMagazine_AC);
         }
-        else
+        else if (loadedBullets < magazineSize)
         {
             if (Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
                 ChangeAction(swapMagazine_AC);
