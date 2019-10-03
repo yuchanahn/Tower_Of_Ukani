@@ -81,7 +81,8 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     }
     private void AnimSetSpeed_Shoot()
     {
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime > 0 ? maxShootAnimTime : gun.gunData.shootTimer.EndTime, ANIM_S_Shoot);
+        float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : gun.gunData.shootTimer.EndTime;
+        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxDuration, ANIM_S_Shoot);
     }
     private void AnimReset_Shoot()
     {

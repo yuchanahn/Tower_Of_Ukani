@@ -22,61 +22,44 @@ public class Shotgun : Gun
     }
     #endregion
 
-    #region Method: Unity
-    protected override void Start()
-    {
-        base.Start();
-
-        // Init Timer
-        gunData.shootTimer.Init(gameObject);
-        gunData.reloadTimer.Init(gameObject);
-        gunData.swapMagazineTimer.Init(gameObject);
-
-        // Init Ammo
-        gunData.loadedBullets = gunData.magazineSize;
-    }
-    #endregion
-
     #region Method: Condition Logic
-    private bool CL_Base()
-    {
-        if (!IsSelected)
-        { ChangeAction(main_AC); return true; }
-
-        return false;
-    }
     private void CL_Main_AC()
     {
-        if (CL_Base()) return;
+        if (CL_NotSelected())
+            return;
 
         if (!gunData.isBulletLoaded && main_AC.IsAnimEnded_Shoot && gunData.loadedBullets > 0)
-        { ChangeAction(reload_AC);  return; }
-
-        if (gunData.loadedBullets <= 0)
+        {
+            ChangeAction(reload_AC);
+        }
+        else if (gunData.loadedBullets <= 0)
         {
             if (main_AC.IsAnimEnded_Shoot)
-            { ChangeAction(swapMagazine_AC); return; }
-
-            if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
-            { ChangeAction(swapMagazine_AC); return; }
+                ChangeAction(swapMagazine_AC);
+            else if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
+                ChangeAction(swapMagazine_AC);
         }
-
-        if (gunData.loadedBullets < gunData.magazineSize && Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
-        { ChangeAction(swapMagazine_AC); return; }
+        else
+        {
+            if (Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
+                ChangeAction(swapMagazine_AC);
+        }
     }
     private void CL_Reload_AC()
     {
-        if (CL_Base()) return;
+        if (CL_NotSelected())
+            return;
 
         if (gunData.reloadTimer.IsEnded)
-        { ChangeAction(main_AC); return; }
+            ChangeAction(main_AC);
     }
     private void CL_SwapMagazine_AC()
     {
-        if (CL_Base()) return;
+        if (CL_NotSelected())
+            return;
 
         if (gunData.swapMagazineTimer.IsEnded)
-        { ChangeAction(reload_AC); return; }
+            ChangeAction(reload_AC);
     }
     #endregion
 }

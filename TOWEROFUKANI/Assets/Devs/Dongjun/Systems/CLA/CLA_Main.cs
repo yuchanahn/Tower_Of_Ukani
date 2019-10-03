@@ -4,14 +4,21 @@ using UnityEngine;
 
 public abstract class CLA_Main : MonoBehaviour
 {
-    [SerializeField]
-    private CLA_Action defaultAction;
+    #region Var: Inspector
+    [SerializeField] private CLA_Action defaultAction;
+    #endregion
+
+    #region Var: Condition Logics
+    protected Dictionary<CLA_Action, Action> ConditionLogics = new Dictionary<CLA_Action, Action>();
+    #endregion
+
+    #region Var: Properties
     protected CLA_Action DefaultAction => defaultAction;
     protected CLA_Action CurrentAction { get; private set; }
+    #endregion
 
-    protected Dictionary<CLA_Action, Action> ConditionLogics = new Dictionary<CLA_Action, Action>();
 
-
+    #region Method: Unity
     protected virtual void Awake()
     {
         if (defaultAction == null)
@@ -39,14 +46,19 @@ public abstract class CLA_Main : MonoBehaviour
         }
 
         CurrentAction?.OnLateUpdate();
-        CheckCondition();
+        RunConditionLogic();
     }
     private void FixedUpdate()
     {
         CurrentAction?.OnFixedUpdate();
     }
+    #endregion
 
+    #region Method: Init
     protected abstract void Init();
+    #endregion
+
+    #region Method: Change Action
     protected void ChangeAction(CLA_Action action)
     {
         if (action == CurrentAction)
@@ -64,9 +76,10 @@ public abstract class CLA_Main : MonoBehaviour
         CurrentAction?.OnEnter();
         CurrentAction.CanExecuteOnStart = true;
     }
-    private void CheckCondition()
+    private void RunConditionLogic()
     {
         if (CurrentAction != null && ConditionLogics.ContainsKey(CurrentAction))
             ConditionLogics[CurrentAction]?.Invoke();
     }
+    #endregion
 }

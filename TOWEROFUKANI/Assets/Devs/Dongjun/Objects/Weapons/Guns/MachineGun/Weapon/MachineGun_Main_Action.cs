@@ -63,7 +63,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
             return;
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime, ANIM_S_Shoot);
+        AnimSetSpeed_Shoot();
     }
     #endregion
 
@@ -92,6 +92,11 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
         // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
     }
+    private void UpdateAmmoBeltPos()
+    {
+        gun.ammoBelt.localPosition =
+            new Vector2(0, Mathf.Lerp(0, gun.AmmoBeltMaxY, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
+    }
 
     // Animation
     private void AnimPlay_Shoot()
@@ -101,20 +106,13 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     }
     private void AnimSetSpeed_Shoot()
     {
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime > 0 ? maxShootAnimTime : gun.gunData.shootTimer.EndTime, ANIM_S_Shoot);
+        float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : gun.gunData.shootTimer.EndTime;
+        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxDuration, ANIM_S_Shoot);
     }
     private void AnimReset_Shoot()
     {
         animator.speed = 1;
         animator.ResetTrigger(ANIM_T_Shoot);
-    }
-    #endregion
-
-    #region Method: Ammo Belt
-    private void UpdateAmmoBeltPos()
-    {
-        gun.ammoBelt.localPosition = 
-            new Vector2(0, Mathf.Lerp(0, gun.AmmoBeltMaxY, 1 - ((float)gun.gunData.loadedBullets / gun.gunData.magazineSize)));
     }
     #endregion
 
