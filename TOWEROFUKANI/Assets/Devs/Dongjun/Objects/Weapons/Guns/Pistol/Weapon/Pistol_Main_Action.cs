@@ -5,7 +5,10 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     #region Var: Inspector
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
-    [SerializeField] private PoolingObj bulletPrefab;
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private BulletData bulletData;
+
+    [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
 
     [Header("Muzzle Flash")]
@@ -13,11 +16,6 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
 
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
-    #endregion
-
-    #region Var: Animation
-    const string ANIM_T_Shoot = "Shoot";
-    const string ANIM_S_Shoot = "Pistol_Shoot";
     #endregion
 
     #region Var: Properties
@@ -59,7 +57,8 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     private void Shoot()
     {
         // Spawn Bullet
-        bulletPrefab.Spawn(shootPoint.position, transform.rotation);
+        Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
+        bullet.SetData(bulletData);
 
         // Consume Bullet
         gun.loadedBullets -= 1;
@@ -77,17 +76,17 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     private void AnimPlay_Shoot()
     {
         IsAnimEnded_Shoot = false;
-        animator.SetTrigger(ANIM_T_Shoot);
+        animator.SetTrigger("Shoot");
     }
     private void AnimSetSpeed_Shoot()
     {
         float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : gun.shootTimer.EndTime;
-        Anim_Logic.SetAnimSpeed(animator, gun.shootTimer.EndTime, maxDuration, ANIM_S_Shoot);
+        Anim_Logic.SetAnimSpeed(animator, gun.shootTimer.EndTime, maxDuration, string.Concat(gun.WeaponNameTrimed, "_Shoot"));
     }
     private void AnimReset_Shoot()
     {
         animator.speed = 1;
-        animator.ResetTrigger(ANIM_T_Shoot);
+        animator.ResetTrigger("Shoot");
     }
     #endregion
 

@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 
-public class GunAction_Base<GunMain> : CLA_Action 
-    where GunMain : Gun
+public abstract class GunAction_Base<TGunMain> : CLA_Action 
+    where TGunMain : Gun
 { 
     protected Animator animator;
-    protected GunMain gun;
+    protected TGunMain gun;
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
-        gun = GetComponent<GunMain>();
+        gun = GetComponent<TGunMain>();
     }
 }

@@ -187,6 +187,10 @@ MonoBehaviour:
   shootPoint: {fileID: 2609116015003256820}
   bulletPrefab: {fileID: 3884733660367707162, guid: 669013e116ca93843a65a5f56b89838a,
     type: 3}
+  bulletData:
+    damage: 2
+    moveSpeed: 45
+    maxDist: 8
   maxShootAnimTime: 0
   muzzleFlashPrefab: {fileID: 3546313596656909244, guid: fc45d6df91e980e4d90c006610728338,
     type: 3}

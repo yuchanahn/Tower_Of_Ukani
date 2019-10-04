@@ -5,7 +5,10 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     #region Var: Inspector
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
-    [SerializeField] private PoolingObj bulletPrefab;
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private BulletData bulletData;
+
+    [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
 
     [Header("Accuracy")]
@@ -71,9 +74,10 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     private void Shoot()
     {
         // Spawn Bullet
-        Transform bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation).transform;
-        bullet.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
-        bullet.rotation = Quaternion.Euler(0, 0, bullet.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
+        Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
+        bullet.transform.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
+        bullet.transform.rotation = Quaternion.Euler(0, 0, bullet.transform.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
+        bullet.SetData(bulletData);
 
         // Consume Bullet
         gun.loadedBullets -= 1;

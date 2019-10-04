@@ -5,7 +5,10 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     #region Var: Inspector
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
-    [SerializeField] private PoolingObj bulletPrefab;
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private BulletData bulletData;
+
+    [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
 
     [Header("Pellets")]
@@ -68,7 +71,9 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
 
         for (int i = 0; i < pelletCount; i++)
         {
-            bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(eRot));
+            Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(eRot));
+            bullet.SetData(bulletData);
+
             eRot.z += pelletAngle;
         }
 

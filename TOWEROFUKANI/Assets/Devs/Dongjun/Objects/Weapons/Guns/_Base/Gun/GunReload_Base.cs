@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GunReload_Base<GunMain> : GunAction_Base<GunMain> 
+public abstract class GunReload_Base<GunMain> : GunAction_Base<GunMain> 
     where GunMain : Gun
 {
     #region Var: Inspector
