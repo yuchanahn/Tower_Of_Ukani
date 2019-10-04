@@ -23,43 +23,49 @@ public class Shotgun : Gun
     #endregion
 
     #region Method: Condition Logic
-    private void CL_Main_AC()
+    private CLA_Action CL_Main_AC()
     {
-        if (CL_NotSelected())
-            return;
+        if (!IsSelected)
+            return main_AC;
 
         if (!isBulletLoaded && main_AC.IsAnimEnded_Shoot && loadedBullets > 0)
-        {
-            ChangeAction(reload_AC);
-        }
-        else if (loadedBullets <= 0)
+            return reload_AC;
+
+        if (loadedBullets <= 0)
         {
             if (main_AC.IsAnimEnded_Shoot)
-                ChangeAction(swapMagazine_AC);
-            else if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
-                ChangeAction(swapMagazine_AC);
+                return swapMagazine_AC;
+
+            if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
+                return swapMagazine_AC;
         }
         else if (loadedBullets < magazineSize)
         {
             if (Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
-                ChangeAction(swapMagazine_AC);
+                return swapMagazine_AC;
         }
+
+        return main_AC;
     }
-    private void CL_Reload_AC()
+    private CLA_Action CL_Reload_AC()
     {
-        if (CL_NotSelected())
-            return;
+        if (!IsSelected)
+            return main_AC;
 
         if (reloadTimer.IsEnded)
-            ChangeAction(main_AC);
+            return main_AC;
+
+        return reload_AC;
     }
-    private void CL_SwapMagazine_AC()
+    private CLA_Action CL_SwapMagazine_AC()
     {
-        if (CL_NotSelected())
-            return;
+        if (!IsSelected)
+            return main_AC;
 
         if (swapMagazineTimer.IsEnded)
-            ChangeAction(reload_AC);
+            return reload_AC;
+
+        return swapMagazine_AC;
     }
     #endregion
 }

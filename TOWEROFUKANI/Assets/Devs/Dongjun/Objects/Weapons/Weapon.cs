@@ -67,14 +67,4 @@ public abstract class Weapon : CLA_Main
         SpriteRoot.SetActive(select);
     }
     #endregion
-
-    #region Method: Condition Logic
-    protected bool CL_NotSelected()
-    {
-        if (!IsSelected)
-        { ChangeAction(DefaultAction); return true; }
-
-        return false;
-    }
-    #endregion
 }

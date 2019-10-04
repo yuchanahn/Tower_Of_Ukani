@@ -9,7 +9,7 @@ public abstract class CLA_Main : MonoBehaviour
     #endregion
 
     #region Var: Condition Logics
-    protected Dictionary<CLA_Action, Action> ConditionLogics = new Dictionary<CLA_Action, Action>();
+    protected Dictionary<CLA_Action, Func<CLA_Action>> ConditionLogics = new Dictionary<CLA_Action, Func<CLA_Action>>();
     #endregion
 
     #region Var: Properties
@@ -59,7 +59,7 @@ public abstract class CLA_Main : MonoBehaviour
     #endregion
 
     #region Method: Change Action
-    protected void ChangeAction(CLA_Action action)
+    private void ChangeAction(CLA_Action action)
     {
         if (action == CurrentAction)
             return;
@@ -69,17 +69,10 @@ public abstract class CLA_Main : MonoBehaviour
         CurrentAction?.OnEnter();
         CurrentAction.CanExecuteOnStart = true;
     }
-    protected void ForceChangeAction(CLA_Action action)
-    {
-        CurrentAction?.OnExit();
-        CurrentAction = action;
-        CurrentAction?.OnEnter();
-        CurrentAction.CanExecuteOnStart = true;
-    }
     private void RunConditionLogic()
     {
         if (CurrentAction != null && ConditionLogics.ContainsKey(CurrentAction))
-            ConditionLogics[CurrentAction]?.Invoke();
+            ChangeAction(ConditionLogics[CurrentAction]());
     }
     #endregion
 }
