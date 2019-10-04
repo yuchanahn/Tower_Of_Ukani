@@ -14,18 +14,18 @@ public class BlackBoard_MobBase : BlackBoard_Base
     #region Action
 
     public bool TA_RandMove()   => mob.MoveRandom();
-    public bool TA_Attack()     => false;
+    public bool TA_Attack()     => mob.Attack();
     public bool TA_Idle()       => mob.IdleRandom();
     public bool TA_Falling() => mob.Falling();
-    public bool TA_Follow()     => false;
+    public bool TA_Follow() => mob.Follow();
     public bool TA_Hurt()       => true;
 
     #endregion
 
     #region Condition
 
-    public bool CN_IsFollow() => false;
-    public bool CN_IsAttack() => false;
+    public bool CN_IsFollow() => mob.CanFollow;
+    public bool CN_IsAttack() => mob.CanAttack;
     public bool CN_IsHurted() => mob.Hurting();
 
     #endregion

@@ -31,6 +31,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     [SerializeField] eMobAniST m_CurAniST;
 
+    [Header("Attack")]
+    [SerializeField] float m_AttackRange;
+
     [SerializeField] AniSpeedData[] m_AniSpeedData;
     [SerializeField] MobMoveData m_MoveData;
     [SerializeField] FollowData m_followData;
@@ -58,17 +61,24 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool m_bAniStart = false;
     protected bool m_bYMoveCoolTime = false;
     protected bool m_bMoveAble = true;
+    protected bool m_bAttacking = false;
 
     protected int m_bPrevDir = 0;
     #endregion
 
     #region Var: Properties
     float VelX =>
-    m_bHurting || !m_bGrounded ? 0
-    : !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0 
+     m_bAttacking ? 0 :
+     CanAttack ? 0 :
+     CanFollow ? m_MoveData.Speed * m_MoveData.Dir :
+     m_bHurting || !m_bGrounded ? 0
+    : !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0
     : m_MoveData.Speed * m_MoveData.Dir;
 
     float VelY => m_rb.velocity.y;
+    public bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
+    public bool CanAttack => m_bAttacking ? true : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
+
     #endregion
 
     #region Method:
@@ -83,10 +93,8 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
             m_Ani[(eMobAniST)i] = ($"{gameObject.name}_{((eMobAniST)i).ToString()}", 1);
         foreach (var i in m_AniSpeedData)
             m_Ani[i.ST] = ($"{gameObject.name}_{i.ST.ToString()}", i.t);
-    }
-    private void Update()
-    {
-        m_groundDetectionData.Size = m_OneWayCollider.size * transform.localScale;
+
+        m_groundDetectionData.Size = m_OneWayCollider.size;
     }
     private void FixedUpdate()
     {
@@ -125,14 +133,15 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
     public bool MoveRandom()
     {
-        if(!m_bGrounded) return false;
+        if (!m_bGrounded) return false;
         m_MoveData.State = MobMoveData.eState.Move;
+        m_CurAniST = eMobAniST.Walk;
         ATimer.Tick(this);
         if (!m_bYMoveCoolTime)
         {
             m_bYMoveCoolTime = ARandom.Get(70) ? true : ARandom.Get(50) ? Jump() : Fall();
             m_bYMoveCoolTime = true;
-            ATimer.Set("JumpFall"+GetInstanceID(), m_MoveData.CoolTime, () => { m_bYMoveCoolTime = false; });
+            ATimer.Set("JumpFall" + GetInstanceID(), m_MoveData.CoolTime, () => { m_bYMoveCoolTime = false; });
         }
         return true;
     }
@@ -145,12 +154,12 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         }
         return true;
     }
-    public bool Falling() { if(!m_bJumping) m_CurAniST = eMobAniST.AirborneDown; return true; }
+    public bool Falling() { if (!m_bJumping) m_CurAniST = eMobAniST.AirborneDown; return true; }
     public bool Jump()
     {
         if (m_bJumpStart = MobYMoveDetect_Logic.UP(transform.position, ref m_jumpData, ref m_MoveData))
             m_CurAniST = eMobAniST.AirborneUp;
-        
+
         return m_bJumpStart;
     }
     public bool Fall()
@@ -165,9 +174,31 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     // TODO : 
 
-    public bool Follow() => true;
-    public bool Attack() => true;
-    private void AttackEnd() { }
+
+    public bool Follow()
+    {
+        var act = Follow_Logic.Follow(ref m_followData, ref m_MoveData, ref m_jumpData, m_groundDetectionData.Size, m_MoveData.Dir, transform.position);
+        m_CurAniST = eMobAniST.Walk;
+        switch (act)
+        {
+            case eMoveAction.JumpProcess:               return m_bJumpStart = true;
+            case eMoveAction.Jump:                      return Jump(); 
+            case eMoveAction.DownJump:                  return Fall(); 
+            case eMoveAction.Left: m_MoveData.Dir = -1; return true;
+            case eMoveAction.Right: m_MoveData.Dir = 1; return true;
+            default: break;
+        }
+        return true;
+    }
+    public bool Attack()
+    {
+        m_CurAniST = eMobAniST.Attack;
+        return m_bAttacking;
+    }
+    private void AttackEnd()
+    {
+        m_bAttacking = false;
+    }
 
 
     public virtual void OnHurt(/* 총알 위치 */)
@@ -179,7 +210,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         }
         m_bHurting = true;
         m_bAniStart = true;
-        
+
         m_CurAniST = eMobAniST.Hit;
     }
     public bool Hurting() => m_bHurting;

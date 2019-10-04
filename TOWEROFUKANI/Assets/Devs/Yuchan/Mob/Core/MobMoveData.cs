@@ -81,8 +81,22 @@ public class MobYMoveDetect_Logic
     }
     public static bool Down(Vector2 pos, Vector2 size, ref MobMoveData data)
     {
-        var hit = Physics2D.RaycastAll(pos - new Vector2(0, size.y * 0.5f), Vector2.down , data.FallAbleDist, data.FallAbleLayer);
+        var hit = Physics2D.RaycastAll(pos - new Vector2(0, size.y * 0.5f), Vector2.down, 0.1f, data.FallAbleLayer);
+        Debug.DrawRay(pos - new Vector2(0, size.y * 0.5f), Vector2.down * new Vector2(0, data.FallAbleDist), Color.red);
+        if (hit.Length == 0) return false;
+
+        hit = Physics2D.RaycastAll(pos - new Vector2(0, size.y * 0.5f), Vector2.down , data.FallAbleDist, data.FallAbleLayer);
         Debug.DrawRay(pos - new Vector2(0, size.y * 0.5f), Vector2.down * new Vector2(0, data.FallAbleDist), Color.red);
         return hit.Length > 0;
+    }
+
+
+    public static Collider2D GetVirJumpDetectGroundOrNull(Vector2 pos, ref JumpData jdata, Vector2 size, ref MobMoveData data, LayerMask soildGorund)
+    {
+        var _pos = pos + new Vector2(0, size.y / 2 + jdata.height);
+        var _dist = jdata.time * data.Speed;
+        var hit = Physics2D.BoxCast(_pos, size, 0, Vector2.right * data.Dir, _dist, soildGorund);
+        
+        return hit.collider;
     }
 }
