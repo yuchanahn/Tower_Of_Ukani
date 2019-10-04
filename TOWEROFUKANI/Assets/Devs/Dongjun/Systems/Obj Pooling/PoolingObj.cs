@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class PoolingObj : MonoBehaviour
 {
     public PoolingObj Prefab { get; private set; }
 
-    public abstract void ResetOnActive();
+    public abstract void ResetOnSpawn();
 
     public void InitPoolingObj(PoolingObj prefab)
     {

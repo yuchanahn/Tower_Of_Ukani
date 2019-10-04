@@ -10,9 +10,9 @@ public class PlayerDropObj : SelfSleepObj
     {
         rb2D = GetComponent<Rigidbody2D>();
     }
-    public override void ResetOnActive()
+    public override void ResetOnSpawn()
     {
-        base.ResetOnActive();
+        base.ResetOnSpawn();
 
         rb2D.velocity = Global.Inst.PlayerRB2D.velocity;
     }

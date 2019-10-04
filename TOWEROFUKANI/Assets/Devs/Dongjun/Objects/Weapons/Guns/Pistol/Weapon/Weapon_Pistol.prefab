@@ -152,26 +152,24 @@ MonoBehaviour:
   defaultAction: {fileID: 485092021999584720}
   weaponName: Pistol
   weaponDesc: This is a Pistol
-  weaponType: 0
-  weaponRange: 1
+  weaponTags: 000000000300000005000000
   pivotPointY: 0.1
   spriteRoot: {fileID: 2609116014577026526}
-  gunData:
-    shootTimer:
-      StartAsEnded: 1
-      CurTime: 0
-      EndTime: 0.15
-    reloadTimer:
-      StartAsEnded: 0
-      CurTime: 0
-      EndTime: 0.4
-    swapMagazineTimer:
-      StartAsEnded: 0
-      CurTime: 0
-      EndTime: 0.6
-    magazineSize: 6
-    loadedBullets: 0
-    isBulletLoaded: 0
+  shootTimer:
+    StartAsEnded: 1
+    CurTime: 0
+    EndTime: 0.15
+  reloadTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime: 0.3
+  swapMagazineTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime: 0.6
+  magazineSize: 6
+  loadedBullets: 0
+  isBulletLoaded: 0
 --- !u!114 &485092021999584720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,8 +186,11 @@ MonoBehaviour:
   shootPoint: {fileID: 2609116015003256820}
   bulletPrefab: {fileID: 3884733660367707162, guid: 669013e116ca93843a65a5f56b89838a,
     type: 3}
+  bulletData:
+    damage: 2
+    moveSpeed: 45
+    maxDist: 8
   maxShootAnimTime: 0
-  muzzleFlashParent: {fileID: 2609116015003256820}
   muzzleFlashPrefab: {fileID: 3546313596656909244, guid: fc45d6df91e980e4d90c006610728338,
     type: 3}
   camShakeData_Shoot:

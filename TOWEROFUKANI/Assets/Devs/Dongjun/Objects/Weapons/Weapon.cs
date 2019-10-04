@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public enum WeaponType
+public enum WeaponTag
 {
     Physical,
     Magical,
-    Living
-}
-public enum WeaponRange
-{
+    Living,
+
+    Ranged,
     Melee,
-    Ranged
+
+    Gun,
+    Bow,
 }
 
 public abstract class Weapon : CLA_Main
@@ -18,26 +20,20 @@ public abstract class Weapon : CLA_Main
     [Header("Weapon Info")]
     [SerializeField] private string weaponName = "Weapon";
     [SerializeField] private string weaponDesc = "This is a Weapon";
-    [SerializeField] private WeaponType weaponType;
-    [SerializeField] private WeaponRange weaponRange;
+    [SerializeField] private WeaponTag[] weaponTags;
 
     [Header("Visuals")]
     [SerializeField] private float pivotPointY;
     [SerializeField] private GameObject spriteRoot;
     #endregion
 
-    #region Var: Weapon Info
-    private string weaponNameTrimed;
-    #endregion
-
     #region Var: Properties
     public bool IsSelected { get; protected set; } = false;
 
     public string WeaponName => weaponName;
-    public string WeaponNameTrimed => weaponNameTrimed;
+    public string WeaponNameTrimed { get; private set; }
     public string WeaponDesc => weaponDesc;
-    public WeaponType WeaponType => weaponType;
-    public WeaponRange WeaponRange => weaponRange;
+    public HashSet<WeaponTag> WeaponTags { get; private set; } = new HashSet<WeaponTag>();
 
     public GameObject SpriteRoot => spriteRoot;
     #endregion
@@ -48,7 +44,13 @@ public abstract class Weapon : CLA_Main
     {
         base.Awake();
 
-        weaponNameTrimed = weaponName.Replace(" ", string.Empty);
+        WeaponNameTrimed = weaponName.Replace(" ", string.Empty);
+
+        if (weaponTags != null)
+        {
+            for (int i = 0; i < weaponTags.Length; i++)
+                WeaponTags.Add(weaponTags[i]);
+        }
 
         transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
     }

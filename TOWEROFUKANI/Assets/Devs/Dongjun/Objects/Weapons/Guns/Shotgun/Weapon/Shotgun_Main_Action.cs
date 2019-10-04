@@ -5,7 +5,10 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     #region Var: Inspector
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
-    [SerializeField] private PoolingObj bulletPrefab;
+    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private BulletData bulletData;
+
+    [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
 
     [Header("Pellets")]
@@ -36,13 +39,13 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     }
     public override void OnUpdate()
     {
-        if (!gun.IsSelected || !gun.gunData.isBulletLoaded)
+        if (!gun.IsSelected || !gun.isBulletLoaded)
             return;
 
         // Shoot
-        if (gun.gunData.shootTimer.IsEnded && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
+        if (gun.shootTimer.IsEnded && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
         {
-            gun.gunData.shootTimer.Restart();
+            gun.shootTimer.Restart();
 
             Shoot();
             ShootEffects();
@@ -68,13 +71,15 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
 
         for (int i = 0; i < pelletCount; i++)
         {
-            bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(eRot));
+            Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(eRot));
+            bullet.SetData(bulletData);
+
             eRot.z += pelletAngle;
         }
 
         // Consume Bullet
-        gun.gunData.loadedBullets -= 1;
-        gun.gunData.isBulletLoaded = false;
+        gun.loadedBullets -= 1;
+        gun.isBulletLoaded = false;
     }
     private void ShootEffects()
     {
@@ -93,7 +98,8 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     }
     private void AnimSetSpeed_Shoot()
     {
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.shootTimer.EndTime, maxShootAnimTime > 0 ? maxShootAnimTime : gun.gunData.shootTimer.EndTime, ANIM_S_Shoot);
+        float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : gun.shootTimer.EndTime;
+        Anim_Logic.SetAnimSpeed(animator, gun.shootTimer.EndTime, maxDuration, ANIM_S_Shoot);
     }
     private void AnimReset_Shoot()
     {

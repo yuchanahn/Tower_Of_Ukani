@@ -77,7 +77,7 @@ public class WeaponHolder : MonoBehaviour
         nameText.text = curWeapon.WeaponName;
 
         // Show Ammo
-        if (curWeapon as Gun) ammoText.text = $"{(curWeapon as Gun).gunData.loadedBullets} / {(curWeapon as Gun).gunData.magazineSize}";
+        if (curWeapon as Gun) ammoText.text = $"{(curWeapon as Gun).loadedBullets} / {(curWeapon as Gun).magazineSize}";
     }
     #endregion
 }

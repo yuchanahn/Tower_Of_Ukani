@@ -2,11 +2,6 @@
 
 public class Bullet : PoolingObj
 {
-    [Header("Projectile Stats")]
-    [SerializeField] protected int damage = 1;
-    [SerializeField] protected float moveSpeed = 50f;
-    [SerializeField] protected float maxDist = 20f;
-
     [Header("Object Detection")]
     [SerializeField] protected Vector2 detectSize;
     [SerializeField] protected LayerMask detectLayers;
@@ -15,37 +10,45 @@ public class Bullet : PoolingObj
     [SerializeField] protected PoolingObj particle_Hit;
     [SerializeField] protected float particle_HitOffset;
 
+    protected BulletData bulletData;
     protected float curTravelDist = 0;
 
-    public override void ResetOnActive()
+
+    public override void ResetOnSpawn()
     {
         curTravelDist = 0;
     }
 
+    #region Method: Unity
     protected virtual void FixedUpdate()
     {
         Move();
         OnMaxDist();
         DetectObject();
     }
+    #endregion
 
+    #region Method: Move
     protected virtual void Move()
     {
-        transform.Translate(moveSpeed * Time.fixedDeltaTime * transform.right, Space.World);
+        transform.Translate(bulletData.moveSpeed * Time.fixedDeltaTime * transform.right, Space.World);
     }
     protected virtual void OnMaxDist()
     {
-        curTravelDist += moveSpeed * Time.fixedDeltaTime;
-        if (curTravelDist >= maxDist)
+        curTravelDist += bulletData.moveSpeed * Time.fixedDeltaTime;
+        if (curTravelDist >= bulletData.maxDist)
             ObjPoolingManager.Sleep(this);
     }
+    #endregion
+
+    #region Method: Hit
     protected virtual void DetectObject()
     {
-        Vector2 pos = (transform.position + (transform.right * detectSize.x * 0.5f)) - (transform.right * (moveSpeed * Time.fixedDeltaTime));
+        Vector2 pos = (transform.position + (transform.right * detectSize.x * 0.5f)) - (transform.right * (bulletData.moveSpeed * Time.fixedDeltaTime));
         float rot = transform.rotation.eulerAngles.z;
 
         RaycastHit2D[] hits = 
-            Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, moveSpeed * Time.fixedDeltaTime, detectLayers);
+            Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, bulletData.moveSpeed * Time.fixedDeltaTime, detectLayers);
 
         Vector2 hitPos = transform.position;
 
@@ -64,7 +67,7 @@ public class Bullet : PoolingObj
                 var mob = hits[i].collider.GetComponent<IDamage>();
                 if (mob != null)
                 {
-                    mob?.Hit(damage);
+                    mob?.Hit(bulletData.damage);
                     OnHit(hitPos);
                     return;
                 }
@@ -77,8 +80,16 @@ public class Bullet : PoolingObj
     protected virtual void OnHit(Vector2 hitPos)
     {
         ObjPoolingManager.Sleep(this);
-        GameObject hitParticle = ObjPoolingManager.Spawn(particle_Hit, hitPos, Quaternion.identity);
-        hitParticle.transform.right = -transform.right;
-        hitParticle.transform.position -= transform.right * particle_HitOffset;
+        Transform hitParticle = ObjPoolingManager.Spawn(particle_Hit, hitPos, Quaternion.identity).transform;
+        hitParticle.right = -transform.right;
+        hitParticle.position -= transform.right * particle_HitOffset;
     }
+    #endregion
+
+    #region Method: Set Value
+    public void SetData(BulletData bulletData)
+    {
+        this.bulletData = bulletData;
+    }
+    #endregion
 }

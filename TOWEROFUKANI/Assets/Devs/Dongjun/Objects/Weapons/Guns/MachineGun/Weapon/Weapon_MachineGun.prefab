@@ -210,26 +210,24 @@ MonoBehaviour:
   defaultAction: {fileID: 1243003119494043728}
   weaponName: Machine Gun
   weaponDesc: This is a Machine Gun
-  weaponType: 0
-  weaponRange: 1
+  weaponTags: 000000000300000005000000
   pivotPointY: -0.025
   spriteRoot: {fileID: 4450316997529025075}
-  gunData:
-    shootTimer:
-      StartAsEnded: 1
-      CurTime: 0
-      EndTime: 0.05
-    reloadTimer:
-      StartAsEnded: 0
-      CurTime: 0
-      EndTime: 0.5
-    swapMagazineTimer:
-      StartAsEnded: 0
-      CurTime: 0
-      EndTime: 1
-    magazineSize: 20
-    loadedBullets: 0
-    isBulletLoaded: 0
+  shootTimer:
+    StartAsEnded: 1
+    CurTime: 0
+    EndTime: 0.06
+  reloadTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime: 0.5
+  swapMagazineTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime: 1.5
+  magazineSize: 20
+  loadedBullets: 0
+  isBulletLoaded: 0
   ammoBelt: {fileID: 1315789236824654805}
   ammoBeltAmmoCount: 7
 --- !u!114 &1243003119494043728
@@ -248,6 +246,10 @@ MonoBehaviour:
   shootPoint: {fileID: 4450316996750440473}
   bulletPrefab: {fileID: 3522369012486736103, guid: 4516c39aa90b59146a00c293b77a065b,
     type: 3}
+  bulletData:
+    damage: 2
+    moveSpeed: 45
+    maxDist: 10
   maxShootAnimTime: 0
   acry_YPosOffset: 0.2
   acry_ZRotOffset: 8

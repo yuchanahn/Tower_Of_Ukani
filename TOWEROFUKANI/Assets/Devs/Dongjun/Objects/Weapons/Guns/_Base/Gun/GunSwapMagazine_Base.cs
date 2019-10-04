@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GunSwapMagazine_Base<GunMain> : GunAction_Base<GunMain> 
+public abstract class GunSwapMagazine_Base<GunMain> : GunAction_Base<GunMain> 
     where GunMain : Gun
 {
     #region Var: Inspector
@@ -23,9 +23,9 @@ public class GunSwapMagazine_Base<GunMain> : GunAction_Base<GunMain>
     public override void OnEnter()
     {
         // Start Timer
-        gun.gunData.swapMagazineTimer.SetActive(true);
-        gun.gunData.swapMagazineTimer.ToZero();
-        gun.gunData.swapMagazineTimer.Restart();
+        gun.swapMagazineTimer.SetActive(true);
+        gun.swapMagazineTimer.ToZero();
+        gun.swapMagazineTimer.Restart();
 
         IsAnimStarted_SwapMagazine = true;
         IsAnimEnded_SwapMagazine = false;
@@ -35,21 +35,21 @@ public class GunSwapMagazine_Base<GunMain> : GunAction_Base<GunMain>
     }
     public override void OnLateEnter()
     {
-        Anim_Logic.SetAnimSpeed(animator, gun.gunData.swapMagazineTimer.EndTime, gun.WeaponNameTrimed + "_SwapMagazine");
+        Anim_Logic.SetAnimSpeed(animator, gun.swapMagazineTimer.EndTime, gun.WeaponNameTrimed + "_SwapMagazine");
     }
     public override void OnExit()
     {
         // Stop Timer
-        gun.gunData.swapMagazineTimer.SetActive(false);
+        gun.swapMagazineTimer.SetActive(false);
 
         // On Timer End
-        if (gun.gunData.swapMagazineTimer.IsEnded)
+        if (gun.swapMagazineTimer.IsEnded)
         {
             IsAnimStarted_SwapMagazine = false;
             IsAnimEnded_SwapMagazine = true;
 
             // Load Bullets
-            gun.gunData.loadedBullets = reloadAll ? gun.gunData.magazineSize : gun.gunData.loadedBullets + reloadAmount;
+            gun.loadedBullets = reloadAll ? gun.magazineSize : gun.loadedBullets + reloadAmount;
         }
 
         // Animation

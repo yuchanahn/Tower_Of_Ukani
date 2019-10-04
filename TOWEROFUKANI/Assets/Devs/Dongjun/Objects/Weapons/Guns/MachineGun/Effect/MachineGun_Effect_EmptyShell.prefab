@@ -138,3 +138,7 @@ MonoBehaviour:
     EndTime: 5
   forceMin: 5
   forceMax: 10
+  showBehindObjTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime: 0.1

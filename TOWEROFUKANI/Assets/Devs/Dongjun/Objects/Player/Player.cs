@@ -2,29 +2,41 @@
 
 public class Player : CLA_Main
 {
-    private Player_Movement_Action movement_Action;
-    private Player_Dash_Action dash_Action;
+    #region Var: CLA_Action
+    private Player_Movement_Action movement_AC;
+    private Player_Dash_Action dash_AC;
+    #endregion
 
+    #region Method: Init
     protected override void Init()
     {
-        movement_Action = GetComponent<Player_Movement_Action>();
-        dash_Action = GetComponent<Player_Dash_Action>();
+        movement_AC = GetComponent<Player_Movement_Action>();
+        dash_AC = GetComponent<Player_Dash_Action>();
 
-        ConditionLogics.Add(movement_Action, CL_Movement);
-        ConditionLogics.Add(dash_Action, CL_Dash);
+        ConditionLogics.Add(movement_AC, CL_Movement);
+        ConditionLogics.Add(dash_AC, CL_Dash);
     }
+    #endregion
 
-    private void CL_Movement()
+    #region Method: Condition Logic
+    private CLA_Action CL_Movement()
     {
         if (PlayerInputManager.Inst.Input_DashDir != 0)
-            ChangeAction(dash_Action);
-    }
-    private void CL_Dash()
-    {
-        if (movement_Action.JumpData.canJump && PlayerInputManager.Inst.Input_Jump)
-            ChangeAction(movement_Action);
+            return dash_AC;
 
-        if (!dash_Action.IsDasing)
-            ChangeAction(movement_Action);
+        return movement_AC;
     }
+    private CLA_Action CL_Dash()
+    {
+        // Cancle On Jump
+        if (movement_AC.JumpData.canJump && PlayerInputManager.Inst.Input_Jump)
+            return movement_AC;
+
+        // Cancle On End
+        if (!dash_AC.IsDasing)
+            return movement_AC;
+
+        return dash_AC;
+    }
+    #endregion
 }
