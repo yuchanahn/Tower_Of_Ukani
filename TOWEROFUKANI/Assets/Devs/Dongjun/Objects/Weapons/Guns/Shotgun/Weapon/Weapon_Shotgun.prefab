@@ -100,8 +100,7 @@ MonoBehaviour:
   defaultAction: {fileID: 3151152317891876062}
   weaponName: Shotgun
   weaponDesc: This is a Shotgun
-  weaponType: 0
-  weaponRange: 1
+  weaponTags: 000000000300000005000000
   pivotPointY: 0.162
   spriteRoot: {fileID: 1077788971484917873}
   shootTimer:

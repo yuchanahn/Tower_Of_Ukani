@@ -152,8 +152,7 @@ MonoBehaviour:
   defaultAction: {fileID: 485092021999584720}
   weaponName: Pistol
   weaponDesc: This is a Pistol
-  weaponType: 0
-  weaponRange: 1
+  weaponTags: 000000000300000005000000
   pivotPointY: 0.1
   spriteRoot: {fileID: 2609116014577026526}
   shootTimer:
