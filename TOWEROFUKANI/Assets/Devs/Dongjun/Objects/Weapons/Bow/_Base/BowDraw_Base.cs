@@ -40,7 +40,10 @@ public abstract class BowDraw_Base<TMain> : BowAction_Base<TMain>
     public override void OnUpdate()
     {
         if (Input.GetKeyUp(PlayerInputManager.Inst.Keys.MainAbility))
+        {
             IsDrawing = false;
+            bow.canShoot = true;
+        }
     }
     public override void OnLateUpdate()
     {

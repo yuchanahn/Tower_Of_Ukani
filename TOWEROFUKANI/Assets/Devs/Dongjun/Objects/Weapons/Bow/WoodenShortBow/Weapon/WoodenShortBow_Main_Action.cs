@@ -16,7 +16,7 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     #endregion
 
     #region Var: Properties
-    public bool IsAnimEnded_Shoot { get; private set; } = false;
+    public bool IsAnimEnded_Shoot { get; private set; } = true;
     #endregion
 
 
@@ -25,9 +25,6 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     {
         bow.shootTimer.SetActive(true);
         bow.shootTimer.Restart();
-
-        IsAnimEnded_Shoot = false;
-        AnimPlay_Shoot();
     }
     public override void OnLateEnter()
     {
@@ -37,12 +34,33 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     {
         AnimReset_Shoot();
     }
+    public override void OnUpdate()
+    {
+        if (bow.canShoot)
+        {
+            bow.canShoot = false;
+
+            IsAnimEnded_Shoot = false;
+            AnimPlay_Shoot();
+        }
+        else if (IsAnimEnded_Shoot)
+        {
+            AnimPlay_Idle();
+        }
+    }
     public override void OnLateUpdate()
     {
         if (!bow.IsSelected)
             return;
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, bow.SpriteRoot.transform, transform);
+    }
+    #endregion
+
+    #region Method: Idle
+    private void AnimPlay_Idle()
+    {
+        animator.Play(string.Concat(bow.WeaponNameTrimed, "_Idle"));
     }
     #endregion
 
@@ -80,12 +98,13 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     {
         Shoot();
         ShootEffects();
-        AnimPlay_Shoot();
     }
     private void OnAnimEnd_Shoot()
     {
         IsAnimEnded_Shoot = true;
         bow.shootTimer.SetActive(false);
+
+        AnimReset_Shoot();
     }
     #endregion
 }
