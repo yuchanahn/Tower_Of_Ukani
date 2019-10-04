@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public abstract class GunSwapMagazine_Base<GunMain> : GunAction_Base<GunMain> 
-    where GunMain : Gun
+public abstract class GunSwapMagazine_Base<TMain> : GunAction_Base<TMain> 
+    where TMain : Gun
 {
     #region Var: Inspector
     [Header("Ammo")]
