@@ -56,7 +56,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5, y: 1.2}
   m_EdgeRadius: 0
 --- !u!251 &5710732187883913212
 PlatformEffector2D:
@@ -180,7 +180,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5, y: 1.2}
   m_EdgeRadius: 0
 --- !u!114 &3872322163839645563
 MonoBehaviour:
@@ -206,7 +206,7 @@ MonoBehaviour:
     SprTr: {fileID: 7268275018201367325}
     Speed: 1.5
     CoolTime: 1
-    JumpAbleDist: 0.5
+    JumpAbleDist: 1.2
     FallAbleDist: 1
     FallAbleLayer:
       serializedVersion: 2
@@ -215,7 +215,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1024
     MoveT:
-      min: 1
+      min: 0.5
       max: 2
     IdleT:
       min: 0.5
@@ -263,7 +263,7 @@ MonoBehaviour:
     IW_Solid: {fileID: 658498686114480918}
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
-    OffsetAmount: 0.01
+    OffsetAmount: 0
 --- !u!114 &2248344777037342470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7268275018201367322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5171003076785061115}
@@ -403,13 +403,13 @@ SpriteRenderer:
   m_SortingLayerID: -1863001065
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7363166705265310760, guid: 821a67f733ae90a4e839d6bf1919f8bc,
+  m_Sprite: {fileID: 1509323768601367529, guid: 915dbaab783058044929b8862012d1f9,
     type: 3}
-  m_Color: {r: 0.29495454, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -489,5 +489,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5, y: 1.2}
   m_EdgeRadius: 0

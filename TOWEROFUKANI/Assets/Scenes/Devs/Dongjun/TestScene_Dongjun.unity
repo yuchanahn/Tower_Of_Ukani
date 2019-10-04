@@ -138,11 +138,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -197,36 +192,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -293,11 +258,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -353,36 +313,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &101261412 stripped
@@ -408,11 +338,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -469,36 +394,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &102981582 stripped
@@ -518,11 +413,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -578,36 +468,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -717,11 +577,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -777,36 +632,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1 &212736552
@@ -856,11 +681,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -916,36 +736,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -1137,11 +927,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1196,36 +981,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -1331,11 +1086,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1390,36 +1140,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -1533,11 +1253,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1592,36 +1307,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -1816,11 +1501,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1875,36 +1555,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -2065,11 +1715,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2125,36 +1770,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &438061436 stripped
@@ -2174,11 +1789,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -2234,36 +1844,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -2419,11 +1999,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2478,36 +2053,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -2655,11 +2200,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2714,36 +2254,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -2908,11 +2418,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2968,36 +2473,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &574635519 stripped
@@ -3017,11 +2492,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -3077,36 +2547,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -7003,11 +6443,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7062,36 +6497,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -7149,11 +6554,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7209,36 +6609,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &667899233 stripped
@@ -7258,11 +6628,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -7318,36 +6683,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -7405,11 +6740,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7465,36 +6795,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &745989377 stripped
@@ -7514,11 +6814,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -7574,36 +6869,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -7692,11 +6957,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7752,36 +7012,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &766914092
@@ -7795,11 +7025,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -7856,36 +7081,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &766914093 stripped
@@ -7905,11 +7100,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -7966,36 +7156,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &777509395
@@ -8009,11 +7169,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -8069,36 +7224,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -8398,11 +7523,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8458,36 +7578,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &835877811 stripped
@@ -8507,11 +7597,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -8568,36 +7653,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &844027432
@@ -8611,11 +7666,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -8672,36 +7722,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &844027433 stripped
@@ -8721,11 +7741,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -8782,36 +7797,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &867656871 stripped
@@ -8831,11 +7816,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -8892,36 +7872,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &874066474 stripped
@@ -8941,11 +7891,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -9002,36 +7947,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!114 &894498901 stripped
@@ -9075,11 +7990,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -9135,36 +8045,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -9232,11 +8112,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9292,36 +8167,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &993417398
@@ -9335,11 +8180,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -9396,36 +8236,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &993417399 stripped
@@ -9451,11 +8261,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -9512,36 +8317,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1036612678
@@ -9555,11 +8330,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -9616,36 +8386,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1036612679 stripped
@@ -9677,11 +8417,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -9738,36 +8473,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1138002792 stripped
@@ -9787,11 +8492,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -9847,36 +8547,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -9934,11 +8604,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9994,36 +8659,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1214801459 stripped
@@ -10043,11 +8678,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -10103,36 +8733,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -10227,11 +8827,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10287,36 +8882,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1294419452 stripped
@@ -10336,11 +8901,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -10396,36 +8956,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -10625,11 +9155,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10684,36 +9209,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -10876,11 +9371,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10935,36 +9425,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -11097,11 +9557,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11157,36 +9612,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1426619735 stripped
@@ -11212,11 +9637,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -11272,36 +9692,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -11403,11 +9793,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11463,36 +9848,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1441196637 stripped
@@ -11518,11 +9873,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -11578,36 +9928,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -11732,11 +10052,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11791,36 +10106,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -11984,11 +10269,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12044,36 +10324,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1577328410
@@ -12087,11 +10337,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -12148,36 +10393,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1577328411 stripped
@@ -12221,11 +10436,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -12282,36 +10492,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1612180569 stripped
@@ -12331,11 +10511,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -12392,36 +10567,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1624896621 stripped
@@ -12441,11 +10586,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -12502,36 +10642,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1645329786 stripped
@@ -12551,11 +10661,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -12611,36 +10716,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -12818,23 +10893,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
       propertyPath: m_cliffData.FallHeight
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -12854,11 +10914,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -12915,36 +10970,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1701253202
@@ -12958,11 +10983,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -13019,36 +11039,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1713616230 stripped
@@ -13080,11 +11070,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -13140,36 +11125,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -13287,11 +11242,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13347,36 +11297,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1777745659
@@ -13390,11 +11310,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -13450,36 +11365,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -13586,11 +11471,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13646,36 +11526,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1793089645 stripped
@@ -13701,11 +11551,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -13761,36 +11606,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -13891,11 +11706,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13950,36 +11760,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -14089,11 +11869,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14148,36 +11923,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -14281,11 +12026,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14340,36 +12080,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -14477,11 +12187,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14537,36 +12242,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1874775856
@@ -14580,11 +12255,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -14641,36 +12311,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1876809995 stripped
@@ -14690,11 +12330,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -14751,36 +12386,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1896851126
@@ -14794,11 +12399,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -14855,36 +12455,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1898841624
@@ -14898,11 +12468,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -14959,36 +12524,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &1898841625 stripped
@@ -15026,11 +12561,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -15087,36 +12617,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1958557439
@@ -15130,11 +12630,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -15190,36 +12685,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -15279,11 +12744,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15338,36 +12798,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -15557,11 +12987,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15617,36 +13042,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &2065153761
@@ -15660,11 +13055,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -15721,36 +13111,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &2076394016
@@ -15764,11 +13124,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -15825,36 +13180,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!4 &2076394017 stripped
@@ -15874,11 +13199,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -15935,36 +13255,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &2109022603
@@ -15978,11 +13268,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
@@ -16038,36 +13323,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mFollowData.dis
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.Speed
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_cliffData.FallHeight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.JumpAbleDist
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_MoveData.MoveT.min
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}

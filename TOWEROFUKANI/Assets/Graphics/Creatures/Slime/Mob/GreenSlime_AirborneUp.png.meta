@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: 8868ddb590ebc2145b922cea3a9f8946
+guid: 0d42f781464c69441ad617413cd38f9a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5921656496000236053
-    second: Slime_Corpse_0
+      213: -3618005393344077685
+    second: GreenSlime_AirborneUp_0
   - first:
-      213: 8635662681233663766
-    second: Slime_Corpse_1
+      213: -284351694168651788
+    second: GreenSlime_AirborneUp_1
   - first:
-      213: -8601144502612090514
-    second: Slime_Corpse_2
+      213: -3675666494833496712
+    second: GreenSlime_AirborneUp_2
   - first:
-      213: 1545691781086386620
-    second: Slime_Corpse_3
+      213: -7197265053377089419
+    second: GreenSlime_AirborneUp_3
+  - first:
+      213: -8404548517699508725
+    second: GreenSlime_AirborneUp_4
+  - first:
+      213: 2497336407433007324
+    second: GreenSlime_AirborneUp_5
+  - first:
+      213: -7791865777928068716
+    second: GreenSlime_AirborneUp_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -110,85 +119,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slime_Corpse_0
+      name: GreenSlime_AirborneUp_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d948e796f74d2864bb6518baf381db36
+      internalID: -3618005393344077685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_AirborneUp_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76df8db70b246a040a6b72cadb1ed9ba
+      internalID: -284351694168651788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_AirborneUp_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c9006d62723d6d409a062587580b23d
+      internalID: -3675666494833496712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_AirborneUp_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a43ac33fb1ce2f4f88b02ddd294f6bf
+      internalID: -7197265053377089419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_AirborneUp_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a26dacbfcadd6b428f32d9f4064942a
-      internalID: 5921656496000236053
+      spriteID: 582d41e2b50fb7541b51556d95a4ff2b
+      internalID: -8404548517699508725
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Corpse_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a9251a2cb2addc64b8f285948f412f67
-      internalID: 8635662681233663766
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Slime_Corpse_2
+      name: GreenSlime_AirborneUp_5
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0121e20cdb24a5d4b8b3459675c82ce9
-      internalID: -8601144502612090514
+      spriteID: c8cb55f00a4f8cb40b57347514c586c7
+      internalID: 2497336407433007324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Corpse_3
+      name: GreenSlime_AirborneUp_6
       rect:
         serializedVersion: 2
-        x: 48
+        x: 64
         y: 0
-        width: 16
-        height: 16
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00a412558e9e18d41a6784f860e276fc
-      internalID: 1545691781086386620
+      spriteID: 52a28ccc69a134e4981701e1108f0147
+      internalID: -7791865777928068716
       vertices: []
       indices: 
       edges: []
@@ -196,7 +268,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b7dd04b454033d84598d912953c0a77f
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

@@ -1,22 +1,28 @@
 fileFormatVersion: 2
-guid: 821a67f733ae90a4e839d6bf1919f8bc
+guid: 245a512477485c2438e31e419c852e9f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7363166705265310760
-    second: Slime_Idle_0
+      213: 5544500871915275999
+    second: GreenSlime_Attack_Pre_0
   - first:
-      213: -5053397183770984521
-    second: Slime_Idle_1
+      213: 6784602962839062595
+    second: GreenSlime_Attack_Pre_1
   - first:
-      213: 2562226924957090973
-    second: Slime_Idle_2
+      213: -5054434059543640224
+    second: GreenSlime_Attack_Pre_2
   - first:
-      213: -5823576197350583881
-    second: Slime_Idle_3
+      213: 5802232879188403450
+    second: GreenSlime_Attack_Pre_3
   - first:
-      213: 1838681140112674480
-    second: Slime_Idle_4
+      213: 898289239009263574
+    second: GreenSlime_Attack_Pre_4
+  - first:
+      213: -3779122397666862719
+    second: GreenSlime_Attack_Pre_5
+  - first:
+      213: -9177072290051034982
+    second: GreenSlime_Attack_Pre_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -60,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +90,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
@@ -96,7 +102,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
@@ -108,18 +114,102 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 1
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Slime_Idle_0
+      name: GreenSlime_Attack_Pre_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 40
+        width: 44
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb9c33190bf4ff4ea37919085b2aeb4
+      internalID: 5544500871915275999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_Attack_Pre_1
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 40
+        width: 44
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51a9cf68e5eb6214591358cb6a4095aa
+      internalID: 6784602962839062595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_Attack_Pre_2
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 40
+        width: 44
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b01ed10038829984dacb346af3b82327
+      internalID: -5054434059543640224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_Attack_Pre_3
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 40
+        width: 44
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4579b31930e035741831ce53f71de711
+      internalID: 5802232879188403450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_Attack_Pre_4
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
-        height: 48
+        width: 44
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,20 +217,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac59e01349c96a94986fdf25e60ef8aa
-      internalID: 7363166705265310760
+      spriteID: efbec384c701fe242b4de4666630382a
+      internalID: 898289239009263574
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Idle_1
+      name: GreenSlime_Attack_Pre_5
       rect:
         serializedVersion: 2
-        x: 48
+        x: 44
         y: 0
-        width: 48
-        height: 48
+        width: 44
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,20 +238,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ac4544557ff7e945abb41d9711dbd80
-      internalID: -5053397183770984521
+      spriteID: b0e10390ab1a30942ba946c521aefd40
+      internalID: -3779122397666862719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Slime_Idle_2
+      name: GreenSlime_Attack_Pre_6
       rect:
         serializedVersion: 2
-        x: 96
+        x: 88
         y: 0
-        width: 48
-        height: 48
+        width: 44
+        height: 40
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,50 +259,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dbb0e024197a2e4d8e54c00653c1775
-      internalID: 2562226924957090973
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Slime_Idle_3
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fa058f14267ce514082dd2c684c2e87a
-      internalID: -5823576197350583881
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Slime_Idle_4
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 48
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f80bee56844ac6142b2d639fabd1eff3
-      internalID: 1838681140112674480
+      spriteID: f3455b6c86940aa419b418b1c22f0e38
+      internalID: -9177072290051034982
       vertices: []
       indices: 
       edges: []
@@ -220,7 +268,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 0097d4dbf466bd04e9cbcb7b3e150309
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
