@@ -18,6 +18,7 @@ public class Player : CLA_Main
     }
     #endregion
 
+    
     #region Method: Condition Logic
     private CLA_Action CL_Movement()
     {
