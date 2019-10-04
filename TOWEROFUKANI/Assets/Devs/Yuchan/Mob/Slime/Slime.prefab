@@ -198,9 +198,11 @@ MonoBehaviour:
   m_CurAniST: 2
   m_AttackRange: 0.5
   m_AniSpeedData:
-  - ST: 1
+  - ST: 2
     t: 0.3
   - ST: 0
+    t: 0.4
+  - ST: 1
     t: 0.4
   m_MoveData:
     SprTr: {fileID: 7268275018201367325}
@@ -247,7 +249,7 @@ MonoBehaviour:
   m_gravityData:
     useGravity: 1
     acceleration: 20
-    terminalVelocity: 0
+    terminalVelocity: 40
   m_groundDetectionData:
     Size: {x: 0, y: 0}
     ScaledSize: {x: 0, y: 0}
@@ -264,6 +266,8 @@ MonoBehaviour:
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
     OffsetAmount: 0
+  m_addSpeed: 3
+  m_AtkActJumpHeight: 1
 --- !u!114 &2248344777037342470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45184536e1c4dff438300eb6ff5b4019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mHP: 1
+  mHP: 10
 --- !u!1 &6529837628258330815
 GameObject:
   m_ObjectHideFlags: 0

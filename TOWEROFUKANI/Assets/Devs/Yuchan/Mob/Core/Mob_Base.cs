@@ -6,7 +6,8 @@ using UnityEngine;
 
 public enum eMobAniST
 {
-    Attack,
+    Attack_Pre,
+    Attack_Post,
     Hit,
     Walk,
     Idle,
@@ -29,7 +30,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     [Header("Collision")]
     [SerializeField] BoxCollider2D m_OneWayCollider;
 
-    [SerializeField] eMobAniST m_CurAniST;
+    [SerializeField] protected eMobAniST m_CurAniST;
 
     [Header("Attack")]
     [SerializeField] float m_AttackRange;
@@ -38,7 +39,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     [SerializeField] MobMoveData m_MoveData;
     [SerializeField] FollowData m_followData;
     [SerializeField] CorpseData m_compseData;
-    [SerializeField] JumpData m_jumpData;
+    [SerializeField] protected JumpData m_jumpData;
     [SerializeField] GravityData m_gravityData;
     [SerializeField] GroundDetectionData m_groundDetectionData;
 
@@ -63,11 +64,15 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool m_bMoveAble = true;
     protected bool m_bAttacking = false;
 
+
+    protected float m_jumpHeight;
+
+
     protected int m_bPrevDir = 0;
     #endregion
 
     #region Var: Properties
-    float VelX =>
+    public virtual float VelX =>
      m_bAttacking ? 0 :
      CanAttack ? 0 :
      CanFollow ? m_MoveData.Speed * m_MoveData.Dir :
@@ -76,8 +81,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     : m_MoveData.Speed * m_MoveData.Dir;
 
     float VelY => m_rb.velocity.y;
-    public bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
-    public bool CanAttack => m_bAttacking ? true : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
+    protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
+    protected int Dir { set { m_MoveData.Dir = value; } get { return m_MoveData.Dir; }   }
+    
+    public virtual bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
+    public virtual bool CanAttack => m_bAttacking ? true : !m_bGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
 
     #endregion
 
@@ -95,9 +103,13 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
             m_Ani[i.ST] = ($"{gameObject.name}_{i.ST.ToString()}", i.t);
 
         m_groundDetectionData.Size = m_OneWayCollider.size;
+        m_atkAct[eAtkST.post] = AttackPost;
+        m_atkAct[eAtkST.pre] = AttackPre;
+        m_jumpHeight = m_jumpData.height;
     }
     private void FixedUpdate()
     {
+        
         GroundDetection_Logic.DetectGround(!m_bJumping, m_rb, transform, m_groundDetectionData, ref m_bGrounded, ref mCurGroundInfo);
         GroundDetection_Logic.ExecuteOnGroundMethod(this, m_bGrounded, ref m_groundDetectionData);
 
@@ -137,7 +149,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_MoveData.State = MobMoveData.eState.Move;
         m_CurAniST = eMobAniST.Walk;
         ATimer.Tick(this);
-        if (!m_bYMoveCoolTime)
+        if (!m_bYMoveCoolTime && !m_bJumpStart)
         {
             m_bYMoveCoolTime = ARandom.Get(70) ? true : ARandom.Get(50) ? Jump() : Fall();
             m_bYMoveCoolTime = true;
@@ -147,6 +159,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
     public bool IdleRandom()
     {
+        if (!m_bGrounded) return false;
         if (m_MoveData.State == MobMoveData.eState.Idle)
         {
             m_CurAniST = eMobAniST.Idle;
@@ -154,7 +167,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         }
         return true;
     }
-    public bool Falling() { if (!m_bJumping) m_CurAniST = eMobAniST.AirborneDown; return true; }
+    public bool Falling()
+    {
+        m_CurAniST = m_bJumping ? eMobAniST.AirborneUp : eMobAniST.AirborneDown;
+        return true;
+    }
     public bool Jump()
     {
         if (m_bJumpStart = MobYMoveDetect_Logic.UP(transform.position, ref m_jumpData, ref m_MoveData))
@@ -190,16 +207,39 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         }
         return true;
     }
-    public bool Attack()
+
+    enum eAtkST
     {
-        m_CurAniST = eMobAniST.Attack;
+        pre,
+        post
+    }
+    eAtkST atkST = eAtkST.pre;
+    Dictionary<eAtkST, Func<bool>> m_atkAct = new Dictionary<eAtkST, Func<bool>>();
+    public bool Attack() => m_atkAct[atkST]();
+    public bool AttackPre()
+    {
+        m_CurAniST = eMobAniST.Attack_Pre;
         return m_bAttacking;
     }
-    private void AttackEnd()
+    private void AttackPreEnd()
+    {
+        atkST = eAtkST.post;
+    }
+    public bool AttackPost()
+    {
+        m_CurAniST = eMobAniST.Attack_Post;
+        return m_bAttacking;
+    }
+    private void AttackPostEnd()
     {
         m_bAttacking = false;
+        atkST = eAtkST.pre;
+        OnAttackEnd();
     }
 
+    public virtual void OnAttackEnd()
+    {
+    }
 
     public virtual void OnHurt(/* 총알 위치 */)
     {
