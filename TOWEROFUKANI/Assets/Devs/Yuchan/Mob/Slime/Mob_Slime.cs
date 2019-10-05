@@ -27,5 +27,6 @@ public class Mob_Slime : Mob_Base
     {
         base.OnGroundEnter();
         m_bAtkEndActing = false;
+        m_jumpData.height = m_jumpHeight;
     }
 }

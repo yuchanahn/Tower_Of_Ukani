@@ -35,12 +35,12 @@ public class Follow_Logic
         Debug.DrawRay(pos + curDir * new Vector2(size.x * 0.5f, 0), curDir * Vector2.right * 1f, Color.green);
 
         if (hit.Length == 0)
-        {
+        {   
             return (Mathf.Sign(GM.PlayerPos.x - pos.x) == 1) ? eMoveAction.Right : eMoveAction.Left;
         }
         else
         {
-            var Hit = MobYMoveDetect_Logic.GetVirJumpDetectGroundOrNull(pos, ref jdata, size, ref mvdata, data.CantMoveGround);
+            var Hit = MobYMoveDetect_Logic.GetVirJumpDetectGroundOrNull(pos, ref jdata, size * 0.9f, ref mvdata, data.CantMoveGround);
             //Debug.DrawRay(pos + new Vector2(0, size.y/2), new Vector2(curDir, 1), Color.green);
             if (!Hit) return eMoveAction.JumpProcess;
             else Debug.Log(Hit.name);   

@@ -122,6 +122,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
         Gravity_Logic.ApplyGravity(m_rb, m_bGrounded ? new GravityData(false, 0, 0) : !m_bJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
 
+        Animation();
         Anim_Logic.SetAnimSpeed(m_ani, m_Ani[m_CurAniST].Item2);
         if (m_bAniStart) { m_ani.Play(m_Ani[m_CurAniST].Item1, 0, 0); m_bAniStart = false; }
         else m_ani.Play(m_Ani[m_CurAniST].Item1);
@@ -131,6 +132,12 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         ATimer.Pop("JumpFall" + GetInstanceID());
     }
     #endregion
+
+
+    void Animation()
+    {
+        m_CurAniST = m_bHurting || m_bAttacking ? m_CurAniST : m_bGrounded ? Dir != 0 ? eMobAniST.Walk : eMobAniST.Idle : VelY > 0 ? eMobAniST.AirborneUp : eMobAniST.AirborneDown;
+    }
 
     #region Method: Move
     public void OnMoveRandom()
@@ -195,15 +202,15 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     public bool Follow()
     {
+        m_MoveData.Dir = (Mathf.Sign(GM.PlayerPos.x - transform.position.x) == 1) ? 1 : -1;
         var act = Follow_Logic.Follow(ref m_followData, ref m_MoveData, ref m_jumpData, m_groundDetectionData.Size, m_MoveData.Dir, transform.position);
-        m_CurAniST = eMobAniST.Walk;
         switch (act)
         {
-            case eMoveAction.JumpProcess:               return m_bGrounded ? m_bJumpStart = true : true;
-            case eMoveAction.Jump:                      return Jump(); 
-            case eMoveAction.DownJump:                  return Fall(); 
-            case eMoveAction.Left: m_MoveData.Dir = -1; return true;
-            case eMoveAction.Right: m_MoveData.Dir = 1; return true;
+            case eMoveAction.JumpProcess:                return m_bGrounded ? m_bJumpStart = true : true;
+            case eMoveAction.Jump:                       return Jump(); 
+            case eMoveAction.DownJump:                   return Fall(); 
+            case eMoveAction.Left: m_MoveData.Dir = -1;  return true;
+            case eMoveAction.Right: m_MoveData.Dir = 1;  return true;
             default: break;
         }
         return true;
