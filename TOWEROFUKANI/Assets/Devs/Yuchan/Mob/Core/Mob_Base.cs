@@ -83,8 +83,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     float VelY => m_rb.velocity.y;
     protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
     protected int Dir { set { m_MoveData.Dir = value; } get { return m_MoveData.Dir; }   }
-    
-    public virtual bool CanFollow => !m_bGrounded ? false : ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
+
+
+    public virtual bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
     public virtual bool CanAttack => m_bAttacking ? true : !m_bGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
             
     #endregion
@@ -98,7 +99,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         if (m_MoveData.State == MobMoveData.eState.Idle) OnIdleRandom();
 
         for (int i = 0; i < (int)eMobAniST.Last; i++)
-            m_Ani[(eMobAniST)i] = ($"{gameObject.name}_{((eMobAniST)i).ToString()}", 1);
+            m_Ani[(eMobAniST)i] = ($"{gameObject.name}_{((eMobAniST)i).ToString()}", 0);
         foreach (var i in m_AniSpeedData)
             m_Ani[i.ST] = ($"{gameObject.name}_{i.ST.ToString()}", i.t);
 
@@ -198,7 +199,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_CurAniST = eMobAniST.Walk;
         switch (act)
         {
-            case eMoveAction.JumpProcess:               return m_bJumpStart = true;
+            case eMoveAction.JumpProcess:               return m_bGrounded ? m_bJumpStart = true : true;
             case eMoveAction.Jump:                      return Jump(); 
             case eMoveAction.DownJump:                  return Fall(); 
             case eMoveAction.Left: m_MoveData.Dir = -1; return true;

@@ -4,14 +4,11 @@ public static class Anim_Logic
 {
     public static void SetAnimSpeed(Animator animator, float duration, string animName = null)
     {
-        if (animName != null && !animator.CheckCurAnimName(animName))
+        if ((animName != null && !animator.CheckCurAnimName(animName)) || duration <= 0)
         {
             animator.speed = 1;
             return;
         }
-
-        if (duration <= 0)
-            return;
 
         animator.speed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / duration;
     }
