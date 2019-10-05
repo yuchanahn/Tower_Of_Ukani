@@ -84,9 +84,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
     protected int Dir { set { m_MoveData.Dir = value; } get { return m_MoveData.Dir; }   }
     
-    public virtual bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
+    public virtual bool CanFollow => !m_bGrounded ? false : ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
     public virtual bool CanAttack => m_bAttacking ? true : !m_bGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
-
+            
     #endregion
 
     #region Method:

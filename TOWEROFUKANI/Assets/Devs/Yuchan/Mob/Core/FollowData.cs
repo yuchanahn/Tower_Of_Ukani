@@ -41,9 +41,9 @@ public class Follow_Logic
         else
         {
             var Hit = MobYMoveDetect_Logic.GetVirJumpDetectGroundOrNull(pos, ref jdata, size, ref mvdata, data.CantMoveGround);
-            Debug.DrawRay(pos + new Vector2(0, size.y/2), new Vector2(curDir, 1), Color.green);
+            //Debug.DrawRay(pos + new Vector2(0, size.y/2), new Vector2(curDir, 1), Color.green);
             if (!Hit) return eMoveAction.JumpProcess;
-            else Debug.Log(Hit.name);
+            else Debug.Log(Hit.name);   
             return curDir == -1 ? eMoveAction.Left : eMoveAction.Right;
         }
     }

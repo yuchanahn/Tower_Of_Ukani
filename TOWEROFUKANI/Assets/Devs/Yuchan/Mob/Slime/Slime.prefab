@@ -212,7 +212,7 @@ MonoBehaviour:
     SprTr: {fileID: 7268275018201367325}
     Speed: 1.5
     CoolTime: 1
-    JumpAbleDist: 1.2
+    JumpAbleDist: 1
     FallAbleDist: 1
     FallAbleLayer:
       serializedVersion: 2

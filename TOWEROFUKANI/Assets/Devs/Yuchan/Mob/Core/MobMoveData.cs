@@ -93,7 +93,7 @@ public class MobYMoveDetect_Logic
 
     public static Collider2D GetVirJumpDetectGroundOrNull(Vector2 pos, ref JumpData jdata, Vector2 size, ref MobMoveData data, LayerMask soildGorund)
     {
-        var _pos = pos + new Vector2(0, size.y / 2 + jdata.height);
+        var _pos = pos + new Vector2(0, jdata.height);
         var _dist = jdata.time * data.Speed;
         var hit = Physics2D.BoxCast(_pos, size, 0, Vector2.right * data.Dir, _dist, soildGorund);
         
