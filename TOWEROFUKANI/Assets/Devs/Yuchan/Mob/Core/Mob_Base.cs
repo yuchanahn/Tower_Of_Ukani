@@ -254,7 +254,13 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_CurAniST = eMobAniST.Hit;
     }
     public bool Hurting() => m_bHurting;
-    private void HurtEnd() { m_bHurting = false; m_MoveData.SprDir = m_bPrevDir; }
+    private void HurtEnd()
+    {
+        m_bAttacking = false;
+        atkST = eAtkST.pre;
+        m_bHurting = false;
+        m_MoveData.SprDir = m_bPrevDir;
+    }
 
     #region Interface: IHurt
 
