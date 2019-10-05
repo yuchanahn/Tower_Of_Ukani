@@ -15,7 +15,6 @@ public abstract class GunReload_Base<TMain> : GunAction_Base<TMain>
     {
         // Start Timer
         gun.reloadTimer.SetActive(true);
-        gun.reloadTimer.ToZero();
         gun.reloadTimer.Restart();
 
         // Animation

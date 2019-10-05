@@ -6,7 +6,7 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private BulletData bulletData;
+    [SerializeField] private WeaponProjectileData bulletData;
 
     [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;

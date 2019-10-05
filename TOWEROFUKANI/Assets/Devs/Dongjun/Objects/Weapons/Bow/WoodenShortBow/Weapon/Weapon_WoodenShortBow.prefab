@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultAction: {fileID: 2778987209543410483}
   weaponName: Wooden Short Bow
-  weaponDesc: This is a Weapon
+  weaponDesc: This is a Shot Bow
   weaponTags: 
   pivotPointY: 0.1
   spriteRoot: {fileID: 2778987210056156138}
@@ -81,6 +81,7 @@ MonoBehaviour:
     CurTime: 0
     EndTime: 0.5
   canShoot: 0
+  drawPower: 0
 --- !u!114 &2778987209543410483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,12 +96,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
   shootPoint: {fileID: 2778987210279264361}
-  bulletPrefab: {fileID: 3884733660367707162, guid: 669013e116ca93843a65a5f56b89838a,
+  arrowPrefab: {fileID: -6090198353138406777, guid: 07fe65b781e65e04d978b2432feee51c,
     type: 3}
-  bulletData:
-    damage: 1
+  projectileData:
+    damage: 5
     moveSpeed: 30
-    maxDist: 10
+    gravity: 0.7
+    curTravelDist: 0
+    maxTravelDist: 15
   maxShootAnimTime: 0.12
   camShakeData_Shoot:
     angle: 0

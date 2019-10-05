@@ -10896,6 +10896,21 @@ PrefabInstance:
       propertyPath: m_cliffData.FallHeight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7268275018201367324, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268275018201367324, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268275018201367324, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
 --- !u!1001 &1686854405
@@ -13423,6 +13438,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778987209543410483, guid: b93e3d79643b1f64e802a4b3f6520097,
+        type: 3}
+      propertyPath: bulletPrefab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b93e3d79643b1f64e802a4b3f6520097, type: 3}

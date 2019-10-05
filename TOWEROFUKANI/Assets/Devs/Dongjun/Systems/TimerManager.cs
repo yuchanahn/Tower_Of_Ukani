@@ -92,7 +92,7 @@ public class TimerData
         {
             IsEnded = true;
             OnEnd?.Invoke();
-            CurTime = 0;
+            CurTime = EndTime;
         }
     }
 
@@ -103,6 +103,7 @@ public class TimerData
     /// </summary>
     public void Restart()
     {
+        CurTime = 0;
         IsEnded = false;
     }
 

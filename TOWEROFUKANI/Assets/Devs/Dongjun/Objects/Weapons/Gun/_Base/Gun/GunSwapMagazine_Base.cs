@@ -24,7 +24,6 @@ public abstract class GunSwapMagazine_Base<TMain> : GunAction_Base<TMain>
     {
         // Start Timer
         gun.swapMagazineTimer.SetActive(true);
-        gun.swapMagazineTimer.ToZero();
         gun.swapMagazineTimer.Restart();
 
         IsAnimStarted_SwapMagazine = true;

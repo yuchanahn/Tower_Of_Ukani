@@ -249,7 +249,9 @@ MonoBehaviour:
   bulletData:
     damage: 2
     moveSpeed: 45
-    maxDist: 10
+    curTravelDist: 0
+    maxTravelDist: 10
+    gravity: 0
   maxShootAnimTime: 0
   acry_YPosOffset: 0.2
   acry_ZRotOffset: 8

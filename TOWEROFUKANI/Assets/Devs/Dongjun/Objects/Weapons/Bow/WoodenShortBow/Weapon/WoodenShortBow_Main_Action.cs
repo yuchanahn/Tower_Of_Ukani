@@ -5,14 +5,18 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     #region Var: Inspector
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
-    [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private BulletData bulletData;
+    [SerializeField] private Arrow arrowPrefab;
+    [SerializeField] private WeaponProjectileData projectileData;
 
     [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
 
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
+    #endregion
+
+    #region Var: Current Data
+    private WeaponProjectileData curProjectileData;
     #endregion
 
     #region Var: Properties
@@ -25,28 +29,16 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     {
         bow.shootTimer.SetActive(true);
         bow.shootTimer.Restart();
-    }
-    public override void OnLateEnter()
-    {
-        AnimSetSpeed_Shoot();
+
+        if (bow.canShoot)
+        {
+            bow.canShoot = false;
+            AnimPlay_Shoot();
+        }
     }
     public override void OnExit()
     {
         AnimReset_Shoot();
-    }
-    public override void OnUpdate()
-    {
-        if (bow.canShoot)
-        {
-            bow.canShoot = false;
-
-            IsAnimEnded_Shoot = false;
-            AnimPlay_Shoot();
-        }
-        else if (IsAnimEnded_Shoot)
-        {
-            AnimPlay_Idle();
-        }
     }
     public override void OnLateUpdate()
     {
@@ -54,13 +46,7 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
             return;
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, bow.SpriteRoot.transform, transform);
-    }
-    #endregion
-
-    #region Method: Idle
-    private void AnimPlay_Idle()
-    {
-        animator.Play(string.Concat(bow.WeaponNameTrimed, "_Idle"));
+        AnimSetSpeed_Shoot();
     }
     #endregion
 
@@ -68,8 +54,13 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     private void Shoot()
     {
         // Spawn Bullet
-        Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
-        bullet.SetData(bulletData);
+        Arrow arrow = arrowPrefab.Spawn(shootPoint.position, transform.rotation);
+
+        curProjectileData = projectileData;
+        curProjectileData.damage = Mathf.Max(Mathf.RoundToInt(curProjectileData.damage * bow.drawPower), 1);
+        curProjectileData.moveSpeed *= bow.drawPower;
+
+        arrow.SetData(curProjectileData);
     }
     private void ShootEffects()
     {
@@ -80,7 +71,8 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     // Animation
     private void AnimPlay_Shoot()
     {
-        animator.Play(string.Concat(bow.WeaponNameTrimed, "_Shoot"), 0, 0);
+        IsAnimEnded_Shoot = false;
+        animator.SetTrigger("Shoot");
     }
     private void AnimSetSpeed_Shoot()
     {
@@ -89,6 +81,8 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     }
     private void AnimReset_Shoot()
     {
+        IsAnimEnded_Shoot = true;
+        animator.ResetTrigger("Shoot");
         animator.speed = 1;
     }
     #endregion
@@ -101,9 +95,6 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     }
     private void OnAnimEnd_Shoot()
     {
-        IsAnimEnded_Shoot = true;
-        bow.shootTimer.SetActive(false);
-
         AnimReset_Shoot();
     }
     #endregion

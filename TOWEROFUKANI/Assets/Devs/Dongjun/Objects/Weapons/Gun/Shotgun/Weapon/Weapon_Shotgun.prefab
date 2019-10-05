@@ -137,7 +137,9 @@ MonoBehaviour:
   bulletData:
     damage: 2
     moveSpeed: 45
-    maxDist: 5
+    gravity: 0
+    curTravelDist: 0
+    maxTravelDist: 7
   maxShootAnimTime: 0
   pelletCount: 4
   pelletAngle: 7

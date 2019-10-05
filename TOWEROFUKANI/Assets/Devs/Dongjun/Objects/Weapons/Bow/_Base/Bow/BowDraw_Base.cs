@@ -17,6 +17,7 @@ public abstract class BowDraw_Base<TMain> : BowAction_Base<TMain>
         bow.drawTimer.Restart();
 
         IsDrawing = true;
+        bow.drawPower = 0;
 
         // Animation
         animator.Play(bow.WeaponNameTrimed + "_Pull", 0, 0);
@@ -43,6 +44,7 @@ public abstract class BowDraw_Base<TMain> : BowAction_Base<TMain>
         {
             IsDrawing = false;
             bow.canShoot = true;
+            bow.drawPower = bow.drawTimer.CurTime / bow.drawTimer.EndTime;
         }
     }
     public override void OnLateUpdate()

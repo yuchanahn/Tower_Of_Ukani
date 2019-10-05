@@ -189,7 +189,9 @@ MonoBehaviour:
   bulletData:
     damage: 2
     moveSpeed: 45
-    maxDist: 8
+    curTravelDist: 0
+    maxTravelDist: 10
+    gravity: 0
   maxShootAnimTime: 0
   muzzleFlashPrefab: {fileID: 3546313596656909244, guid: fc45d6df91e980e4d90c006610728338,
     type: 3}
