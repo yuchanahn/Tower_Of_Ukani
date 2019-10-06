@@ -204,10 +204,6 @@ MonoBehaviour:
     t: 0.4
   - ST: 1
     t: 0.4
-  - ST: 5
-    t: 0.4
-  - ST: 6
-    t: 0.4
   m_MoveData:
     SprTr: {fileID: 7268275018201367325}
     Speed: 1.5

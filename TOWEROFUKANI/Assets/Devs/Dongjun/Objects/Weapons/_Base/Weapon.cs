@@ -18,6 +18,7 @@ public abstract class Weapon : CLA_Main
 {
     #region Var: Inspector
     [Header("Weapon Info")]
+    [SerializeField] private Sprite weaponIcon;
     [SerializeField] private string weaponName = "Weapon";
     [SerializeField] private string weaponDesc = "This is a Weapon";
     [SerializeField] private WeaponTag[] weaponTags;
@@ -30,6 +31,7 @@ public abstract class Weapon : CLA_Main
     #region Var: Properties
     public bool IsSelected { get; protected set; } = false;
 
+    public Sprite WeaponIcon => weaponIcon;
     public string WeaponName => weaponName;
     public string WeaponNameTrimed { get; private set; }
     public string WeaponDesc => weaponDesc;

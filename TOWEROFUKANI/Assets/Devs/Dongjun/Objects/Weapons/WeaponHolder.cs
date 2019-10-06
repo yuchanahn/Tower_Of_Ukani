@@ -6,10 +6,13 @@ public class WeaponHolder : MonoBehaviour
     #region Var: Inspector
     [SerializeField] private Text nameText;
     [SerializeField] private Text ammoText;
-    [SerializeField] private Weapon[] weaponSlot = new Weapon[3];
+    [SerializeField] private Image[] weaponIcon = new Image[3];
+    [SerializeField] private Weapon[] weapons = new Weapon[3];
     #endregion
 
-    #region Var: Current Weapon
+    #region Var: Weapon Holder
+    private int currentSlot = 0;
+    private Weapon oldWeapon;
     private Weapon curWeapon;
     #endregion
 
@@ -17,56 +20,51 @@ public class WeaponHolder : MonoBehaviour
     #region Method Unity
     private void Awake()
     {
-        if (weaponSlot == null)
+        if (weapons == null)
             return;
 
-        curWeapon = weaponSlot[0];
+        // Init Selected Weapon
+        curWeapon = weapons[0];
         curWeapon.SelectWeapon(true);
+
+        // Init Icons
+        for (int i = 0; i < weaponIcon.Length; i++)
+            weaponIcon[i].sprite = weapons[i].WeaponIcon;
     }
     private void Update()
     {
-        if (weaponSlot == null)
+        if (weapons == null)
             return;
 
+        GetInput();
         ChangeWeapon();
         UpdateUI();
     }
     #endregion
 
     #region Method: Change Weapon
-    private void SetWeapon(Weapon weapon)
+    private void GetInput()
     {
-        curWeapon.SelectWeapon(false);
-        curWeapon = weapon;
-        curWeapon.SelectWeapon(true);
+        float scroll = Input.mouseScrollDelta.y;
+        currentSlot += scroll == 0 ? 0 : scroll > 0 ? -1 : 1;
+        currentSlot = currentSlot == -1 ? 2 : currentSlot == weapons.Length ? 0 : currentSlot;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            currentSlot = 0;
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            currentSlot = 1;
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            currentSlot = 2;
     }
     private void ChangeWeapon()
     {
-        if (Input.mouseScrollDelta.y < 0)
-        {
-            if (curWeapon == weaponSlot[0])
-                SetWeapon(weaponSlot[1]);
-            else if (curWeapon == weaponSlot[1])
-                SetWeapon(weaponSlot[2]);
-            else if (curWeapon == weaponSlot[2])
-                SetWeapon(weaponSlot[0]);
-        }
-        else if (Input.mouseScrollDelta.y > 0)
-        {
-            if (curWeapon == weaponSlot[0])
-                SetWeapon(weaponSlot[2]);
-            else if (curWeapon == weaponSlot[1])
-                SetWeapon(weaponSlot[0]);
-            else if (curWeapon == weaponSlot[2])
-                SetWeapon(weaponSlot[1]);
-        }
+        if (oldWeapon == weapons[currentSlot])
+            return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && curWeapon != weaponSlot[0])
-            SetWeapon(weaponSlot[0]);
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && curWeapon != weaponSlot[1])
-            SetWeapon(weaponSlot[1]);
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && curWeapon != weaponSlot[2])
-            SetWeapon(weaponSlot[2]);
+        oldWeapon?.SelectWeapon(false);
+        curWeapon = weapons[currentSlot];
+        curWeapon.SelectWeapon(true);
+        oldWeapon = curWeapon;
     }
     #endregion
 
@@ -76,8 +74,16 @@ public class WeaponHolder : MonoBehaviour
         // Show Name
         nameText.text = curWeapon.WeaponName;
 
-        // Show Ammo
-        if (curWeapon as Gun) ammoText.text = $"{(curWeapon as Gun).loadedBullets} / {(curWeapon as Gun).magazineSize}";
+        // Show Weapon Info
+        if (curWeapon is Gun)
+        {
+            Gun gun = curWeapon as Gun;
+            ammoText.text = $"{gun.loadedBullets} / {gun.magazineSize}";
+        }
+        else
+        {
+            ammoText.text = string.Empty;
+        }
     }
     #endregion
 }

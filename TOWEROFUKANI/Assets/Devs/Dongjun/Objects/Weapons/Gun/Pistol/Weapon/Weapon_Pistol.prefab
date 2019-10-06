@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultAction: {fileID: 485092021999584720}
+  weaponIcon: {fileID: 21300000, guid: 787a57ef333f52b449ce2e66bb892119, type: 3}
   weaponName: Pistol
   weaponDesc: This is a Pistol
   weaponTags: 000000000300000005000000
@@ -189,9 +190,9 @@ MonoBehaviour:
   bulletData:
     damage: 2
     moveSpeed: 45
+    gravity: 0
     curTravelDist: 0
     maxTravelDist: 10
-    gravity: 0
   maxShootAnimTime: 0
   muzzleFlashPrefab: {fileID: 3546313596656909244, guid: fc45d6df91e980e4d90c006610728338,
     type: 3}
