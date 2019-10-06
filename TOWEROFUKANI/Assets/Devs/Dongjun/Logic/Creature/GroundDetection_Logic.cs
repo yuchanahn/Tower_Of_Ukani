@@ -6,7 +6,6 @@ using UnityEngine;
 public struct GroundDetectionData
 {
     [HideInInspector] public Vector2 Size;
-    [HideInInspector] public Vector2 ScaledSize;
     [HideInInspector] public List<Collider2D> IgnoreGrounds;
 
     [HideInInspector] public bool OnGroundEnter_Executed;
@@ -67,17 +66,17 @@ public static class GroundDetection_Logic
 
         if (!canDetect) return;
 
-        detectionData.ScaledSize = detectionData.Size * tf.localScale;
+        Vector2 scaledSize = detectionData.Size * tf.localScale;
         #endregion
 
         #region Box Cast
-        Vector2 castPos = new Vector2(tf.position.x, tf.position.y + detectionData.ScaledSize.y);
+        Vector2 castPos = new Vector2(tf.position.x, tf.position.y + scaledSize.y);
         float offset = detectionData.OutterSnapDist + detectionData.OffsetAmount;
 
         float deltaYDist = -rb2D.velocity.y * Time.fixedDeltaTime;
-        float castDist = detectionData.ScaledSize.y + (deltaYDist > offset ? deltaYDist : offset);
+        float castDist = scaledSize.y + (deltaYDist > offset ? deltaYDist : offset);
 
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, detectionData.ScaledSize, 0f, detectDir, castDist, detectionData.GroundLayers);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, scaledSize, 0f, detectDir, castDist, detectionData.GroundLayers);
         if (hits == null) return;
         #endregion
 
@@ -85,7 +84,7 @@ public static class GroundDetection_Logic
         for (int i = 0; i < hits.Length; i++)
         {
             if (detectionData.IgnoreGrounds.Contains(hits[i].collider) ||
-                hits[i].point.y > tf.position.y - (detectionData.ScaledSize.y * 0.5f) + detectionData.InnerSnapDist)
+                hits[i].point.y > tf.position.y - (scaledSize.y * 0.5f) + detectionData.InnerSnapDist)
                 continue;
 
             if (groundInfo.Col == null || groundInfo.HitPointY < hits[i].point.y)
@@ -105,7 +104,7 @@ public static class GroundDetection_Logic
         if (rb2D.velocity.y <= 0)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
-            tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (detectionData.ScaledSize.y * 0.5f) + detectionData.OffsetAmount);
+            tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (scaledSize.y * 0.5f) + detectionData.OffsetAmount);
         }
 
         Rigidbody2D groundRB = groundInfo.GO.GetComponent<Rigidbody2D>();
@@ -150,7 +149,7 @@ public static class GroundDetection_Logic
     {
         #region Overlap Box
         Vector2 detectPos = tf.position;
-        Vector2 detectSize = detectionData.Size;
+        Vector2 detectSize = detectionData.Size * tf.localScale;
         if (rb2D.velocity.x != 0)
         {
             detectPos.x += (rb2D.velocity.x) / 2;
