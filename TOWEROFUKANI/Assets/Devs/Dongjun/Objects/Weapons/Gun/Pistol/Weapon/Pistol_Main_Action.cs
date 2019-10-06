@@ -26,7 +26,7 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     #region Method: CLA_Action
     public override void OnExit()
     {
-        AnimReset_Shoot();
+        OnAnimEnd_Shoot();
     }
     public override void OnUpdate()
     {
@@ -49,7 +49,7 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
             return;
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
-        AnimSetSpeed_Shoot();
+        Anim_Logic.SetAnimSpeed(animator, gun.shootTimer.EndTime, maxShootAnimTime, string.Concat(gun.WeaponNameTrimed, "_Shoot"));
     }
     #endregion
 
@@ -71,22 +71,10 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
         // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
     }
-
-    // Animation
     private void AnimPlay_Shoot()
     {
         IsAnimEnded_Shoot = false;
-        animator.SetTrigger("Shoot");
-    }
-    private void AnimSetSpeed_Shoot()
-    {
-        float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : gun.shootTimer.EndTime;
-        Anim_Logic.SetAnimSpeed(animator, gun.shootTimer.EndTime, maxDuration, string.Concat(gun.WeaponNameTrimed, "_Shoot"));
-    }
-    private void AnimReset_Shoot()
-    {
-        animator.speed = 1;
-        animator.ResetTrigger("Shoot");
+        animator.Play(string.Concat(gun.WeaponNameTrimed, "_Shoot"), 0, 0);
     }
     #endregion
 
@@ -94,6 +82,7 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     private void OnAnimEnd_Shoot()
     {
         IsAnimEnded_Shoot = true;
+        animator.speed = 1;
     }
     #endregion
 }

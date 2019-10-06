@@ -43,7 +43,7 @@ public abstract class BowDraw_Base<TMain> : BowAction_Base<TMain>
         if (Input.GetKeyUp(PlayerInputManager.Inst.Keys.MainAbility))
         {
             IsDrawing = false;
-            bow.canShoot = true;
+            bow.hasBeenDrawn = true;
             bow.drawPower = bow.drawTimer.CurTime / bow.drawTimer.EndTime;
         }
     }

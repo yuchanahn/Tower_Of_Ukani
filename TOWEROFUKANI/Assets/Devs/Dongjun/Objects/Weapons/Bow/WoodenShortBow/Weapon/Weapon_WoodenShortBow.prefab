@@ -70,18 +70,18 @@ MonoBehaviour:
   weaponIcon: {fileID: 21300000, guid: c6dcd0c1c74b8ae478f5c8587150b90e, type: 3}
   weaponName: Wooden Short Bow
   weaponDesc: This is a Shot Bow
-  weaponTags: 
+  weaponTags: 000000000300000006000000
   pivotPointY: 0.1
   spriteRoot: {fileID: 2778987210056156138}
   shootTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 0.2
+    EndTime: 0.3
   drawTimer:
     StartAsEnded: 0
     CurTime: 0
     EndTime: 0.5
-  canShoot: 0
+  hasBeenDrawn: 0
   drawPower: 0
 --- !u!114 &2778987209543410483
 MonoBehaviour:

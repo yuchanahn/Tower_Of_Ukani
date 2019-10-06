@@ -6,8 +6,8 @@ public abstract class Bow : Weapon
     [SerializeField] public TimerData shootTimer;
     [SerializeField] public TimerData drawTimer;
 
-    public bool canShoot = false;
-    public float drawPower = 0;
+    [HideInInspector] public bool hasBeenDrawn = false;
+    [HideInInspector] public float drawPower = 0;
 
     protected override void Start()
     {

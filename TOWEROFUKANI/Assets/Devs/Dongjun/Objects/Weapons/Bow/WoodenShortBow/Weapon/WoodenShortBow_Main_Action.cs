@@ -30,15 +30,15 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
         bow.shootTimer.SetActive(true);
         bow.shootTimer.Restart();
 
-        if (bow.canShoot)
+        if (bow.hasBeenDrawn)
         {
-            bow.canShoot = false;
+            bow.hasBeenDrawn = false;
             AnimPlay_Shoot();
         }
     }
     public override void OnExit()
     {
-        AnimReset_Shoot();
+        OnAnimEnd_Shoot();
     }
     public override void OnLateUpdate()
     {
@@ -46,7 +46,7 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
             return;
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, bow.SpriteRoot.transform, transform);
-        AnimSetSpeed_Shoot();
+        Anim_Logic.SetAnimSpeed(animator, bow.shootTimer.EndTime, maxShootAnimTime, string.Concat(bow.WeaponNameTrimed, "_Shoot"));
     }
     #endregion
 
@@ -67,23 +67,10 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
         // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
     }
-
-    // Animation
     private void AnimPlay_Shoot()
     {
         IsAnimEnded_Shoot = false;
-        animator.SetTrigger("Shoot");
-    }
-    private void AnimSetSpeed_Shoot()
-    {
-        float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : bow.shootTimer.EndTime;
-        Anim_Logic.SetAnimSpeed(animator, bow.shootTimer.EndTime, maxDuration, string.Concat(bow.WeaponNameTrimed, "_Shoot"));
-    }
-    private void AnimReset_Shoot()
-    {
-        IsAnimEnded_Shoot = true;
-        animator.ResetTrigger("Shoot");
-        animator.speed = 1;
+        animator.Play(string.Concat(bow.WeaponNameTrimed, "_Shoot"), 0, 0);
     }
     #endregion
 
@@ -95,7 +82,8 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     }
     private void OnAnimEnd_Shoot()
     {
-        AnimReset_Shoot();
+        IsAnimEnded_Shoot = true;
+        animator.speed = 1;
     }
     #endregion
 }

@@ -26,11 +26,6 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Animation
-    const string ANIM_T_Shoot = "Shoot";
-    const string ANIM_S_Shoot = "MachineGun_Shoot";
-    #endregion
-
     #region Var: Properties
     public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
@@ -43,7 +38,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     }
     public override void OnExit()
     {
-        AnimReset_Shoot();
+        OnAnimEnd_Shoot();
     }
     public override void OnUpdate()
     {
@@ -66,7 +61,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
             return;
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, gun.SpriteRoot.transform, transform);
-        AnimSetSpeed_Shoot();
+        Anim_Logic.SetAnimSpeed(animator, gun.shootTimer.EndTime, maxShootAnimTime, string.Concat(gun.WeaponNameTrimed, "_Shoot"));
     }
     #endregion
 
@@ -106,17 +101,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     private void AnimPlay_Shoot()
     {
         IsAnimEnded_Shoot = false;
-        animator.SetTrigger(ANIM_T_Shoot);
-    }
-    private void AnimSetSpeed_Shoot()
-    {
-        float maxDuration = maxShootAnimTime > 0 ? maxShootAnimTime : gun.shootTimer.EndTime;
-        Anim_Logic.SetAnimSpeed(animator, gun.shootTimer.EndTime, maxDuration, ANIM_S_Shoot);
-    }
-    private void AnimReset_Shoot()
-    {
-        animator.speed = 1;
-        animator.ResetTrigger(ANIM_T_Shoot);
+        animator.Play(string.Concat(gun.WeaponNameTrimed, "_Shoot"), 0, 0);
     }
     #endregion
 
@@ -124,6 +109,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     private void OnAnimEnd_Shoot()
     {
         IsAnimEnded_Shoot = true;
+        animator.speed = 1;
     }
     #endregion
 }
