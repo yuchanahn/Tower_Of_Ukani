@@ -19,10 +19,6 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     private WeaponProjectileData curProjectileData;
     #endregion
 
-    #region Var: Properties
-    public bool IsAnimEnded_Shoot { get; private set; } = true;
-    #endregion
-
 
     #region Method: CLA_Action
     public override void OnEnter()
@@ -44,6 +40,8 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     {
         if (!bow.IsSelected)
             return;
+
+        bow.arrowSprite.SetActive(bow.shootTimer.IsEnded);
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, bow.SpriteRoot.transform, transform);
         Anim_Logic.SetAnimSpeed(animator, bow.shootTimer.EndTime, maxShootAnimTime, string.Concat(bow.WeaponNameTrimed, "_Shoot"));
@@ -69,7 +67,6 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     }
     private void AnimPlay_Shoot()
     {
-        IsAnimEnded_Shoot = false;
         animator.Play(string.Concat(bow.WeaponNameTrimed, "_Shoot"), 0, 0);
     }
     #endregion
@@ -82,7 +79,6 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     }
     private void OnAnimEnd_Shoot()
     {
-        IsAnimEnded_Shoot = true;
         animator.speed = 1;
     }
     #endregion

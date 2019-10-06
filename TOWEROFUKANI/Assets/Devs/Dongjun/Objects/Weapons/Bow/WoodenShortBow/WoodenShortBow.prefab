@@ -74,13 +74,14 @@ MonoBehaviour:
   pivotPointY: 0.1
   spriteRoot: {fileID: 2778987210056156138}
   shootTimer:
-    StartAsEnded: 0
+    StartAsEnded: 1
     CurTime: 0
     EndTime: 0.3
   drawTimer:
     StartAsEnded: 0
     CurTime: 0
     EndTime: 0.5
+  arrowSprite: {fileID: 7866383674972493763}
   hasBeenDrawn: 0
   drawPower: 0
 --- !u!114 &2778987209543410483
@@ -104,7 +105,7 @@ MonoBehaviour:
     moveSpeed: 30
     gravity: 0.7
     curTravelDist: 0
-    maxTravelDist: 15
+    maxTravelDist: 30
   maxShootAnimTime: 0.2
   camShakeData_Shoot:
     angle: 0

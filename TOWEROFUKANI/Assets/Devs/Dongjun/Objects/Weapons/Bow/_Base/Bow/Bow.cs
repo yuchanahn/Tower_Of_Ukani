@@ -6,6 +6,9 @@ public abstract class Bow : Weapon
     [SerializeField] public TimerData shootTimer;
     [SerializeField] public TimerData drawTimer;
 
+    [Header("Arrow Sprite")]
+    [SerializeField] public GameObject arrowSprite;
+
     [HideInInspector] public bool hasBeenDrawn = false;
     [HideInInspector] public float drawPower = 0;
 

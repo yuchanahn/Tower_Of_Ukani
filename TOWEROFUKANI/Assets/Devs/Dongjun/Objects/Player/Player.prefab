@@ -242,8 +242,8 @@ PlatformEffector2D:
     m_Bits: 1024
   m_RotationalOffset: 180
   m_UseOneWay: 1
-  m_UseOneWayGrouping: 1
-  m_SurfaceArc: 170
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 90
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 0
@@ -384,7 +384,6 @@ MonoBehaviour:
   oneWayCollider: {fileID: 7371128403577552055}
   groundDetectionData:
     Size: {x: 0, y: 0}
-    ScaledSize: {x: 0, y: 0}
     IgnoreGrounds: []
     OnGroundEnter_Executed: 0
     OnGroundExit_Executed: 0
@@ -435,7 +434,7 @@ PrefabInstance:
     - target: {fileID: 1077788971187178467, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
         type: 3}
       propertyPath: m_Name
-      value: Weapon_Shotgun
+      value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 1077788971187178464, guid: ab5ec28e3b385664d9a34ef3a6de12a9,
         type: 3}
@@ -510,7 +509,7 @@ PrefabInstance:
     - target: {fileID: 2609116014883290700, guid: 5f95411add09b9b4c9b9153672129efd,
         type: 3}
       propertyPath: m_Name
-      value: Weapon_Pistol
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 2609116014883290703, guid: 5f95411add09b9b4c9b9153672129efd,
         type: 3}
@@ -585,7 +584,7 @@ PrefabInstance:
     - target: {fileID: 4450316997164171681, guid: 102a22639131d7d42bc9cbc79bf84005,
         type: 3}
       propertyPath: m_Name
-      value: Weapon_MachineGun
+      value: MachineGun
       objectReference: {fileID: 0}
     - target: {fileID: 4450316997164171682, guid: 102a22639131d7d42bc9cbc79bf84005,
         type: 3}

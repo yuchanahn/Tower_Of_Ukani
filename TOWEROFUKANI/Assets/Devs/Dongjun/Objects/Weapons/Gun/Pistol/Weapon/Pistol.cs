@@ -16,14 +16,14 @@ public class Pistol : Gun
         reload_AC = GetComponent<Gun_Reload_Action>();
         swapMagazine_AC = GetComponent<Gun_SwapMagazine_Action>();
 
-        ConditionLogics.Add(main_AC, CL_Main_AC);
-        ConditionLogics.Add(reload_AC, CL_Reload_AC);
-        ConditionLogics.Add(swapMagazine_AC, CL_SwapMagazine_AC);
+        ConditionLogics.Add(main_AC, CL_Main);
+        ConditionLogics.Add(reload_AC, CL_Reload);
+        ConditionLogics.Add(swapMagazine_AC, CL_SwapMagazine);
     }
     #endregion
 
     #region Method: Condition Logic
-    private CLA_Action CL_Main_AC()
+    private CLA_Action CL_Main()
     {
         if (!IsSelected)
             return DefaultAction;
@@ -47,7 +47,7 @@ public class Pistol : Gun
 
         return main_AC;
     }
-    private CLA_Action CL_Reload_AC()
+    private CLA_Action CL_Reload()
     {
         if (!IsSelected)
             return DefaultAction;
@@ -57,7 +57,7 @@ public class Pistol : Gun
 
         return reload_AC;
     }
-    private CLA_Action CL_SwapMagazine_AC()
+    private CLA_Action CL_SwapMagazine()
     {
         if (!IsSelected)
             return DefaultAction;
