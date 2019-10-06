@@ -401,7 +401,12 @@ MonoBehaviour:
     useGravity: 1
     acceleration: 40
     terminalVelocity: 20
-  walkSpeed: 7.5
+  walkData:
+    walkSpeed: 7.5
+    walkAccel: 30
+    changeDirSpeed: 0.2
+    curWalkSpeed: 0
+    oldWalkDir: 0
   jumpData:
     curCount: 0
     maxCount: 2

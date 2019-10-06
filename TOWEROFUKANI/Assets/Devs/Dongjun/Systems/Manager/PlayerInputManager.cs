@@ -30,7 +30,8 @@ public class PlayerInputManager : MonoBehaviour
 
     #region Var: Walk
     public int Input_WalkDir { get; private set; } = 0;
-    private Stack<int> walkKeyStack = new Stack<int>();
+    private int input_walkRight = 0;
+    private int input_walkLeft = 0;
     #endregion
 
     #region Var: FallThrough
@@ -44,8 +45,7 @@ public class PlayerInputManager : MonoBehaviour
     #region Var: Dash
     [HideInInspector]
     public int Input_DashDir = 0;
-
-    private int oldWalkDir = 0;
+    private int oldDashInput = 0;
 
     private readonly float dashInputInterval = 0.2f;
     private float dashInputTime = 0;
@@ -78,22 +78,15 @@ public class PlayerInputManager : MonoBehaviour
     #region Method: Walk
     private void GetInput_Walk()
     {
-        if (Input.GetKeyDown(Keys.WalkRight)) walkKeyStack.Push(1);
-        if (Input.GetKeyDown(Keys.WalkLeft)) walkKeyStack.Push(-1);
+        if (Input.GetKeyDown(Keys.WalkRight)) input_walkRight = input_walkLeft + 1;
+        if (Input.GetKeyDown(Keys.WalkLeft)) input_walkLeft = input_walkRight + 1;
 
-        if ((Input.GetKeyUp(Keys.WalkRight) && walkKeyStack.Peek() == 1) ||
-            (Input.GetKeyUp(Keys.WalkLeft) && walkKeyStack.Peek() == -1))
-            walkKeyStack.Pop();
+        if (Input.GetKeyUp(Keys.WalkRight)) input_walkRight = 0;
+        if (Input.GetKeyUp(Keys.WalkLeft)) input_walkLeft = 0;
 
-        if (walkKeyStack.Count != 0)
-            Input_WalkDir = walkKeyStack.Peek();
-
-        if (!Input.GetKey(Keys.WalkRight) && 
-            !Input.GetKey(Keys.WalkLeft))
-        {
-            walkKeyStack.Clear();
-            Input_WalkDir = 0;
-        }
+        Input_WalkDir = input_walkRight == 0 && input_walkLeft == 0 ? 0 : 
+                        input_walkRight > input_walkLeft ? 1 : 
+                        -1;
     }
     #endregion
 
@@ -132,7 +125,7 @@ public class PlayerInputManager : MonoBehaviour
                 dashInputCount++;
 
             // After First Tap
-            if (oldWalkDir == Input_WalkDir && dashInputTime <= dashInputInterval)
+            if (oldDashInput == Input_WalkDir && dashInputTime <= dashInputInterval)
                 dashInputCount++;
             else
                 dashInputCount = 0;
@@ -146,7 +139,7 @@ public class PlayerInputManager : MonoBehaviour
 
             // Reset Data
             dashInputTime = 0;
-            oldWalkDir = Input_WalkDir;
+            oldDashInput = Input_WalkDir;
         }
 
         dashInputTime += Time.deltaTime;

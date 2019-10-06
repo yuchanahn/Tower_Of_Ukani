@@ -4,29 +4,21 @@ public class Player_Movement_Action : CLA_Action,
     ICanDetectGround
 {
     #region Var: Inspector
-    [Header("Visual")]
-    [SerializeField]
-    private Transform spriteRoot;
-
-    [Header("Collision")]
-    [SerializeField]
-    private BoxCollider2D oneWayCollider;
+    [Header("Ref")]
+    [SerializeField] private Transform spriteRoot;
+    [SerializeField] private BoxCollider2D oneWayCollider;
 
     [Header("GroundDetection")]
-    [SerializeField]
-    private GroundDetectionData groundDetectionData;
+    [SerializeField] private GroundDetectionData groundDetectionData;
 
     [Header("Gravity")]
-    [SerializeField]
-    private GravityData gravityData;
+    [SerializeField] private GravityData gravityData;
 
     [Header("Walk")]
-    [SerializeField]
-    private float walkSpeed = 6f;
+    [SerializeField] private PlayerWalkData walkData;
 
     [Header("Jump")]
-    [SerializeField]
-    private JumpData jumpData;
+    [SerializeField] private JumpData jumpData;
     #endregion
 
     #region Var: Ground Detection
@@ -90,16 +82,10 @@ public class Player_Movement_Action : CLA_Action,
 
         // Fall Through
         fallThroughKeyPressed = PlayerInputManager.Inst.Input_FallThrough;
-        GroundDetection_Logic.FallThrough(
-            ref fallThroughKeyPressed,
-            isGrounded, 
-            rb2D,
-            transform, 
-            oneWayCollider, 
-            groundDetectionData);
+        GroundDetection_Logic.FallThrough(ref fallThroughKeyPressed, isGrounded, rb2D, transform, oneWayCollider, groundDetectionData);
 
         // Walk
-        rb2D.velocity = new Vector2(walkSpeed * PlayerInputManager.Inst.Input_WalkDir, rb2D.velocity.y);
+        PlayerWalk_Logic.Walk(PlayerInputManager.Inst.Input_WalkDir, rb2D, ref walkData, isJumping);
 
         // Jump
         jumpKeyPressed = PlayerInputManager.Inst.Input_Jump;
