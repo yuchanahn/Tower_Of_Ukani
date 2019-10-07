@@ -394,7 +394,6 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1024
     IW_Solid: {fileID: 7371128403274205566}
-    edgeRadius: 0.01
     InnerSnapDist: 0.2
     OutterSnapDist: 0.05
     OffsetAmount: 0
@@ -404,10 +403,11 @@ MonoBehaviour:
     terminalVelocity: 20
   walkData:
     walkSpeed: 7.5
-    walkAccel: 5
+    walkAccelTime: 0.2
     changeDirSpeed: 0.3
     curWalkSpeed: 0
     oldWalkDir: 0
+    time: 0
   jumpData:
     curCount: 0
     maxCount: 2

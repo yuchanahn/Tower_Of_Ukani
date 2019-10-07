@@ -85,7 +85,7 @@ public class Player_Movement_Action : CLA_Action,
         GroundDetection_Logic.FallThrough(ref fallThroughKeyPressed, isGrounded, rb2D, transform, oneWayCollider, groundDetectionData);
 
         // Walk
-        PlayerWalk_Logic.Walk(PlayerInputManager.Inst.Input_WalkDir, rb2D, ref walkData, isJumping);
+        walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, rb2D, isJumping);
 
         // Jump
         jumpKeyPressed = PlayerInputManager.Inst.Input_Jump;
