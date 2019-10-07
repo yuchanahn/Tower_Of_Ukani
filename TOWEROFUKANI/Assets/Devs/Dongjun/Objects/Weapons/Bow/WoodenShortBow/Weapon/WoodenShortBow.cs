@@ -19,7 +19,7 @@ public class WoodenShortBow : Bow
         if (!IsSelected)
             return DefaultAction;
 
-        if (shootTimer.IsEnded && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
+        if (shootTimer.IsEnded && Input.GetKey(PlayerWeaponKeys.MainAbility))
             return draw_AC;
 
         return main_AC;

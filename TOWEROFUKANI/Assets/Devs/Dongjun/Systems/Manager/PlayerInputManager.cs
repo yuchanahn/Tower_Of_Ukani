@@ -1,32 +1,30 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Keys
+public static class PlayerMovementKeys
 {
-    // Movement
-    public KeyCode WalkRight => KeyCode.D;
-    public KeyCode WalkLeft => KeyCode.A;
-    public KeyCode FallThrough => KeyCode.S;
-    public KeyCode Jump => KeyCode.Space;
+    public static KeyCode WalkRight => KeyCode.D;
+    public static KeyCode WalkLeft => KeyCode.A;
+    public static KeyCode FallThrough => KeyCode.S;
+    public static KeyCode Jump => KeyCode.Space;
+}
 
-    // Action
-    public KeyCode Dash => KeyCode.LeftShift;
-    public KeyCode Kick => KeyCode.LeftControl;
+public class PlayerActionKeys
+{
+    public static KeyCode Dash => KeyCode.LeftShift;
+    public static KeyCode Kick => KeyCode.LeftControl;
+}
 
-    // Weapon
-    public KeyCode MainAbility => KeyCode.Mouse0;
-    public KeyCode SubAbility => KeyCode.Mouse1;
-    public KeyCode SpecialAbility => KeyCode.F;
-    public KeyCode Reload => KeyCode.R;
+public class PlayerWeaponKeys
+{
+    public static KeyCode MainAbility => KeyCode.Mouse0;
+    public static KeyCode SubAbility => KeyCode.Mouse1;
+    public static KeyCode SpecialAbility => KeyCode.F;
+    public static KeyCode Reload => KeyCode.R;
 }
 
 public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager Inst { get; private set; }
-
-    #region Var: KeyCode
-    public Keys Keys { get; private set; } = new Keys();
-    #endregion
 
     #region Var: Walk
     public int Input_WalkDir { get; private set; } = 0;
@@ -78,11 +76,11 @@ public class PlayerInputManager : MonoBehaviour
     #region Method: Walk
     private void GetInput_Walk()
     {
-        if (Input.GetKeyDown(Keys.WalkRight)) input_walkRight = input_walkLeft + 1;
-        if (Input.GetKeyDown(Keys.WalkLeft)) input_walkLeft = input_walkRight + 1;
+        if (Input.GetKeyDown(PlayerMovementKeys.WalkRight)) input_walkRight = input_walkLeft + 1;
+        if (Input.GetKeyDown(PlayerMovementKeys.WalkLeft)) input_walkLeft = input_walkRight + 1;
 
-        if (Input.GetKeyUp(Keys.WalkRight)) input_walkRight = 0;
-        if (Input.GetKeyUp(Keys.WalkLeft)) input_walkLeft = 0;
+        if (Input.GetKeyUp(PlayerMovementKeys.WalkRight)) input_walkRight = 0;
+        if (Input.GetKeyUp(PlayerMovementKeys.WalkLeft)) input_walkLeft = 0;
 
         Input_WalkDir = input_walkRight == 0 && input_walkLeft == 0 ? 0 : 
                         input_walkRight > input_walkLeft ? 1 : 
@@ -93,7 +91,7 @@ public class PlayerInputManager : MonoBehaviour
     #region Method: FallThrough
     private void GetInput_FallThrough()
     {
-        if (Input.GetKeyDown(Keys.FallThrough))
+        if (Input.GetKeyDown(PlayerMovementKeys.FallThrough))
             Input_FallThrough = true;
     }
     #endregion
@@ -101,7 +99,7 @@ public class PlayerInputManager : MonoBehaviour
     #region Method: Jump
     private void GetInput_Jump()
     {
-        if (Input.GetKeyDown(Keys.Jump))
+        if (Input.GetKeyDown(PlayerMovementKeys.Jump))
             Input_Jump = true;
     }
     #endregion
@@ -109,7 +107,7 @@ public class PlayerInputManager : MonoBehaviour
     #region Method: Dash
     private void GetInput_Dash()
     {
-        if (Input.GetKeyDown(Keys.Dash))
+        if (Input.GetKeyDown(PlayerActionKeys.Dash))
         {
             Input_DashDir = Input_WalkDir;
             dashInputCount = 0;
@@ -117,8 +115,8 @@ public class PlayerInputManager : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(Keys.WalkRight) || 
-            Input.GetKeyDown(Keys.WalkLeft))
+        if (Input.GetKeyDown(PlayerMovementKeys.WalkRight) || 
+            Input.GetKeyDown(PlayerMovementKeys.WalkLeft))
         {
             // First Tap
             if (dashInputCount == 0)

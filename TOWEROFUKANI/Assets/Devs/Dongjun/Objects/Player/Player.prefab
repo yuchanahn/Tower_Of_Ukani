@@ -243,7 +243,7 @@ PlatformEffector2D:
   m_RotationalOffset: 180
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 90
+  m_SurfaceArc: 0
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 0
@@ -394,6 +394,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1024
     IW_Solid: {fileID: 7371128403274205566}
+    edgeRadius: 0.01
     InnerSnapDist: 0.2
     OutterSnapDist: 0.05
     OffsetAmount: 0
@@ -403,8 +404,8 @@ MonoBehaviour:
     terminalVelocity: 20
   walkData:
     walkSpeed: 7.5
-    walkAccel: 30
-    changeDirSpeed: 0.2
+    walkAccel: 5
+    changeDirSpeed: 0.3
     curWalkSpeed: 0
     oldWalkDir: 0
   jumpData:

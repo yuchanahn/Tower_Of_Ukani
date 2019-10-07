@@ -105,33 +105,43 @@ public class Player_Movement_Action : CLA_Action,
     #region Method: Animation
     private void UpdateAnimation()
     {
+        const string
+        Idle = "Player_Idle",
+        Walk_Forward = "Player_Walk_Forward",
+        Walk_Backward = "Player_Walk_Backward",
+        Airborne = "Player_Airborne",
+        Jump = "Player_Jump",
+        AirJump = "Player_AirJump";
+
+        string jumpAnim = jumpData.canJump ? Jump : AirJump;
+
         if (isGrounded)
         {
             if (PlayerInputManager.Inst.Input_WalkDir == 0)
             {
-                animator.Play("Player_Idle");
+                animator.Play(Idle);
             }
             else
             {
                 if ((PlayerInputManager.Inst.Input_WalkDir == 1 && spriteRoot.rotation.eulerAngles.y == 0) ||
                     (PlayerInputManager.Inst.Input_WalkDir == -1 && spriteRoot.rotation.eulerAngles.y == 180))
-                    animator.Play("Player_Walk_Forward");
+                    animator.Play(Walk_Forward);
                 else
-                    animator.Play("Player_Walk_Backward");
+                    animator.Play(Walk_Backward);
             }
         }
         else
         {
             if (!isJumping)
             {
-                animator.Play("Player_Airborne");
+                animator.Play(Airborne);
             }
             else if (canPlayJumpAnim)
             {
-                animator.Play(jumpData.curCount < 2 ? "Player_Jump" : "Player_AirJump");
+                animator.Play(jumpAnim);
 
                 if (PlayerInputManager.Inst.Input_Jump)
-                    animator.Play(jumpData.curCount < 2 ? "Player_Jump" : "Player_AirJump", 0, 0f);
+                    animator.Play(jumpAnim);
             }
             canPlayJumpAnim = jumpData.canJump;
         }

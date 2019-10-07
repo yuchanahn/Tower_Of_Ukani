@@ -73,7 +73,7 @@ PlatformEffector2D:
   m_RotationalOffset: 180
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 179
+  m_SurfaceArc: 0
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -248,7 +248,6 @@ MonoBehaviour:
     terminalVelocity: 20
   m_groundDetectionData:
     Size: {x: 0, y: 0}
-    ScaledSize: {x: 0, y: 0}
     IgnoreGrounds: []
     OnGroundEnter_Executed: 0
     OnGroundExit_Executed: 0
@@ -259,6 +258,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1024
     IW_Solid: {fileID: 658498686114480918}
+    edgeRadius: 0
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
     OffsetAmount: 0

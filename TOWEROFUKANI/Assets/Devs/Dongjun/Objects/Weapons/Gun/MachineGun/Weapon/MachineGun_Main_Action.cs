@@ -46,7 +46,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
             return;
 
         // Shoot
-        if (gun.shootTimer.IsEnded && Input.GetKey(PlayerInputManager.Inst.Keys.MainAbility))
+        if (gun.shootTimer.IsEnded && Input.GetKey(PlayerWeaponKeys.MainAbility))
         {
             gun.shootTimer.Restart();
 

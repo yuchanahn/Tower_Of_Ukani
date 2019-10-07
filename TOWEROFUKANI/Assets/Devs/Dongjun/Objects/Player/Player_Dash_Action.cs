@@ -38,7 +38,6 @@ public class Player_Dash_Action : CLA_Action
     {
         IsDasing = true;
         dashTime_Cur = 0;
-        rb2D.velocity = new Vector2(PlayerInputManager.Inst.Input_DashDir * (dashDist / dashTime), 0);
 
         Animation();
     }
@@ -55,6 +54,8 @@ public class Player_Dash_Action : CLA_Action
 
         if (dashTime_Cur >= dashTime)
             IsDasing = false;
+        else
+            rb2D.velocity = new Vector2(PlayerInputManager.Inst.Input_DashDir * (dashDist / dashTime), 0);
     }
     #endregion
 

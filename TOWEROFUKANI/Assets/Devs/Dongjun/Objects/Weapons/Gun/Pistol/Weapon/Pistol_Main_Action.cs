@@ -34,7 +34,7 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
             return;
 
         // Shoot
-        if (gun.shootTimer.IsEnded && Input.GetKeyDown(PlayerInputManager.Inst.Keys.MainAbility))
+        if (gun.shootTimer.IsEnded && Input.GetKeyDown(PlayerWeaponKeys.MainAbility))
         {
             gun.shootTimer.Restart();
 

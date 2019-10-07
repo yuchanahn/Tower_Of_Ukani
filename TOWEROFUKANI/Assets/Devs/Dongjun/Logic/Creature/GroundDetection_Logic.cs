@@ -11,11 +11,14 @@ public struct GroundDetectionData
     [HideInInspector] public bool OnGroundEnter_Executed;
     [HideInInspector] public bool OnGroundExit_Executed;
 
+    [Header("Layers")]
     public LayerMask GroundLayers;
     public LayerMask OneWayLayer;
 
+    [Header("Collider")]
     public BoxCollider2D IW_Solid;
 
+    [Header("Detection Value")]
     public float InnerSnapDist;
     public float OutterSnapDist;
     public float OffsetAmount;
@@ -46,45 +49,39 @@ public static class GroundDetection_Logic
 {
     public static Vector2 detectDir = Vector2.down;
 
-    public static void DetectGround(
-        bool canDetect,
-        Rigidbody2D rb2D,
-        Transform tf,
-        GroundDetectionData detectionData,
-        ref bool isGrounded,
-        ref GroundInfo groundInfo)
+    public static void DetectGround(bool canDetect, Rigidbody2D rb2D, Transform tf, GroundDetectionData data, ref bool isGrounded, ref GroundInfo groundInfo)
     {
         #region Set Up
         groundInfo.Reset();
         isGrounded = false;
 
-        if (detectionData.IW_Solid != null)
+        Vector2 scaledSize = data.Size * tf.localScale;
+
+        if (data.IW_Solid != null)
         {
-            detectionData.IW_Solid.size = !canDetect ? detectionData.Size : new Vector2(detectionData.Size.x, detectionData.Size.y - (detectionData.InnerSnapDist / tf.localScale.y));
-            detectionData.IW_Solid.offset = !canDetect ? new Vector2(0, 0) : new Vector2(0, (detectionData.InnerSnapDist / tf.localScale.y) * 0.5f);
+            data.IW_Solid.size = !canDetect ? data.Size : new Vector2(data.Size.x, data.Size.y - (data.InnerSnapDist / tf.localScale.y));
+            data.IW_Solid.offset = !canDetect ? new Vector2(0, 0) : new Vector2(0, (data.InnerSnapDist / tf.localScale.y) * 0.5f);
         }
 
         if (!canDetect) return;
-
-        Vector2 scaledSize = detectionData.Size * tf.localScale;
         #endregion
 
         #region Box Cast
         Vector2 castPos = new Vector2(tf.position.x, tf.position.y + scaledSize.y);
-        float offset = detectionData.OutterSnapDist + detectionData.OffsetAmount;
+        float offset = data.OutterSnapDist + data.OffsetAmount;
 
         float deltaYDist = -rb2D.velocity.y * Time.fixedDeltaTime;
         float castDist = scaledSize.y + (deltaYDist > offset ? deltaYDist : offset);
 
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, scaledSize, 0f, detectDir, castDist, detectionData.GroundLayers);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, scaledSize, 0f, detectDir, castDist, data.GroundLayers);
         if (hits == null) return;
         #endregion
 
         #region Get Highest Hit Point
         for (int i = 0; i < hits.Length; i++)
         {
-            if (detectionData.IgnoreGrounds.Contains(hits[i].collider) ||
-                hits[i].point.y > tf.position.y - (scaledSize.y * 0.5f) + detectionData.InnerSnapDist)
+            if (data.IgnoreGrounds.Contains(hits[i].collider) ||
+                hits[i].point.y > tf.position.y - (scaledSize.y * 0.5f) + data.InnerSnapDist)
                 continue;
 
             if (groundInfo.Col == null || groundInfo.HitPointY < hits[i].point.y)
@@ -104,18 +101,14 @@ public static class GroundDetection_Logic
         if (rb2D.velocity.y <= 0)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
-            tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (scaledSize.y * 0.5f) + detectionData.OffsetAmount);
+            tf.position = new Vector2(tf.position.x, groundInfo.HitPointY + (scaledSize.y * 0.5f) + data.OffsetAmount);
         }
 
         Rigidbody2D groundRB = groundInfo.GO.GetComponent<Rigidbody2D>();
         if (groundRB) rb2D.velocity = new Vector2(rb2D.velocity.x, groundRB.velocity.y);
         #endregion
     }
-
-    public static void ExecuteOnGroundMethod(
-        ICanDetectGround canDetectGround,
-        bool isGrounded,
-        ref GroundDetectionData data)
+    public static void ExecuteOnGroundMethod(ICanDetectGround canDetectGround, bool isGrounded, ref GroundDetectionData data)
     {
         if (isGrounded)
         {
@@ -139,13 +132,7 @@ public static class GroundDetection_Logic
         }
     }
 
-    public static void FallThrough(
-        ref bool input_FallThrough,
-        bool isGrounded,
-        Rigidbody2D rb2D,
-        Transform tf,
-        Collider2D oneWayCollider,
-        GroundDetectionData detectionData)
+    public static void FallThrough(ref bool input, bool isGrounded, Rigidbody2D rb2D, Transform tf, Collider2D oneWayCollider, GroundDetectionData detectionData)
     {
         #region Overlap Box
         Vector2 detectPos = tf.position;
@@ -185,10 +172,10 @@ public static class GroundDetection_Logic
 
         #region Disable Collision
 
-        if (!input_FallThrough)
+        if (!input)
             return;
 
-        input_FallThrough = false;
+        input = false;
 
         if (overlaps == null || !isGrounded)
             return;

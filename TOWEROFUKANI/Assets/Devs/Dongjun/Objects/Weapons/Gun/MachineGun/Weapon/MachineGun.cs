@@ -51,7 +51,7 @@ public class MachineGun : Gun
         }
         else if (loadedBullets < magazineSize)
         {
-            if (Input.GetKeyDown(PlayerInputManager.Inst.Keys.Reload))
+            if (Input.GetKeyDown(PlayerWeaponKeys.Reload))
                 return swapMagazine_AC;
         }
 

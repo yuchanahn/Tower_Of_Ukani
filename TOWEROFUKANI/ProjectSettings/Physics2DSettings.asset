@@ -14,14 +14,14 @@ Physics2DSettings:
   m_MaxTranslationSpeed: 100
   m_MaxRotationSpeed: 360
   m_BaumgarteScale: 0.7
-  m_BaumgarteTimeOfImpactScale: 0.75
+  m_BaumgarteTimeOfImpactScale: 1
   m_TimeToSleep: 0.5
   m_LinearSleepTolerance: 0.01
   m_AngularSleepTolerance: 2
   m_DefaultContactOffset: 0.01
   m_JobOptions:
     serializedVersion: 2
-    useMultithreading: 0
+    useMultithreading: 1
     useConsistencySorting: 0
     m_InterpolationPosesPerJob: 100
     m_NewContactsPerJob: 30
@@ -53,4 +53,4 @@ Physics2DSettings:
   m_ColliderAsleepColor: {r: 0.5686275, g: 0.95686275, b: 0.54509807, a: 0.36078432}
   m_ColliderContactColor: {r: 1, g: 0, b: 1, a: 0.6862745}
   m_ColliderAABBColor: {r: 1, g: 1, b: 0, a: 0.2509804}
-  m_LayerCollisionMatrix: c900fe7fc800fe7fc800fe7fffffffffc800fe7fc800fe7fffffffffffffffffc820fe7fc846ff7fc886ff7fc800fe7fc800fe7fc801fe7fc802fe7fc804fe7fc806feffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc800ff7f
+  m_LayerCollisionMatrix: c900fe7fc800fe7fc800fe7fffffffffc800fe7fc800fe7fffffffffffffffffc820fe7fc846ff7fc886ff7fc800fe7fc800fe7fc801fe7fc802fe7fc804fe7fc806fe7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc800fe7f
