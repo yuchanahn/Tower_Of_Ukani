@@ -8,13 +8,13 @@ public static class PlayerMovementKeys
     public static KeyCode Jump => KeyCode.Space;
 }
 
-public class PlayerActionKeys
+public static class PlayerActionKeys
 {
     public static KeyCode Dash => KeyCode.LeftShift;
     public static KeyCode Kick => KeyCode.LeftControl;
 }
 
-public class PlayerWeaponKeys
+public static class PlayerWeaponKeys
 {
     public static KeyCode MainAbility => KeyCode.Mouse0;
     public static KeyCode SubAbility => KeyCode.Mouse1;
@@ -22,10 +22,8 @@ public class PlayerWeaponKeys
     public static KeyCode Reload => KeyCode.R;
 }
 
-public class PlayerInputManager : MonoBehaviour
+public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
 {
-    public static PlayerInputManager Inst { get; private set; }
-
     #region Var: Walk
     public int Input_WalkDir { get; private set; } = 0;
     private int input_walkRight = 0;
@@ -52,10 +50,6 @@ public class PlayerInputManager : MonoBehaviour
 
 
     #region Method: Unity
-    private void Awake()
-    {
-        Inst = this;
-    }
     private void Update()
     {
         // Movement

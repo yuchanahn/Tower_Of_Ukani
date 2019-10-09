@@ -11,6 +11,7 @@ public struct JumpData
 
     [HideInInspector]
     public float apexY;
+    public bool isJumping;
 
     public float jumpGravity => (2 * height) / (time * time);
     public bool canJump => curCount < maxCount;
@@ -18,9 +19,9 @@ public struct JumpData
 
 public static class Jump_Logic
 {
-    public static void Jump(ref bool input_Jump, ref bool isJumping, ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
+    public static void Jump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
     {
-        ResetJumpingState(ref isJumping, ref jumpData, rb2D, tf);
+        jumpData.ResetJumpingState(rb2D, tf);
 
         if (!input_Jump)
             return;
@@ -30,19 +31,19 @@ public static class Jump_Logic
         if (!jumpData.canJump)
             return;
 
-        isJumping = true;
+        jumpData.isJumping = true;
         jumpData.curCount++;
         jumpData.apexY = tf.position.y + jumpData.height;
 
         // Apply Jump Velocity
         rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.jumpGravity * jumpData.time);
     }
-    public static void Jump(ref bool isJumping, ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
+    public static void Jump(this ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
     {
         if (!jumpData.canJump)
             return;
 
-        isJumping = true;
+        jumpData.isJumping = true;
         jumpData.curCount++;
         jumpData.apexY = tf.position.y + jumpData.height;
 
@@ -50,9 +51,9 @@ public static class Jump_Logic
         rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.jumpGravity * jumpData.time);
     }
 
-    public static void ResetJumpingState(ref bool isJumping, ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
+    public static void ResetJumpingState(this ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
     {
-        if (!isJumping)
+        if (!jumpData.isJumping)
             return;
 
         if (!(tf.position.y >= jumpData.apexY || rb2D.velocity.y <= 0))
@@ -60,9 +61,9 @@ public static class Jump_Logic
 
         // Reset Y Velocity
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0f);
-        isJumping = false;
+        jumpData.isJumping = false;
     }
-    public static void ResetJumpCount(ref JumpData jumpData)
+    public static void ResetJumpCount(this ref JumpData jumpData)
     {
         jumpData.curCount = 0;
     }

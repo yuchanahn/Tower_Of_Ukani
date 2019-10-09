@@ -21,14 +21,8 @@ public class Player_Movement_Action : CLA_Action,
     [SerializeField] private JumpData jumpData;
     #endregion
 
-    #region Var: Ground Detection
-    private bool isGrounded = false;
-    private GroundInfo curGroundInfo = new GroundInfo();
-    #endregion
-
     #region Var: Jump
     private bool jumpKeyPressed = false;
-    private bool isJumping = false;
     private bool canPlayJumpAnim = true;
     #endregion
 
@@ -60,11 +54,10 @@ public class Player_Movement_Action : CLA_Action,
     public override void OnExit()
     {
         // Reset Ground Data
-        isGrounded = false;
-        curGroundInfo.Reset();
+        groundDetectionData.isGrounded = false;
 
         // Reset Jump Data
-        isJumping = false;
+        jumpData.isJumping = false;
 
         // Reset Velocity
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
@@ -77,24 +70,24 @@ public class Player_Movement_Action : CLA_Action,
     public override void OnFixedUpdate()
     {
         // Detect Ground
-        GroundDetection_Logic.DetectGround(!isJumping, rb2D, transform, groundDetectionData, ref isGrounded, ref curGroundInfo);
-        GroundDetection_Logic.ExecuteOnGroundMethod(this, isGrounded, ref groundDetectionData);
+        groundDetectionData.DetectGround(!jumpData.isJumping, rb2D, transform);
+        groundDetectionData.ExecuteOnGroundMethod(this);
 
         // Fall Through
         fallThroughKeyPressed = PlayerInputManager.Inst.Input_FallThrough;
-        GroundDetection_Logic.FallThrough(ref fallThroughKeyPressed, isGrounded, rb2D, transform, oneWayCollider, groundDetectionData);
+        groundDetectionData.FallThrough(ref fallThroughKeyPressed, rb2D, transform, oneWayCollider);
 
         // Walk
-        walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, rb2D, isJumping);
+        walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, rb2D, jumpData.isJumping);
 
         // Jump
         jumpKeyPressed = PlayerInputManager.Inst.Input_Jump;
-        Jump_Logic.Jump(ref jumpKeyPressed, ref isJumping, ref jumpData, rb2D, transform);
+        jumpData.Jump(ref jumpKeyPressed, rb2D, transform);
 
         // Gravity
         Gravity_Logic.ApplyGravity(rb2D, 
-            isGrounded ? new GravityData(false, 0, 0) : 
-            !isJumping ? gravityData : 
+            groundDetectionData.isGrounded ? new GravityData(false, 0, 0) : 
+            !jumpData.isJumping ? gravityData : 
             new GravityData(true, jumpData.jumpGravity, 0));
 
         // Animation
@@ -115,7 +108,7 @@ public class Player_Movement_Action : CLA_Action,
 
         string jumpAnim = jumpData.canJump ? Jump : AirJump;
 
-        if (isGrounded)
+        if (groundDetectionData.isGrounded)
         {
             if (PlayerInputManager.Inst.Input_WalkDir == 0)
             {
@@ -132,7 +125,7 @@ public class Player_Movement_Action : CLA_Action,
         }
         else
         {
-            if (!isJumping)
+            if (!jumpData.isJumping)
             {
                 animator.Play(Airborne);
             }

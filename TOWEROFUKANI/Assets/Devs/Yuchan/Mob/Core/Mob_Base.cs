@@ -52,10 +52,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     #region Var:
     Dictionary<eMobAniST, (string, float)> m_Ani = new Dictionary<eMobAniST, (string, float)>();
-    GroundInfo mCurGroundInfo = new GroundInfo();
 
-    protected bool m_bGrounded = false;
-    protected bool m_bJumping = false;
     protected bool m_bJumpStart = false;
     protected bool m_bFallStart = false;
     protected bool m_bHurting = false;
@@ -76,7 +73,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
      m_bAttacking ? 0 :
      CanAttack ? 0 :
      CanFollow ? m_MoveData.Speed * m_MoveData.Dir :
-     m_bHurting || !m_bGrounded ? 0
+     m_bHurting || !m_groundDetectionData.isGrounded ? 0
     : !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0
     : m_MoveData.Speed * m_MoveData.Dir;
 
@@ -86,7 +83,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
 
     public virtual bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
-    public virtual bool CanAttack => m_bAttacking ? true : !m_bGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
+    public virtual bool CanAttack => m_bAttacking ? true : !m_groundDetectionData.isGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
             
     #endregion
 
@@ -111,16 +108,16 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     private void FixedUpdate()
     {
         
-        GroundDetection_Logic.DetectGround(!m_bJumping, m_rb, transform, m_groundDetectionData, ref m_bGrounded, ref mCurGroundInfo);
-        GroundDetection_Logic.ExecuteOnGroundMethod(this, m_bGrounded, ref m_groundDetectionData);
+        m_groundDetectionData.DetectGround(!m_jumpData.isJumping, m_rb, transform);
+        m_groundDetectionData.ExecuteOnGroundMethod(this);
 
         m_rb.velocity = new Vector2(VelX, VelY);
 
-        GroundDetection_Logic.FallThrough(ref m_bFallStart, m_bGrounded, m_rb, transform, m_OneWayCollider, m_groundDetectionData);
+        m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
 
-        Jump_Logic.Jump(ref m_bJumpStart, ref m_bJumping, ref m_jumpData, m_rb, transform);
+        m_jumpData.Jump(ref m_bJumpStart, m_rb, transform);
 
-        Gravity_Logic.ApplyGravity(m_rb, m_bGrounded ? new GravityData(false, 0, 0) : !m_bJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
+        Gravity_Logic.ApplyGravity(m_rb, m_groundDetectionData.isGrounded ? new GravityData(false, 0, 0) : !m_jumpData.isJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
 
         Animation();
         Anim_Logic.SetAnimSpeed(m_ani, m_Ani[m_CurAniST].Item2);
@@ -136,7 +133,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     void Animation()
     {
-        m_CurAniST = m_bHurting || m_bAttacking ? m_CurAniST : m_bGrounded ? Dir != 0 ? eMobAniST.Walk : eMobAniST.Idle : VelY > 0 ? eMobAniST.AirborneUp : eMobAniST.AirborneDown;
+        m_CurAniST = m_bHurting || m_bAttacking ? m_CurAniST : m_groundDetectionData.isGrounded ? Dir != 0 ? eMobAniST.Walk : eMobAniST.Idle : VelY > 0 ? eMobAniST.AirborneUp : eMobAniST.AirborneDown;
     }
 
     #region Method: Move
@@ -153,7 +150,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
     public bool MoveRandom()
     {
-        if (!m_bGrounded) return false;
+        if (!m_groundDetectionData.isGrounded) return false;
         m_MoveData.State = MobMoveData.eState.Move;
         m_CurAniST = eMobAniST.Walk;
         ATimer.Tick(this);
@@ -167,7 +164,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
     public bool IdleRandom()
     {
-        if (!m_bGrounded) return false;
+        if (!m_groundDetectionData.isGrounded) return false;
         if (m_MoveData.State == MobMoveData.eState.Idle)
         {
             m_CurAniST = eMobAniST.Idle;
@@ -177,7 +174,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
     public bool Falling()
     {
-        m_CurAniST = m_bJumping ? eMobAniST.AirborneUp : eMobAniST.AirborneDown;
+        m_CurAniST = m_jumpData.isJumping ? eMobAniST.AirborneUp : eMobAniST.AirborneDown;
         return true;
     }
     public bool Jump()
@@ -206,7 +203,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         var act = Follow_Logic.Follow(ref m_followData, ref m_MoveData, ref m_jumpData, m_groundDetectionData.Size, m_MoveData.Dir, transform.position);
         switch (act)
         {
-            case eMoveAction.JumpProcess:                return m_bGrounded ? m_bJumpStart = true : true;
+            case eMoveAction.JumpProcess:                return m_groundDetectionData.isGrounded ? m_bJumpStart = true : true;
             case eMoveAction.Jump:                       return Jump(); 
             case eMoveAction.DownJump:                   return Fall(); 
             case eMoveAction.Left: m_MoveData.Dir = -1;  return true;

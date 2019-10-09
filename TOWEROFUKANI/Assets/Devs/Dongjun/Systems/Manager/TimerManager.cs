@@ -118,17 +118,11 @@ public class TimerData
     public void ToEnd() => CurTime = EndTime;
 }
 
-public class TimerManager : MonoBehaviour
+public class TimerManager : SingletonBase<TimerManager>
 {
-    public static TimerManager Inst { get; private set; }
-
     private Dictionary<GameObject, List<TimerData>> timers = new Dictionary<GameObject, List<TimerData>>();
     private GameObject curTickingObj;
 
-    private void Awake()
-    {
-        Inst = this;
-    }
     private void LateUpdate()
     {
         TickTimers();
