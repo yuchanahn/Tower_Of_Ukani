@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public enum ItemTag_Type
 {
@@ -20,7 +21,6 @@ public enum ItemTag_Range
 public sealed class ItemInfo
 {
     #region Var: Inspector
-    [Header("Item Info")]
     [SerializeField] private Sprite icon;
     [SerializeField] private string name = "Item Name";
     [SerializeField] private string desc = "This is an Item";

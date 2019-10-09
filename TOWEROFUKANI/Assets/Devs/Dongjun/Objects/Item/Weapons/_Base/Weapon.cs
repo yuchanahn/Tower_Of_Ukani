@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public enum WeaponTag
 {
@@ -10,13 +11,12 @@ public enum WeaponTag
 public abstract class Weapon : CLA_Main
 {
     #region Var: Inspector
-    [Header("Weapon Info")]
-    [SerializeField] private ItemInfo info;
-    [SerializeField] private WeaponTag[] weaponTags;
 
-    [Header("Visuals")]
-    [SerializeField] private float pivotPointY;
-    [SerializeField] private GameObject spriteRoot;
+    [BoxGroup("Info"), SerializeField] private ItemInfo info;
+    [BoxGroup("Info"), SerializeField] private WeaponTag[] weaponTags;
+
+    [BoxGroup("Visual"), SerializeField] private GameObject spriteRoot;
+    [BoxGroup("Visual"), SerializeField] private float pivotPointY;
     #endregion
 
     #region Var: Properties

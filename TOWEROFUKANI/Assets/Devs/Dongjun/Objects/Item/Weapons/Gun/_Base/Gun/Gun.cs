@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
+using NaughtyAttributes;
 
 public abstract class Gun : Weapon
 {
-    [Header("Timer")]
-    public TimerData shootTimer;
-    public TimerData reloadTimer;
-    public TimerData swapMagazineTimer;
+    [BoxGroup("Timer")] public TimerData shootTimer;
+    [BoxGroup("Timer")] public TimerData reloadTimer;
+    [BoxGroup("Timer")] public TimerData swapMagazineTimer;
 
-    [Header("Ammo")]
-    public int magazineSize;
-    public int loadedBullets;
-    public bool isBulletLoaded;
+    [BoxGroup("Ammo")] public int magazineSize;
+    [BoxGroup("Ammo")] public int loadedBullets;
+    [BoxGroup("Ammo")] public bool isBulletLoaded;
 
     protected override void Start()
     {

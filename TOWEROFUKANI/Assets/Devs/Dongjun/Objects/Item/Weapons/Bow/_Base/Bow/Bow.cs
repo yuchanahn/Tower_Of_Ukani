@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
+using NaughtyAttributes;
 
 public abstract class Bow : Weapon
 {
-    [Header("Timer")]
-    [SerializeField] public TimerData shootTimer;
-    [SerializeField] public TimerData drawTimer;
+    [BoxGroup("Timer")] [SerializeField] public TimerData shootTimer;
+    [BoxGroup("Timer")] [SerializeField] public TimerData drawTimer;
 
-    [Header("Arrow Sprite")]
-    [SerializeField] public GameObject arrowSprite;
+    [BoxGroup("Visual")] [SerializeField] public GameObject arrowSprite;
 
     [HideInInspector] public bool hasBeenDrawn = false;
     [HideInInspector] public float drawPower = 0;
