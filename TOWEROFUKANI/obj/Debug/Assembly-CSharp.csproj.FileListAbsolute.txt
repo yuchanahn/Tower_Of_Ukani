@@ -281,3 +281,4 @@ C:\Users\anyc1\Documents\GitHub\Tower_Of_Ukani\TOWEROFUKANI\obj\Debug\Assembly-C
 C:\Users\anyc1\Documents\GitHub\Tower_Of_Ukani\TOWEROFUKANI\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 C:\Users\anyc1\Documents\GitHub\Tower_Of_Ukani\TOWEROFUKANI\obj\Debug\Assembly-CSharp.dll
 C:\Users\anyc1\Documents\GitHub\Tower_Of_Ukani\TOWEROFUKANI\obj\Debug\Assembly-CSharp.pdb
+C:\Users\anyc1\Documents\GitHub\Tower_Of_Ukani\TOWEROFUKANI\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb

@@ -79,10 +79,39 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     float VelY => m_rb.velocity.y;
     protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
-    protected int Dir { set { m_MoveData.Dir = value; } get { return m_MoveData.Dir; }   }
+    protected int Dir { set { m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
 
 
-    public virtual bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dis);
+    bool IsNoWallFront => !(transform.position.RayHit(transform.position + new Vector3((m_groundDetectionData.Size.x / 2 + 0.15f) * Dir, 0), m_followData.CantMoveGround));
+
+
+
+    bool IsNoWallForward => IsNoWallFront && !transform.position.RayHit(GM.PlayerPos, m_followData.CantMoveGround);
+
+    Vector2 WallOfForward => transform.position.GetRayHit(GM.PlayerPos, m_followData.CantMoveGround).point;
+
+
+    bool IsNoWallUp => AbleFollowCheckUp(WalkSpeed * m_jumpData.time, m_jumpData.height);
+    Vector2 WallOfUp => GetHitWall(WalkSpeed * m_jumpData.time, m_jumpData.height);
+    bool AbleFollowCheckUp(float x, float y)
+    {
+        Vector3 JumpVec2 = new Vector3(x, y);
+        var HitWall = transform.position.GetRayHit(transform.position + JumpVec2, m_followData.CantMoveGround);
+        if (HitWall.collider == null) return !(transform.position + JumpVec2).RayHit(GM.PlayerPos, m_followData.CantMoveGround);
+        return !(HitWall.point - new Vector2(0, m_groundDetectionData.Size.y / 2)).RayHit(GM.PlayerPos, m_followData.CantMoveGround);
+    }
+    Vector2 GetHitWall(float x, float y)
+    {
+        Vector3 JumpVec2 = new Vector3(x, y);
+        var point = transform.position.GetRayHit(transform.position + JumpVec2, m_followData.CantMoveGround);
+        if (point.collider == null) return transform.position + JumpVec2;
+        return point.point;
+    }
+
+    public virtual bool CanFollow =>
+    ((GM.PlayerPos - transform.position).magnitude < m_followData.dis)
+    && (IsNoWallForward || IsNoWallUp);
+
     public virtual bool CanAttack => m_bAttacking ? true : !m_groundDetectionData.isGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
             
     #endregion
@@ -107,7 +136,6 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     }
     private void FixedUpdate()
     {
-        
         m_groundDetectionData.DetectGround(!m_jumpData.isJumping, m_rb, transform);
         m_groundDetectionData.ExecuteOnGroundMethod(this);
 
@@ -199,17 +227,20 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     public bool Follow()
     {
-        m_MoveData.Dir = (Mathf.Sign(GM.PlayerPos.x - transform.position.x) == 1) ? 1 : -1;
-        var act = Follow_Logic.Follow(ref m_followData, ref m_MoveData, ref m_jumpData, m_groundDetectionData.Size, m_MoveData.Dir, transform.position);
-        switch (act)
+        var dir = (Mathf.Sign(GM.PlayerPos.x - transform.position.x) == 1) ? 1 : -1;
+        Dir = dir;
+
+        if (!IsNoWallForward)
         {
-            case eMoveAction.JumpProcess:                return m_groundDetectionData.isGrounded ? m_bJumpStart = true : true;
-            case eMoveAction.Jump:                       return Jump(); 
-            case eMoveAction.DownJump:                   return Fall(); 
-            case eMoveAction.Left: m_MoveData.Dir = -1;  return true;
-            case eMoveAction.Right: m_MoveData.Dir = 1;  return true;
-            default: break;
+            if (!IsNoWallFront) Dir = 0;
+
+            Debug.DrawRay(WallOfForward, (WallOfUp - WallOfForward).normalized * Vector2.Distance(WallOfForward, WallOfUp), Color.black, 1f, true);
+            if (!m_groundDetectionData.isGrounded || GM.PlayerPos.y < transform.position.y) return true;
+            return
+            ((Dir == -1 && WallOfUp.x < WallOfForward.x) || (Dir == 1 && WallOfUp.x > WallOfForward.x)) ?
+            m_bJumpStart = true : false;
         }
+        if (Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f) { Dir = 0; }
         return true;
     }
 

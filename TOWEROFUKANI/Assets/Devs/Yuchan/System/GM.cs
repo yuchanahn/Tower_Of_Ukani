@@ -12,6 +12,7 @@ public class GM : MonoBehaviour
     public static GameObject PlayerObj => Inst.player.gameObject;
     public static Vector3 PlayerPos => Inst.player.transform.position;
 
+
     void Awake()
     {
         Inst = this;

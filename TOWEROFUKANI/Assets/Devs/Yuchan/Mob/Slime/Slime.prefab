@@ -202,7 +202,7 @@ MonoBehaviour:
     t: 0.3
   m_MoveData:
     SprTr: {fileID: 7268275018201367325}
-    Speed: 1.5
+    Speed: 3
     CoolTime: 1
     JumpAbleDist: 1
     FallAbleDist: 1
@@ -223,6 +223,7 @@ MonoBehaviour:
   m_followData:
     followAble: 1
     dis: 5
+    followJumpAbleDis: 1.5
     moveAbleGroundLayers:
       serializedVersion: 2
       m_Bits: 1024
@@ -239,9 +240,10 @@ MonoBehaviour:
   m_jumpData:
     curCount: 0
     maxCount: 1
-    height: 1.5
+    height: 3.5
     time: 0.35
     apexY: 0
+    isJumping: 0
   m_gravityData:
     useGravity: 1
     acceleration: 40
@@ -249,6 +251,7 @@ MonoBehaviour:
   m_groundDetectionData:
     Size: {x: 0, y: 0}
     IgnoreGrounds: []
+    isGrounded: 0
     OnGroundEnter_Executed: 0
     OnGroundExit_Executed: 0
     GroundLayers:
@@ -258,12 +261,11 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 1024
     IW_Solid: {fileID: 658498686114480918}
-    edgeRadius: 0
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
     OffsetAmount: 0
-  m_addSpeed: 5
-  m_AtkActJumpHeight: 0.5
+  m_addSpeed: -3
+  m_AtkActJumpHeight: -3.5
 --- !u!114 &2248344777037342470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,7 +411,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 3.6666667, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
