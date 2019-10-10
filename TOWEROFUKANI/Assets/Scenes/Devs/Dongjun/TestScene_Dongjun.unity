@@ -270,6 +270,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
+--- !u!114 &90109222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2820249382209617227, guid: de8e575bfc7541a4cb26f729cf5133df,
+    type: 3}
+  m_PrefabInstance: {fileID: 1334092403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdcbb0f01046da8458cedf5e7b69e829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &101261412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
@@ -2554,6 +2566,9 @@ MonoBehaviour:
   map: {fileID: 2800000, guid: 02675893a3dda524d915687b1eb5090b, type: 3}
   colorMappings:
   - color: {r: 0, g: 0, b: 0, a: 1}
+    prefab: {fileID: 4955365150437274225, guid: cf508eeb19b5ff54c934adf9afff67df,
+      type: 3}
+  - color: {r: 0.09803922, g: 0.09803922, b: 0.09803922, a: 1}
     prefab: {fileID: 4955365150437274225, guid: 0c6a376ea0965b34a81a9fc9bb0531aa,
       type: 3}
 --- !u!1 &591635420
@@ -3652,7 +3667,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -105, y: 42}
+  m_AnchoredPosition: {x: 0, y: 60}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &814443744
@@ -4896,18 +4911,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b93e3d79643b1f64e802a4b3f6520097, type: 3}
---- !u!114 &1146065810 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2778987209543410482, guid: b93e3d79643b1f64e802a4b3f6520097,
-    type: 3}
-  m_PrefabInstance: {fileID: 1146065809}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47a47578a4bdfe8409a19b91b2f026d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1175815714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
@@ -7123,6 +7126,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7177,6 +7185,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: mFollowData.dis
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_cliffData.FallHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268275018201367324, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268275018201367324, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.6666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268275018201367324, guid: 2f05f784829525c47b67d27b41cf2622,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
@@ -9624,7 +9657,7 @@ PrefabInstance:
         type: 3}
       propertyPath: weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 1146065810}
+      objectReference: {fileID: 90109222}
     - target: {fileID: 4117234795505780076, guid: 4481dd2a3fe0dce40ad7628ca110315a,
         type: 3}
       propertyPath: weapons.Array.data[1]

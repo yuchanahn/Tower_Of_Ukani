@@ -105,8 +105,8 @@ MonoBehaviour:
     tag_Type: 01000000
     tag_Range: 01000000
   weaponTags: 00000000
-  pivotPointY: 0.162
   spriteRoot: {fileID: 1077788971484917873}
+  pivotPointY: 0.162
   shootTimer:
     StartAsEnded: 1
     CurTime: 0
@@ -139,14 +139,14 @@ MonoBehaviour:
   bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
   bulletData:
-    damage: 2
+    damage: 1
     moveSpeed: 45
     gravity: 0
     curTravelDist: 0
     maxTravelDist: 7
   maxShootAnimTime: 0
   pelletCount: 4
-  pelletAngle: 7
+  pelletAngle: 8
   muzzleFlashPrefab: {fileID: 9204822279717750706, guid: 179a6208adf6eab45b4e01bea6d11926,
     type: 3}
   camShakeData_Shoot:
