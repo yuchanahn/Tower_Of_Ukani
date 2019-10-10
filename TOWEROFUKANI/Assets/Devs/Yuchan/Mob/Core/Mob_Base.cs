@@ -229,10 +229,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         var dir = (Mathf.Sign(GM.PlayerPos.x - transform.position.x) == 1) ? 1 : -1;
         Dir = dir;
-
+        if (Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f) { Dir = 0; }
         if (!IsNoWallForward)
         {
-            if (!IsNoWallFront) Dir = 0;
+            if (IsNoWallFront) { return m_bJumpStart = true; }
 
             Debug.DrawRay(WallOfForward, (WallOfUp - WallOfForward).normalized * Vector2.Distance(WallOfForward, WallOfUp), Color.black, 1f, true);
             if (!m_groundDetectionData.isGrounded || GM.PlayerPos.y < transform.position.y) return true;
@@ -240,7 +240,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
             ((Dir == -1 && WallOfUp.x < WallOfForward.x) || (Dir == 1 && WallOfUp.x > WallOfForward.x)) ?
             m_bJumpStart = true : false;
         }
-        if (Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f) { Dir = 0; }
+        
         return true;
     }
 
