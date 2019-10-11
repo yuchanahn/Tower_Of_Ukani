@@ -82,35 +82,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected int Dir { set { m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
 
 
-    bool IsNoWallFront => !(transform.position.RayHit(transform.position + new Vector3((m_groundDetectionData.Size.x / 2 + 0.15f) * Dir, 0), m_followData.CantMoveGround));
 
 
 
-    bool IsNoWallForward => IsNoWallFront && !transform.position.RayHit(GM.PlayerPos, m_followData.CantMoveGround);
-
-    Vector2 WallOfForward => transform.position.GetRayHit(GM.PlayerPos, m_followData.CantMoveGround).point;
-
-
-    bool IsNoWallUp => AbleFollowCheckUp(WalkSpeed * m_jumpData.time, m_jumpData.height);
-    Vector2 WallOfUp => GetHitWall(WalkSpeed * m_jumpData.time, m_jumpData.height);
-    bool AbleFollowCheckUp(float x, float y)
-    {
-        Vector3 JumpVec2 = new Vector3(x, y);
-        var HitWall = transform.position.GetRayHit(transform.position + JumpVec2, m_followData.CantMoveGround);
-        if (HitWall.collider == null) return !(transform.position + JumpVec2).RayHit(GM.PlayerPos, m_followData.CantMoveGround);
-        return !(HitWall.point - new Vector2(0, m_groundDetectionData.Size.y / 2)).RayHit(GM.PlayerPos, m_followData.CantMoveGround);
-    }
-    Vector2 GetHitWall(float x, float y)
-    {
-        Vector3 JumpVec2 = new Vector3(x, y);
-        var point = transform.position.GetRayHit(transform.position + JumpVec2, m_followData.CantMoveGround);
-        if (point.collider == null) return transform.position + JumpVec2;
-        return point.point;
-    }
-
-    public virtual bool CanFollow =>
-    ((GM.PlayerPos - transform.position).magnitude < m_followData.dis)
-    && (IsNoWallForward || IsNoWallUp);
+    public virtual bool CanFollow => false;
 
     public virtual bool CanAttack => m_bAttacking ? true : !m_groundDetectionData.isGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
             
@@ -157,8 +132,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         ATimer.Pop("JumpFall" + GetInstanceID());
     }
     #endregion
-
-
+    
     void Animation()
     {
         m_CurAniST = m_bHurting || m_bAttacking ? m_CurAniST : m_groundDetectionData.isGrounded ? Dir != 0 ? eMobAniST.Walk : eMobAniST.Idle : VelY > 0 ? eMobAniST.AirborneUp : eMobAniST.AirborneDown;
@@ -229,18 +203,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         var dir = (Mathf.Sign(GM.PlayerPos.x - transform.position.x) == 1) ? 1 : -1;
         Dir = dir;
-        if (Mathf.Abs(GM.PlayerPos.x - transform.position.x) < 0.1f) { Dir = 0; }
-        if (!IsNoWallForward)
-        {
-            if (IsNoWallFront) { return m_bJumpStart = true; }
 
-            Debug.DrawRay(WallOfForward, (WallOfUp - WallOfForward).normalized * Vector2.Distance(WallOfForward, WallOfUp), Color.black, 1f, true);
-            if (!m_groundDetectionData.isGrounded || GM.PlayerPos.y < transform.position.y) return true;
-            return
-            ((Dir == -1 && WallOfUp.x < WallOfForward.x) || (Dir == 1 && WallOfUp.x > WallOfForward.x)) ?
-            m_bJumpStart = true : false;
-        }
-        
+
+
         return true;
     }
 

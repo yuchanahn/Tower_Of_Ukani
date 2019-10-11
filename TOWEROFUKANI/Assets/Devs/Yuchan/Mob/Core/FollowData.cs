@@ -7,9 +7,9 @@ using System;
 public struct FollowData
 {
     public bool followAble;
-    public float dis;
-    public float followJumpAbleDis;
-    public LayerMask moveAbleGroundLayers;
+
+    public float dist;
+
     public LayerMask CantMoveGround;
 }
 public enum eMvAct
@@ -28,6 +28,14 @@ public enum eMvAct
 
 public class Follow_Logic
 {
+    bool FollowCheckFor(Vector2 origin, Vector2 target)
+    {
+        return false;
+    }
+
+
+
+
     public static eMvAct Follow(bool bNoWallForward, bool bCheckAble, float posY)
     {
         if(!bNoWallForward && GM.PlayerPos.y > posY)

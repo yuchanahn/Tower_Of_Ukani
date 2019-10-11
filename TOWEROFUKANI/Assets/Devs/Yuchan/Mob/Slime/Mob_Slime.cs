@@ -11,7 +11,7 @@ public class Mob_Slime : Mob_Base
     public override bool CanAttack => m_bAtkEndActing ? false: base.CanAttack;
 
     public override void OnAttackEnd()
-    {
+    {   
         base.OnAttackEnd();
         m_jumpData.height = m_jumpHeight + m_AtkActJumpHeight;
 
