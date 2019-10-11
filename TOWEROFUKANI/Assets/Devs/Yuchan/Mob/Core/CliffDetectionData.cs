@@ -5,6 +5,12 @@ using System;
 
 public class CliffDetect_Logic
 {
+    static public bool IsCliff(Vector2 size, Vector2 footPos, LayerMask groundLayer)
+    {
+        return !footPos.BoxHit(size,footPos, groundLayer);
+    }
+
+
     static public bool CanFall(float fallHeight, Transform Tr, float sizeX, LayerMask grdLayer)
     {
         int uns = sizeX == 0 ? 0 : sizeX > 0 ? 1 : -1;
