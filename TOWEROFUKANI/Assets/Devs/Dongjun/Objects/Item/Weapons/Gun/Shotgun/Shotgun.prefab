@@ -139,11 +139,27 @@ MonoBehaviour:
   bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
   bulletData:
-    damage: 1
-    moveSpeed: 45
-    gravity: 0
+    damage:
+      baseStat: 1
+      curStat: 0
+      percentAdd: 0
+      flatAdd: 0
+    moveSpeed:
+      baseStat: 45
+      curStat: 0
+      percentAdd: 0
+      flatAdd: 0
+    gravity:
+      baseStat: 0
+      curStat: 0
+      percentAdd: 0
+      flatAdd: 0
     curTravelDist: 0
-    maxTravelDist: 7
+    maxTravelDist:
+      baseStat: 7
+      curStat: 0
+      percentAdd: 0
+      flatAdd: 0
   maxShootAnimTime: 0
   pelletCount: 4
   pelletAngle: 8

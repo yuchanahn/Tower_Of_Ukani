@@ -215,8 +215,8 @@ MonoBehaviour:
     tag_Type: 01000000
     tag_Range: 01000000
   weaponTags: 00000000
-  pivotPointY: -0.025
   spriteRoot: {fileID: 4450316997529025075}
+  pivotPointY: -0.025
   shootTimer:
     StartAsEnded: 1
     CurTime: 0
@@ -251,11 +251,27 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3522369012486736103, guid: 4516c39aa90b59146a00c293b77a065b,
     type: 3}
   bulletData:
-    damage: 2
-    moveSpeed: 45
-    gravity: 0
+    damage:
+      baseStat: 1
+      curStat: 0
+      percentAdd: 0
+      flatAdd: 0
+    moveSpeed:
+      baseStat: 45
+      curStat: 0
+      percentAdd: 0
+      flatAdd: 0
+    gravity:
+      baseStat: 0
+      curStat: 0
+      percentAdd: 0
+      flatAdd: 0
     curTravelDist: 0
-    maxTravelDist: 10
+    maxTravelDist:
+      baseStat: 10
+      curStat: 0
+      percentAdd: 0
+      flatAdd: 0
   maxShootAnimTime: 0
   acry_YPosOffset: 0.2
   acry_ZRotOffset: 8

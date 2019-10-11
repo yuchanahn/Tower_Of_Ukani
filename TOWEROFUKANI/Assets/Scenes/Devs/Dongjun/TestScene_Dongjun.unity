@@ -270,18 +270,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}
---- !u!114 &90109222 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2820249382209617227, guid: de8e575bfc7541a4cb26f729cf5133df,
-    type: 3}
-  m_PrefabInstance: {fileID: 1334092403}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdcbb0f01046da8458cedf5e7b69e829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &101261412 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
@@ -868,6 +856,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &286868113 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2778987209543410482, guid: b93e3d79643b1f64e802a4b3f6520097,
+    type: 3}
+  m_PrefabInstance: {fileID: 1146065809}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a47578a4bdfe8409a19b91b2f026d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &319052282
 GameObject:
   m_ObjectHideFlags: 0
@@ -4908,6 +4908,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778987209543410483, guid: b93e3d79643b1f64e802a4b3f6520097,
+        type: 3}
+      propertyPath: projectileData.damage.baseStat
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778987209543410483, guid: b93e3d79643b1f64e802a4b3f6520097,
+        type: 3}
+      propertyPath: projectileData.moveSpeed.baseStat
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778987209543410483, guid: b93e3d79643b1f64e802a4b3f6520097,
+        type: 3}
+      propertyPath: projectileData.gravity.baseStat
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778987209543410483, guid: b93e3d79643b1f64e802a4b3f6520097,
+        type: 3}
+      propertyPath: projectileData.maxTravelDist.baseStat
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b93e3d79643b1f64e802a4b3f6520097, type: 3}
@@ -9657,7 +9677,7 @@ PrefabInstance:
         type: 3}
       propertyPath: weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 90109222}
+      objectReference: {fileID: 286868113}
     - target: {fileID: 4117234795505780076, guid: 4481dd2a3fe0dce40ad7628ca110315a,
         type: 3}
       propertyPath: weapons.Array.data[1]

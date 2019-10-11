@@ -8,7 +8,7 @@ public class TimerData
 {
     #region Var: States
     [SerializeField]
-    private bool StartAsEnded = false;
+    protected bool StartAsEnded = false;
     public bool IsActive { get; private set; } = true;
     public bool IsEnded { get; private set; } = false;
     public bool IsZero => CurTime == 0;
@@ -21,8 +21,8 @@ public class TimerData
     #endregion
 
     #region Var: Action
-    private Action OnTick;
-    private Action OnEnd;
+    protected Action OnTick;
+    protected Action OnEnd;
     #endregion
 
 

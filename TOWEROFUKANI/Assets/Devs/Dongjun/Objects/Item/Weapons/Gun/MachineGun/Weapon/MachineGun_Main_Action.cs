@@ -31,6 +31,12 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
     #endregion
 
 
+    protected override void Awake()
+    {
+        base.Awake();
+        bulletData.Init();
+    }
+
     #region Method: CLA_Action
     public override void OnLateEnter()
     {
