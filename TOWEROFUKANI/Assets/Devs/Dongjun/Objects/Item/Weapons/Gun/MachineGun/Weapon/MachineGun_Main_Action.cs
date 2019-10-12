@@ -67,7 +67,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGun>
             return;
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
-        Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
+        Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime.Cur, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
     }
     #endregion
 

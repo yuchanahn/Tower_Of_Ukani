@@ -110,15 +110,27 @@ MonoBehaviour:
   shootTimer:
     StartAsEnded: 1
     CurTime: 0
-    EndTime: 0.1
+    EndTime:
+      Base: 0.15
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   reloadTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 0.22
+    EndTime:
+      Base: 0.2
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   swapMagazineTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 1.2
+    EndTime:
+      Base: 1
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   magazineSize: 2
   loadedBullets: 0
   isBulletLoaded: 1
@@ -140,24 +152,24 @@ MonoBehaviour:
     type: 3}
   bulletData:
     damage:
-      baseStat: 1
-      curStat: 0
+      Base: 1
+      Cur: 0
       percentAdd: 0
       flatAdd: 0
     moveSpeed:
-      baseStat: 45
-      curStat: 0
+      Base: 45
+      Cur: 0
       percentAdd: 0
       flatAdd: 0
     gravity:
-      baseStat: 0
-      curStat: 0
+      Base: 0
+      Cur: 0
       percentAdd: 0
       flatAdd: 0
     curTravelDist: 0
     maxTravelDist:
-      baseStat: 7
-      curStat: 0
+      Base: 7
+      Cur: 0
       percentAdd: 0
       flatAdd: 0
   maxShootAnimTime: 0

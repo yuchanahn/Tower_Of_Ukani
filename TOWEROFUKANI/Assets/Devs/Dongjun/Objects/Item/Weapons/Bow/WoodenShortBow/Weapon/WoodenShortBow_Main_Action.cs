@@ -49,7 +49,7 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
         weapon.arrowSprite.SetActive(weapon.shootTimer.IsEnded);
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
-        Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
+        Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime.Cur, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
     }
     #endregion
 
@@ -60,8 +60,8 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
         Arrow arrow = arrowPrefab.Spawn(shootPoint.position, transform.rotation);
 
         curProjectileData = projectileData;
-        curProjectileData.damage.curStat = Mathf.Max(Mathf.RoundToInt(curProjectileData.damage.curStat * weapon.drawPower), 1);
-        curProjectileData.moveSpeed.curStat *= weapon.drawPower;
+        curProjectileData.damage.Cur = Mathf.Max(Mathf.RoundToInt(curProjectileData.damage.Cur * weapon.drawPower), 1);
+        curProjectileData.moveSpeed.Cur *= weapon.drawPower;
 
         arrow.SetData(curProjectileData);
     }

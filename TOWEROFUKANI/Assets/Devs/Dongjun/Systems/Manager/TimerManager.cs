@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public interface ITimerData
+{
+    void Tick();
+}
+
 [Serializable]
-public class TimerData
+public class TimerData : ITimerData
 {
     #region Var: States
     [SerializeField]
@@ -21,17 +26,11 @@ public class TimerData
     #endregion
 
     #region Var: Action
-    protected Action OnTick;
-    protected Action OnEnd;
+    private Action OnTick;
+    private Action OnEnd;
     #endregion
 
 
-    /// <summary>
-    /// 자동 타이머를 사용하려면 이 함수를 무조건 Start()에서 실행 시켜 주세요!!!
-    /// </summary>
-    /// <param name="self">게임오브젝트(자기자신).</param>
-    /// <param name="OnTimerTick">타이머가 틱 될때 마다(LateUpdate()에서) 실행되는 함수.</param>
-    /// <param name="OnTimerMax">타이머가 최대 시간에 도달하면 실행되는 함수.</param>
     public void Init(GameObject self, Action OnTick = null, Action OnEnd = null)
     {
         TimerManager.Inst.AddTimer(self, this);
@@ -42,23 +41,17 @@ public class TimerData
         if (StartAsEnded)
             ToEnd();
     }
-
-    /// <summary>
-    /// 타이머 이벤트를 설정하는 함수.
-    /// </summary>
-    /// <param name="OnTick">타이머가 틱 될때 마다(LateUpdate()에서) 실행되는 함수.</param>
-    /// <param name="OnEnd">타이머가 최대 시간에 도달하면 실행되는 함수.</param>
     public void SetAction(Action OnTick = null, Action OnEnd = null)
     {
         this.OnTick = OnTick;
         this.OnEnd = OnEnd;
     }
 
-    /// <summary>
-    /// 타이머를 자동으로 실행할지 결정하는 함수.
-    /// </summary>
-    /// <param name="self">게임오브젝트(자기자신).</param>
-    /// <param name="use">true: 자동으로 실행(LateUpdate()에서), false: 자동으로 실행 안됨.</param>
+    public void SetActive(bool active)
+    {
+        IsActive = active;
+    }
+
     public void UseAutoTick(GameObject self, bool use)
     {
         if (use)
@@ -66,20 +59,6 @@ public class TimerData
         else
             TimerManager.Inst.RemoveTimer(self, this);
     }
-
-    /// <summary>
-    /// 타이머의 활성화 상태를 정하는 함수.
-    /// </summary>
-    /// <param name="active">true: 활성화 됨., false: 비활성화 됨.</param>
-    public void SetActive(bool active)
-    {
-        IsActive = active;
-    }
-
-    /// <summary>
-    /// 타이머의 시간을 흐르게 하는 함수. 
-    /// 최대 시간에 도달하면 더 이상 작동 안함. (이어서 작동 시키려면 Restart()함수를 실행하세요.)
-    /// </summary>
     public void Tick()
     {
         if (!IsActive || IsEnded)
@@ -95,32 +74,19 @@ public class TimerData
             CurTime = EndTime;
         }
     }
-
-    /// <summary>
-    /// 실행하면 IsEnded를 false로 바꿔 줍니다.
-    /// 타이머는 최대 시간에 도달하면 더 이상 Tick()을 실행하지 않습니다.
-    /// 다시 시작하려면 이 함수를 실행 시켜주세요.
-    /// </summary>
     public void Restart()
     {
         CurTime = 0;
         IsEnded = false;
     }
 
-    /// <summary>
-    /// 현재 타이머를 0으로 바꿔줍니다.
-    /// </summary>
     public void ToZero() => CurTime = 0;
-
-    /// <summary>
-    /// 현재 타이머를 최대 시간으로 바꿔줍니다. (바로 OnEnd에 등록된 함수를 실행하고 싶을 때 쓰면 좋습니다.)
-    /// </summary>
     public void ToEnd() => CurTime = EndTime;
 }
 
 public class TimerManager : SingletonBase<TimerManager>
 {
-    private Dictionary<GameObject, List<TimerData>> timers = new Dictionary<GameObject, List<TimerData>>();
+    private Dictionary<GameObject, List<ITimerData>> timers = new Dictionary<GameObject, List<ITimerData>>();
     private GameObject curTickingObj;
 
     private void LateUpdate()
@@ -128,7 +94,7 @@ public class TimerManager : SingletonBase<TimerManager>
         TickTimers();
     }
 
-    public void AddTimer(GameObject go, TimerData data)
+    public void AddTimer(GameObject go, ITimerData data)
     {
         if (timers.ContainsKey(go))
         {
@@ -140,11 +106,11 @@ public class TimerManager : SingletonBase<TimerManager>
             return;
 
         if (!timers.ContainsKey(go))
-            timers.Add(go, new List<TimerData>());
+            timers.Add(go, new List<ITimerData>());
 
         timers[go].Add(data);
     }
-    public void RemoveTimer(GameObject go, TimerData data)
+    public void RemoveTimer(GameObject go, ITimerData data)
     {
         if (!timers.ContainsKey(go) || !timers[go].Contains(data))
             return;

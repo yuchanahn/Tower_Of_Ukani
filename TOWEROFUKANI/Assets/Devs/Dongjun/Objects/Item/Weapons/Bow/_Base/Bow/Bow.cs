@@ -3,8 +3,8 @@ using NaughtyAttributes;
 
 public abstract class Bow : Weapon
 {
-    [BoxGroup("Timer")] [SerializeField] public TimerData shootTimer;
-    [BoxGroup("Timer")] [SerializeField] public TimerData drawTimer;
+    [BoxGroup("Timer")] [SerializeField] public TimerStat shootTimer;
+    [BoxGroup("Timer")] [SerializeField] public TimerStat drawTimer;
 
     [BoxGroup("Visual")] [SerializeField] public GameObject arrowSprite;
 
@@ -14,6 +14,10 @@ public abstract class Bow : Weapon
     protected override void Start()
     {
         base.Start();
+
+        // Init Stat
+        shootTimer.EndTime.Init();
+        drawTimer.EndTime.Init();
 
         // Init Timer
         shootTimer.Init(gameObject);

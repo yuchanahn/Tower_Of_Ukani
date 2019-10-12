@@ -162,15 +162,27 @@ MonoBehaviour:
   shootTimer:
     StartAsEnded: 1
     CurTime: 0
-    EndTime: 0.15
+    EndTime:
+      Base: 0.2
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   reloadTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 0.3
+    EndTime:
+      Base: 0.3
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   swapMagazineTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 0.6
+    EndTime:
+      Base: 0.7
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   magazineSize: 6
   loadedBullets: 0
   isBulletLoaded: 0
@@ -192,27 +204,27 @@ MonoBehaviour:
     type: 3}
   bulletData:
     damage:
-      baseStat: 2
-      curStat: 0
+      Base: 1
+      Cur: 0
       percentAdd: 0
       flatAdd: 0
     moveSpeed:
-      baseStat: 45
-      curStat: 0
+      Base: 45
+      Cur: 0
       percentAdd: 0
       flatAdd: 0
     gravity:
-      baseStat: 0
-      curStat: 0
+      Base: 0
+      Cur: 0
       percentAdd: 0
       flatAdd: 0
     curTravelDist: 0
     maxTravelDist:
-      baseStat: 10
-      curStat: 0
+      Base: 10
+      Cur: 0
       percentAdd: 0
       flatAdd: 0
-  maxShootAnimTime: 0
+  maxShootAnimTime: 0.15
   muzzleFlashPrefab: {fileID: 3546313596656909244, guid: fc45d6df91e980e4d90c006610728338,
     type: 3}
   camShakeData_Shoot:
