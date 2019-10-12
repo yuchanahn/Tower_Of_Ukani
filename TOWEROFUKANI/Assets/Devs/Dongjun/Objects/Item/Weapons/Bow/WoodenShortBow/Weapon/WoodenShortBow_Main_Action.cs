@@ -19,11 +19,6 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     private WeaponProjectileData curProjectileData;
     #endregion
 
-    protected override void Awake()
-    {
-        base.Awake();
-        projectileData.Init();
-    }
 
     #region Method: CLA_Action
     public override void OnEnter()
@@ -60,8 +55,8 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
         Arrow arrow = arrowPrefab.Spawn(shootPoint.position, transform.rotation);
 
         curProjectileData = projectileData;
-        curProjectileData.damage.Cur = Mathf.Max(Mathf.RoundToInt(curProjectileData.damage.Cur * weapon.drawPower), 1);
-        curProjectileData.moveSpeed.Cur *= weapon.drawPower;
+        curProjectileData.damage.Base = Mathf.Max(Mathf.RoundToInt(curProjectileData.damage.Base * weapon.drawPower), 1);
+        curProjectileData.moveSpeed.Base *= weapon.drawPower;
 
         arrow.SetData(curProjectileData);
     }

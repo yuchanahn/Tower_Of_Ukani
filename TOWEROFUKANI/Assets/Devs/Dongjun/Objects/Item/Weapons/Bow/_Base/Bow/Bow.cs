@@ -15,10 +15,6 @@ public abstract class Bow : Weapon
     {
         base.Start();
 
-        // Init Stat
-        shootTimer.EndTime.Init();
-        drawTimer.EndTime.Init();
-
         // Init Timer
         shootTimer.Init(gameObject);
         drawTimer.Init(gameObject);

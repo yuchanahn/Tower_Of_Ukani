@@ -15,6 +15,7 @@ public class MachineGun_EmptyShell : PlayerDropObj
     {
         base.Awake();
 
+        showBehindObjTimer.Init(gameObject, OnEnd: ShowBehindObj);
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     public override void ResetOnSpawn()
@@ -25,7 +26,6 @@ public class MachineGun_EmptyShell : PlayerDropObj
         rb2D.AddTorque(Mathf.Sign(transform.right.x) * Random.Range(forceMin, forceMax), ForceMode2D.Impulse);
 
         showBehindObjTimer.UseAutoTick(gameObject, true);
-        showBehindObjTimer.SetAction(OnEnd: ShowBehindObj);
         showBehindObjTimer.Restart();
 
         spriteRenderer.sortingOrder = 1;

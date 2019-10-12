@@ -12,12 +12,4 @@ public struct WeaponProjectileData
     [HideInInspector]
     public float curTravelDist;
     public FloatStat maxTravelDist;
-
-    public void Init()
-    {
-        damage.Init();
-        moveSpeed.Init();
-        gravity.Init();
-        maxTravelDist.Init();
-    }
 }

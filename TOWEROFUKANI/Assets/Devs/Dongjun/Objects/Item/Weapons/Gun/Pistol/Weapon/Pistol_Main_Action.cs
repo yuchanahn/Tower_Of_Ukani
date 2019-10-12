@@ -23,12 +23,6 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     #endregion
 
 
-    protected override void Awake()
-    {
-        base.Awake();
-        bulletData.Init();
-    }
-
     #region Method: CLA_Action
     public override void OnExit()
     {

@@ -5,46 +5,20 @@ using UnityEngine;
 public struct IntStat
 {
     public int Base;
-    [HideInInspector] public int Cur;
+    public int Cur => (int)(Base * (1 + (percentAdd / 100)) + flatAdd + 0.5f);
 
     [HideInInspector] public float percentAdd;
     [HideInInspector] public float flatAdd;
-
-    public void Init()
-    {
-        Cur = Base;
-
-        percentAdd = 0;
-        flatAdd = 0;
-    }
-
-    public void ApplyAddedStat()
-    {
-        Cur = (int)(Base * (1 + (percentAdd / 100)) + flatAdd + 0.5f);
-    }
 }
 
 [Serializable]
 public struct FloatStat
 {
     public float Base;
-    [HideInInspector] public float Cur;
+    public float Cur => Base * (1 + (percentAdd / 100)) + flatAdd;
 
     [HideInInspector] public float percentAdd;
     [HideInInspector] public float flatAdd;
-
-    public void Init()
-    {
-        Cur = Base;
-
-        percentAdd = 0;
-        flatAdd = 0;
-    }
-
-    public void ApplyAddedStat()
-    {
-        Cur = Base * (1 + (percentAdd / 100)) + flatAdd;
-    }
 }
 
 [Serializable]
@@ -72,8 +46,8 @@ public class TimerStat : ITimerData
 
     public void Init(GameObject self, Action OnTick = null, Action OnEnd = null)
     {
+        // Init Timer
         TimerManager.Inst.AddTimer(self, this);
-
         this.OnTick = OnTick;
         this.OnEnd = OnEnd;
 

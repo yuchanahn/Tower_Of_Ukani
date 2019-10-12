@@ -15,11 +15,6 @@ public abstract class Gun : Weapon
     {
         base.Start();
 
-        // Init Stat
-        shootTimer.EndTime.Init();
-        reloadTimer.EndTime.Init();
-        swapMagazineTimer.EndTime.Init();
-
         // Init Timer
         shootTimer.Init(gameObject);
         reloadTimer.Init(gameObject);
