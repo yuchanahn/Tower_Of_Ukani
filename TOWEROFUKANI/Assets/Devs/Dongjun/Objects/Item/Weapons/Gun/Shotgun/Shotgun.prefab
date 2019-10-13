@@ -110,15 +110,24 @@ MonoBehaviour:
   shootTimer:
     StartAsEnded: 1
     CurTime: 0
-    EndTime: 0.1
+    EndTime:
+      Base: 0.15
+      percentBonus: 0
+      flatBonus: 0
   reloadTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 0.22
+    EndTime:
+      Base: 0.2
+      percentBonus: 0
+      flatBonus: 0
   swapMagazineTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 1.2
+    EndTime:
+      Base: 1
+      percentBonus: 0
+      flatBonus: 0
   magazineSize: 2
   loadedBullets: 0
   isBulletLoaded: 1
@@ -139,11 +148,23 @@ MonoBehaviour:
   bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
   bulletData:
-    damage: 1
-    moveSpeed: 45
-    gravity: 0
+    damage:
+      Base: 1
+      percentBonus: 0
+      flatBonus: 0
+    moveSpeed:
+      Base: 45
+      percentBonus: 0
+      flatBonus: 0
+    gravity:
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
     curTravelDist: 0
-    maxTravelDist: 7
+    maxTravelDist:
+      Base: 7
+      percentBonus: 0
+      flatBonus: 0
   maxShootAnimTime: 0
   pelletCount: 4
   pelletAngle: 8
@@ -152,9 +173,9 @@ MonoBehaviour:
   camShakeData_Shoot:
     angle: 0
     strength: 0.35
-    maxSpeed: 40
+    maxSpeed: 50
     minSpeed: 35
-    duration: 0.05
+    duration: 0.1
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0

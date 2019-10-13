@@ -4,12 +4,12 @@ using UnityEngine;
 [Serializable]
 public struct WeaponProjectileData
 {
-    public int damage;
+    public IntStat damage;
 
-    public float moveSpeed;
-    public float gravity;
+    public FloatStat moveSpeed;
+    public FloatStat gravity;
 
     [HideInInspector]
     public float curTravelDist;
-    public float maxTravelDist;
+    public FloatStat maxTravelDist;
 }

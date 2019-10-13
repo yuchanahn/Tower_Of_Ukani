@@ -157,20 +157,32 @@ MonoBehaviour:
     tag_Type: 01000000
     tag_Range: 01000000
   weaponTags: 00000000
-  pivotPointY: 0.1
   spriteRoot: {fileID: 2609116014577026526}
+  pivotPointY: 0.1
   shootTimer:
     StartAsEnded: 1
     CurTime: 0
-    EndTime: 0.15
+    EndTime:
+      Base: 0.2
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   reloadTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 0.3
+    EndTime:
+      Base: 0.3
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   swapMagazineTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 0.6
+    EndTime:
+      Base: 0.7
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   magazineSize: 6
   loadedBullets: 0
   isBulletLoaded: 0
@@ -191,12 +203,28 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3884733660367707162, guid: 669013e116ca93843a65a5f56b89838a,
     type: 3}
   bulletData:
-    damage: 2
-    moveSpeed: 45
-    gravity: 0
+    damage:
+      Base: 1
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
+    moveSpeed:
+      Base: 45
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
+    gravity:
+      Base: 0
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
     curTravelDist: 0
-    maxTravelDist: 10
-  maxShootAnimTime: 0
+    maxTravelDist:
+      Base: 10
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
+  maxShootAnimTime: 0.15
   muzzleFlashPrefab: {fileID: 3546313596656909244, guid: fc45d6df91e980e4d90c006610728338,
     type: 3}
   camShakeData_Shoot:

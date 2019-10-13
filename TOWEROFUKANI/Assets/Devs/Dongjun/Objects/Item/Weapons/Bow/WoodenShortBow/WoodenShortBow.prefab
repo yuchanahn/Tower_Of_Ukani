@@ -74,16 +74,24 @@ MonoBehaviour:
     tag_Type: 01000000
     tag_Range: 01000000
   weaponTags: 01000000
-  pivotPointY: 0.1
   spriteRoot: {fileID: 2778987210056156138}
+  pivotPointY: 0.1
   shootTimer:
     StartAsEnded: 1
     CurTime: 0
-    EndTime: 0.3
+    EndTime:
+      Base: 0.2
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   drawTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime: 0.5
+    EndTime:
+      Base: 0.5
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   arrowSprite: {fileID: 7866383674972493763}
   hasBeenDrawn: 0
   drawPower: 0
@@ -104,11 +112,27 @@ MonoBehaviour:
   arrowPrefab: {fileID: -6090198353138406777, guid: 07fe65b781e65e04d978b2432feee51c,
     type: 3}
   projectileData:
-    damage: 5
-    moveSpeed: 30
-    gravity: 0.7
+    damage:
+      Base: 5
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
+    moveSpeed:
+      Base: 30
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
+    gravity:
+      Base: 1
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
     curTravelDist: 0
-    maxTravelDist: 30
+    maxTravelDist:
+      Base: 30
+      Cur: 0
+      percentAdd: 0
+      flatAdd: 0
   maxShootAnimTime: 0.2
   camShakeData_Shoot:
     angle: 0

@@ -12,15 +12,20 @@ public class PlayerActionManager : MonoBehaviour
 {
     private static List<ItemEffect> onJump = new List<ItemEffect>();
     private static List<ItemEffect> onDash = new List<ItemEffect>();
+
     private static List<ItemEffect> onDamaged = new List<ItemEffect>();
     private static List<ItemEffect> onHealed = new List<ItemEffect>();
+
     private static List<ItemEffect> onHit = new List<ItemEffect>();
     private static List<ItemEffect> onKill = new List<ItemEffect>();
+
     private static List<ItemEffect> onWeaponMainAbility = new List<ItemEffect>();
     private static List<ItemEffect> onWeaponSubAbility = new List<ItemEffect>();
     private static List<ItemEffect> onWeaponSepcialAbility = new List<ItemEffect>();
+
     private static List<ItemEffect> onGunShoot = new List<ItemEffect>();
     private static List<ItemEffect> onGunReload = new List<ItemEffect>();
+
     private static List<ItemEffect> onBowShoot = new List<ItemEffect>();
 
 

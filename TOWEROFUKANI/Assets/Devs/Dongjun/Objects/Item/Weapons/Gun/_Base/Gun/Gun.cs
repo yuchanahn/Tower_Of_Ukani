@@ -3,9 +3,9 @@ using NaughtyAttributes;
 
 public abstract class Gun : Weapon
 {
-    [BoxGroup("Timer")] public TimerData shootTimer;
-    [BoxGroup("Timer")] public TimerData reloadTimer;
-    [BoxGroup("Timer")] public TimerData swapMagazineTimer;
+    [BoxGroup("Timer")] public TimerStat shootTimer;
+    [BoxGroup("Timer")] public TimerStat reloadTimer;
+    [BoxGroup("Timer")] public TimerStat swapMagazineTimer;
 
     [BoxGroup("Ammo")] public int magazineSize;
     [BoxGroup("Ammo")] public int loadedBullets;
