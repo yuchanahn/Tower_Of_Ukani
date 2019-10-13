@@ -1,0 +1,134 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Shiroi.Pathfinding2D.Kuroi;
+using Shiroi.Pathfinding2D.Runtime;
+using UnityEditor;
+using UnityEngine;
+
+namespace Shiroi.Pathfinding2D.Examples
+{
+    public class PathFinder : MonoBehaviour
+    {
+        [SerializeField] GameObject LinkCheck;
+        [SerializeField] GameObject LinkMaxCheck;
+
+        public static PathFinder Inst;
+
+        public Vector2Int origin, destination;
+        public List<uint> path;
+
+        public KuroiLinkMap linkMap;
+
+        public void Awake()
+        {
+            Inst = this;
+        }
+
+        public void SwapPoints()
+        {
+            var t = origin;
+            origin = destination;
+            destination = t;
+        }
+
+        public FollowingData FindPath(Vector3 ori, Vector3 target)
+        {
+            var ori_vi3 = linkMap.NavMesh.grid.WorldToCell(ori);
+            var tar_vi3 = linkMap.NavMesh.grid.WorldToCell(target);
+            origin = new Vector2Int(ori_vi3.x, ori_vi3.y);
+            destination = new Vector2Int(tar_vi3.x, tar_vi3.y);
+
+            var navmesh = linkMap.NavMesh;
+            path = AStar.CalculatePath(
+                navmesh.IndexOf(origin.x, origin.y),
+                navmesh.IndexOf(destination.x, destination.y),
+                linkMap
+            );
+            if (path == null) return new FollowingData(false, false, Vector2.zero);
+            var link = FindLinkFromTo(path[0], path[1]);
+            bool bLink = FindLinkFromTo(path[0], path[1]) is KuroiLinkMap.LinkNode.GravitationalLink;
+
+            Vector2 max = Vector2.zero;
+            if (link is KuroiLinkMap.LinkNode.GravitationalLink g)
+            {
+                var points = g.Path;
+                max = (points[points.Length-1] - points[0]);
+            }
+
+            var oPos = (navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[2])) - navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[0]))).normalized;
+            oPos.y = bLink ? max.y : 0;
+            return new FollowingData(true, bLink, oPos);
+        }
+        bool find = false;
+        public void FindPath()
+        {
+            var navmesh = linkMap.NavMesh;
+            path = AStar.CalculatePath(
+                navmesh.IndexOf(origin.x, origin.y),
+                navmesh.IndexOf(destination.x, destination.y),
+                linkMap
+            );
+            find = true;
+        }
+
+
+        private void OnDrawGizmos()
+        {
+            var navmesh = linkMap.NavMesh;
+            if (navmesh == null || navmesh.grid == null)
+            {
+                return;
+            }
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(navmesh.grid.GetCellCenterWorld((Vector3Int)origin), 1F);
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(navmesh.grid.GetCellCenterWorld((Vector3Int)destination), 1);
+            Gizmos.color = Color.yellow;
+            if (path == null)
+            {
+                return;
+            }
+
+            var color = new Color(1f, 0.67f, 0f);
+            for (int i = 0; i < path.Count - 1; i++)
+            {
+                var oPos = navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[i + 1]));
+                var link = FindLinkFromTo(path[i], path[i + 1]);
+
+                Gizmos.color = color;
+
+                if (link is KuroiLinkMap.LinkNode.GravitationalLink g)
+                {
+                    var points = g.Path;
+
+                    for (var j = 0; j < points.Length - 1; j++)
+                    {
+                        var a = points[j];
+                        var b = points[j + 1];
+                        Gizmos.DrawLine(
+                            a,
+                            b
+                        );
+                    }
+
+
+
+                    continue;
+                }
+                Gizmos.DrawLine(
+                    oPos,
+                    navmesh.grid.GetCellCenterWorld((Vector3Int)navmesh.PositionOf(path[i]))
+                );
+            }
+
+        }
+
+        private ILink FindLinkFromTo(uint from, uint to)
+        {
+            return linkMap.nodes[from].Links.FirstOrDefault(
+                link => link.Destination == to
+            );
+        }
+    }
+}

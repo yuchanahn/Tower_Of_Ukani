@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shiroi.Pathfinding2D.Examples;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -60,6 +61,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool m_bYMoveCoolTime = false;
     protected bool m_bMoveAble = true;
     protected bool m_bAttacking = false;
+    protected bool m_bFollowJump = false;
 
 
     protected float m_jumpHeight;
@@ -69,10 +71,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     #endregion
 
     #region Var: Properties
+    public Vector2 JumpVel;
     public virtual float VelX =>
      m_bAttacking ? 0 :
      CanAttack ? 0 :
-     CanFollow ? m_MoveData.Speed * m_MoveData.Dir :
+     CanFollow ?  m_MoveData.Speed * m_MoveData.Dir :
      m_bHurting || !m_groundDetectionData.isGrounded ? 0
     : !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0
     : m_MoveData.Speed * m_MoveData.Dir;
@@ -85,7 +88,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
 
 
-    public virtual bool CanFollow => false;
+    public virtual bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dist);
 
     public virtual bool CanAttack => m_bAttacking ? true : !m_groundDetectionData.isGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
             
@@ -114,10 +117,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_groundDetectionData.DetectGround(!m_jumpData.isJumping, m_rb, transform);
         m_groundDetectionData.ExecuteOnGroundMethod(this);
 
-        m_rb.velocity = new Vector2(VelX, VelY);
+        m_rb.velocity = new Vector2(m_bFollowJump ? JumpVel.x : VelX, VelY);
 
         m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
 
+        
         m_jumpData.Jump(ref m_bJumpStart, m_rb, transform);
 
         Gravity_Logic.ApplyGravity(m_rb, m_groundDetectionData.isGrounded ? new GravityData(false, 0, 0) : !m_jumpData.isJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
@@ -198,13 +202,22 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     // TODO : 
 
+    public int FollowJump(Vector2 nom)
+    {
+        JumpVel = nom;
+        m_bJumpStart = true;
+        m_bFollowJump = true;
+        m_jumpData.height = JumpVel.y;
+        return nom.x < 0 ? -1 : 1;
+    }
 
     public bool Follow()
     {
-        var dir = (Mathf.Sign(GM.PlayerPos.x - transform.position.x) == 1) ? 1 : -1;
-        Dir = dir;
+        if (m_bFollowJump) return false;
+        var pa = PathFinder.Inst.FindPath(transform.position, GM.PlayerPos);
 
-
+        Dir = pa.bJump ? FollowJump(pa.nomal) : pa.nomal.x < 0 ? -1 : 1;
+        
 
         return true;
     }
@@ -276,6 +289,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     virtual public void OnGroundEnter()
     {
         Jump_Logic.ResetJumpCount(ref m_jumpData);
+        m_bFollowJump = false;
         m_CurAniST = eMobAniST.Idle;
     }
     virtual public void OnGroundStay()
