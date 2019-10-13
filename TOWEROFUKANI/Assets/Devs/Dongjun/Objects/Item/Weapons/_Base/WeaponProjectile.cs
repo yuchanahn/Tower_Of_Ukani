@@ -30,7 +30,7 @@ public class WeaponProjectile : PoolingObj
     #region Method: Move
     protected virtual void Move()
     {
-        velocity.y -= projectileData.gravity.Cur;
+        velocity.y -= projectileData.gravity.Value;
         transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
         projectileData.curTravelDist += velocity.magnitude * Time.fixedDeltaTime;
 
@@ -38,7 +38,7 @@ public class WeaponProjectile : PoolingObj
     }
     protected virtual void OnMaxDist()
     {
-        if (projectileData.curTravelDist >= projectileData.maxTravelDist.Cur)
+        if (projectileData.curTravelDist >= projectileData.maxTravelDist.Value)
             ObjPoolingManager.Sleep(this);
     }
     #endregion
@@ -46,11 +46,11 @@ public class WeaponProjectile : PoolingObj
     #region Method: Hit
     protected virtual void DetectObject()
     {
-        Vector2 pos = (transform.position + (transform.right * detectSize.x * 0.5f)) - (transform.right * (projectileData.moveSpeed.Cur * Time.fixedDeltaTime));
+        Vector2 pos = (transform.position + (transform.right * detectSize.x * 0.5f)) - (transform.right * (projectileData.moveSpeed.Value * Time.fixedDeltaTime));
         float rot = transform.rotation.eulerAngles.z;
 
         RaycastHit2D[] hits =
-            Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, projectileData.moveSpeed.Cur * Time.fixedDeltaTime, detectLayers);
+            Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, projectileData.moveSpeed.Value * Time.fixedDeltaTime, detectLayers);
 
         Vector2 hitPos = transform.position;
 
@@ -69,7 +69,7 @@ public class WeaponProjectile : PoolingObj
                 IDamage mob = hits[i].collider.GetComponent<IDamage>();
                 if (mob != null)
                 {
-                    mob.Hit(projectileData.damage.Cur);
+                    mob.Hit(projectileData.damage.Value);
                     OnHit(hitPos);
                     return;
                 }
@@ -93,7 +93,7 @@ public class WeaponProjectile : PoolingObj
     public void SetData(WeaponProjectileData projectileData)
     {
         this.projectileData = projectileData;
-        velocity = projectileData.moveSpeed.Cur * transform.right;
+        velocity = projectileData.moveSpeed.Value * transform.right;
     }
     #endregion
 }

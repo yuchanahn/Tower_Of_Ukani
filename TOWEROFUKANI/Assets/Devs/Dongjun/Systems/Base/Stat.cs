@@ -5,20 +5,20 @@ using UnityEngine;
 public struct IntStat
 {
     public int Base;
-    public int Cur => (int)(Base * (1 + (percentAdd / 100)) + flatAdd + 0.5f);
+    public int Value => (int)(Base * (1 + (percentBonus / 100)) + flatBonus + 0.5f);
 
-    [HideInInspector] public float percentAdd;
-    [HideInInspector] public float flatAdd;
+    [HideInInspector] public float percentBonus;
+    [HideInInspector] public float flatBonus;
 }
 
 [Serializable]
 public struct FloatStat
 {
     public float Base;
-    public float Cur => Base * (1 + (percentAdd / 100)) + flatAdd;
+    public float Value => Base * (1 + (percentBonus / 100)) + flatBonus;
 
-    [HideInInspector] public float percentAdd;
-    [HideInInspector] public float flatAdd;
+    [HideInInspector] public float percentBonus;
+    [HideInInspector] public float flatBonus;
 }
 
 [Serializable]
@@ -80,11 +80,11 @@ public class TimerStat : ITimerData
         CurTime += Time.deltaTime;
         OnTick?.Invoke();
 
-        if (CurTime >= EndTime.Cur)
+        if (CurTime >= EndTime.Value)
         {
             IsEnded = true;
             OnEnd?.Invoke();
-            CurTime = EndTime.Cur;
+            CurTime = EndTime.Value;
         }
     }
     public void Restart()
@@ -94,5 +94,5 @@ public class TimerStat : ITimerData
     }
 
     public void ToZero() => CurTime = 0;
-    public void ToEnd() => CurTime = EndTime.Cur;
+    public void ToEnd() => CurTime = EndTime.Value;
 }

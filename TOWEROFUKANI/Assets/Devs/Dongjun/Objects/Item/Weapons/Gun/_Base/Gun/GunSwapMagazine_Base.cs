@@ -34,7 +34,7 @@ public abstract class GunSwapMagazine_Base<TMain> : GunAction_Base<TMain>
     }
     public override void OnLateEnter()
     {
-        Anim_Logic.SetAnimSpeed(animator, weapon.swapMagazineTimer.EndTime.Cur, weapon.Info.NameTrimed + "_SwapMagazine");
+        Anim_Logic.SetAnimSpeed(animator, weapon.swapMagazineTimer.EndTime.Value, weapon.Info.NameTrimed + "_SwapMagazine");
     }
     public override void OnExit()
     {

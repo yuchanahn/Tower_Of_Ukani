@@ -25,7 +25,7 @@ public abstract class BowDraw_Base<TMain> : BowAction_Base<TMain>
     public override void OnLateEnter()
     {
         // Set Animation Speed
-        Anim_Logic.SetAnimSpeed(animator, weapon.drawTimer.EndTime.Cur, weapon.Info.NameTrimed + "_Pull");
+        Anim_Logic.SetAnimSpeed(animator, weapon.drawTimer.EndTime.Value, weapon.Info.NameTrimed + "_Pull");
     }
     public override void OnExit()
     {
@@ -44,7 +44,7 @@ public abstract class BowDraw_Base<TMain> : BowAction_Base<TMain>
         {
             IsDrawing = false;
             weapon.hasBeenDrawn = true;
-            weapon.drawPower = weapon.drawTimer.CurTime / weapon.drawTimer.EndTime.Cur;
+            weapon.drawPower = weapon.drawTimer.CurTime / weapon.drawTimer.EndTime.Value;
         }
     }
     public override void OnLateUpdate()

@@ -23,7 +23,7 @@ public abstract class GunReload_Base<TMain> : GunAction_Base<TMain>
     public override void OnLateEnter()
     {
         // Set Animation Speed
-        Anim_Logic.SetAnimSpeed(animator, weapon.reloadTimer.EndTime.Cur, weapon.Info.NameTrimed + "_Reload");
+        Anim_Logic.SetAnimSpeed(animator, weapon.reloadTimer.EndTime.Value, weapon.Info.NameTrimed + "_Reload");
     }
     public override void OnExit()
     {

@@ -44,7 +44,7 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
         weapon.arrowSprite.SetActive(weapon.shootTimer.IsEnded);
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
-        Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime.Cur, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
+        Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime.Value, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
     }
     #endregion
 
