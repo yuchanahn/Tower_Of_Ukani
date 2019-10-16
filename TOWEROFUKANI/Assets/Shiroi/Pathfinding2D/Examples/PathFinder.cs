@@ -45,18 +45,34 @@ namespace Shiroi.Pathfinding2D.Examples
                 linkMap
             );
             if (path == null) return new FollowingData(false, false, Vector2.zero);
-            var link = FindLinkFromTo(path[0], path[1]);
-            bool bLink = FindLinkFromTo(path[0], path[1]) is KuroiLinkMap.LinkNode.GravitationalLink;
+
+
+
+            var link = FindLinkFromTo(path[1], path[2]);
+            bool bLink = FindLinkFromTo(path[1], path[2]) is KuroiLinkMap.LinkNode.GravitationalLink;
+
+            bool linked = false;
+            for (int i = 0; i < path.Count - 1; i++)
+            {
+                linked = FindLinkFromTo(path[i], path[i + 1]) is KuroiLinkMap.LinkNode.GravitationalLink;
+                if(linked) print($"[{i}][{i+1}]");
+            }
 
             Vector2 max = Vector2.zero;
             if (link is KuroiLinkMap.LinkNode.GravitationalLink g)
             {
+                
                 var points = g.Path;
-                max = (points[points.Length-1] - points[0]);
+                foreach(var i in g.Path)
+                {
+                    max = i.y > max.y ? i : max;
+                }
             }
-
-            var oPos = (navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[2])) - navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[0]))).normalized;
-            oPos.y = bLink ? max.y : 0;
+            Vector2 oPos = (navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[2])) - navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[0]))).normalized;
+            
+            oPos = bLink ? (max - (Vector2)ori) : oPos;
+            print((max - (Vector2)ori));
+            oPos.x *= 3;
             return new FollowingData(true, bLink, oPos);
         }
         bool find = false;
