@@ -214,8 +214,8 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public bool Follow()
     {
         if (m_bFollowJump) return false;
-        var pa = PathFinder.Inst.FindPath(transform.position, GM.PlayerPos);
-
+        var pa = PathFinder.Inst.FindPath(transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
+        if (!pa.bFollow) return false;
         Dir = pa.bJump ? FollowJump(pa.nomal) : pa.nomal.x < 0 ? -1 : 1;
         
 

@@ -18,6 +18,7 @@ namespace Shiroi.Pathfinding2D.Examples
         public List<uint> path;
 
         public KuroiLinkMap linkMap;
+        public Grid Grid => linkMap.NavMesh.grid;
 
         public void Awake()
         {
@@ -44,8 +45,7 @@ namespace Shiroi.Pathfinding2D.Examples
                 navmesh.IndexOf(destination.x, destination.y),
                 linkMap
             );
-            if (path == null) return new FollowingData(false, false, Vector2.zero);
-
+            if (path == null || path.Count < 3) return new FollowingData(false, false, Vector2.zero);
 
 
             var link = FindLinkFromTo(path[1], path[2]);
@@ -54,11 +54,17 @@ namespace Shiroi.Pathfinding2D.Examples
             bool linked = false;
             for (int i = 0; i < path.Count - 1; i++)
             {
-                linked = FindLinkFromTo(path[i], path[i + 1]) is KuroiLinkMap.LinkNode.GravitationalLink;
-                if(linked) print($"[{i}][{i+1}]");
+                if (!linked)
+                {
+                    linked = FindLinkFromTo(path[i], path[i + 1]) is KuroiLinkMap.LinkNode.GravitationalLink;
+                    if(linked)  print($"Jump\n{i},{i+1}");
+                    // Jump 0, 1 에서도 가능... 
+                }
             }
-
-            Vector2 max = Vector2.zero;
+            
+            Vector2 Ori_CellToWorld = navmesh.grid.GetCellCenterWorld((Vector3Int)navmesh.PositionOf(path[0]));
+            Vector2 Ori_CellToWorld2 = navmesh.grid.GetCellCenterWorld((Vector3Int)navmesh.PositionOf(path[1]));
+            Vector2 max = Ori_CellToWorld;
             if (link is KuroiLinkMap.LinkNode.GravitationalLink g)
             {
                 
@@ -67,11 +73,18 @@ namespace Shiroi.Pathfinding2D.Examples
                 {
                     max = i.y > max.y ? i : max;
                 }
+                
             }
             Vector2 oPos = (navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[2])) - navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[0]))).normalized;
+
+
             
-            oPos = bLink ? (max - (Vector2)ori) : oPos;
-            print((max - (Vector2)ori));
+
+            oPos = bLink ? (max - Ori_CellToWorld2) : oPos;
+            if (bLink)
+            {
+                print($"{(max - Ori_CellToWorld2)}\n pos1 {Ori_CellToWorld}\n pos2{Ori_CellToWorld2}\n tar{max}");
+            }
             oPos.x *= 3;
             return new FollowingData(true, bLink, oPos);
         }
