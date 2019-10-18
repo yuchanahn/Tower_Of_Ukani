@@ -122,9 +122,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
 
         
-        m_jumpData.Jump(ref m_bJumpStart, m_rb, transform);
+        m_jumpData.FixedJump(ref m_bJumpStart, m_rb);
 
         Gravity_Logic.ApplyGravity(m_rb, m_groundDetectionData.isGrounded ? new GravityData(false, 0, 0) : !m_jumpData.isJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
+        m_jumpData.FixedJumpGravity(m_rb);
 
         Animation();
         Anim_Logic.SetAnimSpeed(m_ani, m_Ani[m_CurAniST].Item2);
@@ -214,13 +215,13 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public bool Follow()
     {
         if (m_bFollowJump) return false;
-        var pa = PathFinder.Inst.FindPath(transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
-        if (!pa.bFollow) return false;
-        Dir = pa.bJump ? FollowJump(pa.nomal) : pa.nomal.x < 0 ? -1 : 1;
+        var pathFind = PathFinder.Inst.FindPath(transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
+        if (!pathFind.bFollow) return false;
+        Dir = pathFind.bJump ? FollowJump(pathFind.nomal + new Vector2(m_groundDetectionData.Size.x/2 * pathFind.nomal.x < 0 ? -1 : 1, 0)) : pathFind.nomal.x < 0 ? -1 : 1;
         
 
         return true;
-    }
+    }   
 
     enum eAtkST
     {

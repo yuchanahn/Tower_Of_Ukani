@@ -90,6 +90,7 @@ public static class AEM
         max = max.y < rayhit_left.point.y ? rayhit_left.point : max;
         max = max.y < rayhit_rigth.point.y ? rayhit_rigth.point : max;
 
+        max.x = pos.x;
         return max;
     }
 }

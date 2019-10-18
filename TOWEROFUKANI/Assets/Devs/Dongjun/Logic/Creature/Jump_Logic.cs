@@ -10,15 +10,49 @@ public struct JumpData
     public float time;
 
     [HideInInspector]
+    public float fixedYVel;
+
+    [HideInInspector]
     public float apexY;
     public bool isJumping;
 
     public float jumpGravity => (2 * height) / (time * time);
+
     public bool canJump => curCount < maxCount;
 }
 
 public static class Jump_Logic
 {
+    public static void FixedJump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D)
+    {
+        if (!input_Jump)
+            return;
+
+        input_Jump = false;
+
+        jumpData.fixedYVel = jumpData.jumpGravity * jumpData.time;
+
+        if (!jumpData.canJump)
+            return;
+
+        jumpData.isJumping = true;
+        jumpData.curCount++;
+
+        rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.fixedYVel);
+    }
+
+    public static void FixedJumpGravity(this ref JumpData jumpData, Rigidbody2D rb2D)
+    {
+        if (jumpData.isJumping)
+        {
+            jumpData.fixedYVel -= jumpData.jumpGravity * Time.fixedDeltaTime;
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.fixedYVel);
+            jumpData.isJumping = jumpData.fixedYVel > 0;
+        }
+    }
+
+
+
     public static void Jump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
     {
         jumpData.ResetJumpingState(rb2D, tf);

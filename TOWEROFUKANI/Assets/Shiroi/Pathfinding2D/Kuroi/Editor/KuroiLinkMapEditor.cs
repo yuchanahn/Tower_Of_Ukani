@@ -46,6 +46,7 @@ namespace Shiroi.Pathfinding2D.Kuroi.Editor {
             linkMap.jumpCount = (uint) EditorGUILayout.IntField("Jump Count", (int) linkMap.jumpCount);
             linkMap.hitBoxSize = EditorGUILayout.Vector2Field("Hitbox Size", linkMap.hitBoxSize);
             linkMap.maxForce = EditorGUILayout.Vector2Field("Max Force", linkMap.maxForce);
+            linkMap.m_gravity = EditorGUILayout.FloatField("Gravity", linkMap.m_gravity);
         }
 
         protected override void OnEditorGUI() {

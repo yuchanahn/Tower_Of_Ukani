@@ -32,62 +32,59 @@ namespace Shiroi.Pathfinding2D.Examples
             destination = t;
         }
 
-        public FollowingData FindPath(Vector3 ori, Vector3 target)
+        public FollowingData FindPath(Vector3 oPos, Vector3 tPos)
         {
-            var ori_vi3 = linkMap.NavMesh.grid.WorldToCell(ori);
-            var tar_vi3 = linkMap.NavMesh.grid.WorldToCell(target);
-            origin = new Vector2Int(ori_vi3.x, ori_vi3.y);
+            #region Init
+            var ori_vi3 = linkMap.NavMesh.grid.WorldToCell(oPos);
+            var tar_vi3 = linkMap.NavMesh.grid.WorldToCell(tPos);
+            this.origin = new Vector2Int(ori_vi3.x, ori_vi3.y);
             destination = new Vector2Int(tar_vi3.x, tar_vi3.y);
 
             var navmesh = linkMap.NavMesh;
             path = AStar.CalculatePath(
-                navmesh.IndexOf(origin.x, origin.y),
+                navmesh.IndexOf(this.origin.x, this.origin.y),
                 navmesh.IndexOf(destination.x, destination.y),
                 linkMap
             );
-            if (path == null || path.Count < 3) return new FollowingData(false, false, Vector2.zero);
+            #endregion;
 
-
-            var link = FindLinkFromTo(path[1], path[2]);
-            bool bLink = FindLinkFromTo(path[1], path[2]) is KuroiLinkMap.LinkNode.GravitationalLink;
-
-            bool linked = false;
-            for (int i = 0; i < path.Count - 1; i++)
+            // 경로가 없다면 팔로우 하지 않는다.
+            if (path == null)
             {
-                if (!linked)
-                {
-                    linked = FindLinkFromTo(path[i], path[i + 1]) is KuroiLinkMap.LinkNode.GravitationalLink;
-                    if(linked)  print($"Jump\n{i},{i+1}");
-                    // Jump 0, 1 에서도 가능... 
-                }
+                return new FollowingData(false, false, Vector2.zero);
             }
-            
-            Vector2 Ori_CellToWorld = navmesh.grid.GetCellCenterWorld((Vector3Int)navmesh.PositionOf(path[0]));
-            Vector2 Ori_CellToWorld2 = navmesh.grid.GetCellCenterWorld((Vector3Int)navmesh.PositionOf(path[1]));
-            Vector2 max = Ori_CellToWorld;
+
+            var link = FindLinkFromTo(path[0], path[1]);
+
+            Vector2 jumpMaxHeight = oPos;
             if (link is KuroiLinkMap.LinkNode.GravitationalLink g)
             {
-                
-                var points = g.Path;
-                foreach(var i in g.Path)
+                foreach (var i in g.Path)
                 {
-                    max = i.y > max.y ? i : max;
+                    jumpMaxHeight = i.y > jumpMaxHeight.y ? i : jumpMaxHeight;
                 }
-                
+                return new FollowingData(true, true, jumpMaxHeight - (Vector2)oPos);
             }
-            Vector2 oPos = (navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[2])) - navmesh.grid.CellToWorld((Vector3Int)navmesh.PositionOf(path[0]))).normalized;
-
-
-            
-
-            oPos = bLink ? (max - Ori_CellToWorld2) : oPos;
-            if (bLink)
+            else  // 링크(점프)할 수 없다면 가야 하는 방향을 리턴한다.
             {
-                print($"{(max - Ori_CellToWorld2)}\n pos1 {Ori_CellToWorld}\n pos2{Ori_CellToWorld2}\n tar{max}");
+                for (int i = 0; i < path.Count - 1; i++)
+                {
+                    if (FindLinkFromTo(path[i], path[i+1]) is KuroiLinkMap.LinkNode.GravitationalLink g2)
+                    {
+                        tPos = g2.Path[0];
+                        break;
+                    }
+                }
+
+                return new FollowingData(true, false, tPos - oPos);
             }
-            oPos.x *= 3;
-            return new FollowingData(true, bLink, oPos);
         }
+
+
+
+
+
+
         bool find = false;
         public void FindPath()
         {

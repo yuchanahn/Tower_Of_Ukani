@@ -17,7 +17,7 @@ public class Mob_Slime : Mob_Base
 
         m_bJumpStart = true;
         m_bAtkEndActing = true;
-        m_CurAniST = eMobAniST.AirborneUp;
+        m_CurAniST = eMobAniST.AirborneUp;          
         Dir = GM.PlayerPos.x > transform.position.x ? -1 : 1;
     }
 
