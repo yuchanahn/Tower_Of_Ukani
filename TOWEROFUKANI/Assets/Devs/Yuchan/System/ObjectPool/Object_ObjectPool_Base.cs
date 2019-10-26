@@ -21,4 +21,8 @@ public class Object_ObjectPool_Base : MonoBehaviour
     public virtual void SetOn(Vector2 pos)
     {
     }
+
+    public virtual void SetOnUI(Vector2 pos)
+    {
+    }
 }

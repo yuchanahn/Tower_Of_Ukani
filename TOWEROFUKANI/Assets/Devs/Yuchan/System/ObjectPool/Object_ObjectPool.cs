@@ -28,12 +28,19 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
         SetOff();
     }
     public void DestroyObj(float DistroyTime){
-        DestroyObj__(DistroyTime);
+        StartCoroutine(DestroyObj__(DistroyTime));
     }
 
     public  override void SetOn(Vector2 pos)
     {
         gameObject.transform.position = pos;
+        gameObject.SetActive(true);
+        ThisStart();
+    }
+
+    public override void SetOnUI(Vector2 pos)
+    {
+        gameObject.GetComponent<RectTransform>().position = pos;
         gameObject.SetActive(true);
         ThisStart();
     }

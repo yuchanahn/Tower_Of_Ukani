@@ -14,6 +14,7 @@ public class ObjectPool : MonoBehaviour
     static ObjectPool instance;
 
     [SerializeField] PoolingObject[] poolingObjs;
+    [SerializeField] Transform UI;
 
     Queue<GameObject>[] objects;
 
@@ -49,6 +50,17 @@ public class ObjectPool : MonoBehaviour
 
         GameObject GObj = instance.objects[id].Dequeue();
         GObj.GetComponent<Object_ObjectPool_Base>().SetOn(pos);
+        return GObj;
+    }
+
+    public static GameObject createUI(int id, Vector2 pos)
+    {
+        if (instance.objects[id].Count == 0)
+        { instance.CreateObj(id); }
+
+        GameObject GObj = instance.objects[id].Dequeue();
+        GObj.transform.parent = instance.UI;
+        GObj.GetComponent<Object_ObjectPool_Base>().SetOnUI(pos);
         return GObj;
     }
 
