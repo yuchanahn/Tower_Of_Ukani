@@ -27,8 +27,10 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
     public void DestroyObj(){
         SetOff();
     }
-    public void DestroyObj(float DistroyTime){
-        StartCoroutine(DestroyObj__(DistroyTime));
+    public void DestroyObj(float DistroyTime)
+    {
+        ATimer.SetAndReset(gameObject.name + GetInstanceID() , DistroyTime,SetOff);
+        //StartCoroutine(DestroyObj__(DistroyTime));
     }
 
     public  override void SetOn(Vector2 pos)

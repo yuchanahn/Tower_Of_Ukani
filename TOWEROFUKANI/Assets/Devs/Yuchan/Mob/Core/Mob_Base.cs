@@ -14,6 +14,7 @@ public enum eMobAniST
     Idle,
     AirborneDown,
     AirborneUp,
+    Stunned,
     Last,
 }
 
@@ -22,6 +23,17 @@ public struct AniSpeedData
 {
     public eMobAniST ST;
     public float t;
+}
+
+[Serializable]
+public struct StatusEffectData
+{
+    public int AttackStop;
+    public int MoveStop;
+    public int HurtStop;
+    public int UseStatusEffect;
+    public eMobAniST StatusEffect;
+    public int priority;
 }
 
 public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
@@ -64,6 +76,8 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool m_bFollowJump = false;
 
 
+    public StatusEffectData m_STEFData;
+
     protected float m_jumpHeight;
 
 
@@ -72,7 +86,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     #region Var: Properties
     public Vector2 JumpVel;
+
+
+
     public virtual float VelX =>
+     m_STEFData.MoveStop > 0 ? 0:
      m_bAttacking ? 0 :
      CanAttack ? 0 :
      CanFollow ?  m_MoveData.Speed * m_MoveData.Dir :
@@ -84,13 +102,13 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
     protected int Dir { set { m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
 
+    public virtual bool CanFollow => !Hurting() ? ((GM.PlayerPos - transform.position).magnitude < m_followData.dist) : false;
 
-
-
-
-    public virtual bool CanFollow => ((GM.PlayerPos - transform.position).magnitude < m_followData.dist);
-
-    public virtual bool CanAttack => m_bAttacking ? true : !m_groundDetectionData.isGrounded ? false : m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
+    public virtual bool CanAttack =>
+        m_STEFData.AttackStop > 0 ? false :
+        m_bAttacking ? true : 
+        !m_groundDetectionData.isGrounded ? false :
+        m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
             
     #endregion
 
@@ -118,7 +136,6 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_groundDetectionData.ExecuteOnGroundMethod(this);
 
         m_rb.velocity = new Vector2(m_bFollowJump ? JumpVel.x : VelX, VelY);
-
         m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
 
         
@@ -140,7 +157,17 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     
     void Animation()
     {
-        m_CurAniST = m_bHurting || m_bAttacking ? m_CurAniST : m_groundDetectionData.isGrounded ? Dir != 0 ? eMobAniST.Walk : eMobAniST.Idle : VelY > 0 ? eMobAniST.AirborneUp : eMobAniST.AirborneDown;
+        // 상태이상이 애니를 쓴다면...?
+        // 상태 바꾸고 바로 끝내.
+
+        if (m_STEFData.UseStatusEffect > 0) m_CurAniST = m_STEFData.StatusEffect;
+        if (m_bHurting) return;
+        m_CurAniST = 
+        m_bHurting || m_bAttacking ? m_CurAniST : 
+        m_groundDetectionData.isGrounded ? Dir != 0 ? eMobAniST.Walk : 
+                                                      eMobAniST.Idle : 
+        VelY > 0 ? eMobAniST.AirborneUp : 
+                   eMobAniST.AirborneDown;
     }
 
     #region Method: Move
@@ -215,9 +242,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public bool Follow()
     {
         if (m_bFollowJump) return false;
-        var pathFind = PathFinder.Inst.FindPath(transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
+        var pathFind = PathFinder.Inst.FindPath(transform.position, transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
         if (!pathFind.bFollow) return false;
-        Dir = pathFind.bJump ? FollowJump(pathFind.nomal + new Vector2(m_groundDetectionData.Size.x/2 * pathFind.nomal.x < 0 ? -1 : 1, 0)) : pathFind.nomal.x < 0 ? -1 : 1;
+        Dir = pathFind.bJump ? FollowJump(pathFind.nomal) : pathFind.nomal.x < 0 ? -1 : 1;
         
 
         return true;
@@ -275,6 +302,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         atkST = eAtkST.pre;
         m_bHurting = false;
         m_MoveData.SprDir = m_bPrevDir;
+        Debug.Log("End");
     }
 
     #region Interface: IHurt
@@ -291,6 +319,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         Jump_Logic.ResetJumpCount(ref m_jumpData);
         m_bFollowJump = false;
+        if (m_bHurting) return;
         m_CurAniST = eMobAniST.Idle;
     }
     virtual public void OnGroundStay()

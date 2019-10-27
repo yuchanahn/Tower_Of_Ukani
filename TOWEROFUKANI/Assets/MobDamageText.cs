@@ -7,22 +7,39 @@ using UnityEngine.UI;
 
 public class MobDamageText : Object_ObjectPool<MobDamageText>
 {
-    [SerializeField] Text mText;
+    [SerializeField, Range(0, 5)] float JumpPower;
+
+    [SerializeField, Range(0, 5)] float RandomPosRange;
+
+    [SerializeField] public Text mText;
     [SerializeField] float DestoryT;
     Vector2 mPoint;
+    Vector2 mOriginPoint;
+    Vector2 RandPos;
     [Disable] public string Damage;
    
 
-    public static void Show(int dmg, Vector2 point)
+    public static MobDamageText Show(int dmg, Vector2 point)
     {
         var Obj = ObjectPool.createUI(ID, Camera.main.WorldToScreenPoint(point));
-        Obj.GetComponent<MobDamageText>().mText.text = dmg.ToString();
-        Obj.GetComponent<MobDamageText>().mPoint = point;
+
+        var MobDamageText = Obj.GetComponent<MobDamageText>();
+
+        MobDamageText.mText.text = dmg.ToString();
+        MobDamageText.RandPos = (Random.insideUnitCircle * MobDamageText.RandomPosRange);
+        MobDamageText.mOriginPoint = point + MobDamageText.RandPos;
+        return Obj.GetComponent<MobDamageText>();
+    }
+
+    public void SetPoint(Vector2 point)
+    {
+        mOriginPoint = point + RandPos;
     }
 
     public override void ThisStart()
     {
         Damage = mText.text;
+        mPoint = mOriginPoint;
         mText.color = new Color(0,0,0,1);
         transform.localScale = new Vector3(1,1,1);
         DestroyObj(DestoryT);
@@ -31,8 +48,8 @@ public class MobDamageText : Object_ObjectPool<MobDamageText>
     private void Update()
     {
         transform.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(mPoint);
-        transform.localPosition += Vector3.up * Time.deltaTime * 0.1f;
-        transform.localScale -= (Vector3)Vector2.one * Time.deltaTime * 0.1f;
-        mText.color -= new Color(0,0,0,Time.deltaTime * 0.5f);
+        mPoint += Vector2.up * Time.deltaTime * JumpPower;
+        //transform.localScale -= (Vector3)Vector2.one * Time.deltaTime * JumpPower;
+        mText.color -= new Color(0,0,0, Time.deltaTime / DestoryT);
     }
 }

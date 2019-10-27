@@ -49,8 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb5d8ba961aa56459754ad4872ed0af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  JumpPower: 3
+  RandomPosRange: 0.4
   mText: {fileID: 1818273435263061062}
-  DestoryT: 3
+  DestoryT: 0.4
   Damage: 
 --- !u!1 &1818273435263061060
 GameObject:

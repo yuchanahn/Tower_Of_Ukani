@@ -32,7 +32,7 @@ namespace Shiroi.Pathfinding2D.Examples
             destination = t;
         }
 
-        public FollowingData FindPath(Vector3 oPos, Vector3 tPos)
+        public FollowingData FindPath(Vector3 oriPos, Vector3 oPos, Vector3 tPos)
         {
             #region Init
             var ori_vi3 = linkMap.NavMesh.grid.WorldToCell(oPos);
@@ -63,7 +63,14 @@ namespace Shiroi.Pathfinding2D.Examples
                 {
                     jumpMaxHeight = i.y > jumpMaxHeight.y ? i : jumpMaxHeight;
                 }
-                return new FollowingData(true, true, jumpMaxHeight - (Vector2)oPos);
+                var lastx = g.Path[g.Path.Length - 1];
+
+                jumpMaxHeight = new Vector2(lastx.x, jumpMaxHeight.y);
+                var non = jumpMaxHeight - new Vector2(oPos.x, oPos.y);
+
+
+                return new FollowingData(true, true, non);
+
             }
             else  // 링크(점프)할 수 없다면 가야 하는 방향을 리턴한다.
             {

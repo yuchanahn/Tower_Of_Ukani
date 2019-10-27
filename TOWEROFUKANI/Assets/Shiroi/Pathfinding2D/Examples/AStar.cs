@@ -70,7 +70,7 @@ namespace Shiroi.Pathfinding2D.Examples {
                 }
             }
 
-            Debug.Log($"Unable to find path from {@from} to {to}");
+            //Debug.Log($"Unable to find path from {@from} to {to}");
             return null;
         }
 
