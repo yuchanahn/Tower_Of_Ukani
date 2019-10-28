@@ -60,7 +60,7 @@ public static class GroundDetection_Logic
         float castDist = scaledSize.y + (deltaYDist > offset ? deltaYDist : offset);
 
         RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, scaledSize, 0f, detectDir, castDist, data.GroundLayers);
-        if (hits == null) return;
+        if (hits is null) return;
         #endregion
 
         #region Get Highest Hit Point
@@ -72,13 +72,13 @@ public static class GroundDetection_Logic
                 hits[i].point.y > tf.position.y - (scaledSize.y * 0.5f) + data.InnerSnapDist)
                 continue;
 
-            if (hitPointY == null || hitPointY < hits[i].point.y)
+            if (hitPointY is null || hitPointY < hits[i].point.y)
             {
                 hitPointY = hits[i].point.y;
                 hitGround = hits[i].collider.gameObject;
             }
         }
-        if (hitPointY == null) return;
+        if (hitPointY is null) return;
         #endregion
 
         #region Is Grounded
@@ -163,7 +163,7 @@ public static class GroundDetection_Logic
 
         input = false;
 
-        if (overlaps == null || !data.isGrounded)
+        if (overlaps is null || !data.isGrounded)
             return;
 
         for (int i = 0; i < overlaps.Length; i++)

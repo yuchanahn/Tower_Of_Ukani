@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Shotgun_Main_Action : GunAction_Base<Shotgun>
+public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
 {
     #region Var: Inspector
     [Header("Shoot")]
@@ -11,12 +11,16 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
 
-    [Header("Pellets")]
-    [SerializeField] private int pelletCount = 2;
-    [SerializeField] private float pelletAngle = 10f;
+    [Header("Accuracy")]
+    [SerializeField] private float acry_YPosOffset;
+    [SerializeField] private float acry_ZRotOffset;
 
     [Header("Muzzle Flash")]
     [SerializeField] private PoolingObj muzzleFlashPrefab;
+
+    [Header("Empty Shell")]
+    [SerializeField] private Transform emptyShellSpawnPos;
+    [SerializeField] private PoolingObj emptyShellPrefab;
 
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
@@ -26,19 +30,33 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
 
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+
+        bulletData.damage = new IntStat(1, min: 0);
+        bulletData.moveSpeed = new FloatStat(45f, min: 0f);
+        bulletData.maxTravelDist = new FloatStat(10f, min: 0f);
+    }
+    #endregion
 
     #region Method: CLA_Action
+    public override void OnLateEnter()
+    {
+        UpdateAmmoBeltPos();
+    }
     public override void OnExit()
     {
         OnAnimEnd_Shoot();
     }
     public override void OnUpdate()
     {
-        if (!weapon.IsSelected || !weapon.isBulletLoaded)
+        if (!weapon.IsSelected || weapon.loadedBullets <= 0)
             return;
 
         // Shoot
-        if (weapon.shootTimer.IsEnded && Input.GetKeyDown(PlayerWeaponKeys.MainAbility))
+        if (weapon.shootTimer.IsEnded && Input.GetKey(PlayerWeaponKeys.MainAbility))
         {
             weapon.shootTimer.Restart();
 
@@ -60,29 +78,37 @@ public class Shotgun_Main_Action : GunAction_Base<Shotgun>
     #region Method: Shoot
     private void Shoot()
     {
-        // Spawn Bullets
-        Vector3 eRot = transform.eulerAngles;
-        eRot.z -= ((pelletCount / 2) - (pelletCount % 2 == 0 ? 0.5f : 0)) * pelletAngle;
-
-        for (int i = 0; i < pelletCount; i++)
-        {
-            Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(eRot));
-            bullet.SetData(bulletData);
-
-            eRot.z += pelletAngle;
-        }
+        // Spawn Bullet
+        Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
+        bullet.transform.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
+        bullet.transform.rotation = Quaternion.Euler(0, 0, bullet.transform.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
+        bullet.SetData(bulletData);
 
         // Consume Bullet
         weapon.loadedBullets -= 1;
-        weapon.isBulletLoaded = false;
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.WeaponMain);
+        ItemEffectManager.Trigger(PlayerActions.GunShoot);
     }
     private void ShootEffects()
     {
+        // Update Ammo Belt Pos
+        UpdateAmmoBeltPos();
+
+        // Empty Shell
+        emptyShellPrefab.Spawn(emptyShellSpawnPos.position, transform.rotation);
+
         // Muzzle Flash
         muzzleFlashPrefab.Spawn(shootPoint, new Vector2(0, 0), Quaternion.identity);
 
-        // Cam Shake Effect
+        // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
+    }
+    private void UpdateAmmoBeltPos()
+    {
+        weapon.ammoBelt.localPosition =
+            new Vector2(0, Mathf.Lerp(0, weapon.AmmoBeltMaxY, 1 - ((float)weapon.loadedBullets / weapon.magazineSize.Value)));
     }
 
     // Animation

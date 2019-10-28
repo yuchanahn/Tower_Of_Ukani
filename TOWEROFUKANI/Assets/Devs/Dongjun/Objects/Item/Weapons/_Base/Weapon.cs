@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using NaughtyAttributes;
 
 public enum WeaponTag
 {
@@ -8,49 +7,58 @@ public enum WeaponTag
     Bow,
 }
 
-public abstract class Weapon : CLA_Main
+public abstract class WeaponItem : Item 
 {
-    #region Var: Inspector
+    [SerializeField] private GameObject spriteRoot;
+    [SerializeField] private float pivotPointY;
+    [SerializeField] private WeaponTag[] weaponTags;
 
-    [BoxGroup("Info"), SerializeField] private ItemInfo info;
-    [BoxGroup("Info"), SerializeField] private WeaponTag[] weaponTags;
-
-    [BoxGroup("Visual"), SerializeField] private GameObject spriteRoot;
-    [BoxGroup("Visual"), SerializeField] private float pivotPointY;
-    #endregion
-
-    #region Var: Properties
-    public ItemInfo Info => info;
-    public bool IsSelected { get; protected set; } = false;
-    public HashSet<WeaponTag> WeaponTags { get; private set; } = new HashSet<WeaponTag>();
     public GameObject SpriteRoot => spriteRoot;
-    #endregion
+    public HashSet<WeaponTag> WeaponTags 
+    { get; private set; } = new HashSet<WeaponTag>();
+    public bool IsSelected 
+    { get; protected set; } = false;
 
 
-    #region Method: Unity
     protected override void Awake()
     {
         base.Awake();
-        info.Init();
 
         if (weaponTags != null)
+        {
             for (int i = 0; i < weaponTags.Length; i++)
                 WeaponTags.Add(weaponTags[i]);
+        }
+    }
 
+    public override void OnAdd()
+    {
+        SelectWeapon(false);
         transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
     }
-    protected override void Start()
+    public override void OnRemove()
     {
-        base.Start();
-        SpriteRoot.SetActive(IsSelected);
+        IsSelected = false;
+        spriteRoot.SetActive(true);
     }
-    #endregion
 
-    #region Method: Select Weapon
     public void SelectWeapon(bool select)
     {
         IsSelected = select;
-        SpriteRoot.SetActive(select);
+        spriteRoot.SetActive(select);
     }
-    #endregion
+}
+
+public abstract class WeaponObject_Base : CLA_Main { }
+public abstract class WeaponObject<TItem> : WeaponObject_Base
+    where TItem : WeaponItem
+{
+
+    protected TItem weaponItem;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        weaponItem = GetComponent<WeaponItem>() as TItem;
+    }
 }

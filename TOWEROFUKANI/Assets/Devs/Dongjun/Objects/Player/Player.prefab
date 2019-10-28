@@ -385,6 +385,7 @@ MonoBehaviour:
   groundDetectionData:
     Size: {x: 0, y: 0}
     IgnoreGrounds: []
+    isGrounded: 0
     OnGroundEnter_Executed: 0
     OnGroundExit_Executed: 0
     GroundLayers:
@@ -414,6 +415,8 @@ MonoBehaviour:
     height: 3
     time: 0.35
     apexY: 0
+    isJumping: 0
+    fixedYVel: 0
 --- !u!114 &7371128404420445764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanExecuteOnStart: 1
-  spriteRoot: {fileID: 7371128403266533315}
+  bodySprite: {fileID: 7371128403266533312}
   dashDist: 3.5
   dashTime: 0.2
 --- !u!1001 &187652297

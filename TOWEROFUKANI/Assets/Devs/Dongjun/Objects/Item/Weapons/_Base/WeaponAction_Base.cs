@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
 
-public abstract class WeaponAction_Base<TMain> : MonoAnimator
-    where TMain : Weapon
+public abstract class WeaponAction_Base<TItem> : MonoAnimator
+    where TItem : WeaponItem
 {
-    protected TMain weapon;
+    protected TItem weapon;
 
     protected override void Awake()
     {
         base.Awake();
-        weapon = GetComponent<TMain>();
+        weapon = GetComponent<TItem>();
     }
 }
 
-public abstract class GunAction_Base<TMain> : WeaponAction_Base<TMain>
-    where TMain : Gun { }
+public abstract class GunAction_Base<TItem> : WeaponAction_Base<TItem>
+    where TItem : GunItem
+{ }
 
-public abstract class BowAction_Base<TMain> : WeaponAction_Base<TMain>
-    where TMain : Bow { }
+public abstract class BowAction_Base<TItem> : WeaponAction_Base<TItem>
+    where TItem : BowItem
+{ }

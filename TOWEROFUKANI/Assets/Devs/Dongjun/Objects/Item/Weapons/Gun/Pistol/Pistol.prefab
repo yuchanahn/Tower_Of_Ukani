@@ -92,7 +92,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2609116014883290703}
   - component: {fileID: 2974935167531989671}
-  - component: {fileID: 7304129226058279292}
+  - component: {fileID: 706393606752200793}
+  - component: {fileID: 6078878233683138882}
   - component: {fileID: 485092021999584720}
   - component: {fileID: 3987485339869694392}
   - component: {fileID: 8938583646591096550}
@@ -137,7 +138,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7304129226058279292
+--- !u!114 &706393606752200793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,46 +147,66 @@ MonoBehaviour:
   m_GameObject: {fileID: 2609116014883290700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdcbb0f01046da8458cedf5e7b69e829, type: 3}
+  m_Script: {fileID: 11500000, guid: 45e6b62a561ebe14ebfbcfadefe4897f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultAction: {fileID: 485092021999584720}
   info:
     icon: {fileID: 21300000, guid: 787a57ef333f52b449ce2e66bb892119, type: 3}
     name: Pistol
     desc: This is a Pistol
     tag_Type: 01000000
     tag_Range: 01000000
-  weaponTags: 00000000
   spriteRoot: {fileID: 2609116014577026526}
   pivotPointY: 0.1
+  weaponTags: 00000000
   shootTimer:
-    StartAsEnded: 1
+    StartAsEnded: 0
     CurTime: 0
     EndTime:
-      Base: 0.2
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
   reloadTimer:
     StartAsEnded: 0
     CurTime: 0
     EndTime:
-      Base: 0.3
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
   swapMagazineTimer:
     StartAsEnded: 0
     CurTime: 0
     EndTime:
-      Base: 0.7
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
-  magazineSize: 6
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+  magazineSize:
+    Min: 0
+    Max: 0
+    Base: 0
+    percentBonus: 0
+    flatBonus: 0
   loadedBullets: 0
-  isBulletLoaded: 0
+  isBulletLoaded: 1
+--- !u!114 &6078878233683138882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2609116014883290700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b319376008f60064a9637c1bcfa76668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultAction: {fileID: 485092021999584720}
 --- !u!114 &485092021999584720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,26 +225,30 @@ MonoBehaviour:
     type: 3}
   bulletData:
     damage:
+      Min: 0
+      Max: 0
       Base: 1
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      percentBonus: 0
+      flatBonus: 0
     moveSpeed:
+      Min: 0
+      Max: 0
       Base: 45
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      percentBonus: 0
+      flatBonus: 0
     gravity:
+      Min: 0
+      Max: 0
       Base: 0
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      percentBonus: 0
+      flatBonus: 0
     curTravelDist: 0
     maxTravelDist:
+      Min: 0
+      Max: 0
       Base: 10
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      percentBonus: 0
+      flatBonus: 0
   maxShootAnimTime: 0.15
   muzzleFlashPrefab: {fileID: 3546313596656909244, guid: fc45d6df91e980e4d90c006610728338,
     type: 3}

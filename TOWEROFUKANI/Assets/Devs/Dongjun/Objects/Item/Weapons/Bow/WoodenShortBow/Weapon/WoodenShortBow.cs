@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WoodenShortBow : Bow
+public class WoodenShortBow : BowObject
 {
     private WoodenShortBow_Main_Action main_AC;
     private Bow_Draw_Action draw_AC;
@@ -16,17 +16,17 @@ public class WoodenShortBow : Bow
 
     private CLA_Action CL_Main()
     {
-        if (!IsSelected)
+        if (!weaponItem.IsSelected)
             return DefaultAction;
 
-        if (shootTimer.IsEnded && Input.GetKey(PlayerWeaponKeys.MainAbility))
+        if (weaponItem.shootTimer.IsEnded && Input.GetKey(PlayerWeaponKeys.MainAbility))
             return draw_AC;
 
         return main_AC;
     }
     private CLA_Action CL_Draw()
     {
-        if (!IsSelected)
+        if (!weaponItem.IsSelected)
             return DefaultAction;
 
         if (!draw_AC.IsDrawing)

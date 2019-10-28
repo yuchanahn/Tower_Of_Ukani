@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 
-public abstract class GunReload_Base<TMain> : GunAction_Base<TMain> 
-    where TMain : Gun
+public abstract class GunReload_Base<TItem> : GunAction_Base<TItem> 
+    where TItem : GunItem
 {
     #region Var: Inspector
     [Header("Ammo")]
     [SerializeField] protected bool reloadAll = true;
     [SerializeField] protected int reloadAmount;
     #endregion
-
 
     #region Method: CLA_Action
     public override void OnEnter()
@@ -33,7 +32,7 @@ public abstract class GunReload_Base<TMain> : GunAction_Base<TMain>
         // Load Bullets
         if (weapon.reloadTimer.IsEnded)
         {
-            weapon.loadedBullets = reloadAll ? weapon.magazineSize : weapon.loadedBullets + reloadAmount;
+            weapon.loadedBullets = reloadAll ? weapon.magazineSize.Value : weapon.loadedBullets + reloadAmount;
             weapon.isBulletLoaded = true;
         }
 

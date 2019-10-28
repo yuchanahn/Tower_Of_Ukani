@@ -1,26 +1,33 @@
 ﻿using UnityEngine;
-using NaughtyAttributes;
 
-public abstract class Gun : Weapon
+[System.Serializable]
+public class GunData : ItemData
 {
-    [BoxGroup("Timer")] public TimerStat shootTimer;
-    [BoxGroup("Timer")] public TimerStat reloadTimer;
-    [BoxGroup("Timer")] public TimerStat swapMagazineTimer;
 
-    [BoxGroup("Ammo")] public int magazineSize;
-    [BoxGroup("Ammo")] public int loadedBullets;
-    [BoxGroup("Ammo")] public bool isBulletLoaded;
+}
+public abstract class GunItem : WeaponItem
+{
+    public TimerStat shootTimer;
+    public TimerStat reloadTimer;
+    public TimerStat swapMagazineTimer;
 
-    protected override void Start()
+    public IntStat magazineSize;
+    public int loadedBullets;
+    public bool isBulletLoaded;
+
+    protected void Start()
     {
-        base.Start();
-
         // Init Timer
         shootTimer.Init(gameObject);
         reloadTimer.Init(gameObject);
         swapMagazineTimer.Init(gameObject);
 
         // Init Ammo
-        loadedBullets = magazineSize;
+        loadedBullets = magazineSize.Value;
     }
+}
+
+public abstract class GunController : WeaponObject<GunItem>
+{
+
 }

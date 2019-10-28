@@ -10,14 +10,13 @@ public struct JumpData
     public float time;
 
     [HideInInspector]
-    public float fixedYVel;
-
-    [HideInInspector]
     public float apexY;
     public bool isJumping;
 
-    public float jumpGravity => (2 * height) / (time * time);
+    [HideInInspector]
+    public float fixedYVel;
 
+    public float jumpGravity => (2 * height) / (time * time);
     public bool canJump => curCount < maxCount;
 }
 
@@ -40,7 +39,6 @@ public static class Jump_Logic
 
         rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.fixedYVel);
     }
-
     public static void FixedJumpGravity(this ref JumpData jumpData, Rigidbody2D rb2D)
     {
         if (jumpData.isJumping)
@@ -50,8 +48,6 @@ public static class Jump_Logic
             jumpData.isJumping = jumpData.fixedYVel > 0;
         }
     }
-
-
 
     public static void Jump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
     {
@@ -71,6 +67,27 @@ public static class Jump_Logic
 
         // Apply Jump Velocity
         rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.jumpGravity * jumpData.time);
+    }
+    public static void PlayerJump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
+    {
+        jumpData.ResetJumpingState(rb2D, tf);
+
+        if (!input_Jump)
+            return;
+
+        input_Jump = false;
+
+        if (!jumpData.canJump)
+            return;
+
+        jumpData.isJumping = true;
+        jumpData.curCount++;
+        jumpData.apexY = tf.position.y + jumpData.height;
+
+        // Apply Jump Velocity
+        rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.jumpGravity * jumpData.time);
+
+        ItemEffectManager.Trigger(PlayerActions.Jump);
     }
     public static void Jump(this ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
     {
@@ -93,7 +110,9 @@ public static class Jump_Logic
         if (!(tf.position.y >= jumpData.apexY || rb2D.velocity.y <= 0))
             return;
 
-        // Reset Y Velocity
+        if (tf.position.y > jumpData.apexY)
+            tf.position = new Vector3(tf.position.x, jumpData.apexY, tf.position.z);
+
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0f);
         jumpData.isJumping = false;
     }

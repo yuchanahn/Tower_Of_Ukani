@@ -1,22 +1,25 @@
 ﻿using UnityEngine;
-using NaughtyAttributes;
 
-public abstract class Bow : Weapon
+public abstract class BowItem : WeaponItem
 {
-    [BoxGroup("Timer")] [SerializeField] public TimerStat shootTimer;
-    [BoxGroup("Timer")] [SerializeField] public TimerStat drawTimer;
+    [SerializeField] protected GameObject arrowVisual;
 
-    [BoxGroup("Visual")] [SerializeField] public GameObject arrowSprite;
+    public TimerStat shootTimer;
+    public TimerStat drawTimer;
 
     [HideInInspector] public bool hasBeenDrawn = false;
     [HideInInspector] public float drawPower = 0;
 
-    protected override void Start()
-    {
-        base.Start();
+    public GameObject ArrowVisual => arrowVisual;
 
-        // Init Timer
+    protected void Start()
+    {
         shootTimer.Init(gameObject);
         drawTimer.Init(gameObject);
     }
+}
+
+public abstract class BowObject : WeaponObject<BowItem>
+{
+
 }

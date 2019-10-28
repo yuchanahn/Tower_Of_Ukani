@@ -6,7 +6,7 @@ public class MachineGun_EmptyShell : PlayerDropObj
     [SerializeField] private float forceMin;
     [SerializeField] private float forceMax;
 
-    [Header("Order In Layer Timer")]
+    [Header("Change Order In Layer Timer")]
     [SerializeField] private TimerData showBehindObjTimer;
 
     private SpriteRenderer spriteRenderer;
@@ -14,8 +14,8 @@ public class MachineGun_EmptyShell : PlayerDropObj
     protected override void Awake()
     {
         base.Awake();
-
         showBehindObjTimer.Init(gameObject, OnEnd: ShowBehindObj);
+
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
     public override void ResetOnSpawn()
@@ -28,7 +28,7 @@ public class MachineGun_EmptyShell : PlayerDropObj
         showBehindObjTimer.UseAutoTick(gameObject, true);
         showBehindObjTimer.Restart();
 
-        spriteRenderer.sortingOrder = 1;
+        spriteRenderer.sortingOrder = 100;
     }
     protected override void Sleep()
     {
@@ -39,6 +39,6 @@ public class MachineGun_EmptyShell : PlayerDropObj
 
     private void ShowBehindObj()
     {
-        spriteRenderer.sortingOrder = -1;
+        spriteRenderer.sortingOrder = -100;
     }
 }

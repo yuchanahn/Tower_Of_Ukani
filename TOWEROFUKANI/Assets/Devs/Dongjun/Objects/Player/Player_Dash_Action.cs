@@ -4,7 +4,7 @@ public class Player_Dash_Action : CLA_Action
 {
     #region Var: Inspector
     [Header("Visual")]
-    [SerializeField] private Transform spriteRoot;
+    [SerializeField] private SpriteRenderer bodySprite;
 
     [Header("Dash")]
     [SerializeField] private float dashDist;
@@ -40,6 +40,9 @@ public class Player_Dash_Action : CLA_Action
         dashTime_Cur = 0;
 
         Animation();
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.Dash);
     }
     public override void OnExit()
     {
@@ -67,8 +70,8 @@ public class Player_Dash_Action : CLA_Action
     }
     private void Animation()
     {
-        if ((PlayerInputManager.Inst.Input_DashDir == 1 && spriteRoot.rotation.eulerAngles.y == 0) ||
-            (PlayerInputManager.Inst.Input_DashDir == -1 && spriteRoot.rotation.eulerAngles.y == 180))
+        if ((PlayerInputManager.Inst.Input_DashDir == 1 && !bodySprite.flipX) ||
+            (PlayerInputManager.Inst.Input_DashDir == -1 && bodySprite.flipX))
             animator.Play("Player_Dash_Forward", 0, 0f);
         else
             animator.Play("Player_Dash_Backward", 0, 0f);

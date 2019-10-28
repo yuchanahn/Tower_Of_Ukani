@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-public class Shotgun : Gun
+public class Shotgun : GunController
 {
     #region Var: CLA_Action
     private Shotgun_Main_Action main_AC;
     private Gun_Reload_Action reload_AC;
     private Gun_SwapMagazine_Action swapMagazine_AC;
     #endregion
-
 
     #region Method: Init
     protected override void Init()
@@ -25,13 +24,13 @@ public class Shotgun : Gun
     #region Method: Condition Logic
     private CLA_Action CL_Main()
     {
-        if (!IsSelected)
+        if (!weaponItem.IsSelected)
             return main_AC;
 
-        if (!isBulletLoaded && main_AC.IsAnimEnded_Shoot && loadedBullets > 0)
+        if (!weaponItem.isBulletLoaded && main_AC.IsAnimEnded_Shoot && weaponItem.loadedBullets > 0)
             return reload_AC;
 
-        if (loadedBullets <= 0)
+        if (weaponItem.loadedBullets <= 0)
         {
             if (main_AC.IsAnimEnded_Shoot)
                 return swapMagazine_AC;
@@ -39,7 +38,7 @@ public class Shotgun : Gun
             if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
                 return swapMagazine_AC;
         }
-        else if (loadedBullets < magazineSize)
+        else if (weaponItem.loadedBullets < weaponItem.magazineSize.Value)
         {
             if (Input.GetKeyDown(PlayerWeaponKeys.Reload))
                 return swapMagazine_AC;
@@ -49,20 +48,20 @@ public class Shotgun : Gun
     }
     private CLA_Action CL_Reload()
     {
-        if (!IsSelected)
+        if (!weaponItem.IsSelected)
             return main_AC;
 
-        if (reloadTimer.IsEnded)
+        if (weaponItem.reloadTimer.IsEnded)
             return main_AC;
 
         return reload_AC;
     }
     private CLA_Action CL_SwapMagazine()
     {
-        if (!IsSelected)
+        if (!weaponItem.IsSelected)
             return main_AC;
 
-        if (swapMagazineTimer.IsEnded)
+        if (weaponItem.swapMagazineTimer.IsEnded)
             return reload_AC;
 
         return swapMagazine_AC;

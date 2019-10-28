@@ -21,7 +21,7 @@ public abstract class CLA_Main : MonoBehaviour
     #region Method: Unity
     protected virtual void Awake()
     {
-        if (defaultAction == null)
+        if (defaultAction is null)
         {
             Debug.LogError("It Needs Default Action!");
         }

@@ -150,6 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4450316997164171682}
   - component: {fileID: 3512479290777371978}
+  - component: {fileID: 7501912485448073292}
   - component: {fileID: 4770636179610790158}
   - component: {fileID: 1243003119494043728}
   - component: {fileID: 3376335330108281838}
@@ -195,6 +196,64 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7501912485448073292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450316997164171681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78011058dab8b6e4d826a7d4a75400b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info:
+    icon: {fileID: 21300000, guid: 377f95862e9f503448d637d67147f02c, type: 3}
+    name: Machine Gun
+    desc: This is a Machine Gun
+    tag_Type: 01000000
+    tag_Range: 01000000
+  spriteRoot: {fileID: 4450316997529025075}
+  pivotPointY: -0.025
+  weaponTags: 00000000
+  shootTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+  reloadTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+  swapMagazineTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime:
+      Min: 0
+      Max: 0
+      Base: 1
+      percentBonus: 0
+      flatBonus: 0
+  magazineSize:
+    Min: 0
+    Max: 0
+    Base: 0
+    percentBonus: 0
+    flatBonus: 0
+  loadedBullets: 0
+  isBulletLoaded: 1
+  ammoBelt: {fileID: 1315789236824654805}
+  ammoBeltAmmoCount: 7
 --- !u!114 &4770636179610790158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,44 +267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultAction: {fileID: 1243003119494043728}
-  info:
-    icon: {fileID: 21300000, guid: 377f95862e9f503448d637d67147f02c, type: 3}
-    name: Machine Gun
-    desc: This is a Machine Gun
-    tag_Type: 01000000
-    tag_Range: 01000000
-  weaponTags: 00000000
-  spriteRoot: {fileID: 4450316997529025075}
-  pivotPointY: -0.025
-  shootTimer:
-    StartAsEnded: 1
-    CurTime: 0
-    EndTime:
-      Base: 0.05
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
-  reloadTimer:
-    StartAsEnded: 0
-    CurTime: 0
-    EndTime:
-      Base: 0.4
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
-  swapMagazineTimer:
-    StartAsEnded: 0
-    CurTime: 0
-    EndTime:
-      Base: 1
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
-  magazineSize: 20
-  loadedBullets: 0
-  isBulletLoaded: 0
-  ammoBelt: {fileID: 1315789236824654805}
-  ammoBeltAmmoCount: 7
 --- !u!114 &1243003119494043728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,27 +285,31 @@ MonoBehaviour:
     type: 3}
   bulletData:
     damage:
+      Min: 0
+      Max: 0
       Base: 1
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      percentBonus: 0
+      flatBonus: 0
     moveSpeed:
+      Min: 0
+      Max: 0
       Base: 45
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      percentBonus: 0
+      flatBonus: 0
     gravity:
+      Min: 0
+      Max: 0
       Base: 0
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
+      percentBonus: 0
+      flatBonus: 0
     curTravelDist: 0
     maxTravelDist:
+      Min: 0
+      Max: 0
       Base: 10
-      Cur: 0
-      percentAdd: 0
-      flatAdd: 0
-  maxShootAnimTime: 0
+      percentBonus: 0
+      flatBonus: 0
+  maxShootAnimTime: 0.05
   acry_YPosOffset: 0.2
   acry_ZRotOffset: 8
   muzzleFlashPrefab: {fileID: 183118761886031892, guid: 8fb702bfb2eda0847ab717287666cacb,

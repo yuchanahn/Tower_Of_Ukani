@@ -126,7 +126,7 @@ public class TimerManager : SingletonBase<TimerManager>
         {
             curTickingObj = timers.ElementAt(i).Key;
 
-            if (curTickingObj == null)
+            if (curTickingObj is null)
             {
                 timers.Remove(curTickingObj);
                 continue;

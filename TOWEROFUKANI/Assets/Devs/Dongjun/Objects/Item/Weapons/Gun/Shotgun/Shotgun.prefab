@@ -40,8 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1077788971187178464}
   - component: {fileID: 254864248874405640}
-  - component: {fileID: 4565912263870322834}
-  - component: {fileID: 3151152317891876062}
+  - component: {fileID: 7010412958038895736}
+  - component: {fileID: 3648695750760986672}
+  - component: {fileID: 337060379171144907}
   - component: {fileID: 106689858320826181}
   - component: {fileID: 2776416182083292487}
   m_Layer: 0
@@ -85,7 +86,63 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4565912263870322834
+--- !u!114 &7010412958038895736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077788971187178467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2594dd598cebe124ea5ab024660ca463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  info:
+    icon: {fileID: 21300000, guid: 8713c2c7f655ec1478bc2f0dc3b3459b, type: 3}
+    name: Shotgun
+    desc: This is a Shotgun
+    tag_Type: 01000000
+    tag_Range: 01000000
+  spriteRoot: {fileID: 1077788971484917873}
+  pivotPointY: 0.162
+  weaponTags: 00000000
+  shootTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+  reloadTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+  swapMagazineTimer:
+    StartAsEnded: 0
+    CurTime: 0
+    EndTime:
+      Min: 0
+      Max: 0
+      Base: 1
+      percentBonus: 0
+      flatBonus: 0
+  magazineSize:
+    Min: 0
+    Max: 0
+    Base: 0
+    percentBonus: 0
+    flatBonus: 0
+  loadedBullets: 0
+  isBulletLoaded: 1
+--- !u!114 &3648695750760986672
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,41 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c205d6157bf1a8844885ee613a506bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultAction: {fileID: 3151152317891876062}
-  info:
-    icon: {fileID: 21300000, guid: 8713c2c7f655ec1478bc2f0dc3b3459b, type: 3}
-    name: Shotgun
-    desc: This is a Shotgun
-    tag_Type: 01000000
-    tag_Range: 01000000
-  weaponTags: 00000000
-  spriteRoot: {fileID: 1077788971484917873}
-  pivotPointY: 0.162
-  shootTimer:
-    StartAsEnded: 1
-    CurTime: 0
-    EndTime:
-      Base: 0.15
-      percentBonus: 0
-      flatBonus: 0
-  reloadTimer:
-    StartAsEnded: 0
-    CurTime: 0
-    EndTime:
-      Base: 0.2
-      percentBonus: 0
-      flatBonus: 0
-  swapMagazineTimer:
-    StartAsEnded: 0
-    CurTime: 0
-    EndTime:
-      Base: 1
-      percentBonus: 0
-      flatBonus: 0
-  magazineSize: 2
-  loadedBullets: 0
-  isBulletLoaded: 1
---- !u!114 &3151152317891876062
+  defaultAction: {fileID: 337060379171144907}
+--- !u!114 &337060379171144907
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,33 +173,41 @@ MonoBehaviour:
     type: 3}
   bulletData:
     damage:
+      Min: 0
+      Max: 0
       Base: 1
       percentBonus: 0
       flatBonus: 0
     moveSpeed:
+      Min: 0
+      Max: 0
       Base: 45
       percentBonus: 0
       flatBonus: 0
     gravity:
+      Min: 0
+      Max: 0
       Base: 0
       percentBonus: 0
       flatBonus: 0
     curTravelDist: 0
     maxTravelDist:
+      Min: 0
+      Max: 0
       Base: 7
       percentBonus: 0
       flatBonus: 0
-  maxShootAnimTime: 0
+  maxShootAnimTime: 0.18
   pelletCount: 4
-  pelletAngle: 8
+  pelletAngle: 10
   muzzleFlashPrefab: {fileID: 9204822279717750706, guid: 179a6208adf6eab45b4e01bea6d11926,
     type: 3}
   camShakeData_Shoot:
     angle: 0
-    strength: 0.35
+    strength: 0.5
     maxSpeed: 50
-    minSpeed: 35
-    duration: 0.1
+    minSpeed: 30
+    duration: 0.2
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0

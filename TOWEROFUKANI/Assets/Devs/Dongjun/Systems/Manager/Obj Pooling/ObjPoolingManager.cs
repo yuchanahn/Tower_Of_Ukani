@@ -41,14 +41,14 @@ public class ObjPoolingManager : MonoBehaviour
     #region Method: Private
     private void SetUpStartPool()
     {
-        if (startPoolData == null)
+        if (startPoolData is null)
             return;
 
         for (int i = 0; i < startPoolData.Length; i++)
         {
             for (int count = 0; count < startPoolData[i].initCount; count++)
             {
-                if (startPoolData[i].prefab == null || startPoolData[i].initCount <= 0)
+                if (startPoolData[i].prefab is null || startPoolData[i].initCount <= 0)
                     continue;
 
                 PoolingObj prefab = startPoolData[i].prefab;
@@ -93,12 +93,12 @@ public class ObjPoolingManager : MonoBehaviour
     #region Method: Public
     public static void SetUpObjPool(StartPoolData startPoolData)
     {
-        if (startPoolData.prefab == null)
+        if (startPoolData.prefab is null)
             return;
 
         for (int count = 0; count < startPoolData.initCount; count++)
         {
-            if (startPoolData.prefab == null || startPoolData.initCount <= 0)
+            if (startPoolData.prefab is null || startPoolData.initCount <= 0)
                 continue;
 
             PoolingObj prefab = startPoolData.prefab;

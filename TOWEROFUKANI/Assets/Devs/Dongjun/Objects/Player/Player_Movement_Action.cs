@@ -33,6 +33,7 @@ public class Player_Movement_Action : CLA_Action,
     #region Var: Components
     private Animator animator;
     private Rigidbody2D rb2D;
+    private SpriteRenderer bodySpriteRenderer;
     #endregion
 
     #region Var: Properties
@@ -45,6 +46,7 @@ public class Player_Movement_Action : CLA_Action,
     {
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+        bodySpriteRenderer = spriteRoot.GetComponent<SpriteRenderer>();
 
         groundDetectionData.Size = oneWayCollider.size;
     }
@@ -65,7 +67,7 @@ public class Player_Movement_Action : CLA_Action,
     public override void OnLateUpdate()
     {
         // Look At Mouse
-        spriteRoot.LookAtMouseY(Global.Inst.MainCam, transform);
+        bodySpriteRenderer.LookAtMouseY(Global.Inst.MainCam, transform);
     }
     public override void OnFixedUpdate()
     {
@@ -82,7 +84,7 @@ public class Player_Movement_Action : CLA_Action,
 
         // Jump
         jumpKeyPressed = PlayerInputManager.Inst.Input_Jump;
-        jumpData.Jump(ref jumpKeyPressed, rb2D, transform);
+        jumpData.PlayerJump(ref jumpKeyPressed, rb2D, transform);
 
         // Gravity
         Gravity_Logic.ApplyGravity(rb2D, 

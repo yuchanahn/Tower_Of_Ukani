@@ -4,29 +4,60 @@ using UnityEngine;
 [Serializable]
 public struct IntStat
 {
+    // Default
+    public int Min;
+    public int Max;
     public int Base;
-    public int Value => (int)(Base * (1 + (percentBonus / 100)) + flatBonus + 0.5f);
 
+    // Get Value
+    public int Value => Mathf.Clamp((int)(Base * (1 + (percentBonus / 100)) + flatBonus + 0.5f), Min, Max);
+
+    // Bonus
     [HideInInspector] public float percentBonus;
     [HideInInspector] public float flatBonus;
+
+    public IntStat(int _base, int? min = null, int? max = null)
+    {
+        Base = _base;
+        Min = min is null ? int.MinValue : min.Value;
+        Max = max is null ? int.MaxValue : max.Value;
+
+        percentBonus = 0f;
+        flatBonus = 0f;
+    }
 }
 
 [Serializable]
 public struct FloatStat
 {
+    // Default
+    public float Min;
+    public float Max;
     public float Base;
-    public float Value => Base * (1 + (percentBonus / 100)) + flatBonus;
 
+    // Get Value
+    public float Value => Mathf.Clamp(Base * (1 + (percentBonus / 100)) + flatBonus, Min, Max);
+
+    // Bonus
     [HideInInspector] public float percentBonus;
     [HideInInspector] public float flatBonus;
+
+    public FloatStat(float _base, float? min = null, float? max = null)
+    {
+        Base = _base;
+        Min = min is null ? float.NegativeInfinity : min.Value;
+        Max = max is null ? float.PositiveInfinity : max.Value;
+
+        percentBonus = 0f;
+        flatBonus = 0f;
+    }
 }
 
 [Serializable]
 public class TimerStat : ITimerData
 {
     #region Var: States
-    [SerializeField]
-    protected bool StartAsEnded = false;
+    public bool StartAsEnded = false;
     public bool IsActive { get; private set; } = true;
     public bool IsEnded { get; private set; } = false;
     public bool IsZero => CurTime == 0;

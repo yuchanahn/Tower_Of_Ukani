@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
+public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShotBowItem>
 {
     #region Var: Inspector
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private Arrow arrowPrefab;
-    [SerializeField] private WeaponProjectileData projectileData;
+    [SerializeField] private WeaponProjectileData arrowData;
 
     [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
@@ -16,9 +16,20 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
     #endregion
 
     #region Var: Current Data
-    private WeaponProjectileData curProjectileData;
+    private WeaponProjectileData curArrowData;
     #endregion
 
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+
+        arrowData.damage = new IntStat(5, min: 0);
+        arrowData.moveSpeed = new FloatStat(30f, min: 0f);
+        arrowData.gravity = new FloatStat(1f, min: 0f);
+        arrowData.maxTravelDist = new FloatStat(30f, min: 0f);
+    }
+    #endregion
 
     #region Method: CLA_Action
     public override void OnEnter()
@@ -41,7 +52,7 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
         if (!weapon.IsSelected)
             return;
 
-        weapon.arrowSprite.SetActive(weapon.shootTimer.IsEnded);
+        weapon.ArrowVisual.SetActive(weapon.shootTimer.IsEnded);
 
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
         Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime.Value, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
@@ -54,11 +65,15 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBow>
         // Spawn Bullet
         Arrow arrow = arrowPrefab.Spawn(shootPoint.position, transform.rotation);
 
-        curProjectileData = projectileData;
-        curProjectileData.damage.Base = Mathf.Max(Mathf.RoundToInt(curProjectileData.damage.Base * weapon.drawPower), 1);
-        curProjectileData.moveSpeed.Base *= weapon.drawPower;
+        curArrowData = arrowData;
+        curArrowData.damage.Base = Mathf.Max(Mathf.RoundToInt(curArrowData.damage.Base * weapon.drawPower), 1);
+        curArrowData.moveSpeed.Base *= weapon.drawPower;
 
-        arrow.SetData(curProjectileData);
+        arrow.SetData(curArrowData);
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.WeaponMain);
+        ItemEffectManager.Trigger(PlayerActions.BowShoot);
     }
     private void ShootEffects()
     {

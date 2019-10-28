@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿    using UnityEngine;
 
-public class Pistol_Main_Action : GunAction_Base<Pistol>
+public class Pistol_Main_Action : GunAction_Base<PistolItem>
 {
     #region Var: Inspector
     [Header("Shoot")]
@@ -22,6 +22,16 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
     public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
 
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+
+        bulletData.damage = new IntStat(1, min: 0);
+        bulletData.moveSpeed = new FloatStat(45f, min: 0f);
+        bulletData.maxTravelDist = new FloatStat(10f, min: 0f);
+    }
+    #endregion
 
     #region Method: CLA_Action
     public override void OnExit()
@@ -62,6 +72,10 @@ public class Pistol_Main_Action : GunAction_Base<Pistol>
 
         // Consume Bullet
         weapon.loadedBullets -= 1;
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.WeaponMain);
+        ItemEffectManager.Trigger(PlayerActions.GunShoot);
     }
     private void ShootEffects()
     {

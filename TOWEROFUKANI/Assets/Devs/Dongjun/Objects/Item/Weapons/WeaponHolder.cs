@@ -7,33 +7,35 @@ public class WeaponHolder : MonoBehaviour
     [SerializeField] private Text nameText;
     [SerializeField] private Text ammoText;
     [SerializeField] private Image[] weaponIcon = new Image[3];
-    [SerializeField] private Weapon[] weapons = new Weapon[3];
+    [SerializeField] private WeaponItem[] weapons = new WeaponItem[3];
     #endregion
 
     #region Var: Weapon Holder
     private int currentSlot = 0;
-    private Weapon oldWeapon;
-    private Weapon curWeapon;
+    private WeaponItem oldWeapon;
+    private WeaponItem curWeapon;
     #endregion
 
 
     #region Method Unity
     private void Awake()
     {
-        if (weapons == null)
+        if (weapons is null)
             return;
 
         // Init Selected Weapon
         curWeapon = weapons[0];
         curWeapon.SelectWeapon(true);
 
-        // Init Icons
         for (int i = 0; i < weaponIcon.Length; i++)
+        {
+            Inventory.Inst.AddItem(weapons[i]); // Test
             weaponIcon[i].sprite = weapons[i].Info.Icon;
+        }
     }
     private void Update()
     {
-        if (weapons == null)
+        if (weapons is null)
             return;
 
         GetInput();
@@ -46,15 +48,18 @@ public class WeaponHolder : MonoBehaviour
     private void GetInput()
     {
         float scroll = Input.mouseScrollDelta.y;
-        currentSlot += scroll == 0 ? 0 : scroll > 0 ? -1 : 1;
-        currentSlot = currentSlot == -1 ? 2 : currentSlot == weapons.Length ? 0 : currentSlot;
+        if (scroll != 0)
+        {
+            if (scroll < 0)
+                currentSlot = currentSlot == weapons.Length - 1 ? 0 : currentSlot + 1;
+            else
+                currentSlot = currentSlot == 0 ? weapons.Length - 1 : currentSlot - 1;
+        }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            currentSlot = 0;
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-            currentSlot = 1;
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-            currentSlot = 2;
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            currentSlot = currentSlot == weapons.Length - 1 ? 0 : currentSlot + 1;
+        }
     }
     private void ChangeWeapon()
     {
@@ -75,10 +80,10 @@ public class WeaponHolder : MonoBehaviour
         nameText.text = curWeapon.Info.Name;
 
         // Show Weapon Info
-        if (curWeapon is Gun)
+        if (curWeapon is GunItem)
         {
-            Gun gun = curWeapon as Gun;
-            ammoText.text = $"{gun.loadedBullets} / {gun.magazineSize}";
+            GunItem gun = curWeapon as GunItem;
+            ammoText.text = $"{gun.loadedBullets} / {gun.magazineSize.Value}";
         }
         else
         {

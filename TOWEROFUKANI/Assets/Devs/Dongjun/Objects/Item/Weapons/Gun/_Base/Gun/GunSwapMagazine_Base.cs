@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public abstract class GunSwapMagazine_Base<TMain> : GunAction_Base<TMain> 
-    where TMain : Gun
+public abstract class GunSwapMagazine_Base<TItem> : GunAction_Base<TItem> 
+    where TItem : GunItem
 {
     #region Var: Inspector
     [Header("Ammo")]
@@ -48,7 +48,7 @@ public abstract class GunSwapMagazine_Base<TMain> : GunAction_Base<TMain>
             IsAnimEnded_SwapMagazine = true;
 
             // Load Bullets
-            weapon.loadedBullets = reloadAll ? weapon.magazineSize : weapon.loadedBullets + reloadAmount;
+            weapon.loadedBullets = reloadAll ? weapon.magazineSize.Value : weapon.loadedBullets + reloadAmount;
         }
 
         // Animation

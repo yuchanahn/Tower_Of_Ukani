@@ -2,6 +2,15 @@
 
 public static class LookAtMouse_Logic
 {
+    public static void LookAtMouseY(this SpriteRenderer target, Camera mainCam, Transform pivot)
+    {
+        target.flipX = mainCam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x <= 0;
+    }
+    public static void LookAtMouseX(this SpriteRenderer target, Camera mainCam, Transform pivot)
+    {
+        target.flipY = mainCam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x <= 0;
+    }
+
     public static void LookAtMouseY(this Transform target, Camera mainCam, Transform pivot)
     {
         Vector3 newRot = Vector3.zero;

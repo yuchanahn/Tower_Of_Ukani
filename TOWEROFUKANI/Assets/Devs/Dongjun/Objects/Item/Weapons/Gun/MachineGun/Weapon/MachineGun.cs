@@ -1,21 +1,11 @@
 ﻿using UnityEngine;
 
-public class MachineGun : Gun
+public class MachineGun : GunController
 {
-    #region Var: Inspector
-    [Header("Ammo Belt")]
-    public Transform ammoBelt;
-    public float ammoBeltAmmoCount;
-    #endregion
-
     #region Var: CLA_Action
     private MachineGun_Main_Action main_AC;
     private Gun_Reload_Action reload_AC;
     private MachineGun_SwapMagazine_Action swapMagazine_AC;
-    #endregion
-
-    #region Var: Properties
-    public float AmmoBeltMaxY => 0.0625f * ammoBeltAmmoCount;
     #endregion
 
 
@@ -35,12 +25,12 @@ public class MachineGun : Gun
     #region Method: Condition Logic
     private CLA_Action CL_Main()
     {
-        if (!IsSelected)
+        if (!weaponItem.IsSelected)
             return DefaultAction;
 
-        if (loadedBullets <= 0)
+        if (weaponItem.loadedBullets <= 0)
         {
-            if (swapMagazine_AC.IsAnimEnded_SwapMagazine && !reloadTimer.IsEnded)
+            if (swapMagazine_AC.IsAnimEnded_SwapMagazine && !weaponItem.reloadTimer.IsEnded)
                 return reload_AC;
 
             if (main_AC.IsAnimEnded_Shoot)
@@ -49,7 +39,7 @@ public class MachineGun : Gun
             if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
                 return swapMagazine_AC;
         }
-        else if (loadedBullets < magazineSize)
+        else if (weaponItem.loadedBullets < weaponItem.magazineSize.Value)
         {
             if (Input.GetKeyDown(PlayerWeaponKeys.Reload))
                 return swapMagazine_AC;
@@ -59,20 +49,20 @@ public class MachineGun : Gun
     }
     private CLA_Action CL_Reload()
     {
-        if (!IsSelected)
+        if (!weaponItem.IsSelected)
             return DefaultAction;
 
-        if (reloadTimer.IsEnded)
+        if (weaponItem.reloadTimer.IsEnded)
             return main_AC;
 
         return reload_AC;
     }
     private CLA_Action CL_SwapMagazine()
     {
-        if (!IsSelected)
+        if (!weaponItem.IsSelected)
             return DefaultAction;
 
-        if (swapMagazineTimer.IsEnded)
+        if (weaponItem.swapMagazineTimer.IsEnded)
             return reload_AC;
 
         return swapMagazine_AC;

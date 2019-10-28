@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -1942333548769276047
     second: GreenSlime_Hit_3
+  - first:
+      213: -5205411122702882610
+    second: GreenSlime_Hit_4
+  - first:
+      213: -5247213268634399825
+    second: GreenSlime_Hit_5
+  - first:
+      213: -682603755273219809
+    second: GreenSlime_Hit_6
+  - first:
+      213: -3712863922243593867
+    second: GreenSlime_Hit_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -114,6 +126,90 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cdf927a8b3d7934d9a493d0251b4ced
+      internalID: -7119679401952392466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_Hit_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22d1845e97b4d9048a757f99ff4c5749
+      internalID: -4947739629171933669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_Hit_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33a88d73c9e05784597854ab954552c9
+      internalID: -766375423783268682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_Hit_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0eccfa4fbf415848a071258a2a0b4d9
+      internalID: -1942333548769276047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreenSlime_Hit_4
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 32
         height: 32
@@ -124,14 +220,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4708cab0c2f534b47ad9d81e88b6d0a1
-      internalID: -7119679401952392466
+      spriteID: 5bfdaaa9246482843a3fe147e4beb9aa
+      internalID: -5205411122702882610
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GreenSlime_Hit_1
+      name: GreenSlime_Hit_5
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +241,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dc87951d35c8df4683fec1e7ba4c4e3
-      internalID: -4947739629171933669
+      spriteID: 83114799c1f027b4bb28ba37877408a2
+      internalID: -5247213268634399825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GreenSlime_Hit_2
+      name: GreenSlime_Hit_6
       rect:
         serializedVersion: 2
         x: 64
@@ -166,14 +262,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83c1d45f98fdb1e498d648dcce16ebd0
-      internalID: -766375423783268682
+      spriteID: 2b32951d56caa8f49a682cd4b24d9d31
+      internalID: -682603755273219809
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GreenSlime_Hit_3
+      name: GreenSlime_Hit_7
       rect:
         serializedVersion: 2
         x: 96
@@ -187,8 +283,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4dad2d9591ebc1a48beee5826de30417
-      internalID: -1942333548769276047
+      spriteID: a3d79a16ccb3924429f979bebbf72df7
+      internalID: -3712863922243593867
       vertices: []
       indices: 
       edges: []

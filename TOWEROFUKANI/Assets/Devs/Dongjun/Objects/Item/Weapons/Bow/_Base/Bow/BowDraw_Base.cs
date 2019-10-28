@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public abstract class BowDraw_Base<TMain> : BowAction_Base<TMain> 
-    where TMain : Bow
+public abstract class BowDraw_Base<TItem> : BowAction_Base<TItem>
+    where TItem : BowItem
 {
     #region Var: Properties
     public bool IsDrawing { get; private set; } = false;
