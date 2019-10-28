@@ -241,7 +241,33 @@ MonoBehaviour:
     EndTime:
       Min: 0
       Max: 0
-      Base: 1
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+  bulletData:
+    damage:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+    moveSpeed:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+    gravity:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+    curTravelDist: 0
+    maxTravelDist:
+      Min: 0
+      Max: 0
+      Base: 0
       percentBonus: 0
       flatBonus: 0
   magazineSize:
@@ -283,32 +309,6 @@ MonoBehaviour:
   shootPoint: {fileID: 4450316996750440473}
   bulletPrefab: {fileID: 3522369012486736103, guid: 4516c39aa90b59146a00c293b77a065b,
     type: 3}
-  bulletData:
-    damage:
-      Min: 0
-      Max: 0
-      Base: 1
-      percentBonus: 0
-      flatBonus: 0
-    moveSpeed:
-      Min: 0
-      Max: 0
-      Base: 45
-      percentBonus: 0
-      flatBonus: 0
-    gravity:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-    curTravelDist: 0
-    maxTravelDist:
-      Min: 0
-      Max: 0
-      Base: 10
-      percentBonus: 0
-      flatBonus: 0
   maxShootAnimTime: 0.05
   acry_YPosOffset: 0.2
   acry_ZRotOffset: 8
@@ -374,7 +374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4450316997529025084
 Transform:
   m_ObjectHideFlags: 0

@@ -18,18 +18,6 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShotBowItem>
     private WeaponProjectileData arrowData;
     #endregion
 
-    #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-
-        arrowData.damage = new IntStat(5, min: 0);
-        arrowData.moveSpeed = new FloatStat(30f, min: 0f);
-        arrowData.gravity = new FloatStat(1f, min: 0f);
-        arrowData.maxTravelDist = new FloatStat(30f, min: 0f);
-    }
-    #endregion
-
     #region Method: CLA_Action
     public override void OnEnter()
     {

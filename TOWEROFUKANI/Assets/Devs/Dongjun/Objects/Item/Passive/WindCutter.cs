@@ -29,7 +29,7 @@ public class WindCutter : PassiveItem
     #region On Inventory Add / Remove
     public override void OnAdd()
     {
-        if (Inventory.Inst.ContainsItem(this))
+        if (Inventory.Inst.HasItem(this))
         {
             // Upgrade This Item
         }

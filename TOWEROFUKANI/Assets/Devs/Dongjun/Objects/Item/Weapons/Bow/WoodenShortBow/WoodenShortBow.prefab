@@ -95,6 +95,32 @@ MonoBehaviour:
       Base: 0
       percentBonus: 0
       flatBonus: 0
+  arrowData:
+    damage:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+    moveSpeed:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+    gravity:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
+    curTravelDist: 0
+    maxTravelDist:
+      Min: 0
+      Max: 0
+      Base: 0
+      percentBonus: 0
+      flatBonus: 0
   hasBeenDrawn: 0
   drawPower: 0
 --- !u!114 &2778987209543410482
@@ -126,32 +152,6 @@ MonoBehaviour:
   shootPoint: {fileID: 2778987210279264361}
   arrowPrefab: {fileID: -6090198353138406777, guid: 07fe65b781e65e04d978b2432feee51c,
     type: 3}
-  arrowData:
-    damage:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-    moveSpeed:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-    gravity:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-    curTravelDist: 0
-    maxTravelDist:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
   maxShootAnimTime: 0.2
   camShakeData_Shoot:
     angle: 0
@@ -191,7 +191,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2778987210056156133
 Transform:
   m_ObjectHideFlags: 0

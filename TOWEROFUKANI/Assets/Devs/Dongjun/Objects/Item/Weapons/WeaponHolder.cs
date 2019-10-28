@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class WeaponHolder : MonoBehaviour
 {
+    public static WeaponHolder Inst { get; private set; }
+
     #region Var: Inspector
     [SerializeField] private Text nameText;
     [SerializeField] private Text ammoText;
@@ -17,21 +19,10 @@ public class WeaponHolder : MonoBehaviour
     #endregion
 
 
-    #region Method Unity
+    #region Method: Unity
     private void Awake()
     {
-        if (weapons is null)
-            return;
-
-        // Init Selected Weapon
-        curWeapon = weapons[0];
-        curWeapon.SelectWeapon(true);
-
-        for (int i = 0; i < weaponIcon.Length; i++)
-        {
-            Inventory.Inst.AddItem(weapons[i]); // Test
-            weaponIcon[i].sprite = weapons[i].Info.Icon;
-        }
+        Inst = this;
     }
     private void Update()
     {
@@ -41,6 +32,63 @@ public class WeaponHolder : MonoBehaviour
         GetInput();
         ChangeWeapon();
         UpdateUI();
+    }
+    #endregion
+
+    #region Method: Add / Remove
+    public bool HotbarAvailable()
+    {
+        return weapons[weapons.Length - 1] is null;
+    }
+    public void AddWeapon(WeaponItem weapon)
+    {
+        if (!HotbarAvailable())
+            return;
+
+        if (weapons[currentSlot] is null)
+        {
+            weapons[currentSlot] = weapon;
+            weaponIcon[currentSlot].sprite = weapons[currentSlot].Info.Icon;
+            weapons[currentSlot].SelectWeapon(true);
+            return;
+        }
+
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            if (weapons[i] is null)
+            {
+                weapons[i] = weapon;
+                weaponIcon[i].sprite = weapons[i].Info.Icon;
+
+                if (currentSlot == i)
+                    weapons[i].SelectWeapon(true);
+
+                break;
+            }
+        }
+    }
+    public void AddWeapon(WeaponItem weapon, int index)
+    {
+        if (index < 0 || index > weapons.Length - 1)
+            return;
+
+        if (!HotbarAvailable())
+            return;
+
+        weapons[index] = weapon;
+        weaponIcon[index].sprite = weapons[index].Info.Icon;
+
+        if (currentSlot == index)
+            weapons[index].SelectWeapon(true);
+    }
+    
+    public void RemoveWeapon(int index)
+    {
+        if (index < 0 || index > weapons.Length - 1)
+            return;
+
+        weapons[index] = null;
+        weaponIcon[index].sprite = null;
     }
     #endregion
 
@@ -68,7 +116,7 @@ public class WeaponHolder : MonoBehaviour
 
         oldWeapon?.SelectWeapon(false);
         curWeapon = weapons[currentSlot];
-        curWeapon.SelectWeapon(true);
+        curWeapon?.SelectWeapon(true);
         oldWeapon = curWeapon;
     }
     #endregion
@@ -76,6 +124,12 @@ public class WeaponHolder : MonoBehaviour
     #region Method: UI
     private void UpdateUI()
     {
+        nameText.text = string.Empty;
+        ammoText.text = string.Empty;
+
+        if (curWeapon is null)
+            return;
+
         // Show Name
         nameText.text = curWeapon.Info.Name;
 
@@ -84,10 +138,6 @@ public class WeaponHolder : MonoBehaviour
         {
             GunItem gun = curWeapon as GunItem;
             ammoText.text = $"{gun.loadedBullets} / {gun.magazineSize.Value}";
-        }
-        else
-        {
-            ammoText.text = string.Empty;
         }
     }
     #endregion
