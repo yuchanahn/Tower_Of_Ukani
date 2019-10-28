@@ -79,6 +79,13 @@ MonoBehaviour:
   - Object: {fileID: 7426353163216030876, guid: 3eb9ba50ec5f39141a7628c8196b7f4e,
       type: 3}
     Count: 10
+  - Object: {fileID: 1818273435109030253, guid: f1dc467a38e7c404892d7f37530809bb,
+      type: 3}
+    Count: 10
+  - Object: {fileID: 2873601986208158672, guid: b01f8aae05ca2624491dd9425e98fa4e,
+      type: 3}
+    Count: 10
+  UI: {fileID: 0}
 --- !u!1 &350722369162630152
 GameObject:
   m_ObjectHideFlags: 0

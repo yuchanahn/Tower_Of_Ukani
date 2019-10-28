@@ -15,5 +15,6 @@ public class AUI_Slider : MonoBehaviour
     void Update()
     {
         mSlider.value = CUR_ / MAX_;
+        if (CUR_ <= 0) ZeroEvent.Invoke();
     }
 }

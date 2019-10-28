@@ -42,10 +42,13 @@ public class MobHPBar : Object_ObjectPool<MobHPBar>
     }
     private void Update()
     {
-        GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(mLook.position + Vector3.up * 1f);
+        if (mLook)
+        {
+            GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(mLook.position + Vector3.up * 1f);
 
-        mHpBar.CUR_ = mStat.HP;
-        mHpBar.MAX_ = mStat.MAXHP;
+            mHpBar.CUR_ = mStat.HP;
+            mHpBar.MAX_ = mStat.MAXHP;
+        }
     }
 
     public void OnHPZero()
