@@ -49,6 +49,10 @@ public class MobHPBar : Object_ObjectPool<MobHPBar>
             mHpBar.CUR_ = mStat.HP;
             mHpBar.MAX_ = mStat.MAXHP;
         }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void OnHPZero()

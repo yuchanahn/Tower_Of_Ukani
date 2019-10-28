@@ -30,5 +30,8 @@ public static class Gravity_Logic
             gravity = rb2D.velocity.y - (gravityData.acceleration * Time.fixedDeltaTime);
 
         rb2D.velocity = new Vector2(rb2D.velocity.x, gravity);
+
+
+
     }
 }

@@ -5,32 +5,18 @@ using UnityEngine;
 public class StatusEffect_Base : MonoBehaviour
 {
     [SerializeField] protected int priority;
-    [SerializeField] protected int Last_priority;
-    [SerializeField] protected StatusEffectData STEFData;
 
-    Mob_Base mob;
     protected virtual void Start()
     {
-        mob = GetComponent<Mob_Base>();
-        if (mob.m_STEFData.priority < priority)
-        {
-            mob.m_STEFData.StatusEffect = STEFData.StatusEffect;
-            Last_priority = mob.m_STEFData.priority;
-            mob.m_STEFData.priority = priority;
-        }
-
-        mob.m_STEFData.HurtStop += STEFData.HurtStop;
-        mob.m_STEFData.MoveStop += STEFData.MoveStop;
-        mob.m_STEFData.AttackStop += STEFData.AttackStop;
-        mob.m_STEFData.UseStatusEffect += STEFData.UseStatusEffect;
     }
-    protected virtual void OnDestroy()
+
+    public virtual void SetValue<T>(SE_Stat<T> value, T data)
     {
-        mob.m_STEFData.HurtStop -= STEFData.HurtStop;
-        mob.m_STEFData.MoveStop -= STEFData.MoveStop;
-        mob.m_STEFData.AttackStop -= STEFData.AttackStop;
-        mob.m_STEFData.UseStatusEffect -= STEFData.UseStatusEffect;
-        /// 꼭 고칠것....
-        mob.m_STEFData.priority = Last_priority; // 근데 그 전에 Last 가  끝날 수 있음
+        value.SetValue(priority, data);
+    }
+
+    protected virtual void OnSEDestroy()
+    {
+        //GetComponent<StatusEffect_Object>()?.Remove(this);
     }
 }

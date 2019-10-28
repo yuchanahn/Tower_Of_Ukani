@@ -84,7 +84,7 @@ namespace Shiroi.Pathfinding2D.Kuroi {
             TryConnect(x - 1, y, linearLinks);
             TryConnect(x + 1, y, linearLinks);
             if (origin.IsSupported()) {
-                PopulateJumpLinks(x, y, m_gravity, gravitationalLinks);
+                PopulateJumpLinks(x, y, gravitationalLinks);
             }
 
             return new LinkNode {
@@ -98,7 +98,6 @@ namespace Shiroi.Pathfinding2D.Kuroi {
             int height,
             Vector2 origin,
             Vector2 force,
-            float gravity,
             out LinkNode.GravitationalLink link
         ) {
             var currentPosition = origin;
@@ -107,6 +106,7 @@ namespace Shiroi.Pathfinding2D.Kuroi {
                 currentPosition
             };
             do {
+
                 var hitboxCenter = currentPosition;
                 hitboxCenter.y += hitBoxSize.y / 2 + 0.1F;
                 cast = Physics2D.BoxCast(
@@ -118,7 +118,8 @@ namespace Shiroi.Pathfinding2D.Kuroi {
                     NavMesh.worldMask
                 );
                 currentPosition += force * timeStep;
-                force += Vector2.up * gravity * timeStep;
+                force -= new Vector2(0, m_gravity * timeStep);
+
                 points.Add(cast.collider == null ? currentPosition : cast.point);
 
                 if (NavMesh.IsOutOfBounds(currentPosition)) {
@@ -150,7 +151,6 @@ namespace Shiroi.Pathfinding2D.Kuroi {
             int height,
             Vector2 center,
             int xDir,
-            float gravity,
             List<LinkNode.GravitationalLink> output
         ) {
             var visited = new List<uint>();
@@ -159,7 +159,7 @@ namespace Shiroi.Pathfinding2D.Kuroi {
                     var fx = (float) (x + 1) / jumpCount * xDir;
                     var fy = (float) y / jumpCount;
                     var force = new Vector2(fx * maxForce.x, fy * maxForce.y);
-                    if (!ApproximateJump(index, height, center, force, gravity, out var link)) {
+                    if (!ApproximateJump(index, height, center, force, out var link)) {
                         continue;
                     }
 
@@ -173,14 +173,14 @@ namespace Shiroi.Pathfinding2D.Kuroi {
             }
         }
 
-        private void PopulateJumpLinks(int x, int y, float gravity, List<LinkNode.GravitationalLink> output) {
+        private void PopulateJumpLinks(int x, int y, List<LinkNode.GravitationalLink> output) {
             var i = NavMesh.IndexOf(x, y);
             var offset = new Vector2(NavMesh.grid.cellSize.x / 2, 0);
             var center = (Vector2) NavMesh.grid.GetCellCenterWorld(new Vector3Int(x, y, 0));
             var right = center + offset;
             var left = center - offset;
-            CastJumpDirection(i, y, right, 1, gravity, output);
-            CastJumpDirection(i, y, left, -1, gravity, output);
+            CastJumpDirection(i, y, right, 1, output);
+            CastJumpDirection(i, y, left, -1, output);
         }
 
         private void TryConnect(int x, int y, List<DirectLink> output) {

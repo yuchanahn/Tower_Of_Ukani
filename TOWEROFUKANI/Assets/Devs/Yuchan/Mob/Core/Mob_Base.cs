@@ -61,6 +61,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     #region Var: Component
     protected Rigidbody2D m_rb;
     protected Animator m_ani;
+    protected StatusEffect_Object m_SEObj;
     #endregion
 
     #region Var:
@@ -76,7 +77,6 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     protected bool m_bFollowJump = false;
 
 
-    public StatusEffectData m_STEFData;
 
     protected float m_jumpHeight;
 
@@ -88,9 +88,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public Vector2 JumpVel;
 
 
-
     public virtual float VelX =>
-     m_STEFData.MoveStop > 0 ? 0:
      m_bAttacking ? 0 :
      CanAttack ? 0 :
      CanFollow ?  m_MoveData.Speed * m_MoveData.Dir :
@@ -100,12 +98,14 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     float VelY => m_rb.velocity.y;
     protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
-    protected int Dir { set { m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
+    protected int Dir { set { if(m_SEObj.SEChangeDirAble) m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
 
-    public virtual bool CanFollow => !Hurting() ? ((GM.PlayerPos - transform.position).magnitude < m_followData.dist) : false;
+    public virtual bool CanFollow =>
+         !m_SEObj.SEFallowAble ? false :
+        !Hurting() ? ((GM.PlayerPos - transform.position).magnitude < m_followData.dist) : false;
 
     public virtual bool CanAttack =>
-        m_STEFData.AttackStop > 0 ? false :
+        !m_SEObj.SEAttackAble ? false : 
         m_bAttacking ? true : 
         !m_groundDetectionData.isGrounded ? false :
         m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
@@ -117,6 +117,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         m_rb = GetComponent<Rigidbody2D>();
         m_ani = GetComponent<Animator>();
+        m_SEObj = GetComponent<StatusEffect_Object>();
         if (m_MoveData.State == MobMoveData.eState.Move) OnMoveRandom();
         if (m_MoveData.State == MobMoveData.eState.Idle) OnIdleRandom();
 
@@ -135,14 +136,17 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_groundDetectionData.DetectGround(!m_jumpData.isJumping, m_rb, transform);
         m_groundDetectionData.ExecuteOnGroundMethod(this);
 
-        m_rb.velocity = new Vector2(m_bFollowJump ? JumpVel.x : VelX, VelY);
+        m_rb.velocity = new Vector2(m_bFollowJump && m_jumpData.isJumping ? JumpVel.x : VelX * m_SEObj.SESpeedMult, VelY);
         m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
 
         
-        m_jumpData.FixedJump(ref m_bJumpStart, m_rb);
+        m_jumpData.Jump(ref m_bJumpStart, m_rb, transform);
 
-        Gravity_Logic.ApplyGravity(m_rb, m_groundDetectionData.isGrounded ? new GravityData(false, 0, 0) : !m_jumpData.isJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
-        m_jumpData.FixedJumpGravity(m_rb);
+
+        Gravity_Logic.ApplyGravity(m_rb, m_groundDetectionData.isGrounded ? new GravityData(false, 0, 0) :
+            m_bFollowJump ? m_gravityData :
+            !m_jumpData.isJumping ? m_gravityData : new GravityData(true, m_jumpData.jumpGravity, 0));
+
 
         Animation();
         Anim_Logic.SetAnimSpeed(m_ani, m_Ani[m_CurAniST].Item2);
@@ -159,8 +163,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         // 상태이상이 애니를 쓴다면...?
         // 상태 바꾸고 바로 끝내.
-
-        if (m_STEFData.UseStatusEffect > 0) m_CurAniST = m_STEFData.StatusEffect;
+        if (m_SEObj.SEAni != eMobAniST.Last)
+        {
+            m_CurAniST = m_SEObj.SEAni;
+            return;
+        }
         if (m_bHurting) return;
         m_CurAniST = 
         m_bHurting || m_bAttacking ? m_CurAniST : 
@@ -233,9 +240,20 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public int FollowJump(Vector2 nom)
     {
         JumpVel = nom;
-        m_bJumpStart = true;
+
+        //m_bJumpStart = true;
         m_bFollowJump = true;
-        m_jumpData.height = JumpVel.y;
+        //var jVelY = Mathf.Sqrt(2 * JumpVel.y * m_gravityData.acceleration);
+
+        Debug.Log(VelX);
+
+        m_jumpData.isJumping = true;
+        m_jumpData.curCount++;
+        m_jumpData.apexY = JumpVel.y;
+        if (JumpVel.y > 0 && JumpVel.y < 10.4f) JumpVel = new Vector2(JumpVel.x, 10.4f);
+        m_rb.velocity = JumpVel;
+        //m_jumpData.height = JumpVel.y;
+
         return nom.x < 0 ? -1 : 1;
     }
 
@@ -293,6 +311,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_bHurting = true;
         m_bAniStart = true;
 
+        if(m_SEObj.SEAni == eMobAniST.Last)
         m_CurAniST = eMobAniST.Hit;
     }
     public bool Hurting() => m_bHurting;
@@ -317,6 +336,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     #region Interface: ICanDetectGround
     virtual public void OnGroundEnter()
     {
+        Debug.Log(m_bFollowJump);
         Jump_Logic.ResetJumpCount(ref m_jumpData);
         m_bFollowJump = false;
         if (m_bHurting) return;

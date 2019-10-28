@@ -63,13 +63,17 @@ namespace Shiroi.Pathfinding2D.Examples
                 {
                     jumpMaxHeight = i.y > jumpMaxHeight.y ? i : jumpMaxHeight;
                 }
-                var lastx = g.Path[g.Path.Length - 1];
 
-                jumpMaxHeight = new Vector2(lastx.x, jumpMaxHeight.y);
-                var non = jumpMaxHeight - new Vector2(oPos.x, oPos.y);
+                jumpMaxHeight = new Vector2(jumpMaxHeight.x, jumpMaxHeight.y) - g.Path[0];
 
 
-                return new FollowingData(true, true, non);
+                var non = g.Force * new Vector2(1,-1);
+                var y = Mathf.Sqrt(2 * jumpMaxHeight.y * 40);
+                Debug.Log(g.Force + "\n" + y);
+
+
+
+                return new FollowingData(true, true, new Vector2(jumpMaxHeight.x, y));
 
             }
             else  // 링크(점프)할 수 없다면 가야 하는 방향을 리턴한다.
