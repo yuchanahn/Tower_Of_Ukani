@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour
     public static void Heal(int amount)
     {
         HealReceived = amount;
-        ItemEffectManager.Trigger(PlayerActions.Damaged);
+        ItemEffectManager.Trigger(PlayerActions.Healed);
         Heath += HealReceived;
     }
 }

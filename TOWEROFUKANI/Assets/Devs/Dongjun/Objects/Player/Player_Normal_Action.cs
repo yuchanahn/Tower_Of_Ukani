@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class Player_Movement_Action : CLA_Action,
+public class Player_Normal_Action : CLA_Action,
     ICanDetectGround
 {
     #region Var: Inspector
     [Header("Ref")]
     [SerializeField] private Transform spriteRoot;
     [SerializeField] private BoxCollider2D oneWayCollider;
+
+    [Header("Item PickUp")]
+    [SerializeField] private PlayerItemPickUpData itemPickUpData;
 
     [Header("GroundDetection")]
     [SerializeField] private GroundDetectionData groundDetectionData;
@@ -40,7 +43,6 @@ public class Player_Movement_Action : CLA_Action,
     public JumpData JumpData => jumpData;
     #endregion
 
-
     #region Method: Unity
     private void Awake()
     {
@@ -63,6 +65,10 @@ public class Player_Movement_Action : CLA_Action,
 
         // Reset Velocity
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
+    }
+    public override void OnUpdate()
+    {
+        itemPickUpData.PickUp(transform, Input.GetKeyDown(KeyCode.LeftControl));
     }
     public override void OnLateUpdate()
     {

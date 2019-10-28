@@ -54,7 +54,6 @@ public abstract class WeaponController_Base : CLA_Main { }
 public abstract class WeaponController<TItem> : WeaponController_Base
     where TItem : WeaponItem
 {
-
     protected TItem weaponItem;
 
     protected override void Awake()

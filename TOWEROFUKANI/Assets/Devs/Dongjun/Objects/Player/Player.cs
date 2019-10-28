@@ -3,14 +3,14 @@
 public class Player : CLA_Main
 {
     #region Var: CLA_Action
-    private Player_Movement_Action movement_AC;
+    private Player_Normal_Action movement_AC;
     private Player_Dash_Action dash_AC;
     #endregion
 
     #region Method: Init
     protected override void Init()
     {
-        movement_AC = GetComponent<Player_Movement_Action>();
+        movement_AC = GetComponent<Player_Normal_Action>();
         dash_AC = GetComponent<Player_Dash_Action>();
 
         ConditionLogics.Add(movement_AC, CL_Movement);
