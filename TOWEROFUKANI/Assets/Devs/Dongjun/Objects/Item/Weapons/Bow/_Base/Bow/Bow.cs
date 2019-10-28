@@ -2,11 +2,17 @@
 
 public abstract class BowItem : WeaponItem
 {
+    // Visual
     [SerializeField] protected GameObject arrowVisual;
 
+    // Timer
     public TimerStat shootTimer;
     public TimerStat drawTimer;
 
+    // Arrow Data
+    public WeaponProjectileData arrowData;
+
+    // Extra Info
     [HideInInspector] public bool hasBeenDrawn = false;
     [HideInInspector] public float drawPower = 0;
 
@@ -19,7 +25,7 @@ public abstract class BowItem : WeaponItem
     }
 }
 
-public abstract class BowObject : WeaponObject<BowItem>
+public abstract class BowController : WeaponController<BowItem>
 {
 
 }

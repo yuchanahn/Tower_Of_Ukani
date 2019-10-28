@@ -24,6 +24,7 @@ public abstract class WeaponItem : Item
     {
         base.Awake();
 
+        // Init Weapon Tags
         if (weaponTags != null)
         {
             for (int i = 0; i < weaponTags.Length; i++)
@@ -49,8 +50,8 @@ public abstract class WeaponItem : Item
     }
 }
 
-public abstract class WeaponObject_Base : CLA_Main { }
-public abstract class WeaponObject<TItem> : WeaponObject_Base
+public abstract class WeaponController_Base : CLA_Main { }
+public abstract class WeaponController<TItem> : WeaponController_Base
     where TItem : WeaponItem
 {
 

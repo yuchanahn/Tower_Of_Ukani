@@ -6,7 +6,6 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private WeaponProjectileData bulletData;
 
     [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
@@ -22,19 +21,12 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Properties
-    public bool IsAnimEnded_Shoot { get; private set; } = false;
+    #region Var: Stats
+    private WeaponProjectileData bulletData;
     #endregion
 
-    #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-
-        bulletData.damage = new IntStat(1, min: 0);
-        bulletData.moveSpeed = new FloatStat(45f, min: 0f);
-        bulletData.maxTravelDist = new FloatStat(7f, min: 0f);
-    }
+    #region Var: Properties
+    public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
 
     #region Method: CLA_Action
@@ -70,6 +62,9 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
     #region Method: Shoot
     private void Shoot()
     {
+        // Set Bullet Data
+        bulletData = weapon.bulletData;
+
         // Spawn Bullets
         Vector3 eRot = transform.eulerAngles;
         eRot.z -= ((pelletCount / 2) - (pelletCount % 2 == 0 ? 0.5f : 0)) * pelletAngle;
@@ -78,7 +73,6 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
         {
             Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(eRot));
             bullet.SetData(bulletData);
-
             eRot.z += pelletAngle;
         }
 

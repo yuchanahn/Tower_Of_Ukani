@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WoodenShortBow : BowObject
+public class WoodenShortBow : BowController
 {
     private WoodenShortBow_Main_Action main_AC;
     private Bow_Draw_Action draw_AC;

@@ -10,6 +10,8 @@ public class MeshRendererExposeSortingLayer : Editor
 {
     public override void OnInspectorGUI()
     {
+        CreateEditor(target, typeof(Editor).Assembly.GetType("UnityEditor.MeshRendererEditor")).OnInspectorGUI();
+
         serializedObject.Update();
         EditorGUILayout.BeginHorizontal();
 
@@ -25,7 +27,5 @@ public class MeshRendererExposeSortingLayer : Editor
 
         EditorGUILayout.EndHorizontal();
         serializedObject.ApplyModifiedProperties();
-
-        base.OnInspectorGUI();
     }
 }

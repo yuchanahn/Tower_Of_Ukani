@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
-public class GunData : ItemData
-{
-
-}
 public abstract class GunItem : WeaponItem
 {
+    // Timer Data
     public TimerStat shootTimer;
     public TimerStat reloadTimer;
     public TimerStat swapMagazineTimer;
 
+    // Bullet Data
+    public WeaponProjectileData bulletData;
+
+    // Ammo Data
     public IntStat magazineSize;
     public int loadedBullets;
     public bool isBulletLoaded;
@@ -27,7 +27,7 @@ public abstract class GunItem : WeaponItem
     }
 }
 
-public abstract class GunController : WeaponObject<GunItem>
+public abstract class GunController : WeaponController<GunItem>
 {
 
 }

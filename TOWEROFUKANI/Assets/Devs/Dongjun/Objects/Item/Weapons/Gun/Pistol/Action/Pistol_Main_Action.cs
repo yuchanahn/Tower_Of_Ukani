@@ -6,7 +6,6 @@ public class Pistol_Main_Action : GunAction_Base<PistolItem>
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private WeaponProjectileData bulletData;
 
     [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
@@ -18,19 +17,12 @@ public class Pistol_Main_Action : GunAction_Base<PistolItem>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Properties
-    public bool IsAnimEnded_Shoot { get; private set; } = false;
+    #region Var: Stats
+    private WeaponProjectileData bulletData;
     #endregion
 
-    #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-
-        bulletData.damage = new IntStat(1, min: 0);
-        bulletData.moveSpeed = new FloatStat(45f, min: 0f);
-        bulletData.maxTravelDist = new FloatStat(10f, min: 0f);
-    }
+    #region Var: Properties
+    public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
 
     #region Method: CLA_Action
@@ -66,6 +58,9 @@ public class Pistol_Main_Action : GunAction_Base<PistolItem>
     #region Method: Shoot
     private void Shoot()
     {
+        // Set Bullet Data
+        bulletData = weapon.bulletData;
+
         // Spawn Bullet
         Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
         bullet.SetData(bulletData);

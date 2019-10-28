@@ -6,7 +6,6 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShotBowItem>
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
     [SerializeField] private Arrow arrowPrefab;
-    [SerializeField] private WeaponProjectileData arrowData;
 
     [Header("Shoot Animation")]
     [SerializeField] private float maxShootAnimTime;
@@ -15,8 +14,8 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShotBowItem>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Current Data
-    private WeaponProjectileData curArrowData;
+    #region Var: Stats
+    private WeaponProjectileData arrowData;
     #endregion
 
     #region Method: Unity
@@ -62,14 +61,14 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShotBowItem>
     #region Method: Shoot
     private void Shoot()
     {
+        // Set Arrow Data
+        arrowData = weapon.arrowData;
+        arrowData.damage.Base = Mathf.Max(Mathf.RoundToInt(arrowData.damage.Base * weapon.drawPower), 1);
+        arrowData.moveSpeed.Base *= weapon.drawPower;
+
         // Spawn Bullet
         Arrow arrow = arrowPrefab.Spawn(shootPoint.position, transform.rotation);
-
-        curArrowData = arrowData;
-        curArrowData.damage.Base = Mathf.Max(Mathf.RoundToInt(curArrowData.damage.Base * weapon.drawPower), 1);
-        curArrowData.moveSpeed.Base *= weapon.drawPower;
-
-        arrow.SetData(curArrowData);
+        arrow.SetData(arrowData);
 
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.WeaponMain);
