@@ -125,8 +125,8 @@ public class Player_Normal_Action : CLA_Action,
             }
             else
             {
-                if ((PlayerInputManager.Inst.Input_WalkDir == 1 && spriteRoot.rotation.eulerAngles.y == 0) ||
-                    (PlayerInputManager.Inst.Input_WalkDir == -1 && spriteRoot.rotation.eulerAngles.y == 180))
+                if ((PlayerInputManager.Inst.Input_WalkDir == 1 && !bodySpriteRenderer.flipX) ||
+                    (PlayerInputManager.Inst.Input_WalkDir == -1 && bodySpriteRenderer.flipX))
                     animator.Play(Walk_Forward);
                 else
                     animator.Play(Walk_Backward);
