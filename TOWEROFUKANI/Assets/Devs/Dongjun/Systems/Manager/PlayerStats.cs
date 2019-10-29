@@ -12,6 +12,7 @@ public class PlayerStats : MonoBehaviour
     {
         DamageReceived = amount;
         ItemEffectManager.Trigger(PlayerActions.Damaged);
+        PlayerHitEft.Create(GM.PlayerPos);
         Heath -= DamageReceived;
     }
     public static void Heal(int amount)
