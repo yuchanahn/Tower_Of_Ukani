@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 5969363333450609748}
   - component: {fileID: 7371128404420445764}
   - component: {fileID: 6830336080947489379}
+  - component: {fileID: 1571809755}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -479,4 +480,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a841eea85d203414b868bb20708c6e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AirJumpPos: {fileID: 7993730222055176780}
+  feetPos: {fileID: 7993730222055176780}
+  Pspr: {fileID: 7371128403266533312}
+--- !u!114 &1571809755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db44b2fbe64eb5e4eb6a3ac036303cc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

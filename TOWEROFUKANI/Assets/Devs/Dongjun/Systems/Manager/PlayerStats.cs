@@ -2,8 +2,15 @@
 
 public class PlayerStats : MonoBehaviour
 {
-    public static int Heath { get; private set; }
-    public static int Stamina { get; private set; }
+    private void Awake()
+    {
+        heath = new IntStat(100, 0, 100);
+    }
+    
+    private static IntStat heath;
+    public static IntStat Heath => heath;
+
+    public static float Stamina { get; set; } = 0;
 
     public static int DamageReceived;
     public static int HealReceived;
@@ -13,12 +20,12 @@ public class PlayerStats : MonoBehaviour
         DamageReceived = amount;
         ItemEffectManager.Trigger(PlayerActions.Damaged);
         PlayerHitEft.Create(GM.PlayerPos);
-        Heath -= DamageReceived;
+        heath.flatBonus -= DamageReceived;
     }
     public static void Heal(int amount)
     {
         HealReceived = amount;
         ItemEffectManager.Trigger(PlayerActions.Healed);
-        Heath += HealReceived;
+        heath.flatBonus += HealReceived;
     }
 }

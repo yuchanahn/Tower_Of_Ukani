@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class Effect_Object : MonoBehaviour
 {
-    [SerializeField] Transform AirJumpPos;
+    [SerializeField] Transform feetPos;
+    [SerializeField] SpriteRenderer Pspr;
     void CreateAirJump(  )
     {
-        AirJumpEft.Create(AirJumpPos.position);
+        AirJumpEft.Create(feetPos.position);
     }
 
-    void CreateHitEFT()
+    void CreateWalkDust(  )
     {
+        var obj = PlayerWalkDustEft.Create(feetPos.position);
+        var VelDir = Global.Inst.PlayerRB2D.velocity.x >= 0;
 
+        obj.GetComponentInChildren<SpriteRenderer>().flipX = !((VelDir && !Pspr.flipX) || !(!VelDir && Pspr.flipX));
     }
+
+
+
 }

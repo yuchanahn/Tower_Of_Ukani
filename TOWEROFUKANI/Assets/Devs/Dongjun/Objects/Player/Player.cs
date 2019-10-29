@@ -22,7 +22,7 @@ public class Player : CLA_Main
     #region Method: Condition Logic
     private CLA_Action CL_Movement()
     {
-        if (PlayerInputManager.Inst.Input_DashDir != 0)
+        if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStatUIManager.UseStamina())
             return dash_AC;
 
         return movement_AC;

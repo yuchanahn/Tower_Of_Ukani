@@ -40,6 +40,7 @@ public class Player_Dash_Action : CLA_Action
         dashTime_Cur = 0;
 
         Animation();
+        
 
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Dash);

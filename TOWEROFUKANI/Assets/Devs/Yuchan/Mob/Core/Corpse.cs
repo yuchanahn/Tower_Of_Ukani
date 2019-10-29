@@ -17,4 +17,9 @@ public class Corpse : Object_ObjectPool<Corpse>
     {
         _ani.Play(gameObject.name, 0, d.mFCntMin != d.mFCntMax ? (float)Random.Range(d.mFCntMin, d.mFCntMax) / (float)d.mFCntMax : d.mFCntMin);
     }
+
+    public void DestroyOfTime(float t)
+    {
+        DestroyObj(t);
+    }
 }

@@ -26,8 +26,9 @@ public class SE_Stat<T>
 public class StatusEffect_Object : MonoBehaviour
 {
     public bool Use;
+    [SerializeField] GameObject StunnedObj;
 
-    List<StatusEffect_Base> statusEffect_s;
+    List<StatusEffect_Base> statusEffect_s = new List<StatusEffect_Base>();
 
     private SE_Stat<float>      statusEffectSpeed = new SE_Stat<float>(1f);
     private SE_Stat<bool>       statusEffectFallowAble = new SE_Stat<bool>(true);
@@ -57,7 +58,7 @@ public class StatusEffect_Object : MonoBehaviour
     {
         if(GUI.Button(new Rect(10,10,100,20), "Create Stunnd!"))
         {
-            StatusEffect_Stunned.Create(gameObject, 10f);
+            StatusEffect_Stunned.Create(gameObject, StunnedObj, 10f);
         }
     }
 }
