@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AirJumpEft : AEffect<AirJumpEft>
+public class PlayerHitEft : AEffect<PlayerHitEft>
 {
 
 }

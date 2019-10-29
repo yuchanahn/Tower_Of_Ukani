@@ -85,6 +85,12 @@ MonoBehaviour:
   - Object: {fileID: 2873601986208158672, guid: b01f8aae05ca2624491dd9425e98fa4e,
       type: 3}
     Count: 10
+  - Object: {fileID: 2437834748253572632, guid: f6e54eb8519b1564f8594e9815fe8477,
+      type: 3}
+    Count: 10
+  - Object: {fileID: 4904883902665282281, guid: 69517cc1ae08e9c4888236357d66b458,
+      type: 3}
+    Count: 10
   UI: {fileID: 0}
 --- !u!1 &350722369162630152
 GameObject:

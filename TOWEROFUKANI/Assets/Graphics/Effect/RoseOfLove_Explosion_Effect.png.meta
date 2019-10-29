@@ -1,0 +1,388 @@
+fileFormatVersion: 2
+guid: 1fcfba5f008861847872ccd0c2b8fe12
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2447678840831952920
+    second: RoseOfLove_Explosion_Effect_0
+  - first:
+      213: -1579589306944682775
+    second: RoseOfLove_Explosion_Effect_1
+  - first:
+      213: 8579735520555167737
+    second: RoseOfLove_Explosion_Effect_2
+  - first:
+      213: 2593602238707375797
+    second: RoseOfLove_Explosion_Effect_3
+  - first:
+      213: 2680326314794461620
+    second: RoseOfLove_Explosion_Effect_4
+  - first:
+      213: -73120820963860328
+    second: RoseOfLove_Explosion_Effect_5
+  - first:
+      213: -1972697413423420745
+    second: RoseOfLove_Explosion_Effect_6
+  - first:
+      213: 7810330189898355956
+    second: RoseOfLove_Explosion_Effect_7
+  - first:
+      213: -6894106413959052995
+    second: RoseOfLove_Explosion_Effect_8
+  - first:
+      213: -1281105936715527136
+    second: RoseOfLove_Explosion_Effect_9
+  - first:
+      213: -5954575169125808489
+    second: RoseOfLove_Explosion_Effect_10
+  - first:
+      213: 2291196021998623002
+    second: RoseOfLove_Explosion_Effect_11
+  - first:
+      213: 3757677182132091125
+    second: RoseOfLove_Explosion_Effect_12
+  - first:
+      213: 5169940287689163232
+    second: RoseOfLove_Explosion_Effect_13
+  - first:
+      213: -4846357142934200664
+    second: RoseOfLove_Explosion_Effect_14
+  - first:
+      213: -3257942624197646023
+    second: RoseOfLove_Explosion_Effect_15
+  - first:
+      213: 1484168230889863282
+    second: RoseOfLove_Explosion_Effect_16
+  - first:
+      213: -2165130900293091476
+    second: RoseOfLove_Explosion_Effect_17
+  - first:
+      213: -1309828267278682203
+    second: RoseOfLove_Explosion_Effect_18
+  - first:
+      213: -4923100626782794395
+    second: RoseOfLove_Explosion_Effect_19
+  - first:
+      213: -2310374423491314369
+    second: RoseOfLove_Explosion_Effect_20
+  - first:
+      213: -4684043996529049594
+    second: RoseOfLove_Explosion_Effect_21
+  - first:
+      213: -3877571660166099311
+    second: RoseOfLove_Explosion_Effect_22
+  - first:
+      213: -3285290749828210700
+    second: RoseOfLove_Explosion_Effect_23
+  - first:
+      213: 3282764852315490673
+    second: RoseOfLove_Explosion_Effect_24
+  - first:
+      213: -4439990551184322357
+    second: RoseOfLove_Explosion_Effect_25
+  - first:
+      213: 7913400091276788908
+    second: RoseOfLove_Explosion_Effect_26
+  - first:
+      213: 4457778066707153672
+    second: RoseOfLove_Explosion_Effect_27
+  - first:
+      213: 3265801909494838593
+    second: RoseOfLove_Explosion_Effect_28
+  - first:
+      213: -1165493759128060674
+    second: RoseOfLove_Explosion_Effect_29
+  - first:
+      213: 4188843130929149130
+    second: RoseOfLove_Explosion_Effect_30
+  - first:
+      213: -6467639099044689902
+    second: RoseOfLove_Explosion_Effect_31
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3790004ebb1c81647b696f10b8d87627
+      internalID: 2447678840831952920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c45aedc16a580054a83260a222c9974f
+      internalID: -1579589306944682775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fc96e2a8acf3b5489fb2ec2fc21a148
+      internalID: 8579735520555167737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31ed76d79d45c9d4b90909b943eca870
+      internalID: 2593602238707375797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7419f2edf0b1deb46bf6416aa122ee32
+      internalID: 2680326314794461620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be310b867712fe44c9da2badc0cefa46
+      internalID: -73120820963860328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4528a18f59144d643a4c59efee0760a2
+      internalID: -1972697413423420745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e43c3025531559f478324bba78280c0d
+      internalID: 7810330189898355956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RoseOfLove_Explosion_Effect_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dacd7f4b5a513bf428f6faa5e20c790d
+      internalID: -6894106413959052995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

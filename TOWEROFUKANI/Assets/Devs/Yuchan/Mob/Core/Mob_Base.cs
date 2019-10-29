@@ -47,7 +47,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     [Header("Attack")]
     [SerializeField] float m_AttackRange;
+    [SerializeField] Vector2 m_AttackSize;
+    [SerializeField] Vector2 m_AttackOffset;
 
+    [Header("Data")]
     [SerializeField] AniSpeedData[] m_AniSpeedData;
     [SerializeField] MobMoveData m_MoveData;
     [SerializeField] FollowData m_followData;
@@ -245,7 +248,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_bFollowJump = true;
         //var jVelY = Mathf.Sqrt(2 * JumpVel.y * m_gravityData.acceleration);
 
-        Debug.Log(VelX);
+        //Debug.Log(VelX);
 
         m_jumpData.isJumping = true;
         m_jumpData.curCount++;
@@ -297,6 +300,19 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         OnAttackEnd();
     }
 
+    public void AttackProcessStart()
+    {
+        var ColMgr = GetComponentInChildren<AColliderMgr>();
+        Debug.Log(-m_MoveData.SprDir);
+        ColMgr.ReStart(ColMgr.OffSet * -m_MoveData.SprDir);
+    }
+    public void AttackProcessEnd()
+    {
+        var ColMgr = GetComponentInChildren<AColliderMgr>();
+        ColMgr.Stop();
+    }
+
+
     public virtual void OnAttackEnd()
     {
     }
@@ -310,8 +326,8 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         }
         m_bHurting = true;
         m_bAniStart = true;
-
-        if(m_SEObj.SEAni == eMobAniST.Last)
+        GetComponentInChildren<AColliderMgr>().Stop();
+        if (m_SEObj.SEAni == eMobAniST.Last)
         m_CurAniST = eMobAniST.Hit;
     }
     public bool Hurting() => m_bHurting;
@@ -321,7 +337,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         atkST = eAtkST.pre;
         m_bHurting = false;
         m_MoveData.SprDir = m_bPrevDir;
-        Debug.Log("End");
+        //Debug.Log("End");
     }
 
     #region Interface: IHurt
@@ -336,7 +352,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     #region Interface: ICanDetectGround
     virtual public void OnGroundEnter()
     {
-        Debug.Log(m_bFollowJump);
+        //Debug.Log(m_bFollowJump);
         Jump_Logic.ResetJumpCount(ref m_jumpData);
         m_bFollowJump = false;
         if (m_bHurting) return;

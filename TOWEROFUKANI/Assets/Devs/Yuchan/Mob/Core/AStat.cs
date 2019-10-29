@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class AStat : MonoBehaviour, IDamage
 {
     [SerializeField] private int mHP;
+    [SerializeField] private int mDamage;
     private int mMAXHP;
     private int mDmg = 0;
     MobDamageText Dmg = null;
     public int HP { get => mHP; set { mHP = value; if (mHP <= 0) GetComponent<IHurt>().OnDead(); } }
 
     public int MAXHP { get => mMAXHP; }
+    public int Damage => mDamage;
 
     private void Awake()
     {
