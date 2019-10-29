@@ -26,36 +26,20 @@ public class PixelLevelGenerator : MonoBehaviour {
 	private void GenerateTile(int x, int y)
 	{
 		Color pixelColor = map.GetPixel(x, y);
+        if (pixelColor.a == 0)
+            return;
 
-		if (pixelColor.a == 0)
-		{
-			// The pixel is transparrent. Let's ignore it!
-			return;
-		}
+        float offsetX = -(map.width / 2) + ((map.width % 2 == 0) ? 0.5f : 0);
+        float offsetY = -(map.height / 2) + ((map.height % 2 == 0) ? 0.5f : 0);
 
-		foreach (ColorToPrefab colorMapping in colorMappings)
-		{
-			if (colorMapping.color.Equals(pixelColor))
-			{
-				Transform tile = Instantiate(colorMapping.prefab, transform).transform;
-                tile.localPosition = new Vector2(x - (map.width / 2), y - (map.height / 2));
+
+        foreach (ColorToPrefab colorMapping in colorMappings)
+        {
+            if (colorMapping.color.Equals(pixelColor))
+            {
+                Transform tile = Instantiate(colorMapping.prefab, transform).transform;
+                tile.localPosition = new Vector2(x + offsetX, y + offsetY);
             }
-		}
-	}
+        }
+    }
 }
-
-//[CustomEditor(typeof(PixelLevelGenerator))]
-//public class PixelLevelGeneratorEditor : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        if (GUILayout.Button("Generate Level!"))
-//        {
-//            Debug.Log("Pressed");
-//            PixelLevelGenerator generator = (PixelLevelGenerator)target;
-//            generator.GenerateLevel();
-//        }
-
-//        base.OnInspectorGUI();
-//    }
-//}
