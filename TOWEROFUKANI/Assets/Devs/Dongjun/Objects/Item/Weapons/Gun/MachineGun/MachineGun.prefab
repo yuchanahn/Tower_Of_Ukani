@@ -214,6 +214,8 @@ MonoBehaviour:
     desc: This is a Machine Gun
     tag_Type: 01000000
     tag_Range: 01000000
+  droppedItem: {fileID: 8061879157058671612, guid: 6ecd833910a19ba4f88810e1b18f10de,
+    type: 3}
   spriteRoot: {fileID: 4450316997529025075}
   pivotPointY: -0.025
   weaponTags: 00000000

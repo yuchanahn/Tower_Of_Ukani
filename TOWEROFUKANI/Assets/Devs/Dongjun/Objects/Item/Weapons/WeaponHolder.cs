@@ -8,6 +8,7 @@ public class WeaponHolder : MonoBehaviour
     #region Var: Inspector
     [SerializeField] private Text nameText;
     [SerializeField] private Text ammoText;
+    [SerializeField] private Sprite emptyImage;
     [SerializeField] private Image[] weaponIcon = new Image[3];
     [SerializeField] private WeaponItem[] weapons = new WeaponItem[3];
     #endregion
@@ -18,6 +19,9 @@ public class WeaponHolder : MonoBehaviour
     private WeaponItem curWeapon;
     #endregion
 
+    #region Var: Properites
+    public WeaponItem currentWeapon => weapons[currentSlot];
+    #endregion
 
     #region Method: Unity
     private void Awake()
@@ -88,7 +92,15 @@ public class WeaponHolder : MonoBehaviour
             return;
 
         weapons[index] = null;
-        weaponIcon[index].sprite = null;
+        weaponIcon[index].sprite = emptyImage;
+    }
+    public void RemoveWeapon()
+    {
+        if (weapons[currentSlot] is null)
+            return;
+
+        weapons[currentSlot] = null;
+        weaponIcon[currentSlot].sprite = emptyImage;
     }
     #endregion
 

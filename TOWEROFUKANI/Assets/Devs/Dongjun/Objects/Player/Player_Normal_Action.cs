@@ -69,6 +69,7 @@ public class Player_Normal_Action : CLA_Action,
     public override void OnUpdate()
     {
         itemPickUpData.PickUp(transform, Input.GetKeyDown(KeyCode.LeftControl));
+        PlayerItemDrop_Logic.DropFromHotbar(Input.GetKeyDown(KeyCode.Q));
     }
     public override void OnLateUpdate()
     {

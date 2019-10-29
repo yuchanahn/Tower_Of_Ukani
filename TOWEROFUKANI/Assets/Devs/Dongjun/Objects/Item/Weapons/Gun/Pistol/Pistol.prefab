@@ -156,6 +156,8 @@ MonoBehaviour:
     desc: This is a Pistol
     tag_Type: 01000000
     tag_Range: 01000000
+  droppedItem: {fileID: 8061879157058671612, guid: bec6504a1ddd24d4290af7cdcdf00006,
+    type: 3}
   spriteRoot: {fileID: 2609116014577026526}
   pivotPointY: 0.1
   weaponTags: 00000000

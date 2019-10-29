@@ -73,6 +73,8 @@ MonoBehaviour:
     desc: This is a Wooden Short Bow
     tag_Type: 01000000
     tag_Range: 01000000
+  droppedItem: {fileID: 8061879157058671612, guid: 47648cd422798324fa305603f40a37cd,
+    type: 3}
   spriteRoot: {fileID: 2778987210056156138}
   pivotPointY: 0
   weaponTags: 01000000

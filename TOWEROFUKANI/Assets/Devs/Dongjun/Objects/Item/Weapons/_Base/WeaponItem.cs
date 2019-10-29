@@ -14,10 +14,9 @@ public abstract class WeaponItem : Item
     [SerializeField] private WeaponTag[] weaponTags;
 
     public GameObject SpriteRoot => spriteRoot;
-    public HashSet<WeaponTag> WeaponTags 
-    { get; private set; } = new HashSet<WeaponTag>();
-    public bool IsSelected 
-    { get; protected set; } = false;
+    public float PivotPointY => pivotPointY;
+    public HashSet<WeaponTag> WeaponTags { get; private set; } = new HashSet<WeaponTag>();
+    public bool IsSelected { get; protected set; } = false;
 
 
     protected override void Awake()
@@ -35,12 +34,20 @@ public abstract class WeaponItem : Item
     public override void OnAdd()
     {
         SelectWeapon(false);
-        transform.localPosition = new Vector2(transform.localPosition.x, pivotPointY);
     }
     public override void OnRemove()
     {
         IsSelected = false;
         spriteRoot.SetActive(true);
+
+        // Detactivate Self
+        gameObject.SetActive(false);
+        transform.SetParent(null);
+
+        // Activate Dropped Item
+        droppedItem.Init(this);
+        droppedItem.transform.position = GM.PlayerPos;
+        droppedItem.gameObject.SetActive(true);
     }
 
     public void SelectWeapon(bool select)

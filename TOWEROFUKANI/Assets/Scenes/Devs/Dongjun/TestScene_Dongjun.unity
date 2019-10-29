@@ -7428,6 +7428,12 @@ PrefabInstance:
       propertyPath: weapons.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4117234795505780076, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: emptyImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 8751664f8cc66864591b816d3e860cc5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4481dd2a3fe0dce40ad7628ca110315a, type: 3}
 --- !u!1001 &7639122611435246469

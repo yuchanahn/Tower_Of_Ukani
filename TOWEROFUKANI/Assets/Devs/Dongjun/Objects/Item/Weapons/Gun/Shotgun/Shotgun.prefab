@@ -104,6 +104,8 @@ MonoBehaviour:
     desc: This is a Shotgun
     tag_Type: 01000000
     tag_Range: 01000000
+  droppedItem: {fileID: 8061879157058671612, guid: 2eb6e46f835907c4988e393740605825,
+    type: 3}
   spriteRoot: {fileID: 1077788971484917873}
   pivotPointY: 0.162
   weaponTags: 00000000

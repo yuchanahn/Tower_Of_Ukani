@@ -32,6 +32,5 @@ public static class PlayerItemPickUp_Logic
             return;
 
         droppedItem.OnPickUp();
-
     }
 }
