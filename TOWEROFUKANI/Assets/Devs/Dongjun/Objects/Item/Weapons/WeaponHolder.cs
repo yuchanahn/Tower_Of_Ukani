@@ -10,10 +10,10 @@ public class WeaponHolder : MonoBehaviour
     [SerializeField] private Text ammoText;
     [SerializeField] private Sprite emptyImage;
     [SerializeField] private Image[] weaponIcon = new Image[3];
-    [SerializeField] private WeaponItem[] weapons = new WeaponItem[3];
     #endregion
 
     #region Var: Weapon Holder
+    private WeaponItem[] weapons = new WeaponItem[3];
     private int currentSlot = 0;
     private WeaponItem oldWeapon;
     private WeaponItem curWeapon;
@@ -136,7 +136,7 @@ public class WeaponHolder : MonoBehaviour
     #region Method: UI
     private void UpdateUI()
     {
-        nameText.text = string.Empty;
+        nameText.text = "None";
         ammoText.text = string.Empty;
 
         if (curWeapon is null)
