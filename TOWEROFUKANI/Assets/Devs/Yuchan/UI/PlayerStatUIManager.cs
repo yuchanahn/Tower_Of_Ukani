@@ -31,6 +31,16 @@ public class PlayerStatUIManager : MonoBehaviour
 
     private void Update()
     {
+        if (idx == 1)
+        {
+            StaminaBar[0].value = 1;
+        }
+        if (idx == 2)
+        {
+            StaminaBar[0].value = 1;
+            StaminaBar[1].value = 1;
+        }
+
         HpBar.value = (float)PlayerStats.Heath.Value / PlayerStats.Heath.Max;
 
         // max 면 리턴....

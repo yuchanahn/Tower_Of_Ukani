@@ -32,10 +32,15 @@ public class ItemEffect
 
 public class ItemEffectManager : MonoBehaviour
 {
-    private static Dictionary<PlayerActions, List<ItemEffect>> onAction = new Dictionary<PlayerActions, List<ItemEffect>>();
+    private static Dictionary<PlayerActions, List<ItemEffect>> onAction = null;
 
     private void Awake()
     {
+        if (onAction != null)
+            return;
+
+        onAction = new Dictionary<PlayerActions, List<ItemEffect>>();
+
         // Init onAction Dictionary
         for (int i = 0; i < (int)PlayerActions.END; i++)
             onAction.Add((PlayerActions)i, new List<ItemEffect>());

@@ -33,7 +33,6 @@ public class ObjPoolingManager : MonoBehaviour
     private void Awake()
     {
         Inst = this;
-
         SetUpStartPool();
     }
     #endregion
@@ -41,6 +40,9 @@ public class ObjPoolingManager : MonoBehaviour
     #region Method: Private
     private void SetUpStartPool()
     {
+        pool_Active = new Dictionary<PoolingObj, List<PoolingObj>>();
+        pool_Sleeping = new Dictionary<PoolingObj, Queue<PoolingObj>>();
+
         if (startPoolData is null)
             return;
 
