@@ -34,8 +34,10 @@ public class StatusEffect_Object : MonoBehaviour
     private SE_Stat<bool>       statusEffectFallowAble = new SE_Stat<bool>(true);
     private SE_Stat<bool>       statusEffectAttackAble = new SE_Stat<bool>(true);
     private SE_Stat<bool>       statusEffectChangeDirAble = new SE_Stat<bool>(true);
+    private SE_Stat<bool>       statusEffectNoTask = new SE_Stat<bool>(false);
     private SE_Stat<eMobAniST>  statusEffectAni = new SE_Stat<eMobAniST>(eMobAniST.Last);
 
+    public SE_Stat<bool> StatusEffectNoTask => statusEffectNoTask;
     public SE_Stat<float> StatusEffectSpeedMult => statusEffectSpeed;
     public SE_Stat<eMobAniST> StatusEffectAni => statusEffectAni;
     public SE_Stat<bool> StatusEffectFollowAble => statusEffectFallowAble;
@@ -43,6 +45,7 @@ public class StatusEffect_Object : MonoBehaviour
     public SE_Stat<bool> StatusEffectChangeDirAble => statusEffectChangeDirAble;
 
 
+    public bool SENoTask        => Use ? StatusEffectNoTask.Value : false;
     public bool SEAttackAble    => Use ? statusEffectAttackAble.Value : true;
     public bool SEFallowAble    => Use ? statusEffectFallowAble.Value : true;
     public bool SEChangeDirAble => Use ? statusEffectChangeDirAble.Value : true;
@@ -54,11 +57,11 @@ public class StatusEffect_Object : MonoBehaviour
         statusEffect_s.Remove(SEBase);
     }
 
-    void OnGUI()
+    void Update()
     {
-        if(GUI.Button(new Rect(10,10,100,20), "Create Stunnd!"))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            StatusEffect_Stunned.Create(gameObject, StunnedObj, 10f);
+            StatusEffect_Stunned.Create(gameObject, StunnedObj, 3f);
         }
     }
 }

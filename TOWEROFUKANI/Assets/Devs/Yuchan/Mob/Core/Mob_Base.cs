@@ -299,6 +299,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         atkST = eAtkST.pre;
         OnAttackEnd();
     }
+    public bool SENoAct()
+    {
+        return m_SEObj.SENoTask;
+    }
 
     public void AttackProcessStart()
     {
@@ -319,6 +323,8 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     public virtual void OnHurt(/* 총알 위치 */)
     {
+        if (m_SEObj.SEAni != eMobAniST.Last) return; // Ani 우선순위가 Hurt보다 커야함.
+
         if (!m_bHurting)
         {
             m_bPrevDir = m_MoveData.SprDir;
@@ -327,8 +333,8 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_bHurting = true;
         m_bAniStart = true;
         GetComponentInChildren<AColliderMgr>().Stop();
-        if (m_SEObj.SEAni == eMobAniST.Last)
-        m_CurAniST = eMobAniST.Hit;
+        if (m_SEObj.SEAni == eMobAniST.Last) // Ani 우선순위가 Hurt보다 커야함.
+            m_CurAniST = eMobAniST.Hit;
     }
     public bool Hurting() => m_bHurting;
     private void HurtEnd()

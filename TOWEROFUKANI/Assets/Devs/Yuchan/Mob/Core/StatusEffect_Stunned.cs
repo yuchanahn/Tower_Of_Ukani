@@ -45,11 +45,12 @@ public class StatusEffect_Stunned : StatusEffect_Base
         var SE_Stunned  =    GetComponent<StatusEffect_Stunned>();
         var SE_Obj      =    GetComponent<StatusEffect_Object>();
 
-        SE_Stunned.SetValue<eMobAniST>(SE_Obj.StatusEffectAni, eMobAniST.Stunned);
-        SE_Stunned.SetValue<float>(SE_Obj.StatusEffectSpeedMult, 0);
-        SE_Stunned.SetValue<bool>(SE_Obj.StatusEffectAttackAble, false);
-        SE_Stunned.SetValue<bool>(SE_Obj.StatusEffectFollowAble, false);
-        SE_Stunned.SetValue<bool>(SE_Obj.StatusEffectChangeDirAble, false);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectAni, eMobAniST.Stunned);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectSpeedMult, 0);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectAttackAble, false);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectFollowAble, false);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectChangeDirAble, false);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectNoTask, true);
     }
 
     protected override void OnSEDestroy()
@@ -57,11 +58,12 @@ public class StatusEffect_Stunned : StatusEffect_Base
         var SE_Stunned  = GetComponent<StatusEffect_Stunned>();
         var SE_Obj      = GetComponent<StatusEffect_Object>();
 
-        SE_Stunned.SetValue<eMobAniST>  (SE_Obj.StatusEffectAni, eMobAniST.Last);
-        SE_Stunned.SetValue<float>      (SE_Obj.StatusEffectSpeedMult, 1f);
-        SE_Stunned.SetValue<bool>       (SE_Obj.StatusEffectAttackAble, true);
-        SE_Stunned.SetValue<bool>       (SE_Obj.StatusEffectChangeDirAble, true);
-        SE_Stunned.SetValue<bool>       (SE_Obj.StatusEffectFollowAble, true);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectAni, eMobAniST.Last);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectSpeedMult, 1f);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectAttackAble, true);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectChangeDirAble, true);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectFollowAble, true);
+        SE_Stunned.SetValue(SE_Obj.StatusEffectNoTask, false);
 
         StunnedObj.SetActive(false);
     }

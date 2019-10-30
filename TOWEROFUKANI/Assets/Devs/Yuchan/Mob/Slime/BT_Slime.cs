@@ -15,6 +15,8 @@ public class BT_Slime : BT_Base
     {
         root.node
         .AddNode(new Selector())
+            .AddNode(new Task(Bb.TA_SENoAct))
+            .End()
             .AddNode(new Decorator(Bb.CN_IsHurted))
                 .AddNode(new Task(Bb.TA_Hurt))
                 .End()

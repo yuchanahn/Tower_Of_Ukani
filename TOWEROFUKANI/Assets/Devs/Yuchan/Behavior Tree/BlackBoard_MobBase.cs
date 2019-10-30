@@ -19,6 +19,7 @@ public class BlackBoard_MobBase : BlackBoard_Base
     public bool TA_Falling() => mob.Falling();
     public bool TA_Follow() => mob.Follow();
     public bool TA_Hurt()       => true;
+    public bool TA_SENoAct() => mob.SENoAct();
 
     #endregion
 
