@@ -27,7 +27,7 @@ public class ALava : MonoBehaviour
 
     private void MoveUp()
     {
-        if (maxHeight.position.y > (transform.position.y + (transform.localScale.y / 2)))
+        if (maxHeight.position.y > transform.position.y + (size.y / 2))
             transform.Translate(speed * transform.up * Time.fixedDeltaTime);
     }
     private void CheckOverlap()
