@@ -36,21 +36,24 @@ public class Player_Dash_Action : CLA_Action
     #region Method: CLA_Action
     public override void OnEnter()
     {
+        // Set Value
         IsDasing = true;
         dashTime_Cur = 0;
 
+        // Play Animation
         Animation();
-        
 
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Dash);
     }
     public override void OnExit()
     {
-        PlayerInputManager.Inst.Input_DashDir = 0;
-
-        IsDasing = false;
+        // Reset Velocity
         rb2D.velocity = new Vector2(0, 0);
+
+        // Reset Value
+        PlayerInputManager.Inst.Input_DashDir = 0;
+        IsDasing = false;
     }
     public override void OnFixedUpdate()
     {
@@ -64,11 +67,6 @@ public class Player_Dash_Action : CLA_Action
     #endregion
 
     #region Animation
-    private enum AnimState
-    {
-        Dash_Forward = 5,
-        Dash_Backward = 6,
-    }
     private void Animation()
     {
         if ((PlayerInputManager.Inst.Input_DashDir == 1 && !bodySprite.flipX) ||

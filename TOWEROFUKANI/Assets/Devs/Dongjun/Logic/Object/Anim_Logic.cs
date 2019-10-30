@@ -20,7 +20,12 @@ public static class Anim_Logic
             return;
         }
 
+        
         animator.speed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / (maxDuration <= 0 || duration < maxDuration ? duration : maxDuration);
+    }
+    public static void ResetAnimSpeed(Animator animator)
+    {
+        animator.speed = 1;
     }
 
     public static bool CheckCurAnimName(this Animator animator, string nameToCompare)
