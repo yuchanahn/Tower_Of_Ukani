@@ -2,6 +2,23 @@
 
 public class Player : CLA_Main
 {
+    #region Var: Inspector
+    [Header("Component")]
+    public Transform spriteRoot;
+    public SpriteRenderer bodySpriteRenderer;
+    public BoxCollider2D oneWayCollider;
+
+    [Header("GroundDetection")]
+    public GroundDetectionData groundDetectionData;
+
+    [Header("Gravity")]
+    public GravityData gravityData;
+    #endregion
+
+    #region Var: Properties
+    public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
+    #endregion
+
     #region Var: CLA_Action
     private Player_Normal_Action normal_AC;
     private Player_Dash_Action dash_AC;
@@ -15,20 +32,19 @@ public class Player : CLA_Main
         dash_AC = GetComponent<Player_Dash_Action>();
         kick_AC = GetComponent<Player_Kick_Action>();
 
-        ConditionLogics.Add(normal_AC, CL_Movement);
+        ConditionLogics.Add(normal_AC, CL_Normal);
         ConditionLogics.Add(dash_AC, CL_Dash);
         ConditionLogics.Add(kick_AC, CL_Kick);
     }
     #endregion
-
     
     #region Method: Condition Logic
-    private CLA_Action CL_Movement()
+    private CLA_Action CL_Normal()
     {
         if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStatUIManager.UseStamina())
             return dash_AC;
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(PlayerActionKeys.Kick))
             return kick_AC;
 
         return normal_AC;

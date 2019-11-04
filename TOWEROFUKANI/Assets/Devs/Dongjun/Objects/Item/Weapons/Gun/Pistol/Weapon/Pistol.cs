@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Pistol : GunController
+public class Pistol : GunController<PistolItem>
 {
     #region Var: CLA_Action
     private Pistol_Main_Action main_AC;

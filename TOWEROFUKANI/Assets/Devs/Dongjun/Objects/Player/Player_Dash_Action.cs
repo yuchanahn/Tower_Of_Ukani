@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player_Dash_Action : CLA_Action
+public class Player_Dash_Action : CLA_ActionBase<Player>
 {
     #region Var: Inspector
     [Header("Visual")]
@@ -13,6 +13,7 @@ public class Player_Dash_Action : CLA_Action
 
     #region Var: Dash
     private float dashTime_Cur = 0;
+    private int dashDir = 0;
     #endregion
 
     #region Var: Components
@@ -24,10 +25,10 @@ public class Player_Dash_Action : CLA_Action
     public bool IsDasing { get; private set; } = false;
     #endregion
 
-
     #region Method: Unity
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
     }
@@ -39,6 +40,7 @@ public class Player_Dash_Action : CLA_Action
         // Set Value
         IsDasing = true;
         dashTime_Cur = 0;
+        dashDir = PlayerInputManager.Inst.Input_DashDir;
 
         // Play Animation
         Animation();
@@ -52,8 +54,8 @@ public class Player_Dash_Action : CLA_Action
         rb2D.velocity = new Vector2(0, 0);
 
         // Reset Value
-        PlayerInputManager.Inst.Input_DashDir = 0;
         IsDasing = false;
+        dashDir = 0;
     }
     public override void OnFixedUpdate()
     {
@@ -62,15 +64,14 @@ public class Player_Dash_Action : CLA_Action
         if (dashTime_Cur >= dashTime)
             IsDasing = false;
         else
-            rb2D.velocity = new Vector2(PlayerInputManager.Inst.Input_DashDir * (dashDist / dashTime), 0);
+            rb2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
     }
     #endregion
 
     #region Animation
     private void Animation()
     {
-        if ((PlayerInputManager.Inst.Input_DashDir == 1 && !bodySprite.flipX) ||
-            (PlayerInputManager.Inst.Input_DashDir == -1 && bodySprite.flipX))
+        if (PlayerInputManager.Inst.Input_DashDir == main.Dir)
             animator.Play("Player_Dash_Forward", 0, 0f);
         else
             animator.Play("Player_Dash_Backward", 0, 0f);

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Shotgun : GunController
+public class Shotgun : GunController<ShotgunItem>
 {
     #region Var: CLA_Action
     private Shotgun_Main_Action main_AC;

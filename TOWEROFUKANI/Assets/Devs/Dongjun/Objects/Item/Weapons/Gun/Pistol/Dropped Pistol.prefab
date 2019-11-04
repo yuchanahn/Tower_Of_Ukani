@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 8061879157058671587}
   - component: {fileID: 8061879157058671586}
   - component: {fileID: 8061879157058671613}
-  - component: {fileID: 8061879157058671612}
+  - component: {fileID: 1120159414405755277}
   m_Layer: 12
   m_Name: Dropped Pistol
   m_TagString: Untagged
@@ -217,7 +217,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &8061879157058671612
+--- !u!114 &1120159414405755277
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8061879157058671584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50c0a9465885b764096df7743861e296, type: 3}
+  m_Script: {fileID: 11500000, guid: 04622ac72bcd4bb4c881fe1b8f082379, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 706393606752200793, guid: 5f95411add09b9b4c9b9153672129efd, type: 3}

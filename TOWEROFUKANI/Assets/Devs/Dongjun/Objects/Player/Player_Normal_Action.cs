@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player_Normal_Action : CLA_Action,
+public class Player_Normal_Action : CLA_ActionBase<Player>,
     ICanDetectGround
 {
     #region Var: Inspector
@@ -10,12 +10,6 @@ public class Player_Normal_Action : CLA_Action,
 
     [Header("Item PickUp")]
     [SerializeField] private PlayerItemPickUpData itemPickUpData;
-
-    [Header("GroundDetection")]
-    [SerializeField] private GroundDetectionData groundDetectionData;
-
-    [Header("Gravity")]
-    [SerializeField] private GravityData gravityData;
 
     [Header("Walk")]
     [SerializeField] private PlayerWalkData walkData;
@@ -36,7 +30,6 @@ public class Player_Normal_Action : CLA_Action,
     #region Var: Components
     private Animator animator;
     private Rigidbody2D rb2D;
-    private SpriteRenderer bodySpriteRenderer;
     #endregion
 
     #region Var: Properties
@@ -44,13 +37,14 @@ public class Player_Normal_Action : CLA_Action,
     #endregion
 
     #region Method: Unity
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
-        bodySpriteRenderer = spriteRoot.GetComponent<SpriteRenderer>();
 
-        groundDetectionData.Size = oneWayCollider.size;
+        main.groundDetectionData.Size = oneWayCollider.size;
     }
     #endregion
 
@@ -58,33 +52,37 @@ public class Player_Normal_Action : CLA_Action,
     public override void OnExit()
     {
         // Reset Ground Data
-        groundDetectionData.isGrounded = false;
+        main.groundDetectionData.isGrounded = false;
 
         // Reset Jump Data
         jumpData.isJumping = false;
 
         // Reset Velocity
-        rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
+        //rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
     }
     public override void OnUpdate()
     {
-        itemPickUpData.PickUp(transform, Input.GetKeyDown(KeyCode.LeftControl));
-        PlayerItemDrop_Logic.DropFromHotbar(Input.GetKeyDown(KeyCode.Q));
+        // Pick Up Item
+        itemPickUpData.PickUp(transform, Input.GetKeyDown(PlayerActionKeys.PickUpItem));
+
+        // Drop Weapon
+        if (Input.GetKeyDown(PlayerActionKeys.DropItem))
+            Inventory.WeaponHotbar.Remove();
     }
     public override void OnLateUpdate()
     {
         // Look At Mouse
-        bodySpriteRenderer.LookAtMouseY(Global.Inst.MainCam, transform);
+        main.bodySpriteRenderer.LookAtMouseY(Global.Inst.MainCam, transform);
     }
     public override void OnFixedUpdate()
     {
         // Detect Ground
-        groundDetectionData.DetectGround(!jumpData.isJumping, rb2D, transform);
-        groundDetectionData.ExecuteOnGroundMethod(this);
+        main.groundDetectionData.DetectGround(!jumpData.isJumping, rb2D, transform);
+        main.groundDetectionData.ExecuteOnGroundMethod(this);
 
         // Fall Through
         fallThroughKeyPressed = PlayerInputManager.Inst.Input_FallThrough;
-        groundDetectionData.FallThrough(ref fallThroughKeyPressed, rb2D, transform, oneWayCollider);
+        main.groundDetectionData.FallThrough(ref fallThroughKeyPressed, rb2D, transform, oneWayCollider);
 
         // Walk
         walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, rb2D, jumpData.isJumping);
@@ -94,9 +92,9 @@ public class Player_Normal_Action : CLA_Action,
         jumpData.PlayerJump(ref jumpKeyPressed, rb2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(rb2D, 
-            groundDetectionData.isGrounded ? new GravityData(false, 0, 0) : 
-            !jumpData.isJumping ? gravityData : 
+        Gravity_Logic.ApplyGravity(rb2D,
+            main.groundDetectionData.isGrounded ? new GravityData(false, 0, 0) : 
+            !jumpData.isJumping ? main.gravityData : 
             new GravityData(true, jumpData.jumpGravity, 0));
 
         // Animation
@@ -117,7 +115,7 @@ public class Player_Normal_Action : CLA_Action,
 
         string jumpAnim = jumpData.canJump ? Jump : AirJump;
 
-        if (groundDetectionData.isGrounded)
+        if (main.groundDetectionData.isGrounded)
         {
             if (PlayerInputManager.Inst.Input_WalkDir == 0)
             {
@@ -125,8 +123,7 @@ public class Player_Normal_Action : CLA_Action,
             }
             else
             {
-                if ((PlayerInputManager.Inst.Input_WalkDir == 1 && !bodySpriteRenderer.flipX) ||
-                    (PlayerInputManager.Inst.Input_WalkDir == -1 && bodySpriteRenderer.flipX))
+                if (PlayerInputManager.Inst.Input_WalkDir == main.Dir)
                     animator.Play(Walk_Forward);
                 else
                     animator.Play(Walk_Backward);

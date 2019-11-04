@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class AUI_Slider : MonoBehaviour
 {
-    [Disable] public float MAX_;
-    [Disable] public float CUR_;
+    /*[Disable]*/ public float MAX_;
+    /*[Disable]*/ public float CUR_;
 
     [SerializeField] Slider mSlider;
     [SerializeField] UnityEvent ZeroEvent;

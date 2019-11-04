@@ -53,7 +53,7 @@ public class WeaponHolder : MonoBehaviour
         {
             weapons[currentSlot] = weapon;
             weaponIcon[currentSlot].sprite = weapons[currentSlot].Info.Icon;
-            weapons[currentSlot].SelectWeapon(true);
+            weapons[currentSlot].Select(true);
             return;
         }
 
@@ -65,7 +65,7 @@ public class WeaponHolder : MonoBehaviour
                 weaponIcon[i].sprite = weapons[i].Info.Icon;
 
                 if (currentSlot == i)
-                    weapons[i].SelectWeapon(true);
+                    weapons[i].Select(true);
 
                 break;
             }
@@ -83,7 +83,7 @@ public class WeaponHolder : MonoBehaviour
         weaponIcon[index].sprite = weapons[index].Info.Icon;
 
         if (currentSlot == index)
-            weapons[index].SelectWeapon(true);
+            weapons[index].Select(true);
     }
     
     public void RemoveWeapon(int index)
@@ -126,9 +126,9 @@ public class WeaponHolder : MonoBehaviour
         if (oldWeapon == weapons[currentSlot])
             return;
 
-        oldWeapon?.SelectWeapon(false);
+        oldWeapon?.Select(false);
         curWeapon = weapons[currentSlot];
-        curWeapon?.SelectWeapon(true);
+        curWeapon?.Select(true);
         oldWeapon = curWeapon;
     }
     #endregion

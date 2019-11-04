@@ -12,9 +12,8 @@ public class WindCutter : PassiveItem
     #endregion
 
     #region Method: Unity
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         onJumpEffect.action = OnJump;
     }
     #endregion
@@ -29,11 +28,7 @@ public class WindCutter : PassiveItem
     #region On Inventory Add / Remove
     public override void OnAdd()
     {
-        if (Inventory.Inst.HasItem(this))
-        {
-            // Upgrade This Item
-        }
-        else
+        if (Inventory.PassiveItemSlot.Add(this))
         {
             ApplyStats();
             ItemEffectManager.AddEffect(PlayerActions.Jump, onJumpEffect);
@@ -46,16 +41,16 @@ public class WindCutter : PassiveItem
 
     private void ApplyStats()
     {
-        GunItem item;
+        //GunItem item;
 
-        for (int i = 0; i < Inventory.Inst.items.Count; i++)
-        {
-            if (Inventory.Inst.items[i] is GunItem)
-            {
-                item = Inventory.Inst.items[i] as GunItem;
-                item.reloadTimer.EndTime.flatBonus += bonusReloadSpeed;
-            }
-        }
+        //for (int i = 0; i < Inventory.Inst.slot_Item.Count; i++)
+        //{
+        //    if (Inventory.Inst.slot_Item[i] is GunItem)
+        //    {
+        //        item = Inventory.Inst.slot_Item[i] as GunItem;
+        //        item.reloadTimer.EndTime.flatBonus += bonusReloadSpeed;
+        //    }
+        //}
     }
     #endregion
 }

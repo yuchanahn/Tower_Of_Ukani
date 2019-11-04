@@ -7,13 +7,13 @@ public static class PlayerMovementKeys
     public static KeyCode FallThrough => KeyCode.S;
     public static KeyCode Jump => KeyCode.Space;
 }
-
 public static class PlayerActionKeys
 {
     public static KeyCode Dash => KeyCode.LeftShift;
     public static KeyCode Kick => KeyCode.LeftControl;
+    public static KeyCode PickUpItem => KeyCode.C;
+    public static KeyCode DropItem => KeyCode.Q;
 }
-
 public static class PlayerWeaponKeys
 {
     public static KeyCode MainAbility => KeyCode.Mouse0;
@@ -48,7 +48,6 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     private int dashInputCount = 0;
     #endregion
 
-
     #region Method: Unity
     private void Update()
     {
@@ -64,6 +63,7 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     {
         Input_Jump = false;
         Input_FallThrough = false;
+        Input_DashDir = 0;
     }
     #endregion
 

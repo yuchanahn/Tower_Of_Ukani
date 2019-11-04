@@ -3,7 +3,7 @@
 public abstract class CLA_Action : MonoBehaviour
 {
     [HideInInspector]
-    public bool CanExecuteOnStart = true;
+    public bool CanExecute_OnLateEnter = true;
 
     public virtual void OnEnter() { }
     public virtual void OnLateEnter() { }

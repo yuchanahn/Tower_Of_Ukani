@@ -473,26 +473,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultAction: {fileID: 5969363333450609748}
---- !u!114 &5969363333450609748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7371128404420445770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d28f0190f4f6f44ab837a6ac8541b73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
   spriteRoot: {fileID: 7371128403266533315}
+  bodySpriteRenderer: {fileID: 7371128403266533312}
   oneWayCollider: {fileID: 7371128403577552055}
-  itemPickUpData:
-    radius: 1
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 4096
   groundDetectionData:
     Size: {x: 0, y: 0}
     IgnoreGrounds: []
@@ -513,6 +496,26 @@ MonoBehaviour:
     useGravity: 1
     acceleration: 40
     terminalVelocity: 20
+--- !u!114 &5969363333450609748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d28f0190f4f6f44ab837a6ac8541b73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanExecute_OnLateEnter: 1
+  spriteRoot: {fileID: 7371128403266533315}
+  oneWayCollider: {fileID: 7371128403577552055}
+  itemPickUpData:
+    radius: 1
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 4096
   walkData:
     walkSpeed: 7.5
     walkAccelTime: 0.2
@@ -540,7 +543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721e3bb0108e07349ad32779597b3cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
+  CanExecute_OnLateEnter: 1
   bodySprite: {fileID: 7371128403266533312}
   dashDist: 3.5
   dashTime: 0.2
@@ -556,17 +559,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8278ef24bb7a149800a25309ccfce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
+  CanExecute_OnLateEnter: 1
   dirTarget: {fileID: 6372901048470370509}
   power: 10
   detectBox: {fileID: 6092793338137710660}
   detectMask:
     serializedVersion: 2
     m_Bits: 1024
-  durationData:
-    StartAsEnded: 0
-    CurTime: 0
-    EndTime: 0.4
+  velPercent: {x: 0.3, y: 0.3}
+  xVelDrag: 0.8
+  duration: 0
   bodySpriteRenderer: {fileID: 7371128403266533312}
 --- !u!114 &6830336080947489379
 MonoBehaviour:
@@ -626,7 +628,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4, y: 0.1}
+  m_Offset: {x: 0.5, y: 0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -637,5 +639,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.8}
+  m_Size: {x: 1, y: 0.8}
   m_EdgeRadius: 0

@@ -20,12 +20,12 @@ public class PlayerStats : MonoBehaviour
         DamageReceived = amount;
         ItemEffectManager.Trigger(PlayerActions.Damaged);
         PlayerHitEft.Create(GM.PlayerPos);
-        heath.flatBonus -= DamageReceived;
+        heath.Mod_Flat -= DamageReceived;
     }
     public static void Heal(int amount)
     {
         HealReceived = amount;
         ItemEffectManager.Trigger(PlayerActions.Healed);
-        heath.flatBonus += HealReceived;
+        heath.Mod_Flat += HealReceived;
     }
 }

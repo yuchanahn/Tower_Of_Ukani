@@ -5,25 +5,24 @@ using UnityEngine;
 public struct IntStat
 {
     // Default
+    public int Base;
     public int Min;
     public int Max;
-    public int Base;
 
     // Get Value
-    public int Value => Mathf.Clamp((int)(Base * (1 + (percentBonus / 100)) + flatBonus + 0.5f), Min, Max);
+    public int Value => Mathf.Clamp((int)((Base * (1 + (Mod_Percent * 0.01f))) + Mod_Flat + 0.5f), Min, Max);
 
     // Bonus
-    [HideInInspector] public float percentBonus;
-    [HideInInspector] public float flatBonus;
+    [HideInInspector] public float Mod_Percent;
+    [HideInInspector] public int Mod_Flat;
 
     public IntStat(int _base, int? min = null, int? max = null)
     {
         Base = _base;
         Min = min is null ? int.MinValue : min.Value;
         Max = max is null ? int.MaxValue : max.Value;
-
-        percentBonus = 0f;
-        flatBonus = 0f;
+        Mod_Percent = 0f;
+        Mod_Flat = 0;
     }
 }
 
@@ -31,25 +30,24 @@ public struct IntStat
 public struct FloatStat
 {
     // Default
+    public float Base;
     public float Min;
     public float Max;
-    public float Base;
 
     // Get Value
-    public float Value => Mathf.Clamp(Base * (1 + (percentBonus / 100)) + flatBonus, Min, Max);
+    public float Value => Mathf.Clamp((Base * (1 + (Mod_Percent * 0.01f))) + Mod_Flat, Min, Max);
 
     // Bonus
-    [HideInInspector] public float percentBonus;
-    [HideInInspector] public float flatBonus;
+    [HideInInspector] public float Mod_Percent;
+    [HideInInspector] public float Mod_Flat;
 
     public FloatStat(float _base, float? min = null, float? max = null)
     {
         Base = _base;
         Min = min is null ? float.NegativeInfinity : min.Value;
         Max = max is null ? float.PositiveInfinity : max.Value;
-
-        percentBonus = 0f;
-        flatBonus = 0f;
+        Mod_Percent = 0f;
+        Mod_Flat = 0f;
     }
 }
 
@@ -73,7 +71,6 @@ public class TimerStat : ITimerData
     private Action OnTick;
     private Action OnEnd;
     #endregion
-
 
     public void Init(GameObject self, Action OnTick = null, Action OnEnd = null)
     {

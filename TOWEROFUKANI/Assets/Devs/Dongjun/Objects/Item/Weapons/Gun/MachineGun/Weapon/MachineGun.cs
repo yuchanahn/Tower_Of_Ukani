@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-public class MachineGun : GunController
+public class MachineGun : GunController<MachineGunItem>
 {
     #region Var: CLA_Action
     private MachineGun_Main_Action main_AC;
     private Gun_Reload_Action reload_AC;
     private MachineGun_SwapMagazine_Action swapMagazine_AC;
     #endregion
-
 
     #region Method: Init
     protected override void Init()

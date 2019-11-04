@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
 
-public class Player_Kick_Action : CLA_Action
+public class Player_Kick_Action : CLA_ActionBase<Player>
 {
     #region Var: Inspector
-    [Space, Header("Kick")]
+    [Header("Kick")]
     [SerializeField] private Transform dirTarget;
     [SerializeField] private float power;
     [SerializeField] private BoxCollider2D detectBox;
     [SerializeField] private LayerMask detectMask;
 
-    [Space, Header("Animation Duration")]
-    [SerializeField] private TimerData durationData;
+    [Header("Movement")]
+    [SerializeField] private Vector2 velPercent = new Vector2(0.3f, 0.3f);
+    [SerializeField] private float xVelDrag = 0.8f;
 
-    [Space, Header("Sprite Renderer")]
+    [Header("Animation Duration")]
+    [SerializeField] private float duration;
+
+    [Header("Sprite Renderer")]
     [SerializeField] private SpriteRenderer bodySpriteRenderer;
     #endregion
 
@@ -26,41 +30,42 @@ public class Player_Kick_Action : CLA_Action
     #endregion
 
     #region Method: Unity
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
-
-        durationData.Init(gameObject, OnEnd: Finish);
     }
     #endregion
 
     #region Method: CLA_Action
     public override void OnEnter()
     {
-        durationData.SetActive(true);
-        durationData.Restart();
-
-        rb2D.velocity = new Vector2(0, 0);
         IsKicking = true;
+        rb2D.velocity *= velPercent;
 
-        Anim_Logic.SetAnimSpeed(animator, durationData.EndTime);
+        Anim_Logic.SetAnimSpeed(animator, duration);
         Animation();
     }
     public override void OnExit()
     {
-        durationData.SetActive(false);
-        durationData.ToZero();
-
         Anim_Logic.ResetAnimSpeed(animator);
+    }
+    public override void OnLateUpdate()
+    {
+        // Detect Ground
+        main.groundDetectionData.DetectGround(true, rb2D, transform);
+
+        // Gravity
+        Gravity_Logic.ApplyGravity(rb2D, main.gravityData);
+
+        // Reduce X Velocity
+        rb2D.velocity -= new Vector2(rb2D.velocity.x * xVelDrag * Time.fixedDeltaTime * main.Dir, 0);
     }
     #endregion
 
     #region Method: Kick
-    private void Finish()
-    {
-        IsKicking = false;
-    }
     private void Kick()
     {
         Collider2D[] hits = 
@@ -70,13 +75,12 @@ public class Player_Kick_Action : CLA_Action
                 0f, 
                 detectMask);
 
-        if (hits is null)
-            return;
+        if (hits.Length == 0) return;
 
-        float dist = -1;
         Rigidbody2D hitRB2D = null;
 
         // Get Nearest Corpse
+        float dist = -1;
         for (int i = 0; i < hits.Length; i++)
         {
             Rigidbody2D curHitRB2D = hits[i].GetComponent<Rigidbody2D>();
@@ -91,8 +95,7 @@ public class Player_Kick_Action : CLA_Action
             }
         }
 
-        if (hitRB2D is null)
-            return;
+        if (hitRB2D is null) return;
 
         // Kick
         Vector2 kickDir = (dirTarget.position - transform.position).normalized;
@@ -111,6 +114,10 @@ public class Player_Kick_Action : CLA_Action
     private void OnKickAnim()
     {
         Kick();
+    }
+    private void OnKickFinish()
+    {
+        IsKicking = false;
     }
     #endregion
 }

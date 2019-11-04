@@ -17,14 +17,11 @@ public abstract class CLA_Main : MonoBehaviour
     protected CLA_Action CurrentAction { get; private set; }
     #endregion
 
-
     #region Method: Unity
     protected virtual void Awake()
     {
         if (defaultAction is null)
-        {
             Debug.LogError("It Needs Default Action!");
-        }
 
         Init();
     }
@@ -39,10 +36,10 @@ public abstract class CLA_Main : MonoBehaviour
     }
     private void LateUpdate()
     {
-        if (CurrentAction.CanExecuteOnStart)
+        if (CurrentAction.CanExecute_OnLateEnter)
         {
             CurrentAction?.OnLateEnter();
-            CurrentAction.CanExecuteOnStart = false;
+            CurrentAction.CanExecute_OnLateEnter = false;
         }
 
         CurrentAction?.OnLateUpdate();
@@ -67,7 +64,7 @@ public abstract class CLA_Main : MonoBehaviour
         CurrentAction?.OnExit();
         CurrentAction = action;
         CurrentAction?.OnEnter();
-        CurrentAction.CanExecuteOnStart = true;
+        CurrentAction.CanExecute_OnLateEnter = true;
     }
     private void RunConditionLogic()
     {
