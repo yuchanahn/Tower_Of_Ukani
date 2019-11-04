@@ -27,6 +27,12 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
     public void DestroyObj(){
         SetOff();
     }
+
+    void OnDestroy()
+    {
+        ATimer.Pop(gameObject.name + GetInstanceID());
+    }
+
     public void DestroyObj(float DistroyTime)
     {
         ATimer.SetAndReset(gameObject.name + GetInstanceID() , DistroyTime,SetOff);

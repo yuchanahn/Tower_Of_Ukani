@@ -14,9 +14,9 @@ public class Effect_Object : MonoBehaviour
     void CreateWalkDust(  )
     {
         var obj = PlayerWalkDustEft.Create(feetPos.position);
-        var VelDir = Global.Inst.PlayerRB2D.velocity.x >= 0;
 
-        obj.GetComponentInChildren<SpriteRenderer>().flipX = !((VelDir && !Pspr.flipX) || !(!VelDir && Pspr.flipX));
+
+        obj.GetComponentInChildren<SpriteRenderer>().flipX = Global.Inst.PlayerRB2D.velocity.x >= 0 ? false : true;
     }
 
 
