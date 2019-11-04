@@ -20,6 +20,9 @@ public class Inventory : SingletonBase<Inventory>
     #region Method: Unity
     private void Awake()
     {
+        WeaponHotbar.Clear();
+        ActiveItemHotbar.Clear();
+
         InitUI_WeaopnHotbar();
     }
     private void Update()
@@ -182,6 +185,11 @@ public class Inventory : SingletonBase<Inventory>
             Inst.UpdateUI_WeaponHotbar();
             Inst.UpdateUI_WeaponInfo();
         }
+        public static void Clear()
+        {
+            Weapons = new WeaponItem[3];
+            empySlotCount = Weapons.Length;
+        }
         public static bool IsFull()
         {
             return empySlotCount == 0;
@@ -224,6 +232,11 @@ public class Inventory : SingletonBase<Inventory>
 
             Inst.UpdateUI_WeaponHotbar();
             Inst.UpdateUI_WeaponInfo();
+        }
+        public static void Clear()
+        {
+            Items = new ActiveItem[4];
+            empySlotCount = Items.Length;
         }
         public static bool IsFull()
         {
