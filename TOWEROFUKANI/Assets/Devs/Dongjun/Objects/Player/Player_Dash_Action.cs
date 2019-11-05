@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player_Dash_Action : CLA_ActionBase<Player>
+public class Player_Dash_Action : CLA_Action<Player>
 {
     #region Var: Inspector
     [Header("Visual")]

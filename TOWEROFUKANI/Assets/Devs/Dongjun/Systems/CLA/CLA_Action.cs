@@ -1,14 +1,10 @@
-﻿using UnityEngine;
-
-public abstract class CLA_Action : MonoBehaviour
+﻿public class CLA_Action<TMain> : CLA_Action_Base 
+    where TMain : CLA_Main
 {
-    [HideInInspector]
-    public bool CanExecute_OnLateEnter = true;
+    protected TMain main;
 
-    public virtual void OnEnter() { }
-    public virtual void OnLateEnter() { }
-    public virtual void OnExit() { }
-    public virtual void OnUpdate() { }
-    public virtual void OnLateUpdate() { }
-    public virtual void OnFixedUpdate() { }
+    protected virtual void Awake()
+    {
+        main = GetComponent<TMain>();
+    }
 }

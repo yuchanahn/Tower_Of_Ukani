@@ -19,7 +19,7 @@ public class WoodenShortBow : BowController<WoodenShotBowItem>
     #endregion
 
     #region Method: Condition Logic
-    private CLA_Action CL_Main()
+    private CLA_Action_Base CL_Main()
     {
         if (!weaponItem.IsSelected)
             return DefaultAction;
@@ -29,7 +29,7 @@ public class WoodenShortBow : BowController<WoodenShotBowItem>
 
         return main_AC;
     }
-    private CLA_Action CL_Draw()
+    private CLA_Action_Base CL_Draw()
     {
         if (!weaponItem.IsSelected)
             return DefaultAction;

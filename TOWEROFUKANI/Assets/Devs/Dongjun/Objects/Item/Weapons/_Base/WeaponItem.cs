@@ -91,7 +91,7 @@ public abstract class GunItem : WeaponItem
     public int loadedBullets;
     public bool isBulletLoaded;
 
-    protected void Start()
+    protected virtual void Start()
     {
         // Init Timer
         shootTimer.Init(gameObject);
@@ -124,8 +124,9 @@ public abstract class BowItem : WeaponItem
 
     public GameObject ArrowVisual => arrowVisual;
 
-    protected void Start()
+    protected override void Awake()
     {
+        base.Awake();
         shootTimer.Init(gameObject);
         drawTimer.Init(gameObject);
     }

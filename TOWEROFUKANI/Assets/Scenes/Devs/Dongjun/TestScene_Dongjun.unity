@@ -857,7 +857,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5dbdecd8bb2eb5746bb3c8fbb098f17e, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2703,7 +2703,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5dbdecd8bb2eb5746bb3c8fbb098f17e, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5021,27 +5021,26 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Walk: [A], [D]
+  m_Text: 'Walk: [A/D]
 
     Jump: [Space]
 
     Fall Down: [S]
 
 
-    Dash: [A/D + LShift], [A/D Double Tap]
+    Dash: [A/D + L-Shift], [A/D Double Tap]
 
-    Kick: [Z]
-
-
-    Shoot: [LMB]
-
-    Reload: [R]
+    Kick: [L-Ctrl]
 
 
     Change Weapon: [Scroll], [Tab]
 
+    Shoot: [L-MB]
 
-    Pick Up Item: [L-Control]
+    Reload: [R]
+
+
+    Pick Up: [C]
 
     Drop Weapon: [Q]'
 --- !u!222 &953153035
@@ -6626,7 +6625,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5dbdecd8bb2eb5746bb3c8fbb098f17e, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7111,7 +7110,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: cd05276bf0965684790a4aa0394c4fff, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7469,7 +7468,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: cd05276bf0965684790a4aa0394c4fff, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
@@ -8973,7 +8972,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: cd05276bf0965684790a4aa0394c4fff, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4

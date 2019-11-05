@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class WeaponAction_Base<TItem> : MonoAnimator
+public abstract class WeaponAction_Base<TItem> : CLA_Animator
     where TItem : WeaponItem
 {
     protected TItem weapon;

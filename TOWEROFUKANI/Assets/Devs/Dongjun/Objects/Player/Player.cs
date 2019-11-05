@@ -39,7 +39,7 @@ public class Player : CLA_Main
     #endregion
     
     #region Method: Condition Logic
-    private CLA_Action CL_Normal()
+    private CLA_Action_Base CL_Normal()
     {
         if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStatUIManager.UseStamina())
             return dash_AC;
@@ -49,7 +49,7 @@ public class Player : CLA_Main
 
         return normal_AC;
     }
-    private CLA_Action CL_Dash()
+    private CLA_Action_Base CL_Dash()
     {
         // Cancle On Jump
         if (normal_AC.JumpData.canJump && PlayerInputManager.Inst.Input_Jump)
@@ -61,7 +61,7 @@ public class Player : CLA_Main
 
         return dash_AC;
     }
-    private CLA_Action CL_Kick()
+    private CLA_Action_Base CL_Kick()
     {
         if (!kick_AC.IsKicking)
             return normal_AC;

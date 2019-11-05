@@ -22,7 +22,7 @@ public class MachineGun : GunController<MachineGunItem>
     #endregion
 
     #region Method: Condition Logic
-    private CLA_Action CL_Main()
+    private CLA_Action_Base CL_Main()
     {
         if (!weaponItem.IsSelected)
             return DefaultAction;
@@ -46,7 +46,7 @@ public class MachineGun : GunController<MachineGunItem>
 
         return main_AC;
     }
-    private CLA_Action CL_Reload()
+    private CLA_Action_Base CL_Reload()
     {
         if (!weaponItem.IsSelected)
             return DefaultAction;
@@ -56,7 +56,7 @@ public class MachineGun : GunController<MachineGunItem>
 
         return reload_AC;
     }
-    private CLA_Action CL_SwapMagazine()
+    private CLA_Action_Base CL_SwapMagazine()
     {
         if (!weaponItem.IsSelected)
             return DefaultAction;

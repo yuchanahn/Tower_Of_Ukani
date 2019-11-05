@@ -5,30 +5,37 @@ using UnityEngine;
 public abstract class CLA_Main : MonoBehaviour
 {
     #region Var: Inspector
-    [SerializeField] private CLA_Action defaultAction;
+    [SerializeField] private CLA_Action_Base defaultAction;
     #endregion
 
     #region Var: Condition Logics
-    protected Dictionary<CLA_Action, Func<CLA_Action>> ConditionLogics = new Dictionary<CLA_Action, Func<CLA_Action>>();
+    protected Dictionary<CLA_Action_Base, Func<CLA_Action_Base>> ConditionLogics = 
+        new Dictionary<CLA_Action_Base, Func<CLA_Action_Base>>();
     #endregion
 
     #region Var: Properties
-    protected CLA_Action DefaultAction => defaultAction;
-    protected CLA_Action CurrentAction { get; private set; }
+    protected CLA_Action_Base DefaultAction => defaultAction;
+    protected CLA_Action_Base CurrentAction { get; private set; } = null;
     #endregion
 
     #region Method: Unity
+    protected virtual void OnEnable()
+    {
+        CurrentAction?.OnEnter();
+
+        if (CurrentAction is null)
+            CurrentAction = defaultAction;
+    }
+    protected virtual void OnDisable()
+    {
+        CurrentAction?.OnExit();
+    }
     protected virtual void Awake()
     {
         if (defaultAction is null)
-            Debug.LogError("It Needs Default Action!");
+            Debug.LogError("CLA Main Must Have a Default Action!");
 
         Init();
-    }
-    protected virtual void Start()
-    {
-        CurrentAction = defaultAction;
-        CurrentAction?.OnEnter();
     }
     private void Update()
     {
@@ -56,7 +63,7 @@ public abstract class CLA_Main : MonoBehaviour
     #endregion
 
     #region Method: Change Action
-    private void ChangeAction(CLA_Action action)
+    private void ChangeAction(CLA_Action_Base action)
     {
         if (action == CurrentAction)
             return;

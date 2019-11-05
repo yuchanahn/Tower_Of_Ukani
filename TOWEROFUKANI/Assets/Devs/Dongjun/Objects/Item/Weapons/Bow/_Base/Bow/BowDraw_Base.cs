@@ -7,16 +7,15 @@ public abstract class BowDraw_Base<TItem> : BowAction_Base<TItem>
     public bool IsDrawing { get; private set; } = false;
     #endregion
 
-
     #region Method: CLA_Action
     public override void OnEnter()
     {
         // Start Timer
         weapon.drawTimer.SetActive(true);
-        weapon.drawTimer.ToZero();
         weapon.drawTimer.Restart();
 
         IsDrawing = true;
+        weapon.hasBeenDrawn = false;
         weapon.drawPower = 0;
 
         // Animation
@@ -31,6 +30,7 @@ public abstract class BowDraw_Base<TItem> : BowAction_Base<TItem>
     {
         // Stop Timer
         weapon.drawTimer.SetActive(false);
+        weapon.drawTimer.ToZero();
 
         IsDrawing = false;
 
@@ -40,6 +40,9 @@ public abstract class BowDraw_Base<TItem> : BowAction_Base<TItem>
     }
     public override void OnUpdate()
     {
+        if (!weapon.IsSelected)
+            return;
+
         if (Input.GetKeyUp(PlayerWeaponKeys.MainAbility))
         {
             IsDrawing = false;
@@ -52,7 +55,6 @@ public abstract class BowDraw_Base<TItem> : BowAction_Base<TItem>
         if (!weapon.IsSelected)
             return;
 
-        // Look At Mouse
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
     }
     #endregion

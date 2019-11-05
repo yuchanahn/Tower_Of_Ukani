@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player_Normal_Action : CLA_ActionBase<Player>,
+public class Player_Normal_Action : CLA_Action<Player>,
     ICanDetectGround
 {
     #region Var: Inspector
