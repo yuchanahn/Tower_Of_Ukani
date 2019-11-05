@@ -25,9 +25,10 @@ public class Inventory : SingletonBase<Inventory>
 
         InitUI_WeaopnHotbar();
     }
-    private void Update()
+    private void LateUpdate()
     {
         UpdateSelectedWeapon();
+        UpdateUI_WeaponInfo();
     }
     #endregion
 
@@ -84,7 +85,6 @@ public class Inventory : SingletonBase<Inventory>
             // Update UI
             Inst.go_WeaponSelected[WeaponHotbar.index_Old].SetActive(false);
             Inst.go_WeaponSelected[WeaponHotbar.index_Cur].SetActive(true);
-            UpdateUI_WeaponInfo();
         }
     }
     #endregion
@@ -150,7 +150,6 @@ public class Inventory : SingletonBase<Inventory>
 
             // Update UI
             Inst.UpdateUI_WeaponHotbar();
-            Inst.UpdateUI_WeaponInfo();
         }
         public static bool Add(WeaponItem weapon)
         {
@@ -183,7 +182,6 @@ public class Inventory : SingletonBase<Inventory>
             empySlotCount++;
 
             Inst.UpdateUI_WeaponHotbar();
-            Inst.UpdateUI_WeaponInfo();
         }
         public static void Clear()
         {
@@ -229,9 +227,6 @@ public class Inventory : SingletonBase<Inventory>
             Items[index].OnRemove();
             Items[index] = null;
             empySlotCount++;
-
-            Inst.UpdateUI_WeaponHotbar();
-            Inst.UpdateUI_WeaponInfo();
         }
         public static void Clear()
         {

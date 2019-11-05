@@ -12,8 +12,9 @@ public class WindCutter : PassiveItem
     #endregion
 
     #region Method: Unity
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         onJumpEffect.action = OnJump;
     }
     #endregion

@@ -6160,11 +6160,6 @@ PrefabInstance:
       propertyPath: durationData.EndTime
       value: 0.35
       objectReference: {fileID: 0}
-    - target: {fileID: 2166807972467319143, guid: de8e575bfc7541a4cb26f729cf5133df,
-        type: 3}
-      propertyPath: duration
-      value: 0.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de8e575bfc7541a4cb26f729cf5133df, type: 3}
 --- !u!4 &1334092404 stripped

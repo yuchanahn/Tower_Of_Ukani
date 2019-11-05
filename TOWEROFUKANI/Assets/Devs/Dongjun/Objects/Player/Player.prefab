@@ -568,7 +568,7 @@ MonoBehaviour:
     m_Bits: 1024
   velPercent: {x: 0.3, y: 0.3}
   xVelDrag: 0.8
-  duration: 0
+  duration: 0.3
   bodySpriteRenderer: {fileID: 7371128403266533312}
 --- !u!114 &6830336080947489379
 MonoBehaviour:
