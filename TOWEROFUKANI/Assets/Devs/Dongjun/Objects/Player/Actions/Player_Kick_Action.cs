@@ -58,7 +58,10 @@ public class Player_Kick_Action : CLA_Action<Player>
         main.groundDetectionData.DetectGround(true, rb2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(rb2D, main.gravityData);
+        Gravity_Logic.ApplyGravity(rb2D, 
+            main.groundDetectionData.isGrounded ? 
+            new GravityData(false, 0, 0) : 
+            main.gravityData);
 
         // Reduce X Velocity
         rb2D.velocity -= new Vector2(rb2D.velocity.x * xVelDrag * Time.fixedDeltaTime * main.Dir, 0);
