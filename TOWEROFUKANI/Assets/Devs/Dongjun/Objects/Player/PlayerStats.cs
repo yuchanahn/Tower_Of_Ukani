@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Dongjun.Helper;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -28,11 +29,13 @@ public class PlayerStats : MonoBehaviour
     #endregion
 
     #region Method: Unity
-    private void Awake()
+    private void OnEnable()
     {
         OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
         OnStaminaChange = new Dictionary<GameObject, Action<float>>();
-
+    }
+    private void Awake()
+    {
         SetStamina(stamina.Max);
     }
     private void LateUpdate()
@@ -120,7 +123,7 @@ public class PlayerStats : MonoBehaviour
         for (int i = 0; i < OnHealthChange.Count; i++)
         {
             key = OnHealthChange.ElementAt(i).Key;
-            if (key is null)
+            if (key.IsNull())
             {
                 OnHealthChange.Remove(key);
                 continue;
@@ -143,7 +146,7 @@ public class PlayerStats : MonoBehaviour
         for (int i = 0; i < OnStaminaChange.Count; i++)
         {
             key = OnStaminaChange.ElementAt(i).Key;
-            if (key is null)
+            if (key.IsNull())
             {
                 OnStaminaChange.Remove(key);
                 continue;

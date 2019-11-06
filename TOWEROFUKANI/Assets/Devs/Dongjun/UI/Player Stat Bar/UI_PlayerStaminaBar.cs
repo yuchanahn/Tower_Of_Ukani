@@ -20,10 +20,6 @@ public class UI_PlayerStaminaBar : MonoBehaviour
         for (int i = 0; i < staminaBars.Length; i++)
         {
             staminaBars[i] = Instantiate(staminaBarPrefab, staminaBarParent).GetComponent<UI_Bar>();
-        }
-
-        for (int i = 0; i < staminaBars.Length; i++)
-        {
             staminaBars[i].Value = PlayerStats.Stamina.Value >= i + 1 ? 1 : PlayerStats.Stamina.Value - i;
         }
     }
