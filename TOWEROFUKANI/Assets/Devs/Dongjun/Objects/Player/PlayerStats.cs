@@ -32,6 +32,7 @@ public class PlayerStats : MonoBehaviour
     private void OnEnable()
     {
         // Reset Events
+        Debug.Log("asd");
         OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
         OnStaminaChange = new Dictionary<GameObject, Action<float>>();
     }

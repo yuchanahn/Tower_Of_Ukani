@@ -27,8 +27,7 @@ public class TempMapChanger : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerStats.Health.Value <= 0)
-            ReloadScene();
+        if (PlayerStats.Health.Value <= 0) ReloadScene();
     }
 
     private void ReloadScene()
