@@ -7,8 +7,9 @@ public class PlayerStats : MonoBehaviour
 {
     #region Var: Stats
     private static IntStat health = new IntStat(100, min: 0, max: 100);
-    private static FloatStat stamina = new FloatStat(3f, min: 0, max: 3f);
+    private static IntStat stamina = new IntStat(0, min: 0, max: 3);
     private static FloatStat staminaRegen = new FloatStat(0.5f, min: 0, max: 1f);
+    private static float staminaBarValue;
     #endregion
 
     #region Var: Data for Item Effect
@@ -18,19 +19,21 @@ public class PlayerStats : MonoBehaviour
 
     #region Var: Event For UI
     private static Dictionary<GameObject, Action<IntStat>> OnHealthChange;
-    private static Dictionary<GameObject, Action<FloatStat>> OnStaminaChange;
+    private static Dictionary<GameObject, Action<float>> OnStaminaChange;
     #endregion
 
     #region Var: Properties
     public static IntStat Health => health;
-    public static FloatStat Stamina => stamina;
+    public static IntStat Stamina => stamina;
     #endregion
 
     #region Method: Unity
     private void Awake()
     {
         OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
-        OnStaminaChange = new Dictionary<GameObject, Action<FloatStat>>();
+        OnStaminaChange = new Dictionary<GameObject, Action<float>>();
+
+        SetStamina(stamina.Max);
     }
     private void LateUpdate()
     {
@@ -41,17 +44,29 @@ public class PlayerStats : MonoBehaviour
     #region Method: Change Stat
     private static void Regen_Stamina()
     {
-        if (stamina.Value == stamina.Max)
+        if (staminaBarValue >= stamina.Max)
+        {
+            staminaBarValue = stamina.Max;
+            stamina.Mod_Flat = stamina.Max;
             return;
+        }
 
-        stamina.Mod_Flat += staminaRegen.Value * Time.deltaTime;
+        staminaBarValue += staminaRegen.Value * Time.deltaTime;
+        stamina.Mod_Flat = (int)staminaBarValue;
         Invoke_OnStaminaChange();
+    }
+    public static void SetStamina(int amount)
+    {
+        amount = Mathf.Clamp(amount, stamina.Min, stamina.Max);
+        stamina.Mod_Flat = stamina.Max;
+        staminaBarValue = stamina.Max;
     }
     public static bool UseStamina(int amount)
     {
         if (stamina.Value < amount)
             return false;
 
+        staminaBarValue -= amount;
         stamina.Mod_Flat -= amount;
         return true;
     }
@@ -115,7 +130,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public static void AddEvent_OnStaminaChange(GameObject slef, Action<FloatStat> action)
+    public static void AddEvent_OnStaminaChange(GameObject slef, Action<float> action)
     {
         if (OnStaminaChange.ContainsKey(slef))
             return;
@@ -134,7 +149,7 @@ public class PlayerStats : MonoBehaviour
                 continue;
             }
 
-            OnStaminaChange[key].Invoke(Stamina);
+            OnStaminaChange[key].Invoke(staminaBarValue);
         }
     }
     #endregion

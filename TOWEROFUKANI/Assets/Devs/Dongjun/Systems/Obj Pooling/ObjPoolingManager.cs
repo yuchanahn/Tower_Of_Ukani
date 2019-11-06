@@ -24,8 +24,8 @@ public class ObjPoolingManager : MonoBehaviour
     #endregion
 
     #region Var: Pool Data
-    private static Dictionary<PoolingObj, List<PoolingObj>> pool_Active = new Dictionary<PoolingObj, List<PoolingObj>>();
-    private static Dictionary<PoolingObj, Queue<PoolingObj>> pool_Sleeping = new Dictionary<PoolingObj, Queue<PoolingObj>>();
+    private static Dictionary<PoolingObj, List<PoolingObj>> pool_Active;
+    private static Dictionary<PoolingObj, Queue<PoolingObj>> pool_Sleeping;
     #endregion
 
 
