@@ -29,15 +29,12 @@ public class PlayerStats : MonoBehaviour
     #endregion
 
     #region Method: Unity
-    private void OnEnable()
-    {
-        // Reset Events
-        Debug.Log("asd");
-        OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
-        OnStaminaChange = new Dictionary<GameObject, Action<float>>();
-    }
     private void Awake()
     {
+        // Reset Events
+        OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
+        OnStaminaChange = new Dictionary<GameObject, Action<float>>();
+
         SetStamina(stamina.Max);
     }
     private void LateUpdate()

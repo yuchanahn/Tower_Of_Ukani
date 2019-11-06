@@ -5,7 +5,7 @@ public class UI_PlayerHealthBar : MonoBehaviour
 {
     [SerializeField] private Slider healthBar;
 
-    private void Awake()
+    private void Start()
     {
         Init_HealthBar();
         PlayerStats.AddEvent_OnHealthChange(gameObject, Update_HealthBar);

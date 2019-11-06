@@ -5,7 +5,7 @@ public abstract class SingletonBase<T> : MonoBehaviour
 {
     public static T Inst { get; private set; }
 
-    protected virtual void OnEnable()
+    protected virtual void Awake()
     {
         Inst = this as T;
     }

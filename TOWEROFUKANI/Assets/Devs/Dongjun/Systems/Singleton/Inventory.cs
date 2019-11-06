@@ -18,8 +18,10 @@ public class Inventory : SingletonBase<Inventory>
     #endregion
 
     #region Method: Unity
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         WeaponHotbar.Clear();
         ActiveItemHotbar.Clear();
 

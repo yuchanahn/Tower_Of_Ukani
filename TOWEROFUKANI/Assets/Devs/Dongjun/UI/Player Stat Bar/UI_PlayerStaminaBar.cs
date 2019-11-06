@@ -7,7 +7,7 @@ public class UI_PlayerStaminaBar : MonoBehaviour
 
     private UI_Bar[] staminaBars;
 
-    private void Awake()
+    private void Start()
     {
         Init_StaminaBar();
         PlayerStats.AddEvent_OnStaminaChange(gameObject, Update_StaminaBar);
