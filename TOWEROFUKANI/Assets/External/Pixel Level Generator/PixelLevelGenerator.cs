@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class PixelLevelGenerator : MonoBehaviour {
 
-	public Texture2D map;
+	[SerializeField] private Texture2D mapTexture;
+	[SerializeField] private SpriteRenderer mapTempSprite;
 
-	public ColorToPrefab[] colorMappings;
+    [SerializeField] private ColorToPrefab[] colorMappings;
 
     private void Awake()
     {
@@ -14,23 +15,25 @@ public class PixelLevelGenerator : MonoBehaviour {
 
     public void GenerateLevel()
 	{
-        for (int x = 0; x < map.width; x++)
+        for (int x = 0; x < mapTexture.width; x++)
 		{
-			for (int y = 0; y < map.height; y++)
+			for (int y = 0; y < mapTexture.height; y++)
 			{
 				GenerateTile(x, y);
 			}
 		}
-	}
+
+        mapTempSprite.sprite = null;
+    }
 
 	private void GenerateTile(int x, int y)
 	{
-		Color pixelColor = map.GetPixel(x, y);
+		Color pixelColor = mapTexture.GetPixel(x, y);
         if (pixelColor.a == 0)
             return;
 
-        float offsetX = -(map.width / 2) + ((map.width % 2 == 0) ? 0.5f : 0);
-        float offsetY = -(map.height / 2) + ((map.height % 2 == 0) ? 0.5f : 0);
+        float offsetX = -(mapTexture.width / 2) + ((mapTexture.width % 2 == 0) ? 0.5f : 0);
+        float offsetY = -(mapTexture.height / 2) + ((mapTexture.height % 2 == 0) ? 0.5f : 0);
 
 
         foreach (ColorToPrefab colorMapping in colorMappings)
