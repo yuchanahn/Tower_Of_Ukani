@@ -40,6 +40,7 @@ public abstract class GunSwapMagazine_Base<TItem> : GunAction_Base<TItem>
     {
         // Stop Timer
         weapon.swapMagazineTimer.SetActive(false);
+        weapon.swapMagazineTimer.ToZero();
 
         // On Timer End
         if (weapon.swapMagazineTimer.IsEnded)

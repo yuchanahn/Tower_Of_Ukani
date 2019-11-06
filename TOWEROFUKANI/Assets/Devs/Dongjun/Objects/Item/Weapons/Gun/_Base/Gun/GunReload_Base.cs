@@ -28,6 +28,7 @@ public abstract class GunReload_Base<TItem> : GunAction_Base<TItem>
     {
         // Stop Timer
         weapon.reloadTimer.SetActive(false);
+        weapon.reloadTimer.ToZero();
 
         // Load Bullets
         if (weapon.reloadTimer.IsEnded)

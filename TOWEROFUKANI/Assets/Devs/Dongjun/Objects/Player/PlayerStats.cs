@@ -31,6 +31,7 @@ public class PlayerStats : MonoBehaviour
     #region Method: Unity
     private void OnEnable()
     {
+        // Reset Events
         OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
         OnStaminaChange = new Dictionary<GameObject, Action<float>>();
     }
@@ -61,8 +62,8 @@ public class PlayerStats : MonoBehaviour
     public static void SetStamina(int amount)
     {
         amount = Mathf.Clamp(amount, stamina.Min, stamina.Max);
-        stamina.Mod_Flat = stamina.Max;
-        staminaBarValue = stamina.Max;
+        stamina.Mod_Flat = amount;
+        staminaBarValue = amount;
     }
     public static bool UseStamina(int amount)
     {

@@ -26,10 +26,6 @@ public abstract class CLA_Main : MonoBehaviour
         if (CurrentAction is null)
             CurrentAction = defaultAction;
     }
-    protected virtual void OnDisable()
-    {
-        CurrentAction?.OnExit();
-    }
     protected virtual void Awake()
     {
         if (defaultAction is null)

@@ -7,6 +7,7 @@ public abstract class WeaponController<TItem> : WeaponController_Base
     where TItem : WeaponItem
 {
     protected TItem weaponItem;
+
     protected override void Awake()
     {
         base.Awake();
