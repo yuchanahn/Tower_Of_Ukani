@@ -9,30 +9,42 @@ public class TempMapChanger : MonoBehaviour
 
     private void Start()
     {
-        if (CurMap.num == 2)
+        switch (CurMap.num)
         {
-            GM.Player.transform.position = map2Pos.position;
-            map2GO.SetActive(true);
+            case 1:
+                GM.Player.transform.position = map1Pos.position;
+                map2GO.SetActive(false);
+                break;
+            case 2:
+                GM.Player.transform.position = map2Pos.position;
+                map2GO.SetActive(true);
+                break;
+            default:
+                GM.Player.transform.position = map1Pos.position;
+                map2GO.SetActive(false);
+                break;
         }
-        else
-            GM.Player.transform.position = map1Pos.position;
     }
     private void Update()
     {
-        if (PlayerStats.Heath.Value <= 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (PlayerStats.Health.Value <= 0)
+            ReloadScene();
+    }
+
+    private void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void ToMap1()
     {
         CurMap.num = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ReloadScene();
     }
-
     public void ToMap2()
     {
         CurMap.num = 2;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ReloadScene();
     }
 }
 

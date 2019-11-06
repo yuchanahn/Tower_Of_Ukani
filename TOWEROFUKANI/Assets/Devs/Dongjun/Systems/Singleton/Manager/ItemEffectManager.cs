@@ -32,13 +32,14 @@ public class ItemEffect
 
 public class ItemEffectManager : MonoBehaviour
 {
-    private static Dictionary<PlayerActions, List<ItemEffect>> onAction = null;
+    private static Dictionary<PlayerActions, List<ItemEffect>> onAction;
 
     private void Awake()
     {
         if (onAction != null)
             return;
 
+        // Reset Dictionary
         onAction = new Dictionary<PlayerActions, List<ItemEffect>>();
 
         // Init onAction Dictionary
@@ -53,7 +54,6 @@ public class ItemEffectManager : MonoBehaviour
             onAction[action][i].action?.Invoke();
         }
     }
-
     public static void AddEffect(PlayerActions action, ItemEffect itemEffect)
     {
         // 같은 아이템이 이미 있을 경우
