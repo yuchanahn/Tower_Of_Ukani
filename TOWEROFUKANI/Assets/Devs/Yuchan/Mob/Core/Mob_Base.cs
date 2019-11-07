@@ -101,16 +101,21 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
      m_bAttacking ? 0 :
      CanAttack ? 0 :
      IsWallInForword ? 0 :
-     IsCliff ? 0 :
+     IsKeepFollowing ? m_MoveData.Speed * m_MoveData.Dir :
+     IsFollowMax ? 0 :
      CanFollow ?  m_MoveData.Speed * m_MoveData.Dir :
+     IsCliff ? 0 :
      m_bHurting || !m_groundDetectionData.isGrounded ? 0 :
      //: !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0
-
      m_MoveData.Speed * m_MoveData.Dir;
 
     float VelY => m_rb.velocity.y;
     protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
     protected int Dir { set { if(m_SEObj.SEChangeDirAble) m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
+
+    public int DirForPlayer => (GM.PlayerPos.x - transform.position.x) > 0 ? 1 : -1;
+    public bool IsFollowMax { get; set; } = false;
+    public bool IsKeepFollowing { get; set; } = false;
 
     public bool IsCliff => !CliffDetect_Logic.CanFall2(
         m_MoveData.FallHeight,
@@ -202,8 +207,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         if (CanFollow && Follow())  OnFollowing.Invoke();
 
         m_CurAniST = 
-        m_bHurting || m_bAttacking ? m_CurAniST : 
-        m_groundDetectionData.isGrounded ? Dir != 0 ? eMobAniST.Walk : 
+        m_bHurting || m_bAttacking ? m_CurAniST :
+        m_groundDetectionData.isGrounded ? Dir != 0 ? 
+        VelX == 0 ?                  eMobAniST.Idle : eMobAniST.Walk : 
                                                       eMobAniST.Idle : 
         VelY > 0 ? eMobAniST.AirborneUp : 
                    eMobAniST.AirborneDown;
@@ -269,39 +275,38 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
 
     // TODO : 
 
-    public int FollowJump(Vector2 nom)
+    public void FollowJump()
     {
-        JumpVel = nom;
-
-        //m_bJumpStart = true;
         m_bFollowJump = true;
-        //var jVelY = Mathf.Sqrt(2 * JumpVel.y * m_gravityData.acceleration);
-
-        //Debug.Log(VelX);
-
-        m_jumpData.isJumping = true;
-        m_jumpData.curCount++;
-        m_jumpData.apexY = JumpVel.y;
-        if (JumpVel.y > 0 && JumpVel.y < 10.4f) JumpVel = new Vector2(JumpVel.x, 10.4f);
-        m_rb.velocity = JumpVel;
-        //m_jumpData.height = JumpVel.y;
-
-        return nom.x < 0 ? -1 : 1;
+        m_bJumpStart = true;
     }
 
 
     public bool Follow()
     {
+        IsFollowMax = false;
+        IsKeepFollowing = false;
         if (m_bFollowJump) return false;
+
 
         //var pathFind = PathFinder.Inst.FindPath(transform.position, transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
         //if (!pathFind.bFollow) return false;
         //Dir = pathFind.bJump ? FollowJump(pathFind.nomal) : pathFind.nomal.x < 0 ? -1 : 1;
 
+        //if (Mathf.Abs(GM.PlayerPos.y - transform.position.y) >= m_groundDetectionData.Size.y) return false;
+        //if (transform.position.RayHit(GM.PlayerPos, m_followData.CantMoveGround)) return false;
 
-        if (Mathf.Abs(GM.PlayerPos.y - transform.position.y) >= 1f) return false;
-        if (transform.position.RayHit(GM.PlayerPos, m_followData.CantMoveGround)) return false;
-        Dir = (GM.PlayerPos.x - transform.position.x) > 0 ? 1 : -1;
+        if ((Mathf.Abs(GM.PlayerPos.y - transform.position.y) >= m_groundDetectionData.Size.y)
+            && (transform.position.y > GM.PlayerPos.y)
+            && (IsCliff))
+        {
+            IsKeepFollowing = true;
+            return true;
+        }
+        Dir = DirForPlayer;
+        if (IsWallInForword) { FollowJump(); }
+
+        IsFollowMax = Mathf.Abs(GM.PlayerPos.x - transform.position.x) <= 0.1f;
 
         return true;
     }   

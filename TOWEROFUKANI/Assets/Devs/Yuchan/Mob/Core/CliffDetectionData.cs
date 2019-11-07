@@ -41,10 +41,11 @@ public class CliffDetect_Logic
     {
         var sx = Pos - new Vector2(size.x / 2, 0);
         sx.y += size.y / 2;
-        for (float i = 0.005f; sx.x < (Pos + new Vector2(size.x / 2, 0)).x; sx.x += i)
+        size.y *= 0.99f;
+        for (float i = 0.005f; sx.x < (Pos + new Vector2(size.x / 2, 0)).x + (Dir * Speed * Time.fixedDeltaTime); sx.x += i)
         {
-            Debug.DrawRay(sx, (Vector2.down * size.y), Color.green);
+            Debug.DrawRay(sx, (Vector2.down * size.y), Color.red);
         }
-        return Physics2D.BoxCastAll(Pos, size, 0, Vector2.right * Dir, (Dir * Speed * Time.fixedDeltaTime), wallLayer).Length > 0;
+        return !(Physics2D.BoxCastAll(Pos, size, 0, Vector2.right * Dir, (Speed * Time.fixedDeltaTime), wallLayer).Length > 0);
     }
 }
