@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public enum eMobAniST
@@ -59,6 +60,11 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     [SerializeField] GravityData m_gravityData;
     [SerializeField] GroundDetectionData m_groundDetectionData;
 
+
+    [Header("Event")]
+    public UnityEvent OnFollowing;
+    public UnityEvent EndFollowing;
+
     #endregion
 
     #region Var: Component
@@ -94,18 +100,37 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public virtual float VelX =>
      m_bAttacking ? 0 :
      CanAttack ? 0 :
+     IsWallInForword ? 0 :
+     IsCliff ? 0 :
      CanFollow ?  m_MoveData.Speed * m_MoveData.Dir :
-     m_bHurting || !m_groundDetectionData.isGrounded ? 0
-    : !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0
-    : m_MoveData.Speed * m_MoveData.Dir;
+     m_bHurting || !m_groundDetectionData.isGrounded ? 0 :
+     //: !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0
+
+     m_MoveData.Speed * m_MoveData.Dir;
 
     float VelY => m_rb.velocity.y;
     protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
     protected int Dir { set { if(m_SEObj.SEChangeDirAble) m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
 
+    public bool IsCliff => !CliffDetect_Logic.CanFall2(
+        m_MoveData.FallHeight,
+        transform.position,
+        Dir,
+        m_MoveData.Speed,
+        m_groundDetectionData.Size,
+        m_groundDetectionData.GroundLayers);
+
+    public bool IsWallInForword => !CliffDetect_Logic.CanGo(
+        transform.position,
+        Dir,
+        m_MoveData.Speed,
+        m_groundDetectionData.Size,
+        m_groundDetectionData.GroundLayers);
+
     public virtual bool CanFollow =>
          !m_SEObj.SEFallowAble ? false :
-        !Hurting() ? ((GM.PlayerPos - transform.position).magnitude < m_followData.dist) : false;
+         Hurting() ? false :
+         ((GM.PlayerPos - transform.position).magnitude < m_followData.dist);
 
     public virtual bool CanAttack =>
         !m_SEObj.SEAttackAble ? false : 
@@ -166,12 +191,16 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         // 상태이상이 애니를 쓴다면...?
         // 상태 바꾸고 바로 끝내.
+        EndFollowing.Invoke();
         if (m_SEObj.SEAni != eMobAniST.Last)
         {
             m_CurAniST = m_SEObj.SEAni;
             return;
         }
         if (m_bHurting) return;
+
+        if (CanFollow && Follow())  OnFollowing.Invoke();
+
         m_CurAniST = 
         m_bHurting || m_bAttacking ? m_CurAniST : 
         m_groundDetectionData.isGrounded ? Dir != 0 ? eMobAniST.Walk : 
@@ -260,13 +289,19 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         return nom.x < 0 ? -1 : 1;
     }
 
+
     public bool Follow()
     {
         if (m_bFollowJump) return false;
-        var pathFind = PathFinder.Inst.FindPath(transform.position, transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
-        if (!pathFind.bFollow) return false;
-        Dir = pathFind.bJump ? FollowJump(pathFind.nomal) : pathFind.nomal.x < 0 ? -1 : 1;
-        
+
+        //var pathFind = PathFinder.Inst.FindPath(transform.position, transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
+        //if (!pathFind.bFollow) return false;
+        //Dir = pathFind.bJump ? FollowJump(pathFind.nomal) : pathFind.nomal.x < 0 ? -1 : 1;
+
+
+        if (Mathf.Abs(GM.PlayerPos.y - transform.position.y) >= 1f) return false;
+        if (transform.position.RayHit(GM.PlayerPos, m_followData.CantMoveGround)) return false;
+        Dir = (GM.PlayerPos.x - transform.position.x) > 0 ? 1 : -1;
 
         return true;
     }   

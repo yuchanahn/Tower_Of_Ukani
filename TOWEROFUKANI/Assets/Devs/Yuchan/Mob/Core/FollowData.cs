@@ -63,10 +63,13 @@ public class Follow_Logic
 
         // 내가 플레이어 보다 위에있다면......
         // 절벽이면 걍감.....
-
-
     }
 
+
+    public static bool CanKeepFollow(Vector2 origin, Vector2 target, LayerMask wallLayer)
+    {
+        return origin.RayHit(target, wallLayer);
+    }
 
     public static eMvAct Follow(bool bNoWallForward, bool bCheckAble, float posY)
     {
