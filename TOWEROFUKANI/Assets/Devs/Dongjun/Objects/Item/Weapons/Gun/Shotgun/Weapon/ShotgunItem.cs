@@ -3,10 +3,8 @@ using UnityEngine;
 
 public class ShotgunItem : GunItem
 {
-    protected override void Awake()
+    public override void InitStats()
     {
-        base.Awake();
-
         // Timer Data
         shootTimer.StartAsEnded = true;
         shootTimer.EndTime = new FloatStat(0.1f, min: 0.01f);
@@ -14,9 +12,12 @@ public class ShotgunItem : GunItem
         swapMagazineTimer.EndTime = new FloatStat(1f, min: 0.01f);
 
         // Bullet Data
-        bulletData.damage = new IntStat(1, min: 0);
-        bulletData.moveSpeed = new FloatStat(45f, min: 0f);
-        bulletData.maxTravelDist = new FloatStat(7f, min: 0f);
+        bulletData = new WeaponProjectileData()
+        {
+            attackData = new AttackData(1),
+            moveSpeed = new FloatStat(45f, min: 0f),
+            maxTravelDist = new FloatStat(7f, min: 0f),
+        };
 
         // Ammo Data
         magazineSize = new IntStat(2, min: 0);

@@ -1,43 +1,49 @@
 ﻿using UnityEngine;
 
-public class WoodenShortBow : BowController<WoodenShotBowItem>
+public class WoodenShortBow : BowController<WoodenShortBowItem>
 {
     #region Var: CLA_Action
-    private WoodenShortBow_Main_Action main_AC;
-    private Bow_Draw_Action draw_AC;
+    private WoodenShortBow_Main_Action action_Main;
+    private Bow_Draw_Action action_Draw;
+    private Bow_Shoot_Action action_Shoot;
     #endregion
 
     #region Method: Init
     protected override void Init()
     {
-        main_AC = GetComponent<WoodenShortBow_Main_Action>();
-        draw_AC = GetComponent<Bow_Draw_Action>();
+        AddLogic(When.OnDisable, CL_OnDisable);
 
-        ConditionLogics.Add(main_AC, CL_Main);
-        ConditionLogics.Add(draw_AC, CL_Draw);
+        AddLogic(ref action_Main, CL_Main);
+        AddLogic(ref action_Draw, CL_Draw);
+        AddLogic(ref action_Shoot, CL_Shoot);
     }
     #endregion
 
     #region Method: Condition Logic
+    private CLA_Action_Base CL_OnDisable()
+    {
+        return action_Main;
+    }
     private CLA_Action_Base CL_Main()
     {
-        if (!weaponItem.IsSelected)
-            return DefaultAction;
+        if (Input.GetKey(PlayerWeaponKeys.MainAbility))
+            return action_Draw;
 
-        if (weaponItem.shootTimer.IsEnded && Input.GetKey(PlayerWeaponKeys.MainAbility))
-            return draw_AC;
-
-        return main_AC;
+        return null;
     }
     private CLA_Action_Base CL_Draw()
     {
-        if (!weaponItem.IsSelected)
-            return DefaultAction;
+        if (!action_Draw.IsDrawing)
+            return action_Shoot;
 
-        if (!draw_AC.IsDrawing)
-            return main_AC;
+        return null;
+    }
+    private CLA_Action_Base CL_Shoot()
+    {
+        if (weaponItem.shootTimer.IsEnded)
+            return action_Main;
 
-        return draw_AC;
+        return null;
     }
     #endregion
 }

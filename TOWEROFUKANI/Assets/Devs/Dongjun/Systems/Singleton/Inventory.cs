@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,8 +23,10 @@ public class Inventory : SingletonBase<Inventory>
     {
         base.Awake();
 
+        ItemSlot.Clear();
         WeaponHotbar.Clear();
         ActiveItemHotbar.Clear();
+        PassiveItemSlot.Clear();
 
         InitUI_WeaopnHotbar();
     }
@@ -103,13 +106,27 @@ public class Inventory : SingletonBase<Inventory>
 
             for (int i = 0; i < Items.Length; i++)
             {
-                if (Items[i] is null)
+                if (Items[i] != null)
+                    continue;
+
+                empySlotCount--;
+                Items[i] = item;
+                Items[i].OnAdd();
+
+                switch (item)
                 {
-                    Items[i] = item;
-                    item.OnAdd();
-                    empySlotCount--;
-                    return true;
+                    case WeaponItem weapon:
+                        PassiveItemSlot.ApplyBonusStats();
+                        WeaponHotbar.Add(weapon);
+                        break;
+                    //case ActiveItem activeItem:
+                    //    ActiveItemHotbar.Add(activeItem);
+                    //break;
+                    default:
+                        break;
                 }
+
+                return true;
             }
 
             return false;
@@ -120,18 +137,36 @@ public class Inventory : SingletonBase<Inventory>
             {
                 if (Items[i] == item)
                 {
+                    empySlotCount++;
                     Items[i].OnRemove();
                     Items[i] = null;
-                    empySlotCount++;
+
+
                     return true;
                 }
             }
 
             return false;
         }
+        public static void Clear()
+        {
+            Items = new Item[15];
+            empySlotCount = Items.Length;
+        }
         public static bool IsFull()
         {
             return empySlotCount == 0;
+        }
+
+        public static void ResetAllWeaponStats()
+        {
+            for (int i = 0; i < Items.Length; i++)
+            {
+                if (Items[i] is null) continue;
+
+                if (Items[i] is WeaponItem)
+                    (Items[i] as WeaponItem).InitStats();
+            }
         }
     }
     #endregion
@@ -146,13 +181,14 @@ public class Inventory : SingletonBase<Inventory>
 
         private static void AddWeapon(int index, WeaponItem weapon)
         {
+            empySlotCount--;
             Weapons[index] = weapon;
             weapon.OnAdd();
-            empySlotCount--;
 
             // Update UI
             Inst.UpdateUI_WeaponHotbar();
         }
+
         public static bool Add(WeaponItem weapon)
         {
             if (IsFull()) return false;
@@ -165,11 +201,11 @@ public class Inventory : SingletonBase<Inventory>
 
             for (int i = 0; i < Weapons.Length; i++)
             {
-                if (Weapons[i] is null)
-                {
-                    AddWeapon(i, weapon);
-                    return true;
-                }
+                if (Weapons[i] != null)
+                    continue;
+
+                AddWeapon(i, weapon);
+                return true;
             }
 
             return false;
@@ -179,9 +215,9 @@ public class Inventory : SingletonBase<Inventory>
             if (Weapons[index_Cur] is null)
                 return;
 
-            Weapons[index_Cur].OnRemove();
-            Weapons[index_Cur] = null;
             empySlotCount++;
+            ItemSlot.Remove(Weapons[index_Cur]);
+            Weapons[index_Cur] = null;
 
             Inst.UpdateUI_WeaponHotbar();
         }
@@ -217,18 +253,18 @@ public class Inventory : SingletonBase<Inventory>
             if (Items[index] != null)
                 return;
 
+            empySlotCount--;
             Items[index] = item;
             item.OnAdd();
-            empySlotCount--;
         }
         public static void Remove(int index)
         {
             if (Items[index] is null)
                 return;
 
+            empySlotCount++;
             Items[index].OnRemove();
             Items[index] = null;
-            empySlotCount++;
         }
         public static void Clear()
         {
@@ -245,18 +281,43 @@ public class Inventory : SingletonBase<Inventory>
     #region Class: Passive Item Slot
     public static class PassiveItemSlot
     {
-        public static HashSet<PassiveItem> Items { get; private set; } = new HashSet<PassiveItem>();
+        public static Dictionary<Type, PassiveItem> Items
+        { get; private set; } = new Dictionary<Type, PassiveItem>();
 
         public static bool Add(PassiveItem item)
         {
-            if (Items.Contains(item))
+            if (!Items.ContainsKey(item.GetType()))
             {
-                //item.Count++;
-                return false;
+                Items.Add(item.GetType(), item);
+                ApplyBonusStats();
+                return true;
             }
 
-            Items.Add(item);
-            return true;
+            item = Items[item.GetType()];
+            if (item.Cur_Count < item.Max_Count)
+            {
+                item.Cur_Count++;
+                ApplyBonusStats();
+                return true;
+            }
+
+            return false;
+        }
+        public static void Clear()
+        {
+            Items = new Dictionary<Type, PassiveItem>();
+        }
+
+        public static void ApplyBonusStats()
+        {
+            // Reset All Weapon Stats
+            ItemSlot.ResetAllWeaponStats();
+
+            // Apply Bonus Stats
+            foreach (KeyValuePair<Type, PassiveItem> item in Items)
+            {
+                item.Value.ApplyBonusStats();
+            }
         }
     }
     #endregion

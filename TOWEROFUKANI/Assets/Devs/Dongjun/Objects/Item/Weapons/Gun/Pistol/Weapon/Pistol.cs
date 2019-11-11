@@ -3,21 +3,17 @@
 public class Pistol : GunController<PistolItem>
 {
     #region Var: CLA_Action
-    private Pistol_Main_Action main_AC;
-    private Gun_Reload_Action reload_AC;
-    private Gun_SwapMagazine_Action swapMagazine_AC;
+    private Pistol_Main_Action action_Main;
+    private Gun_Reload_Action action_Reload;
+    private Gun_SwapMagazine_Action action_SwapMagazine;
     #endregion
 
     #region Method: Init
     protected override void Init()
     {
-        main_AC = GetComponent<Pistol_Main_Action>();
-        reload_AC = GetComponent<Gun_Reload_Action>();
-        swapMagazine_AC = GetComponent<Gun_SwapMagazine_Action>();
-
-        ConditionLogics.Add(main_AC, CL_Main);
-        ConditionLogics.Add(reload_AC, CL_Reload);
-        ConditionLogics.Add(swapMagazine_AC, CL_SwapMagazine);
+        AddLogic(ref action_Main, CL_Main);
+        AddLogic(ref action_Reload, CL_Reload);
+        AddLogic(ref action_SwapMagazine, CL_SwapMagazine);
     }
     #endregion
 
@@ -29,22 +25,22 @@ public class Pistol : GunController<PistolItem>
 
         if (weaponItem.loadedBullets <= 0)
         {
-            if (swapMagazine_AC.IsAnimEnded_SwapMagazine && !weaponItem.reloadTimer.IsEnded)
-                return reload_AC;
+            if (action_SwapMagazine.IsAnimEnded_SwapMagazine && !weaponItem.reloadTimer.IsEnded)
+                return action_Reload;
 
-            if (main_AC.IsAnimEnded_Shoot)
-                return swapMagazine_AC;
+            if (action_Main.IsAnimEnded_Shoot)
+                return action_SwapMagazine;
 
-            if (swapMagazine_AC.IsAnimStarted_SwapMagazine && !swapMagazine_AC.IsAnimEnded_SwapMagazine)
-                return swapMagazine_AC;
+            if (action_SwapMagazine.IsAnimStarted_SwapMagazine && !action_SwapMagazine.IsAnimEnded_SwapMagazine)
+                return action_SwapMagazine;
         }
         else if (weaponItem.loadedBullets < weaponItem.magazineSize.Value)
         {
             if (Input.GetKeyDown(PlayerWeaponKeys.Reload))
-                return swapMagazine_AC;
+                return action_SwapMagazine;
         }
 
-        return main_AC;
+        return null;
     }
     private CLA_Action_Base CL_Reload()
     {
@@ -52,9 +48,9 @@ public class Pistol : GunController<PistolItem>
             return DefaultAction;
 
         if (weaponItem.reloadTimer.IsEnded)
-            return main_AC;
+            return action_Main;
 
-        return reload_AC;
+        return null;
     }
     private CLA_Action_Base CL_SwapMagazine()
     {
@@ -62,9 +58,9 @@ public class Pistol : GunController<PistolItem>
             return DefaultAction;
 
         if (weaponItem.swapMagazineTimer.IsEnded)
-            return reload_AC;
+            return action_Reload;
 
-        return swapMagazine_AC;
+        return null;
     }
     #endregion
 }

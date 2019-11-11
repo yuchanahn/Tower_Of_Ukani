@@ -30,11 +30,11 @@ public abstract class GunSwapMagazine_Base<TItem> : GunAction_Base<TItem>
         IsAnimEnded_SwapMagazine = false;
 
         // Animation
-        animator.Play(weapon.Info.NameTrimed + "_SwapMagazine", 0, 0);
+        animator.Play(weapon.ANIM_SwapMagazine, 0, 0);
     }
     public override void OnLateEnter()
     {
-        Anim_Logic.SetAnimSpeed(animator, weapon.swapMagazineTimer.EndTime.Value, weapon.Info.NameTrimed + "_SwapMagazine");
+        animator.SetSpeed(weapon.swapMagazineTimer.EndTime.Value, weapon.ANIM_SwapMagazine);
     }
     public override void OnExit()
     {
@@ -53,8 +53,7 @@ public abstract class GunSwapMagazine_Base<TItem> : GunAction_Base<TItem>
         }
 
         // Animation
-        animator.speed = 1;
-        animator.Play(weapon.Info.NameTrimed + "_Idle");
+        animator.ResetSpeed();
     }
     public override void OnLateUpdate()
     {

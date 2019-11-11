@@ -8,31 +8,22 @@ public abstract class Item : MonoBehaviour
 
     #region Var: Properties
     public ItemInfo Info => info;
-    public DroppedItem DroppedItem { get; protected set; }
-    #endregion
 
-    #region Method: Unity
-    protected virtual void Awake()
-    {
-        info.Init();
-    }
+    public DroppedItem DroppedItem { get; private set; }
     #endregion
 
     #region Method: Item
-    public void Init(DroppedItem droppedItem)
+
+    public void InitRef_DroppedItem(DroppedItem droppedItem)
     {
         DroppedItem = droppedItem;
     }
+    public virtual void Init()
+    {
+        info.Init();
+    }
+
     public abstract void OnAdd();
     public abstract void OnRemove();
     #endregion
-}
-
-public abstract class PassiveItem : Item
-{
-
-}
-public abstract class ActiveItem : Item
-{
-
 }

@@ -7,11 +7,11 @@ public struct GravityData
     public float acceleration;
     public float terminalVelocity;// Zero => No Terminal Velocity
 
-    public GravityData(bool useGravity, float acceleration, float terminalVelocity)
+    public GravityData(bool useGravity = false, float accel = 0, float terVel = 0)
     {
         this.useGravity = useGravity;
-        this.acceleration = acceleration;
-        this.terminalVelocity = terminalVelocity;
+        acceleration = accel;
+        terminalVelocity = terVel;
     }
 }
 
@@ -30,8 +30,5 @@ public static class Gravity_Logic
             gravity = rb2D.velocity.y - (gravityData.acceleration * Time.fixedDeltaTime);
 
         rb2D.velocity = new Vector2(rb2D.velocity.x, gravity);
-
-
-
     }
 }

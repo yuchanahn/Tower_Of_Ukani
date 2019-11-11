@@ -1,30 +1,31 @@
 ﻿using UnityEngine;
 
-public abstract class BowDraw_Base<TItem> : BowAction_Base<TItem>
+public class BowDraw_Base<TItem> : BowAction_Base<TItem>
     where TItem : BowItem
 {
-    #region Var: Properties
-    public bool IsDrawing { get; private set; } = false;
+    #region Var: Propertis
+    public bool IsDrawing 
+    { get; protected set; } = false;
     #endregion
 
     #region Method: CLA_Action
     public override void OnEnter()
     {
+        // Reset Data
+        weapon.drawPower = 0;
+        IsDrawing = true;
+
         // Start Timer
         weapon.drawTimer.SetActive(true);
         weapon.drawTimer.Restart();
 
-        IsDrawing = true;
-        weapon.hasBeenDrawn = false;
-        weapon.drawPower = 0;
-
         // Animation
-        animator.Play(weapon.Info.NameTrimed + "_Pull", 0, 0);
+        animator.Play(weapon.ANIM_Draw, 0, 0);
     }
     public override void OnLateEnter()
     {
-        // Set Animation Speed
-        Anim_Logic.SetAnimSpeed(animator, weapon.drawTimer.EndTime.Value, weapon.Info.NameTrimed + "_Pull");
+        // Animation Speed
+        animator.SetSpeed(weapon.drawTimer.EndTime.Value, weapon.ANIM_Draw);
     }
     public override void OnExit()
     {
@@ -32,21 +33,18 @@ public abstract class BowDraw_Base<TItem> : BowAction_Base<TItem>
         weapon.drawTimer.SetActive(false);
         weapon.drawTimer.ToZero();
 
-        IsDrawing = false;
-
         // Animation
-        animator.speed = 1;
-        animator.Play(weapon.Info.NameTrimed + "_Idle");
+        animator.ResetSpeed();
     }
     public override void OnUpdate()
     {
         if (!weapon.IsSelected)
             return;
 
+        // Shoot
         if (Input.GetKeyUp(PlayerWeaponKeys.MainAbility))
         {
             IsDrawing = false;
-            weapon.hasBeenDrawn = true;
             weapon.drawPower = weapon.drawTimer.CurTime / weapon.drawTimer.EndTime.Value;
         }
     }
@@ -55,6 +53,7 @@ public abstract class BowDraw_Base<TItem> : BowAction_Base<TItem>
         if (!weapon.IsSelected)
             return;
 
+        // Look At Mouse
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
     }
     #endregion

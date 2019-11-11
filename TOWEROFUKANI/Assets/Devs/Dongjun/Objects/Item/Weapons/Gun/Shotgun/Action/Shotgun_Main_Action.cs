@@ -40,13 +40,15 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
             return;
 
         // Shoot
-        if (weapon.shootTimer.IsEnded && Input.GetKeyDown(PlayerWeaponKeys.MainAbility))
+        if (weapon.shootTimer.IsEnded)
         {
-            weapon.shootTimer.Restart();
+            animator.Play(weapon.ANIM_Idle);
 
-            Shoot();
-            ShootEffects();
-            AnimPlay_Shoot();
+            if (Input.GetKeyDown(PlayerWeaponKeys.MainAbility))
+            {
+                weapon.shootTimer.Restart();
+                Shoot();
+            }
         }
     }
     public override void OnLateUpdate()
@@ -54,13 +56,29 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
         if (!weapon.IsSelected)
             return;
 
+        // Look At Mouse
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
-        Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime.Value, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
+
+        // Animation Speed
+        animator.SetSpeed(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
     }
     #endregion
 
     #region Method: Shoot
     private void Shoot()
+    {
+        SpawnBullet();
+        ShootEffects();
+
+        // Animtaion
+        IsAnimEnded_Shoot = false;
+        animator.Play(weapon.ANIM_Shoot, 0, 0);
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.WeaponMain);
+        ItemEffectManager.Trigger(PlayerActions.GunShoot);
+    }
+    private void SpawnBullet()
     {
         // Set Bullet Data
         bulletData = weapon.bulletData;
@@ -68,7 +86,6 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
         // Spawn Bullets
         Vector3 eRot = transform.eulerAngles;
         eRot.z -= ((pelletCount / 2) - (pelletCount % 2 == 0 ? 0.5f : 0)) * pelletAngle;
-
         for (int i = 0; i < pelletCount; i++)
         {
             Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(eRot));
@@ -79,10 +96,6 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
         // Consume Bullet
         weapon.loadedBullets -= 1;
         weapon.isBulletLoaded = false;
-
-        // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.WeaponMain);
-        ItemEffectManager.Trigger(PlayerActions.GunShoot);
     }
     private void ShootEffects()
     {
@@ -92,20 +105,13 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
         // Cam Shake Effect
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
     }
-
-    // Animation
-    private void AnimPlay_Shoot()
-    {
-        IsAnimEnded_Shoot = false;
-        animator.Play(string.Concat(weapon.Info.NameTrimed, "_Shoot"), 0, 0);
-    }
     #endregion
 
     #region Method: Anim Event
     private void OnAnimEnd_Shoot()
     {
         IsAnimEnded_Shoot = true;
-        animator.speed = 1;
+        animator.ResetSpeed();
     }
     #endregion
 }

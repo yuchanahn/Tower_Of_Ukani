@@ -17,12 +17,12 @@ public abstract class GunReload_Base<TItem> : GunAction_Base<TItem>
         weapon.reloadTimer.Restart();
 
         // Animation
-        animator.Play(weapon.Info.NameTrimed + "_Reload", 0, 0);
+        animator.Play(weapon.ANIM_Reload, 0, 0);
     }
     public override void OnLateEnter()
     {
         // Set Animation Speed
-        Anim_Logic.SetAnimSpeed(animator, weapon.reloadTimer.EndTime.Value, weapon.Info.NameTrimed + "_Reload");
+        animator.SetSpeed(weapon.reloadTimer.EndTime.Value, weapon.ANIM_Reload);
     }
     public override void OnExit()
     {
@@ -38,8 +38,7 @@ public abstract class GunReload_Base<TItem> : GunAction_Base<TItem>
         }
 
         // Animation
-        animator.speed = 1;
-        animator.Play(weapon.Info.NameTrimed + "_Idle");
+        animator.ResetSpeed();
     }
     public override void OnLateUpdate()
     {

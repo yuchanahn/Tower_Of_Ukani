@@ -10,20 +10,19 @@ public class DroppedWeapon : DroppedItem
     protected override void Awake()
     {
         base.Awake();
-        spriteRenderer.sprite = item.Info.Icon;
+        spriteRenderer.sprite = Item.Info.Icon;
+
+        // Spawn Weapon Item
+        weaponItem = Instantiate(Item.gameObject).GetComponent<WeaponItem>();
+        weaponItem.InitRef_DroppedItem(this);
+        weaponItem.Init();
     }
     #endregion
 
     #region Method: Dropped Item
     public override void OnPickUp()
     {
-        if (weaponItem is null)
-        {
-            weaponItem = Instantiate(item.gameObject, GM.PlayerObj.transform).GetComponent<WeaponItem>();
-            weaponItem.Init(this);
-        }
-
-        if (Inventory.WeaponHotbar.Add(weaponItem))
+        if (Inventory.ItemSlot.Add(weaponItem))
         {
             gameObject.SetActive(false);
 

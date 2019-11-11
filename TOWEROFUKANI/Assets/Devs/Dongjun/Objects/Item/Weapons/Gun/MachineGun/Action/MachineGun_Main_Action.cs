@@ -48,13 +48,15 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
             return;
 
         // Shoot
-        if (weapon.shootTimer.IsEnded && Input.GetKey(PlayerWeaponKeys.MainAbility))
+        if (weapon.shootTimer.IsEnded)
         {
-            weapon.shootTimer.Restart();
+            animator.Play(weapon.ANIM_Idle);
 
-            Shoot();
-            ShootEffects();
-            AnimPlay_Shoot();
+            if (Input.GetKey(PlayerWeaponKeys.MainAbility))
+            {
+                weapon.shootTimer.Restart();
+                Shoot();
+            }
         }
     }
     public override void OnLateUpdate()
@@ -62,13 +64,29 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
         if (!weapon.IsSelected)
             return;
 
+        // Look At Mouse
         LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
-        Anim_Logic.SetAnimSpeed(animator, weapon.shootTimer.EndTime.Value, maxShootAnimTime, string.Concat(weapon.Info.NameTrimed, "_Shoot"));
+
+        // Animation Speed
+        animator.SetSpeed(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
     }
     #endregion
 
     #region Method: Shoot
     private void Shoot()
+    {
+        SpawnBullet();
+        ShootEffects();
+
+        // Animation
+        IsAnimEnded_Shoot = false;
+        animator.Play(weapon.ANIM_Shoot, 0, 0);
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.WeaponMain);
+        ItemEffectManager.Trigger(PlayerActions.GunShoot);
+    }
+    private void SpawnBullet()
     {
         // Set Bullet Data
         bulletData = weapon.bulletData;
@@ -81,10 +99,6 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
 
         // Consume Bullet
         weapon.loadedBullets -= 1;
-
-        // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.WeaponMain);
-        ItemEffectManager.Trigger(PlayerActions.GunShoot);
     }
     private void ShootEffects()
     {
@@ -105,20 +119,13 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
         weapon.ammoBelt.localPosition =
             new Vector2(0, Mathf.Lerp(0, weapon.AmmoBeltMaxY, 1 - ((float)weapon.loadedBullets / weapon.magazineSize.Value)));
     }
-
-    // Animation
-    private void AnimPlay_Shoot()
-    {
-        IsAnimEnded_Shoot = false;
-        animator.Play(string.Concat(weapon.Info.NameTrimed, "_Shoot"), 0, 0);
-    }
     #endregion
 
     #region Method: Anim Event
     private void OnAnimEnd_Shoot()
     {
         IsAnimEnded_Shoot = true;
-        animator.speed = 1;
+        animator.ResetSpeed();
     }
     #endregion
 }

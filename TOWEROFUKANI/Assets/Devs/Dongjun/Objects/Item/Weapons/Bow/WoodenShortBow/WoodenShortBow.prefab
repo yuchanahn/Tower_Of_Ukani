@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2778987209543410481}
   - component: {fileID: 4888941054173731068}
   - component: {fileID: 2778987209543410482}
-  - component: {fileID: 2778987209543410483}
+  - component: {fileID: 4819808717581806958}
   - component: {fileID: 2778987209543410480}
+  - component: {fileID: 8137621359639749979}
   m_Layer: 0
   m_Name: WoodenShortBow
   m_TagString: Untagged
@@ -71,10 +72,8 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: c6dcd0c1c74b8ae478f5c8587150b90e, type: 3}
     name: Wooden Short Bow
     desc: This is a Wooden Short Bow
-    tag_Type: 01000000
+    tag_DamageType: 01000000
     tag_Range: 01000000
-  droppedItem: {fileID: 8061879157058671612, guid: 47648cd422798324fa305603f40a37cd,
-    type: 3}
   spriteRoot: {fileID: 2778987210056156138}
   pivotPointY: 0
   weaponTags: 01000000
@@ -82,48 +81,11 @@ MonoBehaviour:
   shootTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
   drawTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
   arrowData:
-    damage:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-    moveSpeed:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-    gravity:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
     curTravelDist: 0
-    maxTravelDist:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-  hasBeenDrawn: 0
   drawPower: 0
 --- !u!114 &2778987209543410482
 MonoBehaviour:
@@ -137,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a47578a4bdfe8409a19b91b2f026d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultAction: {fileID: 2778987209543410483}
---- !u!114 &2778987209543410483
+  defaultAction: {fileID: 4819808717581806958}
+--- !u!114 &4819808717581806958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,10 +109,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 2778987209543410487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40c7a1cd081154b4daf2b3262957b71b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b7b3aa5ecec1594da52a52429cbbb10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
+  CanExecute_OnLateEnter: 1
+--- !u!114 &2778987209543410480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2778987209543410487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de60508e6782a34698a5e5a5f92414d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanExecute_OnLateEnter: 1
+--- !u!114 &8137621359639749979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2778987209543410487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b8d06f805bacc46b8a98867764815d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CanExecute_OnLateEnter: 1
   shootPoint: {fileID: 2778987210279264361}
   arrowPrefab: {fileID: -6090198353138406777, guid: 07fe65b781e65e04d978b2432feee51c,
     type: 3}
@@ -164,19 +152,6 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
---- !u!114 &2778987209543410480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778987209543410487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7de60508e6782a34698a5e5a5f92414d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
 --- !u!1 &2778987210056156138
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2778987210056156133
 Transform:
   m_ObjectHideFlags: 0

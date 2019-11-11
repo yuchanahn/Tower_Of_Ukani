@@ -3,7 +3,7 @@
 public abstract class DroppedItem : MonoBehaviour
 {
     #region Var: Inspector
-    [SerializeField] protected Item item;
+    [SerializeField] private Item item;
     #endregion
 
     #region Var: Component
@@ -22,6 +22,11 @@ public abstract class DroppedItem : MonoBehaviour
     #endregion
 
     #region Method: Dropped Item
+    public void InitRef_Item(Item item)
+    {
+        this.item = item;
+    }
+
     public abstract void OnPickUp();
     public virtual void Activate()
     {

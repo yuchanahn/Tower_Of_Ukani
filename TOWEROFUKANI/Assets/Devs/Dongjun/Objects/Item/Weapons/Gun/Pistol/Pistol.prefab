@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2609116014577026513
 Transform:
   m_ObjectHideFlags: 0
@@ -154,72 +154,22 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 787a57ef333f52b449ce2e66bb892119, type: 3}
     name: Pistol
     desc: This is a Pistol
-    tag_Type: 01000000
+    tag_DamageType: 01000000
     tag_Range: 01000000
-  droppedItem: {fileID: 8061879157058671612, guid: bec6504a1ddd24d4290af7cdcdf00006,
-    type: 3}
   spriteRoot: {fileID: 2609116014577026526}
   pivotPointY: 0.1
   weaponTags: 00000000
   shootTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
   reloadTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
   swapMagazineTimer:
     StartAsEnded: 0
     CurTime: 0
-    EndTime:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
   bulletData:
-    damage:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-    moveSpeed:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-    gravity:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
     curTravelDist: 0
-    maxTravelDist:
-      Min: 0
-      Max: 0
-      Base: 0
-      percentBonus: 0
-      flatBonus: 0
-  magazineSize:
-    Min: 0
-    Max: 0
-    Base: 0
-    percentBonus: 0
-    flatBonus: 0
   loadedBullets: 0
   isBulletLoaded: 1
 --- !u!114 &6078878233683138882
@@ -247,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2da784a7e6f9946b4150546268ac06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
+  CanExecute_OnLateEnter: 1
   shootPoint: {fileID: 2609116015003256820}
   bulletPrefab: {fileID: 3884733660367707162, guid: 669013e116ca93843a65a5f56b89838a,
     type: 3}
@@ -275,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad004a6c9378b646b4672c9ab6708b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
+  CanExecute_OnLateEnter: 1
   reloadAll: 1
   reloadAmount: 0
 --- !u!114 &8938583646591096550
@@ -290,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d144761646991784a8096cdc914ecd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecuteOnStart: 1
+  CanExecute_OnLateEnter: 1
   reloadAll: 0
   reloadAmount: 0
   magazineDropPos: {fileID: 6979050557962841422}
