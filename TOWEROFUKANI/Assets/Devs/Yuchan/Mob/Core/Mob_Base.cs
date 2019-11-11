@@ -100,7 +100,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public virtual float VelX =>
      m_bAttacking ? 0 :
      CanAttack ? 0 :
-     IsWallInForword ? 0 :
+     IsWallInForword ? IsOneWayInForword ? 0 : m_MoveData.Speed * m_MoveData.Dir :
      IsKeepFollowing ? m_MoveData.Speed * m_MoveData.Dir :
      IsFollowMax ? 0 :
      CanFollow ?  m_MoveData.Speed * m_MoveData.Dir :
@@ -131,6 +131,13 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_MoveData.Speed,
         m_groundDetectionData.Size,
         m_groundDetectionData.GroundLayers);
+
+    public bool IsOneWayInForword => !CliffDetect_Logic.CanGo(
+    transform.position,
+    Dir,
+    m_MoveData.Speed,
+    m_groundDetectionData.Size,
+    m_followData.CantMoveGround);
 
     public virtual bool CanFollow =>
          !m_SEObj.SEFallowAble ? false :
@@ -304,7 +311,16 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
             return true;
         }
         Dir = DirForPlayer;
-        if (IsWallInForword) { FollowJump(); }
+        if ((transform.position.y - GM.PlayerPos.y) > m_groundDetectionData.Size.y)
+        {
+            if (Fall()) return true;
+        }
+
+        if (GM.PlayerPos.y - transform.position.y >= m_groundDetectionData.Size.y)
+        {
+            if(IsWallInForword) { FollowJump(); }
+        }
+        else if (m_groundDetectionData.isGrounded && IsOneWayInForword) { FollowJump(); }
 
         IsFollowMax = Mathf.Abs(GM.PlayerPos.x - transform.position.x) <= 0.1f;
 
