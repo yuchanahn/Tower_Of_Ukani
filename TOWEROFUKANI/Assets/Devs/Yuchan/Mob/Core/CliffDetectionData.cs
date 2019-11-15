@@ -46,6 +46,14 @@ public class CliffDetect_Logic
         {
             Debug.DrawRay(sx, (Vector2.down * size.y), Color.red);
         }
+
+        var obj = Physics2D.BoxCastAll(Pos, size, 0, Vector2.right * Dir, (Speed * Time.fixedDeltaTime), wallLayer);
+
+        foreach(var i in obj)
+        {
+            Debug.Log(i.collider.gameObject.name);
+        }
+
         return !(Physics2D.BoxCastAll(Pos, size, 0, Vector2.right * Dir, (Speed * Time.fixedDeltaTime), wallLayer).Length > 0);
     }
 }

@@ -315,13 +315,18 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         {
             if (Fall()) return true;
         }
-
-        if (GM.PlayerPos.y - transform.position.y >= m_groundDetectionData.Size.y)
+        if (m_groundDetectionData.isGrounded)
         {
-            if(IsWallInForword) { FollowJump(); }
+            if (GM.PlayerPos.y - transform.position.y >= m_groundDetectionData.Size.y)
+            {
+                // 일단 우드 플렛폼의 Y사이즈가 이상함;
+                // 그거떄매 땅에서 벽으로 감지하고 올라올라함;
+                // ....?
+                
+                if (IsWallInForword) { FollowJump(); }
+            }
+            else if (IsOneWayInForword) { FollowJump(); }
         }
-        else if (m_groundDetectionData.isGrounded && IsOneWayInForword) { FollowJump(); }
-
         IsFollowMax = Mathf.Abs(GM.PlayerPos.x - transform.position.x) <= 0.1f;
 
         return true;

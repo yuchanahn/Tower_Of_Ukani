@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Devs/Yuchan/Scene/Test.unity
+- path: Assets/Devs/Dongjun/Scene/TestScene_Dongjun.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
