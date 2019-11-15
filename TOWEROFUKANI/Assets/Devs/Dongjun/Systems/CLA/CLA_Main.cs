@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Dongjun.Helper;
 
-public sealed class Dummy_Action : CLA_Action_Base { }
-
 public abstract class CLA_Main : MonoBehaviour
 {
     #region Var: Inspector

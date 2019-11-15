@@ -30,7 +30,7 @@ public class WindCutter : PassiveItem
         switch (item)
         {
             case GunItem gun:
-                gun.shootTimer.EndTime.Mod_Flat -= bonusAttackSpeed;
+                gun.shootTimer.EndTime.ModFlat -= bonusAttackSpeed;
                 break;
             default:
                 break;

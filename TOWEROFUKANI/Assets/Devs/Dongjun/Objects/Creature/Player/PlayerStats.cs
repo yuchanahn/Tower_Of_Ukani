@@ -10,12 +10,14 @@ public class PlayerStats : MonoBehaviour
     private static IntStat health = new IntStat(100, min: 0, max: 100);
     private static IntStat stamina = new IntStat(0, min: 0, max: 3);
     private static FloatStat staminaRegen = new FloatStat(0.5f, min: 0, max: 1f);
-    private static float staminaBarValue;
+    private static float staminaUIBarValue;
     #endregion
 
     #region Var: Data for Item Effect
     public static int DamageReceived;
     public static int HealReceived;
+
+    public static int DamageDealt;
     #endregion
 
     #region Var: Event For UI
@@ -46,30 +48,30 @@ public class PlayerStats : MonoBehaviour
     #region Method: Change Stat
     private static void Regen_Stamina()
     {
-        if (staminaBarValue >= stamina.Max)
+        if (staminaUIBarValue >= stamina.Max)
         {
-            staminaBarValue = stamina.Max;
-            stamina.Mod_Flat = stamina.Max;
+            staminaUIBarValue = stamina.Max;
+            stamina.ModFlat = stamina.Max;
             return;
         }
 
-        staminaBarValue += staminaRegen.Value * Time.deltaTime;
-        stamina.Mod_Flat = (int)staminaBarValue;
+        staminaUIBarValue += staminaRegen.Value * Time.deltaTime;
+        stamina.ModFlat = (int)staminaUIBarValue;
         Invoke_OnStaminaChange();
     }
     public static void SetStamina(int amount)
     {
         amount = Mathf.Clamp(amount, stamina.Min, stamina.Max);
-        stamina.Mod_Flat = amount;
-        staminaBarValue = amount;
+        stamina.ModFlat = amount;
+        staminaUIBarValue = amount;
     }
     public static bool UseStamina(int amount)
     {
         if (stamina.Value < amount)
             return false;
 
-        staminaBarValue -= amount;
-        stamina.Mod_Flat -= amount;
+        staminaUIBarValue -= amount;
+        stamina.ModFlat -= amount;
         return true;
     }
 
@@ -83,8 +85,12 @@ public class PlayerStats : MonoBehaviour
         // Trriger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Damaged);
 
-        // Apply Damage
-        health.Mod_Flat -= DamageReceived;
+        health.ModFlat -= DamageReceived;
+
+        if (health.Value == 0)
+        {
+            //Death();
+        }
 
         Invoke_OnHealthChange();
 
@@ -102,9 +108,14 @@ public class PlayerStats : MonoBehaviour
         ItemEffectManager.Trigger(PlayerActions.Healed);
 
         // Apply Heal
-        health.Mod_Flat += HealReceived;
+        HealReceived = Mathf.Clamp(HealReceived, 0, health.Max - health.Value);
+        health.ModFlat += HealReceived;
 
         Invoke_OnHealthChange();
+    }
+    public static void Death()
+    {
+        health.ModFlat = 0;
     }
     #endregion
 
@@ -151,7 +162,7 @@ public class PlayerStats : MonoBehaviour
                 continue;
             }
 
-            OnStaminaChange[key].Invoke(staminaBarValue);
+            OnStaminaChange[key].Invoke(staminaUIBarValue);
         }
     }
     #endregion

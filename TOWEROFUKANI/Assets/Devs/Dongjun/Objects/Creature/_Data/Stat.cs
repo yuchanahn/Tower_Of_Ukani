@@ -4,130 +4,168 @@ using UnityEngine;
 [Serializable]
 public struct IntStat
 {
-    private int mod_flat;
-    private float mod_percent;
-    private bool needToUpdate;
+    private bool needToCalculate;
 
     private int @base;
+    private int min;
+    private int max;
+
+    private int modFlat;
+    private float modPercent;
+
     private int value;
 
-    public int Mod_Flat
-    {
-        get { return mod_flat; }
-        set
-        {
-            needToUpdate = true;
-            mod_flat = value;
-        }
-    }
-    public float Mod_Percent
-    {
-        get { return mod_percent; }
-        set
-        {
-            needToUpdate = true;
-            mod_percent = value;
-        }
-    }
-
-    public int Min 
-    { get; private set; }
-    public int Max 
-    { get; private set; }
     public int Base
     {
         get { return @base; }
-        set { @base = Mathf.Clamp(value, Min, Max); }
+        set { @base = Mathf.Clamp(value, min, max); }
     }
+    public int Min
+    {
+        get { return min; }
+        set
+        {
+            min = Math.Min(value, max);
+            @base = Math.Max(@base, min);
+            needToCalculate = true;
+        }
+    }
+    public int Max
+    {
+        get { return max; }
+        set
+        {
+            max = Math.Max(value, min);
+            @base = Math.Min(@base, max);
+            needToCalculate = true;
+        }
+    }
+
+    public int ModFlat
+    {
+        get { return modFlat; }
+        set
+        {
+            modFlat = value;
+            needToCalculate = true;
+        }
+    }
+    public float ModPercent
+    {
+        get { return modPercent; }
+        set
+        {
+            modPercent = value;
+            needToCalculate = true;
+        }
+    }
+
     public int Value
     {
         get
         {
-            if (needToUpdate)
+            if (needToCalculate)
             {
-                needToUpdate = false;
-                value = Mathf.Clamp((int)(Base * (1 + Mod_Percent * 0.01f) + 0.5f) + Mod_Flat, Min, Max);
+                value = Mathf.Clamp((int)(@base * (1 + (modPercent * 0.01f)) + 0.5f) + modFlat, min, max);
+                needToCalculate = false;
             }
             return value;
         }
     }
 
-    public IntStat(int @base, int? min = null, int? max = null)
+    public IntStat(int @base, int min = int.MinValue, int max = int.MaxValue, int modFlat = 0, int modPercent = 0)
     {
-        mod_flat = 0;
-        mod_percent = 0;
-        needToUpdate = false;
-
-        Min = min is null ? int.MinValue : min.Value;
-        Max = max is null ? int.MaxValue : max.Value;
+        this.needToCalculate = true;
         this.@base = @base;
-        value = @base;
+        this.min = min;
+        this.max = max;
+        this.modFlat = modFlat;
+        this.modPercent = modPercent;
+        this.value = 0;
     }
 }
 
 [Serializable]
 public struct FloatStat
 {
-    private float mod_flat;
-    private float mod_percent;
-    private bool needToUpdate;
+    private bool needToCalculate;
 
     private float @base;
+    private float min;
+    private float max;
+
+    private float modFlat;
+    private float modPercent;
+
     private float value;
 
-    public float Mod_Flat
-    {
-        get { return mod_flat; }
-        set
-        {
-            needToUpdate = true;
-            mod_flat = value;
-        }
-    }
-    public float Mod_Percent
-    {
-        get { return mod_percent; }
-        set
-        {
-            needToUpdate = true;
-            mod_percent = value;
-        }
-    }
-
-    public float Min
-    { get; private set; }
-    public float Max
-    { get; private set; }
     public float Base
     {
         get { return @base; }
-        set { @base = Mathf.Clamp(value, Min, Max); }
+        set { @base = Mathf.Clamp(value, min, max); }
     }
+    public float Min
+    {
+        get { return min; }
+        set
+        {
+            min = Math.Min(value, max);
+            @base = Math.Max(@base, min);
+            needToCalculate = true;
+        }
+    }
+    public float Max
+    {
+        get { return max; }
+        set
+        {
+            max = Math.Max(value, min);
+            @base = Math.Min(@base, max);
+            needToCalculate = true;
+        }
+    }
+
+    public float ModFlat
+    {
+        get { return modFlat; }
+        set
+        {
+            modFlat = value;
+            needToCalculate = true;
+        }
+    }
+    public float ModPercent
+    {
+        get { return modPercent; }
+        set
+        {
+            modPercent = value;
+            needToCalculate = true;
+        }
+    }
+
     public float Value
     {
         get
         {
-            if (needToUpdate)
+            if (needToCalculate)
             {
-                needToUpdate = false;
-                value = Mathf.Clamp((Base * (1 + Mod_Percent * 0.01f)) + Mod_Flat, Min, Max);
+                value = Mathf.Clamp((@base * (1 + modPercent * 0.01f)) + modFlat, min, max);
+                needToCalculate = false;
             }
             return value;
         }
     }
 
-    public FloatStat(float @base, float? min = null, float? max = null)
+    public FloatStat(float @base, float min = float.MinValue, float max = float.MaxValue, float modFlat = 0, float modPercent = 0)
     {
-        mod_flat = 0;
-        mod_percent = 0;
-        needToUpdate = true;
-
-        Min = min is null ? float.NegativeInfinity : min.Value;
-        Max = max is null ? float.PositiveInfinity : max.Value;
-        this.@base = 0;
-        value = 0;
-
-        Base = @base;
+        this.needToCalculate = true;
+        this.@base = @base;
+        this.min = min;
+        this.max = max;
+        this.modFlat = modFlat;
+        this.modPercent = modPercent;
+        this.value = 0;
     }
 }
 
