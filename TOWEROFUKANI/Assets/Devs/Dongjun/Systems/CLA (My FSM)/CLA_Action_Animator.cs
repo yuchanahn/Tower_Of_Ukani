@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class CLA_Animator : CLA_Action_Base
+public abstract class CLA_Action_Animator : CLA_Action_Base
 {
     protected Animator animator;
 

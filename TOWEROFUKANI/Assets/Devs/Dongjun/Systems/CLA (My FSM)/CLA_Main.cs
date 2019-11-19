@@ -14,13 +14,14 @@ public abstract class CLA_Main : MonoBehaviour
     {
         AnyAction,
         OnEnable,
-        OnDisable,
+        OnDisable
     }
-    private Dictionary<When, Func<CLA_Action_Base>> logics_Event
-        = new Dictionary<When, Func<CLA_Action_Base>>();
+    private Dictionary<When, Func<CLA_Action_Base>> logics_Event = new Dictionary<When, Func<CLA_Action_Base>>();
+    private Dictionary<CLA_Action_Base, Func<CLA_Action_Base>> logics_Action = new Dictionary<CLA_Action_Base, Func<CLA_Action_Base>>();
+    #endregion
 
-    private Dictionary<CLA_Action_Base, Func<CLA_Action_Base>> logics_Action
-        = new Dictionary<CLA_Action_Base, Func<CLA_Action_Base>>();
+    #region Var: Run Logic
+    private bool canExecute_OnLateEnter = true;
     #endregion
 
     #region Var: Properties
@@ -64,10 +65,10 @@ public abstract class CLA_Main : MonoBehaviour
     private void LateUpdate()
     {
         // Run Action Logic
-        if (CurrentAction.CanExecute_OnLateEnter)
+        if (canExecute_OnLateEnter)
         {
             CurrentAction?.OnLateEnter();
-            CurrentAction.CanExecute_OnLateEnter = false;
+            canExecute_OnLateEnter = false;
         }
         CurrentAction?.OnLateUpdate();
 
@@ -94,7 +95,8 @@ public abstract class CLA_Main : MonoBehaviour
         CurrentAction?.OnExit();
         CurrentAction = action;
         CurrentAction?.OnEnter();
-        CurrentAction.CanExecute_OnLateEnter = true;
+
+        canExecute_OnLateEnter = true;
     }
     protected virtual void RunConditionLogic()
     {
