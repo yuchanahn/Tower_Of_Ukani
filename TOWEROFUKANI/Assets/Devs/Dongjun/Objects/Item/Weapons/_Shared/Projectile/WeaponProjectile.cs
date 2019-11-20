@@ -70,6 +70,10 @@ public class WeaponProjectile : PoolingObj
                 if (mob != null)
                 {
                     mob.Hit(projectileData.attackData.Damage);
+
+                    PlayerStats.DamageDealt = projectileData.attackData.Damage;
+                    ItemEffectManager.Trigger(PlayerActions.Hit);
+
                     OnHit(hitPos);
                     return;
                 }
@@ -81,8 +85,10 @@ public class WeaponProjectile : PoolingObj
     }
     protected virtual void OnHit(Vector2 hitPos)
     {
+        // Sleep
         ObjPoolingManager.Sleep(this);
 
+        // Spawn Effect
         Transform hitParticle = particle_Hit.Spawn(hitPos, Quaternion.identity).transform;
         hitParticle.right = -transform.right;
         hitParticle.position -= transform.right * particle_HitOffset;
