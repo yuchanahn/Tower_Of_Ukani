@@ -451,7 +451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -12, y: 96}
+  m_AnchoredPosition: {x: -12, y: 102}
   m_SizeDelta: {x: 240, y: 36}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &79072553
@@ -1516,7 +1516,7 @@ RectTransform:
   - {fileID: 1339012783}
   - {fileID: 653407834}
   m_Father: {fileID: 501624087}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1910,8 +1910,6 @@ RectTransform:
   m_Children:
   - {fileID: 1620117809}
   - {fileID: 717443871}
-  - {fileID: 764677653}
-  - {fileID: 2058188053}
   - {fileID: 398173047}
   m_Father: {fileID: 1496745256}
   m_RootOrder: 3
@@ -3473,15 +3471,17 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 764677653}
+  - {fileID: 2058188053}
   m_Father: {fileID: 501624087}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 440, y: 90}
-  m_Pivot: {x: 0, y: 1}
+  m_SizeDelta: {x: 0, y: 98}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &717443872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3495,7 +3495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.6509804}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3852,12 +3852,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1867307453}
-  m_Father: {fileID: 501624087}
-  m_RootOrder: 2
+  m_Father: {fileID: 717443871}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -40}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -200, y: 50}
   m_SizeDelta: {x: 400, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &784393716
@@ -4861,7 +4861,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 320}
+  m_AnchoredPosition: {x: 20, y: 400}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &953153034
@@ -5420,7 +5420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -260, y: 112}
+  m_AnchoredPosition: {x: -260, y: 118}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1173635197
@@ -9452,12 +9452,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 501624087}
-  m_RootOrder: 3
+  m_Father: {fileID: 717443871}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -48}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -200, y: 42}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2058188054
@@ -9773,6 +9773,46 @@ PrefabInstance:
       propertyPath: go_WeaponSelected.Array.data[2]
       value: 
       objectReference: {fileID: 1849763413}
+    - target: {fileID: 4996738842699064662, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: img_WeaponSlots.Array.data[2]
+      value: 
+      objectReference: {fileID: 10711463}
+    - target: {fileID: 4996738842699064662, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: img_WeaponSlots.Array.data[1]
+      value: 
+      objectReference: {fileID: 884507398}
+    - target: {fileID: 4996738842699064662, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: img_WeaponSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 1686132609}
+    - target: {fileID: 4996738842699064662, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: go_WeaponSelected.Array.data[2]
+      value: 
+      objectReference: {fileID: 1849763413}
+    - target: {fileID: 4996738842699064662, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: go_WeaponSelected.Array.data[1]
+      value: 
+      objectReference: {fileID: 1530224587}
+    - target: {fileID: 4996738842699064662, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: go_WeaponSelected.Array.data[0]
+      value: 
+      objectReference: {fileID: 1607415429}
+    - target: {fileID: 4996738842699064662, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: txt_WeaponName
+      value: 
+      objectReference: {fileID: 884042319}
+    - target: {fileID: 4996738842699064662, guid: 4481dd2a3fe0dce40ad7628ca110315a,
+        type: 3}
+      propertyPath: txt_AmmoInfo
+      value: 
+      objectReference: {fileID: 1173635197}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4481dd2a3fe0dce40ad7628ca110315a, type: 3}
 --- !u!1001 &7639122611435246469

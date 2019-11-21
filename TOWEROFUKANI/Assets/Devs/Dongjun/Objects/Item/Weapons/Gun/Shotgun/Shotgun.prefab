@@ -104,6 +104,8 @@ MonoBehaviour:
     desc: This is a Shotgun
     tag_DamageType: 01000000
     tag_Range: 01000000
+  droppedItem: {fileID: 5391700499817539471, guid: 2eb6e46f835907c4988e393740605825,
+    type: 3}
   spriteRoot: {fileID: 1077788971484917873}
   pivotPointY: 0.162
   weaponTags: 00000000
@@ -145,7 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f81d87d7841c3a340aeae577e233be2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
   shootPoint: {fileID: 1077788971055575643}
   bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
@@ -175,7 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad004a6c9378b646b4672c9ab6708b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
   reloadAll: 0
   reloadAmount: 0
 --- !u!114 &2776416182083292487
@@ -190,7 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d144761646991784a8096cdc914ecd46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
   reloadAll: 1
   reloadAmount: 0
   magazineDropPos: {fileID: 0}

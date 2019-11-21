@@ -25,6 +25,7 @@ public abstract class WeaponController<TItem> : WeaponController_Base
         base.RunConditionLogic();
     }
 }
+
 public abstract class WeaponItem : Item 
 {
     public enum WeaponTag
@@ -42,32 +43,29 @@ public abstract class WeaponItem : Item
     #region Var: Properties
     public GameObject SpriteRoot => spriteRoot;
     public float PivotPointY => pivotPointY;
-    public HashSet<WeaponTag> WeaponTags
-    { get; private set; } = new HashSet<WeaponTag>();
+    public WeaponTag[] WeaponTags => weaponTags;
     public bool IsSelected
     { get; protected set; } = false;
     #endregion
 
-    #region Method: Item
-    public override void Init()
+    #region Method: Unity
+    protected override void Awake()
     {
-        base.Init();
-
-        // Init Tags
-        if (weaponTags != null)
-        {
-            for (int i = 0; i < weaponTags.Length; i++)
-                WeaponTags.Add(weaponTags[i]);
-        }
+        base.Awake();
 
         InitStats();
         Select(false);
     }
-    public abstract void InitStats();
+    #endregion
 
+    #region Method: Initialize
+    public abstract void InitStats();
+    #endregion
+
+    #region Method: Add/Remove
     public override void OnAdd()
     {
-        Select(Inventory.WeaponHotbar.GetSelected() == this);
+        Select(WeaponHotbar.CurSelected == this);
     }
     public override void OnRemove()
     {

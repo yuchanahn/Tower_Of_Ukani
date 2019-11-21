@@ -32,20 +32,12 @@ public sealed class ItemInfo
     public string Name => name;
     public string NameTrimed { get; private set; }
     public string Desc => desc;
-    public HashSet<ItemTag_DamageType> Tags_Type { get; private set; } = new HashSet<ItemTag_DamageType>();
-    public HashSet<ItemTag_Range> Tags_Range { get; private set; } = new HashSet<ItemTag_Range>();
+    public ItemTag_DamageType[] Tag_DamageType => tag_DamageType;
+    public ItemTag_Range[] Tag_Range => tag_Range;
     #endregion
 
     public void Init()
     {
         NameTrimed = Name.Replace(" ", string.Empty);
-
-        if (tag_DamageType != null)
-            for (int i = 0; i < tag_DamageType.Length; i++)
-                Tags_Type.Add(tag_DamageType[i]);
-
-        if (tag_Range != null)
-            for (int i = 0; i < tag_Range.Length; i++)
-                Tags_Range.Add(tag_Range[i]);
     }
 }

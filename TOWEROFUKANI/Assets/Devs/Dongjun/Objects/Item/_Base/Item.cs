@@ -12,15 +12,17 @@ public abstract class Item : MonoBehaviour
     public DroppedItem DroppedItem { get; private set; }
     #endregion
 
-    #region Method: Item
+    #region Method: Unity
+    protected virtual void Awake()
+    {
+        info.Init();
+    }
+    #endregion
 
+    #region Method: Item
     public void InitRef_DroppedItem(DroppedItem droppedItem)
     {
         DroppedItem = droppedItem;
-    }
-    public virtual void Init()
-    {
-        info.Init();
     }
 
     public abstract void OnAdd();

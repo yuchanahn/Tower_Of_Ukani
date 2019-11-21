@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Dongjun.Helper;
 
 public abstract class CLA_Main : MonoBehaviour
 {

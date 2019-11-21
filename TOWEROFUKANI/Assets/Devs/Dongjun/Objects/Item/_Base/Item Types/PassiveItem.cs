@@ -4,41 +4,49 @@ using UnityEngine;
 
 public abstract class PassiveItem : Item
 {
-    [SerializeField]
-    private WeaponItem.WeaponTag[] affectedWeapons;
+    public enum Gods
+    {
+        Ukani,
+        Bazik,
+        Ellai,
+        None
+    }
+
+    [SerializeField] private WeaponItem.WeaponTag[] affectedWeapons;
+    [SerializeField] private Gods god;
 
     public int Cur_Count
     { get; set; } = 0;
     public int Max_Count
     { get; protected set; } = 1;
-    public HashSet<WeaponItem.WeaponTag> AffectedWeapons
-    { get; private set; } = new HashSet<WeaponItem.WeaponTag>();
+    public WeaponItem.WeaponTag[] AffectedWeapons => affectedWeapons;
+    public Gods God => god;
 
-    public override void Init()
+    public override void OnRemove()
     {
-        base.Init();
-
-        if (affectedWeapons != null)
-        {
-            for (int i = 0; i < affectedWeapons.Length; i++)
-                AffectedWeapons.Add(affectedWeapons[i]);
-        }
-    }
-
-    public override void OnRemove() 
-    { 
-        // 패시브 아이템은 버릴 수 없음!
+        // Activate Dropped Item
+        DroppedItem.Activate();
     }
 
     public void ApplyBonusStats()
     {
-        for (int i = 0; i < Inventory.ItemSlot.Items.Length; i++)
+        // Weapon Hotbar
+        for (int i = 0; i < WeaponHotbar.SLOT_SIZE; i++)
         {
-            if (Inventory.ItemSlot.Items[i] == null)
+            if (WeaponHotbar.Weapons[i] == null)
                 continue;
 
-            SetBonusStats(Inventory.ItemSlot.Items[i]);
+            SetBonusStats(WeaponHotbar.Weapons[i]);
         }
+
+        // Inventory
+        //for (int i = 0; i < Inventory.ItemSlot.Items.Length; i++)
+        //{
+        //    if (Inventory.ItemSlot.Items[i] == null)
+        //        continue;
+
+        //    SetBonusStats(Inventory.ItemSlot.Items[i]);
+        //}
     }
     protected abstract void SetBonusStats(Item item);
 }

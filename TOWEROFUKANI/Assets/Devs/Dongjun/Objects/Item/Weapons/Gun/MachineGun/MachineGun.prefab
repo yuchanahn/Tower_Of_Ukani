@@ -214,7 +214,8 @@ MonoBehaviour:
     desc: This is a Machine Gun
     tag_DamageType: 01000000
     tag_Range: 01000000
-  prefabData: {fileID: 11400000, guid: b3a78130f1fa8434f8d0cd7e1cef7891, type: 2}
+  droppedItem: {fileID: 2169553280500987765, guid: 6ecd833910a19ba4f88810e1b18f10de,
+    type: 3}
   spriteRoot: {fileID: 4450316997529025075}
   pivotPointY: -0.025
   weaponTags: 00000000
@@ -258,7 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddccbb3fd0d7ff847b057f4c512127c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
   shootPoint: {fileID: 4450316996750440473}
   bulletPrefab: {fileID: 3522369012486736103, guid: 4516c39aa90b59146a00c293b77a065b,
     type: 3}
@@ -291,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad004a6c9378b646b4672c9ab6708b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
   reloadAll: 1
   reloadAmount: 0
 --- !u!114 &5483000496705353710
@@ -306,7 +305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e70f38c9fb6da574692860c3f8364269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
   reloadAll: 0
   reloadAmount: 0
   magazineDropPos: {fileID: 0}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Dongjun.Helper
 {
@@ -52,6 +53,19 @@ namespace Dongjun.Helper
             }
 
             return result;
+        }
+    }
+
+    public static class ArrayExtensions
+    {
+        public static int Push<T>(this T[] source, T value)
+        {
+            var index = Array.IndexOf(source, default);
+
+            if (index != -1)
+                source[index] = value;
+
+            return index;
         }
     }
 }

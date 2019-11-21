@@ -74,6 +74,8 @@ MonoBehaviour:
     desc: This is a Wooden Short Bow
     tag_DamageType: 01000000
     tag_Range: 01000000
+  droppedItem: {fileID: 8764207644904070244, guid: 47648cd422798324fa305603f40a37cd,
+    type: 3}
   spriteRoot: {fileID: 2778987210056156138}
   pivotPointY: 0
   weaponTags: 01000000
@@ -112,7 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b7b3aa5ecec1594da52a52429cbbb10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
 --- !u!114 &2778987209543410480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,7 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de60508e6782a34698a5e5a5f92414d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
 --- !u!114 &8137621359639749979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b8d06f805bacc46b8a98867764815d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CanExecute_OnLateEnter: 1
   shootPoint: {fileID: 2778987210279264361}
   arrowPrefab: {fileID: -6090198353138406777, guid: 07fe65b781e65e04d978b2432feee51c,
     type: 3}

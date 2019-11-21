@@ -21,12 +21,14 @@ public class TimerManager : SingletonBase<TimerManager>
         {
             curTickingObj = timers.ElementAt(i).Key;
 
-            if (curTickingObj is null)
+            // Check Game Object
+            if (curTickingObj == null)
             {
                 timers.Remove(curTickingObj);
                 continue;
             }
 
+            // Run Timer
             for (int j = timers[curTickingObj].Count - 1; j >= 0; j--)
                 timers[curTickingObj][j].Tick();
         }

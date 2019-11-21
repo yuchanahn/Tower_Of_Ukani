@@ -11,20 +11,16 @@ public class WindCutter : PassiveItem
     protected ItemEffect onJumpEffect = new ItemEffect();
     #endregion
 
-    #region Method: Item
-    public override void Init()
-    {
-        base.Init();
-
-        Max_Count = 3;
-        onJumpEffect.action = OnJump;
-    }
-
+    #region Method: Add/Remove
     public override void OnAdd()
     {
+        Max_Count = 3;
+        onJumpEffect.action = OnJump;
         ItemEffectManager.AddEffect(PlayerActions.Jump, onJumpEffect);
     }
+    #endregion
 
+    #region Method: Bonus Stats
     protected override void SetBonusStats(Item item)
     {
         switch (item)

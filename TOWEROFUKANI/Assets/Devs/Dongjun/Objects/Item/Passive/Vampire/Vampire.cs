@@ -4,16 +4,11 @@ public class Vampire : PassiveItem
 {
     ItemEffect onHitEffect = new ItemEffect();
 
-    public override void Init()
-    {
-        base.Init();
-
-        Max_Count = 3;
-        onHitEffect.action = LifeSteal;
-    }
-
     public override void OnAdd()
     {
+        Max_Count = 3;
+        onHitEffect.action = LifeSteal;
+
         ItemEffectManager.AddEffect(PlayerActions.Hit, onHitEffect);
     }
 

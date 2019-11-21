@@ -59,9 +59,6 @@ public class Player_Kick_Action : CLA_Action<Player>
         // Detect Ground
         main.groundDetectionData.DetectGround(true, rb2D, transform);
 
-        // Follow Moving Platform
-        main.groundDetectionData.FollowMovingPlatform(rb2D);
-
         // Gravity
         Gravity_Logic.ApplyGravity(rb2D, 
             main.groundDetectionData.isGrounded ? new GravityData() : 
