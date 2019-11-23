@@ -3,7 +3,7 @@
 public class SelfSleepObj : PoolingObj
 {
     [Header("Sleep Timer")]
-    [SerializeField] private TimerData sleepTimer;
+    public TimerData sleepTimer;
 
     protected virtual void Start()
     {

@@ -14,7 +14,7 @@ public class ShotgunItem : GunItem
         // Bullet Data
         bulletData = new WeaponProjectileData()
         {
-            attackData = new AttackData(1),
+            attackData = new AttackData(8),
             moveSpeed = new FloatStat(45f, min: 0f),
             maxTravelDist = new FloatStat(7f, min: 0f),
         };

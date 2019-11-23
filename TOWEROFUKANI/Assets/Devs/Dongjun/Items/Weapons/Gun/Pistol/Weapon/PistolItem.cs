@@ -22,15 +22,16 @@ public class PistolItem : GunItem
         magazineSize = new IntStat(6, min: 0);
 
         // Upgrade Per Count
-        if (Count >= 3)
+        switch (Count)
         {
-            bulletData.attackData = new AttackData(3);
-            return;
-        }
-        if (Count >= 2)
-        {
-            bulletData.attackData = new AttackData(2);
-            return;
+            case 1:
+                break;
+            case 2:
+                bulletData.attackData = new AttackData(2);
+                break;
+            default:
+                bulletData.attackData = new AttackData(3);
+                break;
         }
     }
 }

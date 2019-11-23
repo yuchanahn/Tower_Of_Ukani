@@ -160,7 +160,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1863001065
   m_SortingLayer: 5
-  m_SortingOrder: 1
+  m_SortingOrder: 100
   m_Sprite: {fileID: 9073950842162242612, guid: fe4d4f4781a61d5479a94b76193381dc,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -543,9 +543,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721e3bb0108e07349ad32779597b3cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodySprite: {fileID: 7371128403266533312}
   dashDist: 3.5
   dashTime: 0.2
+  spriteTrailObject: {fileID: 7287980144595261149, guid: 2604182f55f4d654b93a54d6b8afb46a,
+    type: 3}
+  trailDuration: 0.12
+  trailCount: 4
 --- !u!114 &2166807972467319143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,7 +568,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   velPercent: {x: 0.3, y: 0.3}
-  xVelDrag: 0.8
   duration: 0.3
   bodySpriteRenderer: {fileID: 7371128403266533312}
 --- !u!114 &6830336080947489379

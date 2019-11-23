@@ -82,6 +82,8 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
     {
         // Set Bullet Data
         bulletData = weapon.bulletData;
+        bulletData.attackData.damage = new IntStat(0);
+        bulletData.attackData.damage.Base = (int)((weapon.bulletData.attackData.damage.Value / (float)pelletCount) + 0.5f);
 
         // Spawn Bullets
         Vector3 eRot = transform.eulerAngles;

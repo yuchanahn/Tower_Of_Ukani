@@ -44,14 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    icon: {fileID: 21300000, guid: 448912e429fb56a49a2a467f4147d71e, type: 3}
+    icon: {fileID: 21300000, guid: c4b53a36776e9b34993f0b84f1a565cb, type: 3}
     name: Wind Cutter
-    desc: It Will Create Wind When you Jump
+    desc: Add Bonus Damage
     tag_DamageType: 
     tag_Range: 
   droppedItemPrefab: {fileID: 749155337391026208, guid: b8c46588e10bc6f48a5a9ab66a3fec27,
     type: 3}
-  affectedWeapons: 00000000
+  affectedWeapons: 0200000003000000
   god: 0
-  debugText: Wind Cutter Activated!
-  bonusAttackSpeed: 1

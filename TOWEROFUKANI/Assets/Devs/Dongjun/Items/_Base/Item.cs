@@ -33,7 +33,7 @@ public abstract class Item : MonoBehaviour
     }
     #endregion
 
-    #region Method: Item
+    #region Method: Add/Remove
     public abstract void OnAdd();
     public virtual void OnRemove()
     {

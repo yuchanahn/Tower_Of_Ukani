@@ -32,15 +32,16 @@ public class MachineGunItem : GunItem
         magazineSize = new IntStat(20, min: 0);
 
         // Upgrade Per Count
-        if (Count >= 3)
+        switch (Count)
         {
-            shootTimer.EndTime = new FloatStat(0.1f, min: 0.01f);
-            return;
-        }
-        if (Count >= 2)
-        {
-            shootTimer.EndTime = new FloatStat(0.125f, min: 0.01f);
-            return;
+            case 1:
+                break;
+            case 2:
+                shootTimer.EndTime = new FloatStat(0.125f, min: 0.01f);
+                break;
+            default:
+                shootTimer.EndTime = new FloatStat(0.05f, min: 0.01f);
+                break;
         }
     }
 }

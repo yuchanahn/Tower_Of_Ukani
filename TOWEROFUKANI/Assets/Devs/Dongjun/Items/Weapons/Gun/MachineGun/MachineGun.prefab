@@ -218,7 +218,7 @@ MonoBehaviour:
     type: 3}
   spriteRoot: {fileID: 4450316997529025075}
   pivotPointY: -0.025
-  weaponTags: 00000000
+  weaponTags: 02000000
   shootTimer:
     StartAsEnded: 1
     CurTime: 0
@@ -229,6 +229,7 @@ MonoBehaviour:
     StartAsEnded: 0
     CurTime: 0
   bulletData:
+    attackData: {}
     curTravelDist: 0
   loadedBullets: 0
   isBulletLoaded: 1

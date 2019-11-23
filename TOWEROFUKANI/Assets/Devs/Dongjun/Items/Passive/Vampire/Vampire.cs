@@ -9,15 +9,12 @@ public class Vampire : PassiveItem
     #region Method Override: Add/Remove
     public override void OnAdd()
     {
-        base.OnAdd();
-
-        onHitEffect = new ItemEffect(typeof(Vampire), LifeSteal, typeof(WindCutter));
+        onHitEffect = new ItemEffect(GetType(), LifeSteal, typeof(WindCutter));
         ItemEffectManager.AddEffect(PlayerActions.Hit, onHitEffect);
     }
     public override void OnRemove()
     {
         base.OnRemove();
-
         ItemEffectManager.RemoveEffect(PlayerActions.Hit, onHitEffect);
     }
     #endregion
@@ -32,7 +29,7 @@ public class Vampire : PassiveItem
     #region Method: Item Effect
     private void LifeSteal()
     {
-        Debug.Log("Vampire Activated !!!");
+        //Debug.Log("Vampire Activated !!!");
         PlayerStats.Heal(PlayerStats.DamageDealt);
     }
     #endregion

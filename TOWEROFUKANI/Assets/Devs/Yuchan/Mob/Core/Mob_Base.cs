@@ -368,7 +368,6 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     public void AttackProcessStart()
     {
         var ColMgr = GetComponentInChildren<AColliderMgr>();
-        Debug.Log(-m_MoveData.SprDir);
         ColMgr.ReStart(ColMgr.OffSet * -m_MoveData.SprDir);
     }
     public void AttackProcessEnd()

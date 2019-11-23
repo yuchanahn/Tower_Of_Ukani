@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    icon: {fileID: 21300000, guid: b1cb61a4dc1b25b47ac3663b984c7170, type: 3}
+    icon: {fileID: 21300000, guid: c243dff7d7af58c438c5ce319171cf0e, type: 3}
     name: Vampire
     desc: Life steal Item
     tag_DamageType: 00000000
     tag_Range: 00000000
   droppedItemPrefab: {fileID: 2134229020927743989, guid: bada442b86495b04e8c2cdc4e5555bde,
     type: 3}
-  affectedWeapons: 0000000001000000
+  affectedWeapons: 01000000
   god: 0

@@ -9,10 +9,8 @@ public struct StartPoolData
     public uint initCount;
 }
 
-public class ObjPoolingManager : MonoBehaviour
+public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
 {
-    private static ObjPoolingManager Inst;
-
     #region Var: Inspector
     [Header("Default Parent Obj of Pooling Objects")]
     [SerializeField]
@@ -28,11 +26,10 @@ public class ObjPoolingManager : MonoBehaviour
     private static Dictionary<PoolingObj, Queue<PoolingObj>> pool_Sleeping;
     #endregion
 
-
     #region Method: Unity
-    private void Awake()
+    protected override void Awake()
     {
-        Inst = this;
+        base.Awake();
         SetUpStartPool();
     }
     #endregion

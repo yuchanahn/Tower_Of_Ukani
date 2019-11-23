@@ -2,6 +2,7 @@
 
 public class WeaponProjectile : PoolingObj
 {
+    #region Var: Inspector
     [Header("Object Detection")]
     [SerializeField] protected Vector2 detectSize;
     [SerializeField] protected LayerMask detectLayers;
@@ -9,14 +10,19 @@ public class WeaponProjectile : PoolingObj
     [Header("Effects")]
     [SerializeField] protected PoolingObj particle_Hit;
     [SerializeField] protected float particle_HitOffset;
+    #endregion
 
+    #region Var: Data
     protected Vector2 velocity;
     protected WeaponProjectileData projectileData;
+    #endregion
 
+    #region Method: Init PoolingObj
     public override void ResetOnSpawn()
     {
         projectileData.curTravelDist = 0;
     }
+    #endregion
 
     #region Method: Unity
     protected virtual void FixedUpdate()

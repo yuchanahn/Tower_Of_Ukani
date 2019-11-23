@@ -2,49 +2,38 @@
 
 public class DroppedWeapon : DroppedItem
 {
-
-    #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-
-        // Initialize Icon
-        spriteRenderer.sprite = Item.Info.Icon;
-    }
-    #endregion
-
-    #region Method Override: On Pick Up
     public override void OnPickUp()
     {
-        WeaponItem weaponItem;
+        // Get Item Reference
+        WeaponItem weaponItem = Item as WeaponItem;
 
+        // Spawn Weapon
         if (!DroppedFromInventory)
+            weaponItem = Instantiate(Item).GetComponent<WeaponItem>();
+
+        // Add Existing Weapon
+        if (WeaponHotbar.AddExisting(weaponItem))
         {
-            weaponItem = Instantiate(Item.gameObject).GetComponent<WeaponItem>();
-            if (WeaponHotbar.AddExisting(weaponItem))
-            {
-                Destroy(weaponItem.gameObject);
-                Destroy(gameObject);
-                return;
-            }
-        }
-        else
-        {
-            weaponItem = Item as WeaponItem;
+            Destroy(weaponItem.gameObject);
+            Destroy(gameObject);
+            return;
         }
 
-        // Add to Inventory
+        // Add to Hotbar
         if (WeaponHotbar.Add(weaponItem))
         {
             weaponItem.gameObject.SetActive(true);
             weaponItem.transform.SetParent(GM.PlayerObj.transform);
             weaponItem.transform.localPosition = new Vector2(0, weaponItem.PivotPointY);
             Destroy(gameObject);
+            return;
         }
-        else if (Inventory.Add(weaponItem))
+
+        // Add to Inventory
+        if (Inventory.Add(weaponItem))
         {
             Destroy(gameObject);
+            return;
         }
     }
-    #endregion
 }
