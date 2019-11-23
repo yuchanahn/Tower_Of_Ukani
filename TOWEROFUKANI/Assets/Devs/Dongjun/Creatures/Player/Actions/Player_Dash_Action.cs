@@ -8,6 +8,7 @@ public class Player_Dash_Action : CLA_Action<Player>
     [SerializeField] private float dashTime;
 
     [Header("Effect")]
+    [SerializeField] private SpriteTrailObject spriteTrailObject;
     [SerializeField] private float trailDuration = 0.15f;
     [SerializeField] private float trailCount = 4;
     #endregion
@@ -78,7 +79,7 @@ public class Player_Dash_Action : CLA_Action<Player>
         if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))
         {
             curTrailCount++;
-            main.bodySpriteRenderer.SpawnTrail(main.spriteTrailObject, trailDuration, transform);
+            main.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, transform);
         }
     }
     #endregion

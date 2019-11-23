@@ -13,9 +13,6 @@ public class Player : CLA_Main
 
     [Header("Gravity")]
     public GravityData gravityData;
-
-    [Header("Effect")]
-    public SpriteTrailObject spriteTrailObject;
     #endregion
 
     #region Var: Properties

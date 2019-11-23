@@ -55,7 +55,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!1 &3100756893193235760
 GameObject:
@@ -113,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!251 &529497990328173336
 PlatformEffector2D:
@@ -194,7 +194,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!50 &8061879157058671613
 Rigidbody2D:

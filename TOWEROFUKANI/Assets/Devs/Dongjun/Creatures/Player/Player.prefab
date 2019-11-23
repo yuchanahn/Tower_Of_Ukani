@@ -497,8 +497,6 @@ MonoBehaviour:
     useGravity: 1
     acceleration: 40
     terminalVelocity: 20
-  spriteTrailObject: {fileID: 7287980144595261149, guid: 2604182f55f4d654b93a54d6b8afb46a,
-    type: 3}
 --- !u!114 &5969363333450609748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,6 +545,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashDist: 3.5
   dashTime: 0.2
+  spriteTrailObject: {fileID: 7287980144595261149, guid: 2604182f55f4d654b93a54d6b8afb46a,
+    type: 3}
   trailDuration: 0.12
   trailCount: 4
 --- !u!114 &2166807972467319143
@@ -568,7 +568,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   velPercent: {x: 0.3, y: 0.3}
-  xVelDrag: 0.8
   duration: 0.3
   bodySpriteRenderer: {fileID: 7371128403266533312}
 --- !u!114 &6830336080947489379
