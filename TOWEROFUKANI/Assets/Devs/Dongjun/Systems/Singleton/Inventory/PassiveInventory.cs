@@ -28,6 +28,14 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
     { get; private set; } = new Dictionary<Type, PassiveItem>();
     #endregion
 
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+        Clear();
+    }
+    #endregion
+
     #region Method: Add/Remove
     public static bool AddExisting(PassiveItem item)
     {
