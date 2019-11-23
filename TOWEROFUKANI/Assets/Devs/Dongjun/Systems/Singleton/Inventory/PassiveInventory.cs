@@ -36,15 +36,8 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
             PassiveItem sameItem = items.FirstOrDefault(s => s != null && s.GetType() == item.GetType());
             if (sameItem != null)
             {
-                if (sameItem.Cur_Count < sameItem.Max_Count)
-                {
-                    sameItem.Cur_Count++;
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                sameItem.AddCount(item.Count);
+                return true;
             }
 
             if (emptySlotCount == 0)
@@ -59,20 +52,20 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
 
         switch (item.God)
         {
-            case PassiveItem.Gods.Ukani:
+            case TowerOfUkani.Gods.Ukani:
                 return AddItem(ref emptySlotCount_Ukani, ukaniRelics);
 
-            case PassiveItem.Gods.Bazik:
+            case TowerOfUkani.Gods.Bazik:
                 return AddItem(ref emptySlotCount_Bazik, bazikRelics);
 
-            case PassiveItem.Gods.Ellai:
+            case TowerOfUkani.Gods.Ellai:
                 return AddItem(ref emptySlotCount_Ellai, ellaiRelics);
 
-            case PassiveItem.Gods.None:
+            case TowerOfUkani.Gods.None:
                 if (Relics.ContainsKey(item.GetType()))
                 {
-                    // Add Count
-                    return false;
+                    Relics[item.GetType()].AddCount(1);
+                    return true;
                 }
                 item.OnAdd();
                 Relics.Add(item.GetType(), item);
@@ -100,15 +93,15 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
 
         switch (item.God)
         {
-            case PassiveItem.Gods.Ukani:
+            case TowerOfUkani.Gods.Ukani:
                 RemoveItem(ref emptySlotCount_Ukani, ref ukaniRelics);
                 break;
 
-            case PassiveItem.Gods.Bazik:
+            case TowerOfUkani.Gods.Bazik:
                 RemoveItem(ref emptySlotCount_Bazik, ref bazikRelics);
                 break;
 
-            case PassiveItem.Gods.Ellai:
+            case TowerOfUkani.Gods.Ellai:
                 RemoveItem(ref emptySlotCount_Ellai, ref ellaiRelics);
                 break;
         }

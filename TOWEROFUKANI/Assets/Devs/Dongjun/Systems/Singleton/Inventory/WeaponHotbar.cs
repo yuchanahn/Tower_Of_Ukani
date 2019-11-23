@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,6 +47,7 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     }
     private void LateUpdate()
     {
+        ChangeWeapon();
         UpdateUI_SelectedWeapon();
         UpdateUI_WeaponInfo();
     }
@@ -59,7 +61,7 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
         txt_WeaponName.text = "None";
         txt_AmmoInfo.text = string.Empty;
     }
-    private void UpdateUI_WeaponHotbar()
+    private void UpdateUI_WeaponIcons()
     {
         for (int i = 0; i < 3; i++)
         {
@@ -68,10 +70,15 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     }
     private void UpdateUI_WeaponInfo()
     {
-        // Update Weapon Name Text
-        txt_WeaponName.text = CurSelected?.Info.Name ?? "None";
+        if (CurSelected == null)
+        {
+            txt_WeaponName.text = CurSelected?.Info.Name ?? "None";
+            txt_AmmoInfo.text = string.Empty;
+            return;
+        }
 
-        // Update Weapon Specific Info Text
+        txt_WeaponName.text = CurSelected.Info.Name;
+
         switch (CurSelected)
         {
             case GunItem gun:
@@ -84,18 +91,6 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     }
     private void UpdateUI_SelectedWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-            ScrollUp();
-
-        float scroll = Input.mouseScrollDelta.y;
-        if (scroll != 0)
-        {
-            if (scroll < 0)
-                ScrollUp();
-            else
-                ScrollDown();
-        }
-
         if (Index_Prev != Index_Cur)
         {
             go_WeaponSelected[Index_Prev].SetActive(false);
@@ -105,18 +100,26 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     }
     #endregion
 
+    public static bool Contains(WeaponItem weapon)
+    {
+        return Weapons.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name) != null;
+    }
+
     #region Method: Add/Remove
     private static void AddWeapon(int index, WeaponItem weapon)
     {
-        EmptySlotCount--;
         Weapons[index] = weapon;
         weapon.OnAdd();
+        EmptySlotCount--;
+
         PassiveInventory.ApplyAllBonusStats();
-        Inst.UpdateUI_WeaponHotbar();
+
+        Inst.UpdateUI_WeaponIcons();
     }
     public static bool Add(WeaponItem weapon)
     {
-        if (IsFull) return false;
+        if (IsFull)
+            return false;
 
         if (Weapons[Index_Cur] is null)
         {
@@ -133,6 +136,17 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
 
         return false;
     }
+    public static bool AddExisting(WeaponItem weapon)
+    {
+        WeaponItem existingWeapon = Weapons.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name);
+        if (existingWeapon != null)
+        {
+            existingWeapon.AddCount(weapon.Count);
+            PassiveInventory.ApplyAllBonusStats();
+            return true;
+        }
+        return false;
+    }
     public static void Remove()
     {
         if (Weapons[Index_Cur] is null)
@@ -141,7 +155,8 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
         Weapons[Index_Cur].OnRemove();
         Weapons[Index_Cur] = null;
         EmptySlotCount++;
-        Inst.UpdateUI_WeaponHotbar();
+
+        Inst.UpdateUI_WeaponIcons();
     }
     public static void Clear()
     {
@@ -151,18 +166,32 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     #endregion
 
     #region Method: Change Weapon
-    public static void UpdateIndex() => Index_Prev = Index_Cur;
-    public static void ScrollUp()
+    private static void ChangeWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+            ScrollUp();
+
+        float scroll = Input.mouseScrollDelta.y;
+        if (scroll != 0)
+        {
+            if (scroll < 0)
+                ScrollUp();
+            else
+                ScrollDown();
+        }
+    }
+    private static void ScrollUp()
     {
         Index_Cur += Index_Cur == 2 ? -2 : 1;
         PrevSelected?.Select(false);
         CurSelected?.Select(true);
     }
-    public static void ScrollDown()
+    private static void ScrollDown()
     {
         Index_Cur -= Index_Cur == 0 ? -2 : 1;
         PrevSelected?.Select(false);
         CurSelected?.Select(true);
     }
+    private static void UpdateIndex() => Index_Prev = Index_Cur;
     #endregion
 }

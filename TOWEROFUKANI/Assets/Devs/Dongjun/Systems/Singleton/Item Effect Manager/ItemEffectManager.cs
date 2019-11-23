@@ -26,8 +26,16 @@ public enum PlayerActions
 
 public class ItemEffect
 {
-    public ItemEffect after = null;
-    public Action action = null;
+    public Type ThisType { get; private set; }
+    public Action ItemAction { get; private set; }
+    public Type After { get; private set; }
+
+    public ItemEffect(Type thisType, Action action = null, Type after = null)
+    {
+        ThisType = thisType;
+        this.ItemAction = action;
+        this.After = after;
+    }
 }
 
 public class ItemEffectManager : MonoBehaviour
@@ -51,35 +59,23 @@ public class ItemEffectManager : MonoBehaviour
     {
         for (int i = 0; i < onAction[action].Count; i++)
         {
-            onAction[action][i].action?.Invoke();
+            onAction[action][i].ItemAction?.Invoke();
         }
     }
     public static void AddEffect(PlayerActions action, ItemEffect itemEffect)
     {
-        // 같은 아이템이 이미 있을 경우
-        if (onAction[action].Contains(itemEffect))
+        if (!onAction[action].Contains(itemEffect))
         {
-
-        }
-        // 같은 아이템이 없을 경우
-        else
-        {
-            if (itemEffect.after is null)
+            for (int i = 0; i < onAction[action].Count; i++)
             {
-                onAction[action].Add(itemEffect);
-                return;
+                if (itemEffect.ThisType == onAction[action][i].After)
+                {
+                    onAction[action].Insert(i, itemEffect);
+                    return;
+                }
             }
 
-            int index = onAction[action].IndexOf(itemEffect.after);
-
-            if (index != -1)
-            {
-                onAction[action].Insert(index + 1, itemEffect);
-            }
-            else
-            {
-                onAction[action].Add(itemEffect);
-            }
+            onAction[action].Add(itemEffect);
         }
     }
     public static void RemoveEffect(PlayerActions action, ItemEffect itemEffect)
