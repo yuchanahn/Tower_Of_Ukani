@@ -36,7 +36,7 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
         switch (item.God)
         {
             case TowerOfUkani.Gods.None:
-                existingItem = NormalRelics.FirstOrDefault(e => e.Value.Info.Name == item.Info.Name).Value;
+                NormalRelics.TryGetValue(item.GetType(), out existingItem);
                 break;
 
             case TowerOfUkani.Gods.Ukani:
@@ -66,18 +66,23 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
             if (emptySlotCount == 0)
                 return false;
 
-            item.OnAdd();
             items.Push(item);
+            item.OnAdd();
             emptySlotCount--;
             ApplyAllBonusStats();
             return true;
+        }
+        void AddNormalRelic()
+        {
+            NormalRelics.Add(item.GetType(), item);
+            item.OnAdd();
+            ApplyAllBonusStats();
         }
 
         switch (item.God)
         {
             case TowerOfUkani.Gods.None:
-                NormalRelics.Add(item.GetType(), item);
-                ApplyAllBonusStats();
+                AddNormalRelic();
                 return true;
 
             case TowerOfUkani.Gods.Ukani:

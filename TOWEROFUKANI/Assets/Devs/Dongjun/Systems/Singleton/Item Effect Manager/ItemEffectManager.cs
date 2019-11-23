@@ -33,8 +33,8 @@ public class ItemEffect
     public ItemEffect(Type thisType, Action action = null, Type after = null)
     {
         ThisType = thisType;
-        this.ItemAction = action;
-        this.After = after;
+        ItemAction = action;
+        After = after;
     }
 }
 

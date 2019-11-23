@@ -9,9 +9,7 @@ public class WindCutter : PassiveItem
     #region Method Override: Add/Remove
     public override void OnAdd()
     {
-        base.OnAdd();
-
-        onHitEffect = new ItemEffect(typeof(WindCutter), DebugText);
+        onHitEffect = new ItemEffect(GetType(), DebugText);
         ItemEffectManager.AddEffect(PlayerActions.Hit, onHitEffect);
     }
     public override void OnRemove()

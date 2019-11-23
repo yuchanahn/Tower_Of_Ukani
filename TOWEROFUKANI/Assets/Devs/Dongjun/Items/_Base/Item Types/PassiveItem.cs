@@ -15,13 +15,6 @@ public abstract class PassiveItem : Item
     public TowerOfUkani.Gods God => god;
     #endregion
 
-    #region Method: On Add
-    public override void OnAdd()
-    {
-        info.Init();
-    }
-    #endregion
-
     #region Method: Set Bonus Stats
     protected abstract void SetBonusStats(WeaponItem weapon);
     #endregion
