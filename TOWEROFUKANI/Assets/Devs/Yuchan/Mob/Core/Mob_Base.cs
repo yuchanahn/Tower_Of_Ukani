@@ -1,5 +1,4 @@
-﻿using Shiroi.Pathfinding2D.Examples;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -149,7 +148,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         m_bAttacking ? true : 
         !m_groundDetectionData.isGrounded ? false :
         m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
-            
+
+    public bool IsAttacking => m_bAttacking;
+
     #endregion
 
     #region Method:
@@ -385,6 +386,7 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
     {
         if (m_SEObj.SEAni != eMobAniST.Last) return; // Ani 우선순위가 Hurt보다 커야함.
 
+        if (m_bAttacking) return;
         if (!m_bHurting)
         {
             m_bPrevDir = m_MoveData.SprDir;

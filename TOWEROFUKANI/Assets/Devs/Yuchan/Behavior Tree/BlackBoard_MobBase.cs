@@ -28,6 +28,7 @@ public class BlackBoard_MobBase : BlackBoard_Base
     public bool CN_IsFollow() => mob.CanFollow;
     public bool CN_IsAttack() => mob.CanAttack;
     public bool CN_IsHurted() => mob.Hurting();
+    public bool CN_IsNotAttacking() => !mob.IsAttacking;
 
     #endregion
 

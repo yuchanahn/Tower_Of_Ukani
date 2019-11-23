@@ -1,5 +1,4 @@
-﻿using Shiroi.Pathfinding2D.Examples;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,18 +64,6 @@ public static class AEM
     }
 
 
-    public static Vector3Int GetCellPos(this Vector3 pos, LayerMask groundLayer)
-    {
-        var rayhit = Physics2D.Raycast(pos, Vector3.down, 10, groundLayer);
-        if (rayhit)
-        {
-            return (Vector3Int)PathFinder.Inst.Grid.WorldToCell(rayhit.point);
-        }
-        else
-        {
-            return Vector3Int.zero;
-        }
-    }
 
     public static Vector3 GetGorundOfBottomPos(this Vector3 pos, Vector2 size, LayerMask groundLayer)
     {
