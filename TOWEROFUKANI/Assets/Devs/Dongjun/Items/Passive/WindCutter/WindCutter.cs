@@ -4,7 +4,6 @@ public class WindCutter : PassiveItem
 {
     #region Var: Effects
     private ItemEffect onHitEffect;
-    private int bonusDamage = 1;
     #endregion
 
     #region Method Override: Add/Remove
@@ -26,14 +25,27 @@ public class WindCutter : PassiveItem
     #region Method Override: Bonus Stats
     protected override void SetBonusStats(WeaponItem weapon)
     {
+        int bonusPercentDamage = 10;
+
+        switch (Count)
+        {
+            case 1:
+                break;
+            case 2:
+                bonusPercentDamage = 20;
+                break;
+            default:
+                break;
+        }
+
         switch (weapon)
         {
             case GunItem gun:
-                gun.bulletData.attackData.damage.ModFlat += bonusDamage;
+                gun.bulletData.attackData.damage.ModPercent += bonusPercentDamage;
                 break;
 
             case BowItem bow:
-                bow.arrowData.attackData.damage.ModFlat += bonusDamage;
+                bow.arrowData.attackData.damage.ModPercent += bonusPercentDamage;
                 break;
         }
     }
@@ -42,7 +54,7 @@ public class WindCutter : PassiveItem
     #region Method: Item Effect
     private void DebugText()
     {
-        Debug.Log("Wind Cutter Activated!!");
+        //Debug.Log("Wind Cutter Activated!!");
     }
     #endregion
 }

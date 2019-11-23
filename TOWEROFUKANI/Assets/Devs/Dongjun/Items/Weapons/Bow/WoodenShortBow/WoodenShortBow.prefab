@@ -78,7 +78,7 @@ MonoBehaviour:
     type: 3}
   spriteRoot: {fileID: 2778987210056156138}
   pivotPointY: 0
-  weaponTags: 01000000
+  weaponTags: 03000000
   arrowVisual: {fileID: 7866383674972493763}
   shootTimer:
     StartAsEnded: 0
@@ -87,6 +87,7 @@ MonoBehaviour:
     StartAsEnded: 0
     CurTime: 0
   arrowData:
+    attackData: {}
     curTravelDist: 0
   drawPower: 0
 --- !u!114 &2778987209543410482

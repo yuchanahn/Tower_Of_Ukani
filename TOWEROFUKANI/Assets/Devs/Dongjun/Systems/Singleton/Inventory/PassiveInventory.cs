@@ -24,57 +24,73 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
     public static PassiveItem[] UkaniRelics => ukaniRelics;
     public static PassiveItem[] BazikRelics => bazikRelics;
     public static PassiveItem[] EllaiRelics => ellaiRelics;
-    public static Dictionary<Type, PassiveItem> Relics 
+    public static Dictionary<Type, PassiveItem> NormalRelics 
     { get; private set; } = new Dictionary<Type, PassiveItem>();
     #endregion
 
     #region Method: Add/Remove
+    public static bool AddExisting(PassiveItem item)
+    {
+        PassiveItem existingItem = null;
+
+        switch (item.God)
+        {
+            case TowerOfUkani.Gods.None:
+                existingItem = NormalRelics.FirstOrDefault(e => e.Value.Info.Name == item.Info.Name).Value;
+                break;
+
+            case TowerOfUkani.Gods.Ukani:
+                existingItem = ukaniRelics.FirstOrDefault(e => e != null && e.Info.Name == item.Info.Name);
+                break;
+
+            case TowerOfUkani.Gods.Bazik:
+                existingItem = bazikRelics.FirstOrDefault(e => e != null && e.Info.Name == item.Info.Name);
+                break;
+
+            case TowerOfUkani.Gods.Ellai:
+                existingItem = ellaiRelics.FirstOrDefault(e => e != null && e.Info.Name == item.Info.Name);
+                break;
+        }
+
+        if (existingItem == null)
+            return false;
+
+        existingItem.AddCount(item.Count);
+        ApplyAllBonusStats();
+        return true;
+    }
     public static bool Add(PassiveItem item)
     {
-        bool AddItem(ref int emptySlotCount, PassiveItem[] items)
+        bool AddDivineRelic(ref int emptySlotCount, PassiveItem[] items)
         {
-            PassiveItem sameItem = items.FirstOrDefault(s => s != null && s.GetType() == item.GetType());
-            if (sameItem != null)
-            {
-                sameItem.AddCount(item.Count);
-                return true;
-            }
-
             if (emptySlotCount == 0)
                 return false;
 
             item.OnAdd();
-            emptySlotCount--;
             items.Push(item);
+            emptySlotCount--;
             ApplyAllBonusStats();
             return true;
         }
 
         switch (item.God)
         {
-            case TowerOfUkani.Gods.Ukani:
-                return AddItem(ref emptySlotCount_Ukani, ukaniRelics);
-
-            case TowerOfUkani.Gods.Bazik:
-                return AddItem(ref emptySlotCount_Bazik, bazikRelics);
-
-            case TowerOfUkani.Gods.Ellai:
-                return AddItem(ref emptySlotCount_Ellai, ellaiRelics);
-
             case TowerOfUkani.Gods.None:
-                if (Relics.ContainsKey(item.GetType()))
-                {
-                    Relics[item.GetType()].AddCount(1);
-                    return true;
-                }
-                item.OnAdd();
-                Relics.Add(item.GetType(), item);
+                NormalRelics.Add(item.GetType(), item);
                 ApplyAllBonusStats();
                 return true;
 
-            default:
-                return false;
+            case TowerOfUkani.Gods.Ukani:
+                return AddDivineRelic(ref emptySlotCount_Ukani, ukaniRelics);
+
+            case TowerOfUkani.Gods.Bazik:
+                return AddDivineRelic(ref emptySlotCount_Bazik, bazikRelics);
+
+            case TowerOfUkani.Gods.Ellai:
+                return AddDivineRelic(ref emptySlotCount_Ellai, ellaiRelics);
         }
+
+        return false;
     }
     public static void Remove(PassiveItem item)
     {
@@ -87,6 +103,7 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
                 item.OnRemove();
                 items[index] = null;
                 emptySlotCount++;
+
                 ApplyAllBonusStats();
             }
         }
@@ -111,7 +128,7 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
         ukaniRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
         bazikRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
         ellaiRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
-        Relics = new Dictionary<Type, PassiveItem>();
+        NormalRelics = new Dictionary<Type, PassiveItem>();
     }
     #endregion
 
@@ -122,16 +139,15 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
         Inventory.ResetAllWeaponStats();
 
         // Apply Bonus Stats
-        foreach (KeyValuePair<Type, PassiveItem> item in Relics)
-        {
-            item.Value.ApplyBonusStats();
-        }
-
         for (int i = 0; i < SLOT_SIZE_PER_GOD; i++)
         {
             UkaniRelics[i]?.ApplyBonusStats();
             BazikRelics[i]?.ApplyBonusStats();
             EllaiRelics[i]?.ApplyBonusStats();
+        }
+        foreach (KeyValuePair<Type, PassiveItem> item in NormalRelics)
+        {
+            item.Value.ApplyBonusStats();
         }
     }
     #endregion

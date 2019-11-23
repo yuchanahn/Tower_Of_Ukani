@@ -1,14 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DroppedPassiveItem : DroppedItem
 {
     public override void OnPickUp()
     {
-        if (PassiveInventory.Add(Item as PassiveItem))
+        PassiveItem passiveItem = Item as PassiveItem;
+
+        if (!DroppedFromInventory)
+            passiveItem = Instantiate(passiveItem).GetComponent<PassiveItem>();
+
+        if (PassiveInventory.AddExisting(passiveItem))
+        {
+            Destroy(passiveItem.gameObject);
+            Destroy(gameObject);
+            return;
+        }
+
+        if (PassiveInventory.Add(passiveItem))
         {
             Destroy(gameObject);
+            return;
         }
     }
 }

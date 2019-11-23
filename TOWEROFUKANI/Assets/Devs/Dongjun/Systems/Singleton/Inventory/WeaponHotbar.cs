@@ -100,51 +100,53 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     }
     #endregion
 
+    #region Method: Check
     public static bool Contains(WeaponItem weapon)
     {
         return Weapons.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name) != null;
     }
+    #endregion
 
     #region Method: Add/Remove
-    private static void AddWeapon(int index, WeaponItem weapon)
+    public static bool AddExisting(WeaponItem weapon)
     {
-        Weapons[index] = weapon;
-        weapon.OnAdd();
-        EmptySlotCount--;
+        WeaponItem existingWeapon = Weapons.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name);
 
+        if (existingWeapon == null)
+            return false;
+
+        existingWeapon.AddCount(weapon.Count);
         PassiveInventory.ApplyAllBonusStats();
-
-        Inst.UpdateUI_WeaponIcons();
+        return true;
     }
     public static bool Add(WeaponItem weapon)
     {
+        void AddWeapon(int index)
+        {
+            Weapons[index] = weapon;
+            weapon.OnAdd();
+            EmptySlotCount--;
+            PassiveInventory.ApplyAllBonusStats();
+
+            Inst.UpdateUI_WeaponIcons();
+        }
+
         if (IsFull)
             return false;
 
         if (Weapons[Index_Cur] is null)
         {
-            AddWeapon(Index_Cur, weapon);
+            AddWeapon(Index_Cur);
             return true;
         }
 
         int emptyIndex = Array.IndexOf(Weapons, default);
         if (emptyIndex != -1)
         {
-            AddWeapon(emptyIndex, weapon);
+            AddWeapon(emptyIndex);
             return true;
         }
 
-        return false;
-    }
-    public static bool AddExisting(WeaponItem weapon)
-    {
-        WeaponItem existingWeapon = Weapons.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name);
-        if (existingWeapon != null)
-        {
-            existingWeapon.AddCount(weapon.Count);
-            PassiveInventory.ApplyAllBonusStats();
-            return true;
-        }
         return false;
     }
     public static void Remove()

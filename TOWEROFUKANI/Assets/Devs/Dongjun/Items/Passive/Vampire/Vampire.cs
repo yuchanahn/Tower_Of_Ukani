@@ -32,7 +32,7 @@ public class Vampire : PassiveItem
     #region Method: Item Effect
     private void LifeSteal()
     {
-        Debug.Log("Vampire Activated !!!");
+        //Debug.Log("Vampire Activated !!!");
         PlayerStats.Heal(PlayerStats.DamageDealt);
     }
     #endregion

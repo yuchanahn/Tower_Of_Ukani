@@ -20,6 +20,9 @@ public abstract class DroppedItem : MonoBehaviour
     protected virtual void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        // Initialize Icon
+        spriteRenderer.sprite = Item.Info.Icon;
     }
     #endregion
 

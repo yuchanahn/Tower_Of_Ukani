@@ -51,5 +51,5 @@ MonoBehaviour:
     tag_Range: 00000000
   droppedItemPrefab: {fileID: 2134229020927743989, guid: bada442b86495b04e8c2cdc4e5555bde,
     type: 3}
-  affectedWeapons: 0000000001000000
+  affectedWeapons: 01000000
   god: 0

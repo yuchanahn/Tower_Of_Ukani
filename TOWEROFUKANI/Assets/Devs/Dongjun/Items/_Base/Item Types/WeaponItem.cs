@@ -29,6 +29,8 @@ public abstract class WeaponItem : Item
 {
     public enum WeaponTag
     {
+        None,
+        All,
         Gun,
         Bow,
     }
