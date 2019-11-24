@@ -37,7 +37,7 @@ public class MachineGunItem : GunItem
             case 1:
                 break;
             case 2:
-                shootTimer.EndTime = new FloatStat(0.125f, min: 0.01f);
+                shootTimer.EndTime = new FloatStat(0.1f, min: 0.01f);
                 break;
             default:
                 shootTimer.EndTime = new FloatStat(0.05f, min: 0.01f);

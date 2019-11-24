@@ -9,7 +9,6 @@ public class TalismanOfProtection : ActiveItem
     #region Var: Stats
     private TimerData cooldownTimer = new TimerData();
     private TimerData durationTimer = new TimerData();
-
     private IntStat shieldhealth;
     #endregion
 
@@ -55,7 +54,7 @@ public class TalismanOfProtection : ActiveItem
     }
     #endregion
 
-    #region Activate/Deactivate
+    #region Method: Activate/Deactivate
     public override void Activate()
     {
         base.Activate();
@@ -67,10 +66,9 @@ public class TalismanOfProtection : ActiveItem
             durationTimer.UseAutoTick(gameObject, true);
             durationTimer.Restart();
 
-            shieldhealth.ModFlat = 0;
-
             ItemEffectManager.AddEffect(PlayerActions.Damaged, onDamageReceived);
 
+            // Spawn Effect
             shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));
         }
     }
@@ -84,12 +82,16 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.UseAutoTick(gameObject, false);
         durationTimer.ToZero();
 
+        shieldhealth.ModFlat = 0;
+
         ItemEffectManager.RemoveEffect(PlayerActions.Damaged, onDamageReceived);
 
+        // Destroy Effect
         Destroy(shieldEffect);
     }
     #endregion
 
+    #region Method: Shield
     private void Shield()
     {
         int overkillDmg = PlayerStats.DamageReceived - shieldhealth.Value;
@@ -105,4 +107,5 @@ public class TalismanOfProtection : ActiveItem
             PlayerStats.DamageReceived = 0;
         }
     }
+    #endregion
 }

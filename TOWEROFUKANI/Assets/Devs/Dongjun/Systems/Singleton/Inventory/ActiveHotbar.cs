@@ -33,6 +33,23 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
     }
     private void Update()
     {
+        ActivateItem();
+    }
+    #endregion
+
+    #region Method: UI
+    private void UpdateUI_SlotIcon()
+    {
+        for (int i = 0; i < SLOT_SIZE; i++)
+        {
+            img_ActiveSlots[i].sprite = Items[i]?.Info.Icon ?? spr_Empty;
+        }
+    }
+    #endregion
+
+    #region Method: Activate Item
+    private void ActivateItem()
+    {
         if (Input.GetKeyDown(KeyCode.Alpha1) && (!Items[0]?.IsActive ?? false))
             Items[0]?.Activate();
         else if (Input.GetKeyDown(KeyCode.Alpha2) && (!Items[1]?.IsActive ?? false))
@@ -71,6 +88,7 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
         Items[index] = item;
         EmptySlotCount--;
 
+        Inst.UpdateUI_SlotIcon();
         return true;
     }
     public static void Remove(int index)
@@ -81,6 +99,8 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
         Items[index].OnRemove();
         Items[index] = null;
         EmptySlotCount++;
+
+        Inst.UpdateUI_SlotIcon();
     }
     public static void Clear()
     {
