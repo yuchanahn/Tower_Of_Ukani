@@ -17,7 +17,7 @@ public class Player_Kick_Action : CLA_Action<Player>
     [SerializeField] private float duration;
 
     [Header("Sprite Renderer")]
-    [SerializeField] private SpriteRenderer bodySpriteRenderer;
+    [SerializeField] private SpriteRenderer kickEffectSpriteRenderer;
     #endregion
 
     #region Var: Properties
@@ -47,6 +47,8 @@ public class Player_Kick_Action : CLA_Action<Player>
 
         animator.SetSpeed(duration);
         animator.Play("Player_Kick", 0, 0f);
+
+        kickEffectSpriteRenderer.flipX = main.bodySpriteRenderer.flipX;
     }
     public override void OnExit()
     {
@@ -70,19 +72,21 @@ public class Player_Kick_Action : CLA_Action<Player>
     {
         Collider2D[] hits = 
             Physics2D.OverlapBoxAll(
-                transform.position + new Vector3(detectBox.offset.x * (bodySpriteRenderer.flipX ? -1 : 1), detectBox.offset.y), 
+                transform.position + new Vector3(detectBox.offset.x * main.Dir, detectBox.offset.y), 
                 detectBox.size, 
                 0f, 
                 detectMask);
 
-        if (hits.Length == 0) return;
+        if (hits.Length == 0)
+            return;
 
         Rigidbody2D hitRB2D = hits.GetClosest<Rigidbody2D>(transform);
-        if (hitRB2D == null) return;
+        if (hitRB2D == null)
+            return;
 
         // Kick
         Vector2 kickDir = (dirTarget.position - transform.position).normalized;
-        hitRB2D.velocity = new Vector2(kickDir.x * (bodySpriteRenderer.flipX ? -1 : 1), kickDir.y) * power;
+        hitRB2D.velocity = new Vector2(kickDir.x * main.Dir, kickDir.y) * power;
     }
     #endregion
 

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4117234795505780078}
   - component: {fileID: 3671742662400679011}
   - component: {fileID: 4379574795228798098}
-  - component: {fileID: 4996738842699064662}
   - component: {fileID: 4112376304256183711}
   m_Layer: 0
   m_Name: Managers
@@ -114,29 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41ad2f57762dd844b92770e51d0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4996738842699064662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4117234795505780074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f10e543a9b20636438b496bd5d5efc72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spr_Empty: {fileID: 21300000, guid: 8751664f8cc66864591b816d3e860cc5, type: 3}
-  img_WeaponSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  go_WeaponSelected:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  txt_WeaponName: {fileID: 0}
-  txt_AmmoInfo: {fileID: 0}
 --- !u!114 &4112376304256183711
 MonoBehaviour:
   m_ObjectHideFlags: 0

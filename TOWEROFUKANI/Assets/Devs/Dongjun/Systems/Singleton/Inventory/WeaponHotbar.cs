@@ -13,9 +13,11 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     [Header("Sprite")]
     [SerializeField] private Sprite spr_Empty;
 
-    [Header("Weapon Slot")]
-    [SerializeField] private Image[] img_WeaponSlots = new Image[SLOT_SIZE];
-    [SerializeField] private GameObject[] go_WeaponSelected = new GameObject[SLOT_SIZE];
+    [Header("Weapon Icon")]
+    [SerializeField] private Image[] img_WeaponIcons = new Image[SLOT_SIZE];
+
+    [Header("Weapon Slot Selected Icon")]
+    [SerializeField] private GameObject icon_WeaponSelected;
 
     [Header("Weapon Info")]
     [SerializeField] private Text txt_WeaponName;
@@ -56,16 +58,13 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     #region Method: UI
     private void InitUI_WeaopnHotbar()
     {
-        go_WeaponSelected[Index_Cur].SetActive(true);
-
-        txt_WeaponName.text = "None";
-        txt_AmmoInfo.text = string.Empty;
+        icon_WeaponSelected = Instantiate(icon_WeaponSelected, img_WeaponIcons[0].transform.parent, false);
     }
     private void UpdateUI_WeaponIcons()
     {
         for (int i = 0; i < 3; i++)
         {
-            img_WeaponSlots[i].sprite = Weapons[i]?.Info.Icon ?? spr_Empty;
+            img_WeaponIcons[i].sprite = Weapons[i]?.Info.Icon ?? spr_Empty;
         }
     }
     private void UpdateUI_WeaponInfo()
@@ -93,8 +92,7 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     {
         if (Index_Prev != Index_Cur)
         {
-            go_WeaponSelected[Index_Prev].SetActive(false);
-            go_WeaponSelected[Index_Cur].SetActive(true);
+            icon_WeaponSelected.transform.SetParent(img_WeaponIcons[Index_Cur].transform.parent, false);
             UpdateIndex();
         }
     }
