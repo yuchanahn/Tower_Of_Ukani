@@ -111,6 +111,9 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
         WeaponItem existingWeapon = Weapons.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name);
 
         if (existingWeapon == null)
+            existingWeapon = Inventory.Items.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name) as WeaponItem;
+
+        if (existingWeapon == null)
             return false;
 
         existingWeapon.AddCount(weapon.Count);
