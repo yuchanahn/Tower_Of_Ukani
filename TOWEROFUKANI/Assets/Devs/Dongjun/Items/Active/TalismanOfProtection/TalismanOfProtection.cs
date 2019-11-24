@@ -35,21 +35,31 @@ public class TalismanOfProtection : ActiveItem
     #region Method: Add/Remove
     public override void OnAdd()
     {
-        cooldownTimer.UseAutoTick(gameObject, true);
+        // Set Up Timers
+        cooldownTimer.SetTick(gameObject);
         cooldownTimer.Restart();
 
-        onDamageReceived = new ItemEffect(GetType(), Shield);
+        // Initialize Item Effect
+        onDamageReceived = new ItemEffect(GetType(), ShieldFunction);
+
+        // Spawn Effect
+        shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));
+        shieldEffect.SetActive(false);
     }
     public override void OnRemove()
     {
         base.OnRemove();
 
-        cooldownTimer.UseAutoTick(gameObject, false);
+        // Remove Timers
+        cooldownTimer.SetTick(gameObject, TimerTick.None);
         cooldownTimer.ToZero();
-
-        durationTimer.UseAutoTick(gameObject, false);
+        durationTimer.SetTick(gameObject, TimerTick.None);
         durationTimer.ToZero();
 
+        // Destroy Effect
+        Destroy(shieldEffect);
+
+        // Deactivate This Item
         Deactivate();
     }
     #endregion
@@ -59,48 +69,57 @@ public class TalismanOfProtection : ActiveItem
     {
         base.Activate();
 
-        if (cooldownTimer.IsEnded)
-        {
-            cooldownTimer.SetActive(false);
+        if (!cooldownTimer.IsEnded)
+            return;
 
-            durationTimer.UseAutoTick(gameObject, true);
-            durationTimer.Restart();
+        // Stop Cooldown
+        cooldownTimer.SetActive(false);
 
-            ItemEffectManager.AddEffect(PlayerActions.Damaged, onDamageReceived);
+        // Start Duration
+        durationTimer.SetTick(gameObject);
+        durationTimer.Restart();
 
-            // Spawn Effect
-            shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));
-        }
+        // Enable Shield Item Effect
+        ItemEffectManager.AddEffect(PlayerActions.Damaged, onDamageReceived);
+
+        // Show Effect
+        shieldEffect.SetActive(true);
     }
     public override void Deactivate()
     {
         base.Deactivate();
 
+        // Start Cooldown
         cooldownTimer.SetActive(true);
         cooldownTimer.Restart();
 
-        durationTimer.UseAutoTick(gameObject, false);
+        // Stop Duration
+        durationTimer.SetTick(gameObject, TimerTick.None);
         durationTimer.ToZero();
 
+        // Reset Shield Health
         shieldhealth.ModFlat = 0;
 
+        // Disable Shield Item Effect
         ItemEffectManager.RemoveEffect(PlayerActions.Damaged, onDamageReceived);
 
-        // Destroy Effect
-        Destroy(shieldEffect);
+        // Hide Effect
+        shieldEffect.SetActive(false);
     }
     #endregion
 
     #region Method: Shield
-    private void Shield()
+    private void ShieldFunction()
     {
         int overkillDmg = PlayerStats.DamageReceived - shieldhealth.Value;
 
+        // Shield Destroyed
         if (overkillDmg >= 0)
         {
             PlayerStats.DamageReceived = overkillDmg;
             Deactivate();
         }
+        // Damage Shield
         else
         {
             shieldhealth.ModFlat -= PlayerStats.DamageReceived;

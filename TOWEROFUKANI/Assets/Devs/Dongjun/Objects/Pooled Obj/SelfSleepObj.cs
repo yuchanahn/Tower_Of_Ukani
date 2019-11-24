@@ -7,7 +7,8 @@ public class SelfSleepObj : PoolingObj
 
     protected virtual void Start()
     {
-        sleepTimer.Init(gameObject, OnEnd: Sleep);
+        sleepTimer.SetTick(gameObject);
+        sleepTimer.SetAction(OnEnd: Sleep);
     }
     public override void ResetOnSpawn()
     {

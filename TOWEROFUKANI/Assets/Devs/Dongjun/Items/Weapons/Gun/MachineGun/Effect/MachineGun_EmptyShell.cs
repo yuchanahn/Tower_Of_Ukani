@@ -14,7 +14,8 @@ public class MachineGun_EmptyShell : PlayerDropObj
     protected override void Awake()
     {
         base.Awake();
-        showBehindObjTimer.Init(gameObject, OnEnd: ShowBehindObj);
+        showBehindObjTimer.SetTick(gameObject);
+        showBehindObjTimer.SetAction(OnEnd: ShowBehindObj);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -25,7 +26,7 @@ public class MachineGun_EmptyShell : PlayerDropObj
         rb2D.AddForce((Vector3.up - transform.right).normalized * Random.Range(forceMin, forceMax), ForceMode2D.Impulse);
         rb2D.AddTorque(Mathf.Sign(transform.right.x) * Random.Range(forceMin, forceMax), ForceMode2D.Impulse);
 
-        showBehindObjTimer.UseAutoTick(gameObject, true);
+        showBehindObjTimer.SetTick(gameObject);
         showBehindObjTimer.Restart();
 
         spriteRenderer.sortingOrder = 100;
@@ -34,7 +35,7 @@ public class MachineGun_EmptyShell : PlayerDropObj
     {
         base.Sleep();
 
-        showBehindObjTimer.UseAutoTick(gameObject, false);
+        showBehindObjTimer.SetTick(gameObject, TimerTick.None);
     }
 
     private void ShowBehindObj()

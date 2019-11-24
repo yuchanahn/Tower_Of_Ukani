@@ -15,7 +15,6 @@ public class MachineGunItem : GunItem
     public override void InitStats()
     {
         // Timmer Data
-        shootTimer.StartAsEnded = true;
         shootTimer.EndTime = new FloatStat(0.15f, min: 0.01f);
         reloadTimer.EndTime = new FloatStat(0.5f, min: 0.01f);
         swapMagazineTimer.EndTime = new FloatStat(1f, min: 0.01f);

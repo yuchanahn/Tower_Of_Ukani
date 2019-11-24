@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class TimerManager : SingletonBase<TimerManager>
 {
-    private Dictionary<GameObject, List<ITimerData>> timers = new Dictionary<GameObject, List<ITimerData>>();
-    private GameObject curTickingObj;
+    private Dictionary<GameObject, List<ITimerData>> lateUpdateTimers = new Dictionary<GameObject, List<ITimerData>>();
+    private Dictionary<GameObject, List<ITimerData>> updateTimers = new Dictionary<GameObject, List<ITimerData>>();
+    private GameObject curTickingObj_LateUpdate;
+    private GameObject curTickingObj_Update;
 
+    private void Update()
+    {
+        TickTimers(updateTimers, curTickingObj_Update);
+    }
     private void LateUpdate()
     {
-        TickTimers();
+        TickTimers(lateUpdateTimers, curTickingObj_LateUpdate);
     }
 
-    public void TickTimers()
+    public void TickTimers(Dictionary<GameObject, List<ITimerData>> timers, GameObject curTickingObj)
     {
         if (timers.Count == 0)
             return;
@@ -24,7 +30,7 @@ public class TimerManager : SingletonBase<TimerManager>
             // Check Game Object
             if (curTickingObj == null)
             {
-                timers.Remove(curTickingObj);
+                timers.Remove(curTickingObj_Update);
                 continue;
             }
 
@@ -34,27 +40,51 @@ public class TimerManager : SingletonBase<TimerManager>
         }
     }
 
-    public void AddTimer(GameObject go, ITimerData data)
+    public void AddToLateUpdate(GameObject go, ITimerData data)
     {
-        if (timers.ContainsKey(go))
+        if (lateUpdateTimers.ContainsKey(go))
         {
-            timers[go].Add(data);
+            lateUpdateTimers[go].Add(data);
             return;
         }
 
-        if (timers.ContainsKey(go) && timers[go].Contains(data))
+        if (lateUpdateTimers.ContainsKey(go) && lateUpdateTimers[go].Contains(data))
             return;
 
-        if (!timers.ContainsKey(go))
-            timers.Add(go, new List<ITimerData>());
+        if (!lateUpdateTimers.ContainsKey(go))
+            lateUpdateTimers.Add(go, new List<ITimerData>());
 
-        timers[go].Add(data);
+        lateUpdateTimers[go].Add(data);
     }
-    public void RemoveTimer(GameObject go, ITimerData data)
+    public void RemoveFromLateUpdate(GameObject go, ITimerData data)
     {
-        if (!timers.ContainsKey(go) || !timers[go].Contains(data))
+        if (!lateUpdateTimers.ContainsKey(go) || !lateUpdateTimers[go].Contains(data))
             return;
 
-        timers[go].Remove(data);
+        lateUpdateTimers[go].Remove(data);
+    }
+
+    public void AddToUpdate(GameObject go, ITimerData data)
+    {
+        if (updateTimers.ContainsKey(go))
+        {
+            updateTimers[go].Add(data);
+            return;
+        }
+
+        if (updateTimers.ContainsKey(go) && updateTimers[go].Contains(data))
+            return;
+
+        if (!updateTimers.ContainsKey(go))
+            updateTimers.Add(go, new List<ITimerData>());
+
+        updateTimers[go].Add(data);
+    }
+    public void RemoveFromUpdate(GameObject go, ITimerData data)
+    {
+        if (!updateTimers.ContainsKey(go) || !updateTimers[go].Contains(data))
+            return;
+
+        updateTimers[go].Remove(data);
     }
 }

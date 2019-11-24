@@ -125,9 +125,10 @@ public abstract class GunItem : WeaponItem
     {
         #region Init: Stats
         // Init Timer
-        shootTimer.Init(gameObject);
-        reloadTimer.Init(gameObject);
-        swapMagazineTimer.Init(gameObject);
+        shootTimer.SetTickOption(gameObject);
+        shootTimer.ToEnd();
+        reloadTimer.SetTickOption(gameObject);
+        swapMagazineTimer.SetTickOption(gameObject);
 
         // Init Ammo
         loadedBullets = magazineSize.Value;
@@ -183,8 +184,9 @@ public abstract class BowItem : WeaponItem
     {
         #region Init: Stats
         // Init Timer
-        shootTimer.Init(gameObject);
-        drawTimer.Init(gameObject);
+        shootTimer.SetTickOption(gameObject);
+        shootTimer.ToEnd();
+        drawTimer.SetTickOption(gameObject);
         #endregion
 
         #region Init: Animation Clip Names

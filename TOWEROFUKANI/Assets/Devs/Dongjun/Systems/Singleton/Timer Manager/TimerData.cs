@@ -6,12 +6,17 @@ public interface ITimerData
     void Tick();
 }
 
+public enum TimerTick
+{
+    LateUpdate,
+    Update,
+    None
+}
+
 [Serializable]
 public class TimerData : ITimerData
 {
     #region Var: States
-    [SerializeField]
-    protected bool StartAsEnded = false;
     public bool IsActive { get; private set; } = true;
     public bool IsEnded { get; private set; } = false;
     public bool IsZero => CurTime == 0;
@@ -20,7 +25,7 @@ public class TimerData : ITimerData
     #region Var: Data
     [HideInInspector]
     public float CurTime = 0; // 타이머의 현재 시간.
-    public float EndTime = 0; // 타이머릐 최대 시간.
+    public float EndTime = 0; // 타이머의 종료 시간.
     #endregion
 
     #region Var: Action
@@ -28,16 +33,21 @@ public class TimerData : ITimerData
     private Action OnEnd;
     #endregion
 
-    #region Method: Initialize
-    public void Init(GameObject self, Action OnTick = null, Action OnEnd = null)
+    #region Method: Set Up
+    public void SetTick(GameObject self, TimerTick tickType = TimerTick.LateUpdate)
     {
-        TimerManager.Inst.AddTimer(self, this);
+        TimerManager.Inst.RemoveFromLateUpdate(self, this);
+        TimerManager.Inst.RemoveFromUpdate(self, this);
 
-        this.OnTick = OnTick;
-        this.OnEnd = OnEnd;
-
-        if (StartAsEnded)
-            ToEnd();
+        switch (tickType)
+        {
+            case TimerTick.LateUpdate:
+                TimerManager.Inst.AddToLateUpdate(self, this);
+                break;
+            case TimerTick.Update:
+                TimerManager.Inst.AddToUpdate(self, this);
+                break;
+        }
     }
     public void SetAction(Action OnTick = null, Action OnEnd = null)
     {
@@ -51,14 +61,6 @@ public class TimerData : ITimerData
     {
         IsActive = active;
     }
-    public void UseAutoTick(GameObject self, bool use)
-    {
-        if (use)
-            TimerManager.Inst.AddTimer(self, this);
-        else
-            TimerManager.Inst.RemoveTimer(self, this);
-    }
-
     public void Restart()
     {
         CurTime = 0;
@@ -89,7 +91,6 @@ public class TimerData : ITimerData
 public class TimerStat : ITimerData
 {
     #region Var: States
-    public bool StartAsEnded = false;
     public bool IsActive { get; private set; } = true;
     public bool IsEnded { get; private set; } = false;
     public bool IsZero => CurTime == 0;
@@ -98,7 +99,7 @@ public class TimerStat : ITimerData
     #region Var: Data
     [HideInInspector]
     public float CurTime = 0; // 타이머의 현재 시간.
-    public FloatStat EndTime; // 타이머릐 최대 시간.
+    public FloatStat EndTime; // 타이머의 종료 시간.
     #endregion
 
     #region Var: Action
@@ -106,16 +107,21 @@ public class TimerStat : ITimerData
     private Action OnEnd;
     #endregion
 
-    #region Method: Initialize
-    public void Init(GameObject self, Action OnTick = null, Action OnEnd = null)
+    #region Method: Set Up
+    public void SetTickOption(GameObject self, TimerTick autoTickType = TimerTick.LateUpdate)
     {
-        TimerManager.Inst.AddTimer(self, this);
+        TimerManager.Inst.RemoveFromLateUpdate(self, this);
+        TimerManager.Inst.RemoveFromUpdate(self, this);
 
-        this.OnTick = OnTick;
-        this.OnEnd = OnEnd;
-
-        if (StartAsEnded)
-            ToEnd();
+        switch (autoTickType)
+        {
+            case TimerTick.LateUpdate:
+                TimerManager.Inst.AddToLateUpdate(self, this);
+                break;
+            case TimerTick.Update:
+                TimerManager.Inst.AddToUpdate(self, this);
+                break;
+        }
     }
     public void SetAction(Action OnTick = null, Action OnEnd = null)
     {
@@ -129,14 +135,6 @@ public class TimerStat : ITimerData
     {
         IsActive = active;
     }
-    public void UseAutoTick(GameObject self, bool use)
-    {
-        if (use)
-            TimerManager.Inst.AddTimer(self, this);
-        else
-            TimerManager.Inst.RemoveTimer(self, this);
-    }
-
     public void Restart()
     {
         CurTime = 0;
