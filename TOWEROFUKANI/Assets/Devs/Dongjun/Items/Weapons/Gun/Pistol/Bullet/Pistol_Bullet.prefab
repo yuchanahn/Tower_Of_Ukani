@@ -128,6 +128,8 @@ MonoBehaviour:
   detectLayers:
     serializedVersion: 2
     m_Bits: 768
+  ignoreTags:
+  - Player
   particle_Hit: {fileID: 1036255023471385981, guid: 29a4720308044564a9f0ee58eed9cb7c,
     type: 3}
   particle_HitOffset: 0.15

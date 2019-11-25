@@ -7,7 +7,6 @@ public class TalismanOfProtection : ActiveItem
     #endregion
 
     #region Var: Stats
-    private TimerData cooldownTimer = new TimerData();
     private TimerData durationTimer = new TimerData();
     private IntStat shieldhealth;
     #endregion
@@ -23,7 +22,7 @@ public class TalismanOfProtection : ActiveItem
     #region Method: Unity
     private void Start()
     {
-        cooldownTimer.EndTime = 0.1f;
+        cooldownTimer.EndTime = 5f;
 
         durationTimer.EndTime = 2.5f;
         durationTimer.SetAction(OnEnd: Deactivate);
@@ -35,9 +34,7 @@ public class TalismanOfProtection : ActiveItem
     #region Method: Add/Remove
     public override void OnAdd()
     {
-        // Set Up Timers
-        cooldownTimer.SetTick(gameObject);
-        cooldownTimer.Restart();
+        base.OnAdd();
 
         // Initialize Item Effect
         onDamageReceived = new ItemEffect(GetType(), ShieldFunction);
@@ -51,29 +48,25 @@ public class TalismanOfProtection : ActiveItem
         base.OnRemove();
 
         // Remove Timers
-        cooldownTimer.SetTick(gameObject, TimerTick.None);
-        cooldownTimer.ToZero();
         durationTimer.SetTick(gameObject, TimerTick.None);
         durationTimer.ToZero();
 
         // Destroy Effect
         Destroy(shieldEffect);
-
-        // Deactivate This Item
-        Deactivate();
     }
     #endregion
 
     #region Method: Activate/Deactivate
     public override void Activate()
     {
-        base.Activate();
-
-        if (!cooldownTimer.IsEnded)
+        if (IsActive || !cooldownTimer.IsEnded)
             return;
+
+        IsActive = true;
 
         // Stop Cooldown
         cooldownTimer.SetActive(false);
+        cooldownTimer.ToZero();
 
         // Start Duration
         durationTimer.SetTick(gameObject);

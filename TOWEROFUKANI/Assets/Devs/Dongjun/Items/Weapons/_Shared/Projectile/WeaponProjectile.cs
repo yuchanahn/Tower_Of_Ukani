@@ -6,6 +6,7 @@ public class WeaponProjectile : PoolingObj
     [Header("Object Detection")]
     [SerializeField] protected Vector2 detectSize;
     [SerializeField] protected LayerMask detectLayers;
+    [SerializeField] protected string[] ignoreTags;
 
     [Header("Effects")]
     [SerializeField] protected PoolingObj particle_Hit;
@@ -59,6 +60,7 @@ public class WeaponProjectile : PoolingObj
             Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, projectileData.moveSpeed.Value * Time.fixedDeltaTime, detectLayers);
 
         Vector2 hitPos = transform.position;
+        GameObject hitObj = null;
 
         if (hits.Length != 0)
         {
@@ -66,35 +68,42 @@ public class WeaponProjectile : PoolingObj
 
             for (int i = 0; i < hits.Length; i++)
             {
-                if (hits[i].collider.CompareTag("Player"))
+                if (IsIgnoreTag(hits[i].collider))
                     continue;
 
                 hasHit = true;
                 hitPos = hits[i].point;
+                hitObj = hits[i].collider.gameObject;
 
                 IDamage mob = hits[i].collider.GetComponent<IDamage>();
                 if (mob != null)
                 {
                     mob.Hit(projectileData.attackData.damage.Value);
-
                     PlayerStats.DamageDealt = projectileData.attackData.damage.Value;
                     ItemEffectManager.Trigger(PlayerActions.Hit);
-
-                    OnHit(hitPos);
-                    return;
+                    break;
                 }
             }
 
             if (hasHit)
-                OnHit(hitPos);
+                OnHit(hitPos, hitObj);
         }
     }
-    protected virtual void OnHit(Vector2 hitPos)
+    protected bool IsIgnoreTag(Component check)
+    {
+        for (int j = 0; j < ignoreTags.Length; j++)
+            if (check.CompareTag(ignoreTags[j]))
+                return true;
+
+        return false;
+    }
+    protected virtual void OnHit(Vector2 hitPos, GameObject hitObject)
     {
         // Sleep
         ObjPoolingManager.Sleep(this);
 
         // Spawn Effect
+        if (particle_Hit == null) return;
         Transform hitParticle = particle_Hit.Spawn(hitPos, Quaternion.identity).transform;
         hitParticle.right = -transform.right;
         hitParticle.position -= transform.right * particle_HitOffset;

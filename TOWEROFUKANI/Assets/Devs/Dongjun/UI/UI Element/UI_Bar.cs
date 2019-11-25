@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UI_Bar : MonoBehaviour
 {
-    [SerializeField] private Image bar;
+    [SerializeField] protected Image bar;
 
     public float Value
     {

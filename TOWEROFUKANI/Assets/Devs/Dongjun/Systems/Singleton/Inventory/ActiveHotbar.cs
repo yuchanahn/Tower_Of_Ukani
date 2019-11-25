@@ -15,6 +15,9 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
 
     [Header("Active Slot")]
     [SerializeField] private Image[] img_ActiveSlots = new Image[SLOT_SIZE];
+
+    [Header("Slot Infos")]
+    [SerializeField] private ActiveSlotInfo[] slotInfos = new ActiveSlotInfo[SLOT_SIZE];
     #endregion
 
     #region Var: Properties
@@ -35,6 +38,10 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
     {
         ActivateItem();
     }
+    private void LateUpdate()
+    {
+        UpdateUI_SlotInfo();
+    }
     #endregion
 
     #region Method: UI
@@ -45,18 +52,33 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
             img_ActiveSlots[i].sprite = Items[i]?.Info.Icon ?? spr_Empty;
         }
     }
+    private void UpdateUI_SlotInfo()
+    {
+        for (int i = 0; i < SLOT_SIZE; i++)
+        {
+            if (Items[i] is null)
+            {
+                slotInfos[i].gameObject.SetActive(false);
+                continue;
+            }
+
+            slotInfos[i].gameObject.SetActive(true);
+            slotInfos[i].ShowCooldown(Items[i].cooldownTimer);
+            slotInfos[i].ShowActiveFrame(Items[i].IsActive);
+        }
+    }
     #endregion
 
     #region Method: Activate Item
     private void ActivateItem()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && (!Items[0]?.IsActive ?? false))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
             Items[0]?.Activate();
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && (!Items[1]?.IsActive ?? false))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
             Items[1]?.Activate();
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && (!Items[2]?.IsActive ?? false))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
             Items[2]?.Activate();
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && (!Items[3]?.IsActive ?? false))
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
             Items[3]?.Activate();
     }
     #endregion

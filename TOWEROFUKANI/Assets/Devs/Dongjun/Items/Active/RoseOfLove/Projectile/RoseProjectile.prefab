@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1668745976323334250
+--- !u!1 &7594732538610579326
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,52 +8,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1668745976323334251}
-  - component: {fileID: 593094242138930448}
-  m_Layer: 11
-  m_Name: Shotgun_Bullet
+  - component: {fileID: 7594732538610579325}
+  - component: {fileID: 5525761641378204931}
+  m_Layer: 0
+  m_Name: RoseProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1668745976323334251
+--- !u!4 &7594732538610579325
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668745976323334250}
+  m_GameObject: {fileID: 7594732538610579326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2730339448629483527}
+  - {fileID: 7594732538613404583}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &593094242138930448
+--- !u!114 &5525761641378204931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1668745976323334250}
+  m_GameObject: {fileID: 7594732538610579326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 743564d351d5ee942af79dbe912286f8, type: 3}
+  m_Script: {fileID: 11500000, guid: bd35db5805ccc6c4ebf7e588d2e21c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectSize: {x: 1, y: 0.2}
+  detectSize: {x: 0.3, y: 0.3}
   detectLayers:
     serializedVersion: 2
     m_Bits: 768
   ignoreTags:
   - Player
-  particle_Hit: {fileID: 1036255023471385981, guid: 29a4720308044564a9f0ee58eed9cb7c,
-    type: 3}
-  particle_HitOffset: 0.15
---- !u!1 &2747505995723149081
+  particle_Hit: {fileID: 0}
+  particle_HitOffset: 0
+--- !u!1 &7594732538613404576
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,8 +60,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2730339448629483527}
-  - component: {fileID: 4805463828591322451}
+  - component: {fileID: 7594732538613404583}
+  - component: {fileID: 7594732538613404582}
   m_Layer: 0
   m_Name: Sprite Root
   m_TagString: Untagged
@@ -70,27 +69,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2730339448629483527
+--- !u!4 &7594732538613404583
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2747505995723149081}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 7594732538613404576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1668745976323334251}
+  m_Father: {fileID: 7594732538610579325}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4805463828591322451
+--- !u!212 &7594732538613404582
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2747505995723149081}
+  m_GameObject: {fileID: 7594732538613404576}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -119,10 +118,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1138284999
-  m_SortingLayer: 6
+  m_SortingLayerID: 832114591
+  m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3d4455df1c4236449becb87dc99c4bb6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e99747b322f49eb42980f8403a7af4c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
