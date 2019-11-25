@@ -26,7 +26,7 @@ public class SE_Stat<T>
 public class StatusEffect_Object : MonoBehaviour
 {
     public bool Use;
-    [SerializeField] GameObject StunnedObj;
+    [SerializeField] public GameObject StunnedObj;
 
     List<StatusEffect_Base> statusEffect_s = new List<StatusEffect_Base>();
 

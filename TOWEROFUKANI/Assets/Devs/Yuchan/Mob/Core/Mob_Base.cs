@@ -207,7 +207,12 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         EndFollowing.Invoke();
         if (m_SEObj.SEAni != eMobAniST.Last)
         {
+            // TODO : 
+            // 상태이상이 애니를 쓴다면. 다른 애니 끝내자.
+            // 
+            // 
             m_CurAniST = m_SEObj.SEAni;
+            m_bHurting = false;
             return;
         }
         if (m_bHurting) return;
