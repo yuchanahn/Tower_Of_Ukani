@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
 {
     #region Var: Stats
     private static IntStat health = new IntStat(100, min: 0, max: 100);
+
     private static IntStat stamina = new IntStat(0, min: 0, max: 3);
     private static FloatStat staminaRegen = new FloatStat(0.5f, min: 0, max: 1f);
     private static float staminaUIBarValue;
@@ -26,6 +27,7 @@ public class PlayerStats : MonoBehaviour
     #endregion
 
     #region Var: Properties
+    public static bool AbsorbDamage { get; set; } = false;
     public static IntStat Health => health;
     public static IntStat Stamina => stamina;
     #endregion
@@ -77,10 +79,8 @@ public class PlayerStats : MonoBehaviour
 
     public static void Damage(int amount)
     {
-        amount = Mathf.Abs(amount);
-
         // Save Received Damage amount
-        DamageReceived = amount;
+        DamageReceived = AbsorbDamage ? 0 : Mathf.Abs(amount);
 
         // Trriger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Damaged);
@@ -115,7 +115,7 @@ public class PlayerStats : MonoBehaviour
     }
     public static void Death()
     {
-        health.ModFlat = 0;
+        health.Reset();
     }
     #endregion
 

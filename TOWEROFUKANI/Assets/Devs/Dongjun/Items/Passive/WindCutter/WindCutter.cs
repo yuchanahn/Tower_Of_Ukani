@@ -30,10 +30,13 @@ public class WindCutter : PassiveItem
             case 1:
                 break;
             case 2:
-                bonusPercentDamage = 20;
+                bonusPercentDamage = 50;
+                break;
+            case 3:
+                bonusPercentDamage = 100;
                 break;
             default:
-                bonusPercentDamage = 100;
+                bonusPercentDamage = 200;
                 break;
         }
 

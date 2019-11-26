@@ -5,14 +5,14 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
 {
     #region Var: Inspector
     [Header("Shoot")]
-    [SerializeField] private Transform shootPoint;
-    [SerializeField] private Arrow arrowPrefab;
+    [SerializeField] protected Transform shootPoint;
+    [SerializeField] protected Arrow arrowPrefab;
 
     [Header("Shoot Animation")]
-    [SerializeField] private float maxShootAnimTime;
+    [SerializeField] protected float maxShootAnimTime;
 
     [Header("Camera Shake")]
-    [SerializeField] private CameraShake.Data camShakeData_Shoot;
+    [SerializeField] protected CameraShake.Data camShakeData_Shoot;
     #endregion
 
     #region Method: CLA_Action
@@ -44,7 +44,7 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
     #endregion
 
     #region Method: Shoot
-    private void Shoot()
+    protected virtual void Shoot()
     {
         SpawnArrow();
         ShootEffects();
@@ -53,7 +53,7 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
         ItemEffectManager.Trigger(PlayerActions.WeaponMain);
         ItemEffectManager.Trigger(PlayerActions.BowShoot);
     }
-    private void SpawnArrow()
+    protected virtual void SpawnArrow()
     {
         // Set Attack Data
         AttackData curAttackData = weapon.attackData;
@@ -69,7 +69,7 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
         // Set Arrow Data
         arrow.InitData(curArrowData, curAttackData);
     }
-    private void ShootEffects()
+    protected virtual void ShootEffects()
     {
         // Cam Shake
         CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
@@ -77,7 +77,7 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
     #endregion
 
     #region Method: Anim Event
-    private void OnAnim_ShootArrow()
+    protected virtual void OnAnim_ShootArrow()
     {
         Shoot();
     }

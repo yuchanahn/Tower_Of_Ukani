@@ -73,6 +73,12 @@ public struct IntStat
         }
     }
 
+    public void Reset()
+    {
+        ModFlat = 0;
+        ModPercent = 0;
+    }
+
     public IntStat(int @base = 0, int min = int.MinValue, int max = int.MaxValue, int modFlat = 0, int modPercent = 0)
     {
         this.needToCalculate = true;

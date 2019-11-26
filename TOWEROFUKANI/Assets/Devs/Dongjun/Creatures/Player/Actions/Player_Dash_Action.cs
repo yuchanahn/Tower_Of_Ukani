@@ -52,6 +52,9 @@ public class Player_Dash_Action : CLA_Action<Player>
         // Play Animation
         animator.Play(dashDir == main.Dir ? "Player_Dash_Forward" : "Player_Dash_Backward", 0, 0f);
 
+        // Player Will Not Take Damage
+        PlayerStats.AbsorbDamage = true;
+
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Dash);
     }
@@ -63,6 +66,9 @@ public class Player_Dash_Action : CLA_Action<Player>
         // Reset Value
         IsDasing = false;
         dashDir = 0;
+
+        // Player Will Take Damage
+        PlayerStats.AbsorbDamage = false;
     }
     public override void OnFixedUpdate()
     {
@@ -79,7 +85,7 @@ public class Player_Dash_Action : CLA_Action<Player>
         if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))
         {
             curTrailCount++;
-            main.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, transform);
+            main.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, main.bodySpriteRenderer.transform);
         }
     }
     #endregion
