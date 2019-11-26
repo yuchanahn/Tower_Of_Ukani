@@ -217,7 +217,10 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
         }
         if (m_bHurting) return;
 
-        if (CanFollow && Follow())  OnFollowing.Invoke();
+        if (!m_bAttacking)
+        {
+            if (CanFollow && Follow()) OnFollowing.Invoke();
+        }
 
         m_CurAniST = 
         m_bHurting || m_bAttacking ? m_CurAniST :
@@ -316,14 +319,19 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
             IsKeepFollowing = true;
             return true;
         }
-        Dir = DirForPlayer;
-        if ((transform.position.y - GM.PlayerPos.y) > m_groundDetectionData.Size.y)
+        
+        if ((transform.position.y - GM.PlayerPos.y) > m_groundDetectionData.Size.y * 0.9f)
         {
-            if (Fall()) return true;
+            Dir = DirForPlayer;
+            if (Fall())
+            {
+                return true;
+            }
         }
         if (m_groundDetectionData.isGrounded)
         {
-            if (GM.PlayerPos.y - transform.position.y >= m_groundDetectionData.Size.y)
+            Dir = DirForPlayer;
+            if (GM.PlayerPos.y - transform.position.y >= m_groundDetectionData.Size.y * 0.9f)
             {
                 // 일단 우드 플렛폼의 Y사이즈가 이상함;
                 // 그거떄매 땅에서 벽으로 감지하고 올라올라함;
