@@ -28,7 +28,7 @@ public static class PlayerWalk_Logic
         }
         else if (data.oldWalkDir != 0 && data.oldWalkDir != inputDir)
         {
-            data.curWalkSpeed = data.curWalkSpeed * data.changeDirSpeed;
+            data.curWalkSpeed *= data.changeDirSpeed;
             data.time = 0;
         }
         else if (data.curWalkSpeed < data.walkSpeed)
