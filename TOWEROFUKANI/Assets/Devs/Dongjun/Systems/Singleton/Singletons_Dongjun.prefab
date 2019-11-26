@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 4117234795505780072}
   - component: {fileID: 9134514192798373486}
   - component: {fileID: 4117234795505780078}
-  - component: {fileID: 3671742662400679011}
-  - component: {fileID: 4379574795228798098}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -88,30 +86,6 @@ MonoBehaviour:
   mainCam: {fileID: 0}
   camShake: {fileID: 0}
   playerRB2D: {fileID: 0}
---- !u!114 &3671742662400679011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4117234795505780074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6100a0bbe64adec43886226b0881bd28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4379574795228798098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4117234795505780074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f41ad2f57762dd844b92770e51d0ff04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4117234795851757298
 GameObject:
   m_ObjectHideFlags: 0

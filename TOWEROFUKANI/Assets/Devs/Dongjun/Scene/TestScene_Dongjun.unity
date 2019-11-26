@@ -970,6 +970,67 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 114228557}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &125280356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 125280357}
+  - component: {fileID: 125280358}
+  - component: {fileID: 125280359}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &125280357
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125280356}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1169408276}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &125280358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125280356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6100a0bbe64adec43886226b0881bd28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &125280359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125280356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f41ad2f57762dd844b92770e51d0ff04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &140994968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4591,7 +4652,7 @@ RectTransform:
   m_Children:
   - {fileID: 783397308}
   m_Father: {fileID: 1169408276}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6784,7 +6845,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1169408276}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7120,6 +7181,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 125280357}
   - {fileID: 735108444}
   - {fileID: 1096434447}
   m_Father: {fileID: 1496745256}
@@ -11484,11 +11546,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1863065097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d62f50f3024ed6b44b5bfdb4a709e196, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fd15a5b4b9585440bfd7f53ce1d6e98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tp: {fileID: 1512895068}
-  Map2: {fileID: 784393716}
+  goToMap: {fileID: 784393716}
+  goToPos: {fileID: 1512895068}
 --- !u!1 &1867307452
 GameObject:
   m_ObjectHideFlags: 0
@@ -13217,6 +13279,38 @@ PrefabInstance:
       propertyPath: txt_AmmoInfo
       value: 
       objectReference: {fileID: 1173635197}
+    - target: {fileID: 0}
+      propertyPath: txt_WeaponName
+      value: 
+      objectReference: {fileID: 884042319}
+    - target: {fileID: 0}
+      propertyPath: txt_AmmoInfo
+      value: 
+      objectReference: {fileID: 1173635197}
+    - target: {fileID: 0}
+      propertyPath: img_WeaponSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 1686132609}
+    - target: {fileID: 0}
+      propertyPath: img_WeaponSlots.Array.data[1]
+      value: 
+      objectReference: {fileID: 884507398}
+    - target: {fileID: 0}
+      propertyPath: img_WeaponSlots.Array.data[2]
+      value: 
+      objectReference: {fileID: 10711463}
+    - target: {fileID: 0}
+      propertyPath: go_WeaponSelected.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: go_WeaponSelected.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: go_WeaponSelected.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4117234795851757298, guid: 4481dd2a3fe0dce40ad7628ca110315a,
         type: 3}
       propertyPath: m_Name
@@ -13257,46 +13351,6 @@ PrefabInstance:
       propertyPath: playerRB2D
       value: 
       objectReference: {fileID: 1588353896}
-    - target: {fileID: 3671742662400679011, guid: 4481dd2a3fe0dce40ad7628ca110315a,
-        type: 3}
-      propertyPath: txt_WeaponName
-      value: 
-      objectReference: {fileID: 884042319}
-    - target: {fileID: 3671742662400679011, guid: 4481dd2a3fe0dce40ad7628ca110315a,
-        type: 3}
-      propertyPath: txt_AmmoInfo
-      value: 
-      objectReference: {fileID: 1173635197}
-    - target: {fileID: 3671742662400679011, guid: 4481dd2a3fe0dce40ad7628ca110315a,
-        type: 3}
-      propertyPath: img_WeaponSlots.Array.data[0]
-      value: 
-      objectReference: {fileID: 1686132609}
-    - target: {fileID: 3671742662400679011, guid: 4481dd2a3fe0dce40ad7628ca110315a,
-        type: 3}
-      propertyPath: img_WeaponSlots.Array.data[1]
-      value: 
-      objectReference: {fileID: 884507398}
-    - target: {fileID: 3671742662400679011, guid: 4481dd2a3fe0dce40ad7628ca110315a,
-        type: 3}
-      propertyPath: img_WeaponSlots.Array.data[2]
-      value: 
-      objectReference: {fileID: 10711463}
-    - target: {fileID: 3671742662400679011, guid: 4481dd2a3fe0dce40ad7628ca110315a,
-        type: 3}
-      propertyPath: go_WeaponSelected.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3671742662400679011, guid: 4481dd2a3fe0dce40ad7628ca110315a,
-        type: 3}
-      propertyPath: go_WeaponSelected.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3671742662400679011, guid: 4481dd2a3fe0dce40ad7628ca110315a,
-        type: 3}
-      propertyPath: go_WeaponSelected.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4481dd2a3fe0dce40ad7628ca110315a, type: 3}
 --- !u!1001 &7639122611435246469
