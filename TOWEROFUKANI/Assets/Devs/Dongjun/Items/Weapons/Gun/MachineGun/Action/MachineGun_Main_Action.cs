@@ -25,10 +25,6 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Stats
-    private WeaponProjectileData bulletData;
-    #endregion
-
     #region Var: Properties
     public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
@@ -88,14 +84,13 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
     }
     private void SpawnBullet()
     {
-        // Set Bullet Data
-        bulletData = weapon.bulletData;
-
         // Spawn Bullet
         Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
         bullet.transform.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
         bullet.transform.rotation = Quaternion.Euler(0, 0, bullet.transform.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
-        bullet.SetData(bulletData);
+
+        // Set Bullet Data
+        bullet.InitData(weapon.bulletData, weapon.attackData);
 
         // Consume Bullet
         weapon.loadedBullets -= 1;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class WeaponProjectile : PoolingObj
+public class Projectile : PoolingObj
 {
     #region Var: Inspector
     [Header("Object Detection")]
@@ -15,13 +15,26 @@ public class WeaponProjectile : PoolingObj
 
     #region Var: Data
     protected Vector2 velocity;
-    protected WeaponProjectileData projectileData;
+    protected ProjectileData projectileData;
+    protected AttackData attackData;
     #endregion
 
     #region Method: Init PoolingObj
     public override void ResetOnSpawn()
     {
-        projectileData.curTravelDist = 0;
+        projectileData.travelDist.ModFlat = 0;
+    }
+    #endregion
+
+    #region Method: Init Data
+    public void InitData(ProjectileData projectileData, AttackData attackData = new AttackData())
+    {
+        // Init Data
+        this.projectileData = projectileData;
+        this.attackData = attackData;
+
+        // Init Velocity
+        velocity = projectileData.moveSpeed.Value * transform.right;
     }
     #endregion
 
@@ -30,27 +43,42 @@ public class WeaponProjectile : PoolingObj
     {
         Move();
         DetectObject();
-        OnMaxDist();
+
+        if (projectileData.travelDist.Value >= projectileData.travelDist.Max)
+            OnMaxDist();
     }
     #endregion
 
     #region Method: Move
     protected virtual void Move()
     {
+        // Set Velocity
         velocity.y -= projectileData.gravity.Value;
-        transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
-        projectileData.curTravelDist += velocity.magnitude * Time.fixedDeltaTime;
 
+        // Translate
+        transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
+        
+        // Update Travle Dist
+        projectileData.travelDist.ModFlat += velocity.magnitude * Time.fixedDeltaTime;
+
+        // Rotate Towards Moving Dir
         transform.right = velocity.normalized;
     }
     protected virtual void OnMaxDist()
     {
-        if (projectileData.curTravelDist >= projectileData.maxTravelDist.Value)
-            ObjPoolingManager.Sleep(this);
+        ObjPoolingManager.Sleep(this);
     }
     #endregion
 
     #region Method: Hit
+    protected bool IsIgnoreTag(Component check)
+    {
+        for (int j = 0; j < ignoreTags.Length; j++)
+            if (check.CompareTag(ignoreTags[j]))
+                return true;
+
+        return false;
+    }
     protected virtual void DetectObject()
     {
         Vector2 pos = (transform.position + (transform.right * detectSize.x * 0.5f)) - (transform.right * (projectileData.moveSpeed.Value * Time.fixedDeltaTime));
@@ -62,39 +90,31 @@ public class WeaponProjectile : PoolingObj
         Vector2 hitPos = transform.position;
         GameObject hitObj = null;
 
-        if (hits.Length != 0)
+        if (hits.Length == 0)
+            return;
+
+        bool hasHit = false;
+
+        for (int i = 0; i < hits.Length; i++)
         {
-            bool hasHit = false;
+            // Check Ignore Tag
+            if (IsIgnoreTag(hits[i].collider))
+                continue;
 
-            for (int i = 0; i < hits.Length; i++)
-            {
-                if (IsIgnoreTag(hits[i].collider))
-                    continue;
+            // Set Data
+            hasHit = true;
+            hitPos = hits[i].point;
+            hitObj = hits[i].collider.gameObject;
 
-                hasHit = true;
-                hitPos = hits[i].point;
-                hitObj = hits[i].collider.gameObject;
-
-                IDamage mob = hits[i].collider.GetComponent<IDamage>();
-                if (mob != null)
-                {
-                    mob.Hit(projectileData.attackData.damage.Value);
-                    PlayerStats.DamageDealt = projectileData.attackData.damage.Value;
-                    ItemEffectManager.Trigger(PlayerActions.Hit);
-                    break;
-                }
-            }
-
-            if (hasHit)
-                OnHit(hitPos, hitObj);
+            if (CheckHit(hits[i]))
+                break;
         }
-    }
-    protected bool IsIgnoreTag(Component check)
-    {
-        for (int j = 0; j < ignoreTags.Length; j++)
-            if (check.CompareTag(ignoreTags[j]))
-                return true;
 
+        if (hasHit)
+            OnHit(hitPos, hitObj);
+    }
+    protected virtual bool CheckHit(RaycastHit2D hit)
+    {
         return false;
     }
     protected virtual void OnHit(Vector2 hitPos, GameObject hitObject)
@@ -102,19 +122,11 @@ public class WeaponProjectile : PoolingObj
         // Sleep
         ObjPoolingManager.Sleep(this);
 
-        // Spawn Effect
+        // Spawn Hit Effect
         if (particle_Hit == null) return;
         Transform hitParticle = particle_Hit.Spawn(hitPos, Quaternion.identity).transform;
         hitParticle.right = -transform.right;
         hitParticle.position -= transform.right * particle_HitOffset;
-    }
-    #endregion
-
-    #region Method: SetData
-    public void SetData(WeaponProjectileData projectileData)
-    {
-        this.projectileData = projectileData;
-        velocity = projectileData.moveSpeed.Value * transform.right;
     }
     #endregion
 }

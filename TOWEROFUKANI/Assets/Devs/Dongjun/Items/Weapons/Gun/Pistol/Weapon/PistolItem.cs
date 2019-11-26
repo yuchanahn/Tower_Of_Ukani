@@ -4,17 +4,19 @@ public class PistolItem : GunItem
 {
     public override void InitStats()
     {
+        // Attack Data
+        attackData = new AttackData(1);
+
         // Timer Data
         shootTimer.EndTime = new FloatStat(0.15f, min: 0.01f);
         reloadTimer.EndTime = new FloatStat(0.5f, min: 0.01f);
         swapMagazineTimer.EndTime = new FloatStat(0.8f, min: 0.01f);
 
         // Bullet Data
-        bulletData = new WeaponProjectileData()
+        bulletData = new ProjectileData()
         {
-            attackData = new AttackData(1),
             moveSpeed = new FloatStat(45f, min: 0f),
-            maxTravelDist = new FloatStat(10f, min: 0f),
+            travelDist = new FloatStat(0f, min: 0f, max: 10f)
         };
 
         // Ammo Data
@@ -26,10 +28,10 @@ public class PistolItem : GunItem
             case 1:
                 break;
             case 2:
-                bulletData.attackData = new AttackData(2);
+                attackData = new AttackData(2);
                 break;
             default:
-                bulletData.attackData = new AttackData(3);
+                attackData = new AttackData(3);
                 break;
         }
     }

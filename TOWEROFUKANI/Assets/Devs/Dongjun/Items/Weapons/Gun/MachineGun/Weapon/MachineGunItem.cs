@@ -14,17 +14,19 @@ public class MachineGunItem : GunItem
 
     public override void InitStats()
     {
+        // Attack Data
+        attackData = new AttackData(1);
+
         // Timmer Data
         shootTimer.EndTime = new FloatStat(0.15f, min: 0.01f);
         reloadTimer.EndTime = new FloatStat(0.5f, min: 0.01f);
         swapMagazineTimer.EndTime = new FloatStat(1f, min: 0.01f);
 
         // Bullet Data
-        bulletData = new WeaponProjectileData()
+        bulletData = new ProjectileData()
         {
-            attackData = new AttackData(1),
             moveSpeed = new FloatStat(45f, min: 0f),
-            maxTravelDist = new FloatStat(10f, min: 0f),
+            travelDist = new FloatStat(min: 0f, max: 10f)
         };
 
         // Ammo Data

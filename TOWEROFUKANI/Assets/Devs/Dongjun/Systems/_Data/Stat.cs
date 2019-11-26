@@ -73,7 +73,7 @@ public struct IntStat
         }
     }
 
-    public IntStat(int @base, int min = int.MinValue, int max = int.MaxValue, int modFlat = 0, int modPercent = 0)
+    public IntStat(int @base = 0, int min = int.MinValue, int max = int.MaxValue, int modFlat = 0, int modPercent = 0)
     {
         this.needToCalculate = true;
         this.@base = @base;
@@ -157,7 +157,7 @@ public struct FloatStat
         }
     }
 
-    public FloatStat(float @base, float min = float.MinValue, float max = float.MaxValue, float modFlat = 0, float modPercent = 0)
+    public FloatStat(float @base = 0f, float min = float.MinValue, float max = float.MaxValue, float modFlat = 0, float modPercent = 0)
     {
         this.needToCalculate = true;
         this.@base = @base;

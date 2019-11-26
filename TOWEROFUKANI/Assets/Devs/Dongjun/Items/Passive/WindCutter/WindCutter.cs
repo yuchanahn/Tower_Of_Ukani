@@ -33,17 +33,18 @@ public class WindCutter : PassiveItem
                 bonusPercentDamage = 20;
                 break;
             default:
+                bonusPercentDamage = 100;
                 break;
         }
 
         switch (weapon)
         {
             case GunItem gun:
-                gun.bulletData.attackData.damage.ModPercent += bonusPercentDamage;
+                gun.attackData.damage.ModPercent += bonusPercentDamage;
                 break;
 
             case BowItem bow:
-                bow.arrowData.attackData.damage.ModPercent += bonusPercentDamage;
+                bow.attackData.damage.ModPercent += bonusPercentDamage;
                 break;
         }
     }

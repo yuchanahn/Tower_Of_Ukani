@@ -43,11 +43,15 @@ namespace Dongjun.Helper
             float dist = -1;
             for (int i = 0; i < hits.Length; i++)
             {
-                if (dist == -1 || dist > Vector2.Distance(hits[i].transform.position, pivot.position))
+                float curDist = Vector2.Distance(hits[i].transform.position, pivot.position);
+
+                if (dist == -1 || dist > curDist)
                 {
                     T cur = hits[i].GetComponent<T>();
-                    if (cur == null) continue;
+                    if (cur == null)
+                        continue;
 
+                    dist = curDist;
                     result = cur;
                 }
             }

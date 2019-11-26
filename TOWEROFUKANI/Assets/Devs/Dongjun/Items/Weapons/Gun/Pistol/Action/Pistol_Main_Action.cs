@@ -17,10 +17,6 @@ public class Pistol_Main_Action : GunAction_Base<PistolItem>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Stats
-    private WeaponProjectileData bulletData;
-    #endregion
-
     #region Var: Properties
     public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
@@ -79,8 +75,7 @@ public class Pistol_Main_Action : GunAction_Base<PistolItem>
         Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
 
         // Set Bullet Data
-        bulletData = weapon.bulletData;
-        bullet.SetData(bulletData);
+        bullet.InitData(weapon.bulletData, weapon.attackData);
 
         // Consume Bullet
         weapon.loadedBullets -= 1;

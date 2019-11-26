@@ -50,6 +50,10 @@ public abstract class WeaponItem : Item
     { get; protected set; } = false;
     #endregion
 
+    #region Var: Stats
+    public AttackData attackData;
+    #endregion
+
     #region Method: Unity
     protected override void Awake()
     {
@@ -100,7 +104,7 @@ public abstract class GunItem : WeaponItem
     public TimerStat swapMagazineTimer;
 
     [Header("Bullet Data")]
-    public WeaponProjectileData bulletData;
+    public ProjectileData bulletData;
 
     [Header("Ammo Data")]
     public IntStat magazineSize;
@@ -160,7 +164,7 @@ public abstract class BowItem : WeaponItem
     public TimerStat drawTimer;
 
     [Header("Arrow Data")]
-    public WeaponProjectileData arrowData;
+    public ProjectileData arrowData;
     #endregion
 
     #region Var: Bow Data

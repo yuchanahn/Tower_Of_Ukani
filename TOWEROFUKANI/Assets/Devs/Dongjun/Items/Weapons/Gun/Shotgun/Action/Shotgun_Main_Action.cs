@@ -21,10 +21,6 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Stats
-    private WeaponProjectileData bulletData;
-    #endregion
-
     #region Var: Properties
     public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
@@ -80,19 +76,20 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
     }
     private void SpawnBullet()
     {
-        // Set Bullet Data
-        bulletData = weapon.bulletData;
-        bulletData.attackData.damage = new IntStat(0);
-        bulletData.attackData.damage.Base = (int)((weapon.bulletData.attackData.damage.Value / (float)pelletCount) + 0.5f);
+        // Set Attack Data
+        AttackData curAttackData = weapon.attackData;
+        curAttackData.damage = new IntStat(MathD.Round((float)weapon.attackData.damage.Value / pelletCount));
 
-        // Spawn Bullets
-        Vector3 eRot = transform.eulerAngles;
-        eRot.z -= ((pelletCount / 2) - (pelletCount % 2 == 0 ? 0.5f : 0)) * pelletAngle;
-        for (int i = 0; i < pelletCount; i++)
+        // Set Bullet Rotation
+        Vector3 rot = transform.eulerAngles;
+        rot.z -= ((pelletCount / 2) - (pelletCount % 2 == 0 ? 0.5f : 0)) * pelletAngle;
+        for (int i = 0; i < pelletCount; i++, rot.z += pelletAngle)
         {
-            Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(eRot));
-            bullet.SetData(bulletData);
-            eRot.z += pelletAngle;
+            // Spawn Bullets
+            Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(rot));
+
+            // Set Bullet Data
+            bullet.InitData(weapon.bulletData, curAttackData);
         }
 
         // Consume Bullet

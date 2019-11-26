@@ -15,10 +15,6 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Stats
-    private WeaponProjectileData curArrowData;
-    #endregion
-
     #region Method: CLA_Action
     public override void OnEnter()
     {
@@ -59,15 +55,19 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
     }
     private void SpawnArrow()
     {
+        // Set Attack Data
+        AttackData curAttackData = weapon.attackData;
+        curAttackData.damage = new IntStat(Mathf.Max(MathD.Round(weapon.attackData.damage.Value * weapon.drawPower), 1));
+
+        // Set Projectile Data
+        ProjectileData curArrowData = weapon.arrowData;
+        curArrowData.moveSpeed.Base *= weapon.drawPower;
+
         // Spawn Arrow
         Arrow arrow = arrowPrefab.Spawn(shootPoint.position, transform.rotation);
 
         // Set Arrow Data
-        curArrowData = weapon.arrowData;
-        curArrowData.attackData.damage = new IntStat(0);
-        curArrowData.attackData.damage.Base = Mathf.Max(Mathf.RoundToInt(weapon.arrowData.attackData.damage.Value * weapon.drawPower), 1);
-        curArrowData.moveSpeed.Base *= weapon.drawPower;
-        arrow.SetData(curArrowData);
+        arrow.InitData(curArrowData, curAttackData);
     }
     private void ShootEffects()
     {

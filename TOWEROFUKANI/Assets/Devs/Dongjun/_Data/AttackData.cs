@@ -9,7 +9,7 @@ public struct AttackData
     // Penetration
     // Etc...
 
-    public AttackData(int damage)
+    public AttackData(int damage = 0)
     {
         this.damage = new IntStat(damage, min: 0);
     }
