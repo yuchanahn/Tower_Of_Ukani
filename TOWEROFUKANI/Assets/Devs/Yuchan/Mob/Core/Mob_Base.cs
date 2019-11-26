@@ -102,8 +102,9 @@ public class Mob_Base : MonoBehaviour, IHurt, ICanDetectGround
      IsWallInForword ? IsOneWayInForword ? 0 : m_MoveData.Speed * m_MoveData.Dir :
      IsKeepFollowing ? m_MoveData.Speed * m_MoveData.Dir :
      IsFollowMax ? 0 :
-     CanFollow ?  m_MoveData.Speed * m_MoveData.Dir :
      IsCliff ? 0 :
+     CanFollow ?  m_MoveData.Speed * m_MoveData.Dir :
+     
      m_bHurting || !m_groundDetectionData.isGrounded ? 0 :
      //: !CliffDetect_Logic.CanFall(m_MoveData.FallHeight, transform, m_MoveData.Dir * m_groundDetectionData.Size.x, m_groundDetectionData.GroundLayers) ? 0
      m_MoveData.Speed * m_MoveData.Dir;
