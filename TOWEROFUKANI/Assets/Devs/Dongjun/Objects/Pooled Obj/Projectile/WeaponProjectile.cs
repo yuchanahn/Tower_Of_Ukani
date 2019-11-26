@@ -15,7 +15,10 @@ public class WeaponProjectile : Projectile
         ItemEffectManager.Trigger(PlayerActions.Hit);
 
         // Damage Mob
-        damageMob.Hit(PlayerStats.DamageDealt);
+        damageMob.Hit(PlayerStats.DamageDealt); // 여기서 체력이나 불리언 반환 해줘!!
+
+        // TO DO:
+        // Kill Item Effect Trigger
         return true;
     }
 }
