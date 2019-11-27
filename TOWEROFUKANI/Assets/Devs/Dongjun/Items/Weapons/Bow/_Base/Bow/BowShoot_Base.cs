@@ -36,7 +36,7 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
             return;
 
         // Look At Mouse
-        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
+        transform.AimMouse(Global.Inst.MainCam, transform);
 
         // Animation Speed
         animator.SetSpeed(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);

@@ -70,7 +70,7 @@ public class Player_Normal_Action : CLA_Action<Player>,
     public override void OnLateUpdate()
     {
         // Character Body Look At Mouse
-        main.bodySpriteRenderer.LookAtMouseY(Global.Inst.MainCam, transform);
+        main.bodySpriteRenderer.LookAtMouseFlipX(Global.Inst.MainCam, transform);
     }
     public override void OnFixedUpdate()
     {

@@ -44,6 +44,7 @@ public abstract class WeaponItem : Item
 
     #region Var: Properties
     public GameObject SpriteRoot => spriteRoot;
+    public SpriteRenderer RendererRoot { get; private set; }
     public float PivotPointY => pivotPointY;
     public WeaponTag[] WeaponTags => weaponTags;
     public bool IsSelected
@@ -58,6 +59,8 @@ public abstract class WeaponItem : Item
     protected override void Awake()
     {
         base.Awake();
+
+        RendererRoot = spriteRoot.GetComponent<SpriteRenderer>();
 
         InitStats();
         Select(false);

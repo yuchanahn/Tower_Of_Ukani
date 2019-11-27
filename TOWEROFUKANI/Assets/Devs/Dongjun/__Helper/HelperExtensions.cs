@@ -31,9 +31,21 @@ namespace Dongjun.Helper
 
             return false;
         }
+    }
 
-        public static T GetClosest<T>(this Collider2D[] hits, Transform pivot)
-            where T : Component
+    public static class ArrayExtensions
+    {
+        public static int Push<T>(this T[] source, T value)
+        {
+            var index = Array.IndexOf(source, default);
+
+            if (index != -1)
+                source[index] = value;
+
+            return index;
+        }
+
+        public static T GetClosest<T>(this Collider2D[] hits, Transform pivot) where T : Component
         {
             if (hits == null || hits.Length == 0)
                 return null;
@@ -60,16 +72,34 @@ namespace Dongjun.Helper
         }
     }
 
-    public static class ArrayExtensions
+    public static class VectorHelper
     {
-        public static int Push<T>(this T[] source, T value)
+        public static Vector2 Change(this Vector2 target, float? x = null, float? y = null)
         {
-            var index = Array.IndexOf(source, default);
+            if (x.HasValue) target.x = x.Value;
+            if (y.HasValue) target.y = y.Value;
+            return target;
+        }
+        public static Vector3 Change(this Vector3 target, float? x = null, float? y = null, float? z = null)
+        {
+            if (x.HasValue) target.x = x.Value;
+            if (y.HasValue) target.y = y.Value;
+            if (y.HasValue) target.z = z.Value;
+            return target;
+        }
 
-            if (index != -1)
-                source[index] = value;
-
-            return index;
+        public static Vector2 Add(this Vector2 target, float? x = null, float? y = null)
+        {
+            if (x.HasValue) target.x += x.Value;
+            if (y.HasValue) target.y += y.Value;
+            return target;
+        }
+        public static Vector3 Add(this Vector3 target, float? x = null, float? y = null, float? z = null)
+        {
+            if (x.HasValue) target.x += x.Value;
+            if (y.HasValue) target.y += y.Value;
+            if (y.HasValue) target.z += z.Value;
+            return target;
         }
     }
 }

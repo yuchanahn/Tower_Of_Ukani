@@ -2,40 +2,55 @@
 
 public static class LookAtMouse_Logic
 {
-    public static void LookAtMouseY(this SpriteRenderer target, Camera mainCam, Transform pivot)
+    public static void LookAtMouseFlipX(this SpriteRenderer target, Camera cam, Transform pivot)
     {
-        target.flipX = mainCam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x <= 0;
+        target.flipX = cam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x <= 0;
     }
-    public static void LookAtMouseX(this SpriteRenderer target, Camera mainCam, Transform pivot)
+    public static void LookAtMouseFlipY(this SpriteRenderer target, Camera cam, Transform pivot)
     {
-        target.flipY = mainCam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x <= 0;
+        target.flipY = cam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x <= 0;
     }
 
-    public static void LookAtMouseY(this Transform target, Camera mainCam, Transform pivot)
+    public static void LookAtMouseFlipX(this Transform target, Camera cam, Transform pivot)
     {
-        Vector3 newRot = Vector3.zero;
-        newRot.y = mainCam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x > 0 ? 0f : 180f;
-
-        target.localRotation = Quaternion.Euler(newRot);
+        Vector3 lookRot = target.localEulerAngles;
+        lookRot.y = cam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x > 0 ? 0f : 180f;
+        target.localRotation = Quaternion.Euler(lookRot);
     }
-    public static void LookAtMouseX(this Transform target, Camera mainCam, Transform pivot)
+    public static void LookAtMouseFlipY(this Transform target, Camera mainCam, Transform pivot)
     {
-        Vector3 newRot = Vector3.zero;
-        newRot.x = mainCam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x > 0 ? 0f : 180f;
-
-        target.localRotation = Quaternion.Euler(newRot);
+        Vector3 lookRot = target.localEulerAngles;
+        lookRot.x = mainCam.ScreenToWorldPoint(Input.mousePosition).y - pivot.position.y > 0 ? 0f : 180f;
+        target.localRotation = Quaternion.Euler(lookRot);
     }
-    public static void LookAtMouse(this Transform target, Camera mainCam, Transform pivot)
+
+    public static void LookAtMouse(this Transform target, Camera cam, Transform pivot)
     {
-        target.right = (Vector2)(mainCam.ScreenToWorldPoint(Input.mousePosition) - pivot.position).normalized;
+        target.right = (Vector2)(cam.ScreenToWorldPoint(Input.mousePosition) - pivot.position).normalized;
 
         if ((Vector2)target.right == Vector2.left)
             target.localRotation = Quaternion.Euler(0f, 0f, 180f);
     }
 
-    public static void AimedWeapon(Camera mainCam, Transform spriteRoot, Transform pivot)
+    public static void AimMouse(this Transform target, Camera cam, Transform pivot)
     {
-        pivot.LookAtMouse(mainCam, pivot);
-        spriteRoot.LookAtMouseX(mainCam, pivot);
+        // Rotate To Mouse Dir (Absolute X)
+        Vector2 mouseDir = (cam.ScreenToWorldPoint(Input.mousePosition) - pivot.position).normalized;
+        mouseDir.x = Mathf.Abs(mouseDir.x);
+        target.right = mouseDir;
+
+        // Flip X
+        target.LookAtMouseFlipX(cam, pivot);
+    }
+
+    public static void AimMouse(this GameObject target, Camera cam, Transform pivot)
+    {
+        // Rotate To Mouse Dir (Absolute X)
+        Vector2 mouseDir = (cam.ScreenToWorldPoint(Input.mousePosition) - pivot.position).normalized;
+        mouseDir.x = Mathf.Abs(mouseDir.x);
+        target.transform.right = mouseDir;
+
+        // Flip X
+        target.transform.LookAtMouseFlipX(cam, pivot);
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
 {
@@ -61,7 +62,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
             return;
 
         // Look At Mouse
-        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
+        transform.AimMouse(Global.Inst.MainCam, transform);
 
         // Animation Speed
         animator.SetSpeed(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
@@ -85,9 +86,9 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
     private void SpawnBullet()
     {
         // Spawn Bullet
-        Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
-        bullet.transform.position += shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset);
-        bullet.transform.rotation = Quaternion.Euler(0, 0, bullet.transform.eulerAngles.z + Random.Range(-acry_ZRotOffset, acry_ZRotOffset));
+        Bullet bullet = bulletPrefab.Spawn(
+            shootPoint.position + (shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset)),
+            Quaternion.Euler(transform.eulerAngles.Add(Random.Range(-acry_ZRotOffset, acry_ZRotOffset))));
 
         // Set Bullet Data
         bullet.InitData(weapon.bulletData, weapon.attackData);

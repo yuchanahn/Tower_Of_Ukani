@@ -57,7 +57,8 @@ public abstract class GunSwapMagazine_Base<TItem> : GunAction_Base<TItem>
     }
     public override void OnLateUpdate()
     {
-        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
+        // Look At Mouse
+        transform.AimMouse(Global.Inst.MainCam, transform);
     }
     #endregion
 

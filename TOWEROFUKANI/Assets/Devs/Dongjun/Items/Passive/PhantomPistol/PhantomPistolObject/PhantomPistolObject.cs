@@ -4,7 +4,6 @@ public class PhantomPistolObject : MonoBehaviour
 {
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform shootPos;
-    [SerializeField] private Transform spriteRoot;
 
     Vector2 targetPos;
 
@@ -19,7 +18,7 @@ public class PhantomPistolObject : MonoBehaviour
     }
     private void LateUpdate()
     {
-        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, spriteRoot, transform);
+        transform.AimMouse(Global.Inst.MainCam, transform);
     }
 
     public Bullet SpawnBullet()

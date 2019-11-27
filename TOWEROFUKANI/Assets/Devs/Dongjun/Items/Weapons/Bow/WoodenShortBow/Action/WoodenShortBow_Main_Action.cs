@@ -15,7 +15,7 @@ public class WoodenShortBow_Main_Action : BowAction_Base<WoodenShortBowItem>
             return;
 
         // Look At Mouse
-        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
+        transform.AimMouse(Global.Inst.MainCam, transform);
     }
     #endregion
 }

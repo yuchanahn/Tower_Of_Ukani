@@ -48,7 +48,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3833311784718186435, guid: 3309ab85061465349963a7dbc950e716,
     type: 3}
   shootPos: {fileID: 5157473624439308336}
-  spriteRoot: {fileID: 5157473625829553422}
 --- !u!1 &5157473624439308337
 GameObject:
   m_ObjectHideFlags: 0

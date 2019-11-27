@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 37977c2bf42596e468ae8125cbc019e4
+guid: f81a0b702b048584cab6140075d5deba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3968698274476419753
-    second: WeepingMist_Idle_0
+      213: -1641149648826490393
+    second: WeepingMist_Stunned_0
   - first:
-      213: -1562726434439822742
-    second: WeepingMist_Idle_1
+      213: 8385960656668578948
+    second: WeepingMist_Stunned_1
   - first:
-      213: 2673437164623230553
-    second: WeepingMist_Idle_2
+      213: -7918412434253994752
+    second: WeepingMist_Stunned_2
   - first:
-      213: 1863673225638844072
-    second: WeepingMist_Idle_3
+      213: 858790867158237082
+    second: WeepingMist_Stunned_3
   - first:
-      213: -7803518177477555006
-    second: WeepingMist_Idle_4
+      213: 3748414393401099446
+    second: WeepingMist_Stunned_4
   - first:
-      213: -978709809245969940
-    second: WeepingMist_Idle_5
+      213: -8975056112626385573
+    second: WeepingMist_Stunned_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -100,11 +100,23 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WeepingMist_Idle_0
+      name: WeepingMist_Stunned_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ea7bd5e87506a04880e4c3729bbe304
-      internalID: -3968698274476419753
+      spriteID: 08a3fed7fe8651a44b385382efe53727
+      internalID: -1641149648826490393
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeepingMist_Idle_1
+      name: WeepingMist_Stunned_1
       rect:
         serializedVersion: 2
         x: 52
@@ -139,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43ea23c06e26a0a428a7be48a95f98f8
-      internalID: -1562726434439822742
+      spriteID: d5c8c1b74a047b4408e134d1a7b58a05
+      internalID: 8385960656668578948
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeepingMist_Idle_2
+      name: WeepingMist_Stunned_2
       rect:
         serializedVersion: 2
         x: 104
@@ -160,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a06043b722b4fa4d891560732065363
-      internalID: 2673437164623230553
+      spriteID: e58b1c81ff0e8e94c87a0bf2652f0979
+      internalID: -7918412434253994752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeepingMist_Idle_3
+      name: WeepingMist_Stunned_3
       rect:
         serializedVersion: 2
         x: 0
@@ -181,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99535d2ab6a754640be35c10ae1f86cf
-      internalID: 1863673225638844072
+      spriteID: 447bc0f262609fb4cb49837039ef3f93
+      internalID: 858790867158237082
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeepingMist_Idle_4
+      name: WeepingMist_Stunned_4
       rect:
         serializedVersion: 2
         x: 52
@@ -202,14 +214,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67bc8db2f7db75d47930f9749f156a4a
-      internalID: -7803518177477555006
+      spriteID: d46a46aaf69a334438b91a70cb109087
+      internalID: 3748414393401099446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WeepingMist_Idle_5
+      name: WeepingMist_Stunned_5
       rect:
         serializedVersion: 2
         x: 104
@@ -223,8 +235,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b3b3ddc6975f374495782c5a5489bb9
-      internalID: -978709809245969940
+      spriteID: e33f6e4d9cd2fed4e97a787354fb49b5
+      internalID: -8975056112626385573
       vertices: []
       indices: 
       edges: []

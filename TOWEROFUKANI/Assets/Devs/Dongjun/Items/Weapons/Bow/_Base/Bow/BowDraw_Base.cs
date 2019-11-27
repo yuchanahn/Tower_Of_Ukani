@@ -54,7 +54,7 @@ public class BowDraw_Base<TItem> : BowAction_Base<TItem>
             return;
 
         // Look At Mouse
-        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
+        transform.AimMouse(Global.Inst.MainCam, transform);
     }
     #endregion
 }

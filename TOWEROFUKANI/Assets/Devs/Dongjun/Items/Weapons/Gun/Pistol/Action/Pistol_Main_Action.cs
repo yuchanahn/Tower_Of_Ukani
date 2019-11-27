@@ -48,7 +48,7 @@ public class Pistol_Main_Action : GunAction_Base<PistolItem>
             return;
 
         // Look At Mouse
-        LookAtMouse_Logic.AimedWeapon(Global.Inst.MainCam, weapon.SpriteRoot.transform, transform);
+        transform.AimMouse(Global.Inst.MainCam, transform);
 
         // Animation Speed
         animator.SetSpeed(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);

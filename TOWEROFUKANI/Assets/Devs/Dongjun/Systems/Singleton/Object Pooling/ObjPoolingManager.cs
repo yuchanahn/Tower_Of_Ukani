@@ -127,12 +127,32 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
 
         return obj;
     }
+    public static T Spawn<T>(T prefab, Vector2 pos, bool canCreateNew = true) where T : PoolingObj
+    {
+        T obj = ActivateObj(prefab, canCreateNew);
+        obj.transform.SetParent(Inst.defaultPoolParent);
+        obj.transform.position = pos;
+        obj.transform.rotation = Quaternion.identity;
+        obj.ResetOnSpawn();
+
+        return obj;
+    }
     public static T Spawn<T>(T prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true) where T : PoolingObj
     {
         T obj = ActivateObj(prefab, canCreateNew);
         obj.transform.SetParent(parent);
         obj.transform.localPosition = localPos;
         obj.transform.localRotation = localRot;
+        obj.ResetOnSpawn();
+
+        return obj;
+    }
+    public static T Spawn<T>(T prefab, Transform parent, Vector2 localPos, bool canCreateNew = true) where T : PoolingObj
+    {
+        T obj = ActivateObj(prefab, canCreateNew);
+        obj.transform.SetParent(parent);
+        obj.transform.localPosition = localPos;
+        obj.transform.rotation = Quaternion.identity;
         obj.ResetOnSpawn();
 
         return obj;
@@ -156,10 +176,19 @@ public static class ObjPoolingExtension
     {
         return ObjPoolingManager.Spawn(prefab, pos, rot, canCreateNew);
     }
+    public static T Spawn<T>(this T prefab, Vector2 pos, bool canCreateNew = true) where T : PoolingObj
+    {
+        return ObjPoolingManager.Spawn(prefab, pos, canCreateNew);
+    }
     public static T Spawn<T>(this T prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true) where T : PoolingObj
     {
         return ObjPoolingManager.Spawn(prefab, parent, localPos, localRot, canCreateNew);
     }
+    public static T Spawn<T>(this T prefab, Transform parent, Vector2 localPos, bool canCreateNew = true) where T : PoolingObj
+    {
+        return ObjPoolingManager.Spawn(prefab, parent, localPos, canCreateNew);
+    }
+
     public static void Sleep(this PoolingObj obj)
     {
         ObjPoolingManager.Sleep(obj);
