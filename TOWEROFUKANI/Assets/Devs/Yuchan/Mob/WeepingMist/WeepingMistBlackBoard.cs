@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeepingMistBlackBoard : MonoBehaviour
+public class WeepingMistBlackBoard : BlackBoard_Base
 {
-    // Start is called before the first frame update
-    void Start()
+    protected Mob_WeepingMist mob;
+    private void Awake()
     {
-        
+        mob = GetComponent<Mob_WeepingMist>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool TA_RandomMove() => mob.RandomMove();
+    public bool CN_Hurt()
     {
-        
+        return mob.IsHurting;
+    }
+    public bool TA_Hurt()
+    {
+        return true;
     }
 }

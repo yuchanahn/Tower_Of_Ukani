@@ -15,6 +15,8 @@ public enum eMobAniST
     AirborneDown,
     AirborneUp,
     Stunned,
+    Fly,
+
     Last,
 }
 

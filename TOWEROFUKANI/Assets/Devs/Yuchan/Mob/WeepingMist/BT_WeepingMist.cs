@@ -1,18 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BT;
 
-public class BT_WeepingMist : MonoBehaviour
+public class BT_WeepingMist : BT_Base
 {
-    // Start is called before the first frame update
-    void Start()
+    WeepingMistBlackBoard Bb;
+    override protected void Start()
     {
-        
+        Bb = GetComponent<WeepingMistBlackBoard>();
+        InitBT(Bb);
     }
-
-    // Update is called once per frame
-    void Update()
+    override protected void BT_Set()
     {
-        
+        root.node
+        .AddNode(new Selector())
+            .AddNode(new Decorator(Bb.CN_Hurt))
+                .AddNode(new Task(Bb.TA_Hurt))
+                .End()
+            .End()
+            .AddNode(new Task(Bb.TA_RandomMove))
+            .End()
+        .End();
+
+        base.BT_Set();
     }
 }
