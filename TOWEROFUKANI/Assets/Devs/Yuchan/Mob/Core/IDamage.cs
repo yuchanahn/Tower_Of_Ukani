@@ -1,4 +1,4 @@
-﻿internal interface IDamage
+﻿public interface IDamage
 {
     void Hit(int dmg);
 }
