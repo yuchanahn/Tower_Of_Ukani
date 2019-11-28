@@ -56,7 +56,7 @@ public class Player_Dash_Action : CLA_Action<Player>
         PlayerStats.AbsorbDamage = true;
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Dash);
+        ItemEffectManager.Trigger(PlayerActions.DashStart);
     }
     public override void OnExit()
     {
@@ -69,6 +69,9 @@ public class Player_Dash_Action : CLA_Action<Player>
 
         // Player Will Take Damage
         PlayerStats.AbsorbDamage = false;
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.DashEnd);
     }
     public override void OnFixedUpdate()
     {
@@ -76,16 +79,24 @@ public class Player_Dash_Action : CLA_Action<Player>
         dashTime_Cur += Time.fixedDeltaTime;
 
         // Dash
-        if (dashTime_Cur >= dashTime)
-            IsDasing = false;
-        else
+        if (dashTime_Cur < dashTime)
+        {
             rb2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
 
-        // Trail Effect
-        if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))
+            // Trail Effect
+            if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))
+            {
+                curTrailCount++;
+                main.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, main.bodySpriteRenderer.transform);
+            }
+
+            // Trigger Item Effect
+            ItemEffectManager.Trigger(PlayerActions.Dashing);
+        }
+        else
         {
-            curTrailCount++;
-            main.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, main.bodySpriteRenderer.transform);
+            IsDasing = false;
+            return;
         }
     }
     #endregion

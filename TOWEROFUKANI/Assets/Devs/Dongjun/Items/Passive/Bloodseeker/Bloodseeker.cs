@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Vampire : PassiveItem
+public class Bloodseeker : PassiveItem
 {
     #region Var: Item Effect
     private ItemEffect onHitEffect;
@@ -9,7 +9,7 @@ public class Vampire : PassiveItem
     #region Method Override: Add/Remove
     public override void OnAdd()
     {
-        onHitEffect = new ItemEffect(GetType(), LifeSteal, typeof(WindCutter));
+        onHitEffect = new ItemEffect(GetType(), LifeSteal, typeof(Overlord));
         ItemEffectManager.AddEffect(PlayerActions.Hit, onHitEffect);
     }
     public override void OnRemove()
@@ -30,7 +30,7 @@ public class Vampire : PassiveItem
     private void LifeSteal()
     {
         //Debug.Log("Vampire Activated !!!");
-        PlayerStats.Heal(PlayerStats.DamageDealt);
+        PlayerStats.Heal(PlayerStats.DamageToDeal);
     }
     #endregion
 }

@@ -18,7 +18,6 @@ public abstract class GunSwapMagazine_Base<TItem> : GunAction_Base<TItem>
     public bool IsAnimEnded_SwapMagazine { get; private set; } = false;
     #endregion
 
-
     #region Method: CLA_Action
     public override void OnEnter()
     {

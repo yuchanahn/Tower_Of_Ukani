@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
     private static IntStat health = new IntStat(100, min: 0, max: 100);
 
     private static IntStat stamina = new IntStat(0, min: 0, max: 3);
-    private static FloatStat staminaRegen = new FloatStat(0.5f, min: 0, max: 1f);
+    private static FloatStat staminaRegen = new FloatStat(0.5f, min: 0);
     private static float staminaUIBarValue;
     #endregion
 
@@ -18,7 +18,7 @@ public class PlayerStats : MonoBehaviour
     public static int DamageReceived;
     public static int HealReceived;
 
-    public static int DamageDealt;
+    public static int DamageToDeal;
     #endregion
 
     #region Var: Event For UI
@@ -47,7 +47,7 @@ public class PlayerStats : MonoBehaviour
     }
     #endregion
 
-    #region Method: Change Stat
+    #region Method: Change Stat (Self)
     private static void Regen_Stamina()
     {
         if (staminaUIBarValue >= stamina.Max)
@@ -116,6 +116,53 @@ public class PlayerStats : MonoBehaviour
     public static void Death()
     {
         health.Reset();
+    }
+    #endregion
+
+    #region Method: Change Stat (Other)
+    public static bool DealDamage(IDamage iDamage, AttackData attackData)
+    {
+        if (iDamage == null)
+            return false;
+
+        // Set Stat
+        DamageToDeal = attackData.damage.Value;
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.Hit);
+
+        // Damage Mob
+        iDamage.Hit(DamageToDeal); // 여기서 체력이나 불리언 반환 해줘!!
+
+        // TO DO:
+        // Kill Item Effect Trigger
+
+        return true;
+    }
+    public static bool DealDamage(IDamage iDamage, AttackData attackData, params PlayerActions[] actionToTrigger)
+    {
+        if (iDamage == null)
+            return false;
+
+        // Set Stat
+        DamageToDeal = attackData.damage.Value;
+
+        // Trigger Item Effect
+        ItemEffectManager.Trigger(PlayerActions.Hit);
+
+        if (actionToTrigger != null)
+        {
+            for (int i = 0; i < actionToTrigger.Length; i++)
+                ItemEffectManager.Trigger(actionToTrigger[i]);
+        }
+
+        // Damage Mob
+        iDamage.Hit(DamageToDeal); // 여기서 체력이나 불리언 반환 해줘!!
+
+        // TO DO:
+        // Kill Item Effect Trigger
+
+        return true;
     }
     #endregion
 

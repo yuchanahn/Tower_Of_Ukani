@@ -146,7 +146,7 @@ public static class GroundDetection_Logic
                 if (Array.Exists(overlaps, col => col == data.IgnoreGrounds[i])) continue;
 
                 Physics2D.IgnoreCollision(oneWayCollider, data.IgnoreGrounds[i], false);
-                data.IgnoreGrounds.Remove(data.IgnoreGrounds[i]);
+                data.IgnoreGrounds.RemoveAt(i);
             }
         }
         else

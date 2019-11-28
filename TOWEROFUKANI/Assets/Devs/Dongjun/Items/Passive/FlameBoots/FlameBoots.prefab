@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6978737568942830376
+--- !u!1 &8625333493505742768
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6978737568942830379}
-  - component: {fileID: 6978737568942830378}
+  - component: {fileID: 8625333493505742782}
+  - component: {fileID: 8625333493505742783}
   m_Layer: 0
-  m_Name: Vampire
+  m_Name: FlameBoots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6978737568942830379
+--- !u!4 &8625333493505742782
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6978737568942830376}
+  m_GameObject: {fileID: 8625333493505742768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,25 +31,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6978737568942830378
+--- !u!114 &8625333493505742783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6978737568942830376}
+  m_GameObject: {fileID: 8625333493505742768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcb759b53f2dad545a214ded4c144727, type: 3}
+  m_Script: {fileID: 11500000, guid: f8808aadb715e1d409a2c85b71e9d8c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    icon: {fileID: 21300000, guid: c243dff7d7af58c438c5ce319171cf0e, type: 3}
-    name: Vampire
-    desc: Life steal Item
-    tag_DamageType: 00000000
-    tag_Range: 00000000
-  droppedItemPrefab: {fileID: 2134229020927743989, guid: bada442b86495b04e8c2cdc4e5555bde,
+    icon: {fileID: 21300000, guid: 072c88cbe78167f4c86c5c687ca04c9e, type: 3}
+    name: Flame Boots
+    desc: Deal Damage When Dashing
+    tag_DamageType: 
+    tag_Range: 
+  droppedItemPrefab: {fileID: 749155337391026208, guid: 9ddb4facf9ee8074c987a85351b7ec1e,
     type: 3}
-  affectedWeapons: 01000000
-  god: 0
+  god: 2
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  damageSize: {x: 0.5, y: 0.8}

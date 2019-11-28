@@ -4,83 +4,77 @@ using UnityEngine;
 
 public enum PlayerActions
 {
+    // Movement
     Jump,
-    Dash,
+    Dashing,
+    DashStart,
+    DashEnd,
 
+    // Health Change
     Damaged,
     Healed,
+
+    // Attack
     Hit,
     Kill,
 
+    // Weapon
     WeaponMain,
     WeaponSub,
     WeaponSpecial,
 
+    // Gun
     GunShoot,
     GunReload,
 
+    // Bow
     BowShoot,
-
-    END
-}
-
-public class ItemEffect
-{
-    public Type ThisType { get; private set; }
-    public Action ItemAction { get; private set; }
-    public Type After { get; private set; }
-
-    public ItemEffect(Type thisType, Action action = null, Type after = null)
-    {
-        ThisType = thisType;
-        ItemAction = action;
-        After = after;
-    }
 }
 
 public class ItemEffectManager : MonoBehaviour
 {
-    private static Dictionary<PlayerActions, List<ItemEffect>> onAction;
+    private static Dictionary<PlayerActions, List<ItemEffect>> actions;
 
     private void Awake()
     {
-        if (onAction != null)
+        if (actions != null)
             return;
 
-        // Reset Dictionary
-        onAction = new Dictionary<PlayerActions, List<ItemEffect>>();
-
         // Init onAction Dictionary
-        for (int i = 0; i < (int)PlayerActions.END; i++)
-            onAction.Add((PlayerActions)i, new List<ItemEffect>());
+        actions = new Dictionary<PlayerActions, List<ItemEffect>>();
+
+        for (int i = 0; i < Enum.GetValues(typeof(PlayerActions)).Length; i++)
+        {
+            actions.Add((PlayerActions)i, new List<ItemEffect>());
+        }
     }
 
     public static void Trigger(PlayerActions action)
     {
-        for (int i = 0; i < onAction[action].Count; i++)
+        for (int i = 0; i < actions[action].Count; i++)
         {
-            onAction[action][i].ItemAction?.Invoke();
+            actions[action][i].ItemAction?.Invoke();
         }
     }
     public static void AddEffect(PlayerActions action, ItemEffect itemEffect)
     {
-        if (!onAction[action].Contains(itemEffect))
-        {
-            for (int i = 0; i < onAction[action].Count; i++)
-            {
-                if (itemEffect.ThisType == onAction[action][i].After)
-                {
-                    onAction[action].Insert(i, itemEffect);
-                    return;
-                }
-            }
+        if (actions[action].Contains(itemEffect))
+            return;
 
-            onAction[action].Add(itemEffect);
+        for (int i = 0; i < actions[action].Count; i++)
+        {
+            if (itemEffect.ThisType == actions[action][i].After)
+            {
+                actions[action].Insert(i, itemEffect);
+                return;
+            }
         }
+
+        actions[action].Add(itemEffect);
     }
     public static void RemoveEffect(PlayerActions action, ItemEffect itemEffect)
     {
-        if (onAction[action].Contains(itemEffect))
-            onAction[action].Remove(itemEffect);
+        if (actions[action].Contains(itemEffect))
+            actions[action].Remove(itemEffect);
     }
 }
