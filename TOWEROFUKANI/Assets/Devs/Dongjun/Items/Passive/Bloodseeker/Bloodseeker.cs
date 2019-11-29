@@ -9,7 +9,7 @@ public class Bloodseeker : PassiveItem
     #region Method Override: Add/Remove
     public override void OnAdd()
     {
-        onWeaponHitEffect = new ItemEffect(GetType(), LifeSteal, typeof(Overlord));
+        onWeaponHitEffect = new ItemEffect(GetType(), LifeSteal);
         ItemEffectManager.AddEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
     }
     public override void OnRemove()

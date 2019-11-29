@@ -2,48 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerActions
-{
-    // Movement
-    Jump,
-    Dashing,
-    DashStart,
-    DashEnd,
-
-    // Health Change
-    Damaged,
-    Healed,
-
-    // Attack
-    Hit,
-    Kill,
-
-    // Weapon
-    WeaponHit,
-    WeaponMain,
-    WeaponSub,
-    WeaponSpecial,
-
-    // Gun
-    GunHit,
-    GunShoot,
-    GunReload,
-
-    // Bow
-    BowHit,
-    BowShoot,
-}
-
 public class ItemEffectManager : MonoBehaviour
 {
     private static Dictionary<PlayerActions, List<ItemEffect>> actions;
 
+    #region Method: Unity
     private void Awake()
     {
         if (actions != null)
             return;
 
-        // Init onAction Dictionary
+        // Init actions Dictionary
         actions = new Dictionary<PlayerActions, List<ItemEffect>>();
 
         for (int i = 0; i < Enum.GetValues(typeof(PlayerActions)).Length; i++)
@@ -51,7 +20,9 @@ public class ItemEffectManager : MonoBehaviour
             actions.Add((PlayerActions)i, new List<ItemEffect>());
         }
     }
+    #endregion
 
+    #region Method: Trigger Effect
     public static void Trigger(PlayerActions action)
     {
         for (int i = 0; i < actions[action].Count; i++)
@@ -59,6 +30,9 @@ public class ItemEffectManager : MonoBehaviour
             actions[action][i].ItemAction?.Invoke();
         }
     }
+    #endregion
+
+    #region Method: Manage Effect
     public static void AddEffect(PlayerActions action, ItemEffect itemEffect)
     {
         if (actions[action].Contains(itemEffect))
@@ -80,4 +54,5 @@ public class ItemEffectManager : MonoBehaviour
         if (actions[action].Contains(itemEffect))
             actions[action].Remove(itemEffect);
     }
+    #endregion
 }
