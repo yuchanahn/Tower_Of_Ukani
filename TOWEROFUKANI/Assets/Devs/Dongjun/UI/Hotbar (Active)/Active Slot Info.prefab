@@ -298,8 +298,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bar: {fileID: 4743075581196353896}
-  cooldownTime: {fileID: 6697617046016341886}
   cooldownIcon: {fileID: 4743075581152987854}
+  cooldownTime: {fileID: 6697617046016341886}
   activeFrame: {fileID: 2190819313558596152}
 --- !u!1 &4743075581152987854
 GameObject:
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.495283, g: 0.9901155, b: 1, a: 0.35686275}
+  m_Color: {r: 0.10849059, g: 0.7677436, b: 1, a: 0.35686275}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

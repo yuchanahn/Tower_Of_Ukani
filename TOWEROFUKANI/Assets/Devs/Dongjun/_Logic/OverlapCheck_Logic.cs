@@ -50,6 +50,5 @@ public static class OverlapCheck_Logic
             data.prevOverlaps.Add(overlaps[i]);
             data.onEnter?.Invoke(overlaps[i]);
         }
-
     }
 }
