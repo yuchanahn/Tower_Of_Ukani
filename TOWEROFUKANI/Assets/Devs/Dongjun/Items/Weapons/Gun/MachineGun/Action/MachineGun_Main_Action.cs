@@ -88,7 +88,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
         // Spawn Bullet
         Bullet bullet = bulletPrefab.Spawn(
             shootPoint.position + (shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset)),
-            Quaternion.Euler(transform.eulerAngles.Add(Random.Range(-acry_ZRotOffset, acry_ZRotOffset))));
+            Quaternion.Euler(transform.eulerAngles.Add(z: Random.Range(-acry_ZRotOffset, acry_ZRotOffset))));
 
         // Set Bullet Data
         bullet.InitData(weapon.bulletData, weapon.attackData);

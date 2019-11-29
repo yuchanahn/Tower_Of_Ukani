@@ -150,11 +150,8 @@ public class PlayerStats : MonoBehaviour
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Hit);
 
-        if (actionToTrigger != null)
-        {
-            for (int i = 0; i < actionToTrigger.Length; i++)
-                ItemEffectManager.Trigger(actionToTrigger[i]);
-        }
+        for (int i = 0; i < actionToTrigger.Length; i++)
+            ItemEffectManager.Trigger(actionToTrigger[i]);
 
         // Damage Mob
         iDamage.Hit(DamageToDeal); // 여기서 체력이나 불리언 반환 해줘!!

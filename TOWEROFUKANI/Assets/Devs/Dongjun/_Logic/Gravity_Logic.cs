@@ -7,7 +7,9 @@ public struct GravityData
     public float acceleration;
     public float terminalVelocity;// Zero => No Terminal Velocity
 
-    public GravityData(bool useGravity = false, float accel = 0, float terVel = 0)
+    public static GravityData Zero => new GravityData(false);
+
+    public GravityData(bool useGravity = true, float accel = 0, float terVel = 0)
     {
         this.useGravity = useGravity;
         acceleration = accel;

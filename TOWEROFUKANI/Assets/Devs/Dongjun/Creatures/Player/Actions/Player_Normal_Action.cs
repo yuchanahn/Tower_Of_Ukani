@@ -94,9 +94,9 @@ public class Player_Normal_Action : CLA_Action<Player>,
 
         // Gravity
         Gravity_Logic.ApplyGravity(rb2D,
-            main.groundDetectionData.isGrounded ? new GravityData() : 
+            main.groundDetectionData.isGrounded ? GravityData.Zero : 
             !jumpData.isJumping ? main.gravityData : 
-            new GravityData(true, jumpData.jumpGravity));
+            new GravityData(accel: jumpData.jumpGravity));
 
         // Update Animation
         UpdateAnimation();

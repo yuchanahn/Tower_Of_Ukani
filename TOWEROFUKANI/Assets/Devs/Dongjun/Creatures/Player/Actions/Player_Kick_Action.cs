@@ -12,6 +12,7 @@ public class Player_Kick_Action : CLA_Action<Player>
 
     [Header("Movement")]
     [SerializeField] private Vector2 velPercent = new Vector2(0.3f, 0.3f);
+    [SerializeField] private float xVelDecreaseAmount = 3f;
 
     [Header("Animation Duration")]
     [SerializeField] private float duration;
@@ -62,8 +63,11 @@ public class Player_Kick_Action : CLA_Action<Player>
 
         // Gravity
         Gravity_Logic.ApplyGravity(rb2D, 
-            main.groundDetectionData.isGrounded ? new GravityData() : 
+            main.groundDetectionData.isGrounded ? GravityData.Zero : 
             main.gravityData);
+
+        // Decrease X Velocity
+        rb2D.velocity = rb2D.velocity.Change(x: Mathf.MoveTowards(rb2D.velocity.x, 0f, xVelDecreaseAmount * Time.fixedDeltaTime));
     }
     #endregion
 

@@ -649,6 +649,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   velPercent: {x: 0.3, y: 0.3}
+  xVelDecreaseAmount: 3
   duration: 0
   kickEffectSpriteRenderer: {fileID: 7773452921406079708}
 --- !u!114 &6830336080947489379

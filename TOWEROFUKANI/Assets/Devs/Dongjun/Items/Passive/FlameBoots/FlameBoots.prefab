@@ -56,3 +56,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   damageSize: {x: 0.5, y: 0.8}
+  flameParticlePrefab: {fileID: 5879631514358512089, guid: 7601ee3058d371e41880248dafe462ff,
+    type: 3}

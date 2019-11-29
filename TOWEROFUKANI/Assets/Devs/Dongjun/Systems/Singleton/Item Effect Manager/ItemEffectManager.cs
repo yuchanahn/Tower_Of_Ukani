@@ -19,15 +19,18 @@ public enum PlayerActions
     Kill,
 
     // Weapon
+    WeaponHit,
     WeaponMain,
     WeaponSub,
     WeaponSpecial,
 
     // Gun
+    GunHit,
     GunShoot,
     GunReload,
 
     // Bow
+    BowHit,
     BowShoot,
 }
 

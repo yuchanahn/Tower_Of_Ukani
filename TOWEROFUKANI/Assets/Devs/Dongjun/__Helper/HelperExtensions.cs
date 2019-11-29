@@ -84,7 +84,7 @@ namespace Dongjun.Helper
         {
             if (x.HasValue) target.x = x.Value;
             if (y.HasValue) target.y = y.Value;
-            if (y.HasValue) target.z = z.Value;
+            if (z.HasValue) target.z = z.Value;
             return target;
         }
 
@@ -98,7 +98,7 @@ namespace Dongjun.Helper
         {
             if (x.HasValue) target.x += x.Value;
             if (y.HasValue) target.y += y.Value;
-            if (y.HasValue) target.z += z.Value;
+            if (z.HasValue) target.z += z.Value;
             return target;
         }
     }

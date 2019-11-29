@@ -3,19 +3,19 @@
 public class Bloodseeker : PassiveItem
 {
     #region Var: Item Effect
-    private ItemEffect onHitEffect;
+    private ItemEffect onWeaponHitEffect;
     #endregion
 
     #region Method Override: Add/Remove
     public override void OnAdd()
     {
-        onHitEffect = new ItemEffect(GetType(), LifeSteal, typeof(Overlord));
-        ItemEffectManager.AddEffect(PlayerActions.Hit, onHitEffect);
+        onWeaponHitEffect = new ItemEffect(GetType(), LifeSteal, typeof(Overlord));
+        ItemEffectManager.AddEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
     }
     public override void OnRemove()
     {
         base.OnRemove();
-        ItemEffectManager.RemoveEffect(PlayerActions.Hit, onHitEffect);
+        ItemEffectManager.RemoveEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
     }
     #endregion
 
@@ -29,7 +29,6 @@ public class Bloodseeker : PassiveItem
     #region Method: Item Effect
     private void LifeSteal()
     {
-        //Debug.Log("Vampire Activated !!!");
         PlayerStats.Heal(PlayerStats.DamageToDeal);
     }
     #endregion
