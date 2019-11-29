@@ -9,10 +9,7 @@ public class ItemEffectManager : MonoBehaviour
     #region Method: Unity
     private void Awake()
     {
-        if (actions != null)
-            return;
-
-        // Init actions Dictionary
+        // Init Actions Dictionary
         actions = new Dictionary<PlayerActions, List<ItemEffect>>();
 
         for (int i = 0; i < Enum.GetValues(typeof(PlayerActions)).Length; i++)

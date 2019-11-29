@@ -19,6 +19,7 @@ public class FlameBoots : PassiveItem
     #endregion
 
     #region Var: Collision Detection
+    private OverlapCheckData overlapCheckData;
     private List<Collider2D> prevHits = new List<Collider2D>();
     #endregion
 
@@ -33,6 +34,7 @@ public class FlameBoots : PassiveItem
     #region Method: Unity
     private void Start()
     {
+        overlapCheckData = new OverlapCheckData(onEnter: OnFlameDashHit);
         flameDashDamage = new AttackData(5);
     }
     #endregion
@@ -40,6 +42,7 @@ public class FlameBoots : PassiveItem
     #region Method Override: Add/Remove
     public override void OnAdd()
     {
+        // Init Item Effect
         onDashingEffect = new ItemEffect(GetType(), FlameDash);
         onDashEndEffect = new ItemEffect(GetType(), ResetFlameDash);
         ItemEffectManager.AddEffect(PlayerActions.Dashing, onDashingEffect);
@@ -47,11 +50,12 @@ public class FlameBoots : PassiveItem
 
         // Spawn Effect
         flameParticle = Instantiate(flameParticlePrefab, GM.PlayerObj.transform).GetComponent<ParticleSystem>();
-        flameParticle.Stop();
     }
     public override void OnRemove()
     {
         base.OnRemove();
+
+        // Remove Item Effect
         ItemEffectManager.RemoveEffect(PlayerActions.Dashing, onDashingEffect);
         ItemEffectManager.RemoveEffect(PlayerActions.DashEnd, onDashEndEffect);
 
@@ -72,40 +76,23 @@ public class FlameBoots : PassiveItem
     {
         // Get Overlaps
         Collider2D[] hits = Physics2D.OverlapBoxAll(GM.PlayerPos, damageSize, 0f, damageLayer);
-
-        if (hits.Length == 0)
-        {
-            prevHits.Clear();
-            return;
-        }
-
-        // Check Exit
-        for (int i = prevHits.Count - 1; i >= 0; i--)
-        {
-            if (Array.Exists(hits, col => col == prevHits[i]))
-                continue;
-
-            prevHits.RemoveAt(i);
-        }
-
-        // Check Enter
-        for (int i = 0; i < hits.Length; i++)
-        {
-            if (hits[i].CompareTag("Player") || prevHits.Contains(hits[i]))
-                continue;
-
-            prevHits.Add(hits[i]);
-
-            // Deal Damage
-            PlayerStats.DealDamage(hits[i].GetComponent<IDamage>(), flameDashDamage);
-        }
+        overlapCheckData.OverlapCheck(hits);
 
         // Show Effect
         flameParticle.Play();
     }
+    private void OnFlameDashHit(Collider2D overlap)
+    {
+        if (overlap.CompareTag("Player"))
+            return;
+
+        PlayerStats.DealDamage(overlap.GetComponent<IDamage>(), flameDashDamage);
+    }
+
     private void ResetFlameDash()
     {
-        prevHits.Clear();
+        // Clear Overlaps
+        overlapCheckData.Clear();
 
         // Hide Effect
         flameParticle.Stop();
