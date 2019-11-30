@@ -6,6 +6,7 @@ public abstract class ActiveItem : Item
     { get; protected set; } = false;
     public TimerData cooldownTimer
     { get; protected set; } = new TimerData();
+    public bool CanActivate => cooldownTimer.IsEnded && !IsActive;
 
     public override void OnAdd()
     {

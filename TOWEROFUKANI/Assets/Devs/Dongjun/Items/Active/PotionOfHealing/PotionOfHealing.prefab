@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8625333493505742768
+--- !u!1 &1424037574231504221
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8625333493505742782}
-  - component: {fileID: 8625333493505742783}
+  - component: {fileID: 1424037574231504223}
+  - component: {fileID: 1424037574231504220}
   m_Layer: 0
-  m_Name: FlameBoots
+  m_Name: PotionOfHealing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8625333493505742782
+--- !u!4 &1424037574231504223
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8625333493505742768}
+  m_GameObject: {fileID: 1424037574231504221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,30 +31,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8625333493505742783
+--- !u!114 &1424037574231504220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8625333493505742768}
+  m_GameObject: {fileID: 1424037574231504221}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8808aadb715e1d409a2c85b71e9d8c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 311b412cec466cc4182f645ab3628124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    icon: {fileID: 21300000, guid: 072c88cbe78167f4c86c5c687ca04c9e, type: 3}
-    name: Flame Boots
-    desc: Deal Damage When Dashing
+    icon: {fileID: 21300000, guid: 7256fba2e0ec8bc45acd370b13728d36, type: 3}
+    name: Potion Of Healing
+    desc: It Heals you
     tag_DamageType: 
     tag_Range: 
-  droppedItemPrefab: {fileID: 749155337391026208, guid: 9ddb4facf9ee8074c987a85351b7ec1e,
-    type: 3}
-  god: 2
-  damageLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  damageSize: {x: 0.8, y: 0.8}
-  flameParticlePrefab: {fileID: 5879631514358512089, guid: 7601ee3058d371e41880248dafe462ff,
+  droppedItemPrefab: {fileID: 4029644265109773275, guid: 9245b1ba5963f6b46903902845d0c592,
     type: 3}

@@ -72,14 +72,19 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
     #region Method: Activate Item
     private void ActivateItem()
     {
+        ActiveItem activeItem = null;
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            Items[0]?.Activate();
+            activeItem = Items[0];
         else if (Input.GetKeyDown(KeyCode.Alpha2))
-            Items[1]?.Activate();
+            activeItem = Items[1];
         else if (Input.GetKeyDown(KeyCode.Alpha3))
-            Items[2]?.Activate();
+            activeItem = Items[2];
         else if (Input.GetKeyDown(KeyCode.Alpha4))
-            Items[3]?.Activate();
+            activeItem = Items[3];
+
+        if (activeItem != null && activeItem.CanActivate)
+            activeItem.Activate();
     }
     #endregion
 

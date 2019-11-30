@@ -37,7 +37,7 @@ public class TalismanOfProtection : ActiveItem
         base.OnAdd();
 
         // Initialize Item Effect
-        onDamageReceived = new ItemEffect(GetType(), ShieldFunction);
+        onDamageReceived = new ItemEffect(GetType(), Shield);
 
         // Spawn Effect
         shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));
@@ -59,16 +59,13 @@ public class TalismanOfProtection : ActiveItem
     #region Method: Activate/Deactivate
     public override void Activate()
     {
-        if (IsActive || !cooldownTimer.IsEnded)
-            return;
-
         IsActive = true;
 
-        // Stop Cooldown
+        // Stop Cooldown Timer
         cooldownTimer.SetActive(false);
         cooldownTimer.ToZero();
 
-        // Start Duration
+        // Start Duration Timer
         durationTimer.SetTick(gameObject);
         durationTimer.Restart();
 
@@ -82,11 +79,11 @@ public class TalismanOfProtection : ActiveItem
     {
         base.Deactivate();
 
-        // Start Cooldown
+        // Start Cooldown Timer
         cooldownTimer.SetActive(true);
         cooldownTimer.Restart();
 
-        // Stop Duration
+        // Stop Duration Timer
         durationTimer.SetTick(gameObject, TimerTick.None);
         durationTimer.ToZero();
 
@@ -102,7 +99,7 @@ public class TalismanOfProtection : ActiveItem
     #endregion
 
     #region Method: Shield
-    private void ShieldFunction()
+    private void Shield()
     {
         int overkillDmg = PlayerStats.DamageReceived - shieldhealth.Value;
 

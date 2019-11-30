@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dongjun.Helper;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,6 +51,7 @@ public class FlameBoots : PassiveItem
 
         // Spawn Effect
         flameParticle = Instantiate(flameParticlePrefab, GM.PlayerObj.transform).GetComponent<ParticleSystem>();
+        flameParticle.transform.localPosition = flameParticle.transform.localPosition.Add(y: -0.2f);
     }
     public override void OnRemove()
     {

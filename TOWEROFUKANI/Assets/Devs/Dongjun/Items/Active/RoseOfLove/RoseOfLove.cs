@@ -20,10 +20,7 @@ public class RoseOfLove : ActiveItem
 
     public override void Activate()
     {
-        if (!cooldownTimer.IsEnded)
-            return;
-
-        // Reset Cooldown
+        // Restart Cooldown Timer
         cooldownTimer.Restart();
 
         // Spawn Rose
