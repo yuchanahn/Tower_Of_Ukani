@@ -9,6 +9,10 @@ public class Inventory : SingletonBase<Inventory>
     public const int SLOT_SIZE = 15;
     #endregion
 
+    #region Var: Inspector
+    //[Serializable] private 
+    #endregion
+
     #region Var: Properties
     public static Item[] Items
     { get; private set; } = new Item[SLOT_SIZE];
@@ -57,7 +61,7 @@ public class Inventory : SingletonBase<Inventory>
     }
     public static void Clear()
     {
-        Items = new Item[SLOT_SIZE];
+        Array.Clear(Items, 0, Items.Length);
         EmptySlotCount = SLOT_SIZE;
     }
     #endregion

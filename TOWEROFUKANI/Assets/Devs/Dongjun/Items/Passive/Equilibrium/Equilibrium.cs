@@ -5,7 +5,7 @@ public class Equilibrium : PassiveItem
     private ItemEffect onDamagedEffect;
     private ItemEffect onHitEffect;
 
-    private float effectPercent = 50f;
+    private float effectPercent = 30f;
 
     public override void OnAdd()
     {

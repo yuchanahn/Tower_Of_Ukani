@@ -108,14 +108,17 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     #region Method: Add/Remove
     public static bool AddExisting(WeaponItem weapon)
     {
+        // Find in Hotbar
         WeaponItem existingWeapon = Weapons.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name);
 
+        // Find in Inventory
         if (existingWeapon == null)
             existingWeapon = Inventory.Items.FirstOrDefault(e => e != null && e.Info.Name == weapon.Info.Name) as WeaponItem;
 
         if (existingWeapon == null)
             return false;
 
+        // Add Item Count
         existingWeapon.AddCount(weapon.Count);
         PassiveInventory.ApplyAllBonusStats();
         return true;
@@ -163,7 +166,7 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     }
     public static void Clear()
     {
-        Weapons = new WeaponItem[SLOT_SIZE];
+        Array.Clear(Weapons, 0, Weapons.Length);
         EmptySlotCount = SLOT_SIZE;
     }
     #endregion

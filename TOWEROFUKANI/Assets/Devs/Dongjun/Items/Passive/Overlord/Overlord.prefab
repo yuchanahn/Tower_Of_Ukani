@@ -51,4 +51,4 @@ MonoBehaviour:
     tag_Range: 
   droppedItemPrefab: {fileID: 749155337391026208, guid: b8c46588e10bc6f48a5a9ab66a3fec27,
     type: 3}
-  god: 2
+  god: 0

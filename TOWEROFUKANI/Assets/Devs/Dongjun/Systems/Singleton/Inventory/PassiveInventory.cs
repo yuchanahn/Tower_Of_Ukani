@@ -138,10 +138,10 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
     }
     public static void Clear()
     {
-        ukaniRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
-        bazikRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
-        ellaiRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
-        NormalRelics = new Dictionary<Type, PassiveItem>();
+        Array.Clear(ukaniRelics, 0, ukaniRelics.Length);
+        Array.Clear(bazikRelics, 0, bazikRelics.Length);
+        Array.Clear(ellaiRelics, 0, ellaiRelics.Length);
+        NormalRelics.Clear();
     }
     #endregion
 

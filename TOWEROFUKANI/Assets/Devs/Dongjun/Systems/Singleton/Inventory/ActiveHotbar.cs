@@ -91,14 +91,17 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
     #region Method: Add/Remove
     public static bool AddExisting(ActiveItem item)
     {
+        // Find in Hotbar
         ActiveItem existingItem = Items.FirstOrDefault(e => e != null && e.Info.Name == item.Info.Name);
 
+        // Find in Inventory
         if (existingItem == null)
             existingItem = Inventory.Items.FirstOrDefault(e => e != null && e.Info.Name == item.Info.Name) as ActiveItem;
 
         if (existingItem == null)
             return false;
 
+        // Add Item Count
         existingItem.AddCount(item.Count);
         return true;
     }
@@ -131,7 +134,7 @@ public class ActiveHotbar : SingletonBase<ActiveHotbar>
     }
     public static void Clear()
     {
-        Items = new ActiveItem[SLOT_SIZE];
+        Array.Clear(Items, 0, Items.Length);
         EmptySlotCount = SLOT_SIZE;
     }
     #endregion
