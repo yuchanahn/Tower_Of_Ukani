@@ -10,7 +10,16 @@ public class Inventory : SingletonBase<Inventory>
     #endregion
 
     #region Var: Inspector
-    //[Serializable] private 
+    [Header("Inventory Object")]
+    [SerializeField] private GameObject inventoryObject;
+
+    [Header("Inventory Slot")]
+    [SerializeField] private InventorySlot inventorySlotPrefab;
+    [SerializeField] private Transform inventorySlotRoot;
+    #endregion
+
+    #region Var: UI
+    private InventorySlot[] inventorySlots = new InventorySlot[SLOT_SIZE];
     #endregion
 
     #region Var: Properties
@@ -27,6 +36,34 @@ public class Inventory : SingletonBase<Inventory>
         base.Awake();
 
         Clear();
+        InitUI();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(PlayerUIKeys.InventoryToggle))
+            inventoryObject.SetActive(!inventoryObject.activeSelf);
+    }
+    #endregion
+
+    #region Method: UI
+    private void InitUI()
+    {
+        for (int i = 0; i < SLOT_SIZE; i++)
+        {
+            inventorySlots[i] = Instantiate(inventorySlotPrefab, inventorySlotRoot, false);
+            inventorySlots[i].Init(i);
+        }
+    }
+    private void SetSlotUI(int index, Item item)
+    {
+        inventorySlots[index].SetData(item);
+    }
+    private void ClearUI()
+    {
+        for (int i = 0; i < SLOT_SIZE; i++)
+        {
+            inventorySlots[i]?.SetData(null);
+        }
     }
     #endregion
 
@@ -41,6 +78,8 @@ public class Inventory : SingletonBase<Inventory>
             Items[index] = item;
             item.OnAdd();
             EmptySlotCount--;
+
+            Inst.SetSlotUI(index, item);
             return true;
         }
 
@@ -54,6 +93,8 @@ public class Inventory : SingletonBase<Inventory>
             Items[index].OnRemove();
             Items[index] = null;
             EmptySlotCount++;
+
+            Inst.SetSlotUI(index, null);
             return true;
         }
 
@@ -63,6 +104,8 @@ public class Inventory : SingletonBase<Inventory>
     {
         Array.Clear(Items, 0, Items.Length);
         EmptySlotCount = SLOT_SIZE;
+
+        Inst.ClearUI();
     }
     #endregion
 

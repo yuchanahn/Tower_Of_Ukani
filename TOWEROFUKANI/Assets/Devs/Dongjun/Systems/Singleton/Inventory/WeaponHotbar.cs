@@ -174,9 +174,8 @@ public class WeaponHotbar : SingletonBase<WeaponHotbar>
     #region Method: Change Weapon
     private static void ChangeWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-            ScrollUp();
-
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //    ScrollUp();
         float scroll = Input.mouseScrollDelta.y;
         if (scroll != 0)
         {

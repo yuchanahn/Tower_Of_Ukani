@@ -22,6 +22,13 @@ public static class PlayerWeaponKeys
     public static KeyCode Reload => KeyCode.R;
 }
 
+public static class PlayerUIKeys
+{
+    public static KeyCode InventoryToggle => KeyCode.E;
+    public static KeyCode PassiveInventoryToggle => KeyCode.Tab;
+    public static KeyCode Escape => KeyCode.R;
+}
+
 public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
 {
     #region Var: Walk

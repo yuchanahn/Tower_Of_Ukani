@@ -10,14 +10,24 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
     public const int SLOT_SIZE_PER_GOD = 3;
     #endregion
 
+    #region Var: Inspector
+    [Header("Inventory Object")]
+    [SerializeField] private GameObject inventoryObject;
+
+    [Header("Inventory Slot")]
+    [SerializeField] private PassiveItemSlot itemSlotPrefab;
+    [SerializeField] private Transform itemSlotRoot;
+    #endregion
+
     #region Var: Inventory
     private static PassiveItem[] ukaniRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
     private static PassiveItem[] bazikRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
     private static PassiveItem[] ellaiRelics = new PassiveItem[SLOT_SIZE_PER_GOD];
-
     private static int emptySlotCount_Ukani = SLOT_SIZE_PER_GOD;
     private static int emptySlotCount_Bazik = SLOT_SIZE_PER_GOD;
     private static int emptySlotCount_Ellai = SLOT_SIZE_PER_GOD;
+
+    private static Dictionary<Type, PassiveItemSlot> itemSlots = new Dictionary<Type, PassiveItemSlot>();
     #endregion
 
     #region Var: Properties
@@ -33,6 +43,23 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
     {
         base.Awake();
         Clear();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(PlayerUIKeys.PassiveInventoryToggle))
+            inventoryObject.SetActive(!inventoryObject.activeSelf);
+    }
+    #endregion
+
+    #region Method: UI
+    private void AddItemSlot(PassiveItem item)
+    {
+        itemSlots.Add(item.GetType(), Instantiate(Inst.itemSlotPrefab, Inst.itemSlotRoot, false));
+        itemSlots[item.GetType()].SetData(item);
+    }
+    private void RemoveItemSlot(PassiveItem item)
+    {
+        itemSlots.Remove(item.GetType());
     }
     #endregion
 
@@ -65,6 +92,8 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
 
         existingItem.AddCount(item.Count);
         ApplyAllBonusStats();
+
+        itemSlots[existingItem.GetType()].SetData(existingItem);
         return true;
     }
     public static bool Add(PassiveItem item)
@@ -78,6 +107,8 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
             item.OnAdd();
             emptySlotCount--;
             ApplyAllBonusStats();
+
+            Inst.AddItemSlot(item);
             return true;
         }
         void AddNormalRelic()
@@ -85,6 +116,8 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
             NormalRelics.Add(item.GetType(), item);
             item.OnAdd();
             ApplyAllBonusStats();
+
+            Inst.AddItemSlot(item);
         }
 
         switch (item.God)
@@ -116,8 +149,9 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
                 item.OnRemove();
                 items[index] = null;
                 emptySlotCount++;
-
                 ApplyAllBonusStats();
+
+                Inst.RemoveItemSlot(item);
             }
         }
 
@@ -142,6 +176,8 @@ public class PassiveInventory : SingletonBase<PassiveInventory>
         Array.Clear(bazikRelics, 0, bazikRelics.Length);
         Array.Clear(ellaiRelics, 0, ellaiRelics.Length);
         NormalRelics.Clear();
+
+        itemSlots.Clear();
     }
     #endregion
 
