@@ -19,4 +19,12 @@ public class WeepingMistBlackBoard : BlackBoard_Base
     {
         return true;
     }
+
+    public bool CN_IsStund() => GetComponent<StatusEffect_Stunned>();
+
+    // 스턴 상태 일경우 뭘 할껀지 아무것도 안하니까 True
+    public bool TA_StundEvent() => true;
+
+    public bool CN_IsPlayerInAgroRange() => Vector2.Distance(GM.PlayerPos, mob.transform.position) < mob.AgroRange;
+    public bool TA_Follow() => mob.Follow();
 }

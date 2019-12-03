@@ -122,7 +122,11 @@ MonoBehaviour:
     Speed: 1
     Dir2d: {x: 0, y: 0}
   mAniSpeedData: []
+  mSprTr: {fileID: 5283869461139039952}
   MoveLink: []
+  MoveTimeIdle: 1
+  MoveTimeMove: 3
+  AgroRange: 10
 --- !u!114 &4409644187442236126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3281447207712922554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.086, y: 1.83, z: 0}
+  m_LocalPosition: {x: -0.086, y: 1.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4157748926146777058}

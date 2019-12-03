@@ -1219,11 +1219,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dropped MachineGun
       objectReference: {fileID: 0}
-    - target: {fileID: 8061879156807900284, guid: 6ecd833910a19ba4f88810e1b18f10de,
-        type: 3}
-      propertyPath: m_Name
-      value: IW OneWay
-      objectReference: {fileID: 0}
     - target: {fileID: 8061879157058671587, guid: 6ecd833910a19ba4f88810e1b18f10de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1278,6 +1273,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061879156807900284, guid: 6ecd833910a19ba4f88810e1b18f10de,
+        type: 3}
+      propertyPath: m_Name
+      value: IW OneWay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ecd833910a19ba4f88810e1b18f10de, type: 3}
@@ -2215,11 +2215,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeepingMist
       objectReference: {fileID: 0}
-    - target: {fileID: 2018358931423771165, guid: a834a7f1af0b01e4091caaace80c5832,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7658684800277846326, guid: a834a7f1af0b01e4091caaace80c5832,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2274,11 +2269,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7649732452239359505, guid: a834a7f1af0b01e4091caaace80c5832,
-        type: 3}
-      propertyPath: mMoveData.Speed
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a834a7f1af0b01e4091caaace80c5832, type: 3}
@@ -3424,11 +3414,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dropped MachineGun
       objectReference: {fileID: 0}
-    - target: {fileID: 8061879156807900284, guid: 6ecd833910a19ba4f88810e1b18f10de,
-        type: 3}
-      propertyPath: m_Name
-      value: IW OneWay
-      objectReference: {fileID: 0}
     - target: {fileID: 8061879157058671587, guid: 6ecd833910a19ba4f88810e1b18f10de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3483,6 +3468,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061879156807900284, guid: 6ecd833910a19ba4f88810e1b18f10de,
+        type: 3}
+      propertyPath: m_Name
+      value: IW OneWay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ecd833910a19ba4f88810e1b18f10de, type: 3}
@@ -6892,11 +6882,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dropped MachineGun
       objectReference: {fileID: 0}
-    - target: {fileID: 8061879156807900284, guid: 6ecd833910a19ba4f88810e1b18f10de,
-        type: 3}
-      propertyPath: m_Name
-      value: IW OneWay
-      objectReference: {fileID: 0}
     - target: {fileID: 8061879157058671587, guid: 6ecd833910a19ba4f88810e1b18f10de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6951,6 +6936,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061879156807900284, guid: 6ecd833910a19ba4f88810e1b18f10de,
+        type: 3}
+      propertyPath: m_Name
+      value: IW OneWay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ecd833910a19ba4f88810e1b18f10de, type: 3}
@@ -8881,11 +8871,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dropped MachineGun
       objectReference: {fileID: 0}
-    - target: {fileID: 8061879156807900284, guid: 6ecd833910a19ba4f88810e1b18f10de,
-        type: 3}
-      propertyPath: m_Name
-      value: IW OneWay
-      objectReference: {fileID: 0}
     - target: {fileID: 8061879157058671587, guid: 6ecd833910a19ba4f88810e1b18f10de,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8940,6 +8925,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061879156807900284, guid: 6ecd833910a19ba4f88810e1b18f10de,
+        type: 3}
+      propertyPath: m_Name
+      value: IW OneWay
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ecd833910a19ba4f88810e1b18f10de, type: 3}

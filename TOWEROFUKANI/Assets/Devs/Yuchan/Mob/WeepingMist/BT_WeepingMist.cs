@@ -15,6 +15,16 @@ public class BT_WeepingMist : BT_Base
     {
         root.node
         .AddNode(new Selector())
+            .AddNode(new Decorator(Bb.CN_IsStund))
+                .AddNode(new Task(Bb.TA_StundEvent))
+                .End()
+            .End()
+
+            .AddNode(new Decorator(Bb.CN_IsPlayerInAgroRange))
+                .AddNode(new Task(Bb.TA_Follow))
+                .End()
+            .End()
+
             .AddNode(new Decorator(Bb.CN_Hurt))
                 .AddNode(new Task(Bb.TA_Hurt))
                 .End()

@@ -16,6 +16,8 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
 
     [SerializeField] FlyMobMove_ mMoveData;
     [SerializeField] AniSpeedData[] mAniSpeedData;
+    [SerializeField] Transform mSprTr;
+
 
     #endregion
 
@@ -29,21 +31,51 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
     Dictionary<eMobAniST, (string, float)> m_Ani = new Dictionary<eMobAniST, (string, float)>();
     bool mAniStart;
     eMobAniST mCurAniST;
+    StatusEffect_Object mSE;
 
     #region Properties
 
     int NextLinkIdx => Mathf.Min(mLinkIdx + 1, MoveLink.Length);
     Vector2 NextPath => MoveLink[NextLinkIdx];
-    Vector2 Dir2d { get { return mMoveData.Dir2d; } set { mMoveData.Dir2d = value; } }
+    Vector2 Dir2d { 
+        get 
+        { 
+            return mHurt ? Vector2.zero :
+                           mMoveData.Dir2d;
+        } 
+
+        set { if (mSE.SEChangeDirAble) mMoveData.Dir2d = value; } 
+    }
     Vector2 Pos2d => transform.position;
     float MoveSpeed => mMoveData.Speed;
     public bool IsHurting => mHurt;
+    public int SpriteDir
+    {
+        get
+        {
+            return mSprTr.eulerAngles.y == 180 ? -1 : 1;
+        }
+        set
+        {
+            mSprTr.eulerAngles = new Vector2(0, value == -1 ? 0 : 180);
+        }
+    }
+
+
 
     #endregion
 
 
     private void Awake()
     {
+        //======================================================================
+        //      ## Init
+        //======================================================================
+
+        mSE = GetComponent<StatusEffect_Object>();
+
+        //======================================================================
+
         for (int i = 0; i < (int)eMobAniST.Last; i++)
             m_Ani[(eMobAniST)i] = ($"{gameObject.name}_{((eMobAniST)i).ToString()}", 0);
         foreach (var i in mAniSpeedData)
@@ -58,12 +90,23 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
 
     void Animation()
     {
+        if (mSE.SEAni != eMobAniST.Last)
+        {
+            // TODO : 
+            // 상태이상이 애니를 쓴다면. 다른 애니 끝내자.
+            // 
+            // 
+            mCurAniST = mSE.SEAni;
+            HurtEnd();
+            return;
+        }
 
+        if(!mHurt) SpriteDir = Dir2d.x > 0 ? 1 : -1;
     }
 
     void FixedUpdate()
     {
-        mRb2d.velocity = Dir2d * MoveSpeed;
+        mRb2d.velocity = Dir2d * MoveSpeed * mSE.SESpeedMult;
         Animation();
         Anim_Logic.SetAnimSpeed(mAnimator, m_Ani[mCurAniST].Item2);
         if (mAniStart) { mAnimator.Play(m_Ani[mCurAniST].Item1, 0, 0); mAniStart = false; }
@@ -91,9 +134,15 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
     }
 
 
+    //=================================================================
+    //      ## Movement
+    //=================================================================
+
+    // # Rnadom Move
     // 이동주기
-    float MoveTimeIdle = 1f;
-    float MoveTimeMove = 3f;
+    [Header("MovementRate")]
+    [SerializeField] float MoveTimeIdle = 1f;
+    [SerializeField] float MoveTimeMove = 3f;
 
     float MoveTime = 3f;
     float MoveT = 0;
@@ -132,6 +181,17 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
         return true;
     }
 
+    // # Follow
+    // 이동 
+    [Header("AgroRange")]
+    [SerializeField] public float AgroRange;
+    public bool Follow()
+    {
+        Dir2d = (GM.PlayerPos - transform.position).normalized;
+        return true;
+    }
+
+
     bool mHurt = false;
 
     void HurtEnd()
@@ -144,6 +204,8 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
         mHurt       = true;
         mAniStart   = true;
         mCurAniST   = eMobAniST.Hit;
+
+        SpriteDir = (GM.PlayerPos.x - transform.position.x) < 0 ? -1 : 1;
     }
     public void HurtEnd_AniEvent()
     {
