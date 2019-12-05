@@ -14,6 +14,7 @@ public class Mob_WeepingMist : FlyingMob_Base
     [SerializeField, Header("AttackDuration")] float AttackDuration;
     [SerializeField] GameObject RainObject;
     [SerializeField] SpriteRenderer mRainRenderer;
+    [SerializeField] BoxCollider2D RainCollider;
     [SerializeField] Vector2 RainSize;
 
     override protected void PreAttack()
@@ -28,6 +29,7 @@ public class Mob_WeepingMist : FlyingMob_Base
 
         RainObject.SetActive(true);
         RainObject.transform.localPosition = new Vector3(0, -RainSize.y/2);
+        RainCollider.size = RainSize;
         mRainRenderer.size = RainSize;
     }
     protected override void OnAttackEnd()

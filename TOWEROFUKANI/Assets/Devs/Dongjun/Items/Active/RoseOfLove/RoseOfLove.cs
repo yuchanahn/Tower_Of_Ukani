@@ -8,7 +8,7 @@ public class RoseOfLove : ActiveItem
 
     private void Start()
     {
-        cooldownTimer.EndTime = 0.5f;
+        cooldownTimer.EndTime = 7f;
 
         roseProjectileData = new ProjectileData()
         {

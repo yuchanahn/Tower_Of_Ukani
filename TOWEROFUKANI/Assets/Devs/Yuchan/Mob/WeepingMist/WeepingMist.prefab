@@ -367,6 +367,7 @@ MonoBehaviour:
   AttackDuration: 10
   RainObject: {fileID: 1005293261}
   mRainRenderer: {fileID: 1005293262}
+  RainCollider: {fileID: 1005293265}
   RainSize: {x: 2, y: 3}
 --- !u!114 &4409644187442236126
 MonoBehaviour:

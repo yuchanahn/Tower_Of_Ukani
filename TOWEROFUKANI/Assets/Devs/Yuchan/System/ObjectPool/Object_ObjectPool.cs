@@ -48,7 +48,7 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
 
     public override void SetOnUI(Vector2 pos)
     {
-        gameObject.GetComponent<RectTransform>().position = pos;
+        (gameObject.transform as RectTransform).position = pos;
         gameObject.SetActive(true);
         ThisStart();
     }

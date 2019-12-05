@@ -10,7 +10,9 @@ public class MobHPBar : Object_ObjectPool<MobHPBar>
     [SerializeField] float DestoryT;
 
     static Dictionary<GameObject, MobHPBar> mobHPBars = new Dictionary<GameObject, MobHPBar>();
-
+    
+    [HideInInspector]
+    public float sizeY;
 
     public override void ThisStart()
     {
@@ -24,9 +26,11 @@ public class MobHPBar : Object_ObjectPool<MobHPBar>
             mobHPBars[Mob].SetOnUI(mobPos);
             return;
         }
-        var obj = ObjectPool.createUI(ID, Camera.main.WorldToScreenPoint(mobPos) + new Vector3(0, (sizeY / 2) + 1f));
-        obj.GetComponent<MobHPBar>().SetStat(Mob.GetComponent<AStat>(), Mob.transform);
-        mobHPBars[Mob] = obj.GetComponent<MobHPBar>();
+
+        MobHPBar obj = ObjectPool.createUI(ID, Vector2.zero).GetComponent<MobHPBar>();
+        obj.SetStat(Mob.GetComponent<AStat>(), Mob.transform);
+        obj.sizeY = sizeY;
+        mobHPBars[Mob] = obj;
     }
 
     public override void SetOff()
@@ -44,7 +48,7 @@ public class MobHPBar : Object_ObjectPool<MobHPBar>
     {
         if (mLook)
         {
-            GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(mLook.position + Vector3.up * 1f);
+            (transform as RectTransform).position = Camera.main.WorldToScreenPoint(mLook.position + Vector3.up * ((sizeY / 2) + 1f));
 
             mHpBar.CUR_ = mStat.HP;
             mHpBar.MAX_ = mStat.MAXHP;

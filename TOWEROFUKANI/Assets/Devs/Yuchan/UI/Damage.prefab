@@ -52,7 +52,7 @@ MonoBehaviour:
   JumpPower: 3
   RandomPosRange: 0.4
   mText: {fileID: 1818273435263061062}
-  DestoryT: 0.6
+  DestoryT: 0.8
   Damage: 
 --- !u!1 &1818273435263061060
 GameObject:
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 1818273435263061063}
   - component: {fileID: 1818273435263061057}
   - component: {fileID: 1818273435263061062}
-  - component: {fileID: 7629222651412314622}
+  - component: {fileID: 1922830292485039704}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -119,9 +119,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: 6b5ea52491b01b74a9dfc19324d6bdc7, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
@@ -132,7 +132,7 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 1234
---- !u!114 &7629222651412314622
+--- !u!114 &1922830292485039704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,5 +145,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2, y: -2}
+  m_EffectDistance: {x: 1.5, y: -1.5}
   m_UseGraphicAlpha: 1

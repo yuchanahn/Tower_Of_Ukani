@@ -22,10 +22,8 @@ public class PixelLevelGenerator : MonoBehaviour
             }
         }
 
-
-
         mapTempSprite.sprite = null;
-        GM.CurMapName = "Main";
+        GM.CurMapName = transform.root.name;
         GM.MapSize[GM.CurMapName] = mapTexture;
         GM.CurMapCenter = transform.position;
     }

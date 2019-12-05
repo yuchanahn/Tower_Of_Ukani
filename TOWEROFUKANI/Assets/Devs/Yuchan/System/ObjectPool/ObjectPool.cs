@@ -59,7 +59,7 @@ public class ObjectPool : MonoBehaviour
         { instance.CreateObj(id); }
 
         GameObject GObj = instance.objects[id].Dequeue();
-        GObj.transform.SetParent(instance.UI);
+        GObj.transform.SetParent(instance.UI, false);
         GObj.GetComponent<Object_ObjectPool_Base>().SetOnUI(pos);
         return GObj;
     }

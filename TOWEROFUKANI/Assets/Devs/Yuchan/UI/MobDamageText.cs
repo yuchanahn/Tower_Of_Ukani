@@ -40,7 +40,11 @@ public class MobDamageText : Object_ObjectPool<MobDamageText>
     {
         Damage = mText.text;
         mPoint = mOriginPoint;
-        mText.color = new Color(0,0,0,1);
+
+        Color newColor = mText.color;
+        newColor.a = 1;
+        mText.color = newColor;
+
         transform.localScale = new Vector3(1,1,1);
         DestroyObj(DestoryT);
     }
@@ -50,6 +54,9 @@ public class MobDamageText : Object_ObjectPool<MobDamageText>
         transform.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(mPoint);
         mPoint += Vector2.up * Time.deltaTime * JumpPower;
         //transform.localScale -= (Vector3)Vector2.one * Time.deltaTime * JumpPower;
-        mText.color -= new Color(0,0,0, Time.deltaTime / DestoryT);
+
+        Color newColor = mText.color;
+        newColor.a -= Time.deltaTime / DestoryT;
+        mText.color = newColor;
     }
 }

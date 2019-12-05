@@ -12,6 +12,10 @@ public class GM : MonoBehaviour
     public static Vector2 PlayerSize => new Vector2(0.5f,0.8f);
     public static GameObject PlayerObj => Inst.player.gameObject;
     public static Vector3 PlayerPos => Inst.player.transform.position;
+
+    [SerializeField] GameObject Map1;
+    [SerializeField] GameObject Map2;
+
     public static Dictionary<string, Texture2D> MapSize = new Dictionary<string, Texture2D>();
     public static Texture2D CurMapSize => MapSize[CurMapName];
     public static string CurMapName;
@@ -29,6 +33,6 @@ public class GM : MonoBehaviour
 
     private void Update()
     {
-        pos = (GM.CurMapWorldPoint.x) - CurMapSize.width;
+        CurMapName = Map2.activeSelf ? Map2.name : Map1.name;
     }
 }

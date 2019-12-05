@@ -22,8 +22,11 @@ public class CorpseMgr : MonoBehaviour
         for (int i = 0; i < MobCount; i++)
         {
             var w = Random.insideUnitCircle;
-            gObj[i] = corpse.Spawn(mobPos + w * 0.3f).gameObject;
-            gObj[i].GetComponent<Corpse>().Init(corpseData);
+
+            var spawnedCorpse = corpse.Spawn(mobPos + w * 0.3f);
+            spawnedCorpse.Init(corpseData);
+
+            gObj[i] = spawnedCorpse.gameObject;
         }
 
         return gObj;

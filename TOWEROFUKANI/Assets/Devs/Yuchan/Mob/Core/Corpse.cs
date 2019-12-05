@@ -9,7 +9,8 @@ public class Corpse : PoolingObj
 
     public void Init(CorpseData d)
     {
-        _ani.Play(gameObject.name, 0, d.mFCntMin != d.mFCntMax ? (float)Random.Range(d.mFCntMin, d.mFCntMax) / (float)d.mFCntMax : d.mFCntMin);
+        name = Prefab.name;
+        _ani.Play(gameObject.name, 0, d.mFCntMin != d.mFCntMax ? Random.Range(d.mFCntMin, d.mFCntMax) / (float)d.mFCntMax : d.mFCntMin);
     }
 
     public void DestroyOfTime(float t)
