@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Corpse : Object_ObjectPool<Corpse>
+
+public class Corpse : PoolingObj
 {
     [SerializeField] Animator _ani;
-
-    public override void ThisStart()
-    {
-        var rb2D = GetComponent<Rigidbody2D>();
-        rb2D.isKinematic = false;
-        rb2D.velocity = new Vector2(0, 0);
-    }
 
     public void Init(CorpseData d)
     {
@@ -20,6 +14,17 @@ public class Corpse : Object_ObjectPool<Corpse>
 
     public void DestroyOfTime(float t)
     {
-        DestroyObj(t);
+        ATimer.Set(GetInstanceID().ToString(), t, this.Sleep);
+    }
+    private void OnDestroy()
+    {
+        ATimer.Pop(GetInstanceID().ToString());
+    }
+
+    public override void ResetOnSpawn()
+    {
+        var rb2D = GetComponent<Rigidbody2D>();
+        rb2D.isKinematic = false;
+        rb2D.velocity = new Vector2(0, 0);
     }
 }

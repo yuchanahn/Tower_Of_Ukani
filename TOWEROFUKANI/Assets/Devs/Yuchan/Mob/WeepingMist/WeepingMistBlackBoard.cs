@@ -20,11 +20,18 @@ public class WeepingMistBlackBoard : BlackBoard_Base
         return true;
     }
 
-    public bool CN_IsStund() => GetComponent<StatusEffect_Stunned>();
+    public bool CN_IsStunned() => GetComponent<StatusEffect_Stunned>();
 
     // 스턴 상태 일경우 뭘 할껀지 아무것도 안하니까 True
-    public bool TA_StundEvent() => true;
+    public bool TA_StundEvent() => mob.Stunned();
 
-    public bool CN_IsPlayerInAgroRange() => Vector2.Distance(GM.PlayerPos, mob.transform.position) < mob.AgroRange;
+    public bool CN_IsPlayerInAgroRange() => Vector2.Distance(GM.PlayerPos, mob.Pos) < mob.AgroRange;
     public bool TA_Follow() => mob.Follow();
+    public bool CN_IsPlayerInAttackRange() => mob.IsAttacking ? true : Vector2.Distance(GM.PlayerPos, mob.Pos) < mob.AttackRange;
+    public bool TA_Attack() => mob.OnAttack();
+    public bool CN_IsTeleporting() => mob.IsTeleporting;
+    public bool TA_Teleport()
+    {
+        return true;
+    }
 }

@@ -16,6 +16,11 @@ public enum eMobAniST
     AirborneUp,
     Stunned,
     Fly,
+    PreCry,
+    Cry,
+    Spread,
+    Merge,
+    Death,
 
     Last,
 }

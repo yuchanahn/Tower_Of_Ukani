@@ -7,6 +7,8 @@ public class AStat : MonoBehaviour, IDamage
 {
     [SerializeField] private int mHP;
     [SerializeField] private int mDamage;
+
+    bool IsIgnoreHit => GetComponent<StatusEffect_IgnoreHit>();
     private int mMAXHP;
     private int mDmg = 0;
     MobDamageText Dmg = null;
@@ -22,6 +24,7 @@ public class AStat : MonoBehaviour, IDamage
 
     public void Hit(int dmg)
     {
+        if (IsIgnoreHit) return;
         HP -= dmg;
         mDmg += dmg;
         GetComponent<IHurt>().OnHurt();

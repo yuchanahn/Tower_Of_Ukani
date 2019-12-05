@@ -30,23 +30,35 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
     Animator mAnimator;
     Dictionary<eMobAniST, (string, float)> m_Ani = new Dictionary<eMobAniST, (string, float)>();
     bool mAniStart;
-    eMobAniST mCurAniST;
+    protected bool mMoveStop = false;
+    protected bool mHitImmunity = false;
+    public eMobAniST mCurAniST;
     StatusEffect_Object mSE;
 
     #region Properties
 
     int NextLinkIdx => Mathf.Min(mLinkIdx + 1, MoveLink.Length);
     Vector2 NextPath => MoveLink[NextLinkIdx];
-    Vector2 Dir2d { 
-        get 
-        { 
-            return mHurt ? Vector2.zero :
-                           mMoveData.Dir2d;
-        } 
+    Vector2 Dir2d {
+        get
+        {
+            Vector2 nextPos = transform.position + (Vector3)mMoveData.Dir2d * Time.fixedDeltaTime * MoveSpeed;
+            return mHurt        ? Vector2.zero :
+                   mAttacking   ? Vector2.zero :
+                   mMoveStop    ? Vector2.zero :
+                   !( (nextPos.x <  GM.CurMapWorldPoint.x 
+                   && nextPos.x > GM.CurMapWorldPoint.x - GM.CurMapSize.width)
+                   &&
+                   (nextPos.y <  GM.CurMapWorldPoint.y 
+                   && nextPos.y > GM.CurMapWorldPoint.y - GM.CurMapSize.height)) ? Vector2.zero :
 
-        set { if (mSE.SEChangeDirAble) mMoveData.Dir2d = value; } 
+                   mMoveData.Dir2d;
+        }
+
+        set { if (mSE.SEChangeDirAble) mMoveData.Dir2d = value; }
     }
-    Vector2 Pos2d => transform.position;
+    public Vector3 Pos => transform.position - (Vector3.up * 3);
+    public Vector2 Pos2d => transform.position - (Vector3.up * 3);
     float MoveSpeed => mMoveData.Speed;
     public bool IsHurting => mHurt;
     public int SpriteDir
@@ -66,7 +78,7 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
     #endregion
 
 
-    private void Awake()
+    virtual protected void Awake()
     {
         //======================================================================
         //      ## Init
@@ -81,11 +93,11 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
         foreach (var i in mAniSpeedData)
             m_Ani[i.ST] = ($"{gameObject.name}_{i.ST.ToString()}", i.t);
 
-        mRb2d     = GetComponent<Rigidbody2D>();
+        mRb2d = GetComponent<Rigidbody2D>();
         mAnimator = GetComponent<Animator>();
 
-        mAttack[eAttackST.PreAttack]    = PreAttack;
-        mAttack[eAttackST.Attack]       = Attack;
+        mAttack[eAttackST.PreAttack] = PreAttack;
+        mAttack[eAttackST.Attack] = Attack;
     }
 
     void Animation()
@@ -101,7 +113,7 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
             return;
         }
 
-        if(!mHurt) SpriteDir = Dir2d.x > 0 ? 1 : -1;
+        if (!mHurt) SpriteDir = Dir2d.x > 0 ? 1 : -1;
     }
 
     void FixedUpdate()
@@ -113,25 +125,65 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
         else mAnimator.Play(m_Ani[mCurAniST].Item1);
     }
 
-
-
-    void PreAttack()
+    public virtual bool Stunned()
     {
-
-    }
-    void PreAttackEnd_AniEvent()
-    {
-        mCurAttackST = eAttackST.Attack;
+        return true;
     }
 
-    void Attack()
-    {
 
-    }
-    void AttackEnd_AniEvent()
+    //======================================================================
+    //      ## Attack
+    //======================================================================
+
+    [Header("Attack"), Range(0,100f)] public float AttackRange;
+
+    protected bool mAttacking = false;
+    public bool IsAttacking => mAttacking;
+
+    virtual public bool OnAttack()
     {
+        mAttack[mCurAttackST]();
+
+        return true;
+    }
+
+    virtual protected void OnAttackEnd()
+    {
+        mAttacking = false;
         mCurAttackST = eAttackST.PreAttack;
     }
+
+    virtual protected void PreAttack()
+    {
+        mAttacking = true;
+        mCurAniST = eMobAniST.Attack_Pre;
+    }
+
+    void PreAttackEnd_AniEvent()
+    {
+        mCurAttackST = eAttackST.Attack; 
+        OnAttackStart();
+    }
+
+    virtual protected void OnAttackStart()
+    {
+
+    }
+
+    virtual protected void Attack()
+    {
+        mCurAniST = eMobAniST.Attack_Post;
+    }
+
+    void AttackEnd_AniEvent()
+    {
+        OnAttackEnd();
+    }
+
+
+
+
+
 
 
     //=================================================================
@@ -187,20 +239,26 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
     [SerializeField] public float AgroRange;
     public bool Follow()
     {
-        Dir2d = (GM.PlayerPos - transform.position).normalized;
+        Dir2d = (GM.PlayerPos - Pos).normalized;
+        mCurAniST = eMobAniST.Fly;
         return true;
     }
 
 
+    //=================================================================
+    //      ## Hit
+    //=================================================================
+
     bool mHurt = false;
 
-    void HurtEnd()
+    protected void HurtEnd()
     {
         mHurt = false;
     }
 
-    public void OnHurt()
+    virtual public void OnHurt()
     {
+        if (mHitImmunity) return;
         mHurt       = true;
         mAniStart   = true;
         mCurAniST   = eMobAniST.Hit;
@@ -212,8 +270,15 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
         HurtEnd();
     }
 
+
+    //=================================================================
+    //      ## Dead
+    //=================================================================
+
+    [SerializeField, Header("Compse")] CorpseData Compse;
     public void OnDead()
     {
-        Debug.Log("Dead!");
+        Destroy(gameObject);
+        CorpseMgr.CreateCorpseOrNull(transform, Compse);
     }
 }

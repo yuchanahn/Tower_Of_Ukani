@@ -94,6 +94,9 @@ MonoBehaviour:
   - Object: {fileID: 1173779807699850722, guid: 108b6dd0ba5873d43818d41208f488a4,
       type: 3}
     Count: 10
+  - Object: {fileID: 2609118334392690136, guid: 48d257210bec05142be48d1a37927f43,
+      type: 3}
+    Count: 10
   UI: {fileID: 0}
 --- !u!1 &350722369162630152
 GameObject:
@@ -139,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c16a943003d7f449bb6ebf3f5e5797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pos: 0
 --- !u!114 &350722369162630154
 MonoBehaviour:
   m_ObjectHideFlags: 0
