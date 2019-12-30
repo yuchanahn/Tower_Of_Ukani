@@ -16,6 +16,7 @@ public enum eDirections
 	NORTH_WEST = 7,
 }
 
+[Serializable]
 public class Node
 {
 	public Point pos;
@@ -109,6 +110,7 @@ public class PathfindingNode
 	}
 }
 
+[Serializable]
 public class Grid
 {
 	public Node[] gridNodes = new Node[0];
@@ -257,7 +259,11 @@ public class Grid
 		return false;  // If we are out of bounds, then we are def a wall
 	}
 
-	private bool isInBounds( int index )
+
+
+
+
+    private bool isInBounds( int index )
 	{
 		if ( index < 0 || index >= gridNodes.Length ) return false;
 
@@ -588,7 +594,7 @@ public class Grid
 		}
 	}
 
-	private Node getNode( int row, int column )
+	public Node getNode( int row, int column )
 	{
 		Node node = null;
 
@@ -596,7 +602,6 @@ public class Grid
 		{
 			node = gridNodes[ rowColumnToIndex( row, column ) ];
 		}
-
 		return node;
 	}
 

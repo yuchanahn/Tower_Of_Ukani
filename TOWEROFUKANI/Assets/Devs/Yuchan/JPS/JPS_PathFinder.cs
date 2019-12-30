@@ -9,6 +9,7 @@ public class JPS_PathFinder : MonoBehaviour
     public Vector2[] Find( Vector2 start, Vector2 stop )
     {
         List<Point> path = gridJPS.getPath( gridV.WorldToGrid(start), gridV.WorldToGrid(stop));
+        
         var v3 = new Vector2[path.Count];
         for(int i =0; i < path.Count; i++)
         {
