@@ -6,7 +6,7 @@ public class BG_Scroller : MonoBehaviour
 {
     [SerializeField] private float globalSpeed = 0.01f;
     [SerializeField] private BG_Obj[] bgObjects;
-    private Material[] materials;
+    private SpriteRenderer[] renderers;
 
     float camPosX_Cur;
     float camPosX_Old;
@@ -17,11 +17,11 @@ public class BG_Scroller : MonoBehaviour
         camPosX_Cur = transform.position.x;
         camPosX_Old = camPosX_Cur;
 
-        materials = new Material[bgObjects.Length];
+        renderers = new SpriteRenderer[bgObjects.Length];
 
         for (int i = 0; i < bgObjects.Length; i++)
         {
-            materials[i] = bgObjects[i].GetComponent<MeshRenderer>().material;
+            renderers[i] = bgObjects[i].GetComponent<SpriteRenderer>();
         }
     }
     private void LateUpdate()
@@ -36,7 +36,7 @@ public class BG_Scroller : MonoBehaviour
 
         for (int i = 0; i < bgObjects.Length; i++)
         {
-            materials[i].mainTextureOffset = new Vector2(deltaLength * bgObjects[i].GetSpeed(), 0);
+            renderers[i].material.SetVector("_Offset", new Vector4(deltaLength * bgObjects[i].GetSpeed(), 0));
         }
     }
 }

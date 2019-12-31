@@ -48,7 +48,7 @@ public class TalismanOfProtection : ActiveItem
         base.OnRemove();
 
         // Remove Timers
-        durationTimer.SetTick(gameObject, TimerTick.None);
+        durationTimer.SetTick(gameObject, TickType.None);
         durationTimer.ToZero();
 
         // Destroy Effect
@@ -84,7 +84,7 @@ public class TalismanOfProtection : ActiveItem
         cooldownTimer.Restart();
 
         // Stop Duration Timer
-        durationTimer.SetTick(gameObject, TimerTick.None);
+        durationTimer.SetTick(gameObject, TickType.None);
         durationTimer.ToZero();
 
         // Reset Shield Health

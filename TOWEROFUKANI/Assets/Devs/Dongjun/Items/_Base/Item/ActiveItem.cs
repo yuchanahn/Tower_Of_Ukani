@@ -19,7 +19,7 @@ public abstract class ActiveItem : Item
 
         Deactivate();
 
-        cooldownTimer.SetTick(gameObject, TimerTick.None);
+        cooldownTimer.SetTick(gameObject, TickType.None);
         cooldownTimer.ToZero();
     }
 

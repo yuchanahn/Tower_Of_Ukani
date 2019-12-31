@@ -1362,7 +1362,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -4037,7 +4037,7 @@ ParticleSystem:
         ctime7: 0
         atime0: 0
         atime1: 65535
-        atime2: 0
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
@@ -4831,7 +4831,7 @@ GameObject:
   - component: {fileID: 8567307132159692857}
   - component: {fileID: 1036255023471385981}
   m_Layer: 31
-  m_Name: Test_Bullet_Effect_Hit
+  m_Name: Bullet_Effect_Hit_YellowSpark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4867,6 +4867,5 @@ MonoBehaviour:
   particleSystems:
   - {fileID: 8567307131394727882}
   destroyTimer:
-    StartAsEnded: 0
     CurTime: 0
     EndTime: 0.2

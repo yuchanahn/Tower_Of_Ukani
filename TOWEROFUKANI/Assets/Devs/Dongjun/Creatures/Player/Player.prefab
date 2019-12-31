@@ -608,7 +608,7 @@ MonoBehaviour:
     curCount: 0
     maxCount: 2
     height: 3
-    time: 0.35
+    time: 0.37
     apexY: 0
     isJumping: 0
     fixedYVel: 0
