@@ -6,7 +6,7 @@ public interface ITimerData
     void Tick();
 }
 
-public enum TimerTick
+public enum TickType
 {
     LateUpdate,
     Update,
@@ -34,17 +34,17 @@ public class TimerData : ITimerData
     #endregion
 
     #region Method: Set Up
-    public void SetTick(GameObject self, TimerTick tickType = TimerTick.LateUpdate)
+    public void SetTick(GameObject self, TickType tickType = TickType.LateUpdate)
     {
         TimerManager.Inst.RemoveFromLateUpdate(self, this);
         TimerManager.Inst.RemoveFromUpdate(self, this);
 
         switch (tickType)
         {
-            case TimerTick.LateUpdate:
+            case TickType.LateUpdate:
                 TimerManager.Inst.AddToLateUpdate(self, this);
                 break;
-            case TimerTick.Update:
+            case TickType.Update:
                 TimerManager.Inst.AddToUpdate(self, this);
                 break;
         }
@@ -108,17 +108,17 @@ public class TimerStat : ITimerData
     #endregion
 
     #region Method: Set Up
-    public void SetTickOption(GameObject self, TimerTick autoTickType = TimerTick.LateUpdate)
+    public void SetTickOption(GameObject self, TickType autoTickType = TickType.LateUpdate)
     {
         TimerManager.Inst.RemoveFromLateUpdate(self, this);
         TimerManager.Inst.RemoveFromUpdate(self, this);
 
         switch (autoTickType)
         {
-            case TimerTick.LateUpdate:
+            case TickType.LateUpdate:
                 TimerManager.Inst.AddToLateUpdate(self, this);
                 break;
-            case TimerTick.Update:
+            case TickType.Update:
                 TimerManager.Inst.AddToUpdate(self, this);
                 break;
         }

@@ -43,7 +43,7 @@ public class Player : CLA_Main
         if (Input.GetKeyDown(PlayerActionKeys.Kick))
             return action_Kick;
 
-        return action_Normal;
+        return null;
     }
     private CLA_Action_Base CL_Dash()
     {
@@ -55,14 +55,14 @@ public class Player : CLA_Main
         if (!action_Dash.IsDasing)
             return action_Normal;
 
-        return action_Dash;
+        return null;
     }
     private CLA_Action_Base CL_Kick()
     {
         if (!action_Kick.IsKicking)
             return action_Normal;
 
-        return action_Kick;
+        return null;
     }
     #endregion
 }

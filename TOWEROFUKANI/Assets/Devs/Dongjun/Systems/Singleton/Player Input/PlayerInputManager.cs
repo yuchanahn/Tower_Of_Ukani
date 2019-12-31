@@ -1,40 +1,10 @@
 ﻿using UnityEngine;
 
-public static class PlayerMovementKeys
-{
-    public static KeyCode WalkRight => KeyCode.D;
-    public static KeyCode WalkLeft => KeyCode.A;
-    public static KeyCode FallThrough => KeyCode.S;
-    public static KeyCode Jump => KeyCode.Space;
-}
-public static class PlayerActionKeys
-{
-    public static KeyCode Dash => KeyCode.LeftShift;
-    public static KeyCode Kick => KeyCode.LeftControl;
-    public static KeyCode PickUpItem => KeyCode.C;
-    public static KeyCode DropItem => KeyCode.Q;
-}
-public static class PlayerWeaponKeys
-{
-    public static KeyCode MainAbility => KeyCode.Mouse0;
-    public static KeyCode SubAbility => KeyCode.Mouse1;
-    public static KeyCode SpecialAbility => KeyCode.F;
-    public static KeyCode Reload => KeyCode.R;
-}
-
-public static class PlayerUIKeys
-{
-    public static KeyCode InventoryToggle => KeyCode.E;
-    public static KeyCode PassiveInventoryToggle => KeyCode.Tab;
-    public static KeyCode Escape => KeyCode.R;
-}
-
 public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
 {
     #region Var: Walk
-    public int Input_WalkDir { get; private set; } = 0;
-    private int input_walkRight = 0;
-    private int input_walkLeft = 0;
+    private int input_WalkDir = 0;
+    public int Input_WalkDir => input_WalkDir;
     #endregion
 
     #region Var: FallThrough
@@ -47,12 +17,12 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
 
     #region Var: Dash
     [HideInInspector]
-    public int Input_DashDir = 0;
-    private int oldDashInput = 0;
-
     private readonly float dashInputInterval = 0.2f;
     private float dashInputTime = 0;
     private int dashInputCount = 0;
+    private int oldDashInput = 0;
+    public int Input_DashDir
+    { get; private set; }
     #endregion
 
     #region Method: Unity
@@ -77,15 +47,23 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     #region Method: Walk
     private void GetInput_Walk()
     {
-        if (Input.GetKeyDown(PlayerMovementKeys.WalkRight)) input_walkRight = input_walkLeft + 1;
-        if (Input.GetKeyDown(PlayerMovementKeys.WalkLeft)) input_walkLeft = input_walkRight + 1;
+        void GetDir(ref int dir, KeyCode plusKey, KeyCode minusKey)
+        {
+            if (Input.GetKeyDown(plusKey))
+                dir = 1;
+            if (Input.GetKeyDown(minusKey))
+                dir = -1;
 
-        if (Input.GetKeyUp(PlayerMovementKeys.WalkRight)) input_walkRight = 0;
-        if (Input.GetKeyUp(PlayerMovementKeys.WalkLeft)) input_walkLeft = 0;
+            if (dir == 1 && Input.GetKeyUp(plusKey))
+                dir = -1;
+            if (dir == -1 && Input.GetKeyUp(minusKey))
+                dir = 1;
 
-        Input_WalkDir = input_walkRight == 0 && input_walkLeft == 0 ? 0 : 
-                        input_walkRight > input_walkLeft ? 1 : 
-                        -1;
+            if (!Input.GetKey(plusKey) && !Input.GetKey(minusKey))
+                dir = 0;
+        }
+
+        GetDir(ref input_WalkDir, PlayerMovementKeys.WalkRight, PlayerMovementKeys.WalkLeft);
     }
     #endregion
 
