@@ -1,13 +1,17 @@
 using UnityEditor;
 using UnityEngine;
+using Dongjun.Helper;
 
 public class PixelLevelGenerator : MonoBehaviour
 {
     [SerializeField] private Texture2D mapTexture;
     [SerializeField] private SpriteRenderer mapTempSprite;
     [SerializeField] private ColorToPrefab[] colorMappings;
+    [SerializeField] private LayerMask GroundLayer;
+    [SerializeField] private int GridSize = 1;
+    [SerializeField] GameObject prefab;
 
-    private void Awake()
+    private void Start()
     {
         GenerateLevel();
     }
@@ -43,7 +47,28 @@ public class PixelLevelGenerator : MonoBehaviour
             {
                 Transform tile = Instantiate(colorMapping.prefab, transform).transform;
                 tile.localPosition = new Vector2(x + offsetX, y + offsetY);
+
+                if (((1 << colorMapping.prefab.layer) & GroundLayer) != 0)
+                {
+                    var p = GridView.Inst.GetNodeAtWorldPostiton(tile.position).pos;
+
+                    GridView.Inst.GetNodeAtWorldPostiton(tile.position.Add(x: -0.25f, y: -0.25f)).isObstacle = true;
+                    GridView.Inst.GetNodeAtWorldPostiton(tile.position.Add(x: 0.25f, y: 0.25f)).isObstacle = true;
+                    GridView.Inst.GetNodeAtWorldPostiton(tile.position.Add(x: -0.25f, y: 0.25f)).isObstacle = true;
+                    GridView.Inst.GetNodeAtWorldPostiton(tile.position.Add(x: 0.25f, y: -0.25f)).isObstacle = true;
+                }
             }
+            
         }
+
+        /*
+            if(((1<<other.gameObject.layer) & includeLayers) != 0)
+            {
+                //It matched one
+            } 
+         */
+
     }
 }
+
+

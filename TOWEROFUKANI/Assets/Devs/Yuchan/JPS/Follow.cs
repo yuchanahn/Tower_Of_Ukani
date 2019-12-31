@@ -44,6 +44,6 @@ public class Follow : MonoBehaviour
     {
         if (mMovement_queue.Count > 0) Vel = GetVel;
         else Vel = !IsFar ? Vector2.zero : Vel;
-        transform.position += (Vector3)Vel * Time.deltaTime;
+        transform.position += (Vector3)Vel * Time.deltaTime * 5f;
     }
 }

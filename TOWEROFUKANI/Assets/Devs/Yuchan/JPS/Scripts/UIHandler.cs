@@ -55,14 +55,14 @@ public class UIHandler : MonoBehaviour
 		calcWallDistButton.interactable = false;
 		placeSearchMarkersButton.interactable = false;
 		findPathButton.interactable = false;
-		_gridSliders.SetActive(false);
+		//_gridSliders.SetActive(false);
 
 		switch ( JPSState.state )
 		{
 			case eJPSState.ST_OBSTACLE_BUILDING:
 				calcJPButton.interactable = true;
 				_descriptionTextBox.text = initalDescription;
-				_gridSliders.SetActive(true);
+				//_gridSliders.SetActive(true);
 				break;
 			case eJPSState.ST_PRIMARY_JPS_BUILDING:
 				calcStraightJPDistButton.interactable = true;
