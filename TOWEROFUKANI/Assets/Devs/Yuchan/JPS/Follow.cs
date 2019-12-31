@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dongjun.Helper;
 
 public class Follow : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class Follow : MonoBehaviour
 
     Vector2 Vel = Vector2.zero;
     Vector2 targetPos = Vector2.zero;
+    [SerializeField] GameObject prefab;
 
 
     bool IsFirst => (mMovement_queue.Count == mPath.Length);
     bool IsFar => IsFirst ? false : Vector2.Distance(targetPos, transform.position) > 0.1f;
-    Vector2 TargetPos => targetPos = (IsFar ? targetPos : mMovement_queue.Dequeue());
+    Vector2 TargetPos => targetPos = (IsFar ? targetPos : mMovement_queue.Dequeue().Add(-0.5f, 0.5f));
 
     Vector2 GetVel => (TargetPos - (Vector2)transform.position).normalized;
     bool FollowStart = false;
@@ -35,6 +37,14 @@ public class Follow : MonoBehaviour
         {
             Vector2[] path = pathFinder.Find(transform.position, PlayerPos.position);
             UpdatePath(path);
+        }
+
+        if (GUI.Button(new Rect(500, 40, 100, 20), "path"))
+        {
+            foreach(var i in mPath)
+            {
+                Instantiate(prefab, i, Quaternion.identity);
+            }
         }
     }
     private void Start()

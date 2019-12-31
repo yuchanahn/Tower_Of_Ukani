@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using Dongjun.Helper;
+using System.Collections.Generic;
 
 public class PixelLevelGenerator : MonoBehaviour
 {
@@ -31,7 +32,9 @@ public class PixelLevelGenerator : MonoBehaviour
         GM.MapSize[GM.CurMapName] = mapTexture;
         GM.CurMapCenter = transform.position;
     }
-
+    [SerializeField] int map_w;
+    [SerializeField] int map_h;
+    [SerializeField] int objSize;
     private void GenerateTile(int x, int y)
     {
         Color pixelColor = mapTexture.GetPixel(x, y);
@@ -50,24 +53,51 @@ public class PixelLevelGenerator : MonoBehaviour
 
                 if (((1 << colorMapping.prefab.layer) & GroundLayer) != 0)
                 {
-                    var p = GridView.Inst.GetNodeAtWorldPostiton(tile.position).pos;
-
-                    GridView.Inst.GetNodeAtWorldPostiton(tile.position.Add(x: -0.25f, y: -0.25f)).isObstacle = true;
-                    GridView.Inst.GetNodeAtWorldPostiton(tile.position.Add(x: 0.25f, y: 0.25f)).isObstacle = true;
-                    GridView.Inst.GetNodeAtWorldPostiton(tile.position.Add(x: -0.25f, y: 0.25f)).isObstacle = true;
-                    GridView.Inst.GetNodeAtWorldPostiton(tile.position.Add(x: 0.25f, y: -0.25f)).isObstacle = true;
+                    for(int i = 0; i < objSize; i++)
+                    {
+                        for (int j = 0; j < objSize; j++)
+                        {
+                            var lpfs = tile.position.Add(x: i, y: -j);
+                            var __x = (tile.localPosition.x - offsetX) + i;
+                            var __y = (tile.localPosition.y - offsetY) - j;
+                            if (__x >= 0 && __x < map_w && __y >= 0 && __y < map_h)
+                                CreateBlock(lpfs, 1, 1);
+                        }
+                    }
+                    
                 }
             }
-            
         }
 
-        /*
-            if(((1<<other.gameObject.layer) & includeLayers) != 0)
-            {
-                //It matched one
-            } 
-         */
+        void CreateBlock(Vector2 pos, float cnt, float size_offset)
+        {
+            float size2_offset = size_offset * 2;
+            Vector2[] p = {
+            pos.Add(x: -size_offset, y: -size_offset),
+            pos.Add(x: size_offset, y: size_offset),
+            pos.Add(x: -size_offset, y: size_offset),
+            pos.Add(x: size_offset, y: -size_offset)
+            };
+            Vector2[] p2 = {
+            pos.Add(x: -size2_offset, y: -size2_offset),
+            pos.Add(x: size2_offset, y: size2_offset),
+            pos.Add(x: -size2_offset, y: size2_offset),
+            pos.Add(x: size2_offset, y: -size2_offset)
+            };
 
+            Queue<Vector3> q = new Queue<Vector3>();
+            GridView.Inst.GetNodeAtWorldPostiton(pos).isObstacle = true;
+            /*for (int i = 0; i < 1 * cnt; i++)
+            {
+                GridView.Inst.GetNodeAtWorldPostiton(pos).isObstacle = true;
+                //q.Enqueue(p2[i]);
+            }
+            while(q.Count > 0)
+            {
+                var i = q.Dequeue();
+                CreateBlock(i, cnt-1, size_offset);
+            }*/
+        }
     }
 }
 

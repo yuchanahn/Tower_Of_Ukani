@@ -188,16 +188,17 @@ public class GridView : MonoBehaviour
 
     public void CreateImage()
     {
+
         foreach(var i in grid.gridNodes)
         {
             if (i.isObstacle)
             {
-                Instantiate(blockPrefab, getNodePosAsWorldPos(i.pos), Quaternion.identity);
+                Instantiate(blockPrefab, getNodePosAsWorldPos(i.pos), Quaternion.identity).transform.SetParent(transform);
             }
             else
             {
-                Instantiate(blockPrefab2, getNodePosAsWorldPos(i.pos), Quaternion.identity);
-            }
+                Instantiate(blockPrefab2, getNodePosAsWorldPos(i.pos), Quaternion.identity).transform.SetParent(transform);
+			}
         }
     }
 
