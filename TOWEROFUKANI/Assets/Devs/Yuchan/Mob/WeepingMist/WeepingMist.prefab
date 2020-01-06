@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 266196159677176671}
   - component: {fileID: 1505841439728467174}
   - component: {fileID: 208608847839365501}
+  - component: {fileID: 1528643971}
   m_Layer: 8
   m_Name: WeepingMist
   m_TagString: Untagged
@@ -346,9 +347,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMoveData:
-    Speed: 1
+    Speed: 4
     Dir2d: {x: 0, y: 0}
-  mAniSpeedData: []
+  mAniSpeedData:
+  - ST: 2
+    t: 0.3
   mSprTr: {fileID: 5283869461139039952}
   MoveLink: []
   mCurAniST: 0
@@ -357,18 +360,18 @@ MonoBehaviour:
   MoveTimeMove: 3
   AgroRange: 10
   Compse:
-    mCntMin: 1
-    mCntMax: 2
+    mCntMin: 2
+    mCntMax: 3
     mFCntMin: 0
     mFCntMax: 11
     mCorpse: {fileID: 8546638897159743268, guid: 48d257210bec05142be48d1a37927f43,
       type: 3}
-  RandRangeOfTeleport: 45
-  AttackDuration: 10
+  RandRangeOfTeleport: 30
+  AttackDuration: 3
   RainObject: {fileID: 1005293261}
   mRainRenderer: {fileID: 1005293262}
   RainCollider: {fileID: 1005293265}
-  RainSize: {x: 2, y: 3}
+  RainSize: {x: 2, y: 6}
 --- !u!114 &4409644187442236126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45184536e1c4dff438300eb6ff5b4019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mHP: 2000
+  mHP: 40
   mDamage: 10
 --- !u!114 &208608847839365501
 MonoBehaviour:
@@ -421,6 +424,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Use: 1
   StunnedObj: {fileID: 3281447207712922554}
+--- !u!114 &1528643971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018358931423771165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9c0d99f109723489a2bf3770e70288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 2100000, guid: 287147c37f962fa47983a78f8a424ef0, type: 2}
+  Time: 0.5
+  SpriteRenderers:
+  - {fileID: 5283869461139039953}
 --- !u!1 &3281447207712922554
 GameObject:
   m_ObjectHideFlags: 0

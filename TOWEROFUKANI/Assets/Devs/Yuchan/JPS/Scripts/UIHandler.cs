@@ -33,17 +33,7 @@ public class UIHandler : MonoBehaviour
 
 	void Start()
 	{
-		SetInteractiveButtons();    // set initial state of buttons
-
-
-        
-
-		// Set Values of Sliders
-		_widthSlider.value = _gridView.rowSize;
-		_widthText.text = _widthSlider.value.ToString();
-
-		_heightSlider.value = _gridView.numBlocks / _gridView.rowSize;
-		_heightText.text = _heightSlider.value.ToString();
+		//SetInteractiveButtons();    // set initial state of buttons
 	}
 
 	public void SetInteractiveButtons()

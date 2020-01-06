@@ -96,6 +96,7 @@ public class PlayerStats : MonoBehaviour
 
         // Visual Effect
         PlayerHitEft.Create(GM.PlayerPos);
+        GM.Player.GetComponent<HitColorEffect>().OnHit();
     }
     public static void Heal(int amount)
     {

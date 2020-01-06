@@ -27,6 +27,7 @@ public class AStat : MonoBehaviour, IDamage
         if (IsIgnoreHit) return;
         HP -= dmg;
         mDmg += dmg;
+        GetComponent<HitColorEffect>().OnHit();
         GetComponent<IHurt>().OnHurt();
 
         ATimer.SetAndReset(gameObject.name + GetInstanceID().ToString(), 0.1f,

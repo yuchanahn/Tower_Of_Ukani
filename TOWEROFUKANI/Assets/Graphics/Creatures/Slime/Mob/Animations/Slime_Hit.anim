@@ -47,15 +47,6 @@ AnimationClip:
     path: Sprite Root
     classID: 212
     script: {fileID: 0}
-  - curve:
-    - time: 0
-      value: {fileID: 2100000, guid: 287147c37f962fa47983a78f8a424ef0, type: 2}
-    - time: 0.083333336
-      value: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-    attribute: m_Materials.Array.data[0]
-    path: Sprite Root
-    classID: 212
-    script: {fileID: 0}
   m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
@@ -70,13 +61,6 @@ AnimationClip:
       typeID: 212
       customType: 23
       isPPtrCurve: 1
-    - serializedVersion: 2
-      path: 2067665726
-      attribute: 0
-      script: {fileID: 0}
-      typeID: 212
-      customType: 21
-      isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: -7119679401952392466, guid: 962e8ae5032107f438123f3ba8a8d5f1, type: 3}
     - {fileID: -4947739629171933669, guid: 962e8ae5032107f438123f3ba8a8d5f1, type: 3}
@@ -86,8 +70,6 @@ AnimationClip:
     - {fileID: -5247213268634399825, guid: 962e8ae5032107f438123f3ba8a8d5f1, type: 3}
     - {fileID: -682603755273219809, guid: 962e8ae5032107f438123f3ba8a8d5f1, type: 3}
     - {fileID: -3712863922243593867, guid: 962e8ae5032107f438123f3ba8a8d5f1, type: 3}
-    - {fileID: 2100000, guid: 287147c37f962fa47983a78f8a424ef0, type: 2}
-    - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

@@ -81,7 +81,7 @@ public class Mob_WeepingMist : FlyingMob_Base
     void OnTeleport(Vector2 Target)
     {
         StatusEffect_IgnoreHit.Create(gameObject);
-        transform.position = Target;
+        transform.position = Target + Random.insideUnitCircle * 2f;
         mCurAniST = eMobAniST.Merge;
     }
     void OnTeleportEnd()

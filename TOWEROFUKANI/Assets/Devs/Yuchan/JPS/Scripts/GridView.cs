@@ -3,39 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 
 //[ExecuteInEditMode]
-public class GridView : MonoBehaviour 
+public class GridView : MonoBehaviour
 {
-	public GameObject blockPrefab = null;
-	public GameObject blockPrefab2 = null;
+    public GameObject blockPrefab = null;
+    public GameObject blockPrefab2 = null;
 
-	[Range(0, 100000)]
-	public int numBlocks = 1;
-	public float blockSize = 0.64f;
+    [Range(0, 100000)]
+    public int numBlocks = 1;
+    public float blockSize = 0.64f;
     [Range(0, 1000)]
-	public int rowSize = 10;
-	[RangeAttribute(0.0f, 1.0f)]
-	public float blockBuffer = 0.0f;
+    public int rowSize = 10;
+    [RangeAttribute(0.0f, 1.0f)]
+    public float blockBuffer = 0.0f;
 
-	[SerializeField] private PathLineRenderer _pathRenderer;
+    [SerializeField] private PathLineRenderer _pathRenderer;
 
     [SerializeField] GameObject pointIMG;
 
-	private int previousNumBlocks = 0;
-	private float previousBuffer = 0;
+    private int previousNumBlocks = 0;
+    private float previousBuffer = 0;
 
-	private GameObject[] childObjects = new GameObject[1];
+    private GameObject[] childObjects = new GameObject[1];
 
-	public Grid grid = new Grid();
+    public Grid grid = new Grid();
 
-	private Queue< BlockScript > selectedPathPoints = new Queue< BlockScript >();
+    private Queue<BlockScript> selectedPathPoints = new Queue<BlockScript>();
 
-	private IEnumerator findPath = null;
+    private IEnumerator findPath = null;
 
-    public static GridView Inst;
+    public static GridView[] Inst = new GridView[10];
+    [SerializeField] int Target_Object_Size;
 
     private void Awake()
     {
-        Inst = this;
+        Inst[Target_Object_Size] = this;
 
         JPSState.state = eJPSState.ST_OBSTACLE_BUILDING;
         _pathRenderer.disablePath();
@@ -45,38 +46,38 @@ public class GridView : MonoBehaviour
     }
 
     void Start()
-	{
-		Debug.Assert( _pathRenderer != null, "Path Renderer isn't set!" );
+    {
+        Debug.Assert(_pathRenderer != null, "Path Renderer isn't set!");
 
-		_pathRenderer._gridView = this;
-	}
+        _pathRenderer._gridView = this;
+    }
 
-	// Update is called once per frame
-	void Update () 
-	{
-		// If no one has given us a prefab to use, then don't make anything as we'll just get null pointer exception nonsense
-		if ( blockPrefab == null )
-			return;
+    // Update is called once per frame
+    void Update()
+    {
+        // If no one has given us a prefab to use, then don't make anything as we'll just get null pointer exception nonsense
+        if (blockPrefab == null)
+            return;
 
-		// If we need to resize then do
-		//if ( previousNumBlocks != numBlocks || previousBuffer != blockBuffer )
-		//{
-		//	resize();
-		//	previousNumBlocks = numBlocks;
-		//	previousBuffer = blockBuffer;
-		//}
-	}
+        // If we need to resize then do
+        //if ( previousNumBlocks != numBlocks || previousBuffer != blockBuffer )
+        //{
+        //	resize();
+        //	previousNumBlocks = numBlocks;
+        //	previousBuffer = blockBuffer;
+        //}
+    }
 
-#region Helper Functions
+    #region Helper Functions
 
-	public void Reset()
-	{
-		//JPSState.state = eJPSState.ST_OBSTACLE_BUILDING;
-		//_pathRenderer.disablePath();
-		//findPath = null;
-		//selectedPathPoints.Clear();
-		//resize();
-	}
+    public void Reset()
+    {
+        //JPSState.state = eJPSState.ST_OBSTACLE_BUILDING;
+        //_pathRenderer.disablePath();
+        //findPath = null;
+        //selectedPathPoints.Clear();
+        //resize();
+    }
 
     public Point WorldToGrid(Vector2 pos)
     {
@@ -89,7 +90,7 @@ public class GridView : MonoBehaviour
     }
     public Node GetNodeAtWorldPostiton(Vector2 position)
     {
-        var point = GridView.Inst.WorldToGrid(position);
+        var point = WorldToGrid(position);
         return grid.getNode(point.row, point.column);
     }
 
@@ -101,89 +102,98 @@ public class GridView : MonoBehaviour
 
     // Resize the grid based off the new values
     public void resize()
-	{
-        Debug.Log("resize");
-		// clear the queue
-		selectedPathPoints.Clear();
-
-		// Kill all my children
-		//foreach ( GameObject child in childObjects )
-		{
-			//DestroyImmediate( child );
-		}
-
-		// realloc the grids
-		grid.gridNodes = new Node[numBlocks];
-		grid.pathfindingNodes = new PathfindingNode[numBlocks];
-		//childObjects   = new GameObject[numBlocks];
-
-		for ( int i = 0; i < numBlocks ; ++i )
-		{
-			int column = i % rowSize;
-			int row    = i / rowSize;
-			
-			// Create a new Child object
-			//GameObject child = Instantiate( blockPrefab );
-			///child.GetComponent<Transform>().parent = GetComponent<Transform>();  // Set as parent of this new child
-			//child.GetComponent<Transform>().localPosition = new Vector3(
-			//	column *  ( blockSize + blockBuffer ),
-			//	row    * -( blockSize + blockBuffer ),
-			//	0.0f
-			//);
-
-			grid.gridNodes[ i ] = new Node();
-			grid.gridNodes[ i ].pos  = new Point( row, column );
-
-			grid.pathfindingNodes[ i ] = new PathfindingNode();
-			grid.pathfindingNodes[ i ].pos = new Point( row, column );
-
-			grid.rowSize = this.rowSize;
-			//child.GetComponent<BlockScript>().nodeReference = grid.gridNodes[ i ]; // give the child a shared_ptr reference to the node it needs to act on
-			//child.GetComponent<BlockScript>().gridView = this;
-
-			//childObjects[ i ] = child;
-		}
-	}
-
-	// Return the World Position of these grid points, relative to this object
-	public Vector3 getNodePosAsWorldPos( Point point )
-	{
-		var trans = GetComponent<Transform>();
-		
-		return new Vector3(
-			trans.localPosition.x + point.column *  ( blockSize + blockBuffer ),
-			trans.localPosition.y + point.row    * -( blockSize + blockBuffer ),
-			0.0f
-		);
-	}
-
-	public void markNodeAsPathPoint( BlockScript block_script )
-	{
-		if ( selectedPathPoints.Contains( block_script ) )
-		{
-			return;
-		}
-
-		// max size has to be 2
-		while ( selectedPathPoints.Count >= 2 )
-		{
-			selectedPathPoints.Dequeue().removePathMarker();   // remove the oldest element
-		}
-
-		// enqueue the new postition
-		selectedPathPoints.Enqueue( block_script );
-	}
-
-#endregion
-
-#region Button Callbacks
-
-    void GetJPS_Path()
     {
+        selectedPathPoints.Clear();
+
+        // Kill all my children
+        //foreach ( GameObject child in childObjects )
+        {
+            //DestroyImmediate( child );
+        }
+
+        // realloc the grids
+        grid.gridNodes = new Node[numBlocks];
+        grid.pathfindingNodes = new PathfindingNode[numBlocks];
+        //childObjects   = new GameObject[numBlocks];
+
+        for (int i = 0; i < numBlocks; ++i)
+        {
+            int column = i % rowSize;
+            int row = i / rowSize;
+
+            // Create a new Child object
+            //GameObject child = Instantiate( blockPrefab );
+            ///child.GetComponent<Transform>().parent = GetComponent<Transform>();  // Set as parent of this new child
+            //child.GetComponent<Transform>().localPosition = new Vector3(
+            //	column *  ( blockSize + blockBuffer ),
+            //	row    * -( blockSize + blockBuffer ),
+            //	0.0f
+            //);
+
+            grid.gridNodes[i] = new Node();
+            grid.gridNodes[i].pos = new Point(row, column);
+
+            grid.pathfindingNodes[i] = new PathfindingNode();
+            grid.pathfindingNodes[i].pos = new Point(row, column);
+
+            grid.rowSize = this.rowSize;
+            //child.GetComponent<BlockScript>().nodeReference = grid.gridNodes[ i ]; // give the child a shared_ptr reference to the node it needs to act on
+            //child.GetComponent<BlockScript>().gridView = this;
+
+            //childObjects[ i ] = child;
+        }
+    }
+
+    // Return the World Position of these grid points, relative to this object
+    public Vector3 getNodePosAsWorldPos(Point point)
+    {
+        var trans = GetComponent<Transform>();
+
+        return new Vector3(
+            trans.localPosition.x + point.column * (blockSize + blockBuffer),
+            trans.localPosition.y + point.row * -(blockSize + blockBuffer),
+            0.0f
+        );
+    }
+
+    public void markNodeAsPathPoint(BlockScript block_script)
+    {
+        if (selectedPathPoints.Contains(block_script))
+        {
+            return;
+        }
+
+        // max size has to be 2
+        while (selectedPathPoints.Count >= 2)
+        {
+            selectedPathPoints.Dequeue().removePathMarker();   // remove the oldest element
+        }
+
+        // enqueue the new postition
+        selectedPathPoints.Enqueue(block_script);
+    }
+
+    #endregion
+
+    #region Button Callbacks
+
+    bool IsPathFind = false;
+
+    public void GetJPS_Path()
+    {
+        if (IsPathFind) return;
         grid.buildPrimaryJumpPoints();
         grid.buildStraightJumpPoints();
         grid.buildDiagonalJumpPoints();
+        IsPathFind = true;
+    }
 
+    void Start_JPS()
+    {
+        CalcPrimaryJumpPoints();
+        CalcStraightJPDistances();
+        CalcDiagonalJPDistances();
+        CalcWallDistances();
     }
 
     public void CreateImage()

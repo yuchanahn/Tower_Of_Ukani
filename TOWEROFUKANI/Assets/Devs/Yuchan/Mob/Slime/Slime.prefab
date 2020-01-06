@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 4138764173793614123}
   - component: {fileID: 3417997360494488752}
   - component: {fileID: 1362207583}
+  - component: {fileID: 7555408727852874607}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Untagged
@@ -278,7 +279,7 @@ MonoBehaviour:
     FallHeight: 2
     State: 0
   m_followData:
-    dist: 5
+    dist: 10
     CantMoveGround:
       serializedVersion: 2
       m_Bits: 512
@@ -317,6 +318,13 @@ MonoBehaviour:
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
     OffsetAmount: 0
+    groundRB: {fileID: 0}
+  OnFollowing:
+    m_PersistentCalls:
+      m_Calls: []
+  EndFollowing:
+    m_PersistentCalls:
+      m_Calls: []
   JumpVel: {x: 0, y: 0}
   m_addSpeed: 2
   m_AtkActJumpHeight: 0.5
@@ -356,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45184536e1c4dff438300eb6ff5b4019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mHP: 10
+  mHP: 20
   mDamage: 10
 --- !u!114 &3417997360494488752
 MonoBehaviour:
@@ -384,6 +392,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c339e37fc83610e498640ef2d2ee1064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7555408727852874607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569291923833692112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9c0d99f109723489a2bf3770e70288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Material: {fileID: 2100000, guid: 287147c37f962fa47983a78f8a424ef0, type: 2}
+  Time: 0.5
+  SpriteRenderers:
+  - {fileID: 7268275018201367324}
 --- !u!1 &6529837628258330815
 GameObject:
   m_ObjectHideFlags: 0

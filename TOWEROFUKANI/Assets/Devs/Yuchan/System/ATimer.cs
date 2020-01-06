@@ -26,9 +26,9 @@ public class ATimer : MonoBehaviour
     }
     public static void Pop(string key)
     {
-        mTimerEvent.Remove(key);
-        mTimer.Remove(key);
-    }
+        if (mTimer.ContainsKey(key))        mTimer.Remove(key);
+        if (mTimerEvent.ContainsKey(key))   mTimerEvent.Remove(key);
+    }  
 
     public static void Set(object key, float t, Action ev)
     {

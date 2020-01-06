@@ -18,23 +18,25 @@ public class Follow : MonoBehaviour
 
     bool IsFirst => (mMovement_queue.Count == mPath.Length);
     bool IsFar => IsFirst ? false : Vector2.Distance(targetPos, transform.position) > 0.1f;
-    Vector2 TargetPos => targetPos = (IsFar ? targetPos : mMovement_queue.Dequeue().Add(-0.5f, 0.5f));
+    Vector2 TargetPos => targetPos = (IsFar ? targetPos : mMovement_queue.Dequeue().Add(-0.5f * (ObjectSize - 1), 0.5f * (ObjectSize - 1)));
 
     Vector2 GetVel => (TargetPos - (Vector2)transform.position).normalized;
     bool FollowStart = false;
+    [SerializeField] int ObjectSize;
 
     void UpdatePath(Vector2[] path)
     {
         mPath = path;
         mMovement_queue.Clear();
         foreach(var i in mPath) mMovement_queue.Enqueue(i);
-    }
+    }  
 
 
     private void OnGUI()
     {
         if( GUI.Button(new Rect(500,10,100,20), "Start"))
         {
+            GridView.Inst[ObjectSize].GetJPS_Path();
             Vector2[] path = pathFinder.Find(transform.position, PlayerPos.position);
             UpdatePath(path);
         }
