@@ -2,7 +2,7 @@
 
 public class DroppedWeapon : DroppedItem
 {
-    public override void OnPickUp()
+    public override void OnPickUp(PlayerItemPickUpData data)
     {
         // Get Item Reference
         WeaponItem weaponItem = Item as WeaponItem;
@@ -35,5 +35,11 @@ public class DroppedWeapon : DroppedItem
         //    Destroy(gameObject);
         //    return;
         //}
+
+        if (data.inventory.TryAddItem(weaponItem))
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 }

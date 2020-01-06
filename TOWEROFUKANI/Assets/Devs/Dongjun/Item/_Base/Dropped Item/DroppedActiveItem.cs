@@ -2,7 +2,7 @@
 
 public class DroppedActiveItem : DroppedItem
 {
-    public override void OnPickUp()
+    public override void OnPickUp(PlayerItemPickUpData data)
     {
         ActiveItem activeItem = Item as ActiveItem;
 

@@ -2,7 +2,7 @@
 
 public class DroppedPassiveItem : DroppedItem
 {
-    public override void OnPickUp()
+    public override void OnPickUp(PlayerItemPickUpData data)
     {
         PassiveItem passiveItem = Item as PassiveItem;
 

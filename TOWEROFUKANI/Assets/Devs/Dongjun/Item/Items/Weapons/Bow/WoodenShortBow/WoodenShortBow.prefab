@@ -70,10 +70,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     icon: {fileID: 21300000, guid: c6dcd0c1c74b8ae478f5c8587150b90e, type: 3}
-    name: Wooden Short Bow
-    desc: This is a Wooden Short Bow
-    tag_DamageType: 01000000
-    tag_Range: 01000000
+    itemName: Wooden Shortbow
+    itemDesc: This is an Item
+    itemStackLimit: 1
+    damageType: 
+    range: 
   droppedItemPrefab: {fileID: 8764207644904070244, guid: 47648cd422798324fa305603f40a37cd,
     type: 3}
   spriteRoot: {fileID: 2778987210056156138}

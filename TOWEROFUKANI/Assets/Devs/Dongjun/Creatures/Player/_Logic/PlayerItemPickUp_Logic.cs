@@ -6,6 +6,7 @@ public struct PlayerItemPickUpData
 {
     public float radius;
     public LayerMask layerMask;
+    public ToU_Inventory inventory;
 }
 
 public static class PlayerItemPickUp_Logic
@@ -13,6 +14,6 @@ public static class PlayerItemPickUp_Logic
     public static void PickUp(this PlayerItemPickUpData data, Transform tf)
     {
         Collider2D[] items = Physics2D.OverlapCircleAll(tf.position, data.radius, data.layerMask);
-        items.GetClosest<DroppedItem>(tf)?.OnPickUp();
+        items.GetClosest<DroppedItem>(tf)?.OnPickUp(data);
     }
 }

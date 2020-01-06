@@ -35,6 +35,6 @@ public abstract class DroppedItem : MonoBehaviour
     #endregion
 
     #region Method: On Pick Up
-    public abstract void OnPickUp();
+    public abstract void OnPickUp(PlayerItemPickUpData data);
     #endregion
 }

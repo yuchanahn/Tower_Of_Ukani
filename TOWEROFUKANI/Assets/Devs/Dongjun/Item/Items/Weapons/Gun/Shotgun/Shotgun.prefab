@@ -100,27 +100,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     icon: {fileID: 21300000, guid: 8713c2c7f655ec1478bc2f0dc3b3459b, type: 3}
-    name: Shotgun
-    desc: This is a Shotgun
-    tag_DamageType: 01000000
-    tag_Range: 01000000
+    itemName: Shotgun
+    itemDesc: This is an Item
+    itemStackLimit: 1
+    damageType: 
+    range: 
   droppedItemPrefab: {fileID: 5391700499817539471, guid: 2eb6e46f835907c4988e393740605825,
     type: 3}
   spriteRoot: {fileID: 1077788971484917873}
   pivotPointY: 0.162
   weaponTags: 02000000
+  attackData: {}
   shootTimer:
-    StartAsEnded: 0
     CurTime: 0
   reloadTimer:
-    StartAsEnded: 0
     CurTime: 0
   swapMagazineTimer:
-    StartAsEnded: 0
     CurTime: 0
-  bulletData:
-    attackData: {}
-    curTravelDist: 0
+  bulletData: {}
   loadedBullets: 0
   isBulletLoaded: 1
 --- !u!114 &3648695750760986672
