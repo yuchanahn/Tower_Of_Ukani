@@ -11,7 +11,7 @@ public abstract class DroppedItem : MonoBehaviour
     #endregion
 
     #region Var: Properties
-    public Item Item => item;
+    public Item ItemObj => item;
     public bool DroppedFromInventory
     { get; private set; } = false;
     #endregion
@@ -22,7 +22,7 @@ public abstract class DroppedItem : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         // Initialize Icon
-        spriteRenderer.sprite = Item.Info.Icon;
+        spriteRenderer.sprite = ItemObj.Info.Icon;
     }
     #endregion
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public abstract class Item : MonoBehaviour
 {
@@ -11,8 +12,11 @@ public abstract class Item : MonoBehaviour
     #endregion
 
     #region Var: Properties
+    // Item Data
     public ItemInfo Info => info;
     public DroppedItem DroppedItemPrefab => droppedItemPrefab;
+
+    // Inventory Ref
     public InventoryBase Inventory
     { get; private set; }
     #endregion
@@ -20,16 +24,30 @@ public abstract class Item : MonoBehaviour
     #region Method: Unity
     protected virtual void Awake()
     {
-        info.Init();
+        // Temp
+        if (info.ID == null)
+            info.Init();
     }
     #endregion
 
-    #region Method: Add/Remove
+    #region Method: Data
+    public void SetInfo(ItemInfo other)
+    {
+        info.SetID(other.ID);
+        info.Count = other.Count;
+    }
+    #endregion
+
+    #region Method: Add / Move / Drop
     public virtual void OnAdd(InventoryBase inventory)
     {
         Inventory = inventory;
     }
-    public virtual void OnRemove()
+    public virtual void OnMove()
+    {
+
+    }
+    public virtual void OnDrop()
     {
         this.SpawnDroppedItem();
     }

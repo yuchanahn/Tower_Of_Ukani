@@ -43,9 +43,9 @@ public class TalismanOfProtection : ActiveItem
         shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));
         shieldEffect.SetActive(false);
     }
-    public override void OnRemove()
+    public override void OnDrop()
     {
-        base.OnRemove();
+        base.OnDrop();
 
         // Remove Timers
         durationTimer.SetTick(gameObject, TickType.None);
@@ -57,7 +57,7 @@ public class TalismanOfProtection : ActiveItem
     #endregion
 
     #region Method: Activate/Deactivate
-    public override void Activate()
+    protected override void OnActivate()
     {
         IsActive = true;
 

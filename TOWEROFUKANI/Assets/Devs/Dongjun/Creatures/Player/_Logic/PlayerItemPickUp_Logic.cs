@@ -4,9 +4,14 @@ using Dongjun.Helper;
 [System.Serializable]
 public struct PlayerItemPickUpData
 {
+    [Header("Pick Up Data")]
     public float radius;
     public LayerMask layerMask;
-    public ToU_Inventory inventory;
+
+    [Header("Inventory Ref")]
+    public PlayerInventory inventory;
+    public PlayerWeaponHotbar weaponHotbar;
+    public PlayerActiveHotbar activeHotbar;
 }
 
 public static class PlayerItemPickUp_Logic

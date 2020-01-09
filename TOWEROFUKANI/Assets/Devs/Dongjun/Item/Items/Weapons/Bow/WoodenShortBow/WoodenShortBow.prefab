@@ -77,6 +77,7 @@ MonoBehaviour:
     range: 
   droppedItemPrefab: {fileID: 8764207644904070244, guid: 47648cd422798324fa305603f40a37cd,
     type: 3}
+  itemUI: {fileID: -6411987293264075731, guid: ada4f8660c7c76544989b8c33fc4035e, type: 3}
   spriteRoot: {fileID: 2778987210056156138}
   pivotPointY: 0
   weaponTags: 03000000

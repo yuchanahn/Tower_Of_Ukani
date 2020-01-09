@@ -45,10 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     icon: {fileID: 21300000, guid: 072c88cbe78167f4c86c5c687ca04c9e, type: 3}
-    name: Flame Boots
-    desc: Deal Damage When Dashing
-    tag_DamageType: 
-    tag_Range: 
+    itemName: Flame Boots
+    itemDesc: This is an Item
+    itemStackLimit: 0
+    damageType: 
+    range: 
   droppedItemPrefab: {fileID: 749155337391026208, guid: 9ddb4facf9ee8074c987a85351b7ec1e,
     type: 3}
   god: 2

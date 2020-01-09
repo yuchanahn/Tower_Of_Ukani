@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum Item_DamageType
@@ -34,10 +35,11 @@ public sealed class ItemInfo
     #region Var: Properties
     // Item Data
     public string ID
-    { get; private set; }
+    { get; private set; } = null;
     public Sprite Icon => icon;
     public string ItemName => itemName;
-    public string NameTrimed { get; private set; }
+    public string NameTrimed
+    { get; private set; }
     public string ItemDesc => itemDesc;
 
     // Item Count
@@ -55,15 +57,25 @@ public sealed class ItemInfo
     public bool IsMaxStack => StackLimit != 0 && Count == StackLimit;
 
     // Item Tags
-    public Item_DamageType[] DamageType => damageType;
-    public Item_Range[] Range => range;
+    public List<Item_DamageType> DamageType
+    { get; private set; }
+    public List<Item_Range> Range
+    { get; private set; }
     #endregion
 
     #region Method: Initialize
     public void Init()
     {
-        NameTrimed = ItemName.Replace(" ", string.Empty);
+        // Init ID as ItemName
         SetID(itemName);
+
+        // Init Trimed Name
+        NameTrimed = ItemName.Trim();
+        NameTrimed = ItemName.Replace(" ", "_");
+
+        // Init Tag
+        DamageType = damageType.ToList();
+        Range = range.ToList();
     }
     #endregion
 

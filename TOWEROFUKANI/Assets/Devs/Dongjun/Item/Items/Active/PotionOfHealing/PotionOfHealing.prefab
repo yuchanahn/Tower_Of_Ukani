@@ -45,9 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     icon: {fileID: 21300000, guid: 7256fba2e0ec8bc45acd370b13728d36, type: 3}
-    name: Potion Of Healing
-    desc: It Heals you
-    tag_DamageType: 
-    tag_Range: 
+    itemName: Potion of Healing
+    itemDesc: This is an Item
+    itemStackLimit: 0
+    damageType: 
+    range: 
   droppedItemPrefab: {fileID: 4029644265109773275, guid: 9245b1ba5963f6b46903902845d0c592,
     type: 3}

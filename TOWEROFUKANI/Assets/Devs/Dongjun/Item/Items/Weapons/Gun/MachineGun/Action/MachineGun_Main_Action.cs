@@ -91,7 +91,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
             Quaternion.Euler(transform.eulerAngles.Add(z: Random.Range(-acry_ZRotOffset, acry_ZRotOffset))));
 
         // Set Bullet Data
-        bullet.InitData(weapon.bulletData, weapon.attackData);
+        bullet.InitData(bullet.transform.right, weapon.bulletData, weapon.attackData);
 
         // Consume Bullet
         weapon.loadedBullets -= 1;

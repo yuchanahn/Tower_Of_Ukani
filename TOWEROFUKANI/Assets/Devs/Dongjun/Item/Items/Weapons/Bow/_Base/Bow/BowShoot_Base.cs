@@ -67,7 +67,7 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
         Arrow arrow = arrowPrefab.Spawn(shootPoint.position, transform.rotation);
 
         // Set Arrow Data
-        arrow.InitData(curArrowData, curAttackData);
+        arrow.InitData(arrow.transform.right, curArrowData, curAttackData);
     }
     protected virtual void ShootEffects()
     {

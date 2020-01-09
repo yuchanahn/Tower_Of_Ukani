@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 
-[Serializable]
 public struct IntStat
 {
     private bool needToCalculate;
@@ -91,7 +90,6 @@ public struct IntStat
     }
 }
 
-[Serializable]
 public struct FloatStat
 {
     private bool needToCalculate;

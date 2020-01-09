@@ -12,20 +12,19 @@ public class RoseOfLove : ActiveItem
 
         roseProjectileData = new ProjectileData()
         {
-            moveSpeed = new FloatStat(8, min: 0),
+            moveSpeed = new FloatStat(2f, min: 0),
             travelDist = new FloatStat(20, min: 0),
-            gravity = new FloatStat(0.3f, min: 0)
+            gravity = new FloatStat(30f, min: 0)
         };
     }
 
-    public override void Activate()
+    protected override void OnActivate()
     {
         // Restart Cooldown Timer
         cooldownTimer.Restart();
 
         // Spawn Rose
         WeaponProjectile rose = roseProjectile.Spawn(GM.PlayerPos, Quaternion.identity);
-        rose.transform.right = (Vector2)(Global.Inst.MainCam.ScreenToWorldPoint(Input.mousePosition) - GM.PlayerPos);
-        rose.InitData(roseProjectileData);
+        rose.InitData(Global.Inst.MainCam.ScreenToWorldPoint(Input.mousePosition) - GM.PlayerPos, roseProjectileData);
     }
 }

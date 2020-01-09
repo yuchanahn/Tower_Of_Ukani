@@ -14,9 +14,9 @@ public class Bloodseeker : PassiveItem
         onWeaponHitEffect = new ItemEffect(GetType(), LifeSteal);
         ItemEffectManager.AddEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
     }
-    public override void OnRemove()
+    public override void OnDrop()
     {
-        base.OnRemove();
+        base.OnDrop();
         ItemEffectManager.RemoveEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
     }
     #endregion

@@ -36,16 +36,19 @@ public class TimerData : ITimerData
     #region Method: Set Up
     public void SetTick(GameObject self, TickType tickType = TickType.LateUpdate)
     {
-        TimerManager.Inst.RemoveFromLateUpdate(self, this);
-        TimerManager.Inst.RemoveFromUpdate(self, this);
-
         switch (tickType)
         {
             case TickType.LateUpdate:
+                TimerManager.Inst.RemoveFromUpdate(self, this);
                 TimerManager.Inst.AddToLateUpdate(self, this);
                 break;
             case TickType.Update:
+                TimerManager.Inst.RemoveFromLateUpdate(self, this);
                 TimerManager.Inst.AddToUpdate(self, this);
+                break;
+            default:
+                TimerManager.Inst.RemoveFromUpdate(self, this);
+                TimerManager.Inst.RemoveFromLateUpdate(self, this);
                 break;
         }
     }
@@ -87,7 +90,6 @@ public class TimerData : ITimerData
     }
 }
 
-[Serializable]
 public class TimerStat : ITimerData
 {
     #region Var: States
@@ -97,7 +99,6 @@ public class TimerStat : ITimerData
     #endregion
 
     #region Var: Data
-    [HideInInspector]
     public float CurTime = 0; // 타이머의 현재 시간.
     public FloatStat EndTime; // 타이머의 종료 시간.
     #endregion
@@ -108,18 +109,21 @@ public class TimerStat : ITimerData
     #endregion
 
     #region Method: Set Up
-    public void SetTickOption(GameObject self, TickType autoTickType = TickType.LateUpdate)
+    public void SetTick(GameObject self, TickType tickType = TickType.LateUpdate)
     {
-        TimerManager.Inst.RemoveFromLateUpdate(self, this);
-        TimerManager.Inst.RemoveFromUpdate(self, this);
-
-        switch (autoTickType)
+        switch (tickType)
         {
             case TickType.LateUpdate:
+                TimerManager.Inst.RemoveFromUpdate(self, this);
                 TimerManager.Inst.AddToLateUpdate(self, this);
                 break;
             case TickType.Update:
+                TimerManager.Inst.RemoveFromLateUpdate(self, this);
                 TimerManager.Inst.AddToUpdate(self, this);
+                break;
+            default:
+                TimerManager.Inst.RemoveFromUpdate(self, this);
+                TimerManager.Inst.RemoveFromLateUpdate(self, this);
                 break;
         }
     }

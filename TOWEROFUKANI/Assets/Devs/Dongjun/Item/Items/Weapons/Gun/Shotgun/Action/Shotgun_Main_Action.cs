@@ -89,7 +89,7 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
             Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(rot));
 
             // Set Bullet Data
-            bullet.InitData(weapon.bulletData, curAttackData);
+            bullet.InitData(bullet.transform.right, weapon.bulletData, curAttackData);
         }
 
         // Consume Bullet

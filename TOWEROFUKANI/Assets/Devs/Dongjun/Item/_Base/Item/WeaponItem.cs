@@ -27,7 +27,7 @@ public abstract class WeaponController<TItem> : WeaponController_Base
 
 public abstract class WeaponItem : Item 
 {
-    public enum WeaponTag
+    public enum WeaponType
     {
         None,
         All,
@@ -39,14 +39,13 @@ public abstract class WeaponItem : Item
     [Header("Weapon Info")]
     [SerializeField] private GameObject spriteRoot;
     [SerializeField] private float pivotPointY;
-    [SerializeField] private WeaponTag[] weaponTags;
+    [SerializeField] private WeaponType[] weaponTags;
     #endregion
 
     #region Var: Properties
     public GameObject SpriteRoot => spriteRoot;
-    public SpriteRenderer RendererRoot { get; private set; }
     public float PivotPointY => pivotPointY;
-    public WeaponTag[] WeaponTags => weaponTags;
+    public WeaponType[] WeaponTags => weaponTags;
     public bool IsSelected
     { get; protected set; } = false;
     #endregion
@@ -59,11 +58,7 @@ public abstract class WeaponItem : Item
     protected override void Awake()
     {
         base.Awake();
-
-        RendererRoot = spriteRoot.GetComponent<SpriteRenderer>();
-
         InitStats();
-        Select(false);
     }
     #endregion
 
@@ -71,16 +66,24 @@ public abstract class WeaponItem : Item
     public abstract void InitStats();
     #endregion
 
-    #region Method Override: Add/Remove
+    #region Method Override: Add / Move / Drop
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        //Select(WeaponHotbar.CurSelected == this);
+        gameObject.SetActive(true);
+        transform.SetParent(GM.PlayerObj.transform);
+        transform.localPosition = new Vector2(0, PivotPointY);
+
+        Select(Inventory is PlayerWeaponHotbar && (Inventory as PlayerWeaponHotbar).CurWeapon == this);
     }
-    public override void OnRemove()
+    public override void OnMove()
     {
-        base.OnRemove();
+        Select(Inventory is PlayerWeaponHotbar && (Inventory as PlayerWeaponHotbar).CurWeapon == this);
+    }
+    public override void OnDrop()
+    {
+        base.OnDrop();
 
         Select(false);
         gameObject.SetActive(false);
@@ -103,30 +106,25 @@ public abstract class GunController<TGun> : WeaponController<TGun> where TGun : 
 public abstract class GunItem : WeaponItem
 {
     #region Var: Stats
-    [Header("Timer")]
-    public TimerStat shootTimer;
-    public TimerStat reloadTimer;
-    public TimerStat swapMagazineTimer;
+    // Timer
+    public TimerStat shootTimer = new TimerStat();
+    public TimerStat reloadTimer = new TimerStat();
+    public TimerStat swapMagazineTimer = new TimerStat();
 
-    [Header("Bullet Data")]
+    // Bullet Data
     public ProjectileData bulletData;
 
     [Header("Ammo Data")]
-    public IntStat magazineSize;
     public int loadedBullets;
     public bool isBulletLoaded;
+    public IntStat magazineSize;
     #endregion
 
-    #region Var: Properties
-    // Animation Clip Names
-    public string ANIM_Idle
-    { get; private set; }
-    public string ANIM_Shoot
-    { get; private set; }
-    public string ANIM_Reload
-    { get; private set; }
-    public string ANIM_SwapMagazine
-    { get; private set; }
+    #region Var: Anim Clip Names
+    public readonly string ANIM_Idle = "Idle";
+    public readonly string ANIM_Shoot = "Shoot";
+    public readonly string ANIM_Reload = "Reload";
+    public readonly string ANIM_SwapMagazine = "SwapMagazine";
     #endregion
 
     #region Method: Unity
@@ -134,20 +132,13 @@ public abstract class GunItem : WeaponItem
     {
         #region Init: Stats
         // Init Timer
-        shootTimer.SetTickOption(gameObject);
+        shootTimer.SetTick(gameObject);
         shootTimer.ToEnd();
-        reloadTimer.SetTickOption(gameObject);
-        swapMagazineTimer.SetTickOption(gameObject);
+        reloadTimer.SetTick(gameObject);
+        swapMagazineTimer.SetTick(gameObject);
 
         // Init Ammo
         loadedBullets = magazineSize.Value;
-        #endregion
-
-        #region Init: Animation Clip Names
-        ANIM_Idle = string.Concat(info.NameTrimed, "_Idle");
-        ANIM_Shoot = string.Concat(info.NameTrimed, "_Shoot");
-        ANIM_Reload = string.Concat(info.NameTrimed, "_Reload");
-        ANIM_SwapMagazine = string.Concat(info.NameTrimed, "_SwapMagazine");
         #endregion
     }
     #endregion
@@ -164,11 +155,11 @@ public abstract class BowItem : WeaponItem
     #endregion
 
     #region Var: Stats
-    [Header("Timer")]
-    public TimerStat shootTimer;
-    public TimerStat drawTimer;
+    // Timer
+    public TimerStat shootTimer = new TimerStat();
+    public TimerStat drawTimer = new TimerStat();
 
-    [Header("Arrow Data")]
+    // Arrow Data
     public ProjectileData arrowData;
     #endregion
 
@@ -176,16 +167,14 @@ public abstract class BowItem : WeaponItem
     [HideInInspector] public float drawPower = 0;
     #endregion
 
+    #region Var: Anim Clip Names
+    public readonly string ANIM_Idle = "Idle";
+    public readonly string ANIM_Shoot = "Shoot";
+    public readonly string ANIM_Draw = "Pull";
+    #endregion
+
     #region Var: Properties
     public GameObject ArrowVisual => arrowVisual;
-
-    // Animation Clip Names
-    public string ANIM_Idle
-    { get; private set; }
-    public string ANIM_Shoot
-    { get; private set; }
-    public string ANIM_Draw
-    { get; private set; }
     #endregion
 
     #region Method: Unity
@@ -193,15 +182,9 @@ public abstract class BowItem : WeaponItem
     {
         #region Init: Stats
         // Init Timer
-        shootTimer.SetTickOption(gameObject);
+        shootTimer.SetTick(gameObject);
         shootTimer.ToEnd();
-        drawTimer.SetTickOption(gameObject);
-        #endregion
-
-        #region Init: Animation Clip Names
-        ANIM_Idle = string.Concat(info.NameTrimed, "_Idle");
-        ANIM_Shoot = string.Concat(info.NameTrimed, "_Shoot");
-        ANIM_Draw = string.Concat(info.NameTrimed, "_Pull");
+        drawTimer.SetTick(gameObject);
         #endregion
     }
     #endregion

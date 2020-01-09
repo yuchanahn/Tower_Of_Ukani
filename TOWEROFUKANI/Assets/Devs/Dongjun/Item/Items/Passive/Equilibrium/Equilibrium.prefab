@@ -45,9 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     icon: {fileID: 21300000, guid: b39e1bb0a30315b4686339ff7fe2d939, type: 3}
-    name: Equilibrium
-    desc: Deals and Takes 50% more Damage
-    tag_DamageType: 
-    tag_Range: 
+    itemName: Equilibrium
+    itemDesc: This is an Item
+    itemStackLimit: 0
+    damageType: 
+    range: 
   droppedItemPrefab: {fileID: 0}
   god: 3

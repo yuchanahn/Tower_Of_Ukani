@@ -16,7 +16,7 @@ public class WoodenShortBowItem : BowItem
         {
             moveSpeed = new FloatStat(30f, min: 0f),
             travelDist = new FloatStat(min: 0f, max: 30f),
-            gravity = new FloatStat(1f, min: 0f)
+            gravity = new FloatStat(40f, min: 0f)
         };
     }
 }

@@ -4,28 +4,23 @@ public class DroppedActiveItem : DroppedItem
 {
     public override void OnPickUp(PlayerItemPickUpData data)
     {
-        ActiveItem activeItem = Item as ActiveItem;
+        // Get Item Reference
+        ActiveItem activeItem = ItemObj as ActiveItem;
 
+        // Spawn Item
         if (!DroppedFromInventory)
             activeItem = Instantiate(activeItem).GetComponent<ActiveItem>();
 
-        //if (ActiveHotbar.AddExisting(activeItem))
-        //{
-        //    Destroy(activeItem.gameObject);
-        //    Destroy(gameObject);
-        //    return;
-        //}
-
-        //if (ActiveHotbar.Add(activeItem))
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
-
-        //if (Inventory.Add(activeItem))
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
+        // Add To Inventory
+        if (data.activeHotbar.TryAddItem(activeItem))
+        {
+            Destroy(gameObject);
+            return;
+        }
+        if (data.inventory.TryAddItem(activeItem))
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 }

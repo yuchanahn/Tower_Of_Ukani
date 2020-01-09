@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
 public struct AttackData
 {
     public IntStat damage;

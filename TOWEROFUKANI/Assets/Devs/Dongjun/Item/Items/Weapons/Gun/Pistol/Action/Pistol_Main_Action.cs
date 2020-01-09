@@ -75,7 +75,7 @@ public class Pistol_Main_Action : GunAction_Base<PistolItem>
         Bullet bullet = bulletPrefab.Spawn(shootPoint.position, transform.rotation);
 
         // Set Bullet Data
-        bullet.InitData(weapon.bulletData, weapon.attackData);
+        bullet.InitData(bullet.transform.right, weapon.bulletData, weapon.attackData);
 
         // Consume Bullet
         weapon.loadedBullets -= 1;

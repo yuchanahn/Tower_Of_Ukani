@@ -2,12 +2,15 @@
 
 public abstract class ActiveItem : Item
 {
-    public bool IsActive
-    { get; protected set; } = false;
+    #region Var: Properties
     public TimerData cooldownTimer
     { get; protected set; } = new TimerData();
+    public bool IsActive
+    { get; protected set; } = false;
     public bool CanActivate => cooldownTimer.IsEnded && !IsActive;
+    #endregion
 
+    #region Method Override: Add / Drop
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
@@ -15,18 +18,27 @@ public abstract class ActiveItem : Item
         cooldownTimer.SetTick(gameObject);
         cooldownTimer.Restart();
     }
-    public override void OnRemove()
+    public override void OnDrop()
     {
-        base.OnRemove();
+        base.OnDrop();
 
         Deactivate();
         cooldownTimer.SetTick(gameObject, TickType.None);
         cooldownTimer.ToZero();
     }
+    #endregion
 
-    public abstract void Activate();
+    #region Method: Active Item
+    public void Activate()
+    {
+        if (CanActivate)
+            OnActivate();
+    }
+    protected abstract void OnActivate();
+
     public virtual void Deactivate()
     {
         IsActive = false;
     }
+    #endregion
 }

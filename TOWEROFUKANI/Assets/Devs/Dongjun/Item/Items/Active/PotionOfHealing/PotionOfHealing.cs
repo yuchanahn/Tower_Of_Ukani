@@ -9,7 +9,7 @@ public class PotionOfHealing : ActiveItem
         cooldownTimer.EndTime = 15f;
     }
 
-    public override void Activate()
+    protected override void OnActivate()
     {
         if (PlayerStats.Health.Value == PlayerStats.Health.Max)
             return;

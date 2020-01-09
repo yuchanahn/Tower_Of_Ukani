@@ -5,37 +5,23 @@ public class DroppedWeapon : DroppedItem
     public override void OnPickUp(PlayerItemPickUpData data)
     {
         // Get Item Reference
-        WeaponItem weaponItem = Item as WeaponItem;
+        WeaponItem weaponItem = ItemObj as WeaponItem;
 
-        // Spawn Weapon
+        // Spawn Item
         if (!DroppedFromInventory)
-            weaponItem = Instantiate(Item).GetComponent<WeaponItem>();
+            weaponItem = Instantiate(ItemObj).GetComponent<WeaponItem>();
 
-        //// Add Existing Weapon
-        //if (WeaponHotbar.AddExisting(weaponItem))
-        //{
-        //    Destroy(weaponItem.gameObject);
-        //    Destroy(gameObject);
-        //    return;
-        //}
-
-        //// Add to Hotbar
-        //if (WeaponHotbar.Add(weaponItem))
-        //{
-        //    weaponItem.gameObject.SetActive(true);
-        //    weaponItem.transform.SetParent(GM.PlayerObj.transform);
-        //    weaponItem.transform.localPosition = new Vector2(0, weaponItem.PivotPointY);
-        //    Destroy(gameObject);
-        //    return;
-        //}
-
-        //// Add to Inventory
-        //if (Inventory.Add(weaponItem))
-        //{
-        //    Destroy(gameObject);
-        //    return;
-        //}
-
+        // Add To Inventory
+        if (data.weaponHotbar.TryAddItem(weaponItem, data.weaponHotbar.CurSlot))
+        {
+            Destroy(gameObject);
+            return;
+        }
+        if (data.weaponHotbar.TryAddItem(weaponItem))
+        {
+            Destroy(gameObject);
+            return;
+        }
         if (data.inventory.TryAddItem(weaponItem))
         {
             Destroy(gameObject);

@@ -50,6 +50,7 @@ MonoBehaviour:
     m_Bits: 768
   ignoreTags:
   - Player
+  rotateToMovingDir: 0
   particle_Hit: {fileID: 0}
   particle_HitOffset: 0
 --- !u!1 &7594732538613404576

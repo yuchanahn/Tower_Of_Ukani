@@ -45,10 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     icon: {fileID: 21300000, guid: 681df79e582484d48951f08157759f65, type: 3}
-    name: Bloodseeker
-    desc: Life steal Item
-    tag_DamageType: 00000000
-    tag_Range: 00000000
+    itemName: Bloodseeker
+    itemDesc: This is an Item
+    itemStackLimit: 0
+    damageType: 
+    range: 
   droppedItemPrefab: {fileID: 2134229020927743989, guid: bada442b86495b04e8c2cdc4e5555bde,
     type: 3}
   god: 2

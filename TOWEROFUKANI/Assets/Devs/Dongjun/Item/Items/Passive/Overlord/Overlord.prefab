@@ -45,10 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     icon: {fileID: 21300000, guid: c4b53a36776e9b34993f0b84f1a565cb, type: 3}
-    name: Overlord
-    desc: Add Bonus Damage
-    tag_DamageType: 
-    tag_Range: 
+    itemName: Overlord
+    itemDesc: This is an Item
+    itemStackLimit: 0
+    damageType: 
+    range: 
   droppedItemPrefab: {fileID: 749155337391026208, guid: b8c46588e10bc6f48a5a9ab66a3fec27,
     type: 3}
   god: 0
