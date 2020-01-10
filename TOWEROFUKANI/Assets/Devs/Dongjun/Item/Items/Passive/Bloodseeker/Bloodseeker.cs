@@ -6,6 +6,13 @@ public class Bloodseeker : PassiveItem
     private ItemEffect onWeaponHitEffect;
     #endregion
 
+    #region Method: Initialize
+    public override void InitStats()
+    {
+
+    }
+    #endregion
+
     #region Method Override: Add/Remove
     public override void OnAdd(InventoryBase inventory)
     {

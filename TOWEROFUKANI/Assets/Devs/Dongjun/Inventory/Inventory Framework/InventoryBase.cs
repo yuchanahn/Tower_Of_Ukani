@@ -51,7 +51,7 @@ public abstract class InventoryBase : MonoBehaviour
 
     #region Method: Helper
     // Check Valid
-    public bool IsValidItem(Item item)
+    public bool IsValidItemType(Item item)
     {
         for (int i = 0; i < SlotTypes.Length; i++)
         {
@@ -66,9 +66,9 @@ public abstract class InventoryBase : MonoBehaviour
     }
 
     // Check Item
-    public bool ContainsItemID(Item item)
+    public bool ContainsItemID(string id)
     {
-        return GetIndex_ItemID(item) != -1 ? true : false;
+        return GetIndex_ItemID(id) != -1 ? true : false;
     }
     public bool ContainsItem(Item item)
     {
@@ -86,9 +86,13 @@ public abstract class InventoryBase : MonoBehaviour
     }
 
     // Get Index
-    public int GetIndex_ItemID(Item item)
+    public int GetIndex_ItemID(string id)
     {
-        return Array.FindIndex(items, i => i != null ? i.Info.ID == item.Info.ID : false);
+        return Array.FindIndex(items, i => i != null ? i.Info.ID == id : false);
+    }
+    public int GetIndex_ItemName(string itemName)
+    {
+        return Array.FindIndex(items, i => i != null ? i.Info.ItemName == itemName : false);
     }
     public int GetIndex_Item(Item item)
     {
@@ -292,8 +296,8 @@ public abstract class InventoryBase : MonoBehaviour
         if (!IsValidIndex(index)
         || targetInventory == null
         || !targetInventory.IsValidIndex(targetIndex)
-        || !targetInventory.IsValidItem(items[index])
-        || (targetInventory.items[targetIndex] != null && !IsValidItem(targetInventory.items[targetIndex])))
+        || !targetInventory.IsValidItemType(items[index])
+        || (targetInventory.items[targetIndex] != null && !IsValidItemType(targetInventory.items[targetIndex])))
             return false;
 
         // Add ExistingItem

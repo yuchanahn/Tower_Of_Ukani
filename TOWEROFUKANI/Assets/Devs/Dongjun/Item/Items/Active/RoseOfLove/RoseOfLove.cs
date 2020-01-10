@@ -6,7 +6,7 @@ public class RoseOfLove : ActiveItem
 
     private ProjectileData roseProjectileData;
 
-    private void Start()
+    public override void InitStats()
     {
         cooldownTimer.EndTime = 7f;
 

@@ -4,7 +4,7 @@ public class PotionOfHealing : ActiveItem
 {
     private int healAmount = 30;
 
-    private void Start()
+    public override void InitStats()
     {
         cooldownTimer.EndTime = 15f;
     }

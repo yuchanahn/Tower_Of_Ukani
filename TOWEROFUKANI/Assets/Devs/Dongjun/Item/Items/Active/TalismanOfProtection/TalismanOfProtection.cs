@@ -19,8 +19,8 @@ public class TalismanOfProtection : ActiveItem
     private GameObject shieldEffect;
     #endregion
 
-    #region Method: Unity
-    private void Start()
+    #region Method: Initialize
+    public override void InitStats()
     {
         cooldownTimer.EndTime = 5f;
 

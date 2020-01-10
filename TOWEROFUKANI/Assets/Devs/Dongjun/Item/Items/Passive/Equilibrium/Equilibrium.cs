@@ -7,6 +7,13 @@ public class Equilibrium : PassiveItem
 
     private float effectPercent = 30f;
 
+    #region Method: Initialize
+    public override void InitStats()
+    {
+
+    }
+    #endregion
+
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);

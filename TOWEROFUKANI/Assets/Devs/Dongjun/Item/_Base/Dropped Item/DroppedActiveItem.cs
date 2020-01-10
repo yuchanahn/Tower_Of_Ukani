@@ -12,15 +12,22 @@ public class DroppedActiveItem : DroppedItem
             activeItem = Instantiate(activeItem).GetComponent<ActiveItem>();
 
         // Add To Inventory
+        if (data.inventory.TryUpgradeItem(activeItem.Info.ItemName)
+        || data.weaponHotbar.TryUpgradeItem(activeItem.Info.ItemName))
+        {
+            goto EXIT;
+        }
         if (data.activeHotbar.TryAddItem(activeItem))
         {
-            Destroy(gameObject);
-            return;
+            goto EXIT;
         }
         if (data.inventory.TryAddItem(activeItem))
         {
-            Destroy(gameObject);
-            return;
+            goto EXIT;
         }
+
+    EXIT:
+        Destroy(gameObject);
+        return;
     }
 }

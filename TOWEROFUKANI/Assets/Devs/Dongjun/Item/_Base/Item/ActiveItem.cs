@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class ActiveItem : Item
+public abstract class ActiveItem : UpgradableItem
 {
     #region Var: Properties
     public TimerData cooldownTimer
@@ -16,7 +16,11 @@ public abstract class ActiveItem : Item
         base.OnAdd(inventory);
 
         cooldownTimer.SetTick(gameObject);
-        cooldownTimer.Restart();
+
+        if (inventory is PlayerActiveHotbar)
+        {
+            cooldownTimer.Restart();
+        }
     }
     public override void OnDrop()
     {

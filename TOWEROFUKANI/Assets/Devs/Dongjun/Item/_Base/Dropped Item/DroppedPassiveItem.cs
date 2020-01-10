@@ -4,12 +4,14 @@ public class DroppedPassiveItem : DroppedItem
 {
     public override void OnPickUp(PlayerItemPickUpData data)
     {
-        // Get Item Reference
-        PassiveItem passiveItem = ItemObj as PassiveItem;
+        // TODO!!!
 
-        // Spawn Item
-        if (!DroppedFromInventory)
-            passiveItem = Instantiate(passiveItem).GetComponent<PassiveItem>();
+        //// Get Item Reference
+        //PassiveItem passiveItem = ItemObj as PassiveItem;
+
+        //// Spawn Item
+        //if (!DroppedFromInventory)
+        //    passiveItem = Instantiate(passiveItem).GetComponent<PassiveItem>();
 
         // Add To Inventory
         //if (PassiveInventory.AddExisting(passiveItem))

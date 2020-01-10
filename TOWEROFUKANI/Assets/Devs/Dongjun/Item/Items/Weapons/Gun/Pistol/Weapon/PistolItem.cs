@@ -22,17 +22,17 @@ public class PistolItem : GunItem
         // Ammo Data
         magazineSize = new IntStat(6, min: 0);
 
-        // Upgrade Per Count
-        //switch (Count)
-        //{
-        //    case 1:
-        //        break;
-        //    case 2:
-        //        attackData = new AttackData(2);
-        //        break;
-        //    default:
-        //        attackData = new AttackData(3);
-        //        break;
-        //}
+        // Upgrade
+        switch (ItemLevel)
+        {
+            case 1:
+                break;
+            case 2:
+                attackData = new AttackData(2);
+                break;
+            default:
+                attackData = new AttackData(3);
+                break;
+        }
     }
 }

@@ -25,7 +25,7 @@ public abstract class WeaponController<TItem> : WeaponController_Base
     }
 }
 
-public abstract class WeaponItem : Item 
+public abstract class WeaponItem : UpgradableItem 
 {
     public enum WeaponType
     {
@@ -52,18 +52,6 @@ public abstract class WeaponItem : Item
 
     #region Var: Stats
     public AttackData attackData;
-    #endregion
-
-    #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-        InitStats();
-    }
-    #endregion
-
-    #region Method: Initialize
-    public abstract void InitStats();
     #endregion
 
     #region Method Override: Add / Move / Drop
@@ -128,8 +116,10 @@ public abstract class GunItem : WeaponItem
     #endregion
 
     #region Method: Unity
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
+
         #region Init: Stats
         // Init Timer
         shootTimer.SetTick(gameObject);
@@ -178,8 +168,10 @@ public abstract class BowItem : WeaponItem
     #endregion
 
     #region Method: Unity
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
+
         #region Init: Stats
         // Init Timer
         shootTimer.SetTick(gameObject);

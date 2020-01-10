@@ -32,10 +32,9 @@ public class FlameBoots : PassiveItem
     private ParticleSystem flameParticle;
     #endregion
 
-    #region Method: Unity
-    private void Start()
+    #region Method: Initialize
+    public override void InitStats()
     {
-        overlapCheckData = new OverlapCheckData(onEnter: OnFlameDashHit);
         flameDashDamage = new AttackData(5);
     }
     #endregion
@@ -44,6 +43,9 @@ public class FlameBoots : PassiveItem
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
+
+        // Init Data
+        overlapCheckData = new OverlapCheckData(onEnter: OnFlameDashHit);
 
         // Init Item Effect
         onDashingEffect = new ItemEffect(GetType(), FlameDash);

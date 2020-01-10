@@ -42,14 +42,14 @@ public class TimerManager : SingletonBase<TimerManager>
 
     public void AddToLateUpdate(GameObject go, ITimerData data)
     {
+        if (lateUpdateTimers.ContainsKey(go) && lateUpdateTimers[go].Contains(data))
+            return;
+
         if (lateUpdateTimers.ContainsKey(go))
         {
             lateUpdateTimers[go].Add(data);
             return;
         }
-
-        if (lateUpdateTimers.ContainsKey(go) && lateUpdateTimers[go].Contains(data))
-            return;
 
         if (!lateUpdateTimers.ContainsKey(go))
             lateUpdateTimers.Add(go, new List<ITimerData>());
@@ -66,14 +66,14 @@ public class TimerManager : SingletonBase<TimerManager>
 
     public void AddToUpdate(GameObject go, ITimerData data)
     {
+        if (updateTimers.ContainsKey(go) && updateTimers[go].Contains(data))
+            return;
+
         if (updateTimers.ContainsKey(go))
         {
             updateTimers[go].Add(data);
             return;
         }
-
-        if (updateTimers.ContainsKey(go) && updateTimers[go].Contains(data))
-            return;
 
         if (!updateTimers.ContainsKey(go))
             updateTimers.Add(go, new List<ITimerData>());

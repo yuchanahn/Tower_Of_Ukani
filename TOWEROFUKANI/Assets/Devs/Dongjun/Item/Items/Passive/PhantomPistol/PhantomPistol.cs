@@ -10,7 +10,8 @@ public class PhantomPistol : PassiveItem
     private AttackData attackData;
     private ProjectileData projectileData;
 
-    private void Start()
+    #region Method: Initialize
+    public override void InitStats()
     {
         attackData = new AttackData(3);
 
@@ -20,6 +21,7 @@ public class PhantomPistol : PassiveItem
             travelDist = new FloatStat(0f, min: 0f, max: 6f)
         };
     }
+    #endregion
 
     public override void OnAdd(InventoryBase inventory)
     {

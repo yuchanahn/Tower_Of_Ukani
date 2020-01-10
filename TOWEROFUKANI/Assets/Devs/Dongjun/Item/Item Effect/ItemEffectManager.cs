@@ -29,7 +29,7 @@ public class ItemEffectManager : MonoBehaviour
     }
     #endregion
 
-    #region Method: Manage Effect
+    #region Method: Manage Effects
     public static void AddEffect(PlayerActions action, ItemEffect itemEffect)
     {
         if (actions[action].Contains(itemEffect))
