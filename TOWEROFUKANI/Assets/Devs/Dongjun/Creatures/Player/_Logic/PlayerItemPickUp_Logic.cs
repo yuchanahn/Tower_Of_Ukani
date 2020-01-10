@@ -12,6 +12,7 @@ public struct PlayerItemPickUpData
     public PlayerInventory inventory;
     public PlayerWeaponHotbar weaponHotbar;
     public PlayerActiveHotbar activeHotbar;
+    public PlayerPassiveInventory passiveInventory;
 }
 
 public static class PlayerItemPickUp_Logic

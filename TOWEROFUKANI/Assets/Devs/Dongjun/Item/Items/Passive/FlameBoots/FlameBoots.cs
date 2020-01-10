@@ -71,7 +71,7 @@ public class FlameBoots : PassiveItem
     #endregion
 
     #region Method Override: Set Bonus Stats
-    protected override void SetBonusStats(WeaponItem weapon)
+    public override void ApplyBonusStats(WeaponItem weapon)
     {
 
     }

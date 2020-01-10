@@ -22,6 +22,7 @@ public abstract class UpgradableItem : Item
     public void AddLevel(int amount = 1)
     {
         ItemLevel += amount;
+        InitStats();
     }
     #endregion
 }

@@ -31,7 +31,7 @@ public class Equilibrium : PassiveItem
         ItemEffectManager.RemoveEffect(PlayerActions.Hit, onHitEffect);
     }
 
-    protected override void SetBonusStats(WeaponItem weapon)
+    public override void ApplyBonusStats(WeaponItem weapon)
     {
 
     }

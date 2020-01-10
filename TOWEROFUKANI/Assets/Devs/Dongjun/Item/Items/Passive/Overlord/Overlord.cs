@@ -30,7 +30,7 @@ public class Overlord : PassiveItem
     }
 
     #region Method Override: Bonus Stats
-    protected override void SetBonusStats(WeaponItem weapon)
+    public override void ApplyBonusStats(WeaponItem weapon)
     {
         switch (weapon)
         {

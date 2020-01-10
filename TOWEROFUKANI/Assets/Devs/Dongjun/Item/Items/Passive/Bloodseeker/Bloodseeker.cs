@@ -29,7 +29,7 @@ public class Bloodseeker : PassiveItem
     #endregion
 
     #region Method Override: Bonus Stats
-    protected override void SetBonusStats(WeaponItem weapon)
+    public override void ApplyBonusStats(WeaponItem weapon)
     {
 
     }

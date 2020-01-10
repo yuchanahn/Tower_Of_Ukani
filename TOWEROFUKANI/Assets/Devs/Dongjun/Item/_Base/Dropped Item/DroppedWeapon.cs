@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using System.Collections;
+using UnityEngine;
 
 public class DroppedWeapon : DroppedItem
 {
@@ -12,8 +14,8 @@ public class DroppedWeapon : DroppedItem
             weaponItem = Instantiate(ItemObj).GetComponent<WeaponItem>();
 
         // Add To Inventory
-        if (data.inventory.TryUpgradeItem(weaponItem.Info.ItemName)
-        ||  data.weaponHotbar.TryUpgradeItem(weaponItem.Info.ItemName))
+        if (data.inventory.TryUpgradeItem(weaponItem.Info.ItemName, data.passiveInventory)
+        ||  data.weaponHotbar.TryUpgradeItem(weaponItem.Info.ItemName, data.passiveInventory))
         {
             Destroy(weaponItem.gameObject);
             goto EXIT;

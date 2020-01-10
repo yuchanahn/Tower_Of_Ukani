@@ -32,11 +32,10 @@ public class ToU_Inventory : InventoryBase
         if (!(items[index] is UpgradableItem))
             return false;
 
-        UpgradableItem upgradableItem = items[index] as UpgradableItem;
+        (items[index] as UpgradableItem).AddLevel();
 
-        upgradableItem.AddLevel();
-        upgradableItem.InitStats();
-        //passiveInventory?.ApplyBonusStats();
+        if (passiveInventory != null && items[index] is WeaponItem)
+            passiveInventory.ApplyBonusStatToWeapon(items[index] as WeaponItem);
 
         return true;
     }

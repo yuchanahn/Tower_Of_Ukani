@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPassiveInventory : MonoBehaviour
+public class PlayerPassiveInventory : PassiveInventory
 {
 
 }

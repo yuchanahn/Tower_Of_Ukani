@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dongjun.Helper;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ public class PassiveInventory : MonoBehaviour
     private void Awake()
     {
         // None이 첫번째라서 1부터 시작 
-        for (int i = 1; i < Enum.GetValues(typeof(TowerOfUkani.Gods)).Length; i++)
+        for (int i = 1; i < General.EnumCount<TowerOfUkani.Gods>(); i++)
         {
             // Load 할때 저장된 맥스 사이즈 가져오기
             divineMaxSizes.Add((TowerOfUkani.Gods)i, 3);
@@ -27,56 +28,108 @@ public class PassiveInventory : MonoBehaviour
     #endregion
 
     #region Method: Helper
-    public bool Contains(PassiveItem item, TowerOfUkani.Gods god = TowerOfUkani.Gods.None)
+    public bool Contains(PassiveItem item)
     {
-        switch (god)
+        switch (item.God)
         {
             case TowerOfUkani.Gods.None:
                 return relics.Find(i => i.Info.ItemName == item.Info.ItemName) != null;
             default:
-                return divineRelics[god].Find(i => i.Info.ItemName == item.Info.ItemName) != null;
+                return divineRelics[item.God].Find(i => i.Info.ItemName == item.Info.ItemName) != null;
         }
     }
     #endregion
 
     #region Method: Inventory
-    public bool TryAddItem(PassiveItem item, TowerOfUkani.Gods god = TowerOfUkani.Gods.None)
+    public bool TryUpgradeItem(PassiveItem item, params ToU_Inventory[] inventories)
     {
-        if (Contains(item, god))
+        if (!Contains(item))
             return false;
 
-        switch (god)
+        PassiveItem passive;
+
+        switch (item.God)
+        {
+            case TowerOfUkani.Gods.None:
+                passive = relics.Find(i => i.Info.ItemName == item.Info.ItemName);
+                break;
+            default:
+                passive = divineRelics[item.God].Find(i => i.Info.ItemName == item.Info.ItemName);
+                break;
+        }
+
+        passive.AddLevel();
+
+        for (int i = 0; i < inventories.Length; i++)
+        {
+            for (int curItem = 0; curItem < inventories[i].Size; curItem++)
+            {
+                if (!(inventories[i].GetItem(curItem) is WeaponItem))
+                    continue;
+
+                passive.ApplyBonusStats(inventories[i].GetItem(curItem) as WeaponItem);
+            }
+        }
+
+        return true;
+    }
+    public bool TryAddItem(PassiveItem item)
+    {
+        if (Contains(item))
+            return false;
+
+        item.OnAdd(null);
+
+        switch (item.God)
         {
             case TowerOfUkani.Gods.None:
                 relics.Add(item);
                 return true;
             default:
-                if (divineRelics[god].Count >= divineMaxSizes[god]) return false;
-                divineRelics[god].Add(item);
+                if (divineRelics[item.God].Count >= divineMaxSizes[item.God]) return false;
+                divineRelics[item.God].Add(item);
                 return true;
         }
     }
-    public bool TryRemoveItem(PassiveItem item, TowerOfUkani.Gods god = TowerOfUkani.Gods.None)
+    public bool TryRemoveItem(PassiveItem item)
     {
-        if (!Contains(item, god))
+        if (!Contains(item))
             return false;
 
-        switch (god)
+        PassiveItem passive;
+
+        switch (item.God)
         {
             case TowerOfUkani.Gods.None:
-                relics.RemoveAt(relics.FindIndex(i => i.Info.ItemName == item.Info.ItemName));
-                return true;
+                passive = relics[relics.FindIndex(i => i.Info.ItemName == item.Info.ItemName)];
+                relics.Remove(passive);
+                break;
             default:
-                divineRelics[god].RemoveAt(divineRelics[god].FindIndex(i => i.Info.ItemName == item.Info.ItemName));
-                return true;
+                passive = divineRelics[item.God][divineRelics[item.God].FindIndex(i => i.Info.ItemName == item.Info.ItemName)];
+                divineRelics[item.God].Remove(passive);
+                break;
         }
+
+        passive.OnRemove();
+        return true;
     }
     #endregion
 
     #region Method: Bonus Stats
-    public void ApplyBonusStats(ToU_Inventory inventory)
+    public void ApplyBonusStatToWeapon(WeaponItem weapon)
     {
+        for (int i = 0; i < relics.Count; i++)
+        {
+            relics[i].ApplyBonusStats(weapon);
+        }
 
+        for (int i = 1; i < General.EnumCount<TowerOfUkani.Gods>(); i++)
+        {
+            for (int j = 0; j < divineRelics[(TowerOfUkani.Gods)i].Count; j++)
+            {
+                divineRelics[(TowerOfUkani.Gods)i][j].ApplyBonusStats(weapon);
+            }
+        }
     }
     #endregion
 }

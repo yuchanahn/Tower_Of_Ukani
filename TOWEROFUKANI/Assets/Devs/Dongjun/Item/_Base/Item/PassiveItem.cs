@@ -12,6 +12,6 @@ public abstract class PassiveItem : UpgradableItem
     #endregion
 
     #region Method: Bonus Stats
-    protected abstract void SetBonusStats(WeaponItem weapon);
+    public abstract void ApplyBonusStats(WeaponItem weapon);
     #endregion
 }

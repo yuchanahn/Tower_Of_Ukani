@@ -178,7 +178,7 @@ public class PlayerStats : MonoBehaviour
         for (int i = 0; i < OnHealthChange.Count; i++)
         {
             key = OnHealthChange.ElementAt(i).Key;
-            if (key.IsNull())
+            if (key == null)
             {
                 OnHealthChange.Remove(key);
                 continue;
@@ -201,7 +201,7 @@ public class PlayerStats : MonoBehaviour
         for (int i = 0; i < OnStaminaChange.Count; i++)
         {
             key = OnStaminaChange.ElementAt(i).Key;
-            if (key.IsNull())
+            if (key == null)
             {
                 OnStaminaChange.Remove(key);
                 continue;

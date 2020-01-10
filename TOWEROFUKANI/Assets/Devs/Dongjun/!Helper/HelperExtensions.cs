@@ -5,31 +5,9 @@ namespace Dongjun.Helper
 {
     public static class General
     {
-        public static bool IsNull(this MonoBehaviour monoBehaviour)
+        public static int EnumCount<T>() where T : Enum
         {
-            try
-            {
-                string temp = monoBehaviour.name;
-            }
-            catch
-            {
-                return true;
-            }
-
-            return false;
-        }
-        public static bool IsNull(this GameObject gameObject)
-        {
-            try
-            {
-                string temp = gameObject.name;
-            }
-            catch
-            {
-                return true;
-            }
-
-            return false;
+            return Enum.GetValues(typeof(T)).Length;
         }
     }
 

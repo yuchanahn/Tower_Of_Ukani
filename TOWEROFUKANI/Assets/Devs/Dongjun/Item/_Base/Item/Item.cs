@@ -38,7 +38,7 @@ public abstract class Item : MonoBehaviour
     }
     #endregion
 
-    #region Method: Add / Move / Drop
+    #region Method: Add / Move / Drop / Remove
     public virtual void OnAdd(InventoryBase inventory)
     {
         Inventory = inventory;
@@ -50,6 +50,10 @@ public abstract class Item : MonoBehaviour
     public virtual void OnDrop()
     {
         this.SpawnDroppedItem();
+    }
+    public virtual void OnRemove()
+    {
+        Destroy(gameObject);
     }
     #endregion
 }
