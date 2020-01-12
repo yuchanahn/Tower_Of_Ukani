@@ -10,7 +10,7 @@ public static class PlayerMovementKeys
 public static class PlayerActionKeys
 {
     public static KeyCode Dash => KeyCode.LeftShift;
-    public static KeyCode Kick => KeyCode.F;
+    public static KeyCode Kick => KeyCode.LeftControl;
     public static KeyCode PickUpItem => KeyCode.C;
     public static KeyCode DropItem => KeyCode.Q;
 }
@@ -18,7 +18,7 @@ public static class PlayerWeaponKeys
 {
     public static KeyCode MainAbility => KeyCode.Mouse0;
     public static KeyCode SubAbility => KeyCode.Mouse1;
-    public static KeyCode SpecialAbility => KeyCode.LeftControl;
+    public static KeyCode SpecialAbility => KeyCode.F;
     public static KeyCode Reload => KeyCode.R;
 
     public static bool GetKey(KeyCode keyCode)

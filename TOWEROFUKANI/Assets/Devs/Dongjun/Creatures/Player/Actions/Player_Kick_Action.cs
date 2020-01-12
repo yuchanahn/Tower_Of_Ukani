@@ -4,21 +4,28 @@ using Dongjun.Helper;
 public class Player_Kick_Action : CLA_Action<Player>
 {
     #region Var: Inspector
+    [Header("Walk")]
+    [SerializeField] private PlayerWalkData walkData;
+
     [Header("Kick")]
     [SerializeField] private Transform dirTarget;
     [SerializeField] private float power;
     [SerializeField] private BoxCollider2D detectBox;
-    [SerializeField] private LayerMask detectMask;
+    [SerializeField] private LayerMask blockMask;
+    [SerializeField] private LayerMask mobMask;
 
     [Header("Movement")]
-    [SerializeField] private Vector2 velPercent = new Vector2(0.3f, 0.3f);
-    [SerializeField] private float xVelDecreaseAmount = 3f;
+    [SerializeField] private float yVelPercent = 0.3f;
 
     [Header("Animation Duration")]
     [SerializeField] private float duration;
 
     [Header("Sprite Renderer")]
     [SerializeField] private SpriteRenderer kickEffectSpriteRenderer;
+    #endregion
+
+    #region Var: Attack Data
+    private AttackData attackData;
     #endregion
 
     #region Var: Properties
@@ -37,6 +44,8 @@ public class Player_Kick_Action : CLA_Action<Player>
 
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+
+        attackData = new AttackData(1);
     }
     #endregion
 
@@ -44,11 +53,14 @@ public class Player_Kick_Action : CLA_Action<Player>
     public override void OnEnter()
     {
         IsKicking = true;
-        rb2D.velocity *= velPercent;
 
+        rb2D.velocity = rb2D.velocity.Change(y: rb2D.velocity.y * yVelPercent);
+
+        // Play Animation
         animator.SetSpeed(duration);
         animator.Play("Player_Kick", 0, 0f);
 
+        // Flip Sprite
         kickEffectSpriteRenderer.flipX = main.bodySpriteRenderer.flipX;
     }
     public override void OnExit()
@@ -66,25 +78,25 @@ public class Player_Kick_Action : CLA_Action<Player>
             main.groundDetectionData.isGrounded ? GravityData.Zero : 
             main.gravityData);
 
-        // Decrease X Velocity
-        rb2D.velocity = rb2D.velocity.Change(x: Mathf.MoveTowards(rb2D.velocity.x, 0f, xVelDecreaseAmount * Time.fixedDeltaTime));
+        // Walk
+        walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, rb2D, false);
     }
     #endregion
 
     #region Method: Kick
-    private void Kick()
+    private void KickBlock()
     {
-        Collider2D[] hits = 
+        Collider2D[] blockHits = 
             Physics2D.OverlapBoxAll(
                 transform.position + new Vector3(detectBox.offset.x * main.Dir, detectBox.offset.y), 
                 detectBox.size, 
                 0f, 
-                detectMask);
+                blockMask);
 
-        if (hits.Length == 0)
+        if (blockHits.Length == 0)
             return;
 
-        Rigidbody2D hitRB2D = hits.GetClosest<Rigidbody2D>(transform);
+        Rigidbody2D hitRB2D = blockHits.GetClosest<Rigidbody2D>(transform);
         if (hitRB2D == null)
             return;
 
@@ -92,12 +104,32 @@ public class Player_Kick_Action : CLA_Action<Player>
         Vector2 kickDir = (dirTarget.position - transform.position).normalized;
         hitRB2D.velocity = new Vector2(kickDir.x * main.Dir, kickDir.y) * power;
     }
+    private void KickMob()
+    {
+        Collider2D[] mobHits =
+            Physics2D.OverlapBoxAll(
+                transform.position + new Vector3(detectBox.offset.x * main.Dir, detectBox.offset.y),
+                detectBox.size,
+                0f,
+                mobMask);
+
+        if (mobHits.Length == 0)
+            return;
+
+        IDamage iDamage = mobHits.GetClosest<IDamage>(transform);
+        if (iDamage == null)
+            return;
+
+        // Damage
+        iDamage.Hit(attackData.damage.Value);
+    }
     #endregion
 
     #region Method: Anim Event
     private void OnKickAnim()
     {
-        Kick();
+        KickBlock();
+        KickMob();
     }
     private void OnKickFinish()
     {

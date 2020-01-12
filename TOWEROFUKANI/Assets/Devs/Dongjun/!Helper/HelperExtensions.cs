@@ -23,7 +23,7 @@ namespace Dongjun.Helper
             return index;
         }
 
-        public static T GetClosest<T>(this Collider2D[] hits, Transform pivot) where T : Component
+        public static T GetClosest<T>(this Collider2D[] hits, Transform pivot) where T : class
         {
             if (hits == null || hits.Length == 0)
                 return null;

@@ -597,6 +597,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db44b2fbe64eb5e4eb6a3ac036303cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbsorbDamage: 0
+  IgnoreDamage: 0
+  DamageReceived: 0
+  HealReceived: 0
+  DamageToDeal: 0
 --- !u!114 &7371128404420445766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,12 +707,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8278ef24bb7a149800a25309ccfce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkData:
+    walkSpeed: 5
+    walkAccelTime: 0.2
+    changeDirSpeed: 1
+    curWalkSpeed: 0
+    oldWalkDir: 0
+    time: 0
   dirTarget: {fileID: 6372901048470370509}
   power: 10
   detectBox: {fileID: 6092793338137710660}
-  detectMask:
+  blockMask:
     serializedVersion: 2
     m_Bits: 1024
+  mobMask:
+    serializedVersion: 2
+    m_Bits: 256
   velPercent: {x: 0.3, y: 0.3}
   xVelDecreaseAmount: 3
   duration: 0
