@@ -250,14 +250,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3429f59ac248bb48a1cffcd12fa72d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CreatureLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  MobSize: {x: 1.5, y: 1.5}
+  mAniSpeedData: []
   m_OneWayCollider: {fileID: 5555169890968166534}
   m_CurAniST: 2
   m_AttackRange: 1
-  m_AttackSize: {x: 0, y: 0}
-  m_AttackOffset: {x: 0, y: 0}
-  m_AniSpeedData:
-  - ST: 2
-    t: 0.3
   m_MoveData:
     SprTr: {fileID: 7268275018201367325}
     Speed: 3

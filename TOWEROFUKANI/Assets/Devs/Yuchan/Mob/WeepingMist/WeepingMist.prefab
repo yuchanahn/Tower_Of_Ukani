@@ -346,12 +346,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3117c163af4a27a41905eae69f8f63d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mMoveData:
-    Speed: 4
-    Dir2d: {x: 0, y: 0}
+  CreatureLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  MobSize: {x: 2, y: 2}
   mAniSpeedData:
   - ST: 2
     t: 0.3
+  mMoveData:
+    Speed: 4
+    Dir2d: {x: 0, y: 0}
   mSprTr: {fileID: 5283869461139039952}
   MoveLink: []
   mCurAniST: 0

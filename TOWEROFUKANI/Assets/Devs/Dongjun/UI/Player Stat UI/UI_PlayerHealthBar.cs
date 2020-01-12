@@ -16,7 +16,7 @@ public class UI_PlayerHealthBar : MonoBehaviour
         healthBar.Value = (float)PlayerStats.Inst.Health.Value / PlayerStats.Inst.Health.Max;
     }
 
-    private void Update_HealthBar(IntStat health)
+    private void Update_HealthBar(FloatStat health)
     {
         healthBar.Value = (float)health.Value / health.Max;
     }

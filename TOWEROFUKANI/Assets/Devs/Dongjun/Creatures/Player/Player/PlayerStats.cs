@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerStats : SingletonBase<PlayerStats>
 {
     #region Var: Stats
-    private IntStat health = new IntStat(100, min: 0, max: 100);
+    private FloatStat health = new FloatStat(100, min: 0, max: 100);
     private FloatStat stamina = new FloatStat(0, min: 0, max: 3);
     private FloatStat staminaRegen = new FloatStat(0.5f, min: 0);
 
@@ -16,13 +16,13 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #endregion
 
     #region Var: Data for Item Effect
-    public int DamageReceived;
-    public int HealReceived;
-    public int DamageToDeal;
+    public float DamageReceived;
+    public float HealReceived;
+    public float DamageToDeal;
     #endregion
 
     #region Var: Event On Stat Change
-    private Dictionary<GameObject, Action<IntStat>> OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
+    private Dictionary<GameObject, Action<FloatStat>> OnHealthChange = new Dictionary<GameObject, Action<FloatStat>>();
     private Dictionary<GameObject, Action<FloatStat>> OnStaminaChange = new Dictionary<GameObject, Action<FloatStat>>();
     #endregion
 
@@ -30,7 +30,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     public bool IsDead
     { get; private set; } = false;
 
-    public IntStat Health => health;
+    public FloatStat Health => health;
     public FloatStat Stamina => stamina;
     #endregion
 
@@ -72,7 +72,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         return true;
     }
 
-    public void Damage(int amount)
+    public void Damage(float amount)
     {
         if (IgnoreDamage)
             return;
@@ -96,7 +96,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         PlayerHitEft.Create(GM.PlayerPos);
         GM.Player.GetComponent<HitColorEffect>().OnHit();
     }
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
         // Apply Heal
         HealReceived = Mathf.Abs(amount);
@@ -165,7 +165,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #endregion
 
     #region Method: On Stat Change Event
-    public void AddEvent_OnHealthChange(GameObject slef, Action<IntStat> action)
+    public void AddEvent_OnHealthChange(GameObject slef, Action<FloatStat> action)
     {
         if (OnHealthChange.ContainsKey(slef))
             return;

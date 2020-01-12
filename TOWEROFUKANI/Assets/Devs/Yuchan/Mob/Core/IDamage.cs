@@ -1,4 +1,4 @@
 ﻿public interface IDamage
 {
-    void Hit(int dmg);
+    float Hit(float dmg);
 }

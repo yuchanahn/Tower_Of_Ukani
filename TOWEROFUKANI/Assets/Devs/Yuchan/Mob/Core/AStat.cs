@@ -5,26 +5,24 @@ using UnityEngine.UI;
 
 public class AStat : MonoBehaviour, IDamage
 {
-    [SerializeField] private int mHP;
-    [SerializeField] private int mDamage;
+    [SerializeField] private float mHP;
+    [SerializeField] private float mDamage;
 
-    bool IsIgnoreHit => GetComponent<StatusEffect_IgnoreHit>();
-    private int mMAXHP;
-    private int mDmg = 0;
+    private float mMAXHP;
+    private float mDmg = 0;
     MobDamageText Dmg = null;
-    public int HP { get => mHP; set { mHP = value; if (mHP <= 0) GetComponent<IHurt>().OnDead(); } }
+    public float HP { get => mHP; set { mHP = value; if (mHP <= 0) GetComponent<IHurt>().OnDead(); } }
 
-    public int MAXHP { get => mMAXHP; }
-    public int Damage => mDamage;
+    public float MAXHP { get => mMAXHP; }
+    public float Damage => mDamage;
 
     private void Awake()
     {
         mMAXHP = mHP;
     }
 
-    public void Hit(int dmg)
+    public float Hit(float dmg)
     {
-        if (IsIgnoreHit) return;
         HP -= dmg;
         mDmg += dmg;
         GetComponent<HitColorEffect>().OnHit();
@@ -35,7 +33,7 @@ public class AStat : MonoBehaviour, IDamage
         {
             Dmg = null; mDmg = 0;
         });
-        if (Dmg == null) Dmg = MobDamageText.Show(mDmg, transform.position);
+        if (Dmg == null) Dmg = MobDamageText.Show(MathD.Round(mDmg), transform.position);
         Dmg.mText.text = mDmg.ToString();
         Dmg.SetPoint(transform.position);
         Dmg.ThisStart();
@@ -43,6 +41,7 @@ public class AStat : MonoBehaviour, IDamage
 
         
         MobHPBar.Show(gameObject, transform.position, 0.5f);
+        return mHP;
     }
 
 }

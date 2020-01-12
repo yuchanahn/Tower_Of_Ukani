@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BlackBoard_MobBase : BlackBoard_Base
 {
-    protected Mob_Base mob;
+    protected GroundMob_Base mob;
 
     private void Awake()
     {
-        mob = GetComponent<Mob_Base>();
+        mob = GetComponent<GroundMob_Base>();
     }
 
     #region Action

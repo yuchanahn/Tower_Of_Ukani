@@ -41,7 +41,7 @@ public class ALava : MonoBehaviour
         {
             Rigidbody2D rb2D = overlaps[i].GetComponent<Rigidbody2D>();
 
-            var mob = overlaps[i].GetComponent<Mob_Base>();
+            var mob = overlaps[i].GetComponent<GroundMob_Base>();
 
             if (mob != null && rb2D != null)
             {
@@ -65,7 +65,7 @@ public class ALava : MonoBehaviour
                 if (dt > 0.1f)
                 {
                     dt = 0;
-                    PlayerStats.Damage(10);
+                    PlayerStats.Inst.Damage(10);
                 }
                 return;
             }

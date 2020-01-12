@@ -8,7 +8,7 @@ public class TalismanOfProtection : ActiveItem
 
     #region Var: Stats
     private TimerData durationTimer = new TimerData();
-    private IntStat shieldhealth;
+    private FloatStat shieldhealth;
     #endregion
 
     #region Var: Item Effect
@@ -27,7 +27,7 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.EndTime = 2.5f;
         durationTimer.SetAction(OnEnd: Deactivate);
 
-        shieldhealth = new IntStat(40, min: 0, max: 40);
+        shieldhealth = new FloatStat(40, min: 0, max: 40);
     }
     #endregion
 
@@ -101,7 +101,7 @@ public class TalismanOfProtection : ActiveItem
     #region Method: Shield
     private void Shield()
     {
-        int overkillDmg = PlayerStats.Inst.DamageReceived - shieldhealth.Value;
+        float overkillDmg = PlayerStats.Inst.DamageReceived - shieldhealth.Value;
 
         // Shield Destroyed
         if (overkillDmg >= 0)

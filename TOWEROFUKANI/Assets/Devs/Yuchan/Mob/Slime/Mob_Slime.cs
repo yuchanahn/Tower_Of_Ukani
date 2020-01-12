@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Mob_Slime : Mob_Base
+public class Mob_Slime : GroundMob_Base
 {
     [SerializeField] float m_addSpeed = 2f;
     [SerializeField] float m_AtkActJumpHeight = 3f;

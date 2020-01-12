@@ -1,34 +1,20 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-enum eAttackST
-{
-    PreAttack,
-    Attack
-}
-
-public class FlyingMob_Base : MonoBehaviour, IHurt
+public class FlyingMob_Base : Mob_Base
 {
     #region DATA
 
     [SerializeField] FlyMobMove_ mMoveData;
-    [SerializeField] AniSpeedData[] mAniSpeedData;
     [SerializeField] Transform mSprTr;
-
-
     #endregion
-
 
     public Vector2[] MoveLink;
     int mLinkIdx = 0;
-    Dictionary<eAttackST, Action> mAttack = new Dictionary<eAttackST, Action>();
     eAttackST mCurAttackST;
     Rigidbody2D mRb2d;
     Animator mAnimator;
-    Dictionary<eMobAniST, (string, float)> m_Ani = new Dictionary<eMobAniST, (string, float)>();
     bool mAniStart;
     protected bool mMoveStop = false;
     protected bool mHitImmunity = false;
@@ -81,17 +67,14 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
     virtual protected void Awake()
     {
         //======================================================================
-        //      ## Init
+        //      ## StatusEffect
         //======================================================================
 
         mSE = GetComponent<StatusEffect_Object>();
 
         //======================================================================
 
-        for (int i = 0; i < (int)eMobAniST.Last; i++)
-            m_Ani[(eMobAniST)i] = ($"{gameObject.name}_{((eMobAniST)i).ToString()}", 0);
-        foreach (var i in mAniSpeedData)
-            m_Ani[i.ST] = ($"{gameObject.name}_{i.ST.ToString()}", i.t);
+        Init_AniDuration();   // 애니 시간.
 
         mRb2d = GetComponent<Rigidbody2D>();
         mAnimator = GetComponent<Animator>();
@@ -118,11 +101,13 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
 
     void FixedUpdate()
     {
-        mRb2d.velocity = Dir2d * MoveSpeed * mSE.SESpeedMult;
+        
+        mRb2d.velocity = Dir2d * MoveSpeed * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
         Animation();
         Anim_Logic.SetAnimSpeed(mAnimator, m_Ani[mCurAniST].Item2);
         if (mAniStart) { mAnimator.Play(m_Ani[mCurAniST].Item1, 0, 0); mAniStart = false; }
         else mAnimator.Play(m_Ani[mCurAniST].Item1);
+        
     }
 
     public virtual bool Stunned()
@@ -256,7 +241,7 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
         mHurt = false;
     }
 
-    virtual public void OnHurt()
+    public override void OnHurt()
     {
         if (mHitImmunity) return;
         mHurt       = true;
@@ -276,7 +261,7 @@ public class FlyingMob_Base : MonoBehaviour, IHurt
     //=================================================================
 
     [SerializeField, Header("Compse")] CorpseData Compse;
-    public void OnDead()
+    public override void OnDead()
     {
         Destroy(gameObject);
         CorpseMgr.CreateCorpseOrNull(transform, Compse);
