@@ -38,10 +38,10 @@ public class Equilibrium : PassiveItem
 
     private void OnDamaged()
     {
-        PlayerStats.DamageReceived += MathD.Round(PlayerStats.DamageReceived * (effectPercent * 0.01f));
+        PlayerStats.Inst.DamageReceived += MathD.Round(PlayerStats.Inst.DamageReceived * (effectPercent * 0.01f));
     }
     private void OnHit()
     {
-        PlayerStats.DamageToDeal += MathD.Round(PlayerStats.DamageToDeal * (effectPercent * 0.01f));
+        PlayerStats.Inst.DamageToDeal += MathD.Round(PlayerStats.Inst.DamageToDeal * (effectPercent * 0.01f));
     }
 }

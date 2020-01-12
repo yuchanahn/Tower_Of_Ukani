@@ -5,7 +5,7 @@ public class DroppedPassiveItem : DroppedItem
     public override void OnPickUp(PlayerItemPickUpData data)
     {
         // Get Item Reference
-        PassiveItem passiveItem = ItemObj as PassiveItem;
+        PassiveItem passiveItem = Item as PassiveItem;
 
         // Spawn Item
         if (!DroppedFromInventory)

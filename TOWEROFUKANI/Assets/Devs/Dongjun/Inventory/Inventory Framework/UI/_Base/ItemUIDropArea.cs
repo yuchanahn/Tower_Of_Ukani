@@ -11,7 +11,7 @@ public class ItemUIDropArea : MonoBehaviour,
             return;
 
         // Drop Item
-        //droppedItem.Item.Inventory.DropItem(droppedItem.Item, droppedItem.Item.Count);
-        droppedItem.ItemObj.Inventory.RemoveItem(droppedItem.ItemObj, droppedItem.ItemObj.Info.Count);
+        InventoryBase inventory = droppedItem.Item.Inventory;
+        inventory.DropItem(inventory.GetIndex_ItemID(droppedItem.Item.Info.ID));
     }
 }

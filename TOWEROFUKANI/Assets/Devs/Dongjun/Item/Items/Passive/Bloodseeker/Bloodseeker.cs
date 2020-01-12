@@ -38,7 +38,7 @@ public class Bloodseeker : PassiveItem
     #region Method: Item Effect
     private void LifeSteal()
     {
-        PlayerStats.Heal(PlayerStats.DamageToDeal);
+        PlayerStats.Inst.Heal(PlayerStats.Inst.DamageToDeal);
     }
     #endregion
 }

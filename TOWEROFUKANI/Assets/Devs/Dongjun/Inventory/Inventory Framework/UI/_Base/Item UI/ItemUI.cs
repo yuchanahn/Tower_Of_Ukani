@@ -12,7 +12,7 @@ public abstract class ItemUI : MonoBehaviour,
     #endregion
 
     #region Var: Properties
-    public Item ItemObj
+    public Item Item
     { get; private set; }
     #endregion
 
@@ -36,7 +36,7 @@ public abstract class ItemUI : MonoBehaviour,
     public virtual void OnUpdateUI(Item item)
     {
         gameObject.name = item.Info.ItemName;
-        ItemObj = item;
+        Item = item;
     }
     #endregion
 
@@ -55,7 +55,7 @@ public abstract class ItemUI : MonoBehaviour,
         if (Input.GetKey(KeyCode.Mouse0) || eventData.button != PointerEventData.InputButton.Right)
             return;
 
-        rightCickManager?.OnRightClick(ItemObj);
+        rightCickManager?.OnRightClick(Item);
     }
     protected virtual void OnPointerEnter(PointerEventData eventData)
     {

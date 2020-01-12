@@ -101,19 +101,19 @@ public class TalismanOfProtection : ActiveItem
     #region Method: Shield
     private void Shield()
     {
-        int overkillDmg = PlayerStats.DamageReceived - shieldhealth.Value;
+        int overkillDmg = PlayerStats.Inst.DamageReceived - shieldhealth.Value;
 
         // Shield Destroyed
         if (overkillDmg >= 0)
         {
-            PlayerStats.DamageReceived = overkillDmg;
+            PlayerStats.Inst.DamageReceived = overkillDmg;
             Deactivate();
         }
         // Damage Shield
         else
         {
-            shieldhealth.ModFlat -= PlayerStats.DamageReceived;
-            PlayerStats.DamageReceived = 0;
+            shieldhealth.ModFlat -= PlayerStats.Inst.DamageReceived;
+            PlayerStats.Inst.DamageReceived = 0;
         }
     }
     #endregion

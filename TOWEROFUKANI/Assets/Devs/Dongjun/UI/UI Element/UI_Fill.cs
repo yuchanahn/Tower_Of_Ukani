@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Bar : MonoBehaviour
+public class UI_Fill : MonoBehaviour
 {
     [SerializeField] protected Image bar;
 

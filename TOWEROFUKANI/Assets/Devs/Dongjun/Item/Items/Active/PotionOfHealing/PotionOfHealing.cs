@@ -11,11 +11,11 @@ public class PotionOfHealing : ActiveItem
 
     protected override void OnActivate()
     {
-        if (PlayerStats.Health.Value == PlayerStats.Health.Max)
+        if (PlayerStats.Inst.Health.Value == PlayerStats.Inst.Health.Max)
             return;
 
         cooldownTimer.Restart();
 
-        PlayerStats.Heal(healAmount);
+        PlayerStats.Inst.Heal(healAmount);
     }
 }

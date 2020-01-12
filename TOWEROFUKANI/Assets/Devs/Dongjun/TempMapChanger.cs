@@ -27,9 +27,9 @@ public class TempMapChanger : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerStats.Health.Value <= 0)
+        if (PlayerStats.Inst.Health.Value <= 0)
         {
-            PlayerStats.Heal(PlayerStats.Health.Max);
+            PlayerStats.Inst.Heal(PlayerStats.Inst.Health.Max);
             ReloadScene();
         }
     }

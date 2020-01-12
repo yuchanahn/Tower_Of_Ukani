@@ -49,7 +49,7 @@ public class MachineGun_Main_Action : GunAction_Base<MachineGunItem>
         {
             animator.Play(weapon.ANIM_Idle);
 
-            if (Input.GetKey(PlayerWeaponKeys.MainAbility))
+            if (PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
             {
                 weapon.shootTimer.Restart();
                 Shoot();

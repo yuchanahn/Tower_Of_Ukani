@@ -37,7 +37,7 @@ public class Player : CLA_Main
     #region Method: Condition Logic
     private CLA_Action_Base CL_Normal()
     {
-        if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.UseStamina(1))
+        if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.Inst.UseStamina(1))
             return action_Dash;
 
         if (Input.GetKeyDown(PlayerActionKeys.Kick))

@@ -62,12 +62,7 @@ public class Player_Normal_Action : CLA_Action<Player>,
         // Pick Up Item
         if (Input.GetKeyDown(PlayerActionKeys.PickUpItem))
             itemPickUpData.PickUp(transform);
-
-        // Drop Weapon From Weapon Hotbar
-        //if (Input.GetKeyDown(PlayerActionKeys.DropItem))
-        //    WeaponHotbar.Remove();
     }
-
     public override void OnLateUpdate()
     {
         // Character Body Look At Mouse

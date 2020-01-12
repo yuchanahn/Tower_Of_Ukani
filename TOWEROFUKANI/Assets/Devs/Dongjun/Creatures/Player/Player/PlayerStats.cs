@@ -4,124 +4,124 @@ using System.Linq;
 using Dongjun.Helper;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : SingletonBase<PlayerStats>
 {
     #region Var: Stats
-    private static IntStat health = new IntStat(100, min: 0, max: 100);
+    private IntStat health = new IntStat(100, min: 0, max: 100);
+    private FloatStat stamina = new FloatStat(0, min: 0, max: 3);
+    private FloatStat staminaRegen = new FloatStat(0.5f, min: 0);
 
-    private static IntStat stamina = new IntStat(0, min: 0, max: 3);
-    private static FloatStat staminaRegen = new FloatStat(0.5f, min: 0);
-    private static float staminaUIBarValue;
+    public bool AbsorbDamage = false;
+    public bool IgnoreDamage = false;
     #endregion
 
     #region Var: Data for Item Effect
-    public static int DamageReceived;
-    public static int HealReceived;
-
-    public static int DamageToDeal;
+    public int DamageReceived;
+    public int HealReceived;
+    public int DamageToDeal;
     #endregion
 
-    #region Var: Event For UI
-    private static Dictionary<GameObject, Action<IntStat>> OnHealthChange;
-    private static Dictionary<GameObject, Action<float>> OnStaminaChange;
+    #region Var: Event On Stat Change
+    private Dictionary<GameObject, Action<IntStat>> OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
+    private Dictionary<GameObject, Action<FloatStat>> OnStaminaChange = new Dictionary<GameObject, Action<FloatStat>>();
     #endregion
 
     #region Var: Properties
-    public static bool AbsorbDamage { get; set; } = false;
-    public static IntStat Health => health;
-    public static IntStat Stamina => stamina;
+    public bool IsDead
+    { get; private set; } = false;
+
+    public IntStat Health => health;
+    public FloatStat Stamina => stamina;
     #endregion
 
     #region Method: Unity
-    private void Awake()
+    protected override void Awake()
     {
-        // Reset Events
-        OnHealthChange = new Dictionary<GameObject, Action<IntStat>>();
-        OnStaminaChange = new Dictionary<GameObject, Action<float>>();
-
+        base.Awake();
         SetStamina(stamina.Max);
     }
     private void LateUpdate()
     {
-        Regen_Stamina();
+        RegenStamina();
     }
     #endregion
 
     #region Method: Change Stat (Self)
-    private static void Regen_Stamina()
+    private void RegenStamina()
     {
-        if (staminaUIBarValue >= stamina.Max)
+        if (stamina.ModFlat >= stamina.Max)
         {
-            staminaUIBarValue = stamina.Max;
             stamina.ModFlat = stamina.Max;
             return;
         }
 
-        staminaUIBarValue += staminaRegen.Value * Time.deltaTime;
-        stamina.ModFlat = (int)staminaUIBarValue;
+        stamina.ModFlat += staminaRegen.Value * Time.deltaTime;
         Invoke_OnStaminaChange();
     }
-    public static void SetStamina(int amount)
+    public void SetStamina(float amount)
     {
         amount = Mathf.Clamp(amount, stamina.Min, stamina.Max);
         stamina.ModFlat = amount;
-        staminaUIBarValue = amount;
     }
-    public static bool UseStamina(int amount)
+    public bool UseStamina(float amount)
     {
         if (stamina.Value < amount)
             return false;
 
-        staminaUIBarValue -= amount;
         stamina.ModFlat -= amount;
         return true;
     }
 
-    public static void Damage(int amount)
+    public void Damage(int amount)
     {
-        // Save Received Damage amount
+        if (IgnoreDamage)
+            return;
+
+        // Apply Damage
         DamageReceived = AbsorbDamage ? 0 : Mathf.Abs(amount);
-
-        // Trriger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Damaged);
-
         health.ModFlat -= DamageReceived;
 
+        // Death
         if (health.Value == 0)
         {
             //Death();
+            return;
         }
 
+        // Invoke Event
         Invoke_OnHealthChange();
 
         // Visual Effect
         PlayerHitEft.Create(GM.PlayerPos);
         GM.Player.GetComponent<HitColorEffect>().OnHit();
     }
-    public static void Heal(int amount)
+    public void Heal(int amount)
     {
-        amount = Mathf.Abs(amount);
-
-        // Save Received Heal amount
-        HealReceived = amount;
-
-        // Trriger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Healed);
-
         // Apply Heal
-        HealReceived = Mathf.Clamp(HealReceived, 0, health.Max - health.Value);
-        health.ModFlat += HealReceived;
+        HealReceived = Mathf.Abs(amount);
+        ItemEffectManager.Trigger(PlayerActions.Healed);
+        health.ModFlat += Mathf.Clamp(HealReceived, 0, health.Max - health.Value);
 
+        // Invoke Event
         Invoke_OnHealthChange();
+
+        // TODO
+        // Visual Effect
     }
-    public static void Death()
+    public void Death()
     {
-        health.Reset();
+        IsDead = true;
+
+        // TODO
+        // Play Death Animation
+
+        // Show Death Screen
     }
     #endregion
 
     #region Method: Change Stat (Other)
-    public static bool DealDamage(IDamage iDamage, AttackData attackData)
+    public bool DealDamage(IDamage iDamage, AttackData attackData)
     {
         if (iDamage == null)
             return false;
@@ -140,7 +140,7 @@ public class PlayerStats : MonoBehaviour
 
         return true;
     }
-    public static bool DealDamage(IDamage iDamage, AttackData attackData, params PlayerActions[] actionToTrigger)
+    public bool DealDamage(IDamage iDamage, AttackData attackData, params PlayerActions[] actionToTrigger)
     {
         if (iDamage == null)
             return false;
@@ -165,14 +165,14 @@ public class PlayerStats : MonoBehaviour
     #endregion
 
     #region Method: On Stat Change Event
-    public static void AddEvent_OnHealthChange(GameObject slef, Action<IntStat> action)
+    public void AddEvent_OnHealthChange(GameObject slef, Action<IntStat> action)
     {
         if (OnHealthChange.ContainsKey(slef))
             return;
 
         OnHealthChange.Add(slef, action);
     }
-    private static void Invoke_OnHealthChange()
+    private void Invoke_OnHealthChange()
     {
         GameObject key;
         for (int i = 0; i < OnHealthChange.Count; i++)
@@ -184,18 +184,18 @@ public class PlayerStats : MonoBehaviour
                 continue;
             }
 
-            OnHealthChange[key].Invoke(Health);
+            OnHealthChange[key].Invoke(health);
         }
     }
 
-    public static void AddEvent_OnStaminaChange(GameObject slef, Action<float> action)
+    public void AddEvent_OnStaminaChange(GameObject slef, Action<FloatStat> action)
     {
         if (OnStaminaChange.ContainsKey(slef))
             return;
 
         OnStaminaChange.Add(slef, action);
     }
-    private static void Invoke_OnStaminaChange()
+    private void Invoke_OnStaminaChange()
     {
         GameObject key;
         for (int i = 0; i < OnStaminaChange.Count; i++)
@@ -207,7 +207,7 @@ public class PlayerStats : MonoBehaviour
                 continue;
             }
 
-            OnStaminaChange[key].Invoke(staminaUIBarValue);
+            OnStaminaChange[key].Invoke(stamina);
         }
     }
     #endregion

@@ -248,7 +248,7 @@ public abstract class InventoryBase : MonoBehaviour
 
         if (items[index].Info.Count == 0)
         {
-            Destroy(items[index].gameObject);
+            items[index].OnRemove();
             items[index] = null;
             EmptySlots++;
         }
@@ -268,7 +268,7 @@ public abstract class InventoryBase : MonoBehaviour
 
         if (items[index].Info.Count == 0)
         {
-            Destroy(items[index].gameObject);
+            items[index].OnRemove();
             items[index] = null;
             EmptySlots++;
         }
@@ -282,7 +282,9 @@ public abstract class InventoryBase : MonoBehaviour
             return;
 
         if (destroy)
-            Destroy(items[index].gameObject);
+        {
+            items[index].OnRemove();
+        }
 
         items[index] = null;
         EmptySlots++;

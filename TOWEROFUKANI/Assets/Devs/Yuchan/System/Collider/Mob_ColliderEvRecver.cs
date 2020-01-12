@@ -10,7 +10,7 @@ public class Mob_ColliderEvRecver : AColliderEvent
         {
             if(i.tag == "Player")
             {
-                PlayerStats.Damage(GetComponentInChildren<AStat>().Damage);
+                PlayerStats.Inst.Damage(GetComponentInChildren<AStat>().Damage);
                 GetComponentInChildren<AColliderMgr>().Stop();
             }
         }

@@ -36,7 +36,7 @@ public class Pistol : GunController<PistolItem>
         }
         else if (weaponItem.loadedBullets < weaponItem.magazineSize.Value)
         {
-            if (Input.GetKeyDown(PlayerWeaponKeys.Reload))
+            if (PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.Reload))
                 return action_SwapMagazine;
         }
 

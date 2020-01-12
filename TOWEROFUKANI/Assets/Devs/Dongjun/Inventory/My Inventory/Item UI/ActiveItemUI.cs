@@ -11,12 +11,12 @@ public class ActiveItemUI : DraggableItemUI
 
     [Header("Cooldown Indicator")]
     [SerializeField] private GameObject cooldownIndicator;
-    [SerializeField] private UI_Bar cooldownFill;
+    [SerializeField] private UI_Fill cooldownFill;
     [SerializeField] private Text cooldownTime;
 
     private void LateUpdate()
     {
-        ActiveItem activeItem = ItemObj as ActiveItem;
+        ActiveItem activeItem = Item as ActiveItem;
 
         // Active Indicator
         activeIndicator.SetActive(activeItem.IsActive);

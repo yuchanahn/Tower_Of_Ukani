@@ -53,7 +53,7 @@ public class Player_Dash_Action : CLA_Action<Player>
         animator.Play(dashDir == main.Dir ? "Player_Dash_Forward" : "Player_Dash_Backward", 0, 0f);
 
         // Player Will Not Take Damage
-        PlayerStats.AbsorbDamage = true;
+        PlayerStats.Inst.AbsorbDamage = true;
 
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.DashStart);
@@ -68,7 +68,7 @@ public class Player_Dash_Action : CLA_Action<Player>
         dashDir = 0;
 
         // Player Will Take Damage
-        PlayerStats.AbsorbDamage = false;
+        PlayerStats.Inst.AbsorbDamage = false;
 
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.DashEnd);

@@ -2,21 +2,6 @@
 using System.Linq;
 using UnityEngine;
 
-public enum Item_DamageType
-{
-    None,
-    Physical,
-    Magical,
-    Living,
-}
-
-public enum Item_Range
-{
-    None,
-    Ranged,
-    Melee,
-}
-
 [System.Serializable]
 public sealed class ItemInfo
 {
@@ -25,7 +10,7 @@ public sealed class ItemInfo
     [SerializeField] private Sprite icon;
     [SerializeField] private string itemName = "Item Name";
     [SerializeField, TextArea] private string itemDesc = "This is an Item";
-    [SerializeField] private int itemStackLimit = 0;
+    [SerializeField] private int itemStackLimit = 1; // 0 이면 무한 스택 가능
 
     [Header("Item Tags")]
     [SerializeField] private Item_DamageType[] damageType;
@@ -38,16 +23,14 @@ public sealed class ItemInfo
     { get; private set; } = null;
     public Sprite Icon => icon;
     public string ItemName => itemName;
-    public string NameTrimed
-    { get; private set; }
     public string ItemDesc => itemDesc;
 
     // Item Count
-    private int bk_ItemCount = 1;
+    private int bk_Count = 1;
     public int Count
     {
-        get => bk_ItemCount;
-        set { bk_ItemCount = itemStackLimit == 0 ? Mathf.Max(0, value) : Mathf.Clamp(value, 0, itemStackLimit); }
+        get => bk_Count;
+        set { bk_Count = itemStackLimit == 0 ? Mathf.Max(0, value) : Mathf.Clamp(value, 0, itemStackLimit); }
     }
     public int StackLimit
     {
@@ -68,10 +51,6 @@ public sealed class ItemInfo
     {
         // Init ID as ItemName
         SetID(itemName);
-
-        // Init Trimed Name
-        NameTrimed = ItemName.Trim();
-        NameTrimed = ItemName.Replace(" ", "_");
 
         // Init Tag
         DamageType = damageType.ToList();

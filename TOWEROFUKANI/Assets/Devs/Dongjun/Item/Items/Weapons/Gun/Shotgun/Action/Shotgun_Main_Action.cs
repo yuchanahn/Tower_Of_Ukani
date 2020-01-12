@@ -40,7 +40,7 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
         {
             animator.Play(weapon.ANIM_Idle);
 
-            if (Input.GetKeyDown(PlayerWeaponKeys.MainAbility))
+            if (PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility))
             {
                 weapon.shootTimer.Restart();
                 Shoot();

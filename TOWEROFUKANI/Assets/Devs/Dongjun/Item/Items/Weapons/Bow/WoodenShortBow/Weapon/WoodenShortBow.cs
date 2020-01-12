@@ -26,7 +26,7 @@ public class WoodenShortBow : BowController<WoodenShortBowItem>
     }
     private CLA_Action_Base CL_Main()
     {
-        if (Input.GetKey(PlayerWeaponKeys.MainAbility))
+        if (PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
             return action_Draw;
 
         return null;

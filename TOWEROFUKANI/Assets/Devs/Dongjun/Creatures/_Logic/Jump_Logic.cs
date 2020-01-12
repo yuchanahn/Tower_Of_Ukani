@@ -24,16 +24,12 @@ public static class Jump_Logic
 {
     public static void FixedJump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D)
     {
-        if (!input_Jump)
-            return;
-
+        if (!input_Jump) return;
         input_Jump = false;
 
         jumpData.fixedYVel = jumpData.jumpGravity * jumpData.time;
 
-        if (!jumpData.canJump)
-            return;
-
+        if (!jumpData.canJump) return;
         jumpData.isJumping = true;
         jumpData.curCount++;
 
@@ -41,45 +37,22 @@ public static class Jump_Logic
     }
     public static void FixedJumpGravity(this ref JumpData jumpData, Rigidbody2D rb2D)
     {
-        if (jumpData.isJumping)
-        {
-            jumpData.fixedYVel -= jumpData.jumpGravity * Time.fixedDeltaTime;
-            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.fixedYVel);
-            jumpData.isJumping = jumpData.fixedYVel > 0;
-        }
-    }
-
-    public static void Jump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
-    {
-        jumpData.ResetJumpingState(rb2D, tf);
-
-        if (!input_Jump)
+        if (!jumpData.isJumping)
             return;
 
-        input_Jump = false;
-
-        if (!jumpData.canJump)
-            return;
-
-        jumpData.isJumping = true;
-        jumpData.curCount++;
-        jumpData.apexY = tf.position.y + jumpData.height;
-
-        // Apply Jump Velocity
-        rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.jumpGravity * jumpData.time);
+        jumpData.fixedYVel -= jumpData.jumpGravity * Time.fixedDeltaTime;
+        rb2D.velocity = new Vector2(rb2D.velocity.x, jumpData.fixedYVel);
+        jumpData.isJumping = jumpData.fixedYVel > 0;
     }
+
     public static void PlayerJump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
     {
         jumpData.ResetJumpingState(rb2D, tf);
 
-        if (!input_Jump)
-            return;
-
+        if (!input_Jump) return;
         input_Jump = false;
 
-        if (!jumpData.canJump)
-            return;
-
+        if (!jumpData.canJump) return;
         jumpData.isJumping = true;
         jumpData.curCount++;
         jumpData.apexY = tf.position.y + jumpData.height;
@@ -90,11 +63,14 @@ public static class Jump_Logic
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Jump);
     }
-    public static void Jump(this ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
+    public static void Jump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
     {
-        if (!jumpData.canJump)
-            return;
+        jumpData.ResetJumpingState(rb2D, tf);
 
+        if (!input_Jump) return;
+        input_Jump = false;
+
+        if (!jumpData.canJump) return;
         jumpData.isJumping = true;
         jumpData.curCount++;
         jumpData.apexY = tf.position.y + jumpData.height;

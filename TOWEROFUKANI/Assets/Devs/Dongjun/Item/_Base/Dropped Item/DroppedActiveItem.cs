@@ -5,7 +5,7 @@ public class DroppedActiveItem : DroppedItem
     public override void OnPickUp(PlayerItemPickUpData data)
     {
         // Get Item Reference
-        ActiveItem activeItem = ItemObj as ActiveItem;
+        ActiveItem activeItem = Item as ActiveItem;
 
         // Spawn Item
         if (!DroppedFromInventory)

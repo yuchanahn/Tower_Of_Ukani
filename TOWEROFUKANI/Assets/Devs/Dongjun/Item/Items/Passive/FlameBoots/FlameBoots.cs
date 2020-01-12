@@ -92,7 +92,7 @@ public class FlameBoots : PassiveItem
         if (overlap.CompareTag("Player"))
             return;
 
-        PlayerStats.DealDamage(overlap.GetComponent<IDamage>(), flameDashDamage);
+        PlayerStats.Inst.DealDamage(overlap.GetComponent<IDamage>(), flameDashDamage);
     }
 
     private void ResetFlameDash()

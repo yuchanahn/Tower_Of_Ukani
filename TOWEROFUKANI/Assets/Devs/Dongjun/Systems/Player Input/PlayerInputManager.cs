@@ -7,12 +7,12 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     public int Input_WalkDir => input_WalkDir;
     #endregion
 
-    #region Var: FallThrough
-    public bool Input_FallThrough { get; private set; } = false;
-    #endregion
-
     #region Var: Jump
     public bool Input_Jump { get; private set; } = false;
+    #endregion
+
+    #region Var: FallThrough
+    public bool Input_FallThrough { get; private set; } = false;
     #endregion
 
     #region Var: Dash
@@ -25,18 +25,29 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     { get; private set; }
     #endregion
 
+    #region Var: Weapon
+    public bool CanUseWeapon
+    { get; private set; } = true;
+    #endregion
+
     #region Method: Unity
     private void Update()
     {
         // Movement
         GetInput_Walk();
-        GetInput_FallThrough();
         GetInput_Jump();
+        GetInput_FallThrough();
 
-        // Ability
+        // Action
         GetInput_Dash();
+
+        // Weapon
+        UpdateWeaponKey();
     }
-    private void FixedUpdate()
+    #endregion
+
+    #region Method: Reset Input
+    public void ResetInput()
     {
         Input_Jump = false;
         Input_FallThrough = false;
@@ -120,6 +131,22 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
         }
 
         dashInputTime += Time.deltaTime;
+    }
+    #endregion
+
+    #region Method: Weapon
+    private void UpdateWeaponKey()
+    {
+        if (UI_Utility.IsMouseOverUI() && (Input.GetKeyDown(PlayerWeaponKeys.MainAbility) || Input.GetKeyDown(PlayerWeaponKeys.SubAbility)))
+        {
+            CanUseWeapon = false;
+            return;
+        }
+
+        if (!CanUseWeapon && Input.GetKey(PlayerWeaponKeys.MainAbility))
+            return;
+
+        CanUseWeapon = true;
     }
     #endregion
 }

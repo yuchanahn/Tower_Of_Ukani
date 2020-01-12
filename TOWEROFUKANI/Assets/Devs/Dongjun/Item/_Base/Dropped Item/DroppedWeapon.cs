@@ -7,11 +7,11 @@ public class DroppedWeapon : DroppedItem
     public override void OnPickUp(PlayerItemPickUpData data)
     {
         // Get Item Reference
-        WeaponItem weaponItem = ItemObj as WeaponItem;
+        WeaponItem weaponItem = Item as WeaponItem;
 
         // Spawn Item
         if (!DroppedFromInventory)
-            weaponItem = Instantiate(ItemObj).GetComponent<WeaponItem>();
+            weaponItem = Instantiate(Item).GetComponent<WeaponItem>();
 
         // Add To Inventory
         if (data.inventory.TryUpgradeItem(weaponItem.Info.ItemName, data.passiveInventory)

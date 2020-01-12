@@ -42,7 +42,7 @@ public class BowDraw_Base<TItem> : BowAction_Base<TItem>
             return;
 
         // Shoot
-        if (Input.GetKeyUp(PlayerWeaponKeys.MainAbility))
+        if (PlayerWeaponKeys.GetKeyUp(PlayerWeaponKeys.MainAbility))
         {
             IsDrawing = false;
             weapon.drawPower = weapon.drawTimer.CurTime / weapon.drawTimer.EndTime.Value;

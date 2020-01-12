@@ -22,6 +22,7 @@ public class ToU_Inventory : InventoryBase
     }
     #endregion
 
+    #region Method: Upgrade Item
     public bool TryUpgradeItem(string itemName, PassiveInventory passiveInventory = null)
     {
         int index = GetIndex_ItemName(itemName);
@@ -39,4 +40,5 @@ public class ToU_Inventory : InventoryBase
 
         return true;
     }
+    #endregion
 }
