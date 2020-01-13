@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Dongjun.Helper;
 
 public class Corpse : PoolingObj
 {
@@ -39,14 +39,12 @@ public class Corpse : PoolingObj
             col = GetComponent<Collider2D>();
             GravityScale = rb2D.gravityScale;
         }
-
+        cScale = Vector2.one;
         col.enabled = true;
         rb2D.isKinematic = false;
         rb2D.velocity = new Vector2(0, 0);
-        acc = 0;
         rb2D.gravityScale = GravityScale;
         transform.localScale = Vector3.one;
-        StartAbsorb();
     }
 
     bool mAbsorb = false;
@@ -58,21 +56,19 @@ public class Corpse : PoolingObj
     }
 
 
-    float acc = 1;
-    float aT = 0.1f;
-    float speed = 2;
+    float speed = 20;
+    Vector2 cScale = Vector2.one;
     private void Update()
     {
         if (!mAbsorb) return;
         // 시체조각 흡수시 작아지는 연출....
-        var vel = (GM.PlayerPos - transform.position).normalized;
-        transform.position += vel * Time.deltaTime * speed;
-        transform.localScale = transform.localScale.x <= 0 ? Vector3.zero : transform.localScale - (Vector3.one * acc * Time.deltaTime);
-        
+        transform.position = Vector2.MoveTowards(transform.position, GM.PlayerPos, speed * Time.deltaTime);
+        transform.localScale = Vector3.one * Vector2.Distance(GM.PlayerPos, transform.position) * 0.5f;
+        transform.localScale = transform.localScale.Clamp(Vector2.zero, cScale);
+        cScale = transform.localScale;
         if (Vector2.Distance(GM.PlayerPos, transform.position) <= 0.1f)
         {
             this.Sleep();
         }
-        acc += aT * Time.deltaTime;
     }
 }
