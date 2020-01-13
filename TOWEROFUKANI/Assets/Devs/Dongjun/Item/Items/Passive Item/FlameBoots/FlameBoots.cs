@@ -25,7 +25,7 @@ public class FlameBoots : PassiveItem
     #endregion
 
     #region Var: Flame Dash
-    private AttackData flameDashDamage;
+    private AttackData flameDashAttackData;
     #endregion
 
     #region Var: Effects
@@ -35,7 +35,7 @@ public class FlameBoots : PassiveItem
     #region Method: Initialize
     public override void InitStats()
     {
-        flameDashDamage = new AttackData(5);
+        flameDashAttackData = new AttackData(5);
     }
     #endregion
 
@@ -92,7 +92,7 @@ public class FlameBoots : PassiveItem
         if (overlap.CompareTag("Player"))
             return;
 
-        PlayerStats.Inst.DealDamage(overlap.GetComponent<IDamage>(), flameDashDamage);
+        PlayerStats.Inst.DealDamage(flameDashAttackData, overlap.gameObject);
     }
 
     private void ResetFlameDash()

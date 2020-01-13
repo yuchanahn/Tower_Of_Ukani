@@ -116,12 +116,7 @@ public class Player_Kick_Action : CLA_Action<Player>
         if (mobHits.Length == 0)
             return;
 
-        IDamage iDamage = mobHits.GetClosest<IDamage>(transform);
-        if (iDamage == null)
-            return;
-
-        // Damage
-        iDamage.Hit(attackData.damage.Value);
+        PlayerStats.Inst.DealDamage(attackData, mobHits.GetClosest(transform));
     }
     #endregion
 

@@ -75,17 +75,17 @@ public class Projectile : PoolingObj
     #endregion
 
     #region Method: Hit
-    protected bool IsIgnoreTag(Component check)
+    protected bool IsIgnoreTag(Component target)
     {
         for (int j = 0; j < ignoreTags.Length; j++)
-            if (check.CompareTag(ignoreTags[j]))
+            if (target.CompareTag(ignoreTags[j]))
                 return true;
 
         return false;
     }
     protected virtual void DetectObject()
     {
-        Vector2 pos = (transform.position + (transform.right * detectSize.x * 0.5f)) - (transform.right * (projectileData.moveSpeed.Value * Time.fixedDeltaTime));
+        Vector2 pos = transform.position + (transform.right * detectSize.x * 0.5f) - (transform.right * (projectileData.moveSpeed.Value * Time.fixedDeltaTime));
         float rot = transform.rotation.eulerAngles.z;
 
         RaycastHit2D[] hits =
