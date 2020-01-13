@@ -6,6 +6,9 @@ public class PlayerInventory : ToU_Inventory
 {
     protected override void Awake()
     {
-        Init(20, typeof(WeaponItem), typeof(ActiveItem));
+        Init(20,
+            typeof(ResourceItem),
+            typeof(WeaponItem),
+            typeof(ActiveItem));
     }
 }

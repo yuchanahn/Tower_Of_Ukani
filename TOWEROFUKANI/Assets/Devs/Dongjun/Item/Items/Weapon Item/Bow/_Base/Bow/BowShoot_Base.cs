@@ -57,7 +57,7 @@ public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
     {
         // Set Attack Data
         AttackData curAttackData = weapon.attackData;
-        curAttackData.damage = new IntStat(Mathf.Max(MathD.Round(weapon.attackData.damage.Value * weapon.drawPower), 1));
+        curAttackData.damage = new FloatStat(Mathf.Max(weapon.attackData.damage.Value * weapon.drawPower, 1));
 
         // Set Projectile Data
         ProjectileData curArrowData = weapon.arrowData;

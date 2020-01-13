@@ -36,7 +36,7 @@ public class ToU_Inventory : InventoryBase
         (items[index] as UpgradableItem).AddLevel();
 
         if (passiveInventory != null && items[index] is WeaponItem)
-            passiveInventory.ApplyBonusStatToWeapon(items[index] as WeaponItem);
+            passiveInventory.ApplyBonusStatsToWeapon(items[index] as WeaponItem);
 
         return true;
     }

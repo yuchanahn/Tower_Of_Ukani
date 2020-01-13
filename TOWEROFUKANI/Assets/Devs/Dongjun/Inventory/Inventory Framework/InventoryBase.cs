@@ -120,7 +120,7 @@ public abstract class InventoryBase : MonoBehaviour
 
     public virtual void AddItem(Item item, int index = -1)
     {
-        if (item == null)
+        if (item == null || !IsValidItemType(item))
             return;
 
         void AddNew(int to)
@@ -178,7 +178,7 @@ public abstract class InventoryBase : MonoBehaviour
     }
     public virtual bool TryAddItem(Item item, int index = -1)
     {
-        if (item == null)
+        if (item == null || !IsValidItemType(item))
             return false;
 
         void AddNew(int to)

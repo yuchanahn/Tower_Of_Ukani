@@ -78,7 +78,7 @@ public class Shotgun_Main_Action : GunAction_Base<ShotgunItem>
     {
         // Set Attack Data
         AttackData curAttackData = weapon.attackData;
-        curAttackData.damage = new IntStat(MathD.Round((float)weapon.attackData.damage.Value / pelletCount));
+        curAttackData.damage = new FloatStat(weapon.attackData.damage.Value / pelletCount);
 
         // Set Bullet Rotation
         Vector3 rot = transform.eulerAngles;

@@ -5,8 +5,9 @@ using UnityEngine;
 public class InventoryUI : InventoryUIBase
 {
     [Header("Item UI")]
-    [SerializeField] private ItemUI weaponItemUI;
-    [SerializeField] private ItemUI activeItemUI;
+    [SerializeField] private WeaponItemUI weaponItemUI;
+    [SerializeField] private ActiveItemUI activeItemUI;
+    [SerializeField] private ResourceItemUI resourceItemUI;
 
     protected override ItemUI SpawnItemUI(Item item, int slotIndex)
     {
@@ -20,7 +21,8 @@ public class InventoryUI : InventoryUIBase
             case ActiveItem _:
                 itemUI = Instantiate(activeItemUI.gameObject).GetComponent<ItemUI>();
                 break;
-            default:
+            case ResourceItem _:
+                itemUI = Instantiate(resourceItemUI.gameObject).GetComponent<ItemUI>();
                 break;
         }
 

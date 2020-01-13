@@ -56,12 +56,17 @@ public class PlayerStats : SingletonBase<PlayerStats>
         }
 
         stamina.ModFlat += staminaRegen.Value * Time.deltaTime;
+
+        // Invoke Event
         Invoke_OnStaminaChange();
     }
     public void SetStamina(float amount)
     {
         amount = Mathf.Clamp(amount, stamina.Min, stamina.Max);
         stamina.ModFlat = amount;
+
+        // Invoke Event
+        Invoke_OnStaminaChange();
     }
     public bool UseStamina(float amount)
     {
@@ -69,6 +74,9 @@ public class PlayerStats : SingletonBase<PlayerStats>
             return false;
 
         stamina.ModFlat -= amount;
+
+        // Invoke Event
+        Invoke_OnStaminaChange();
         return true;
     }
 
@@ -77,15 +85,19 @@ public class PlayerStats : SingletonBase<PlayerStats>
         if (IgnoreDamage)
             return;
 
-        // Apply Damage
+        // Store Damage Amount
         DamageReceived = AbsorbDamage ? 0 : Mathf.Abs(amount);
+
+        // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Damaged);
+
+        // Apply Damage
         health.ModFlat -= DamageReceived;
 
         // Death
         if (health.Value == 0)
         {
-            //Death();
+            Death();
             return;
         }
 
@@ -93,14 +105,18 @@ public class PlayerStats : SingletonBase<PlayerStats>
         Invoke_OnHealthChange();
 
         // Visual Effect
-        PlayerHitEft.Create(GM.PlayerPos);
-        GM.Player.GetComponent<HitColorEffect>().OnHit();
+        PlayerHitEft.Create(transform.position);
+        GetComponent<HitColorEffect>().OnHit();
     }
     public void Heal(float amount)
     {
-        // Apply Heal
+        // Store Heal Amount
         HealReceived = Mathf.Abs(amount);
+
+        // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Healed);
+
+        // Apply Heal
         health.ModFlat += Mathf.Clamp(HealReceived, 0, health.Max - health.Value);
 
         // Invoke Event
@@ -126,17 +142,18 @@ public class PlayerStats : SingletonBase<PlayerStats>
         if (iDamage == null)
             return false;
 
-        // Set Stat
+        // Store Damage
         DamageToDeal = attackData.damage.Value;
 
         // Trigger Item Effect
         ItemEffectManager.Trigger(PlayerActions.Hit);
 
         // Damage Mob
-        iDamage.Hit(DamageToDeal); // 여기서 체력이나 불리언 반환 해줘!!
+        float mobHP = iDamage.Hit(DamageToDeal);
 
-        // TO DO:
-        // Kill Item Effect Trigger
+        // Trigger Item Effect
+        if (mobHP <= 0)
+            ItemEffectManager.Trigger(PlayerActions.Kill);
 
         return true;
     }
@@ -145,7 +162,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         if (iDamage == null)
             return false;
 
-        // Set Stat
+        // Store Damage
         DamageToDeal = attackData.damage.Value;
 
         // Trigger Item Effect
@@ -155,10 +172,11 @@ public class PlayerStats : SingletonBase<PlayerStats>
             ItemEffectManager.Trigger(actionToTrigger[i]);
 
         // Damage Mob
-        iDamage.Hit(DamageToDeal); // 여기서 체력이나 불리언 반환 해줘!!
+        float mobHP = iDamage.Hit(DamageToDeal);
 
-        // TO DO:
-        // Kill Item Effect Trigger
+        // Trigger Item Effect
+        if (mobHP <= 0)
+            ItemEffectManager.Trigger(PlayerActions.Kill);
 
         return true;
     }

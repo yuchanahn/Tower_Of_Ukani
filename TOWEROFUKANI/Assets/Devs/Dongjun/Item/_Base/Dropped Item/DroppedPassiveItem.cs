@@ -19,7 +19,9 @@ public class DroppedPassiveItem : DroppedItem
             Destroy(passiveItem.gameObject);
             goto EXIT;
         }
-        if (data.passiveInventory.TryAddItem(passiveItem))
+        if (data.passiveInventory.TryAddItem(passiveItem,
+            data.inventory,
+            data.weaponHotbar))
         {
             goto EXIT;
         }

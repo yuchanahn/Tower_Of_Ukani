@@ -2,14 +2,14 @@
 
 public struct AttackData
 {
-    public IntStat damage;
+    public FloatStat damage;
     // Damage Type
     // Knockback
     // Penetration
     // Etc...
 
-    public AttackData(int damage = 0)
+    public AttackData(float damage = 0)
     {
-        this.damage = new IntStat(damage, min: 0);
+        this.damage = new FloatStat(damage, min: 0);
     }
 }

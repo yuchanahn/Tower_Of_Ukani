@@ -46,34 +46,25 @@ public class PassiveInventory : MonoBehaviour
         if (!Contains(item))
             return false;
 
-        PassiveItem passive;
+        PassiveItem upgradeTarget;
 
         switch (item.God)
         {
             case TowerOfUkani.Gods.None:
-                passive = relics.Find(i => i.Info.ItemName == item.Info.ItemName);
+                upgradeTarget = relics.Find(i => i.Info.ItemName == item.Info.ItemName);
                 break;
             default:
-                passive = divineRelics[item.God].Find(i => i.Info.ItemName == item.Info.ItemName);
+                upgradeTarget = divineRelics[item.God].Find(i => i.Info.ItemName == item.Info.ItemName);
                 break;
         }
 
-        passive.AddLevel();
+        upgradeTarget.AddLevel();
 
-        for (int i = 0; i < inventories.Length; i++)
-        {
-            for (int curItem = 0; curItem < inventories[i].Size; curItem++)
-            {
-                if (!(inventories[i].GetItem(curItem) is WeaponItem))
-                    continue;
-
-                passive.ApplyBonusStats(inventories[i].GetItem(curItem) as WeaponItem);
-            }
-        }
+        ApplyBonusStatsToInventories(upgradeTarget, inventories);
 
         return true;
     }
-    public bool TryAddItem(PassiveItem item)
+    public bool TryAddItem(PassiveItem item, params ToU_Inventory[] inventories)
     {
         if (Contains(item))
             return false;
@@ -84,12 +75,16 @@ public class PassiveInventory : MonoBehaviour
         {
             case TowerOfUkani.Gods.None:
                 relics.Add(item);
-                return true;
+                break;
             default:
                 if (divineRelics[item.God].Count >= divineMaxSizes[item.God]) return false;
                 divineRelics[item.God].Add(item);
-                return true;
+                break;
         }
+
+        ApplyBonusStatsToInventories(item, inventories);
+
+        return true;
     }
     public bool TryRemoveItem(PassiveItem item)
     {
@@ -116,7 +111,21 @@ public class PassiveInventory : MonoBehaviour
     #endregion
 
     #region Method: Bonus Stats
-    public void ApplyBonusStatToWeapon(WeaponItem weapon)
+    private void ApplyBonusStatsToInventories(PassiveItem item, ToU_Inventory[] inventories)
+    {
+        // Apply Bonus Stats
+        for (int i = 0; i < inventories.Length; i++)
+        {
+            for (int j = 0; j < inventories[i].Size; j++)
+            {
+                if (!(inventories[i].GetItem(j) is WeaponItem))
+                    continue;
+
+                item.ApplyBonusStats(inventories[i].GetItem(j) as WeaponItem);
+            }
+        }
+    }
+    public void ApplyBonusStatsToWeapon(WeaponItem weapon)
     {
         for (int i = 0; i < relics.Count; i++)
         {
