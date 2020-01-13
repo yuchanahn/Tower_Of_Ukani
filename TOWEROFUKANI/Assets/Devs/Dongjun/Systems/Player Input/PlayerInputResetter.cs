@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInputReseter : MonoBehaviour
+public class PlayerInputResetter : MonoBehaviour
 {
     private void FixedUpdate()
     {

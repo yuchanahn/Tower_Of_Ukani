@@ -16,9 +16,9 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #endregion
 
     #region Var: Data for Item Effect
-    public float DamageReceived;
-    public float HealReceived;
-    public float DamageToDeal;
+    [HideInInspector] public float DamageReceived;
+    [HideInInspector] public float HealReceived;
+    [HideInInspector] public float DamageToDeal;
     #endregion
 
     #region Var: Event On Stat Change

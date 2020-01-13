@@ -694,7 +694,7 @@ MonoBehaviour:
   spriteTrailObject: {fileID: 7287980144595261149, guid: 2604182f55f4d654b93a54d6b8afb46a,
     type: 3}
   trailDuration: 0.12
-  trailCount: 4
+  trailCount: 5
 --- !u!114 &2166807972467319143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,8 +723,7 @@ MonoBehaviour:
   mobMask:
     serializedVersion: 2
     m_Bits: 256
-  velPercent: {x: 0.3, y: 0.3}
-  xVelDecreaseAmount: 3
+  yVelPercent: 0.3
   duration: 0
   kickEffectSpriteRenderer: {fileID: 7773452921406079708}
 --- !u!114 &6830336080947489379
@@ -754,7 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: 287147c37f962fa47983a78f8a424ef0, type: 2}
-  Time: 0.5
+  Time: 0.25
   SpriteRenderers:
   - {fileID: 7371128403266533312}
 --- !u!1 &8380180170933658504

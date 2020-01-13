@@ -94,7 +94,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sleepTimer:
-    StartAsEnded: 0
     CurTime: 0
     EndTime: 0
-  fadeSpeed: 4
+  fadeSpeed: 6
