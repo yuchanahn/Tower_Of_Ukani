@@ -3,11 +3,29 @@ using UnityEngine;
 
 namespace Dongjun.Helper
 {
-    public static class General
+    public static class EnumHelper
     {
-        public static int EnumCount<T>() where T : Enum
+        public static int Count<T>() where T : Enum
         {
             return Enum.GetValues(typeof(T)).Length;
+        }
+    }
+
+    public static class General
+    {
+        public static void ClearChildren(this GameObject target)
+        {
+            for (int i = 0; i < target.transform.childCount; i++)
+            {
+                GameObject.Destroy(target.transform.GetChild(i).gameObject);
+            }
+        }
+        public static void ClearChildren(this Transform target)
+        {
+            for (int i = 0; i < target.childCount; i++)
+            {
+                GameObject.Destroy(target.GetChild(i).gameObject);
+            }
         }
     }
 

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Dongjun.Helper;
+using System;
 using UnityEngine;
 
 public abstract class InventoryUIBase : MonoBehaviour
@@ -34,8 +34,7 @@ public abstract class InventoryUIBase : MonoBehaviour
         itemUIs = new ItemUI[Size];
 
         // Clear Slots
-        for (int i = 0; i < slotUIGroup.transform.childCount; i++)
-            Destroy(slotUIGroup.transform.GetChild(i).gameObject);
+        slotUIGroup.ClearChildren();
 
         // Spawn Slots
         for (int i = 0; i < Size; i++)

@@ -16,7 +16,7 @@ public class PassiveInventory : MonoBehaviour
     private void Awake()
     {
         // None이 첫번째라서 1부터 시작 
-        for (int i = 1; i < General.EnumCount<TowerOfUkani.Gods>(); i++)
+        for (int i = 1; i < EnumHelper.Count<TowerOfUkani.Gods>(); i++)
         {
             // Load 할때 저장된 맥스 사이즈 가져오기
             divineMaxSizes.Add((TowerOfUkani.Gods)i, 3);
@@ -132,7 +132,7 @@ public class PassiveInventory : MonoBehaviour
             relics[i].ApplyBonusStats(weapon);
         }
 
-        for (int i = 1; i < General.EnumCount<TowerOfUkani.Gods>(); i++)
+        for (int i = 1; i < EnumHelper.Count<TowerOfUkani.Gods>(); i++)
         {
             for (int j = 0; j < divineRelics[(TowerOfUkani.Gods)i].Count; j++)
             {

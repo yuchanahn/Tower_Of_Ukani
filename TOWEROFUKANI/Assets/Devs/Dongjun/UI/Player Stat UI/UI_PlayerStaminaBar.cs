@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public class UI_PlayerStaminaBar : MonoBehaviour
 {
@@ -7,13 +8,17 @@ public class UI_PlayerStaminaBar : MonoBehaviour
 
     private UI_Fill[] staminaBars;
 
+    private void Awake()
+    {
+        staminaBarParent.ClearChildren();
+    }
     private void Start()
     {
-        Init_StaminaBar();
+        SetUp_StaminaBar();
         PlayerStats.Inst.AddEvent_OnStaminaChange(gameObject, Update_StaminaBar);
     }
 
-    private void Init_StaminaBar()
+    private void SetUp_StaminaBar()
     {
         staminaBars = new UI_Fill[(int)PlayerStats.Inst.Stamina.Max];
 
