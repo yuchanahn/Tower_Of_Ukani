@@ -36,7 +36,7 @@ public class AStat : MonoBehaviour, IDamage
             Dmg = null; mDmg = 0;
         });
         if (Dmg == null) Dmg = MobDamageText.Show(MathD.Round(mDmg), transform.position);
-        Dmg.mText.text = mDmg.ToString();
+        Dmg.mText.text = MathD.Round(mDmg).ToString();
         Dmg.SetPoint(transform.position);
         Dmg.ThisStart();
 
