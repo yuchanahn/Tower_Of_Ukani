@@ -11,6 +11,7 @@ public class AStat : MonoBehaviour, IDamage
     private float mMAXHP;
     private float mDmg = 0;
     MobDamageText Dmg = null;
+    bool IsIgnoreHit => GetComponent<StatusEffect_IgnoreHit>();
     public float HP { get => mHP; set { mHP = value; if (mHP <= 0) GetComponent<IHurt>().OnDead(); } }
 
     public float MAXHP { get => mMAXHP; }
@@ -23,6 +24,7 @@ public class AStat : MonoBehaviour, IDamage
 
     public float Hit(float dmg)
     {
+        if (IsIgnoreHit) return 0;
         HP -= dmg;
         mDmg += dmg;
         GetComponent<HitColorEffect>().OnHit();

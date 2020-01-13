@@ -77,6 +77,7 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
     public virtual float VelX =>
      m_bAttacking ? 0 :
      CanAttack ? 0 :
+     m_bHurting ? 0 :
      IsWallInForword ? IsOneWayInForword ? 0 : m_MoveData.Speed * m_MoveData.Dir :
      IsKeepFollowing ? m_MoveData.Speed * m_MoveData.Dir :
      IsFollowMax ? 0 :
@@ -155,8 +156,8 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
     {
         m_groundDetectionData.DetectGround(!m_jumpData.isJumping, m_rb, transform);
         m_groundDetectionData.ExecuteOnGroundMethod(this);
-
-        m_rb.velocity = new Vector2(m_bFollowJump && m_jumpData.isJumping ? JumpVel.x : VelX * m_SEObj.SESpeedMult * (CheckOverlapSlow(MobSize, new Vector2(m_MoveData.Dir, 0)) ? OverlapSlow : 1f), VelY);
+        var OverlapSlowSpeed = (CheckOverlapSlow(MobSize, new Vector2(m_MoveData.Dir, 0)) ? OverlapSlow : 1f);
+        m_rb.velocity = new Vector2(m_bFollowJump && m_jumpData.isJumping ? JumpVel.x : VelX * m_SEObj.SESpeedMult * OverlapSlowSpeed, VelY);
         m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
 
         
