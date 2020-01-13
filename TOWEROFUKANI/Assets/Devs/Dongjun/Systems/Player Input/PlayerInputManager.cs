@@ -16,11 +16,13 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     #endregion
 
     #region Var: Dash
-    [HideInInspector]
+    private readonly int dashTapCount = 2;
     private readonly float dashInputInterval = 0.2f;
+
     private float dashInputTime = 0;
-    private int dashInputCount = 0;
-    private int oldDashInput = 0;
+    private int curDashTapCount = 0;
+    private int prevDashInputDir = 0;
+
     public int Input_DashDir
     { get; private set; }
     #endregion
@@ -65,9 +67,9 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
             if (Input.GetKeyDown(minusKey))
                 dir = -1;
 
-            if (dir == 1 && Input.GetKeyUp(plusKey))
+            if (Input.GetKey(minusKey) && Input.GetKeyUp(plusKey))
                 dir = -1;
-            if (dir == -1 && Input.GetKeyUp(minusKey))
+            if (Input.GetKey(plusKey) && Input.GetKeyUp(minusKey))
                 dir = 1;
 
             if (!Input.GetKey(plusKey) && !Input.GetKey(minusKey))
@@ -97,40 +99,44 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     #region Method: Dash
     private void GetInput_Dash()
     {
+        // 대쉬 키를 눌렀을 때
         if (Input.GetKeyDown(PlayerActionKeys.Dash))
         {
             Input_DashDir = Input_WalkDir;
-            dashInputCount = 0;
+            curDashTapCount = 0;
             dashInputTime = 0;
             return;
         }
 
-        if (Input.GetKeyDown(PlayerMovementKeys.WalkRight) || 
-            Input.GetKeyDown(PlayerMovementKeys.WalkLeft))
+        // 더블 탭 했을 때
+        if (Input.GetKeyDown(PlayerMovementKeys.WalkRight) 
+        || Input.GetKeyDown(PlayerMovementKeys.WalkLeft))
         {
             // First Tap
-            if (dashInputCount == 0)
-                dashInputCount++;
+            if (curDashTapCount == 0)
+                curDashTapCount = 1;
 
             // After First Tap
-            if (oldDashInput == Input_WalkDir && dashInputTime <= dashInputInterval)
-                dashInputCount++;
-            else
-                dashInputCount = 0;
+            curDashTapCount = 
+                (prevDashInputDir == Input_WalkDir && dashInputTime <= dashInputInterval)
+                ? curDashTapCount + 1
+                : 0;
+
+            prevDashInputDir = Input_WalkDir;
+            dashInputTime = 0;
 
             // Check Tap Count
-            if (dashInputCount == 2)
+            if (curDashTapCount == dashTapCount)
             {
+                curDashTapCount = 0;
                 Input_DashDir = Input_WalkDir;
-                dashInputCount = 0;
+                return;
             }
-
-            // Reset Data
-            dashInputTime = 0;
-            oldDashInput = Input_WalkDir;
         }
-
-        dashInputTime += Time.deltaTime;
+        else
+        {
+            dashInputTime += Time.deltaTime;
+        }
     }
     #endregion
 
