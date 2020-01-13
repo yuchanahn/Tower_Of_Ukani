@@ -9838,11 +9838,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7371128404420445768, guid: de8e575bfc7541a4cb26f729cf5133df,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2227997050219821179, guid: de8e575bfc7541a4cb26f729cf5133df,
         type: 3}
       propertyPath: inventoryUI
