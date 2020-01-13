@@ -137,9 +137,14 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #endregion
 
     #region Method: Change Stat (Other)
-    public bool DealDamage(IDamage iDamage, AttackData attackData)
+    public bool DealDamage(AttackData attackData, GameObject target)
     {
+        IDamage iDamage = target.GetComponent<IDamage>();
         if (iDamage == null)
+            return false;
+
+        // 피해 무시 채크
+        if (target.GetComponent<StatusEffect_IgnoreHit>() != null)
             return false;
 
         // Store Damage
@@ -157,9 +162,14 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
         return true;
     }
-    public bool DealDamage(IDamage iDamage, AttackData attackData, params PlayerActions[] actionToTrigger)
+    public bool DealDamage(AttackData attackData, GameObject target, params PlayerActions[] actionToTrigger)
     {
+        IDamage iDamage = target.GetComponent<IDamage>();
         if (iDamage == null)
+            return false;
+
+        // 피해 무시 채크
+        if (target.GetComponent<StatusEffect_IgnoreHit>() != null)
             return false;
 
         // Store Damage

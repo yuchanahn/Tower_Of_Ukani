@@ -66,6 +66,31 @@ namespace Dongjun.Helper
 
             return result;
         }
+        public static GameObject GetClosest(this Collider2D[] hits, Transform pivot)
+        {
+            if (hits == null || hits.Length == 0)
+                return null;
+
+            GameObject result = null;
+
+            float dist = -1;
+            for (int i = 0; i < hits.Length; i++)
+            {
+                float curDist = Vector2.Distance(hits[i].transform.position, pivot.position);
+
+                if (dist == -1 || dist > curDist)
+                {
+                    GameObject cur = hits[i].gameObject;
+                    if (cur == null)
+                        continue;
+
+                    dist = curDist;
+                    result = cur;
+                }
+            }
+
+            return result;
+        }
     }
 
     public static class VectorHelper
@@ -95,6 +120,43 @@ namespace Dongjun.Helper
             if (x.HasValue) target.x += x.Value;
             if (y.HasValue) target.y += y.Value;
             if (z.HasValue) target.z += z.Value;
+            return target;
+        }
+
+        public static Vector2 Clamp(this Vector2 target, 
+            float? minX = null, 
+            float? maxX = null, 
+            float? minY = null,
+            float? maxY = null)
+        {
+            target.x = Mathf.Clamp(target.x, minX ?? float.MinValue, maxX ?? float.MaxValue);
+            target.y = Mathf.Clamp(target.y, minY ?? float.MinValue, maxY ?? float.MaxValue);
+            return target;
+        }
+        public static Vector2 Clamp(this Vector2 target, Vector2? min, Vector2? max)
+        {
+            target.x = Mathf.Clamp(target.x, min == null ? float.MinValue : min.Value.x, max == null ? float.MinValue : max.Value.x);
+            target.y = Mathf.Clamp(target.y, min == null ? float.MinValue : min.Value.y, max == null ? float.MinValue : max.Value.y);
+            return target;
+        }
+        public static Vector3 Clamp(this Vector3 target,
+            float? minX = null,
+            float? maxX = null,
+            float? minY = null,
+            float? maxY = null,
+            float? minZ = null,
+            float? maxZ = null)
+        {
+            target.x = Mathf.Clamp(target.x, minX ?? float.MinValue, maxX ?? float.MaxValue);
+            target.y = Mathf.Clamp(target.y, minY ?? float.MinValue, maxY ?? float.MaxValue);
+            target.y = Mathf.Clamp(target.z, minZ ?? float.MinValue, maxZ ?? float.MaxValue);
+            return target;
+        }
+        public static Vector3 Clamp(this Vector3 target, Vector3? min, Vector3? max)
+        {
+            target.x = Mathf.Clamp(target.x, min == null ? float.MinValue : min.Value.x, max == null ? float.MinValue : max.Value.x);
+            target.y = Mathf.Clamp(target.y, min == null ? float.MinValue : min.Value.y, max == null ? float.MinValue : max.Value.y);
+            target.z = Mathf.Clamp(target.z, min == null ? float.MinValue : min.Value.z, max == null ? float.MinValue : max.Value.z);
             return target;
         }
     }
