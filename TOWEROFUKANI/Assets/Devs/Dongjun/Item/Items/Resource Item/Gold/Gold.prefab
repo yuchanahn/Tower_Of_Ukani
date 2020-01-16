@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    icon: {fileID: 21300000, guid: af03758393cee754f9126b0070879c0f, type: 3}
+    icon: {fileID: 21300000, guid: 8dee7942e39e1cd4db1a3b023fa237a0, type: 3}
     itemName: Gold
     itemDesc: Resource
     itemStackLimit: 0
