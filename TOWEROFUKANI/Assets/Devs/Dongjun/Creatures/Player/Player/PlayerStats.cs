@@ -154,11 +154,11 @@ public class PlayerStats : SingletonBase<PlayerStats>
         ItemEffectManager.Trigger(PlayerActions.Hit);
 
         // Damage Mob
+        Debug.Log("Hit");
         float mobHP = iDamage.Hit(DamageToDeal);
 
         // Trigger Item Effect
-        if (mobHP <= 0)
-            ItemEffectManager.Trigger(PlayerActions.Kill);
+        if (mobHP <= 0) ItemEffectManager.Trigger(PlayerActions.Kill);
 
         return true;
     }
