@@ -19,6 +19,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     [HideInInspector] public float DamageReceived;
     [HideInInspector] public float HealReceived;
     [HideInInspector] public float DamageToDeal;
+    [HideInInspector] public Mob_Base KilledMob;
     #endregion
 
     #region Var: Event On Stat Change
@@ -29,7 +30,6 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #region Var: Properties
     public bool IsDead
     { get; private set; } = false;
-
     public FloatStat Health => health;
     public FloatStat Stamina => stamina;
     #endregion
@@ -160,7 +160,10 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
         // Trigger Item Effect
         if (mobHP <= 0)
+        {
+            KilledMob = target.GetComponent<Mob_Base>();
             ItemEffectManager.Trigger(PlayerActions.Kill);
+        }
 
         return true;
     }
@@ -188,7 +191,10 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
         // Trigger Item Effect
         if (mobHP <= 0)
+        {
+            KilledMob = target.GetComponent<Mob_Base>();
             ItemEffectManager.Trigger(PlayerActions.Kill);
+        }
 
         return true;
     }
@@ -239,6 +245,13 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
             OnStaminaChange[key].Invoke(stamina);
         }
+    }
+    #endregion
+
+    #region Method: Misc
+    public void AddCorpsePrefab(GameObject corpsePrefab)
+    {
+
     }
     #endregion
 }
