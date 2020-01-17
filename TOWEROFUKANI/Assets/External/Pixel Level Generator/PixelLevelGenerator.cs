@@ -65,7 +65,7 @@ public class PixelLevelGenerator : MonoBehaviour
                                 if (__x >= 0 && __x < map_w && __y >= 0 && __y < map_h)
                                 {
                                     GridView.Inst[osize].GetNodeAtWorldPostiton(lpfs).isObstacle = true;
-                                    GridView.Inst[osize].GetNodeAtWorldPostiton(lpfs).isVirtualWall = i != 0 && j != 0;
+                                    GridView.Inst[osize].GetNodeAtWorldPostiton(lpfs).isVirtualWall = !(i == 0 && j == 0);
                                 }
                             }
                         }

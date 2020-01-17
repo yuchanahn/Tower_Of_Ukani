@@ -813,8 +813,12 @@ public class Grid
 
 		return false;
 	}
+    public Node GetNode(Point pos)
+    {
+        return gridNodes[pointToIndex(pos)];
+    }
 
-	private bool goalIsInExactDirection( Point curr, eDirections dir, Point goal )
+    private bool goalIsInExactDirection( Point curr, eDirections dir, Point goal )
 	{
 		int diff_column = goal.column - curr.column;
 		int diff_row    = goal.row - curr.row;

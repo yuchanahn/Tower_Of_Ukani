@@ -32,7 +32,7 @@ public class GridView : MonoBehaviour
     private IEnumerator findPath = null;
 
     public static GridView[] Inst = new GridView[10];
-    [SerializeField] int Target_Object_Size;
+    public int Target_Object_Size;
 
     private void Awake()
     {
