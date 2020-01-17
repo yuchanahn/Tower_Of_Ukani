@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7993730222055176780}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Feet Pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 683193428511094841}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Kick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5770521733965310482}
   - component: {fileID: 7773452921406079708}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Kick Effect Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6372901048470370509}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Kick Target Dir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7371128403266533315}
   - component: {fileID: 7371128403266533312}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Sprite Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7371128403274205505}
   - component: {fileID: 7371128403274205566}
-  m_Layer: 30
+  m_Layer: 14
   m_Name: IW Solid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7371128403513975016}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 7371128403577552054}
   - component: {fileID: 7371128403577552055}
   - component: {fileID: 7371128403577552052}
-  m_Layer: 30
+  m_Layer: 15
   m_Name: IW One Way
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 2166807972467319143}
   - component: {fileID: 6830336080947489379}
   - component: {fileID: 229264507}
-  m_Layer: 30
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -766,7 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1190306685819989609}
   - component: {fileID: 6092793338137710660}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Kick Detect Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
