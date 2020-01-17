@@ -61,6 +61,7 @@ public abstract class DraggableItemUI : ItemUI,
         canvasGroup.alpha = 1f;
         thisCanvas.overrideSorting = false;
 
+        // TODO
         // 갓갓 유니티!!!
         // 텍스트 흐려지는 버그: https://forum.unity.com/threads/case-1172941-fuzzy-blurry-text-after-moving-visualelement-2019-3-0a10.717584/
         gameObject.SetActive(false);
@@ -72,6 +73,12 @@ public abstract class DraggableItemUI : ItemUI,
     protected override void OnPointerDown(PointerEventData eventData)
     {
         base.OnPointerDown(eventData);
+
+        if (Item.IsLocked)
+        {
+            eventData.pointerDrag = null;
+            return;
+        }
 
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
@@ -87,6 +94,12 @@ public abstract class DraggableItemUI : ItemUI,
     }
     protected virtual void OnDrag(PointerEventData eventData)
     {
+        if (Item.IsLocked)
+        {
+            eventData.pointerDrag = null;
+            return;
+        }
+
         if (eventData.button != PointerEventData.InputButton.Left)
             return;
 

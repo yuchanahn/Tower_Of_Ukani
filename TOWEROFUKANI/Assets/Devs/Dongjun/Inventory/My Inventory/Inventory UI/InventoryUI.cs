@@ -6,7 +6,7 @@ public class InventoryUI : InventoryUIBase
 {
     [Header("Item UI")]
     [SerializeField] private WeaponItemUI weaponItemUI;
-    [SerializeField] private ActiveItemUI activeItemUI;
+    [SerializeField] private ActiveItemSimpleUI activeItemUI;
     [SerializeField] private ResourceItemUI resourceItemUI;
 
     protected override ItemUI SpawnItemUI(Item item, int slotIndex)

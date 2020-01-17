@@ -38,9 +38,12 @@ public class DroppableSlotUI : SlotUI,
         if (fromSlot == this)
             return;
 
-        UI_Screen screen = null;
+        // Check IsLocked
+        if (inventoryUI.itemUIs[Index]?.Item.IsLocked ?? false || droppedItem.Item.IsLocked)
+            return;
 
         // Trigger Action
+        UI_Screen screen = null;
         if (fromSlot.onMoveItem(fromSlot.Index, inventoryUI.inventory, Index))
         {
             // Drop Success

@@ -60,6 +60,7 @@ public class TalismanOfProtection : ActiveItem
     protected override void OnActivate()
     {
         IsActive = true;
+        IsLocked = true;
 
         // Stop Cooldown Timer
         cooldownTimer.SetActive(false);

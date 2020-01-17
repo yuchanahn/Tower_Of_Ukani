@@ -19,7 +19,13 @@ public abstract class ActiveItem : UpgradableItem
 
         if (inventory is PlayerActiveHotbar)
         {
+            cooldownTimer.SetActive(true);
             cooldownTimer.Restart();
+        }
+        else
+        {
+            cooldownTimer.SetActive(false);
+            Deactivate();
         }
     }
     public override void OnDrop()
@@ -43,6 +49,7 @@ public abstract class ActiveItem : UpgradableItem
     public virtual void Deactivate()
     {
         IsActive = false;
+        IsLocked = false;
     }
     #endregion
 }

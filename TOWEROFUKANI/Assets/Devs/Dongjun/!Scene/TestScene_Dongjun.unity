@@ -7891,7 +7891,8 @@ MonoBehaviour:
   rightClickManager: {fileID: 0}
   weaponItemUI: {fileID: -6411987293264075731, guid: ada4f8660c7c76544989b8c33fc4035e,
     type: 3}
-  activeItemUI: {fileID: 352634753, guid: 1b127baa701791e46946da5331efbee9, type: 3}
+  activeItemUI: {fileID: 4789927352329266350, guid: 07ecc7e3db4e6e44da369822b7fbeebd,
+    type: 3}
   resourceItemUI: {fileID: 3984776937621524389, guid: 1f5dd496c23705147807aa836800949e,
     type: 3}
 --- !u!1 &884481469
