@@ -6,5 +6,5 @@ using System;
 public interface IHurt
 {
     void OnHurt();
-    void OnDead(bool absorbCorpses, Action<Corpse> onAbsorb);
+    void OnDead();
 }

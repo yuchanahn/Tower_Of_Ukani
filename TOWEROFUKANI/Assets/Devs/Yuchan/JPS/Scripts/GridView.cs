@@ -105,30 +105,13 @@ public class GridView : MonoBehaviour
     {
         selectedPathPoints.Clear();
 
-        // Kill all my children
-        //foreach ( GameObject child in childObjects )
-        {
-            //DestroyImmediate( child );
-        }
-
-        // realloc the grids
         grid.gridNodes = new Node[numBlocks];
         grid.pathfindingNodes = new PathfindingNode[numBlocks];
-        //childObjects   = new GameObject[numBlocks];
 
         for (int i = 0; i < numBlocks; ++i)
         {
             int column = i % rowSize;
             int row = i / rowSize;
-
-            // Create a new Child object
-            //GameObject child = Instantiate( blockPrefab );
-            ///child.GetComponent<Transform>().parent = GetComponent<Transform>();  // Set as parent of this new child
-            //child.GetComponent<Transform>().localPosition = new Vector3(
-            //	column *  ( blockSize + blockBuffer ),
-            //	row    * -( blockSize + blockBuffer ),
-            //	0.0f
-            //);
 
             grid.gridNodes[i] = new Node();
             grid.gridNodes[i].pos = new Point(row, column);
@@ -137,10 +120,6 @@ public class GridView : MonoBehaviour
             grid.pathfindingNodes[i].pos = new Point(row, column);
 
             grid.rowSize = this.rowSize;
-            //child.GetComponent<BlockScript>().nodeReference = grid.gridNodes[ i ]; // give the child a shared_ptr reference to the node it needs to act on
-            //child.GetComponent<BlockScript>().gridView = this;
-
-            //childObjects[ i ] = child;
         }
     }
 

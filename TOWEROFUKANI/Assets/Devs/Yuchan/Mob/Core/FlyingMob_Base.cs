@@ -261,17 +261,10 @@ public class FlyingMob_Base : Mob_Base
     //=================================================================
 
     [SerializeField, Header("Compse")] CorpseData Corpse;
-    public override void OnDead(bool absorbCorpses, Action<Corpse> onAbsorb)
+    public override void OnDead()
     {
         Destroy(gameObject);
 
         var Corpses = CorpseMgr.CreateCorpseOrNull(transform, Corpse);
-        if(absorbCorpses)
-        {
-            foreach(var i in Corpses)
-            {
-                i.GetComponent<Corpse>().StartAbsorb(onAbsorb);
-            }
-        }
     }
 }

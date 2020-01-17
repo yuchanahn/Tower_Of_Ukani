@@ -12,7 +12,7 @@ public class AStat : MonoBehaviour, IDamage
     private float mDmg = 0;
     MobDamageText Dmg = null;
     bool IsIgnoreHit => GetComponent<StatusEffect_IgnoreHit>();
-    public float HP { get; set; }
+    public float HP { get { return mHP; } set { mHP = value; if(mHP <= 0) GetComponent<IHurt>().OnDead(); } }
 
     public float MAXHP { get => mMAXHP; }
     public float Damage => mDamage;
@@ -27,10 +27,6 @@ public class AStat : MonoBehaviour, IDamage
         if (IsIgnoreHit) return 0;
         var dmg = atkData.damage.Value;
         HP -= dmg;
-        if (HP <= 0)
-        {
-            GetComponent<IHurt>().OnDead(atkData.absorbCorpses, atkData.onAbsorb);
-        }
         mDmg += dmg;
         GetComponent<HitColorEffect>().OnHit();
         GetComponent<IHurt>().OnHurt();

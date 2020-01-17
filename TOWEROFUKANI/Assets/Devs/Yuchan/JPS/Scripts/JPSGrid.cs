@@ -21,7 +21,9 @@ public class Node
 {
 	public Point pos;
 	public bool isObstacle = false;
-	public int[] jpDistances = new int[8];
+    public bool isVirtualWall = false;
+
+    public int[] jpDistances = new int[8];
 
 	public bool isJumpPoint = false;
 	// Holds if primary jump point has direction COMING FROM the Cardianal direction,
