@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-public class BowDraw_Base<TItem> : BowAction_Base<TItem>
-    where TItem : BowItem
+public class BowDraw_Base<T> : BowAction_Base<T> where T : BowItem
 {
     #region Var: Propertis
     public bool IsDrawing 

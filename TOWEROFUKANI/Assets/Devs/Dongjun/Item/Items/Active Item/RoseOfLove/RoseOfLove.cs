@@ -26,5 +26,8 @@ public class RoseOfLove : ActiveItem
         // Spawn Rose
         WeaponProjectile rose = roseProjectile.Spawn(GM.PlayerPos, Quaternion.identity);
         rose.InitData(Global.Inst.MainCam.ScreenToWorldPoint(Input.mousePosition) - GM.PlayerPos, roseProjectileData);
+
+        // Deactivate Item
+        Deactivate();
     }
 }

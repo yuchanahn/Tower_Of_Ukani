@@ -11,7 +11,7 @@
     Healed,
 
     // Attack
-    Hit,
+    DamageDealt,
     Kill,
 
     // Weapon

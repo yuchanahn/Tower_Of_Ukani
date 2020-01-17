@@ -363,8 +363,8 @@ MonoBehaviour:
   MoveTimeIdle: 1
   MoveTimeMove: 3
   AgroRange: 10
-  Compse:
-    mCntMin: 2
+  Corpse:
+    mCntMin: 1
     mCntMax: 3
     mFCntMin: 0
     mFCntMax: 11
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: 287147c37f962fa47983a78f8a424ef0, type: 2}
-  Time: 0.5
+  Time: 0.25
   SpriteRenderers:
   - {fileID: 5283869461139039953}
 --- !u!1 &3281447207712922554

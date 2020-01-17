@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class GunReload_Base<TItem> : GunAction_Base<TItem> 
-    where TItem : GunItem
+public abstract class GunReload_Base<T> : GunAction_Base<T> where T : GunItem
 {
     #region Var: Inspector
     [Header("Ammo")]

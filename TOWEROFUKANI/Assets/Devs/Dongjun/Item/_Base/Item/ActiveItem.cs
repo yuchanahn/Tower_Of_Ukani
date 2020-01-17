@@ -15,13 +15,16 @@ public abstract class ActiveItem : UpgradableItem
     {
         base.OnAdd(inventory);
 
+        // Init Cooldown Timer
         cooldownTimer.SetTick(gameObject);
 
+        // Reset Cooldown When Added to Hotbar
         if (inventory is PlayerActiveHotbar)
         {
             cooldownTimer.SetActive(true);
             cooldownTimer.Restart();
         }
+        // Stop Cooldown When Added to Inventory
         else
         {
             cooldownTimer.SetActive(false);
@@ -32,17 +35,24 @@ public abstract class ActiveItem : UpgradableItem
     {
         base.OnDrop();
 
-        Deactivate();
+        // Stop Cooldown Timer
         cooldownTimer.SetTick(gameObject, TickType.None);
         cooldownTimer.ToZero();
+
+        // Deactivate Item
+        Deactivate();
     }
     #endregion
 
     #region Method: Active Item
     public void Activate()
     {
-        if (CanActivate)
-            OnActivate();
+        if (!CanActivate)
+            return;
+
+        IsActive = true;
+        IsLocked = true;
+        OnActivate();
     }
     protected abstract void OnActivate();
 

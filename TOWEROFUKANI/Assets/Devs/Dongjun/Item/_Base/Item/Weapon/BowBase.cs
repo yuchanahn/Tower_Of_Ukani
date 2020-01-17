@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class BowController<TBow> : WeaponController<TBow> where TBow : BowItem { }
+public abstract class BowController<T> : WeaponController<T> where T : BowItem { }
 public abstract class BowItem : WeaponItem
 {
     #region Var: Inspector

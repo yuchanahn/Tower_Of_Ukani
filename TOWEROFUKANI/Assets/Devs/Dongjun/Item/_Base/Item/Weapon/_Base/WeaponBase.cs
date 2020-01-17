@@ -1,19 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class WeaponController_Base : CLA_Main { }
-public abstract class WeaponController<TItem> : WeaponController_Base
-    where TItem : WeaponItem
+public abstract class WeaponController<T> : WeaponController_Base
+    where T : WeaponItem
 {
-    protected TItem weaponItem;
+    #region Var: Weapon Item
+    protected T weaponItem;
+    #endregion
 
+    #region Method: Unity
     protected override void Awake()
     {
         base.Awake();
-        weaponItem = GetComponent<WeaponItem>() as TItem;
+        weaponItem = GetComponent<WeaponItem>() as T;
     }
+    #endregion
 
+    #region Method: CLA
     protected override void RunConditionLogic()
     {
         if (!weaponItem.IsSelected)
@@ -24,6 +27,7 @@ public abstract class WeaponController<TItem> : WeaponController_Base
 
         base.RunConditionLogic();
     }
+    #endregion
 }
 
 public abstract class WeaponItem : UpgradableItem
@@ -52,24 +56,27 @@ public abstract class WeaponItem : UpgradableItem
         gameObject.SetActive(true);
         transform.SetParent(GM.PlayerObj.transform);
         transform.localPosition = new Vector2(0, pivotPointY);
-
-        Select(Inventory is PlayerWeaponHotbar && (Inventory as PlayerWeaponHotbar).CurWeapon == this);
+        CheckSelect();
     }
     public override void OnMove()
     {
-        Select(Inventory is PlayerWeaponHotbar && (Inventory as PlayerWeaponHotbar).CurWeapon == this);
+        CheckSelect();
     }
     public override void OnDrop()
     {
         base.OnDrop();
 
-        Select(false);
         gameObject.SetActive(false);
         transform.SetParent(null);
+        Select(false);
     }
     #endregion
 
     #region Method: Select Weapon
+    private void CheckSelect()
+    {
+        Select(Inventory is PlayerWeaponHotbar && (Inventory as PlayerWeaponHotbar).CurWeapon == this);
+    }
     public void Select(bool select)
     {
         IsSelected = select;

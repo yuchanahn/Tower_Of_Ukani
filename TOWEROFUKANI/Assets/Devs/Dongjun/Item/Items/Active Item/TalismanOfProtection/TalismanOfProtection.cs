@@ -7,8 +7,8 @@ public class TalismanOfProtection : ActiveItem
     #endregion
 
     #region Var: Stats
-    private TimerData durationTimer = new TimerData();
     private FloatStat shieldhealth;
+    private TimerData durationTimer = new TimerData();
     #endregion
 
     #region Var: Item Effect
@@ -22,16 +22,17 @@ public class TalismanOfProtection : ActiveItem
     #region Method: Initialize
     public override void InitStats()
     {
-        cooldownTimer.EndTime = 5f;
+        // Init Shield HP
+        shieldhealth = new FloatStat(40, min: 0, max: 40);
 
+        // Init Timers
+        cooldownTimer.EndTime = 5f;
         durationTimer.EndTime = 2.5f;
         durationTimer.SetAction(OnEnd: Deactivate);
-
-        shieldhealth = new FloatStat(40, min: 0, max: 40);
     }
     #endregion
 
-    #region Method: Add/Remove
+    #region Method: Add / Drop
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
@@ -56,12 +57,9 @@ public class TalismanOfProtection : ActiveItem
     }
     #endregion
 
-    #region Method: Activate/Deactivate
+    #region Method: Activate / Deactivate
     protected override void OnActivate()
     {
-        IsActive = true;
-        IsLocked = true;
-
         // Stop Cooldown Timer
         cooldownTimer.SetActive(false);
         cooldownTimer.ToZero();
@@ -102,20 +100,18 @@ public class TalismanOfProtection : ActiveItem
     #region Method: Shield
     private void Shield()
     {
-        float overkillDmg = PlayerStats.Inst.DamageReceived - shieldhealth.Value;
+        // Calculate Overkill Damage
+        float overkillDmg = Mathf.Max(PlayerStats.Inst.DamageReceived - shieldhealth.Value, 0);
 
-        // Shield Destroyed
-        if (overkillDmg >= 0)
-        {
-            PlayerStats.Inst.DamageReceived = overkillDmg;
-            Deactivate();
-        }
+        // Damage Player
+        PlayerStats.Inst.DamageReceived = overkillDmg;
+
         // Damage Shield
-        else
-        {
-            shieldhealth.ModFlat -= PlayerStats.Inst.DamageReceived;
-            PlayerStats.Inst.DamageReceived = 0;
-        }
+        shieldhealth.ModFlat -= PlayerStats.Inst.DamageReceived;
+
+        // Deactivate Shield
+        if (shieldhealth.Value == 0)
+            Deactivate();
     }
     #endregion
 }

@@ -22,13 +22,13 @@ public class Equilibrium : PassiveItem
         onHitEffect = new ItemEffect(GetType(), OnHit);
 
         ItemEffectManager.AddEffect(PlayerActions.Damaged, onDamagedEffect);
-        ItemEffectManager.AddEffect(PlayerActions.Hit, onHitEffect);
+        ItemEffectManager.AddEffect(PlayerActions.DamageDealt, onHitEffect);
     }
     public override void OnDrop()
     {
         base.OnDrop();
         ItemEffectManager.RemoveEffect(PlayerActions.Damaged, onDamagedEffect);
-        ItemEffectManager.RemoveEffect(PlayerActions.Hit, onHitEffect);
+        ItemEffectManager.RemoveEffect(PlayerActions.DamageDealt, onHitEffect);
     }
 
     public override void ApplyBonusStats(WeaponItem weapon)

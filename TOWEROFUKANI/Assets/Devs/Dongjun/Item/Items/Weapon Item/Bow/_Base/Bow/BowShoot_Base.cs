@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BowShoot_Base<TItem> : BowAction_Base<TItem>
-    where TItem : BowItem
+public abstract class BowShoot_Base<T> : BowAction_Base<T> where T : BowItem
 {
     #region Var: Inspector
     [Header("Shoot")]

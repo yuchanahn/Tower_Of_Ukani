@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class GunController<TGun> : WeaponController<TGun> where TGun : GunItem { }
+public abstract class GunController<T> : WeaponController<T> where T : GunItem { }
 public abstract class GunItem : WeaponItem
 {
     #region Var: Stats

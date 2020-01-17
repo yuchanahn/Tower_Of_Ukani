@@ -139,8 +139,6 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #region Method: Change Stat (Other)
     public bool DealDamage(AttackData attackData, GameObject target)
     {
-        Debug.Log(target.name);
-
         IDamage iDamage = target.GetComponent<IDamage>();
         if (iDamage == null)
             return false;
@@ -153,7 +151,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         DamageToDeal = attackData.damage.Value;
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Hit);
+        ItemEffectManager.Trigger(PlayerActions.DamageDealt);
 
         // Damage Mob
         float mobHP = iDamage.Hit(attackData);
@@ -181,7 +179,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         DamageToDeal = attackData.damage.Value;
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Hit);
+        ItemEffectManager.Trigger(PlayerActions.DamageDealt);
 
         for (int i = 0; i < actionToTrigger.Length; i++)
             ItemEffectManager.Trigger(actionToTrigger[i]);
