@@ -139,6 +139,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #region Method: Change Stat (Other)
     public bool DealDamage(AttackData attackData, GameObject target)
     {
+        Debug.Log(target.name);
+
         IDamage iDamage = target.GetComponent<IDamage>();
         if (iDamage == null)
             return false;
