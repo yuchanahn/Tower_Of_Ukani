@@ -7722,11 +7722,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
-    - target: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5171003076785061115, guid: 2f05f784829525c47b67d27b41cf2622,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7781,51 +7776,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mAniSpeedData.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_followData.dist
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_compseData.mCntMin
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: m_compseData.mCntMax
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mAniSpeedData.Array.data[0].ST
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3872322163839645563, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mAniSpeedData.Array.data[0].t
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mDamage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4138764173793614123, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: mHP
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7555408727852874607, guid: 2f05f784829525c47b67d27b41cf2622,
-        type: 3}
-      propertyPath: Time
-      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05f784829525c47b67d27b41cf2622, type: 3}

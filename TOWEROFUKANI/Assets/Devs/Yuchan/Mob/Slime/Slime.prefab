@@ -254,7 +254,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   MobSize: {x: 1.5, y: 1.5}
-  mAniSpeedData: []
+  mAniSpeedData:
+  - ST: 2
+    t: 0.3
   m_OneWayCollider: {fileID: 5555169890968166534}
   m_CurAniST: 2
   m_AttackRange: 1
@@ -405,7 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Material: {fileID: 2100000, guid: 287147c37f962fa47983a78f8a424ef0, type: 2}
-  Time: 0.5
+  Time: 0.25
   SpriteRenderers:
   - {fileID: 7268275018201367324}
 --- !u!1 &6529837628258330815
@@ -592,7 +594,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1073742080
 --- !u!1 &7268275018201367322
 GameObject:
   m_ObjectHideFlags: 0
