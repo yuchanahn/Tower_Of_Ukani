@@ -22,11 +22,11 @@ public class AStat : MonoBehaviour, IDamage
         mMAXHP = mHP;
     }
 
-    public float Hit(float dmg)
+    public float Hit(AttackData dmg)
     {
         if (IsIgnoreHit) return 0;
-        HP -= dmg;
-        mDmg += dmg;
+        HP -= dmg.damage.Value;
+        mDmg += dmg.damage.Value;
         GetComponent<HitColorEffect>().OnHit();
         GetComponent<IHurt>().OnHurt();
 
