@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Dongjun.Helper;
+using System;
 
 public class Corpse : PoolingObj
 {
@@ -10,7 +11,7 @@ public class Corpse : PoolingObj
     public void Init(CorpseData d)
     {
         name = Prefab.name;
-        _ani.Play(gameObject.name, 0, d.mFCntMin != d.mFCntMax ? Random.Range(d.mFCntMin, d.mFCntMax) / (float)d.mFCntMax : d.mFCntMin);
+        _ani.Play(gameObject.name, 0, d.mFCntMin != d.mFCntMax ? UnityEngine.Random.Range(d.mFCntMin, d.mFCntMax) / (float)d.mFCntMax : d.mFCntMin);
     }
 
     public void DestroyOfTime(float t)
@@ -48,11 +49,13 @@ public class Corpse : PoolingObj
     }
 
     bool mAbsorb = false;
-    public void StartAbsorb()
+    Action<Corpse> OnAbsorb;
+    public void StartAbsorb(Action<Corpse> onAbsorb)
     {
         mAbsorb = true;
         GetComponent<Collider2D>().enabled = false;
         rb2D.gravityScale = 0;
+        OnAbsorb = onAbsorb;
     }
 
 
@@ -69,6 +72,7 @@ public class Corpse : PoolingObj
         if (Vector2.Distance(GM.PlayerPos, transform.position) <= 0.1f)
         {
             this.Sleep();
+            OnAbsorb(Prefab.GetComponent<Corpse>());
         }
     }
 }

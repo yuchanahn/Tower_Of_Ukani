@@ -72,6 +72,6 @@ public abstract class Mob_Base : MonoBehaviour, IHurt
             m_Ani[i.ST] = (i.ST.ToString(), i.t);
     }
 
-    public abstract void OnDead();
+    public abstract void OnDead(bool absorbCorpses, Action<Corpse> onAbsorb);
     public abstract void OnHurt();
 }

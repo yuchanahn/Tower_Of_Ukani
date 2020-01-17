@@ -403,7 +403,7 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
 
     #region Interface: IHurt
 
-    public override void OnDead()
+    public override void OnDead(bool absorbCorpses, Action<Corpse> onAbsorb)
     {
         Destroy(gameObject);
         CorpseMgr.CreateCorpseOrNull(transform, m_compseData);
