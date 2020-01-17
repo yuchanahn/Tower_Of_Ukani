@@ -154,7 +154,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         ItemEffectManager.Trigger(PlayerActions.Hit);
 
         // Damage Mob
-        float mobHP = iDamage.Hit(DamageToDeal);
+        float mobHP = iDamage.Hit(attackData);
 
         // Trigger Item Effect
         if (mobHP <= 0)
@@ -182,7 +182,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
             ItemEffectManager.Trigger(actionToTrigger[i]);
 
         // Damage Mob
-        float mobHP = iDamage.Hit(DamageToDeal);
+        float mobHP = iDamage.Hit(attackData);
 
         // Trigger Item Effect
         if (mobHP <= 0)

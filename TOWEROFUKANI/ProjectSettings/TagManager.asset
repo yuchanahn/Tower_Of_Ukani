@@ -35,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Player
   - Pixel
   m_SortingLayers:
   - name: Default
