@@ -71,8 +71,6 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
     #endregion
 
     #region Var: Properties
-    public Vector2 JumpVel;
-
 
     public virtual float VelX =>
      m_bAttacking ? 0 :
@@ -157,9 +155,9 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
         m_groundDetectionData.DetectGround(!m_jumpData.isJumping, m_rb, transform);
         m_groundDetectionData.ExecuteOnGroundMethod(this);
         var OverlapSlowSpeed = (CheckOverlapSlow(MobSize, new Vector2(m_MoveData.Dir, 0)) ? OverlapSlow : 1f);
-        m_rb.velocity = new Vector2(m_bFollowJump && m_jumpData.isJumping ? JumpVel.x : VelX * m_SEObj.SESpeedMult * OverlapSlowSpeed, VelY);
+        m_rb.velocity = new Vector2(m_bFollowJump && m_jumpData.isJumping ? VelX : VelX * m_SEObj.SESpeedMult * OverlapSlowSpeed, VelY);
         m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
-
+        
         
         m_jumpData.Jump(ref m_bJumpStart, m_rb, transform);
 
@@ -182,15 +180,9 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
     
     void Animation()
     {
-        // 상태이상이 애니를 쓴다면...?
-        // 상태 바꾸고 바로 끝내.
         EndFollowing.Invoke();
         if (m_SEObj.SEAni != eMobAniST.Last)
         {
-            // TODO : 
-            // 상태이상이 애니를 쓴다면. 다른 애니 끝내자.
-            // 
-            // 
             m_CurAniST = m_SEObj.SEAni;
             m_bHurting = false;
             return;
@@ -284,14 +276,6 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
         IsKeepFollowing = false;
         if (m_bFollowJump) return false;
 
-
-        //var pathFind = PathFinder.Inst.FindPath(transform.position, transform.position.GetGorundOfBottomPos(m_groundDetectionData.Size, m_followData.CantMoveGround), GM.PlayerPos.GetGorundOfBottomPos(GM.PlayerSize, m_followData.CantMoveGround));
-        //if (!pathFind.bFollow) return false;
-        //Dir = pathFind.bJump ? FollowJump(pathFind.nomal) : pathFind.nomal.x < 0 ? -1 : 1;
-
-        //if (Mathf.Abs(GM.PlayerPos.y - transform.position.y) >= m_groundDetectionData.Size.y) return false;
-        //if (transform.position.RayHit(GM.PlayerPos, m_followData.CantMoveGround)) return false;
-
         if ((Mathf.Abs(GM.PlayerPos.y - transform.position.y) >= m_groundDetectionData.Size.y)
             && (transform.position.y > GM.PlayerPos.y)
             && (IsCliff))
@@ -299,7 +283,6 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
             IsKeepFollowing = true;
             return true;
         }
-        
         if ((transform.position.y - GM.PlayerPos.y) > m_groundDetectionData.Size.y * 0.9f)
         {
             Dir = DirForPlayer;
@@ -313,10 +296,6 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
             Dir = DirForPlayer;
             if (GM.PlayerPos.y - transform.position.y >= m_groundDetectionData.Size.y * 0.9f)
             {
-                // 일단 우드 플렛폼의 Y사이즈가 이상함;
-                // 그거떄매 땅에서 벽으로 감지하고 올라올라함;
-                // ....?
-                
                 if (IsWallInForword) { FollowJump(); }
             }
             else if (IsOneWayInForword) { FollowJump(); }
