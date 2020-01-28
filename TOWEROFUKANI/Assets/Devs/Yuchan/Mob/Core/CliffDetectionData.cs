@@ -37,14 +37,17 @@ public class CliffDetect_Logic
         return Physics2D.BoxCastAll(TPos, size, 0, Vector2.down, fallHeight, grdLayer).Length > 0;
     }
 
-    static public bool CanGo(Vector2 Pos, int Dir, float Speed, Vector2 size, LayerMask wallLayer)
+    static public bool CanGo(Vector2 Pos, int Dir, float Speed, Vector2 size, LayerMask wallLayer, bool show = false)
     {
         var sx = Pos - new Vector2(size.x / 2, 0);
         sx.y += size.y / 2;
         size.y *= 0.99f;
-        //for (float i = 0.005f; sx.x < (Pos + new Vector2(size.x / 2, 0)).x + (Dir * Speed * Time.fixedDeltaTime); sx.x += i)
+        if (show)
         {
-            //Debug.DrawRay(sx, (Vector2.down * size.y), Color.red);
+            for (float i = 0.005f; sx.x < (Pos + new Vector2(size.x / 2, 0)).x + (Dir * Speed * Time.fixedDeltaTime); sx.x += i)
+            {
+                Debug.DrawRay(sx, (Vector2.down * size.y), Color.red);
+            }
         }
 
         var obj = Physics2D.BoxCastAll(Pos, size, 0, Vector2.right * Dir, (Speed * Time.fixedDeltaTime), wallLayer);

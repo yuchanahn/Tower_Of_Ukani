@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dongjun.Helper;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -108,6 +109,13 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
         m_MoveData.Speed,
         m_groundDetectionData.Size,
         m_groundDetectionData.GroundLayers);
+
+    public bool IsJumpHeightHitWall => !CliffDetect_Logic.CanGo(
+    transform.position.Add(y : m_jumpHeight),
+    Dir,
+    m_MoveData.Speed,
+    m_groundDetectionData.Size,
+    m_followData.CantMoveGround,true);
 
     public bool IsOneWayInForword => !CliffDetect_Logic.CanGo(
     transform.position,
@@ -286,17 +294,14 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
         if ((transform.position.y - GM.PlayerPos.y) > m_groundDetectionData.Size.y * 0.9f)
         {
             Dir = DirForPlayer;
-            if (Fall())
-            {
-                return true;
-            }
+            if (Fall()) { return true; }
         }
         if (m_groundDetectionData.isGrounded)
         {
             Dir = DirForPlayer;
             if (GM.PlayerPos.y - transform.position.y >= m_groundDetectionData.Size.y * 0.9f)
             {
-                if (IsWallInForword) { FollowJump(); }
+                if (IsWallInForword && !IsJumpHeightHitWall) { FollowJump(); }
             }
             else if (IsOneWayInForword) { FollowJump(); }
         }
