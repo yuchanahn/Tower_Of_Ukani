@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 2227997050219821179}
   - component: {fileID: 1977913979973998782}
   - component: {fileID: 4749230937349024608}
+  - component: {fileID: 4775023531336007662}
   - component: {fileID: 1571809755}
   - component: {fileID: 7371128404420445766}
   - component: {fileID: 5969363333450609748}
@@ -585,6 +586,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
+--- !u!114 &4775023531336007662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e09d44ef0154745b0cc55e874a752a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
 --- !u!114 &1571809755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,6 +616,7 @@ MonoBehaviour:
   DamageReceived: 0
   HealReceived: 0
   DamageToDeal: 0
+  KilledMob: {fileID: 0}
 --- !u!114 &7371128404420445766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,6 +676,7 @@ MonoBehaviour:
     inventory: {fileID: 2227997050219821179}
     weaponHotbar: {fileID: 1977913979973998782}
     activeHotbar: {fileID: 4749230937349024608}
+    consumableHotbar: {fileID: 4775023531336007662}
     passiveInventory: {fileID: 7333475252025045501}
   walkData:
     walkSpeed: 7.5

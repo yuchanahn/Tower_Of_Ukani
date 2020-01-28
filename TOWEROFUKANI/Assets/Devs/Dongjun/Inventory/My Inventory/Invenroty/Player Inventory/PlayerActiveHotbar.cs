@@ -13,6 +13,9 @@ public class PlayerActiveHotbar : ToU_Inventory
 
     private void ActivateItem()
     {
+        if (!inventoryUI.gameObject.activeInHierarchy)
+            return;
+
         ActiveItem toActivate = null;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

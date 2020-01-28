@@ -9,7 +9,7 @@ public sealed class ItemInfo
     [Header("Data")]
     [SerializeField] private Sprite icon;
     [SerializeField] private string itemName = "Item Name";
-    [SerializeField, TextArea] private string itemDesc = "This is an Item";
+    [SerializeField, TextArea(5, 20)] private string itemDesc = "This is an Item";
     [SerializeField] private int itemStackLimit = 1; // 0 이면 무한 스택 가능
 
     [Header("Item Tags")]

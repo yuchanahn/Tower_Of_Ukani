@@ -12,6 +12,7 @@ public struct PlayerItemPickUpData
     public PlayerInventory inventory;
     public PlayerWeaponHotbar weaponHotbar;
     public PlayerActiveHotbar activeHotbar;
+    public PlayerConsumableHotbar consumableHotbar;
     public PlayerPassiveInventory passiveInventory;
 }
 

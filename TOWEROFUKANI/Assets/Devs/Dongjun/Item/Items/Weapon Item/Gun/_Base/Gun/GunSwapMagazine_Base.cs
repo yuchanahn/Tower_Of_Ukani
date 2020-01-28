@@ -62,7 +62,7 @@ public abstract class GunSwapMagazine_Base<T> : GunAction_Base<T>
     #endregion
 
     #region Method: AnimEvent
-    protected virtual void Effect_DropMagazine()
+    protected virtual void AniEvent_DropMagazine()
     {
         ObjPoolingManager.Spawn(droppedMagazinePrefab, magazineDropPos.position, transform.rotation);
     }

@@ -9,6 +9,7 @@ public class PlayerInventory : ToU_Inventory
         Init(20,
             typeof(ResourceItem),
             typeof(WeaponItem),
-            typeof(ActiveItem));
+            typeof(ActiveItem),
+            typeof(ConsumableItem));
     }
 }

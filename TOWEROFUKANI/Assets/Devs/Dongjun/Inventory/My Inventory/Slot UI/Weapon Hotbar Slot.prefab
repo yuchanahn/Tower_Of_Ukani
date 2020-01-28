@@ -85,8 +85,6 @@ GameObject:
   - component: {fileID: 1272346218019525218}
   - component: {fileID: 1272346218019525221}
   - component: {fileID: 1272346218019525222}
-  - component: {fileID: 1272346218019525216}
-  - component: {fileID: 1272346218019525219}
   m_Layer: 0
   m_Name: Weapon Hotbar Slot
   m_TagString: Untagged
@@ -164,30 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedIndicator: {fileID: 6829482748666475728}
---- !u!114 &1272346218019525216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272346218019525223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 269da49ddd91dcd41b7d1981a7c09e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1272346218019525219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1272346218019525223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c159ade4941cb11428bf9b748b0de063, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6829482748666475728
 GameObject:
   m_ObjectHideFlags: 0

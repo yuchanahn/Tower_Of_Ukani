@@ -7,6 +7,7 @@ public class InventoryUI : InventoryUIBase
     [Header("Item UI")]
     [SerializeField] private WeaponItemUI weaponItemUI;
     [SerializeField] private ActiveItemSimpleUI activeItemUI;
+    [SerializeField] private ConsumableItemUI consumableItemUI;
     [SerializeField] private ResourceItemUI resourceItemUI;
 
     protected override ItemUI SpawnItemUI(Item item, int slotIndex)
@@ -20,6 +21,9 @@ public class InventoryUI : InventoryUIBase
                 break;
             case ActiveItem _:
                 itemUI = Instantiate(activeItemUI.gameObject).GetComponent<ItemUI>();
+                break;
+            case ConsumableItem _:
+                itemUI = Instantiate(consumableItemUI.gameObject).GetComponent<ItemUI>();
                 break;
             case ResourceItem _:
                 itemUI = Instantiate(resourceItemUI.gameObject).GetComponent<ItemUI>();

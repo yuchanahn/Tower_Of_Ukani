@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1424037574231504221
+--- !u!1 &3172563786257210372
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1424037574231504223}
-  - component: {fileID: 1424037574231504220}
+  - component: {fileID: 3172563786257210375}
+  - component: {fileID: 3172563786257210374}
   m_Layer: 0
-  m_Name: PotionOfHealing
+  m_Name: Potion of Healing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1424037574231504223
+--- !u!4 &3172563786257210375
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424037574231504221}
+  m_GameObject: {fileID: 3172563786257210372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,24 +31,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1424037574231504220
+--- !u!114 &3172563786257210374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424037574231504221}
+  m_GameObject: {fileID: 3172563786257210372}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 311b412cec466cc4182f645ab3628124, type: 3}
+  m_Script: {fileID: 11500000, guid: 128026842b9bb444ab25642ec23c7adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   info:
     icon: {fileID: 21300000, guid: 7256fba2e0ec8bc45acd370b13728d36, type: 3}
     itemName: Potion of Healing
-    itemDesc: This is an Item
+    itemDesc: This Item Heals you.
     itemStackLimit: 0
     damageType: 
     range: 
-  droppedItemPrefab: {fileID: 4029644265109773275, guid: 9245b1ba5963f6b46903902845d0c592,
+  droppedItemPrefab: {fileID: 6655503512168929108, guid: 8adfc13f093e0054db07391cdfda2acd,
     type: 3}
+  healAmount: 20

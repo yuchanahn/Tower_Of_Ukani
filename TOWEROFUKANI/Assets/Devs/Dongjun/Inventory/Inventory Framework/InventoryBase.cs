@@ -258,10 +258,10 @@ public abstract class InventoryBase : MonoBehaviour
     }
     public virtual void RemoveItem(Item item, int amount = 1)
     {
-        if (IsEmpty || GetIndex_Item(item) == -1)
-            return;
-
         int index = GetIndex_Item(item);
+
+        if (IsEmpty || index == -1)
+            return;
 
         amount = Mathf.Max(0, amount);
         items[index].Info.Count -= amount;
@@ -279,6 +279,24 @@ public abstract class InventoryBase : MonoBehaviour
     public virtual void DeleteItem(int index, bool destroy = true)
     {
         if (IsEmpty || !IsValidIndex(index) || items[index] == null)
+            return;
+
+        if (destroy)
+        {
+            items[index].OnRemove();
+        }
+
+        items[index] = null;
+        EmptySlots++;
+
+        // Update UI
+        inventoryUI?.UpdateSlot(index);
+    }
+    public virtual void DeleteItem(Item item, bool destroy = true)
+    {
+        int index = GetIndex_Item(item);
+
+        if (IsEmpty || index == -1)
             return;
 
         if (destroy)

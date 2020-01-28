@@ -38,6 +38,12 @@ public class DroppableSlotUI : SlotUI,
         if (fromSlot == this)
             return;
 
+        if (inventoryUI == null)
+        {
+            Debug.LogError("Inventory Does Not Exists!!!\nAdd Inventory Component.");
+            return;
+        }
+
         // Check IsLocked
         if (inventoryUI.itemUIs[Index]?.Item.IsLocked ?? false || droppedItem.Item.IsLocked)
             return;
