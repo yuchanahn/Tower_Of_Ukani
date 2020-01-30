@@ -115,7 +115,7 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
     Dir,
     m_MoveData.Speed,
     m_groundDetectionData.Size,
-    m_followData.CantMoveGround,true);
+    m_followData.CantMoveGround);
 
     public bool IsOneWayInForword => !CliffDetect_Logic.CanGo(
     transform.position,
@@ -303,7 +303,7 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
             {
                 if (IsWallInForword && !IsJumpHeightHitWall) { FollowJump(); }
             }
-            else if (IsOneWayInForword) { FollowJump(); }
+            else if (IsOneWayInForword && !IsJumpHeightHitWall) { FollowJump(); }
         }
         IsFollowMax = Mathf.Abs(GM.PlayerPos.x - transform.position.x) <= 0.1f;
 
