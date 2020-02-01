@@ -47,7 +47,7 @@ public class PlayerWeaponHotbar : ToU_Inventory
     }
     private void DropWeapon()
     {
-        if (Input.GetKeyDown(PlayerActionKeys.DropItem))
+        if (Input.GetKeyDown(PlayerActionKeys.DropWeapon))
         {
             DropItem(CurSlot);
         }

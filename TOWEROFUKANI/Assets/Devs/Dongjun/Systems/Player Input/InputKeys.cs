@@ -12,7 +12,7 @@ public static class PlayerActionKeys
     public static KeyCode Dash => KeyCode.LeftShift;
     public static KeyCode Kick => KeyCode.LeftControl;
     public static KeyCode PickUpItem => KeyCode.C;
-    public static KeyCode DropItem => KeyCode.Q;
+    public static KeyCode DropWeapon => KeyCode.P;
 }
 public static class PlayerWeaponKeys
 {
@@ -39,4 +39,5 @@ public static class PlayerUIKeys
 {
     public static KeyCode InventoryToggle => KeyCode.E;
     public static KeyCode PassiveInventoryToggle => KeyCode.Tab;
+    public static KeyCode PassiveHotbarToggle => KeyCode.Q;
 }

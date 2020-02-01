@@ -11,7 +11,7 @@ public class ScreenToggleManager : MonoBehaviour
         if (Input.GetKeyDown(PlayerUIKeys.InventoryToggle))
             inventory.Toggle();
 
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(PlayerUIKeys.PassiveHotbarToggle))
         {
             bool tempActive = activeHotbar.gameObject.activeSelf;
             activeHotbar.gameObject.SetActive(!activeHotbar.gameObject.activeSelf);

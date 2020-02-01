@@ -47,7 +47,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 7256fba2e0ec8bc45acd370b13728d36, type: 3}
     itemName: Potion of Healing
     itemDesc: This Item Heals you.
-    itemStackLimit: 0
+    itemStackLimit: 5
     damageType: 
     range: 
   droppedItemPrefab: {fileID: 6655503512168929108, guid: 8adfc13f093e0054db07391cdfda2acd,

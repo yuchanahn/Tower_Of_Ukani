@@ -27,7 +27,6 @@ public class PlayerConsumableHotbar : ToU_Inventory
     }
     private void ConsumeAndRemove(ConsumableItem item)
     {
-        item = items[0] as ConsumableItem;
         if (item == null)
             return;
 

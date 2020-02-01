@@ -689,10 +689,9 @@ MonoBehaviour:
     curCount: 0
     maxCount: 2
     height: 3
-    time: 0.37
+    time: 0.33
     apexY: 0
     isJumping: 0
-    fixedYVel: 0
 --- !u!114 &7371128404420445764
 MonoBehaviour:
   m_ObjectHideFlags: 0
