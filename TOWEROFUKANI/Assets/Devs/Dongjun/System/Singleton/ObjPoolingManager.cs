@@ -1,23 +1,34 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-[System.Serializable]
-public struct StartPoolData
+public abstract class PoolingObj : MonoBehaviour
 {
-    public PoolingObj prefab;
-    public uint initCount;
+    public PoolingObj Prefab { get; private set; }
+
+    public abstract void ResetOnSpawn();
+
+    public void InitPoolingObj(PoolingObj prefab)
+    {
+        Prefab = prefab;
+    }
 }
 
 public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
 {
+    #region Struct: Start Pool Data
+    [System.Serializable]
+    public struct StartPoolData
+    {
+        public PoolingObj prefab;
+        public uint initCount;
+    }
+    #endregion
+
     #region Var: Inspector
-    [Header("Default Parent Obj of Pooling Objects")]
-    [SerializeField]
+    [SerializeField, Header("Default Parent Obj of Pooling Objects")]
     private Transform defaultPoolParent;
 
-    [Header("Spawn Object On Start")]
-    [SerializeField]
+    [SerializeField, Header("Spawn Object On Start")]
     private StartPoolData[] startPoolData;
     #endregion
 
