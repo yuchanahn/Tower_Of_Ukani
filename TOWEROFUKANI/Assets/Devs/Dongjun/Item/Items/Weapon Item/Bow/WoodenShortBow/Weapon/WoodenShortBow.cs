@@ -2,48 +2,42 @@
 
 public class WoodenShortBow : BowController<WoodenShortBowItem>
 {
-    #region Var: CLA_Action
-    private WoodenShortBow_Main_Action action_Main;
-    private Bow_Draw_Action action_Draw;
-    private Bow_Shoot_Action action_Shoot;
+    #region Var: States
+    private WoodenShortBow_Main state_Main;
+    private Bow_Draw state_Draw;
+    private Bow_Shoot state_Shoot;
     #endregion
 
     #region Method: Init
-    protected override void Init()
+    protected override void InitStates()
     {
-        AddLogic(When.OnDisable, CL_OnDisable);
+        SetLogic(ref state_Main, () => 
+        {
+            if (PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
+                return state_Draw;
 
-        AddLogic(ref action_Main, CL_Main);
-        AddLogic(ref action_Draw, CL_Draw);
-        AddLogic(ref action_Shoot, CL_Shoot);
-    }
-    #endregion
+            return null;
+        });
 
-    #region Method: Condition Logic
-    private CLA_Action_Base CL_OnDisable()
-    {
-        return action_Main;
-    }
-    private CLA_Action_Base CL_Main()
-    {
-        if (PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
-            return action_Draw;
+        SetLogic(ref state_Draw, () =>
+        {
+            if (!state_Draw.IsDrawing)
+                return state_Shoot;
 
-        return null;
-    }
-    private CLA_Action_Base CL_Draw()
-    {
-        if (!action_Draw.IsDrawing)
-            return action_Shoot;
+            return null;
+        });
 
-        return null;
-    }
-    private CLA_Action_Base CL_Shoot()
-    {
-        if (weaponItem.shootTimer.IsEnded)
-            return action_Main;
+        SetLogic(ref state_Shoot, () =>
+        {
+            if (weaponItem.shootTimer.IsEnded)
+                return state_Main;
 
-        return null;
+            return null;
+        });
+
+        SetLogic(When.OnDisable, () => state_Main);
+
+        SetDefaultState(state_Main);
     }
     #endregion
 }

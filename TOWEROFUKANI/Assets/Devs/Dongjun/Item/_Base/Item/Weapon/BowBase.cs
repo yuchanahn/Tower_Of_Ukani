@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public abstract class BowController<T> : WeaponController<T> where T : BowItem { }
+public abstract class BowController<T> : WeaponController<T>
+    where T : BowItem
+{ }
+
 public abstract class BowItem : WeaponItem
 {
     #region Var: Inspector

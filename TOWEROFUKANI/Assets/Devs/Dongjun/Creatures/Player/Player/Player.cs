@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player : CLA_Main
+public class Player : SSM_Main
 {
     #region Var: Inspector
     [Header("Component")]
@@ -20,49 +20,47 @@ public class Player : CLA_Main
     #endregion
 
     #region Var: CLA_Action
-    private Player_Normal_Action action_Normal;
-    private Player_Dash_Action action_Dash;
-    private Player_Kick_Action action_Kick;
+    private Player_Normal_Action state_Normal;
+    private Player_Dash_Action state_Dash;
+    private Player_Kick_Action state_Kick;
     #endregion
 
     #region Method: Init
-    protected override void Init()
+    protected override void InitStates()
     {
-        AddLogic(ref action_Normal, CL_Normal);
-        AddLogic(ref action_Dash, CL_Dash);
-        AddLogic(ref action_Kick, CL_Kick);
-    }
-    #endregion
-    
-    #region Method: Condition Logic
-    private CLA_Action_Base CL_Normal()
-    {
-        if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.Inst.UseStamina(1))
-            return action_Dash;
+        SetLogic(ref state_Normal, () => 
+        {
+            if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.Inst.UseStamina(1))
+                return state_Dash;
 
-        if (Input.GetKeyDown(PlayerActionKeys.Kick))
-            return action_Kick;
+            if (Input.GetKeyDown(PlayerActionKeys.Kick))
+                return state_Kick;
 
-        return null;
-    }
-    private CLA_Action_Base CL_Dash()
-    {
-        // Cancle On Jump
-        if (action_Normal.JumpData.canJump && PlayerInputManager.Inst.Input_Jump)
-            return action_Normal;
+            return null;
+        });
 
-        // Cancle On End
-        if (!action_Dash.IsDasing)
-            return action_Normal;
+        SetLogic(ref state_Dash, () => 
+        {
+            // Cancle On Jump
+            if (state_Normal.JumpData.canJump && PlayerInputManager.Inst.Input_Jump)
+                return state_Normal;
 
-        return null;
-    }
-    private CLA_Action_Base CL_Kick()
-    {
-        if (!action_Kick.IsKicking)
-            return action_Normal;
+            // Cancle On End
+            if (!state_Dash.IsDasing)
+                return state_Normal;
 
-        return null;
+            return null;
+        });
+
+        SetLogic(ref state_Kick, () => 
+        {
+            if (!state_Kick.IsKicking)
+                return state_Normal;
+
+            return null;
+        });
+
+        SetDefaultState(state_Normal);
     }
     #endregion
 }

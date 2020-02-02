@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
 
-public abstract class WeaponController_Base : CLA_Main { }
+public abstract class WeaponController_Base : SSM_Main { }
 public abstract class WeaponController<T> : WeaponController_Base
     where T : WeaponItem
 {
-    #region Var: Weapon Item
-    protected T weaponItem;
+    #region Var: Properties
+    protected T weaponItem
+    { get; private set; }
+    public Animator animator
+    { get; private set; }
     #endregion
 
     #region Method: Unity
     protected override void Awake()
     {
         base.Awake();
-        weaponItem = GetComponent<WeaponItem>() as T;
+        weaponItem = GetComponent<T>();
+        animator = GetComponent<Animator>();
     }
     #endregion
 
@@ -21,7 +25,7 @@ public abstract class WeaponController<T> : WeaponController_Base
     {
         if (!weaponItem.IsSelected)
         {
-            ChangeAction(DefaultAction);
+            ChangeState(DefaultState);
             return;
         }
 
@@ -42,10 +46,21 @@ public abstract class WeaponItem : UpgradableItem
     public GameObject SpriteRoot => spriteRoot;
     public bool IsSelected
     { get; protected set; } = false;
+
+    public Animator animator
+    { get; private set; }
     #endregion
 
     #region Var: Stats
     public AttackData attackData;
+    #endregion
+
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+        animator = GetComponent<Animator>();
+    }
     #endregion
 
     #region Method Override: Add / Move / Drop
