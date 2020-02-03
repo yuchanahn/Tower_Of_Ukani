@@ -8619,6 +8619,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1413585827}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1427361236 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5681672376404113145, guid: 8e078a41e50e29841bc94cbe8e409e3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089852955}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4d767ef990b4045b107e47368d911c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1438737389
 GameObject:
   m_ObjectHideFlags: 0
@@ -13587,12 +13599,12 @@ PrefabInstance:
         type: 3}
       propertyPath: mainCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1089852956}
     - target: {fileID: 4117234795505780078, guid: 4481dd2a3fe0dce40ad7628ca110315a,
         type: 3}
       propertyPath: camShake
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1427361236}
     - target: {fileID: 4117234795505780078, guid: 4481dd2a3fe0dce40ad7628ca110315a,
         type: 3}
       propertyPath: playerRB2D
