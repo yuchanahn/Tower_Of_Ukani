@@ -4,6 +4,8 @@ public class PlayerConsumableHotbar : ToU_Inventory
 {
     protected override void Awake()
     {
+        inventoryUI = InGameUI_Manager.Inst.consumableHotbarUI;
+
         Init(4, typeof(ConsumableItem));
     }
     private void Update()

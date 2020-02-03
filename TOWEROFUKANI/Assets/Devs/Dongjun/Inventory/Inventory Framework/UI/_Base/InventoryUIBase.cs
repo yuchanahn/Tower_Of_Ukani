@@ -30,6 +30,7 @@ public abstract class InventoryUIBase : MonoBehaviour
     {
         this.inventory = inventory;
         Size = inventory.Size;
+
         slotUIs = new SlotUI[Size];
         itemUIs = new ItemUI[Size];
 
