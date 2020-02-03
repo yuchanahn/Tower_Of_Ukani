@@ -193,49 +193,54 @@ public abstract class InventoryBase : MonoBehaviour
         {
             AddNew(index);
 
-            // Update UI
             inventoryUI?.UpdateSlot(index);
             return true;
         }
-        else
+
+        // Add To Existing Item
+        int stackableIndex = GetIndex_Stackable(item);
+        if (stackableIndex != -1)
         {
-            // Add To Existing Item
-            if (ContainsStackable(item))
+            if (items[stackableIndex].Info.AddCount(item.Info))
             {
-                int stackableIndex = GetIndex_Stackable(item);
-                if (items[stackableIndex].Info.AddCount(item.Info))
+                if (item.Info.Count == 0)
                 {
-                    if (item.Info.Count == 0)
-                        Destroy(item.gameObject);
-
-                    // Update UI
-                    inventoryUI?.UpdateSlot(stackableIndex);
-                    return true;
+                    Destroy(item.gameObject);
+                    item = null;
                 }
+
+                inventoryUI?.UpdateSlot(stackableIndex);
+
+                if (item != null)
+                {
+                    if (!IsFull)
+                    {
+                        int emptyIndex = GetIndex_EmptySlot();
+                        AddNew(emptyIndex);
+
+                        inventoryUI?.UpdateSlot(emptyIndex);
+                    }
+                    else
+                    {
+                        item.OnDrop();
+                    }
+                }
+
+                return true;
             }
-
-            // Add To Empty Slot
-            if (item != null)
-            {
-                if (!IsFull)
-                {
-                    int emptyIndex = GetIndex_EmptySlot();
-                    AddNew(emptyIndex);
-
-                    // Update UI
-                    inventoryUI?.UpdateSlot(emptyIndex);
-                    return true;
-                }
-                // Drop Item
-                else
-                {
-                    item.OnDrop();
-                    return false;
-                }
-            }
-
-            return false;
         }
+
+        // Add to Empty Slot
+        if (!IsFull)
+        {
+            int emptyIndex = GetIndex_EmptySlot();
+            AddNew(emptyIndex);
+
+            inventoryUI?.UpdateSlot(emptyIndex);
+            return true;
+        }
+
+        return false;
     }
 
     public virtual void RemoveItem(int index, int amount = 1)

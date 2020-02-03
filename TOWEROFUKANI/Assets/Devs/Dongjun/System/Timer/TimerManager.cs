@@ -6,22 +6,22 @@ public class TimerManager : SingletonBase<TimerManager>
 {
     private Dictionary<GameObject, List<ITimerData>> lateUpdateTimers = new Dictionary<GameObject, List<ITimerData>>();
     private Dictionary<GameObject, List<ITimerData>> updateTimers = new Dictionary<GameObject, List<ITimerData>>();
-    private GameObject curTickingObj_LateUpdate;
-    private GameObject curTickingObj_Update;
 
     private void Update()
     {
-        TickTimers(updateTimers, curTickingObj_Update);
+        TickTimers(updateTimers);
     }
     private void LateUpdate()
     {
-        TickTimers(lateUpdateTimers, curTickingObj_LateUpdate);
+        TickTimers(lateUpdateTimers);
     }
 
-    public void TickTimers(Dictionary<GameObject, List<ITimerData>> timers, GameObject curTickingObj)
+    public void TickTimers(Dictionary<GameObject, List<ITimerData>> timers)
     {
         if (timers.Count == 0)
             return;
+
+        GameObject curTickingObj;
 
         for (int i = timers.Count - 1; i >= 0; i--)
         {
@@ -30,7 +30,7 @@ public class TimerManager : SingletonBase<TimerManager>
             // Check Game Object
             if (curTickingObj == null)
             {
-                timers.Remove(curTickingObj_Update);
+                timers.Remove(curTickingObj);
                 continue;
             }
 

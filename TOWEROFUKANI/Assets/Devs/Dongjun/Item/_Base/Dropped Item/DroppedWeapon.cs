@@ -20,22 +20,19 @@ public class DroppedWeapon : DroppedItem
             Destroy(weaponItem.gameObject);
             goto EXIT;
         }
+
         if (data.weaponHotbar.TryAddItem(weaponItem, data.weaponHotbar.CurSlot))
-        {
             goto EXIT;
-        }
+
         if (data.weaponHotbar.TryAddItem(weaponItem))
-        {
             goto EXIT;
-        }
+
         if (data.inventory.TryAddItem(weaponItem))
-        {
             goto EXIT;
-        }
+
         return;
 
     EXIT:
         Destroy(gameObject);
-        return;
     }
 }

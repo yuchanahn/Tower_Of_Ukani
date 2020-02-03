@@ -15,17 +15,14 @@ public class DroppedConsumableItem : DroppedItem
 
         // Add To Inventory
         if (data.consumableHotbar.TryAddItem(consumableItem))
-        {
             goto EXIT;
-        }
+
         if (data.inventory.TryAddItem(consumableItem))
-        {
             goto EXIT;
-        }
+
         return;
 
     EXIT:
         Destroy(gameObject);
-        return;
     }
 }

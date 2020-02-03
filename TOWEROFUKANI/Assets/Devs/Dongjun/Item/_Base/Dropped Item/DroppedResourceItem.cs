@@ -15,13 +15,11 @@ public class DroppedResourceItem : DroppedItem
 
         // Add To Inventory
         if (data.inventory.TryAddItem(resourceItem))
-        {
             goto EXIT;
-        }
+
         return;
 
     EXIT:
         Destroy(gameObject);
-        return;
     }
 }

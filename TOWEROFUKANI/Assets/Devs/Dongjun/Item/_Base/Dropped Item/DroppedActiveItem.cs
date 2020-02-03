@@ -14,21 +14,17 @@ public class DroppedActiveItem : DroppedItem
         // Add To Inventory
         if (data.inventory.TryUpgradeItem(activeItem.Info.ItemName, data.passiveInventory)
         || data.weaponHotbar.TryUpgradeItem(activeItem.Info.ItemName, data.passiveInventory))
-        {
             goto EXIT;
-        }
+
         if (data.activeHotbar.TryAddItem(activeItem))
-        {
             goto EXIT;
-        }
+
         if (data.inventory.TryAddItem(activeItem))
-        {
             goto EXIT;
-        }
+
         return;
 
     EXIT:
         Destroy(gameObject);
-        return;
     }
 }
