@@ -1489,7 +1489,7 @@ Animator:
   m_GameObject: {fileID: 1635102215631221661}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f51ce7da9f3e3ea44a6f38da74e750bc, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1675,7 +1675,7 @@ Animator:
   m_GameObject: {fileID: 1635102215789769813}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6a798c4c274b25349946342117038d36, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1792,7 +1792,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1635102216084493611}
   m_Layer: 0
-  m_Name: '[UI] In-Game'
+  m_Name: UI (In-Game)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

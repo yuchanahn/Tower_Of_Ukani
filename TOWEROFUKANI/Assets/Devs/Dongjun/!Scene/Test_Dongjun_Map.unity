@@ -2984,25 +2984,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &504677992
-RectTransform:
+--- !u!4 &504677992
+Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504677991}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5335648, y: 0.5335648, z: 0.5335648}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 768.4165, y: 432.00003}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &504677993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12903,7 +12898,7 @@ PrefabInstance:
     - target: {fileID: 1635102216084493612, guid: 5b9390edd2da90649913d9af80641b06,
         type: 3}
       propertyPath: m_Name
-      value: '[UI] In-Game'
+      value: UI (In-Game)
       objectReference: {fileID: 0}
     - target: {fileID: 1635102216084493611, guid: 5b9390edd2da90649913d9af80641b06,
         type: 3}
