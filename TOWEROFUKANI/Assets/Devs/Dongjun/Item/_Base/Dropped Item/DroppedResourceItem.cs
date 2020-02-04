@@ -14,7 +14,7 @@ public class DroppedResourceItem : DroppedItem
             resourceItem = Instantiate(resourceItem).GetComponent<ResourceItem>();
 
         // Add To Inventory
-        if (data.inventory.TryAddItem(resourceItem))
+        if (PlayerInventoryManager.inventory.TryAddItem(resourceItem))
             goto EXIT;
 
         return;

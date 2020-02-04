@@ -7,8 +7,10 @@ public class PlayerInventory : ToU_Inventory
 {
     protected override void Awake()
     {
+        // Get UI
         inventoryUI = InGameUI_Manager.Inst.inventoryUI;
 
+        // Init
         Init(20,
             typeof(ResourceItem),
             typeof(WeaponItem),

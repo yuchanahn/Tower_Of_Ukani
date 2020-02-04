@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player_Normal_Action : SSM_State_wMain<Player>,
+public class Player_Normal : SSM_State_wMain<Player>,
     ICanDetectGround
 {
     #region Var: Inspector

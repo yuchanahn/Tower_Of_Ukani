@@ -7,19 +7,12 @@ public class Equilibrium : PassiveItem
 
     private float effectPercent = 30f;
 
-    #region Method: Initialize
-    public override void InitStats()
-    {
-
-    }
-    #endregion
-
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        onDamagedEffect = new ItemEffect(GetType(), OnDamaged);
-        onHitEffect = new ItemEffect(GetType(), OnHit);
+        onDamagedEffect = this.CreateItemEffect(OnDamaged);
+        onHitEffect = this.CreateItemEffect(OnHit);
 
         ItemEffectManager.AddEffect(PlayerActions.Damaged, onDamagedEffect);
         ItemEffectManager.AddEffect(PlayerActions.DamageDealt, onHitEffect);
@@ -29,11 +22,6 @@ public class Equilibrium : PassiveItem
         base.OnDrop();
         ItemEffectManager.RemoveEffect(PlayerActions.Damaged, onDamagedEffect);
         ItemEffectManager.RemoveEffect(PlayerActions.DamageDealt, onHitEffect);
-    }
-
-    public override void ApplyBonusStats(WeaponItem weapon)
-    {
-
     }
 
     private void OnDamaged()

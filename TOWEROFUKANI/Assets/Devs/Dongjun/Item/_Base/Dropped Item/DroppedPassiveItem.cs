@@ -12,16 +12,12 @@ public class DroppedPassiveItem : DroppedItem
             passiveItem = Instantiate(passiveItem).GetComponent<PassiveItem>();
 
         // Add To Inventory
-        if (data.passiveInventory.TryUpgradeItem(passiveItem,
-            data.inventory,
-            data.weaponHotbar))
+        if (PlayerInventoryManager.passiveInventory.TryUpgradeItem(passiveItem))
         {
             Destroy(passiveItem.gameObject);
             goto EXIT;
         }
-        if (data.passiveInventory.TryAddItem(passiveItem,
-            data.inventory,
-            data.weaponHotbar))
+        if (PlayerInventoryManager.passiveInventory.TryAddItem(passiveItem))
         {
             goto EXIT;
         }

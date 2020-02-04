@@ -14,10 +14,10 @@ public class DroppedConsumableItem : DroppedItem
             consumableItem = Instantiate(consumableItem).GetComponent<ConsumableItem>();
 
         // Add To Inventory
-        if (data.consumableHotbar.TryAddItem(consumableItem))
+        if (PlayerInventoryManager.consumableHotbar.TryAddItem(consumableItem))
             goto EXIT;
 
-        if (data.inventory.TryAddItem(consumableItem))
+        if (PlayerInventoryManager.inventory.TryAddItem(consumableItem))
             goto EXIT;
 
         return;

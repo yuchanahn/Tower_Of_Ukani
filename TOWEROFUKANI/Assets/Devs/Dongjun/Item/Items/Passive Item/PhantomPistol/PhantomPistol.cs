@@ -10,7 +10,7 @@ public class PhantomPistol : PassiveItem
     private AttackData attackData;
     private ProjectileData projectileData;
 
-    #region Method: Initialize
+    #region Method: Stats
     public override void InitStats()
     {
         attackData = new AttackData(3);
@@ -23,11 +23,13 @@ public class PhantomPistol : PassiveItem
     }
     #endregion
 
+    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        onShoot = new ItemEffect(GetType(), OnShoot);
+        onShoot = this.CreateItemEffect(OnShoot);
+
         ItemEffectManager.AddEffect(PlayerActions.GunShoot, onShoot);
 
         // Spawn Phantom Pistol Object
@@ -41,15 +43,13 @@ public class PhantomPistol : PassiveItem
         // Destroy Phantom Pistol Object
         Destroy(phantomPistolObject);
     }
+    #endregion
 
-    public override void ApplyBonusStats(WeaponItem weapon)
-    {
-
-    }
-
+    #region Method: Item Effect
     private void OnShoot()
     {
         Bullet bullet = phantomPistolObject.SpawnBullet();
         bullet.InitData(bullet.transform.right, projectileData, attackData);
     }
+    #endregion
 }

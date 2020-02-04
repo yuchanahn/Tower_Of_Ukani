@@ -4,7 +4,7 @@ public abstract class ActiveItem : UpgradableItem
 {
     #region Var: Properties
     public TimerData cooldownTimer
-    { get; protected set; } = new TimerData();
+    { get; private set; } = new TimerData();
     public bool IsActive
     { get; protected set; } = false;
     public bool CanActivate => cooldownTimer.IsEnded && !IsActive;

@@ -23,21 +23,17 @@ public class ToU_Inventory : InventoryBase
     #endregion
 
     #region Method: Upgrade Item
-    public bool TryUpgradeItem(string itemName, PassiveInventory passiveInventory = null)
+    public bool TryUpgradeItem(string itemName)
     {
         int index = GetIndex_ItemName(itemName);
-
         if (index == -1)
             return false;
 
-        if (!(items[index] is UpgradableItem))
+        UpgradableItem upgradable = items[index] as UpgradableItem;
+        if (upgradable == null)
             return false;
 
-        (items[index] as UpgradableItem).AddLevel();
-
-        if (passiveInventory != null && items[index] is WeaponItem)
-            passiveInventory.ApplyBonusStatsToWeapon(items[index] as WeaponItem);
-
+        upgradable.AddLevel();
         return true;
     }
     #endregion

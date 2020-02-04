@@ -19,16 +19,18 @@ public class TalismanOfProtection : ActiveItem
     private GameObject shieldEffect;
     #endregion
 
-    #region Method: Initialize
+    #region Method: Stats
     public override void InitStats()
     {
-        // Init Shield HP
-        shieldhealth = new FloatStat(40, min: 0, max: 40);
-
-        // Init Timers
+        // Init Cooldown
         cooldownTimer.EndTime = 5f;
+
+        // Init Duration
         durationTimer.EndTime = 2.5f;
         durationTimer.SetAction(OnEnd: Deactivate);
+
+        // Init Shield HP
+        shieldhealth = new FloatStat(40, min: 0, max: 40);
     }
     #endregion
 
@@ -37,8 +39,7 @@ public class TalismanOfProtection : ActiveItem
     {
         base.OnAdd(inventory);
 
-        // Initialize Item Effect
-        onDamageReceived = new ItemEffect(GetType(), Shield);
+        onDamageReceived = this.CreateItemEffect(Shield);
 
         // Spawn Effect
         shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));

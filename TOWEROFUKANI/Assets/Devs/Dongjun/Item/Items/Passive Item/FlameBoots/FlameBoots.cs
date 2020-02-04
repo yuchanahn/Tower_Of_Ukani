@@ -32,7 +32,7 @@ public class FlameBoots : PassiveItem
     private ParticleSystem flameParticle;
     #endregion
 
-    #region Method: Initialize
+    #region Method: Stats
     public override void InitStats()
     {
         flameDashAttackData = new AttackData(5);
@@ -47,9 +47,9 @@ public class FlameBoots : PassiveItem
         // Init Data
         overlapCheckData = new OverlapCheckData(onEnter: OnFlameDashHit);
 
-        // Init Item Effect
-        onDashingEffect = new ItemEffect(GetType(), FlameDash);
-        onDashEndEffect = new ItemEffect(GetType(), ResetFlameDash);
+        onDashingEffect = this.CreateItemEffect(FlameDash);
+        onDashEndEffect = this.CreateItemEffect(ResetFlameDash);
+
         ItemEffectManager.AddEffect(PlayerActions.Dashing, onDashingEffect);
         ItemEffectManager.AddEffect(PlayerActions.DashEnd, onDashEndEffect);
 
@@ -67,13 +67,6 @@ public class FlameBoots : PassiveItem
 
         // Destory Effect
         Destroy(flameParticle.gameObject);
-    }
-    #endregion
-
-    #region Method Override: Set Bonus Stats
-    public override void ApplyBonusStats(WeaponItem weapon)
-    {
-
     }
     #endregion
 

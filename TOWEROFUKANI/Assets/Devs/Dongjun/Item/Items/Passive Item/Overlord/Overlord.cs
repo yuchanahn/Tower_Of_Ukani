@@ -4,13 +4,11 @@ public class Overlord : PassiveItem
 {
     private int bonusPercentDamage = 10;
 
-    #region Method: Initialize
     public override void InitStats()
     {
         switch (ItemLevel)
         {
-            case 1:
-                break;
+            case 1: break;
             case 2:
                 bonusPercentDamage = 50;
                 break;
@@ -22,26 +20,11 @@ public class Overlord : PassiveItem
                 break;
         }
     }
-    #endregion
-
-    public override void OnAdd(InventoryBase inventory)
+    public override void InitStatMod()
     {
-        base.OnAdd(inventory);
-    }
-
-    #region Method Override: Bonus Stats
-    public override void ApplyBonusStats(WeaponItem weapon)
-    {
-        switch (weapon)
+        AddWeaponStatMod(weapon =>
         {
-            case GunItem gun:
-                gun.attackData.damage.ModPercent += bonusPercentDamage;
-                break;
-
-            case BowItem bow:
-                bow.attackData.damage.ModPercent += bonusPercentDamage;
-                break;
-        }
+            weapon.attackData.damage.ModPercent += bonusPercentDamage;
+        });
     }
-    #endregion
 }

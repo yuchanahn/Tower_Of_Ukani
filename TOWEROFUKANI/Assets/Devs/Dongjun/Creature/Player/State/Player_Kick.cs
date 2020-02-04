@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Dongjun.Helper;
 
-public class Player_Kick_Action : SSM_State_wMain<Player>
+public class Player_Kick : SSM_State_wMain<Player>
 {
     #region Var: Inspector
     [Header("Walk")]

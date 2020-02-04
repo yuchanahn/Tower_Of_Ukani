@@ -14,20 +14,20 @@ public class DroppedWeapon : DroppedItem
             weaponItem = Instantiate(Item).GetComponent<WeaponItem>();
 
         // Add To Inventory
-        if (data.inventory.TryUpgradeItem(weaponItem.Info.ItemName, data.passiveInventory)
-        ||  data.weaponHotbar.TryUpgradeItem(weaponItem.Info.ItemName, data.passiveInventory))
+        if (PlayerInventoryManager.inventory.TryUpgradeItem(weaponItem.Info.ItemName)
+        || PlayerInventoryManager.weaponHotbar.TryUpgradeItem(weaponItem.Info.ItemName))
         {
             Destroy(weaponItem.gameObject);
             goto EXIT;
         }
 
-        if (data.weaponHotbar.TryAddItem(weaponItem, data.weaponHotbar.CurSlot))
+        if (PlayerInventoryManager.weaponHotbar.TryAddItem(weaponItem, PlayerInventoryManager.weaponHotbar.CurSlot))
             goto EXIT;
 
-        if (data.weaponHotbar.TryAddItem(weaponItem))
+        if (PlayerInventoryManager.weaponHotbar.TryAddItem(weaponItem))
             goto EXIT;
 
-        if (data.inventory.TryAddItem(weaponItem))
+        if (PlayerInventoryManager.inventory.TryAddItem(weaponItem))
             goto EXIT;
 
         return;

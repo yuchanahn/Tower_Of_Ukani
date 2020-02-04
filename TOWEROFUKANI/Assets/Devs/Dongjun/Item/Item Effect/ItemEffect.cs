@@ -1,18 +1,30 @@
 ﻿using System;
 
-public class ItemEffect
+public struct ItemEffect
 {
-    public Type ThisType
-    { get; private set; }
     public Action ItemAction
     { get; private set; }
-    public Type After
+    public Type ThisType
+    { get; private set; }
+    public Type AfterThis
     { get; private set; }
 
-    public ItemEffect(Type thisType, Action action, Type after = null)
+    public ItemEffect(Action action, Type thisType, Type after = null)
     {
-        ThisType = thisType;
         ItemAction = action;
-        After = after;
+        ThisType = thisType;
+        AfterThis = after;
+    }
+}
+
+public static class ItemEffectExtension
+{
+    public static ItemEffect CreateItemEffect<T_THis, T_After>(this T_THis _, Action action)
+    {
+        return new ItemEffect(action, typeof(T_THis), typeof(T_After));
+    }
+    public static ItemEffect CreateItemEffect<T_THis>(this T_THis _, Action action)
+    {
+        return new ItemEffect(action, typeof(T_THis));
     }
 }

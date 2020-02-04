@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Player_Dash_Action : SSM_State_wMain<Player>
+public class Player_Dash : SSM_State_wMain<Player>
 {
     #region Var: Inspector
     [Header("Dash")]

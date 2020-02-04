@@ -11,9 +11,13 @@ public class PlayerWeaponHotbar : ToU_Inventory
     #region Method: Unity
     protected override void Awake()
     {
+        // Get UI
         inventoryUI = InGameUI_Manager.Inst.weaponHotbarUI;
 
+        // Init
         Init(3, typeof(WeaponItem));
+
+        // Select Slot 0
         (inventoryUI.slotUIs[CurSlot] as WeaponHotbarSlot).Select(true);
     }
     private void Update()

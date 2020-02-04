@@ -34,28 +34,32 @@ public class TimerData : ITimerData
     #endregion
 
     #region Method: Set Up
-    public void SetTick(GameObject self, TickType tickType = TickType.LateUpdate)
+    public TimerData SetTick(GameObject self, TickType tickType = TickType.LateUpdate)
     {
         switch (tickType)
         {
             case TickType.LateUpdate:
-                TimerManager.Inst.RemoveFromUpdate(self, this);
-                TimerManager.Inst.AddToLateUpdate(self, this);
+                TimerManager.Inst.RemoveTick_Update(self, this);
+                TimerManager.Inst.AddTick_LateUpdate(self, this);
                 break;
             case TickType.Update:
-                TimerManager.Inst.RemoveFromLateUpdate(self, this);
-                TimerManager.Inst.AddToUpdate(self, this);
+                TimerManager.Inst.RemoveTick_LateUpdate(self, this);
+                TimerManager.Inst.AddTick_Update(self, this);
                 break;
-            default:
-                TimerManager.Inst.RemoveFromUpdate(self, this);
-                TimerManager.Inst.RemoveFromLateUpdate(self, this);
+            case TickType.None:
+                TimerManager.Inst.RemoveTick_Update(self, this);
+                TimerManager.Inst.RemoveTick_LateUpdate(self, this);
                 break;
         }
+
+        return this;
     }
-    public void SetAction(Action OnTick = null, Action OnEnd = null)
+    public TimerData SetAction(Action OnTick = null, Action OnEnd = null)
     {
         this.OnTick = OnTick;
         this.OnEnd = OnEnd;
+
+        return this;
     }
     #endregion
 
@@ -109,28 +113,32 @@ public class TimerStat : ITimerData
     #endregion
 
     #region Method: Set Up
-    public void SetTick(GameObject self, TickType tickType = TickType.LateUpdate)
+    public TimerStat SetTick(GameObject self, TickType tickType = TickType.LateUpdate)
     {
         switch (tickType)
         {
             case TickType.LateUpdate:
-                TimerManager.Inst.RemoveFromUpdate(self, this);
-                TimerManager.Inst.AddToLateUpdate(self, this);
+                TimerManager.Inst.RemoveTick_Update(self, this);
+                TimerManager.Inst.AddTick_LateUpdate(self, this);
                 break;
             case TickType.Update:
-                TimerManager.Inst.RemoveFromLateUpdate(self, this);
-                TimerManager.Inst.AddToUpdate(self, this);
+                TimerManager.Inst.RemoveTick_LateUpdate(self, this);
+                TimerManager.Inst.AddTick_Update(self, this);
                 break;
-            default:
-                TimerManager.Inst.RemoveFromUpdate(self, this);
-                TimerManager.Inst.RemoveFromLateUpdate(self, this);
+            case TickType.None:
+                TimerManager.Inst.RemoveTick_Update(self, this);
+                TimerManager.Inst.RemoveTick_LateUpdate(self, this);
                 break;
         }
+
+        return this;
     }
-    public void SetAction(Action OnTick = null, Action OnEnd = null)
+    public TimerStat SetAction(Action OnTick = null, Action OnEnd = null)
     {
         this.OnTick = OnTick;
         this.OnEnd = OnEnd;
+
+        return this;
     }
     #endregion
 

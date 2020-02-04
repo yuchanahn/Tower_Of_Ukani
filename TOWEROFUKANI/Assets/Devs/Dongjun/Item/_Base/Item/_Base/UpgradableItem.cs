@@ -8,8 +8,9 @@ public abstract class UpgradableItem : Item
     #endregion
 
     #region Method: Unity
-    protected virtual void Start()
+    protected override void Awake()
     {
+        base.Awake();
         InitStats();
     }
     #endregion
@@ -19,7 +20,7 @@ public abstract class UpgradableItem : Item
     #endregion
 
     #region Method: Add Level
-    public void AddLevel(int amount = 1)
+    public virtual void AddLevel(int amount = 1)
     {
         ItemLevel += amount;
         InitStats();

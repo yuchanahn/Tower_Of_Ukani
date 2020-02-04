@@ -4,8 +4,10 @@ public class PlayerActiveHotbar : ToU_Inventory
 {
     protected override void Awake()
     {
+        // Get UI
         inventoryUI = InGameUI_Manager.Inst.activeHotbarUI;
 
+        // Init
         Init(4, typeof(ActiveItem));
     }
     private void Update()

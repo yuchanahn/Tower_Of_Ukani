@@ -17,4 +17,9 @@ public struct AttackData
     {
         this.damage = new FloatStat(damage, min: 0);
     }
+
+    public void Reset()
+    {
+        damage.Reset();
+    }
 }
