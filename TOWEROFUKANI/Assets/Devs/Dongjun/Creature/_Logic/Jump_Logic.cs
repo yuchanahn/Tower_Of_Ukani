@@ -39,7 +39,7 @@ public static class Jump_Logic
         rb2D.velocity = new Vector2(rb2D.velocity.x, jumpVel);
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Jump);
+        ActionEffectManager.Trigger(PlayerActions.Jump);
     }
 
     public static void Jump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)

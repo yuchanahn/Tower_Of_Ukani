@@ -56,7 +56,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         PlayerStats.Inst.AbsorbDamage = true;
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.DashStart);
+        ActionEffectManager.Trigger(PlayerActions.DashStart);
     }
     public override void OnExit()
     {
@@ -71,7 +71,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         PlayerStats.Inst.AbsorbDamage = false;
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.DashEnd);
+        ActionEffectManager.Trigger(PlayerActions.DashEnd);
     }
     public override void OnFixedUpdate()
     {
@@ -91,7 +91,7 @@ public class Player_Dash : SSM_State_wMain<Player>
             }
 
             // Trigger Item Effect
-            ItemEffectManager.Trigger(PlayerActions.Dashing);
+            ActionEffectManager.Trigger(PlayerActions.Dashing);
         }
         else
         {

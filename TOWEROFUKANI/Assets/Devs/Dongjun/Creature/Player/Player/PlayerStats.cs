@@ -111,7 +111,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         DamageReceived = AbsorbDamage ? 0 : Mathf.Abs(amount);
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Damaged);
+        ActionEffectManager.Trigger(PlayerActions.Damaged);
 
         // Apply Damage
         health.ModFlat -= DamageReceived;
@@ -136,7 +136,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         HealReceived = Mathf.Abs(amount);
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Healed);
+        ActionEffectManager.Trigger(PlayerActions.Healed);
 
         // Apply Heal
         health.ModFlat += Mathf.Clamp(HealReceived, 0, health.Max - health.Value);
@@ -177,11 +177,11 @@ public class PlayerStats : SingletonBase<PlayerStats>
         DamagedMob = target.GetComponent<Mob_Base>();
 
         // Trigger Item Effect (Hit)
-        ItemEffectManager.Trigger(PlayerActions.DamageDealt);
+        ActionEffectManager.Trigger(PlayerActions.DamageDealt);
 
         // Trigger Item Effect (Other)
         for (int i = 0; i < actionToTrigger.Length; i++)
-            ItemEffectManager.Trigger(actionToTrigger[i]);
+            ActionEffectManager.Trigger(actionToTrigger[i]);
 
         // Damage Mob
         float mobHP = iDamage.Hit(attackData);
@@ -190,7 +190,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         if (mobHP <= 0)
         {
             KilledMob = target.GetComponent<Mob_Base>();
-            ItemEffectManager.Trigger(PlayerActions.Kill);
+            ActionEffectManager.Trigger(PlayerActions.Kill);
         }
 
         // Reset Damaged Mob

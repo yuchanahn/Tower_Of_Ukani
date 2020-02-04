@@ -14,6 +14,14 @@ public abstract class PassiveItem : UpgradableItem
     // Properties
     public TowerOfUkani.Gods God => god;
 
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+        InitStatMod();
+    }
+    #endregion
+
     #region Method: Stats
     // 이 함수로 아이템 스탯 초기화
     public override void InitStats() { }
