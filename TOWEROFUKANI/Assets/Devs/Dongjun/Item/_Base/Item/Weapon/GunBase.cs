@@ -3,11 +3,18 @@
 public abstract class GunController<T> : WeaponController<T> where T : GunItem { }
 public abstract class GunItem : WeaponItem
 {
+    #region Var: Animation Names
+    public readonly string ANIM_Idle = "Idle";
+    public readonly string ANIM_Shoot = "Shoot";
+    public readonly string ANIM_Reload = "Reload";
+    public readonly string ANIM_SwapMagazine = "SwapMagazine";
+    #endregion
+
     #region Var: Stats
     // Timer
-    public TimerStat shootTimer = new TimerStat();
-    public TimerStat reloadTimer = new TimerStat();
-    public TimerStat swapMagazineTimer = new TimerStat();
+    public readonly TimerStat shootTimer = new TimerStat();
+    public readonly TimerStat reloadTimer = new TimerStat();
+    public readonly TimerStat swapMagazineTimer = new TimerStat();
 
     // Bullet Data
     public ProjectileData bulletData;
@@ -18,28 +25,28 @@ public abstract class GunItem : WeaponItem
     public IntStat magazineSize;
     #endregion
 
-    #region Var: Anim Clip Names
-    public readonly string ANIM_Idle = "Idle";
-    public readonly string ANIM_Shoot = "Shoot";
-    public readonly string ANIM_Reload = "Reload";
-    public readonly string ANIM_SwapMagazine = "SwapMagazine";
-    #endregion
-
     #region Method: Unity
-    protected override void Start()
+    protected virtual void Start()
     {
-        base.Start();
-
-        #region Init: Stats
         // Init Timer
-        shootTimer.SetTick(gameObject);
-        shootTimer.ToEnd();
+        shootTimer.SetTick(gameObject).ToEnd();
         reloadTimer.SetTick(gameObject);
         swapMagazineTimer.SetTick(gameObject);
 
         // Init Ammo
         loadedBullets = magazineSize.Value;
-        #endregion
+    }
+    #endregion
+
+    #region Method: Stats
+    public override void ResetStats()
+    {
+        attackData.Reset();
+        shootTimer.EndTime.Reset();
+        reloadTimer.EndTime.Reset();
+        swapMagazineTimer.EndTime.Reset();
+        bulletData.Reset();
+        magazineSize.Reset();
     }
     #endregion
 }

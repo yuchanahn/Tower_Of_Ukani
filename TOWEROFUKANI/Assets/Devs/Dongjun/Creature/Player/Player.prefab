@@ -432,12 +432,14 @@ GameObject:
   - component: {fileID: 7371128404420445767}
   - component: {fileID: 7371128404420445760}
   - component: {fileID: 7371128404420445771}
+  - component: {fileID: 7930919154338704464}
+  - component: {fileID: 7333475252025045501}
   - component: {fileID: 2227997050219821179}
   - component: {fileID: 1977913979973998782}
   - component: {fileID: 4749230937349024608}
   - component: {fileID: 4775023531336007662}
-  - component: {fileID: 7333475252025045501}
   - component: {fileID: 1571809755}
+  - component: {fileID: 560649603753229986}
   - component: {fileID: 7371128404420445766}
   - component: {fileID: 5969363333450609748}
   - component: {fileID: 7371128404420445764}
@@ -535,6 +537,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.8}
   m_EdgeRadius: 0
+--- !u!114 &7930919154338704464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c2bda7b06f739740b693900e46559aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7333475252025045501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e914daa909b6abc459a8649ad0a8550d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2227997050219821179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,18 +613,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
---- !u!114 &7333475252025045501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7371128404420445770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e914daa909b6abc459a8649ad0a8550d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1571809755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +631,18 @@ MonoBehaviour:
   HealReceived: 0
   DamageToDeal: 0
   KilledMob: {fileID: 0}
+--- !u!114 &560649603753229986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94e9b455bf36ac34fb4c6f7ce24fcfb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7371128404420445766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,11 +698,6 @@ MonoBehaviour:
     layerMask:
       serializedVersion: 2
       m_Bits: 4096
-    inventory: {fileID: 2227997050219821179}
-    weaponHotbar: {fileID: 1977913979973998782}
-    activeHotbar: {fileID: 4749230937349024608}
-    consumableHotbar: {fileID: 4775023531336007662}
-    passiveInventory: {fileID: 7333475252025045501}
   walkData:
     walkSpeed: 7.5
     walkAccelTime: 0.2

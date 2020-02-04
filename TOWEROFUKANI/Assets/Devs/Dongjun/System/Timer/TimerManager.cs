@@ -40,7 +40,7 @@ public class TimerManager : SingletonBase<TimerManager>
         }
     }
 
-    public void AddToLateUpdate(GameObject go, ITimerData data)
+    public void AddTick_LateUpdate(GameObject go, ITimerData data)
     {
         if (lateUpdateTimers.ContainsKey(go) && lateUpdateTimers[go].Contains(data))
             return;
@@ -56,7 +56,7 @@ public class TimerManager : SingletonBase<TimerManager>
 
         lateUpdateTimers[go].Add(data);
     }
-    public void RemoveFromLateUpdate(GameObject go, ITimerData data)
+    public void RemoveTick_LateUpdate(GameObject go, ITimerData data)
     {
         if (!lateUpdateTimers.ContainsKey(go) || !lateUpdateTimers[go].Contains(data))
             return;
@@ -64,7 +64,7 @@ public class TimerManager : SingletonBase<TimerManager>
         lateUpdateTimers[go].Remove(data);
     }
 
-    public void AddToUpdate(GameObject go, ITimerData data)
+    public void AddTick_Update(GameObject go, ITimerData data)
     {
         if (updateTimers.ContainsKey(go) && updateTimers[go].Contains(data))
             return;
@@ -80,7 +80,7 @@ public class TimerManager : SingletonBase<TimerManager>
 
         updateTimers[go].Add(data);
     }
-    public void RemoveFromUpdate(GameObject go, ITimerData data)
+    public void RemoveTick_Update(GameObject go, ITimerData data)
     {
         if (!updateTimers.ContainsKey(go) || !updateTimers[go].Contains(data))
             return;

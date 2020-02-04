@@ -27,4 +27,15 @@ public class Mob_Slime : GroundMob_Base
         m_bAtkEndActing = false;
         m_jumpData.height = m_jumpHeight;
     }
+
+
+    //=================================================================
+    //      ## Mob_Slime :: Dead
+    //=================================================================
+
+    public override void OnDead()
+    {
+        base.OnDead();
+        GetComponent<CorpseSpawner>().Spawn();
+    }
 }

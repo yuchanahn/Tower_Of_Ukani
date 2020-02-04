@@ -95,7 +95,7 @@ public class Mob_WeepingMist : FlyingMob_Base
     void TeleportEnd_AniEvent() => OnTeleportEnd();
 
     //=================================================================
-    //      ## Stunned : override
+    //      ## Mob_WeepingMist :: Stunned
     //=================================================================
 
     public override bool Stunned()
@@ -106,7 +106,7 @@ public class Mob_WeepingMist : FlyingMob_Base
     }
 
     //=================================================================
-    //      ## Hurt : override
+    //      ## Mob_WeepingMist :: Hurt
     //=================================================================
 
     public override void OnHurt()
@@ -122,5 +122,16 @@ public class Mob_WeepingMist : FlyingMob_Base
     {
         yield return new WaitForEndOfFrame();
         act();
+    }
+
+
+    //=================================================================
+    //      ## Mob_WeepingMist :: Dead
+    //=================================================================
+
+    public override void OnDead()
+    {
+        base.OnDead();
+        GetComponent<CorpseSpawner>().Spawn();
     }
 }

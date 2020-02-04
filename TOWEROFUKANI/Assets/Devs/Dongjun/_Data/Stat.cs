@@ -72,12 +72,6 @@ public struct IntStat
         }
     }
 
-    public void Reset()
-    {
-        ModFlat = 0;
-        ModPercent = 0;
-    }
-
     public IntStat(int @base = 0, int min = int.MinValue, int max = int.MaxValue, int modFlat = 0, int modPercent = 0)
     {
         this.needToCalculate = true;
@@ -87,6 +81,12 @@ public struct IntStat
         this.modFlat = modFlat;
         this.modPercent = modPercent;
         this.value = 0;
+    }
+
+    public void Reset()
+    {
+        ModFlat = 0;
+        ModPercent = 0;
     }
 }
 
@@ -170,5 +170,11 @@ public struct FloatStat
         this.modFlat = modFlat;
         this.modPercent = modPercent;
         this.value = 0;
+    }
+
+    public void Reset()
+    {
+        ModFlat = 0;
+        ModPercent = 0;
     }
 }

@@ -260,11 +260,8 @@ public class FlyingMob_Base : Mob_Base
     //      ## Dead
     //=================================================================
 
-    [SerializeField, Header("Corpse")] CorpseData Corpse;
     public override void OnDead()
     {
         Destroy(gameObject);
-
-        var Corpses = CorpseMgr.CreateCorpseOrNull(transform, Corpse);
     }
 }

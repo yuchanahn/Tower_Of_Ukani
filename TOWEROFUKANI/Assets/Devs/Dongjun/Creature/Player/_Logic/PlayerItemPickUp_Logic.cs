@@ -7,13 +7,6 @@ public struct PlayerItemPickUpData
     [Header("Pick Up Data")]
     public float radius;
     public LayerMask layerMask;
-
-    [Header("Inventory Ref")]
-    public PlayerInventory inventory;
-    public PlayerWeaponHotbar weaponHotbar;
-    public PlayerActiveHotbar activeHotbar;
-    public PlayerConsumableHotbar consumableHotbar;
-    public PlayerPassiveInventory passiveInventory;
 }
 
 public static class PlayerItemPickUp_Logic

@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 1505841439728467174}
   - component: {fileID: 208608847839365501}
   - component: {fileID: 1528643971}
+  - component: {fileID: 487823510}
   m_Layer: 8
   m_Name: WeepingMist
   m_TagString: Untagged
@@ -363,13 +364,6 @@ MonoBehaviour:
   MoveTimeIdle: 1
   MoveTimeMove: 3
   AgroRange: 10
-  Corpse:
-    mCntMin: 1
-    mCntMax: 3
-    mFCntMin: 0
-    mFCntMax: 11
-    mCorpse: {fileID: 8546638897159743268, guid: 48d257210bec05142be48d1a37927f43,
-      type: 3}
   RandRangeOfTeleport: 30
   AttackDuration: 3
   RainObject: {fileID: 1005293261}
@@ -444,6 +438,24 @@ MonoBehaviour:
   Time: 0.25
   SpriteRenderers:
   - {fileID: 5283869461139039953}
+--- !u!114 &487823510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018358931423771165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a24ee746b5dc1d448fa8741df306d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mData:
+    cntMin: 1
+    cntMax: 3
+    CurrentMode: 0
+    Corpse: {fileID: 8546638897159743268, guid: 48d257210bec05142be48d1a37927f43,
+      type: 3}
 --- !u!1 &3281447207712922554
 GameObject:
   m_ObjectHideFlags: 0

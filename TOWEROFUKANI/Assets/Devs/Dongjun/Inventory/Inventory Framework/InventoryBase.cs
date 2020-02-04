@@ -203,15 +203,13 @@ public abstract class InventoryBase : MonoBehaviour
         {
             if (items[stackableIndex].Info.AddCount(item.Info))
             {
+                inventoryUI?.UpdateSlot(stackableIndex);
+
                 if (item.Info.Count == 0)
                 {
                     Destroy(item.gameObject);
-                    item = null;
                 }
-
-                inventoryUI?.UpdateSlot(stackableIndex);
-
-                if (item != null)
+                else
                 {
                     if (!IsFull)
                     {

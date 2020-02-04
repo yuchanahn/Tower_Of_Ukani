@@ -34,7 +34,6 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
     [Header("Data")]
     [SerializeField] MobMoveData m_MoveData;
     [SerializeField] FollowData m_followData;
-    [SerializeField] CorpseData m_compseData;
     [SerializeField] protected JumpData m_jumpData;
     [SerializeField] GravityData m_gravityData;
     [SerializeField] GroundDetectionData m_groundDetectionData;
@@ -390,7 +389,6 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
     public override void OnDead()
     {
         Destroy(gameObject);
-        CorpseMgr.CreateCorpseOrNull(transform, m_compseData);
     }
     #endregion
 

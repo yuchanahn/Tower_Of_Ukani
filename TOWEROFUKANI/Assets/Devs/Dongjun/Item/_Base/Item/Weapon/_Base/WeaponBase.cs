@@ -63,39 +63,60 @@ public abstract class WeaponItem : UpgradableItem
     }
     #endregion
 
-    #region Method Override: Add / Move / Drop
+    #region Method: Stats
+    public override void AddLevel(int amount = 1)
+    {
+        base.AddLevel(amount);
+        PlayerStatMod.ApplyMod_Weapon(this);
+    }
+    public abstract void ResetStats();
+    #endregion
+
+    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
+        // Attach to Player
         gameObject.SetActive(true);
         transform.SetParent(GM.PlayerObj.transform);
         transform.localPosition = new Vector2(0, pivotPointY);
-        CheckSelect();
+
+        // Select
+        SelectInActiveSlot();
+
+        // Apply Stat Mod
+        PlayerStatMod.ApplyMod_Weapon(this);
     }
     public override void OnMove()
     {
-        CheckSelect();
+        SelectInActiveSlot();
     }
     public override void OnDrop()
     {
         base.OnDrop();
 
+        // Detach from Player
         gameObject.SetActive(false);
         transform.SetParent(null);
+
+        // Unselect
         Select(false);
+
+        // Reset Stats
+        ResetStats();
     }
     #endregion
 
     #region Method: Select Weapon
-    private void CheckSelect()
-    {
-        Select(Inventory is PlayerWeaponHotbar && (Inventory as PlayerWeaponHotbar).CurWeapon == this);
-    }
     public void Select(bool select)
     {
         IsSelected = select;
         spriteRoot.SetActive(select);
+    }
+    private void SelectInActiveSlot()
+    {
+        Select(Inventory is PlayerWeaponHotbar && (Inventory as PlayerWeaponHotbar).CurWeapon == this);
     }
     #endregion
 }

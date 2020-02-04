@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 3417997360494488752}
   - component: {fileID: 1362207583}
   - component: {fileID: 7555408727852874607}
+  - component: {fileID: 10251628}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Untagged
@@ -285,13 +286,6 @@ MonoBehaviour:
     CantMoveGround:
       serializedVersion: 2
       m_Bits: 512
-  m_compseData:
-    mCntMin: 4
-    mCntMax: 5
-    mFCntMin: 0
-    mFCntMax: 4
-    mCorpse: {fileID: 3864375849378008672, guid: 3eb9ba50ec5f39141a7628c8196b7f4e,
-      type: 3}
   m_jumpData:
     curCount: 0
     maxCount: 1
@@ -299,7 +293,6 @@ MonoBehaviour:
     time: 0.15
     apexY: 0
     isJumping: 0
-    fixedYVel: 0
   m_gravityData:
     useGravity: 1
     acceleration: 40
@@ -327,7 +320,6 @@ MonoBehaviour:
   EndFollowing:
     m_PersistentCalls:
       m_Calls: []
-  JumpVel: {x: 0, y: 0}
   m_addSpeed: 2
   m_AtkActJumpHeight: 0.5
 --- !u!114 &2248344777037342470
@@ -410,6 +402,26 @@ MonoBehaviour:
   Time: 0.25
   SpriteRenderers:
   - {fileID: 7268275018201367324}
+--- !u!114 &10251628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569291923833692112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a24ee746b5dc1d448fa8741df306d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mData:
+    cntMin: 4
+    cntMax: 5
+    fCntMin: 0
+    fCntMax: 4
+    CurrentMode: 0
+    Corpse: {fileID: 3864375849378008672, guid: 3eb9ba50ec5f39141a7628c8196b7f4e,
+      type: 3}
 --- !u!1 &6529837628258330815
 GameObject:
   m_ObjectHideFlags: 0

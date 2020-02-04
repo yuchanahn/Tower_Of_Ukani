@@ -13,6 +13,11 @@ namespace Dongjun.Helper
 
     public static class General
     {
+        public static void GetComponent<T>(this GameObject go, ref T variable) where T : Component
+        {
+            variable = go.GetComponent<T>();
+        }
+
         public static void ClearChildren(this GameObject target)
         {
             for (int i = 0; i < target.transform.childCount; i++)
@@ -31,16 +36,6 @@ namespace Dongjun.Helper
 
     public static class ArrayExtensions
     {
-        public static int Push<T>(this T[] source, T value)
-        {
-            var index = Array.IndexOf(source, default);
-
-            if (index != -1)
-                source[index] = value;
-
-            return index;
-        }
-
         public static T GetClosest<T>(this Collider2D[] hits, Transform pivot) where T : class
         {
             if (hits == null || hits.Length == 0)

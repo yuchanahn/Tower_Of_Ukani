@@ -1,30 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Dongjun.Helper;
 using UnityEngine;
 
 public class PlayerStats : SingletonBase<PlayerStats>
 {
-    #region Var: Stats
-    private FloatStat health = new FloatStat(100, min: 0, max: 100);
-    private FloatStat stamina = new FloatStat(0, min: 0, max: 3);
-    private FloatStat staminaRegen = new FloatStat(0.5f, min: 0);
+    #region Var: Base Stats
+    private float base_health_Max = 100;
+    private float base_stamina_Max = 3;
+    private float base_staminaRegen = 0.5f;
+    #endregion
+
+    #region Var: Current Stats
+    private FloatStat health;
+    private FloatStat stamina;
+    private FloatStat staminaRegen;
 
     public bool AbsorbDamage = false;
     public bool IgnoreDamage = false;
     #endregion
 
-    #region Var: Data for Item Effect
+    #region Var: Data Stat Change Data
     [HideInInspector] public float DamageReceived;
     [HideInInspector] public float HealReceived;
     [HideInInspector] public float DamageToDeal;
-    [HideInInspector] public Mob_Base KilledMob;
+    public Mob_Base KilledMob { get; private set; }
+    public Mob_Base DamagedMob { get; private set; }
     #endregion
 
-    #region Var: Event On Stat Change
-    private Dictionary<GameObject, Action<FloatStat>> OnHealthChange = new Dictionary<GameObject, Action<FloatStat>>();
-    private Dictionary<GameObject, Action<FloatStat>> OnStaminaChange = new Dictionary<GameObject, Action<FloatStat>>();
+    #region Var: Event for UI
+    private readonly Dictionary<GameObject, Action<FloatStat>> OnHealthChange = new Dictionary<GameObject, Action<FloatStat>>();
+    private readonly Dictionary<GameObject, Action<FloatStat>> OnStaminaChange = new Dictionary<GameObject, Action<FloatStat>>();
     #endregion
 
     #region Var: Properties
@@ -38,15 +44,30 @@ public class PlayerStats : SingletonBase<PlayerStats>
     protected override void Awake()
     {
         base.Awake();
+
+        // Init Stats
+        health = new FloatStat(0, min: 0, max: base_health_Max);
+        stamina = new FloatStat(0, min: 0, max: base_stamina_Max);
+        staminaRegen = new FloatStat(base_staminaRegen, min: 0);
+
+        // Init
+        health.ModFlat = health.Max;
         SetStamina(stamina.Max);
     }
     private void LateUpdate()
     {
+        // Regen Stamina
         RegenStamina();
     }
     #endregion
 
-    #region Method: Change Stat (Self)
+    #region Method: Change Stat (Player)
+    public void ResetStats()
+    {
+        health.Max = base_health_Max;
+        staminaRegen.Reset();
+    }
+
     private void RegenStamina()
     {
         if (stamina.ModFlat >= stamina.Max)
@@ -82,6 +103,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
     public void Damage(float amount)
     {
+        // Check Ignore Damage
         if (IgnoreDamage)
             return;
 
@@ -89,7 +111,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         DamageReceived = AbsorbDamage ? 0 : Mathf.Abs(amount);
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Damaged);
+        ActionEffectManager.Trigger(PlayerActions.Damaged);
 
         // Apply Damage
         health.ModFlat -= DamageReceived;
@@ -114,7 +136,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         HealReceived = Mathf.Abs(amount);
 
         // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.Healed);
+        ActionEffectManager.Trigger(PlayerActions.Healed);
 
         // Apply Heal
         health.ModFlat += Mathf.Clamp(HealReceived, 0, health.Max - health.Value);
@@ -130,75 +152,55 @@ public class PlayerStats : SingletonBase<PlayerStats>
         IsDead = true;
 
         // TODO
-        // Play Death Animation
+        // Play Death Animation / Effect
 
         // Show Death Screen
     }
     #endregion
 
-    #region Method: Change Stat (Other)
-    public bool DealDamage(AttackData attackData, GameObject target)
-    {
-        IDamage iDamage = target.GetComponent<IDamage>();
-        if (iDamage == null)
-            return false;
-
-        // 피해 무시 채크
-        if (target.GetComponent<StatusEffect_IgnoreHit>() != null)
-            return false;
-
-        // Store Damage
-        DamageToDeal = attackData.damage.Value;
-
-        // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.DamageDealt);
-
-        // Damage Mob
-        float mobHP = iDamage.Hit(attackData);
-
-        // Trigger Item Effect
-        if (mobHP <= 0)
-        {
-            KilledMob = target.GetComponent<Mob_Base>();
-            ItemEffectManager.Trigger(PlayerActions.Kill);
-        }
-
-        return true;
-    }
+    #region Method: Change Stat (Mob / Other)
     public bool DealDamage(AttackData attackData, GameObject target, params PlayerActions[] actionToTrigger)
     {
+        // Get IDamage
         IDamage iDamage = target.GetComponent<IDamage>();
         if (iDamage == null)
             return false;
 
-        // 피해 무시 채크
+        // Check Ignore Hit (피해 무시)
         if (target.GetComponent<StatusEffect_IgnoreHit>() != null)
             return false;
 
         // Store Damage
         DamageToDeal = attackData.damage.Value;
 
-        // Trigger Item Effect
-        ItemEffectManager.Trigger(PlayerActions.DamageDealt);
+        // Store Damaged Mob
+        DamagedMob = target.GetComponent<Mob_Base>();
 
+        // Trigger Item Effect (Hit)
+        ActionEffectManager.Trigger(PlayerActions.DamageDealt);
+
+        // Trigger Item Effect (Other)
         for (int i = 0; i < actionToTrigger.Length; i++)
-            ItemEffectManager.Trigger(actionToTrigger[i]);
+            ActionEffectManager.Trigger(actionToTrigger[i]);
 
         // Damage Mob
         float mobHP = iDamage.Hit(attackData);
 
-        // Trigger Item Effect
+        // Trigger Item Effect (Kill)
         if (mobHP <= 0)
         {
             KilledMob = target.GetComponent<Mob_Base>();
-            ItemEffectManager.Trigger(PlayerActions.Kill);
+            ActionEffectManager.Trigger(PlayerActions.Kill);
         }
+
+        // Reset Damaged Mob
+        DamagedMob = null;
 
         return true;
     }
     #endregion
 
-    #region Method: On Stat Change Event
+    #region Method: Event for UI
     public void AddEvent_OnHealthChange(GameObject slef, Action<FloatStat> action)
     {
         if (OnHealthChange.ContainsKey(slef))
@@ -243,13 +245,6 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
             OnStaminaChange[key].Invoke(stamina);
         }
-    }
-    #endregion
-
-    #region Method: Misc
-    public void AddCorpsePrefab(GameObject corpsePrefab)
-    {
-
     }
     #endregion
 }

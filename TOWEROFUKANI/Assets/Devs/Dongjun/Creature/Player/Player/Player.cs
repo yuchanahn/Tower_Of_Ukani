@@ -20,9 +20,9 @@ public class Player : SSM_Main
     #endregion
 
     #region Var: CLA_Action
-    private Player_Normal_Action state_Normal;
-    private Player_Dash_Action state_Dash;
-    private Player_Kick_Action state_Kick;
+    private Player_Normal state_Normal;
+    private Player_Dash state_Dash;
+    private Player_Kick state_Kick;
     #endregion
 
     #region Method: Init
