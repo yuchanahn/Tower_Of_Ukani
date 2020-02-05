@@ -46,7 +46,7 @@ public class StatusEffect
         Action onEnd = null,
         Action onAction = null,
         Type afterThis = null,
-        int endTime = 0)
+        float endTime = 0)
     {
         ID = id;
         MobAction = mobAction;

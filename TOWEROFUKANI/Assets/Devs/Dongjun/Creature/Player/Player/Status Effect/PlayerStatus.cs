@@ -22,7 +22,13 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     }
     public void AddEffect(Mob_Base mob, MobAction mobAction, StatusEffect effect)
     {
-        List<StatusEffect> effects = dic_Effects[mob.StatusID][mobAction];
+        if (!dic_Effects.ContainsKey(mob.StatusID))
+            dic_Effects.Add(mob.StatusID, new Dictionary<MobAction, List<StatusEffect>>());
+
+        if (!dic_Effects[mob.StatusID].ContainsKey(mobAction))
+            dic_Effects[mob.StatusID].Add(mobAction, new List<StatusEffect>());
+
+        List <StatusEffect> effects = dic_Effects[mob.StatusID][mobAction];
 
         if (effects.Contains(effect))
             return;
