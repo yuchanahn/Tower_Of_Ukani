@@ -38,6 +38,7 @@ public enum eAttackST
 public abstract class Mob_Base : MonoBehaviour, IHurt
 {
     protected const float OverlapSlow = 0.65f;
+    public readonly StatusID StatusID = new StatusID();
     [SerializeField] LayerMask CreatureLayer;
     [SerializeField] protected Vector2 MobSize;
 
