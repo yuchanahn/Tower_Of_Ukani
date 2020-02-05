@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface ITimerData
 {
-    void Tick();
+    void Tick(float deltaTime);
 }
 
 public enum TickType
@@ -77,12 +77,12 @@ public class TimerData : ITimerData
     public void ToEnd() => CurTime = EndTime;
     #endregion
 
-    void ITimerData.Tick()
+    void ITimerData.Tick(float deltaTime)
     {
         if (!IsActive || IsEnded)
             return;
 
-        CurTime += Time.deltaTime;
+        CurTime += deltaTime;
         OnTick?.Invoke();
 
         if (CurTime >= EndTime)
@@ -156,12 +156,12 @@ public class TimerStat : ITimerData
     public void ToEnd() => CurTime = EndTime.Value;
     #endregion
 
-    void ITimerData.Tick()
+    void ITimerData.Tick(float deltaTime)
     {
         if (!IsActive || IsEnded)
             return;
 
-        CurTime += Time.deltaTime;
+        CurTime += deltaTime;
         OnTick?.Invoke();
 
         if (CurTime >= EndTime.Value)

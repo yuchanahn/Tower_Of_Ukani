@@ -29,13 +29,11 @@ public class ActionEffectManager : MonoBehaviour
         if (effects[action].Contains(itemEffect))
             return;
 
-        for (int i = 0; i < effects[action].Count; i++)
+        int index = effects[action].FindIndex(i => itemEffect.ThisType == i.AfterThis);
+        if (index != -1)
         {
-            if (itemEffect.ThisType == effects[action][i].AfterThis)
-            {
-                effects[action].Insert(i, itemEffect);
-                return;
-            }
+            effects[action].Insert(index, itemEffect);
+            return;
         }
 
         effects[action].Add(itemEffect);

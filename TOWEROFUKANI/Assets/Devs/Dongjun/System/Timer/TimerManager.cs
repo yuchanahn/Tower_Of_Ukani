@@ -36,7 +36,7 @@ public class TimerManager : SingletonBase<TimerManager>
 
             // Run Timer
             for (int j = timers[curTickingObj].Count - 1; j >= 0; j--)
-                timers[curTickingObj][j].Tick();
+                timers[curTickingObj][j].Tick(Time.deltaTime);
         }
     }
 
