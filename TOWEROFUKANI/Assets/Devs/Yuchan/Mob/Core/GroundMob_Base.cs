@@ -175,7 +175,7 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
 
 
         Animation();
-        Anim_Logic.SetAnimSpeed(m_ani, m_Ani[m_CurAniST].Item2);
+        m_ani.SetDuration(m_Ani[m_CurAniST].Item2);
         if (m_bAniStart) { m_ani.Play(m_Ani[m_CurAniST].Item1, 0, 0); m_bAniStart = false; }
         else m_ani.Play(m_Ani[m_CurAniST].Item1);
     }

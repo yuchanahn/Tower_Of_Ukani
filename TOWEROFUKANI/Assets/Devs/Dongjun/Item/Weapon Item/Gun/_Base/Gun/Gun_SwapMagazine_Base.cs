@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public abstract class Gun_SwapMagazine_Base<T> : Gun_State_Base<T> 
     where T : GunItem
@@ -33,7 +34,7 @@ public abstract class Gun_SwapMagazine_Base<T> : Gun_State_Base<T>
     }
     public override void OnLateEnter()
     {
-        weapon.animator.SetSpeed(weapon.swapMagazineTimer.EndTime.Value, weapon.ANIM_SwapMagazine);
+        weapon.animator.SetDuration(weapon.swapMagazineTimer.EndTime.Value, weapon.ANIM_SwapMagazine);
     }
     public override void OnExit()
     {

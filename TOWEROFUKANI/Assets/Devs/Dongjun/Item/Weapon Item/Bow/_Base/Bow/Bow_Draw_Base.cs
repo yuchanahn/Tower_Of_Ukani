@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public class Bow_Draw_Base<T> : Bow_State_Base<T>
     where T : BowItem
@@ -25,7 +26,7 @@ public class Bow_Draw_Base<T> : Bow_State_Base<T>
     public override void OnLateEnter()
     {
         // Animation Speed
-        weapon.animator.SetSpeed(weapon.drawTimer.EndTime.Value, weapon.ANIM_Draw);
+        weapon.animator.SetDuration(weapon.drawTimer.EndTime.Value, weapon.ANIM_Draw);
     }
     public override void OnExit()
     {

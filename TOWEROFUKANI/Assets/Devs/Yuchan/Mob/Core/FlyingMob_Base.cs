@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dongjun.Helper;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -104,7 +105,7 @@ public class FlyingMob_Base : Mob_Base
         
         mRb2d.velocity = Dir2d * MoveSpeed * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
         Animation();
-        Anim_Logic.SetAnimSpeed(mAnimator, m_Ani[mCurAniST].Item2);
+        mAnimator.SetDuration(m_Ani[mCurAniST].Item2);
         if (mAniStart) { mAnimator.Play(m_Ani[mCurAniST].Item1, 0, 0); mAniStart = false; }
         else mAnimator.Play(m_Ani[mCurAniST].Item1);
         

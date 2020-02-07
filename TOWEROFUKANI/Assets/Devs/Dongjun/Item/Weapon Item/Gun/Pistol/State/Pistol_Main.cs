@@ -1,4 +1,5 @@
-﻿    using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public class Pistol_Main : Gun_State_Base<PistolItem>
 {
@@ -51,7 +52,7 @@ public class Pistol_Main : Gun_State_Base<PistolItem>
         transform.AimMouse(Global.Inst.MainCam, transform);
 
         // Animation Speed
-        weapon.animator.SetSpeed(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
+        weapon.animator.SetDuration(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
     }
     #endregion
 

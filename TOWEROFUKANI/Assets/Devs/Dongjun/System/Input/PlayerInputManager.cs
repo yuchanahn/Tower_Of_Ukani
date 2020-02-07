@@ -8,11 +8,12 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     #endregion
 
     #region Var: Jump
-    public bool Input_Jump { get; private set; } = false;
+    public bool Input_Jump = false;
     #endregion
 
     #region Var: FallThrough
-    public bool Input_FallThrough { get; private set; } = false;
+    public bool Input_FallThrough
+    { get; private set; } = false;
     #endregion
 
     #region Var: Dash
@@ -51,7 +52,6 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     #region Method: Reset Input
     public void ResetInput()
     {
-        Input_Jump = false;
         Input_FallThrough = false;
         Input_DashDir = 0;
     }

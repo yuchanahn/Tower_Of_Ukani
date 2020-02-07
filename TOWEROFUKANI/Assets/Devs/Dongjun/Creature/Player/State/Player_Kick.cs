@@ -49,7 +49,7 @@ public class Player_Kick : SSM_State_wMain<Player>
     }
     #endregion
 
-    #region Method: CLA_Action
+    #region Method: SSM
     public override void OnEnter()
     {
         IsKicking = true;
@@ -57,8 +57,8 @@ public class Player_Kick : SSM_State_wMain<Player>
         rb2D.velocity = rb2D.velocity.Change(y: rb2D.velocity.y * yVelPercent);
 
         // Play Animation
-        animator.SetSpeed(duration);
-        animator.Play("Player_Kick", 0, 0f);
+        animator.SetDuration(duration);
+        animator.Play("Kick", 0, 0f);
 
         // Flip Sprite
         kickEffectSpriteRenderer.flipX = main.bodySpriteRenderer.flipX;

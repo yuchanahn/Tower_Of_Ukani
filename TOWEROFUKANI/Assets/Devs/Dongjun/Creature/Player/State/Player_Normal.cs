@@ -19,7 +19,6 @@ public class Player_Normal : SSM_State_wMain<Player>,
     #endregion
 
     #region Var: Jump
-    private bool jumpKeyPressed = false;
     private bool canPlayJumpAnim = true;
     #endregion
 
@@ -85,8 +84,8 @@ public class Player_Normal : SSM_State_wMain<Player>,
         main.groundDetectionData.FollowMovingPlatform(rb2D);
 
         // Jump
-        jumpKeyPressed = PlayerInputManager.Inst.Input_Jump;
-        jumpData.PlayerJump(ref jumpKeyPressed, rb2D, transform);
+        if (jumpData.Jump(ref PlayerInputManager.Inst.Input_Jump, rb2D, transform))
+            ActionEffectManager.Trigger(PlayerActions.Jump);
 
         // Gravity
         Gravity_Logic.ApplyGravity(rb2D,
@@ -103,13 +102,14 @@ public class Player_Normal : SSM_State_wMain<Player>,
     private void UpdateAnimation()
     {
         const string
-        Idle           = "Player_Idle",
-        Walk_Forward   = "Player_Walk_Forward",
-        Walk_Backward  = "Player_Walk_Backward",
-        Airborne       = "Player_Airborne",
-        Jump           = "Player_Jump",
-        AirJump        = "Player_AirJump";
+        Idle           = "Idle",
+        Walk_Forward   = "Walk_Forward",
+        Walk_Backward  = "Walk_Backward",
+        Airborne       = "Airborne",
+        Jump           = "Jump",
+        AirJump        = "AirJump";
 
+        // 땅위에 있을 때
         if (main.groundDetectionData.isGrounded)
         {
             animator.Play(

@@ -88,6 +88,53 @@ namespace Dongjun.Helper
         }
     }
 
+    public static class AnimationHelper
+    {
+        public static float CurrentClipTime(this Animator animator)
+        {
+            return animator.GetCurrentAnimatorStateInfo(0).length * (1 - animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        }
+        public static float CurrentClipLength(this Animator animator)
+        {
+            return animator.GetCurrentAnimatorStateInfo(0).length;
+        }
+
+        public static bool CheckCurrentClipName(this Animator animator, string nameToCompare)
+        {
+            return animator.GetCurrentAnimatorStateInfo(0).IsName(nameToCompare);
+        }
+        public static float GetNormalizedTime(this Animator animator)
+        {
+            return animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        }
+
+        public static void SetDuration(this Animator animator, float duration, string animName = null)
+        {
+            if ((animName != null && !animator.CheckCurrentClipName(animName)) || duration <= 0)
+            {
+                animator.speed = 1;
+                return;
+            }
+
+            animator.speed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / duration;
+        }
+        public static void SetDuration(this Animator animator, float duration, float maxDuration, string animName = null)
+        {
+            if ((animName != null && !animator.CheckCurrentClipName(animName)) || duration <= 0)
+            {
+                animator.speed = 1;
+                return;
+            }
+
+            duration = maxDuration <= 0 || duration < maxDuration ? duration : maxDuration;
+            animator.speed = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length / duration;
+        }
+        public static void ResetSpeed(this Animator animator)
+        {
+            animator.speed = 1;
+        }
+    }
+
     public static class VectorHelper
     {
         public static Vector2 Change(this Vector2 target, float? x = null, float? y = null)

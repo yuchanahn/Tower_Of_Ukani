@@ -40,7 +40,7 @@ public class Player_Dash : SSM_State_wMain<Player>
     }
     #endregion
 
-    #region Method: CLA_Action
+    #region Method: SSM
     public override void OnEnter()
     {
         // Set Value
@@ -50,7 +50,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         curTrailCount = 0;
 
         // Play Animation
-        animator.Play(dashDir == main.Dir ? "Player_Dash_Forward" : "Player_Dash_Backward", 0, 0f);
+        animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward", 0, 0f);
 
         // Player Will Not Take Damage
         PlayerStats.Inst.AbsorbDamage = true;

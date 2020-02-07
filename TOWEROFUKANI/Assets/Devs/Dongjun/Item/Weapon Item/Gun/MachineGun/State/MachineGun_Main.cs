@@ -65,7 +65,7 @@ public class MachineGun_Main : Gun_State_Base<MachineGunItem>
         transform.AimMouse(Global.Inst.MainCam, transform);
 
         // Animation Speed
-        weapon.animator.SetSpeed(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
+        weapon.animator.SetDuration(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
     }
     #endregion
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public abstract class Bow_Shoot_Base<T> : Bow_State_Base<T>
     where T : BowItem
@@ -39,7 +40,7 @@ public abstract class Bow_Shoot_Base<T> : Bow_State_Base<T>
         transform.AimMouse(Global.Inst.MainCam, transform);
 
         // Animation Speed
-        weapon.animator.SetSpeed(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
+        weapon.animator.SetDuration(weapon.shootTimer.EndTime.Value, maxShootAnimTime, weapon.ANIM_Shoot);
     }
     #endregion
 

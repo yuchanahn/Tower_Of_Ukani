@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public abstract class Gun_Reload_Base<T> : Gun_State_Base<T>
     where T : GunItem
@@ -22,7 +23,7 @@ public abstract class Gun_Reload_Base<T> : Gun_State_Base<T>
     public override void OnLateEnter()
     {
         // Set Animation Speed
-        weapon.animator.SetSpeed(weapon.reloadTimer.EndTime.Value, weapon.ANIM_Reload);
+        weapon.animator.SetDuration(weapon.reloadTimer.EndTime.Value, weapon.ANIM_Reload);
     }
     public override void OnExit()
     {
