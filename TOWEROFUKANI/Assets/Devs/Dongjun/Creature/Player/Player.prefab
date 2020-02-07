@@ -441,6 +441,7 @@ GameObject:
   - component: {fileID: 1571809755}
   - component: {fileID: 560649603753229986}
   - component: {fileID: 7371128404420445766}
+  - component: {fileID: 3688400116078953524}
   - component: {fileID: 5969363333450609748}
   - component: {fileID: 7371128404420445764}
   - component: {fileID: 2166807972467319143}
@@ -630,7 +631,6 @@ MonoBehaviour:
   DamageReceived: 0
   HealReceived: 0
   DamageToDeal: 0
-  KilledMob: {fileID: 0}
 --- !u!114 &560649603753229986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -679,6 +679,18 @@ MonoBehaviour:
     useGravity: 1
     acceleration: 40
     terminalVelocity: 20
+--- !u!114 &3688400116078953524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95dcac8066b67ad4aa15cbb409a2dee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5969363333450609748
 MonoBehaviour:
   m_ObjectHideFlags: 0

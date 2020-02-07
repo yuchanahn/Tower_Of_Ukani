@@ -14,28 +14,28 @@ public class StatusID { }
 public class StatusEffect
 {
     public StatusID ID
-    { get; private set; }
+    { get; protected set; }
     public MobAction MobAction
-    { get; private set; }
+    { get; protected set; }
     public GameObject Caster
     { get; protected set; }
     public StatusType StatusType
-    { get; private set; }
+    { get; protected set; }
 
     public Type AfterThis
-    { get; private set; } = null;
+    { get; protected set; } = null;
 
     public Action OnStart
-    { get; private set; }
+    { get; protected set; }
     public Action OnEnd
-    { get; private set; }
+    { get; protected set; }
     public Action OnAction
-    { get; private set; }
+    { get; protected set; }
 
     public TimerData Timer
-    { get; private set; } = null;
+    { get; protected set; } = null;
     public bool EndOnCasterDeath
-    { get; private set; }
+    { get; protected set; }
 
     public StatusEffect(
         StatusID id,
@@ -69,3 +69,4 @@ public class StatusEffect
         }
     }
 }
+

@@ -104,7 +104,7 @@ public abstract class SSM_Main : MonoBehaviour
         if (logics_State.ContainsKey(CurrentState))
             ChangeState(logics_State[CurrentState]());
 
-        if (logics_Event.ContainsKey(When.AnyAction))
+        if (logics_Event.ContainsKey(When.AnyAction) && logics_Event[When.AnyAction]() != null)
             ChangeState(logics_Event[When.AnyAction]());
     }
     #endregion

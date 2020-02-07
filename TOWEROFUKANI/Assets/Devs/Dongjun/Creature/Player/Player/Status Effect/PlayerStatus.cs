@@ -7,6 +7,12 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     private Dictionary<StatusID, Dictionary<MobAction, List<StatusEffect>>> dic_Effects = 
         new Dictionary<StatusID, Dictionary<MobAction, List<StatusEffect>>>();
 
+    private int stunCount = 0;
+    public bool IsStunned => stunCount > 0;
+
+    public void AddStunCount() => stunCount++;
+    public void RemoveStunCount() => stunCount--;
+
     public void Trigger(Mob_Base mob, MobAction mobAction)
     {
         for (int i = dic_Effects[mob.StatusID][mobAction].Count - 1; i >= 0; i--)
@@ -106,3 +112,55 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     }
 }
 
+public static class StatusCreator
+{
+    public static void CreateStatusEffect(
+        this Mob_Base mob,
+        MobAction mobAction,
+        StatusType statusType,
+        Action onStart = null,
+        Action onEnd = null,
+        Action onAction = null,
+        Type afterThis = null,
+        float endTime = 0)
+    {
+        PlayerStatus.Inst.AddEffect(
+            mob,
+            mobAction,
+            new StatusEffect(
+                mob.StatusID,
+                mobAction,
+                mob.gameObject,
+                statusType,
+                onStart,
+                onEnd,
+                onAction,
+                afterThis,
+                endTime));
+    }
+
+    public static void CreateStatusStun(
+        this Mob_Base mob,
+        MobAction mobAction,
+        StatusType statusType,
+        Action onStart = null,
+        Action onEnd = null,
+        Action onAction = null,
+        Type afterThis = null,
+        float endTime = 0)
+    {
+        PlayerStatus.Inst.AddEffect(
+            mob,
+            mobAction,
+            new StatusStun(
+                mob.StatusID,
+                mobAction,
+                mob.gameObject,
+                statusType,
+                onStart,
+                onEnd,
+                onAction,
+                afterThis,
+                endTime));
+    }
+}

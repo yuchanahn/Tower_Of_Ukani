@@ -19,7 +19,8 @@ public class Player : SSM_Main
     public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
     #endregion
 
-    #region Var: CLA_Action
+    #region Var: States
+    private Player_Stunned state_Stunned;
     private Player_Normal state_Normal;
     private Player_Dash state_Dash;
     private Player_Kick state_Kick;
@@ -28,6 +29,22 @@ public class Player : SSM_Main
     #region Method: Init
     protected override void InitStates()
     {
+        SetLogic(When.AnyAction, () =>
+        {
+            if (PlayerStatus.Inst.IsStunned)
+                return state_Stunned;
+
+            return null;
+        });
+
+        SetLogic(ref state_Stunned, () =>
+        {
+            if (!PlayerStatus.Inst.IsStunned)
+                return state_Normal;
+
+            return null;
+        });
+
         SetLogic(ref state_Normal, () => 
         {
             if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.Inst.UseStamina(1))
