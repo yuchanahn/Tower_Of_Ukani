@@ -8,15 +8,19 @@ public class StatusStun : StatusEffect
         MobAction mobAction,
         GameObject caster,
         StatusType statusType,
+        float endTime = 0,
         Action onStart = null,
         Action onEnd = null,
         Action onAction = null,
-        Type afterThis = null,
-    float endTime = 0) : base(id, mobAction, caster, statusType, onStart, onEnd, onAction, afterThis, endTime)
+        Type afterThis = null) : base(id, mobAction, caster, statusType, endTime, onStart, onEnd, onAction, afterThis)
     {
         PlayerStatus.Inst.AddStunCount();
 
-        Timer?.SetAction(OnEnd: () =>
+        if (Timer == null)
+            Timer = new TimerData();
+
+        Timer.EndTime = endTime;
+        Timer.SetAction(OnEnd: () =>
         {
             OnEnd?.Invoke();
             PlayerStatus.Inst.RemoveStunCount();

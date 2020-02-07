@@ -32,18 +32,10 @@ public class Player_Kick : SSM_State_wMain<Player>
     public bool IsKicking { get; private set; } = false;
     #endregion
 
-    #region Var: Components
-    private Animator animator;
-    private Rigidbody2D rb2D;
-    #endregion
-
     #region Method: Unity
     protected override void Awake()
     {
         base.Awake();
-
-        animator = GetComponent<Animator>();
-        rb2D = GetComponent<Rigidbody2D>();
 
         attackData = new AttackData(1);
     }
@@ -54,11 +46,11 @@ public class Player_Kick : SSM_State_wMain<Player>
     {
         IsKicking = true;
 
-        rb2D.velocity = rb2D.velocity.Change(y: rb2D.velocity.y * yVelPercent);
+        main.rb2D.velocity = main.rb2D.velocity.Change(y: main.rb2D.velocity.y * yVelPercent);
 
         // Play Animation
-        animator.SetDuration(duration);
-        animator.Play("Kick", 0, 0f);
+        main.animator.SetDuration(duration);
+        main.animator.Play("Kick", 0, 0f);
 
         // Flip Sprite
         kickEffectSpriteRenderer.flipX = main.bodySpriteRenderer.flipX;
@@ -66,20 +58,20 @@ public class Player_Kick : SSM_State_wMain<Player>
     public override void OnExit()
     {
         // Animation
-        animator.ResetSpeed();
+        main.animator.ResetSpeed();
     }
     public override void OnFixedUpdate()
     {
         // Detect Ground
-        main.groundDetectionData.DetectGround(true, rb2D, transform);
+        main.groundDetectionData.DetectGround(true, main.rb2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(rb2D, 
+        Gravity_Logic.ApplyGravity(main.rb2D, 
             main.groundDetectionData.isGrounded ? GravityData.Zero : 
             main.gravityData);
 
         // Walk
-        walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, rb2D, false);
+        walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.rb2D, false);
     }
     #endregion
 

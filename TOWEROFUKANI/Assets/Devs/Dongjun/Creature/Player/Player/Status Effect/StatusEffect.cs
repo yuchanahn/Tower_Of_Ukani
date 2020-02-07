@@ -42,11 +42,11 @@ public class StatusEffect
         MobAction mobAction,
         GameObject caster,
         StatusType statusType,
+        float endTime = 0,
         Action onStart = null,
         Action onEnd = null,
         Action onAction = null,
-        Type afterThis = null,
-        float endTime = 0)
+        Type afterThis = null)
     {
         ID = id;
         MobAction = mobAction;
@@ -60,6 +60,7 @@ public class StatusEffect
         if (endTime != 0)
         {
             Timer = new TimerData();
+            Timer.EndTime = endTime;
             Timer.SetTick(PlayerStatus.Inst.gameObject, TickType.Update).
                 SetAction(OnEnd: () => 
                 {

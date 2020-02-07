@@ -15,6 +15,12 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
 
     public void Trigger(Mob_Base mob, MobAction mobAction)
     {
+        if (!dic_Effects.ContainsKey(mob.StatusID))
+            return;
+
+        if (!dic_Effects[mob.StatusID].ContainsKey(mobAction))
+            return;
+
         for (int i = dic_Effects[mob.StatusID][mobAction].Count - 1; i >= 0; i--)
         {
             if (dic_Effects[mob.StatusID][mobAction].Count == 0)
@@ -118,11 +124,11 @@ public static class StatusCreator
         this Mob_Base mob,
         MobAction mobAction,
         StatusType statusType,
+        float endTime = 0,
         Action onStart = null,
         Action onEnd = null,
         Action onAction = null,
-        Type afterThis = null,
-        float endTime = 0)
+        Type afterThis = null)
     {
         PlayerStatus.Inst.AddEffect(
             mob,
@@ -132,22 +138,22 @@ public static class StatusCreator
                 mobAction,
                 mob.gameObject,
                 statusType,
+                endTime,
                 onStart,
                 onEnd,
                 onAction,
-                afterThis,
-                endTime));
+                afterThis));
     }
 
     public static void CreateStatusStun(
         this Mob_Base mob,
         MobAction mobAction,
         StatusType statusType,
+        float endTime,
         Action onStart = null,
         Action onEnd = null,
         Action onAction = null,
-        Type afterThis = null,
-        float endTime = 0)
+        Type afterThis = null)
     {
         PlayerStatus.Inst.AddEffect(
             mob,
@@ -157,10 +163,10 @@ public static class StatusCreator
                 mobAction,
                 mob.gameObject,
                 statusType,
+                endTime,
                 onStart,
                 onEnd,
                 onAction,
-                afterThis,
-                endTime));
+                afterThis));
     }
 }

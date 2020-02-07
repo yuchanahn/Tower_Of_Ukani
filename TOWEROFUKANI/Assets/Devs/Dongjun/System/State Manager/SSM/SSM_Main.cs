@@ -101,11 +101,14 @@ public abstract class SSM_Main : MonoBehaviour
     }
     protected virtual void RunConditionLogic()
     {
-        if (logics_State.ContainsKey(CurrentState))
-            ChangeState(logics_State[CurrentState]());
-
         if (logics_Event.ContainsKey(When.AnyAction) && logics_Event[When.AnyAction]() != null)
+        {
             ChangeState(logics_Event[When.AnyAction]());
+        }
+        else if(logics_State.ContainsKey(CurrentState))
+        {
+            ChangeState(logics_State[CurrentState]());
+        }
     }
     #endregion
 

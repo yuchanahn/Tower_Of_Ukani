@@ -22,11 +22,6 @@ public class Player_Dash : SSM_State_wMain<Player>
     int curTrailCount = 0;
     #endregion
 
-    #region Var: Components
-    private Animator animator;
-    private Rigidbody2D rb2D;
-    #endregion
-
     #region Var: Properties
     public bool IsDasing { get; private set; } = false;
     #endregion
@@ -35,8 +30,6 @@ public class Player_Dash : SSM_State_wMain<Player>
     protected override void Awake()
     {
         base.Awake();
-        animator = GetComponent<Animator>();
-        rb2D = GetComponent<Rigidbody2D>();
     }
     #endregion
 
@@ -50,7 +43,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         curTrailCount = 0;
 
         // Play Animation
-        animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward", 0, 0f);
+        main.animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward", 0, 0f);
 
         // Player Will Not Take Damage
         PlayerStats.Inst.AbsorbDamage = true;
@@ -61,7 +54,7 @@ public class Player_Dash : SSM_State_wMain<Player>
     public override void OnExit()
     {
         // Reset Velocity
-        rb2D.velocity = new Vector2(0, 0);
+        main.rb2D.velocity = new Vector2(0, 0);
 
         // Reset Value
         IsDasing = false;
@@ -81,7 +74,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         // Dash
         if (dashTime_Cur < dashTime)
         {
-            rb2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
+            main.rb2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
 
             // Trail Effect
             if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))

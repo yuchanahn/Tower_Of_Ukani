@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public class Player : SSM_Main
 {
@@ -16,6 +17,10 @@ public class Player : SSM_Main
     #endregion
 
     #region Var: Properties
+    public Rigidbody2D rb2D
+    { get; private set; }
+    public Animator animator
+    { get; private set; }
     public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
     #endregion
 
@@ -26,7 +31,14 @@ public class Player : SSM_Main
     private Player_Kick state_Kick;
     #endregion
 
-    #region Method: Init
+    protected override void Awake()
+    {
+        base.Awake();
+        rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
+
+    #region Method: Init States
     protected override void InitStates()
     {
         SetLogic(When.AnyAction, () =>
