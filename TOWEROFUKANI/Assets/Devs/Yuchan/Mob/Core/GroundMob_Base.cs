@@ -19,7 +19,7 @@ public struct StatusEffectData
     public int priority;
 }
 
-public class GroundMob_Base : Mob_Base, ICanDetectGround
+public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
 {
     #region Var: Inspector
 
@@ -357,6 +357,7 @@ public class GroundMob_Base : Mob_Base, ICanDetectGround
     public virtual void OnAttackEnd()
     {
     }
+
 
     public override void OnHurt(/* 총알 위치 */)
     {

@@ -73,6 +73,7 @@ public abstract class Mob_Base : MonoBehaviour, IHurt
             m_Ani[i.ST] = (i.ST.ToString(), i.t);
     }
 
+    public abstract void OnSuccessfulAttack();
     public abstract void OnDead();
     public abstract void OnHurt();
 }

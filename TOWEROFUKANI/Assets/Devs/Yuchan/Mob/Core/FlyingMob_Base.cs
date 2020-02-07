@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyingMob_Base : Mob_Base
+public abstract class FlyingMob_Base : Mob_Base
 {
     #region DATA
 

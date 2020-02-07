@@ -11,6 +11,7 @@ public class Mob_ColliderEvRecver : AColliderEvent
             if(i.tag == "Player")
             {
                 PlayerStats.Inst.Damage(GetComponentInChildren<AStat>().Damage);
+                GetComponent<Mob_Base>().OnSuccessfulAttack();
                 GetComponentInChildren<AColliderMgr>().Stop();
             }
         }

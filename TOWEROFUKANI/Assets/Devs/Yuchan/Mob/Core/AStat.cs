@@ -31,14 +31,7 @@ public class AStat : MonoBehaviour, IDamage
 
         var id = GetComponent<Mob_Base>().StatusID;
 
-        PlayerStatus.Inst.AddEffect(GetComponent<Mob_Base>(), MobAction.Hit, new StatusEffect(
-            id,  MobAction.Hit, gameObject, StatusType.Debuff, 
-            () => { Debug.Log("어떤 상태이상 시작."); } ,
-            ()=> { Debug.Log("업뎃"); },  
-            () => { Debug.Log("상태이상 끝"); }, endTime: 1)
-        );
         PlayerStatus.Inst.Trigger(GetComponent<Mob_Base>(), MobAction.Hit);
-
 
         GetComponent<HitColorEffect>().OnHit();
         GetComponent<IHurt>().OnHurt();

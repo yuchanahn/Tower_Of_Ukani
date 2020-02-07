@@ -134,4 +134,9 @@ public class Mob_WeepingMist : FlyingMob_Base
         base.OnDead();
         GetComponent<CorpseSpawner>().Spawn();
     }
+
+    public override void OnSuccessfulAttack()
+    {
+        throw new System.NotImplementedException();
+    }
 }
