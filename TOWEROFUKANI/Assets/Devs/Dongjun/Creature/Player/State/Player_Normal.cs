@@ -5,7 +5,6 @@ public class Player_Normal : SSM_State_wMain<Player>,
 {
     #region Var: Inspector
     [Header("Ref")]
-    [SerializeField] private Transform spriteRoot;
     [SerializeField] private BoxCollider2D oneWayCollider;
 
     [Header("Item PickUp")]
@@ -35,6 +34,7 @@ public class Player_Normal : SSM_State_wMain<Player>,
     {
         base.Awake();
 
+        // Init Ground Detection Size
         main.groundDetectionData.Size = oneWayCollider.size;
     }
     #endregion

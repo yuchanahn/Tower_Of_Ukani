@@ -31,12 +31,14 @@ public class Player : SSM_Main
     private Player_Kick state_Kick;
     #endregion
 
+    #region Method: Unity
     protected override void Awake()
     {
-        base.Awake();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        base.Awake();
     }
+    #endregion
 
     #region Method: Init States
     protected override void InitStates()
