@@ -8,7 +8,7 @@ public abstract class WeaponState_Base<T> : SSM_State
     #endregion
 
     #region Method: Unity
-    protected void Awake()
+    protected virtual void Awake()
     {
         weapon = GetComponent<T>();
     }

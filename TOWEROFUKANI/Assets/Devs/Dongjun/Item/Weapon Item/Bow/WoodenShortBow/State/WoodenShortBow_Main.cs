@@ -12,7 +12,7 @@ public class WoodenShortBow_Main : Bow_State_Base<WoodenShortBowItem>
     }
     public override void OnLateUpdate()
     {
-        if (!weapon.IsSelected)
+        if (PlayerStatus.Inst.IsStunned || !weapon.IsSelected)
             return;
 
         // Look At Mouse

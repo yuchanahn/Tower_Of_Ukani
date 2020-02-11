@@ -6,6 +6,10 @@
     DashStart,
     DashEnd,
 
+    // Status
+    Stunned,
+    StunEnd,
+
     // Health Change
     Damaged,
     Healed,

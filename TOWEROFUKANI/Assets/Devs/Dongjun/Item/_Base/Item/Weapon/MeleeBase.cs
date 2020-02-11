@@ -10,6 +10,7 @@ public abstract class MeleeItem : WeaponItem
     #region Var: Stats
     // Timer
     public readonly TimerStat basicAttackTimer = new TimerStat();
+    public readonly TimerStat heavyAttackTimer = new TimerStat();
     #endregion
 
     #region Method: Unity
@@ -17,6 +18,7 @@ public abstract class MeleeItem : WeaponItem
     {
         // Init Timer
         basicAttackTimer.SetTick(gameObject).ToEnd();
+        heavyAttackTimer.SetTick(gameObject).ToEnd();
     }
     #endregion
 
@@ -25,6 +27,7 @@ public abstract class MeleeItem : WeaponItem
     {
         attackData.Reset();
         basicAttackTimer.EndTime.Reset();
+        heavyAttackTimer.EndTime.Reset();
     }
     #endregion
 }

@@ -721,6 +721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryUI: {fileID: 0}
+  fist: {fileID: 6802882944117935053}
 --- !u!114 &4749230937349024608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,7 +871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashDist: 4
-  dashTime: 0.2
+  dashTime: 0.25
   spriteTrailObject: {fileID: 7287980144595261149, guid: 2604182f55f4d654b93a54d6b8afb46a,
     type: 3}
   trailDuration: 0.12
@@ -1003,7 +1004,7 @@ PrefabInstance:
     - target: {fileID: 368671185200428079, guid: 15b4942c57991d444ad169b86961eb55,
         type: 3}
       propertyPath: m_Name
-      value: Bare-knuckle
+      value: Fist
       objectReference: {fileID: 0}
     - target: {fileID: 368671185200428078, guid: 15b4942c57991d444ad169b86961eb55,
         type: 3}
@@ -1068,3 +1069,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1398428059}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6802882944117935053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6802882944977132118, guid: 15b4942c57991d444ad169b86961eb55,
+    type: 3}
+  m_PrefabInstance: {fileID: 1398428059}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91a152dd197cd4e418ae8606cf427411, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

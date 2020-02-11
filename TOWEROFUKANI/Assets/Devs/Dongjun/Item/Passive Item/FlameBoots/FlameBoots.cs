@@ -21,7 +21,6 @@ public class FlameBoots : PassiveItem
 
     #region Var: Collision Detection
     private OverlapCheckData overlapCheckData;
-    private List<Collider2D> prevHits = new List<Collider2D>();
     #endregion
 
     #region Var: Flame Dash
@@ -74,17 +73,13 @@ public class FlameBoots : PassiveItem
     private void FlameDash()
     {
         // Get Overlaps
-        Collider2D[] hits = Physics2D.OverlapBoxAll(GM.PlayerPos, damageSize, 0f, damageLayer);
-        overlapCheckData.OverlapCheck(hits);
+        overlapCheckData.OverlapCheck(Physics2D.OverlapBoxAll(GM.PlayerPos, damageSize, 0f, damageLayer));
 
         // Show Effect
         flameParticle.Play();
     }
     private void OnFlameDashHit(Collider2D overlap)
     {
-        if (overlap.CompareTag("Player"))
-            return;
-
         PlayerStats.Inst.DealDamage(flameDashAttackData, overlap.gameObject);
     }
 

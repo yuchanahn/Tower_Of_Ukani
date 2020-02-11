@@ -10,8 +10,18 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     private int stunCount = 0;
     public bool IsStunned => stunCount > 0;
 
-    public void AddStunCount() => stunCount++;
-    public void RemoveStunCount() => stunCount--;
+    public void AddStunCount()
+    {
+        stunCount++;
+        ActionEffectManager.Trigger(PlayerActions.Stunned);
+    }
+    public void RemoveStunCount()
+    {
+        stunCount--;
+
+        if (stunCount == 0)
+            ActionEffectManager.Trigger(PlayerActions.StunEnd);
+    }
 
     public void Trigger(Mob_Base mob, MobAction mobAction)
     {

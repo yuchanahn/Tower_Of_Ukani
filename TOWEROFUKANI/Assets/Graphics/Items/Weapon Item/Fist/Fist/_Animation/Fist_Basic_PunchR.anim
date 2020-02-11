@@ -38,17 +38,17 @@ AnimationClip:
     - time: 0
       value: {fileID: -7845065060392251170, guid: 40871726da4532b4783a5c95ce8f43ea,
         type: 3}
-    - time: 0.083333336
+    - time: 0.041666668
       value: {fileID: 3543212508219978796, guid: 40871726da4532b4783a5c95ce8f43ea,
         type: 3}
-    - time: 0.16666667
+    - time: 0.083333336
       value: {fileID: 4066273695370709225, guid: 40871726da4532b4783a5c95ce8f43ea,
         type: 3}
     attribute: m_Sprite
     path: Sprite Root
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 12
+  m_SampleRate: 24
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -78,7 +78,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.125
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -154,4 +154,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.125
+    functionName: OnAnimEnd_Attack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

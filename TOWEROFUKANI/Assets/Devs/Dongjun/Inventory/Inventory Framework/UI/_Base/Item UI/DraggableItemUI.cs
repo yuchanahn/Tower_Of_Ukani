@@ -74,7 +74,7 @@ public abstract class DraggableItemUI : ItemUI,
     {
         base.OnPointerDown(eventData);
 
-        if (Item.IsLocked)
+        if (Item.LockSlot)
         {
             eventData.pointerDrag = null;
             return;
@@ -94,7 +94,7 @@ public abstract class DraggableItemUI : ItemUI,
     }
     protected virtual void OnDrag(PointerEventData eventData)
     {
-        if (Item.IsLocked)
+        if (Item.LockSlot)
         {
             eventData.pointerDrag = null;
             return;

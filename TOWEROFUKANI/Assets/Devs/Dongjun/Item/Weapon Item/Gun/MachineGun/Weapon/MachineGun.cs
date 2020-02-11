@@ -11,6 +11,14 @@ public class MachineGun : GunController<MachineGunItem>
     #region Method: Init
     protected override void InitStates()
     {
+        SetLogic(When.AnyAction, () =>
+        {
+            if (PlayerStatus.Inst.IsStunned)
+                return state_Main;
+
+            return null;
+        });
+
         SetLogic(ref state_Main, () =>
         {
             if (!weaponItem.IsSelected)

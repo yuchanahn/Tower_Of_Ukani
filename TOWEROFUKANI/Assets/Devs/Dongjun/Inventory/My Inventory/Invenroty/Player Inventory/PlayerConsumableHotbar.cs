@@ -17,7 +17,7 @@ public class PlayerConsumableHotbar : ToU_Inventory
 
     private void ConsumeItem()
     {
-        if (!inventoryUI.gameObject.activeInHierarchy)
+        if (PlayerStatus.Inst.IsStunned || !inventoryUI.gameObject.activeInHierarchy)
             return;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

@@ -15,8 +15,8 @@ public abstract class Item : MonoBehaviour
     // Item Data
     public ItemInfo Info => info;
     public DroppedItem DroppedItemPrefab => droppedItemPrefab;
-    public bool IsLocked
-    { get; protected set; } = false;
+    public bool LockSlot
+    { get; set; } = false;
 
     // Inventory
     public InventoryBase Inventory

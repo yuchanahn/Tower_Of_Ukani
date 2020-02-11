@@ -11,6 +11,16 @@ public class WoodenShortBow : BowController<WoodenShortBowItem>
     #region Method: Init
     protected override void InitStates()
     {
+        SetLogic(When.AnyAction, () =>
+        {
+            if (PlayerStatus.Inst.IsStunned)
+                return state_Main;
+
+            return null;
+        });
+
+        SetLogic(When.OnDisable, () => state_Main);
+
         SetLogic(ref state_Main, () => 
         {
             if (PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
@@ -35,7 +45,6 @@ public class WoodenShortBow : BowController<WoodenShortBowItem>
             return null;
         });
 
-        SetLogic(When.OnDisable, () => state_Main);
 
         SetDefaultState(state_Main);
     }

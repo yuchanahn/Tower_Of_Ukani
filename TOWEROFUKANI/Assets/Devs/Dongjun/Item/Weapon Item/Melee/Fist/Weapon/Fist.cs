@@ -7,12 +7,6 @@ public class Fist : MeleeController<FistItem>
     private Fist_Slam state_Slam;
     private Fist_Dash state_Dash;
 
-    protected override void RunConditionLogic()
-    {
-        // Select This When Empty
-        weaponItem.Select(PlayerInventoryManager.weaponHotbar.CurWeapon == null);
-        base.RunConditionLogic();
-    }
     protected override void InitStates()
     {
         SetLogic(ref state_Basic, () =>

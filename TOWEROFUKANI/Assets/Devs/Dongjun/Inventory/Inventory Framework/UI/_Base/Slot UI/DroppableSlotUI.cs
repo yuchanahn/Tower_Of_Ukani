@@ -9,6 +9,10 @@ public class DroppableSlotUI : SlotUI,
     private Func<int, InventoryBase, int, bool> onMoveItem;
     #endregion
 
+    #region Var: Slot
+    public bool IsLocked = false;
+    #endregion
+
     #region Method: Init
     public virtual void Init(Func<int, InventoryBase, int, bool> onMoveItem)
     {
@@ -30,6 +34,9 @@ public class DroppableSlotUI : SlotUI,
     #region Interface: Unity UI Event
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
+        if (IsLocked)
+            return;
+
         DraggableItemUI droppedItem = eventData.pointerDrag.gameObject.GetComponent<DraggableItemUI>();
         if (droppedItem == null)
             return;
@@ -45,7 +52,7 @@ public class DroppableSlotUI : SlotUI,
         }
 
         // Check IsLocked
-        if (inventoryUI.itemUIs[Index]?.Item.IsLocked ?? false || droppedItem.Item.IsLocked)
+        if (inventoryUI.itemUIs[Index]?.Item.LockSlot ?? false || droppedItem.Item.LockSlot)
             return;
 
         // Trigger Action

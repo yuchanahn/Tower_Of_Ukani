@@ -2,10 +2,17 @@
 
 public class PlayerWeaponHotbar : ToU_Inventory
 {
+    #region Var: Inspector
+    [SerializeField] private FistItem fist;
+    #endregion
+
     #region Var: Properties
     public int CurSlot
     { get; private set; } = 0;
     public WeaponItem CurWeapon => items[CurSlot] as WeaponItem;
+
+    private int canChangeSlot = 0;
+    public bool IsSlotLocked => canChangeSlot != 0;
     #endregion
 
     #region Method: Unity
@@ -19,17 +26,48 @@ public class PlayerWeaponHotbar : ToU_Inventory
 
         // Select Slot 0
         (inventoryUI.slotUIs[CurSlot] as WeaponHotbarSlot).Select(true);
+
+        // Select Weapon
+        fist.Select(CurWeapon == null);
+
+        // Lock / Unlock On Stun
+        ActionEffectManager.AddEffect(PlayerActions.Stunned, new ActionEffect(() => LockSlot(true), typeof(PlayerWeaponHotbar)));
+        ActionEffectManager.AddEffect(PlayerActions.StunEnd, new ActionEffect(() => LockSlot(false), typeof(PlayerWeaponHotbar)));
     }
     private void Update()
     {
-        ChangeWeapon();
+        if (PlayerStatus.Inst.IsStunned)
+            return;
+
+        ChangeSlot();
         DropWeapon();
     }
     #endregion
 
     #region Method: Weapon Hotbar
-    private void ChangeWeapon()
+    public void LockChangeSlot(bool _lock)
     {
+        if (_lock) canChangeSlot++;
+        else canChangeSlot--;
+
+        canChangeSlot = Mathf.Max(canChangeSlot, 0);
+
+        if (PlayerStatus.Inst.IsStunned)
+            return;
+
+        LockSlot(IsSlotLocked);
+    }
+    public void LockSlot(bool _lock)
+    {
+        for (int i = 0; i < inventoryUI.slotUIs.Length; i++)
+            (inventoryUI.slotUIs[i] as DroppableSlotUI).IsLocked = _lock;
+    }
+
+    private void ChangeSlot()
+    {
+        if (IsSlotLocked)
+            return;
+
         const int TO_RIGHT = 1;
         const int TO_LEFT = -1;
 
@@ -50,13 +88,14 @@ public class PlayerWeaponHotbar : ToU_Inventory
         // Scroll
         if (Input.mouseScrollDelta.y < 0) UpdateHotbar(TO_RIGHT);
         if (Input.mouseScrollDelta.y > 0) UpdateHotbar(TO_LEFT);
+
+        // Toggle Fist
+        fist.Select(CurWeapon == null);
     }
     private void DropWeapon()
     {
-        if (Input.GetKeyDown(PlayerActionKeys.DropWeapon))
-        {
+        if (Input.GetKeyDown(PlayerActionKeys.DropWeapon) && CurWeapon != null)
             DropItem(CurSlot);
-        }
     }
     #endregion
 }

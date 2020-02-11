@@ -33,24 +33,17 @@ public class Shotgun_Main : Gun_State_Base<ShotgunItem>
     }
     public override void OnUpdate()
     {
-        if (!weapon.IsSelected || !weapon.isBulletLoaded)
+        if (PlayerStatus.Inst.IsStunned || !weapon.IsSelected || !weapon.isBulletLoaded)
             return;
 
-        // Shoot
-        if (weapon.shootTimer.IsEnded)
-        {
+        if (IsAnimEnded_Shoot)
             weapon.animator.Play(weapon.ANIM_Idle);
 
-            if (PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility))
-            {
-                weapon.shootTimer.Restart();
-                Shoot();
-            }
-        }
+        Shoot();
     }
     public override void OnLateUpdate()
     {
-        if (!weapon.IsSelected)
+        if (PlayerStatus.Inst.IsStunned || !weapon.IsSelected)
             return;
 
         // Look At Mouse
@@ -64,6 +57,11 @@ public class Shotgun_Main : Gun_State_Base<ShotgunItem>
     #region Method: Shoot
     private void Shoot()
     {
+        if (!weapon.shootTimer.IsEnded || !PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
+            return;
+
+        weapon.shootTimer.Restart();
+
         SpawnBullet();
         ShootEffects();
 
