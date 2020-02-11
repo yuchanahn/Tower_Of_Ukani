@@ -39,7 +39,7 @@ public class GridView : MonoBehaviour
         Inst[Target_Object_Size] = this;
 
         JPSState.state = eJPSState.ST_OBSTACLE_BUILDING;
-        _pathRenderer.disablePath();
+        //_pathRenderer.disablePath();
         findPath = null;
         selectedPathPoints.Clear();
         resize();
@@ -47,9 +47,9 @@ public class GridView : MonoBehaviour
 
     void Start()
     {
-        Debug.Assert(_pathRenderer != null, "Path Renderer isn't set!");
+        //Debug.Assert(_pathRenderer != null, "Path Renderer isn't set!");
 
-        _pathRenderer._gridView = this;
+        //_pathRenderer._gridView = this;
     }
 
     // Update is called once per frame

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using System;
+using Dongjun.Helper;
 
 public class CliffDetect_Logic
 {
@@ -56,4 +58,60 @@ public class CliffDetect_Logic
 
         return !(obj.Length > 0);
     }
+
+    static RaycastHit2D[] CheckForword(Vector2 Start, Vector2 Size, float Dir, float Dist, LayerMask lyr)
+    {
+        return Physics2D.BoxCastAll(Start, Size, 0, Vector2.right * Dir, Dist, lyr);
+    }
+
+    static Point GetGridPos(RaycastHit2D t)
+    {
+        return GridView.Inst[1].GetNodeAtWorldPostiton(t.transform.position).pos;
+    }
+    static bool IsWall(Point point)
+    {
+        return GridView.Inst[1].grid.GetNode(point).isObstacle;
+    }
+
+    static public bool CanGo2(Vector2 Pos1, float JumpHeight, int Dir, float Speed, Vector2 size, LayerMask wallLayer, bool show = false)
+    {
+        size.y *= 0.99f;
+
+        bool Possible = false;
+        var MaxHeightY = Pos1.Add(y: JumpHeight).y;
+
+        // 먼저 현위치에서 점프 높이까지 수직으로 검사.
+        var c = Physics2D.BoxCastAll(Pos1, size, 0, Vector2.up, JumpHeight, wallLayer);
+
+        // 위에 벽에 걸렸을 경우.
+        if (c.Length > 0)
+        {
+            c.OrderByDescending(d => d.collider.transform.position.y);
+            MaxHeightY = c[0].transform.position.Foot(Vector2.one).y;
+        }
+
+        // 벽의 Y좌표를 점프 최대 높이로 계산한 뒤 검사를 시작한다.
+        var check = CheckForword(Pos1, size, Dir, Speed * Time.fixedDeltaTime, wallLayer);
+        if (check.Length == 0) return true;
+        check.OrderByDescending(d => d.collider.transform.position.y);
+
+        int NotWallStack = 0;
+        
+        var point = GetGridPos(check[0]);
+
+        for (var i = 0; i < (MaxHeightY - Pos1.y) + 1; i++, --point.row)
+        {
+            if (!IsWall(point))
+            {
+                Possible = Possible ? true : (size.y <= ++NotWallStack);
+                Debug.Log("c : "+NotWallStack);
+            }
+            else
+            {
+                NotWallStack = 0;
+            }
+        }
+        return Possible;
+    }
+
 }

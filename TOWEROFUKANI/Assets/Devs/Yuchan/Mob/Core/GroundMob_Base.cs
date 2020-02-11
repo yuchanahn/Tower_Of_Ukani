@@ -109,12 +109,13 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
         m_groundDetectionData.Size,
         m_groundDetectionData.GroundLayers);
 
-    public bool IsJumpHeightHitWall => !CliffDetect_Logic.CanGo(
-    transform.position.Add(y : m_jumpHeight),
+    public bool IsJumpHeightHitWall => !CliffDetect_Logic.CanGo2(
+    transform.position,
+    m_jumpHeight,
     Dir,
     m_MoveData.Speed,
     m_groundDetectionData.Size,
-    m_followData.CantMoveGround);
+    m_followData.CantMoveGround, true);
 
     public bool IsOneWayInForword => !CliffDetect_Logic.CanGo(
     transform.position,
