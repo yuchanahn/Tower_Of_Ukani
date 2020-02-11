@@ -8,6 +8,9 @@ public class JPS_PathFinder : MonoBehaviour
 {
     [SerializeField] GridView gridV;
     [SerializeField] Grid gridJPS => gridV.grid;
+
+
+
     public Vector2[] Find( Vector2 start, Vector2 stop )
     {
         Vector2[] dir = {

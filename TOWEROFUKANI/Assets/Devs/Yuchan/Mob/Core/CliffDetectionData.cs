@@ -104,7 +104,6 @@ public class CliffDetect_Logic
             if (!IsWall(point))
             {
                 Possible = Possible ? true : (size.y <= ++NotWallStack);
-                Debug.Log("c : "+NotWallStack);
             }
             else
             {

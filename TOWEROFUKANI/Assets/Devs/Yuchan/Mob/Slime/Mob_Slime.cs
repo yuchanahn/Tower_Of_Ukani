@@ -41,7 +41,6 @@ public class Mob_Slime : GroundMob_Base
 
     public override void OnSuccessfulAttack()
     {
-        Debug.Log("Player Stun");
         this.CreateStatusStun(mobAction: MobAction.None, statusType: StatusType.Debuff, endTime: 1f);
     }
 }

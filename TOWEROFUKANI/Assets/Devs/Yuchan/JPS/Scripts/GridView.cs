@@ -93,6 +93,10 @@ public class GridView : MonoBehaviour
         var point = WorldToGrid(position);
         return grid.getNode(point.row, point.column);
     }
+    public Node GetNodeAtWorldPostiton(Point point)
+    {
+        return grid.getNode(point.row, point.column);
+    }
 
     public void CreatePrefab(Vector3 pos)
     {

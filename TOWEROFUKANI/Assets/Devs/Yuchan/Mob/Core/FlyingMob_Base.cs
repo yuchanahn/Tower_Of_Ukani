@@ -26,7 +26,8 @@ public abstract class FlyingMob_Base : Mob_Base
 
     int NextLinkIdx => Mathf.Min(mLinkIdx + 1, MoveLink.Length);
     Vector2 NextPath => MoveLink[NextLinkIdx];
-    Vector2 Dir2d {
+    public FlyMobMove_ MoveData => mMoveData;
+    public Vector2 Dir2d {
         get
         {
             Vector2 nextPos = transform.position + (Vector3)mMoveData.Dir2d * Time.fixedDeltaTime * MoveSpeed;
@@ -102,13 +103,11 @@ public abstract class FlyingMob_Base : Mob_Base
 
     void FixedUpdate()
     {
-        
         mRb2d.velocity = Dir2d * MoveSpeed * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
         Animation();
         mAnimator.SetDuration(m_Ani[mCurAniST].Item2);
         if (mAniStart) { mAnimator.Play(m_Ani[mCurAniST].Item1, 0, 0); mAniStart = false; }
         else mAnimator.Play(m_Ani[mCurAniST].Item1);
-        
     }
 
     public virtual bool Stunned()
@@ -116,6 +115,23 @@ public abstract class FlyingMob_Base : Mob_Base
         return true;
     }
 
+
+    public void SetAni(eMobAniST ani)
+    {
+        if (mAnimator.speed == 0)
+        {
+            AniPlay();
+        }
+        mCurAniST = ani;
+    }
+    public void AniStop()
+    {
+        mAnimator.speed = 0;
+    }
+    public void AniPlay()
+    {
+        mAnimator.speed = 1;
+    }
 
     //======================================================================
     //      ## Attack
@@ -125,6 +141,8 @@ public abstract class FlyingMob_Base : Mob_Base
 
     protected bool mAttacking = false;
     public bool IsAttacking => mAttacking;
+
+    
 
     virtual public bool OnAttack()
     {
@@ -179,8 +197,8 @@ public abstract class FlyingMob_Base : Mob_Base
     // # Rnadom Move
     // 이동주기
     [Header("MovementRate")]
-    [SerializeField] float MoveTimeIdle = 1f;
-    [SerializeField] float MoveTimeMove = 3f;
+    [SerializeField] public float MoveTimeIdle = 1f;
+    [SerializeField] public float MoveTimeMove = 3f;
 
     float MoveTime = 3f;
     float MoveT = 0;

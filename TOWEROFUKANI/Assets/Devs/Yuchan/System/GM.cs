@@ -7,8 +7,10 @@ public class GM : MonoBehaviour
     static GM Inst;
 
     Player player;
+    [SerializeField] LayerMask soildGround;
 
     public static Player Player => Inst.player;
+    public static LayerMask SoildGroundLayer => Inst.soildGround;
     public static Vector2 PlayerSize => new Vector2(0.5f,0.8f);
     public static GameObject PlayerObj => Inst.player.gameObject;
     public static Vector3 PlayerPos => Inst.player.transform.position;

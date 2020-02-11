@@ -18,6 +18,11 @@ public enum eMobAniST
     Spread,
     Merge,
     Death,
+    Attack,
+    Hang,
+
+
+
 
     Last,
 }
