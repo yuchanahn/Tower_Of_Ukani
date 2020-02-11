@@ -22,6 +22,7 @@ public class Player : SSM_Main
     public Animator animator
     { get; private set; }
     public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
+    public bool IsDashing => CurrentState == state_Dash;
     #endregion
 
     #region Var: States
@@ -43,18 +44,18 @@ public class Player : SSM_Main
     #region Method: Init States
     protected override void InitStates()
     {
-        SetLogic(When.AnyAction, () =>
-        {
-            if (PlayerStatus.Inst.IsStunned)
-                return state_Stunned;
-
-            return null;
-        });
-
         SetLogic(ref state_Stunned, () =>
         {
             if (!PlayerStatus.Inst.IsStunned)
                 return state_Normal;
+
+            return null;
+        });
+
+        SetLogic(When.AnyAction, () =>
+        {
+            if (PlayerStatus.Inst.IsStunned)
+                return state_Stunned;
 
             return null;
         });
@@ -77,7 +78,7 @@ public class Player : SSM_Main
                 return state_Normal;
 
             // Cancle On End
-            if (!state_Dash.IsDasing)
+            if (state_Dash.DashDone)
                 return state_Normal;
 
             return null;

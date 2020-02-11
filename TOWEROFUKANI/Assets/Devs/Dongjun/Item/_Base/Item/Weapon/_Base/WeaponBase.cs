@@ -14,13 +14,13 @@ public abstract class WeaponController<T> : WeaponController_Base
     #region Method: Unity
     protected override void Awake()
     {
-        base.Awake();
         weaponItem = GetComponent<T>();
         animator = GetComponent<Animator>();
+        base.Awake();
     }
     #endregion
 
-    #region Method: CLA
+    #region Method: SSM
     protected override void RunConditionLogic()
     {
         if (!weaponItem.IsSelected)

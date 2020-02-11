@@ -15,10 +15,11 @@ public abstract class WeaponState_Base<T> : SSM_State
     #endregion
 }
 
+public abstract class Melee_State_Base<T> : WeaponState_Base<T>
+    where T : MeleeItem { }
+
 public abstract class Gun_State_Base<T> : WeaponState_Base<T>
-    where T : GunItem
-{ }
+    where T : GunItem { }
 
 public abstract class Bow_State_Base<T> : WeaponState_Base<T>
-    where T : BowItem
-{ }
+    where T : BowItem { }

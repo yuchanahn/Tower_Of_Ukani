@@ -52,6 +52,10 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     #region Method: Reset Input
     public void ResetInput()
     {
+        // Hmm.....
+        if (Input.GetKeyUp(PlayerMovementKeys.Jump))
+            Input_Jump = false;
+
         Input_FallThrough = false;
         Input_DashDir = 0;
     }

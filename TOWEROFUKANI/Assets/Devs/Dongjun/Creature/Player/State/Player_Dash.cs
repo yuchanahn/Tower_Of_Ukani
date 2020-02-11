@@ -23,7 +23,7 @@ public class Player_Dash : SSM_State_wMain<Player>
     #endregion
 
     #region Var: Properties
-    public bool IsDasing { get; private set; } = false;
+    public bool DashDone { get; private set; } = false;
     #endregion
 
     #region Method: Unity
@@ -36,11 +36,15 @@ public class Player_Dash : SSM_State_wMain<Player>
     #region Method: SSM
     public override void OnEnter()
     {
-        // Set Value
-        IsDasing = true;
+        // Init Value
+        DashDone = false;
         dashTime_Cur = 0;
         dashDir = PlayerInputManager.Inst.Input_DashDir;
         curTrailCount = 0;
+
+        // Lock Dir When Using Melee Weapon
+        if (PlayerInventoryManager.weaponHotbar.CurWeapon == null || PlayerInventoryManager.weaponHotbar.CurWeapon is MeleeItem)
+            main.bodySpriteRenderer.flipX = dashDir == 1 ? false : true;
 
         // Play Animation
         main.animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward", 0, 0f);
@@ -57,7 +61,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         main.rb2D.velocity = new Vector2(0, 0);
 
         // Reset Value
-        IsDasing = false;
+        DashDone = false;
         dashDir = 0;
 
         // Player Will Take Damage
@@ -88,7 +92,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         }
         else
         {
-            IsDasing = false;
+            DashDone = true;
             return;
         }
     }

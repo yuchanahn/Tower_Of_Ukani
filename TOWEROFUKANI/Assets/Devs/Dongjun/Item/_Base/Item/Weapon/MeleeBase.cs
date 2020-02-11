@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public abstract class FistController<T> : WeaponController<T> where T : FistItem { }
-public abstract class FistItem : WeaponItem
+public abstract class MeleeController<T> : WeaponController<T> where T : MeleeItem { }
+public abstract class MeleeItem : WeaponItem
 {
     #region Var: Animation Names
-    public readonly string ANIM_Neutral = "Idle";
+    public readonly string ANIM_Neutral = "Neutral";
     #endregion
 
     #region Var: Stats
