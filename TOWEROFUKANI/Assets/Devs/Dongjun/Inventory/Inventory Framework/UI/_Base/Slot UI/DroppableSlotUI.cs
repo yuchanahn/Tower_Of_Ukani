@@ -52,7 +52,7 @@ public class DroppableSlotUI : SlotUI,
         }
 
         // Check IsLocked
-        if (inventoryUI.itemUIs[Index]?.Item.LockSlot ?? false || droppedItem.Item.LockSlot)
+        if (inventoryUI.itemUIs[Index]?.Item.LockInSlot ?? false || droppedItem.Item.LockInSlot)
             return;
 
         // Trigger Action

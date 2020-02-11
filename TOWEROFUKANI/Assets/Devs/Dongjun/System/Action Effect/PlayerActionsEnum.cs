@@ -32,4 +32,10 @@
     // Bow
     BowHit,
     BowShoot,
+
+    // Melee
+    MeleeBasic,
+    MeleeHeavy,
+    MeleeSlam,
+    MeleeDash,
 }

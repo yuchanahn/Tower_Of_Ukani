@@ -51,7 +51,7 @@ public abstract class ActiveItem : UpgradableItem
             return;
 
         IsActive = true;
-        LockSlot = true;
+        LockInSlot = true;
         OnActivate();
     }
     protected abstract void OnActivate();
@@ -59,7 +59,7 @@ public abstract class ActiveItem : UpgradableItem
     public virtual void Deactivate()
     {
         IsActive = false;
-        LockSlot = false;
+        LockInSlot = false;
     }
     #endregion
 }

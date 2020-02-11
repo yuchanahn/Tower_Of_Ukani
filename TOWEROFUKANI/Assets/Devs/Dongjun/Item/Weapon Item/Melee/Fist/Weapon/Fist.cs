@@ -11,11 +11,17 @@ public class Fist : MeleeController<FistItem>
     {
         SetLogic(ref state_Basic, () =>
         {
+            if (Input.GetKey(PlayerWeaponKeys.SubAbility))
+                return state_Heavy;
+
             return null;
         });
 
         SetLogic(ref state_Heavy, () =>
         {
+            if (state_Heavy.PunchAnimEnd)
+                return state_Basic;
+
             return null;
         });
 

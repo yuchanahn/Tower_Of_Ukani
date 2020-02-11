@@ -16,6 +16,12 @@ public class Player : SSM_Main
     public GravityData gravityData;
     #endregion
 
+    #region Var: Player
+    public bool CanMelee = true;
+    public bool CanDash = true;
+    public bool CanKick = true;
+    #endregion
+
     #region Var: Properties
     public Rigidbody2D rb2D
     { get; private set; }
@@ -62,10 +68,10 @@ public class Player : SSM_Main
 
         SetLogic(ref state_Normal, () => 
         {
-            if (PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.Inst.UseStamina(1))
+            if (CanDash && PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.Inst.UseStamina(1))
                 return state_Dash;
 
-            if (Input.GetKeyDown(PlayerActionKeys.Kick))
+            if (CanKick && Input.GetKeyDown(PlayerActionKeys.Kick))
                 return state_Kick;
 
             return null;

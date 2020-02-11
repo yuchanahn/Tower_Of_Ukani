@@ -156,7 +156,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.125
-    functionName: OnAnimEnd_Attack
+    functionName: OnAnimEnd_Basic
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

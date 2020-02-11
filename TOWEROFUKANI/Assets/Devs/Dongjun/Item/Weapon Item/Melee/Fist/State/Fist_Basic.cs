@@ -27,7 +27,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
     #region Method: SSM
     public override void OnExit()
     {
-        OnAnimEnd_Attack();
+        OnAnimEnd_Basic();
     }
     public override void OnUpdate()
     {
@@ -36,7 +36,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
 
         if (PlayerStatus.Inst.IsStunned)
         {
-            OnAnimEnd_Attack();
+            OnAnimEnd_Basic();
             weapon.animator.Play(weapon.ANIM_Neutral);
             return;
         }
@@ -66,33 +66,51 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         var hits = Physics2D.OverlapBoxAll(damagePoint.position, damageSize, 0f, damageLayer);
         for (int i = 0; i < hits.Length; i++)
         {
-            PlayerStats.Inst.DealDamage(new AttackData(2), hits[i].gameObject);
+            // TODO: 무기 힛? 아님 주먹 힛? 아님 둘다?
+            PlayerStats.Inst.DealDamage(new AttackData(2), hits[i].gameObject, PlayerActions.WeaponHit);
         }
 
         // Lock Weapon Slot
         PlayerInventoryManager.weaponHotbar.LockChangeSlot(true);
 
         // Animation
-        IsAnimEnded_Attack = false;
-        weapon.animator.Play(prevAttackAnim == 1 ? "Basic_PunchR" : "Basic_PunchL");
-        prevAttackAnim *= -1;
+        BasicAttackAnim_Start();
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.WeaponMain);
-        ActionEffectManager.Trigger(PlayerActions.GunShoot);
+        ActionEffectManager.Trigger(PlayerActions.MeleeBasic);
+    }
+
+    private void BasicAttackAnim_Start()
+    {
+        GM.Player.CanDash = false;
+        GM.Player.CanKick = false;
+
+        IsAnimEnded_Attack = false;
+        weapon.animator.Play(prevAttackAnim == 1 ? "Basic_PunchR" : "Basic_PunchL");
+        prevAttackAnim *= -1;
+    }
+    private void BasicAttackAnim_End()
+    {
+        GM.Player.CanDash = true;
+        GM.Player.CanKick = true;
+
+        IsAnimEnded_Attack = true;
     }
     #endregion
 
     #region Method: Anim Event
-    private void OnAnimEnd_Attack()
+    private void OnAnimEnd_Basic()
     {
+        // Reset Timer
         weapon.basicAttackTimer.Restart();
 
         // Unlock Weapon Slot
         if (!IsAnimEnded_Attack)
             PlayerInventoryManager.weaponHotbar.LockChangeSlot(false);
 
-        IsAnimEnded_Attack = true;
+        // Animation
+        BasicAttackAnim_End();
         weapon.animator.ResetSpeed();
     }
     #endregion
