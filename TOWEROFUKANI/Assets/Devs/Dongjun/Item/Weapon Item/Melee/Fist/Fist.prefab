@@ -218,6 +218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52b619763397e74c80d2a889ec276cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  damagePoint: {fileID: 8337588583469459949}
+  damageSize: {x: 1, y: 0.5}
+  slamDone: 0
 --- !u!114 &3930636927227531425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +269,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3864906082717699522}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2288104045111468068
 GameObject:
@@ -295,6 +301,36 @@ Transform:
   m_Father: {fileID: 3864906082717699522}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4379297577321621636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8337588583469459949}
+  m_Layer: 30
+  m_Name: SlamAttack Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8337588583469459949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379297577321621636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3864906082717699522}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7390389034092274253
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +360,7 @@ Transform:
   m_Children:
   - {fileID: 7877975200504638529}
   - {fileID: 3708027182497472706}
+  - {fileID: 8337588583469459949}
   - {fileID: 6637942662529288260}
   m_Father: {fileID: 368671185200428078}
   m_RootOrder: 1

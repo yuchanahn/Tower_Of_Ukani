@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6509096972923198150}
   - component: {fileID: 4379949452992791}
   m_Layer: 8
-  m_Name: Stunned
+  m_Name: Stunned Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 560649603753229986}
   - component: {fileID: 7371128404420445766}
   - component: {fileID: 3688400116078953524}
+  - component: {fileID: 643206919162900154}
   - component: {fileID: 5969363333450609748}
   - component: {fileID: 7371128404420445764}
   - component: {fileID: 2166807972467319143}
@@ -813,6 +814,9 @@ MonoBehaviour:
     useGravity: 1
     acceleration: 40
     terminalVelocity: 20
+  NoAction: 0
+  CanDash: 1
+  CanKick: 1
 --- !u!114 &3688400116078953524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,6 +830,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stunnedRingEffect: {fileID: 939084213130845577}
+--- !u!114 &643206919162900154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93543d0f5b929bc4c9084abeada352c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5969363333450609748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,7 +936,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feetPos: {fileID: 7993730222055176780}
-  Pspr: {fileID: 7371128403266533312}
 --- !u!114 &229264507
 MonoBehaviour:
   m_ObjectHideFlags: 0

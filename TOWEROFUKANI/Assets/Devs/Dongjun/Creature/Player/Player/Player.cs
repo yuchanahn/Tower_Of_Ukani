@@ -17,9 +17,10 @@ public class Player : SSM_Main
     #endregion
 
     #region Var: Player
-    public bool CanMelee = true;
     public bool CanDash = true;
     public bool CanKick = true;
+    public bool CanChangeDir = true;
+    public bool PlayingOtherMotion = false;
     #endregion
 
     #region Var: Properties
@@ -27,12 +28,15 @@ public class Player : SSM_Main
     { get; private set; }
     public Animator animator
     { get; private set; }
+
     public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
     public bool IsDashing => CurrentState == state_Dash;
+    public bool IsKicking => CurrentState == state_Kick;
     #endregion
 
     #region Var: States
-    private Player_Stunned state_Stunned;
+    private Player_HardCC state_HardCC;
+    private Player_OtherMotion state_OtherMotion;
     private Player_Normal state_Normal;
     private Player_Dash state_Dash;
     private Player_Kick state_Kick;
@@ -50,7 +54,18 @@ public class Player : SSM_Main
     #region Method: Init States
     protected override void InitStates()
     {
-        SetLogic(ref state_Stunned, () =>
+        SetLogic(When.AnyAction, () =>
+        {
+            if (PlayerStatus.Inst.IsStunned)
+                return state_HardCC;
+
+            if (PlayingOtherMotion)
+                return state_OtherMotion;
+
+            return null;
+        });
+
+        SetLogic(ref state_HardCC, () =>
         {
             if (!PlayerStatus.Inst.IsStunned)
                 return state_Normal;
@@ -58,10 +73,13 @@ public class Player : SSM_Main
             return null;
         });
 
-        SetLogic(When.AnyAction, () =>
+        SetLogic(ref state_OtherMotion, () => 
         {
-            if (PlayerStatus.Inst.IsStunned)
-                return state_Stunned;
+            if (CanDash && PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.Inst.UseStamina(1))
+                return state_Dash;
+
+            if (!PlayingOtherMotion)
+                return state_Normal;
 
             return null;
         });
@@ -83,7 +101,7 @@ public class Player : SSM_Main
             if (state_Normal.JumpData.canJump && PlayerInputManager.Inst.Input_Jump)
                 return state_Normal;
 
-            // Cancle On End
+            // Dash Done
             if (state_Dash.DashDone)
                 return state_Normal;
 

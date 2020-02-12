@@ -9,10 +9,30 @@ public class Fist : MeleeController<FistItem>
 
     protected override void InitStates()
     {
+        SetLogic(When.AnyAction, () =>
+        {
+            if (!weaponItem.IsSelected)
+                return null;
+
+            if (PlayerStatus.Inst.IsStunned)
+                return state_Basic;
+
+            if (GM.Player.IsDashing)
+                return state_Dash;
+
+            return null;
+        });
+
         SetLogic(ref state_Basic, () =>
         {
             if (Input.GetKey(PlayerWeaponKeys.SubAbility))
                 return state_Heavy;
+
+            if (!GM.Player.IsKicking
+            &&  !GM.Player.groundDetectionData.isGrounded
+            &&  Input.GetKey(KeyCode.S)
+            &&  Input.GetKeyDown(PlayerWeaponKeys.MainAbility))
+                return state_Slam;
 
             return null;
         });
@@ -27,6 +47,9 @@ public class Fist : MeleeController<FistItem>
 
         SetLogic(ref state_Slam, () =>
         {
+            if (state_Slam.slamAnimDone || GM.Player.IsDashing)
+                return state_Basic;
+
             return null;
         });
 
@@ -34,14 +57,6 @@ public class Fist : MeleeController<FistItem>
         {
             if (!GM.Player.IsDashing)
                 return state_Basic;
-
-            return null;
-        });
-
-        SetLogic(When.AnyAction, () =>
-        {
-            if (GM.Player.IsDashing)
-                return state_Dash;
 
             return null;
         });

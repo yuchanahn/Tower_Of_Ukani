@@ -1,18 +1,18 @@
 ﻿using Dongjun.Helper;
 using UnityEngine;
 
-public class Player_Stunned : SSM_State_wMain<Player>
+public class Player_HardCC : SSM_State_wMain<Player>
 {
     [SerializeField] private GameObject stunnedRingEffect;
 
-    public override void OnEnter()
-    {
-        stunnedRingEffect.SetActive(true);
-        main.animator.Play("Stunned");
-    }
     public override void OnExit()
     {
         stunnedRingEffect.SetActive(false);
+    }
+    public override void OnUpdate()
+    {
+        VisualEffect();
+        Animation();
     }
     public override void OnFixedUpdate()
     {
@@ -24,5 +24,18 @@ public class Player_Stunned : SSM_State_wMain<Player>
         Gravity_Logic.ApplyGravity(main.rb2D,
             main.groundDetectionData.isGrounded ? GravityData.Zero :
             main.gravityData);
+    }
+
+    private void VisualEffect()
+    {
+        stunnedRingEffect.SetActive(PlayerStatus.Inst.IsStunned);
+    }
+    private void Animation()
+    {
+        if (PlayerStatus.Inst.IsStunned)
+        {
+            main.animator.Play("Stunned");
+            return;
+        }
     }
 }
