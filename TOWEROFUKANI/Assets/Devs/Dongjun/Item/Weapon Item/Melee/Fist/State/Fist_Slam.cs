@@ -23,7 +23,6 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
         // Animation
         weapon.animator.Play("Slam_Airborne");
 
-        GM.Player.CanKick = false;
         GM.Player.PlayingOtherMotion = true;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
     }
@@ -31,7 +30,6 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
     {
         slamAnimDone = false;
 
-        GM.Player.CanKick = true;
         GM.Player.PlayingOtherMotion = false;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
     }

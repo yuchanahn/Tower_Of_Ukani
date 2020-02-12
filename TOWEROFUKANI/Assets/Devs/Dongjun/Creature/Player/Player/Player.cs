@@ -33,6 +33,7 @@ public class Player : SSM_Main
 
     public bool IsDashing => CurrentState == state_Dash;
     public bool IsKicking => CurrentState == state_Kick;
+    public bool IsOtherMotion => CurrentState == state_OtherMotion;
     #endregion
 
     #region Var: States
@@ -60,7 +61,7 @@ public class Player : SSM_Main
             if (PlayerStatus.Inst.IsHardCCed)
                 return state_HardCC;
 
-            if (PlayingOtherMotion)
+            if (!IsOtherMotion && PlayingOtherMotion)
                 return state_OtherMotion;
 
             return null;
@@ -78,6 +79,9 @@ public class Player : SSM_Main
         {
             if (CanDash && PlayerInputManager.Inst.Input_DashDir != 0 && PlayerStats.Inst.UseStamina(1))
                 return state_Dash;
+
+            if (CanKick && Input.GetKeyDown(PlayerActionKeys.Kick))
+                return state_Kick;
 
             if (!PlayingOtherMotion)
                 return state_Normal;

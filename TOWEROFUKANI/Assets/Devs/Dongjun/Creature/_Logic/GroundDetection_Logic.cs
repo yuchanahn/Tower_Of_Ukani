@@ -61,7 +61,11 @@ public static class GroundDetection_Logic
             data.IW_Solid.offset = !canDetect ? new Vector2(0, 0) : new Vector2(0, (data.InnerSnapDist / tf.localScale.y) * 0.5f);
         }
 
-        if (!canDetect) return;
+        if (!canDetect)
+        {
+            data.Reset_IW_Solid_Col_Size();
+            return;
+        }
         #endregion
 
         #region Box Cast
