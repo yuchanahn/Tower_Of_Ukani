@@ -46,7 +46,9 @@ public class ObjectPool : MonoBehaviour
     public static GameObject create(int id, Vector2 pos)
     {
         if (instance.objects[id].Count == 0)
-        { instance.CreateObj(id); }
+        { 
+            instance.CreateObj(id);
+        }
 
         GameObject GObj = instance.objects[id].Dequeue();
         GObj.GetComponent<Object_ObjectPool_Base>().SetOn(pos);
@@ -57,10 +59,12 @@ public class ObjectPool : MonoBehaviour
     {
         if (instance.objects[id].Count == 0)
         { instance.CreateObj(id); }
-
+        
         GameObject GObj = instance.objects[id].Dequeue();
         GObj.transform.SetParent(instance.UI, false);
         GObj.GetComponent<Object_ObjectPool_Base>().SetOnUI(pos);
+
+
         return GObj;
     }
 

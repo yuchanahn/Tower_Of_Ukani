@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Object_ObjectPool_Base : MonoBehaviour
+public class Object_ObjectPool_Base : MonoBehaviour, IObjectPool
 {
     public virtual int GetID(){
         return -1;

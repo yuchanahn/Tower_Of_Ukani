@@ -36,7 +36,7 @@ public class MobDamageText : Object_ObjectPool<MobDamageText>
         mOriginPoint = point + RandPos;
     }
 
-    public override void ThisStart()
+    public override void Begin()
     {
         Damage = mText.text;
         mPoint = mOriginPoint;

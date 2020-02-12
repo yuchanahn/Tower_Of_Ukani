@@ -1,66 +1,75 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
 
 public class MobHPBar : Object_ObjectPool<MobHPBar>
 {
     [SerializeField] AUI_Slider mHpBar;
-    [SerializeField] Transform mLook;
     [SerializeField] AStat mStat;
-    [SerializeField] float DestoryT;
+    [SerializeField] Transform mTarget;
+    [HideInInspector] public float sizeY;
 
-    static Dictionary<GameObject, MobHPBar> mobHPBars = new Dictionary<GameObject, MobHPBar>();
-    
-    [HideInInspector]
-    public float sizeY;
+    // ===============================================================
+    //        ## 생성 소멸자
+    // ===============================================================
 
-    public override void ThisStart()
+    public override void Begin()
     {
-        DestroyObj(DestoryT);
+    }
+    public override void End()
+    {
+        if (mTarget) mTarget.GetComponent<AStat>().mHPBarUI = null;
     }
 
-    public static void Show(GameObject Mob, Vector2 mobPos, float sizeY)
-    {
-        if (mobHPBars.ContainsKey(Mob))
-        {
-            mobHPBars[Mob].SetOnUI(mobPos);
-            return;
-        }
+    // ===============================================================
 
-        MobHPBar obj = ObjectPool.createUI(ID, Vector2.zero).GetComponent<MobHPBar>();
-        obj.SetStat(Mob.GetComponent<AStat>(), Mob.transform);
-        obj.sizeY = sizeY;
-        mobHPBars[Mob] = obj;
-    }
-
-    public override void SetOff()
-    {
-        base.SetOff();
-        if(mLook) mobHPBars.Remove(mLook.gameObject);
-    }
-
-    public void SetStat(AStat stat, Transform look)
-    {
-        mLook = look;
-        mStat = stat;
-    }
     private void Update()
     {
-        if (mLook)
+        HpBarUpdate();
+        if (mTarget == null)
         {
-            (transform as RectTransform).position = Camera.main.WorldToScreenPoint(mLook.position + Vector3.up * ((sizeY / 2) + 1f));
+            DestroyObj();
+        }
+    }
+
+    // ===============================================================
+    //      ## 크리에이터
+    // ===============================================================
+
+    public static MobHPBar Create(AStat target, float destroyT)
+    {
+        var o = CreateUI(target.transform.position).GetComponent<MobHPBar>();
+        o.Init(target);
+        o.SetDestroyTimer(destroyT);
+        return o;
+    }
+
+    // ===============================================================
+
+
+    public void SetDestroyTimer(float destroyT)
+    {
+        DestroyObj(destroyT);
+    }
+
+    public void Init(AStat stat)
+    {
+        mStat = stat;
+        mTarget = stat.transform;
+
+        HpBarUpdate();
+    }
+
+    void HpBarUpdate()
+    {
+        if (mTarget)
+        {
+            (transform as RectTransform).position = Camera.main.WorldToScreenPoint(mTarget.position + Vector3.up * ((sizeY / 2) + 1f));
 
             mHpBar.CUR_ = mStat.HP;
             mHpBar.MAX_ = mStat.MAXHP;
         }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
-    public void OnHPZero()
-    {
-        DestroyObj();
     }
 }

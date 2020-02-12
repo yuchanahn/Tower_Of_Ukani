@@ -37,4 +37,12 @@ public class GM : MonoBehaviour
     {
         CurMapName = Map2.activeSelf ? Map2.name : Map1.name;
     }
+
+
+    private void OnGUI()
+    {
+        //if(GUI.Button(new Rect(10,20, 100,20), "on"))
+        {
+        }
+    }
 }

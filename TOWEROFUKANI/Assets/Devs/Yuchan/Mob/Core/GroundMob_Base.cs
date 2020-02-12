@@ -263,7 +263,6 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
     {
         if (m_bFallStart = MobYMoveDetect_Logic.Down(transform.position, m_groundDetectionData.Size, ref m_MoveData))
             m_CurAniST = eMobAniST.AirborneDown;
-
         return m_bFallStart;
     }
 
@@ -277,13 +276,15 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
         m_bJumpStart = true;
     }
 
+    float FallAndJumpCoolTime = 1f;
+    float FallAndJumpCoolTimeT = 1f;
 
     public bool Follow()
     {
-        IsFollowMax = false;
+        IsFollowMax = Mathf.Abs(GM.PlayerPos.x - transform.position.x) <= 0.1f;
         IsKeepFollowing = false;
         if (m_bFollowJump) return false;
-
+        FallAndJumpCoolTimeT += Time.deltaTime;
         if ((Mathf.Abs(GM.PlayerPos.y - transform.position.y) >= m_groundDetectionData.Size.y)
             && (transform.position.y > GM.PlayerPos.y)
             && (IsCliff))
@@ -293,20 +294,37 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
         }
         if ((transform.position.y - GM.PlayerPos.y) > m_groundDetectionData.Size.y * 0.9f)
         {
-            Dir = DirForPlayer;
-            if (Fall()) { return true; }
+            if (FallAndJumpCoolTimeT >= FallAndJumpCoolTime)
+            {
+                FallAndJumpCoolTimeT = 0;
+                Dir = DirForPlayer;
+                if (Fall()) { return true; }
+            }
+            else
+            {
+                return false;
+            }
         }
         if (m_groundDetectionData.isGrounded)
         {
-            Dir = DirForPlayer;
+            if(!IsFollowMax) Dir = DirForPlayer;
             if (GM.PlayerPos.y - transform.position.y >= m_groundDetectionData.Size.y * 0.9f)
             {
-                if (IsWallInForword && !IsJumpHeightHitWall) { FollowJump(); }
+                if (IsWallInForword && !IsJumpHeightHitWall) 
+                {
+                    if (FallAndJumpCoolTimeT >= FallAndJumpCoolTime)
+                    {
+                        FallAndJumpCoolTimeT = 0;
+                        FollowJump();
+                    }
+                }
             }
-            else if (IsOneWayInForword && !IsJumpHeightHitWall) { FollowJump(); }
+            else if (IsOneWayInForword && !IsJumpHeightHitWall) 
+            {
+                FollowJump();
+            }
         }
-        IsFollowMax = Mathf.Abs(GM.PlayerPos.x - transform.position.x) <= 0.1f;
-
+        
         return true;
     }   
 

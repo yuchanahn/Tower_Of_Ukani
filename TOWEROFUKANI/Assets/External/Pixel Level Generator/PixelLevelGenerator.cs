@@ -73,6 +73,7 @@ public class PixelLevelGenerator : MonoBehaviour
                 }
             }
         }
+        GridView.Inst[1].GetJPS_Path();
     }
 }
 

@@ -6,7 +6,7 @@ public class AEffect<T> : Object_ObjectPool<AEffect<T>>
 {
     [SerializeField] string EndPoint;
 
-    public override void ThisStart()
+    public override void Begin()
     {
         GetComponent<AniEventMgr>().Set(EndPoint, () => { DestroyObj(); });
     }

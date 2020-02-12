@@ -6,7 +6,7 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
 {
     public static int ID = -1;
 
-    public virtual void ThisStart()
+    public virtual void Begin()
     {
     }
     public override int GetID(){
@@ -18,13 +18,21 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
         ID = id;
     }
 
-    public  override void SetOff()
+    public override void SetOff()
     {
+        End();
         ObjectPool.PoolingObjectDestroy(gameObject);
         gameObject.SetActive(false);
     }
 
-    public void DestroyObj(){
+
+    public virtual void End()
+    {
+    }
+
+    public void DestroyObj()
+    {
+        ATimer.Pop(GetInstanceID() + "DestroyObj");
         SetOff();
     }
 
@@ -35,22 +43,21 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
 
     public void DestroyObj(float DistroyTime)
     {
-        ATimer.SetAndReset(gameObject.name + GetInstanceID() , DistroyTime,SetOff);
-        //StartCoroutine(DestroyObj__(DistroyTime));
+        ATimer.SetAndReset(GetInstanceID() + "DestroyObj", DistroyTime, SetOff);
     }
 
     public  override void SetOn(Vector2 pos)
     {
         gameObject.transform.position = pos;
         gameObject.SetActive(true);
-        ThisStart();
+        Begin();
     }
 
     public override void SetOnUI(Vector2 pos)
     {
         (gameObject.transform as RectTransform).position = pos;
         gameObject.SetActive(true);
-        ThisStart();
+        Begin();
     }
 
     public static GameObject Create(Vector2 pos)
@@ -58,9 +65,8 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
         return ObjectPool.create(ID, pos);
     }
 
-    IEnumerator DestroyObj__(float time)
+    public static GameObject CreateUI(Vector2 pos)
     {
-        yield return new WaitForSeconds(time);
-        SetOff();
+        return ObjectPool.createUI(ID, pos);
     }
 }
