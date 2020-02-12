@@ -13,7 +13,7 @@ public class Pistol : GunController<PistolItem>
     {
         SetLogic(When.AnyAction, () =>
         {
-            if (PlayerStatus.Inst.IsStunned)
+            if (PlayerStatus.Inst.IsHardCCed)
                 return state_Main;
 
             return null;

@@ -14,7 +14,7 @@ public class Fist : MeleeController<FistItem>
             if (!weaponItem.IsSelected)
                 return null;
 
-            if (PlayerStatus.Inst.IsStunned)
+            if (PlayerStatus.Inst.IsHardCCed)
                 return state_Basic;
 
             if (GM.Player.IsDashing)

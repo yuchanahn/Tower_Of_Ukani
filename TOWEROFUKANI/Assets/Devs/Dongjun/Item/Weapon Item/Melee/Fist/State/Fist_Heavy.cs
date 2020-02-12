@@ -42,7 +42,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsHardCCed)
             return;
 
         // Charge
@@ -78,7 +78,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsHardCCed)
             return;
 
         // Look At Mouse

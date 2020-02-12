@@ -8,12 +8,12 @@ public class PlayerWeaponHotbar : ToU_Inventory
     #endregion
 
     #region Var: Properties
+    public BoolSet IsSlotLocked
+    { get; private set; } = new BoolSet();
+
     public int CurSlot
     { get; private set; } = 0;
     public WeaponItem CurWeapon => items[CurSlot] as WeaponItem;
-
-    private HashSet<object> slotLockObjs = new HashSet<object>();
-    public bool IsSlotLocked => slotLockObjs.Count != 0;
     #endregion
 
     #region Method: Unity
@@ -37,7 +37,7 @@ public class PlayerWeaponHotbar : ToU_Inventory
         // Toggle Fist
         fist.Select(CurWeapon == null);
 
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsStunned.Value)
             return;
 
         ChangeSlot();
@@ -48,19 +48,12 @@ public class PlayerWeaponHotbar : ToU_Inventory
     #region Method: Weapon Hotbar
     public void LockSlots<Tthis>(Tthis _this, bool _lock) where Tthis : class
     {
-        if (_lock && !slotLockObjs.Contains(_this))
-        {
-            slotLockObjs.Add(_this);
-        }
-        else if (!_lock && slotLockObjs.Contains(_this))
-        {
-            slotLockObjs.Remove(_this);
-        }
+        IsSlotLocked.Set(_this, _lock);
 
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsStunned.Value)
             return;
 
-        LockSlotDrop(IsSlotLocked);
+        LockSlotDrop(IsSlotLocked.Value);
     }
     public void LockSlotDrop(bool _lock)
     {
@@ -70,7 +63,7 @@ public class PlayerWeaponHotbar : ToU_Inventory
 
     private void ChangeSlot()
     {
-        if (IsSlotLocked)
+        if (IsSlotLocked.Value)
             return;
 
         const int TO_RIGHT = 1;

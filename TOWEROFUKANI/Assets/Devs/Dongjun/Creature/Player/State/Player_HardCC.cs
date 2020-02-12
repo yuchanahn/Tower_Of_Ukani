@@ -16,25 +16,38 @@ public class Player_HardCC : SSM_State_wMain<Player>
     }
     public override void OnFixedUpdate()
     {
-        main.groundDetectionData.DetectGround(true /*넉백 될 때는 안해야 함.*/, main.rb2D, transform);
-
-        // TODO: 넉백 도중에는 콜라이더 크기 리셋
-        // main.groundDetectionData.Reset_IW_Solid_Col_Size();
+        main.groundDetectionData.DetectGround(!PlayerStatus.Inst.IsKnockbacked, main.rb2D, transform);
 
         Gravity_Logic.ApplyGravity(main.rb2D,
             main.groundDetectionData.isGrounded ? GravityData.Zero :
             main.gravityData);
+
+        if (!PlayerStatus.Inst.IsKnockbacked)
+        {
+            GM.Player.rb2D.velocity = GM.Player.rb2D.velocity.Change(x: 0);
+        }
+        else
+        {
+            main.groundDetectionData.Reset_IW_Solid_Col_Size();
+        }
     }
 
     private void VisualEffect()
     {
-        stunnedRingEffect.SetActive(PlayerStatus.Inst.IsStunned);
+        stunnedRingEffect.SetActive(PlayerStatus.Inst.IsStunned.Value);
     }
     private void Animation()
     {
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsStunned.Value)
         {
             main.animator.Play("Stunned");
+            return;
+        }
+
+        if (PlayerStatus.Inst.IsKnockbacked)
+        {
+            // TODO:
+            //main.animator.Play("Knockbacked");
             return;
         }
     }

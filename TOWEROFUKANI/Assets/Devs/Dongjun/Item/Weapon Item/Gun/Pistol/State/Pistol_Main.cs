@@ -32,7 +32,7 @@ public class Pistol_Main : Gun_State_Base<PistolItem>
         if (!weapon.IsSelected || weapon.loadedBullets <= 0)
             return;
 
-        if (PlayerStatus.Inst.IsStunned || !weapon.IsSelected)
+        if (PlayerStatus.Inst.IsHardCCed || !weapon.IsSelected)
             return;
 
         if (IsAnimEnded_Shoot)
@@ -45,7 +45,7 @@ public class Pistol_Main : Gun_State_Base<PistolItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsHardCCed)
             return;
 
         // Look At Mouse

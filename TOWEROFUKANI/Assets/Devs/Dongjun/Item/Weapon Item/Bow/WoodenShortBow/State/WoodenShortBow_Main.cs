@@ -15,7 +15,7 @@ public class WoodenShortBow_Main : Bow_State_Base<WoodenShortBowItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsHardCCed)
             return;
 
         // Look At Mouse

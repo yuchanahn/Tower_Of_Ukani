@@ -40,7 +40,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsStunned || GM.Player.IsKicking)
+        if (PlayerStatus.Inst.IsHardCCed || GM.Player.IsKicking)
             return;
 
         if (IsAnimEnded_Attack)
@@ -53,7 +53,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsHardCCed)
             return;
 
         // Look At Mouse

@@ -57,7 +57,7 @@ public class Player : SSM_Main
     {
         SetLogic(When.AnyAction, () =>
         {
-            if (PlayerStatus.Inst.IsStunned)
+            if (PlayerStatus.Inst.IsHardCCed)
                 return state_HardCC;
 
             if (PlayingOtherMotion)
@@ -68,7 +68,7 @@ public class Player : SSM_Main
 
         SetLogic(ref state_HardCC, () =>
         {
-            if (!PlayerStatus.Inst.IsStunned)
+            if (!PlayerStatus.Inst.IsHardCCed)
                 return state_Normal;
 
             return null;

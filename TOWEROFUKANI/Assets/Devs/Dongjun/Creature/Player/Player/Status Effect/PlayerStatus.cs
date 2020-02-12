@@ -4,53 +4,55 @@ using UnityEngine;
 
 public class PlayerStatus : SingletonBase<PlayerStatus>
 {
-    private Dictionary<StatusID, Dictionary<MobAction, List<StatusEffect>>> dic_Effects = 
+    private Dictionary<StatusID, Dictionary<MobAction, List<StatusEffect>>> statusEffects = 
         new Dictionary<StatusID, Dictionary<MobAction, List<StatusEffect>>>();
 
-    private int stunCount = 0;
-    public bool IsStunned => stunCount > 0;
+    public BoolSet IsStunned
+    { get; private set; } = new BoolSet();
+    public bool IsKnockbacked
+    { get; private set; } = false;
+    public bool IsHardCCed => IsStunned.Value || IsKnockbacked;
 
-    public void AddStunCount()
+    public void AddStun<Tthis>(Tthis _this) where Tthis : class
     {
-        stunCount++;
+        IsStunned.Set(_this, true);
         ActionEffectManager.Trigger(PlayerActions.Stunned);
     }
-    public void RemoveStunCount()
+    public void RemoveStun<Tthis>(Tthis _this) where Tthis : class
     {
-        stunCount--;
-
-        if (stunCount == 0)
+        IsStunned.Set(_this, false);
+        if (!IsStunned.Value)
             ActionEffectManager.Trigger(PlayerActions.StunEnd);
     }
 
     public void Trigger(Mob_Base mob, MobAction mobAction)
     {
-        if (!dic_Effects.ContainsKey(mob.StatusID))
+        if (!statusEffects.ContainsKey(mob.StatusID))
             return;
 
-        if (!dic_Effects[mob.StatusID].ContainsKey(mobAction))
+        if (!statusEffects[mob.StatusID].ContainsKey(mobAction))
             return;
 
-        for (int i = dic_Effects[mob.StatusID][mobAction].Count - 1; i >= 0; i--)
+        for (int i = statusEffects[mob.StatusID][mobAction].Count - 1; i >= 0; i--)
         {
-            if (dic_Effects[mob.StatusID][mobAction].Count == 0)
+            if (statusEffects[mob.StatusID][mobAction].Count == 0)
             {
-                dic_Effects.Remove(mob.StatusID);
+                statusEffects.Remove(mob.StatusID);
                 continue;
             }
 
-            dic_Effects[mob.StatusID][mobAction][i].OnAction?.Invoke();
+            statusEffects[mob.StatusID][mobAction][i].OnAction?.Invoke();
         }
     }
     public void AddEffect(Mob_Base mob, MobAction mobAction, StatusEffect effect)
     {
-        if (!dic_Effects.ContainsKey(mob.StatusID))
-            dic_Effects.Add(mob.StatusID, new Dictionary<MobAction, List<StatusEffect>>());
+        if (!statusEffects.ContainsKey(mob.StatusID))
+            statusEffects.Add(mob.StatusID, new Dictionary<MobAction, List<StatusEffect>>());
 
-        if (!dic_Effects[mob.StatusID].ContainsKey(mobAction))
-            dic_Effects[mob.StatusID].Add(mobAction, new List<StatusEffect>());
+        if (!statusEffects[mob.StatusID].ContainsKey(mobAction))
+            statusEffects[mob.StatusID].Add(mobAction, new List<StatusEffect>());
 
-        List <StatusEffect> effects = dic_Effects[mob.StatusID][mobAction];
+        List <StatusEffect> effects = statusEffects[mob.StatusID][mobAction];
 
         if (effects.Contains(effect))
             return;
@@ -72,11 +74,11 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
 
     public void RemoveFromList(StatusID key, MobAction mobAction, StatusEffect effect)
     {
-        dic_Effects[key][mobAction].Remove(effect);
+        statusEffects[key][mobAction].Remove(effect);
     }
     public void RemoveEffect(StatusType statusType)
     {
-        foreach (var entry in dic_Effects)
+        foreach (var entry in statusEffects)
         {
             foreach (var effects in entry.Value)
             {
@@ -93,7 +95,7 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     }
     public void RemoveEffect(Mob_Base caster)
     {
-        foreach (var entry in dic_Effects)
+        foreach (var entry in statusEffects)
         {
             foreach (var effects in entry.Value)
             {
@@ -110,7 +112,7 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     }
     public void RemoveEffect(Mob_Base caster, StatusType statusType)
     {
-        foreach (var entry in dic_Effects)
+        foreach (var entry in statusEffects)
         {
             foreach (var effects in entry.Value)
             {
