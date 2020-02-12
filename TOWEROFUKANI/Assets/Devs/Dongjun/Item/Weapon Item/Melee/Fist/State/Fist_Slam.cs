@@ -20,8 +20,6 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
 
     public override void OnEnter()
     {
-        GM.Player.rb2D.velocity = Vector2.down * 30f;
-
         // Animation
         weapon.animator.Play("Slam_Airborne");
 
@@ -39,6 +37,9 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
     }
     public override void OnFixedUpdate()
     {
+        // Down Vel
+        GM.Player.rb2D.velocity = Vector2.down * 30f;
+
         // Detect Ground
         GM.Player.groundDetectionData.DetectGround(true, GM.Player.rb2D, GM.Player.transform);
         GM.Player.groundDetectionData.ExecuteOnGroundMethod(this);

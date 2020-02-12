@@ -17,10 +17,10 @@ public class Player : SSM_Main
     #endregion
 
     #region Var: Player
-    public bool CanDash = true;
-    public bool CanKick = true;
-    public bool CanChangeDir = true;
-    public bool PlayingOtherMotion = false;
+    [HideInInspector] public bool CanDash = true;
+    [HideInInspector] public bool CanKick = true;
+    [HideInInspector] public bool CanChangeDir = true;
+    [HideInInspector] public bool PlayingOtherMotion = false;
     #endregion
 
     #region Var: Properties
@@ -30,6 +30,7 @@ public class Player : SSM_Main
     { get; private set; }
 
     public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
+
     public bool IsDashing => CurrentState == state_Dash;
     public bool IsKicking => CurrentState == state_Kick;
     #endregion
