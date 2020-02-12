@@ -40,6 +40,11 @@ public class Player_Normal : SSM_State_wMain<Player>,
     #endregion
 
     #region Method: SSM
+    public override void OnEnter()
+    {
+        if (main.groundDetectionData.isGrounded)
+            jumpData.ResetJumpCount();
+    }
     public override void OnExit()
     {
         // Reset Ground Data
@@ -57,7 +62,8 @@ public class Player_Normal : SSM_State_wMain<Player>,
     public override void OnLateUpdate()
     {
         // Character Body Look At Mouse
-        main.bodySpriteRenderer.LookAtMouseFlipX(Global.Inst.MainCam, transform);
+        if (main.CanChangeDir)
+            main.bodySpriteRenderer.LookAtMouseFlipX(Global.Inst.MainCam, transform);
     }
     public override void OnFixedUpdate()
     {
@@ -94,12 +100,12 @@ public class Player_Normal : SSM_State_wMain<Player>,
     private void UpdateAnimation()
     {
         const string
-        Idle           = "Idle",
-        Walk_Forward   = "Walk_Forward",
-        Walk_Backward  = "Walk_Backward",
-        Airborne       = "Airborne",
-        Jump           = "Jump",
-        AirJump        = "AirJump";
+            Idle           = "Idle",
+            Walk_Forward   = "Walk_Forward",
+            Walk_Backward  = "Walk_Backward",
+            Airborne       = "Airborne",
+            Jump           = "Jump",
+            AirJump        = "AirJump";
 
         // 땅위에 있을 때
         if (main.groundDetectionData.isGrounded)
@@ -125,16 +131,16 @@ public class Player_Normal : SSM_State_wMain<Player>,
     #endregion
 
     #region Interface: ICanDetectGround
-    public void OnGroundEnter()
+    void ICanDetectGround.OnGroundEnter()
     {
         // Reset Jump
-        Jump_Logic.ResetJumpCount(ref jumpData);
+        jumpData.ResetJumpCount();
     }
-    public void OnGroundStay()
+    void ICanDetectGround.OnGroundStay()
     {
     }
-    public void OnGroundExit()
+    void ICanDetectGround.OnGroundExit()
     {
     }
-#endregion
+    #endregion
 }

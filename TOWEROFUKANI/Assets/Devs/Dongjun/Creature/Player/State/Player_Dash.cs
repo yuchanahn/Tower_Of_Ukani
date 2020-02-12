@@ -16,6 +16,7 @@ public class Player_Dash : SSM_State_wMain<Player>
     #region Var: Dash
     private float dashTime_Cur = 0;
     private int dashDir = 0;
+    private bool isUsingMelee = false;
     #endregion
 
     #region Var: Effect
@@ -37,19 +38,9 @@ public class Player_Dash : SSM_State_wMain<Player>
     public override void OnEnter()
     {
         // Init Value
-        DashDone = false;
-        dashTime_Cur = 0;
         dashDir = PlayerInputManager.Inst.Input_DashDir;
-        curTrailCount = 0;
 
-        // Lock Dir When Using Melee Weapon
-        if (PlayerInventoryManager.weaponHotbar.CurWeapon == null || PlayerInventoryManager.weaponHotbar.CurWeapon is MeleeItem)
-            main.bodySpriteRenderer.flipX = dashDir == 1 ? false : true;
-
-        // Play Animation
-        main.animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward", 0, 0f);
-
-        // Player Will Not Take Damage
+        // Player AbsorbDamage true
         PlayerStats.Inst.AbsorbDamage = true;
 
         // Trigger Item Effect
@@ -57,43 +48,70 @@ public class Player_Dash : SSM_State_wMain<Player>
     }
     public override void OnExit()
     {
-        // Reset Velocity
-        main.rb2D.velocity = new Vector2(0, 0);
-
         // Reset Value
         DashDone = false;
         dashDir = 0;
+        dashTime_Cur = 0;
+        curTrailCount = 0;
 
-        // Player Will Take Damage
+        // Reset Vel
+        main.rb2D.velocity = new Vector2(0, 0);
+
+        // Player AbsorbDamage false
         PlayerStats.Inst.AbsorbDamage = false;
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.DashEnd);
+
+        // When Using Melee Weapon
+        if (isUsingMelee)
+        {
+            isUsingMelee = false;
+
+            // Unlock Slot
+            PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
+        }
+    }
+    public override void OnUpdate()
+    {
+        if (!isUsingMelee)
+        {
+            // When Using Melee Weapon
+            isUsingMelee = PlayerInventoryManager.weaponHotbar.CurWeapon == null || PlayerInventoryManager.weaponHotbar.CurWeapon is MeleeItem;
+            if (isUsingMelee)
+            {
+                // Look at Dash Dir
+                main.bodySpriteRenderer.flipX = dashDir == 1 ? false : true;
+
+                // Lock Slot
+                PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
+            }
+        }
+
+        // Play Animation
+        main.animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward");
     }
     public override void OnFixedUpdate()
     {
         // Timer
         dashTime_Cur += Time.fixedDeltaTime;
-
-        // Dash
-        if (dashTime_Cur < dashTime)
-        {
-            main.rb2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
-
-            // Trail Effect
-            if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))
-            {
-                curTrailCount++;
-                main.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, main.bodySpriteRenderer.transform);
-            }
-
-            // Trigger Item Effect
-            ActionEffectManager.Trigger(PlayerActions.Dashing);
-        }
-        else
+        if (dashTime_Cur >= dashTime)
         {
             DashDone = true;
             return;
+        }
+
+        // Dash
+        main.rb2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
+
+        // Trigger Item Effect
+        ActionEffectManager.Trigger(PlayerActions.Dashing);
+
+        // Trail Effect
+        if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))
+        {
+            curTrailCount++;
+            main.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, main.bodySpriteRenderer.transform);
         }
     }
     #endregion

@@ -17,27 +17,26 @@ public class Fist_Dash : Melee_State_Base<FistItem>
     protected override void Awake()
     {
         base.Awake();
-        overlapCheckData = new OverlapCheckData(onEnter: OnDashHit);
+
+        // Deal Damage
+        overlapCheckData = new OverlapCheckData(
+            onEnter: overlap => 
+            {
+                PlayerStats.Inst.DealDamage(new AttackData(5), overlap.gameObject);
+            });
     }
 
     public override void OnEnter()
     {
         // Look Dir
-        Vector3 lookRot = transform.localEulerAngles;
-        lookRot.y = GM.Player.Dir == 1 ? 0f : 180f;
-        transform.localRotation = Quaternion.Euler(lookRot);
+        Flip_Logic.FlipXTo(GM.Player.Dir, transform);
+
+        // Animation
+        weapon.animator.Play("Dash");
     }
     public override void OnUpdate()
     {
         // Get Overlaps
         overlapCheckData.OverlapCheck(Physics2D.OverlapBoxAll(damagePoint.position, damageSize, 0f, damageLayer));
-
-        // Animation
-        weapon.animator.Play("Dash");
-    }
-
-    private void OnDashHit(Collider2D overlap)
-    {
-        PlayerStats.Inst.DealDamage(new AttackData(5), overlap.gameObject);
     }
 }

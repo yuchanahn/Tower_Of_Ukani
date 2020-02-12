@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerWeaponHotbar : ToU_Inventory
 {
@@ -7,12 +8,12 @@ public class PlayerWeaponHotbar : ToU_Inventory
     #endregion
 
     #region Var: Properties
+    public BoolSet IsSlotLocked
+    { get; private set; } = new BoolSet();
+
     public int CurSlot
     { get; private set; } = 0;
     public WeaponItem CurWeapon => items[CurSlot] as WeaponItem;
-
-    private int canChangeSlot = 0;
-    public bool IsSlotLocked => canChangeSlot != 0;
     #endregion
 
     #region Method: Unity
@@ -27,16 +28,16 @@ public class PlayerWeaponHotbar : ToU_Inventory
         // Select Slot 0
         (inventoryUI.slotUIs[CurSlot] as WeaponHotbarSlot).Select(true);
 
-        // Select Weapon
-        fist.Select(CurWeapon == null);
-
-        // Lock / Unlock On Stun
-        ActionEffectManager.AddEffect(PlayerActions.Stunned, new ActionEffect(() => LockSlot(true), typeof(PlayerWeaponHotbar)));
-        ActionEffectManager.AddEffect(PlayerActions.StunEnd, new ActionEffect(() => LockSlot(false), typeof(PlayerWeaponHotbar)));
+        // On Stun
+        ActionEffectManager.AddEffect(PlayerActions.Stunned, new ActionEffect(() => LockSlots(this, true), typeof(PlayerWeaponHotbar)));
+        ActionEffectManager.AddEffect(PlayerActions.StunEnd, new ActionEffect(() => LockSlots(this, false), typeof(PlayerWeaponHotbar)));
     }
     private void Update()
     {
-        if (PlayerStatus.Inst.IsStunned)
+        // Toggle Fist
+        fist.Select(CurWeapon == null);
+
+        if (PlayerStatus.Inst.IsStunned.Value)
             return;
 
         ChangeSlot();
@@ -45,19 +46,16 @@ public class PlayerWeaponHotbar : ToU_Inventory
     #endregion
 
     #region Method: Weapon Hotbar
-    public void LockChangeSlot(bool _lock)
+    public void LockSlots<Tthis>(Tthis _this, bool _lock) where Tthis : class
     {
-        if (_lock) canChangeSlot++;
-        else canChangeSlot--;
+        IsSlotLocked.Set(_this, _lock);
 
-        canChangeSlot = Mathf.Max(canChangeSlot, 0);
-
-        if (PlayerStatus.Inst.IsStunned)
+        if (PlayerStatus.Inst.IsStunned.Value)
             return;
 
-        LockSlot(IsSlotLocked);
+        LockSlotDrop(IsSlotLocked.Value);
     }
-    public void LockSlot(bool _lock)
+    public void LockSlotDrop(bool _lock)
     {
         for (int i = 0; i < inventoryUI.slotUIs.Length; i++)
             (inventoryUI.slotUIs[i] as DroppableSlotUI).IsLocked = _lock;
@@ -65,7 +63,7 @@ public class PlayerWeaponHotbar : ToU_Inventory
 
     private void ChangeSlot()
     {
-        if (IsSlotLocked)
+        if (IsSlotLocked.Value)
             return;
 
         const int TO_RIGHT = 1;
@@ -88,9 +86,6 @@ public class PlayerWeaponHotbar : ToU_Inventory
         // Scroll
         if (Input.mouseScrollDelta.y < 0) UpdateHotbar(TO_RIGHT);
         if (Input.mouseScrollDelta.y > 0) UpdateHotbar(TO_LEFT);
-
-        // Toggle Fist
-        fist.Select(CurWeapon == null);
     }
     private void DropWeapon()
     {

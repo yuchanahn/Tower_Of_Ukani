@@ -25,21 +25,23 @@ public class Fist_Basic : Melee_State_Base<FistItem>
     }
 
     #region Method: SSM
+    public override void OnEnter()
+    {
+        weapon.animator.Play(weapon.ANIM_Neutral);
+    }
     public override void OnExit()
     {
-        OnAnimEnd_Basic();
+        GM.Player.CanDash = true;
+        GM.Player.CanKick = true;
+        PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
     }
     public override void OnUpdate()
     {
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsStunned)
-        {
-            OnAnimEnd_Basic();
-            weapon.animator.Play(weapon.ANIM_Neutral);
+        if (PlayerStatus.Inst.IsHardCCed || GM.Player.IsKicking)
             return;
-        }
 
         if (IsAnimEnded_Attack)
             weapon.animator.Play(weapon.ANIM_Neutral);
@@ -48,7 +50,10 @@ public class Fist_Basic : Melee_State_Base<FistItem>
     }
     public override void OnLateUpdate()
     {
-        if (PlayerStatus.Inst.IsStunned || !weapon.IsSelected)
+        if (!weapon.IsSelected)
+            return;
+
+        if (PlayerStatus.Inst.IsHardCCed)
             return;
 
         // Look At Mouse
@@ -59,7 +64,10 @@ public class Fist_Basic : Melee_State_Base<FistItem>
     #region Method: Basic Attack
     private void BasicAttack()
     {
-        if (!weapon.basicAttackTimer.IsEnded || !IsAnimEnded_Attack || !PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
+        if (!weapon.basicAttackTimer.IsEnded || !IsAnimEnded_Attack)
+            return;
+
+        if (!PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
             return;
 
         // Deal Damage
@@ -70,32 +78,19 @@ public class Fist_Basic : Melee_State_Base<FistItem>
             PlayerStats.Inst.DealDamage(new AttackData(2), hits[i].gameObject, PlayerActions.WeaponHit);
         }
 
-        // Lock Weapon Slot
-        PlayerInventoryManager.weaponHotbar.LockChangeSlot(true);
-
         // Animation
-        BasicAttackAnim_Start();
+        IsAnimEnded_Attack = false;
+        weapon.animator.Play(prevAttackAnim == 1 ? "Basic_PunchR" : "Basic_PunchL");
+        prevAttackAnim *= -1;
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.WeaponMain);
         ActionEffectManager.Trigger(PlayerActions.MeleeBasic);
-    }
 
-    private void BasicAttackAnim_Start()
-    {
+        // Player
         GM.Player.CanDash = false;
         GM.Player.CanKick = false;
-
-        IsAnimEnded_Attack = false;
-        weapon.animator.Play(prevAttackAnim == 1 ? "Basic_PunchR" : "Basic_PunchL");
-        prevAttackAnim *= -1;
-    }
-    private void BasicAttackAnim_End()
-    {
-        GM.Player.CanDash = true;
-        GM.Player.CanKick = true;
-
-        IsAnimEnded_Attack = true;
+        PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
     }
     #endregion
 
@@ -105,13 +100,14 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         // Reset Timer
         weapon.basicAttackTimer.Restart();
 
-        // Unlock Weapon Slot
-        if (!IsAnimEnded_Attack)
-            PlayerInventoryManager.weaponHotbar.LockChangeSlot(false);
-
         // Animation
-        BasicAttackAnim_End();
+        IsAnimEnded_Attack = true;
         weapon.animator.ResetSpeed();
+
+        // Player
+        GM.Player.CanDash = true;
+        GM.Player.CanKick = true;
+        PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
     }
     #endregion
 }

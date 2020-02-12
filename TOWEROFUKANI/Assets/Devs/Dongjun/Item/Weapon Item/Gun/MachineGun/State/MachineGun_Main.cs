@@ -41,7 +41,10 @@ public class MachineGun_Main : Gun_State_Base<MachineGunItem>
     }
     public override void OnUpdate()
     {
-        if (PlayerStatus.Inst.IsStunned || !weapon.IsSelected || weapon.loadedBullets <= 0)
+        if (!weapon.IsSelected || weapon.loadedBullets <= 0)
+            return;
+
+        if (PlayerStatus.Inst.IsHardCCed)
             return;
 
         if (IsAnimEnded_Shoot)
@@ -51,7 +54,10 @@ public class MachineGun_Main : Gun_State_Base<MachineGunItem>
     }
     public override void OnLateUpdate()
     {
-        if (PlayerStatus.Inst.IsStunned || !weapon.IsSelected)
+        if (!weapon.IsSelected)
+            return;
+
+        if (PlayerStatus.Inst.IsHardCCed || !weapon.IsSelected)
             return;
 
         // Look At Mouse
