@@ -10,7 +10,7 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
     [SerializeField] private Vector2 damageSize;
     #endregion
 
-    [HideInInspector] public bool slamAnimDone = false;
+    [HideInInspector] public bool slamAnimEnd = false;
 
     private void OnDrawGizmos()
     {
@@ -28,7 +28,7 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
     }
     public override void OnExit()
     {
-        slamAnimDone = false;
+        slamAnimEnd = false;
 
         GM.Player.PlayingOtherMotion = false;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
@@ -51,7 +51,7 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
         for (int i = 0; i < hits.Length; i++)
         {
             // TODO: 무기 힛? 아님 주먹 힛? 아님 둘다?
-            PlayerStats.Inst.DealDamage(new AttackData(3), hits[i].gameObject, PlayerActions.WeaponHit);
+            PlayerStats.Inst.DealDamage(weapon.attackData_Slam, hits[i].gameObject, PlayerActions.WeaponHit);
         }
 
         // Animation
@@ -68,7 +68,7 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
     #region Method: Anim Event
     private void OnAnimEnd_Slam()
     {
-        slamAnimDone = true;
+        slamAnimEnd = true;
     }
     #endregion
 }

@@ -1,23 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Effect_Object : MonoBehaviour
+public class Player_Effect_Object : MonoBehaviour
 {
     [SerializeField] Transform feetPos;
-    void CreateAirJump(  )
+
+    void CreateAirJump()
     {
         AirJumpEft.Create(feetPos.position);
     }
-
-    void CreateWalkDust(  )
+    void CreateWalkDust()
     {
         var obj = PlayerWalkDustEft.Create(feetPos.position);
-
-
         obj.GetComponentInChildren<SpriteRenderer>().flipX = GM.Player.rb2D.velocity.x >= 0 ? false : true;
     }
-
-
-
 }

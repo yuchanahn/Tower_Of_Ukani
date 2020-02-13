@@ -8,6 +8,11 @@ public abstract class MeleeItem : WeaponItem
     #endregion
 
     #region Var: Stats
+    // Attack Data
+    public AttackData attackData_Heavy;
+    public AttackData attackData_Slam;
+    public AttackData attackData_Dash;
+
     // Timer
     public readonly TimerStat basicAttackTimer = new TimerStat();
     public readonly TimerStat heavyAttackTimer = new TimerStat();
@@ -26,6 +31,10 @@ public abstract class MeleeItem : WeaponItem
     public override void ResetStats()
     {
         attackData.Reset();
+        attackData_Heavy.Reset();
+        attackData_Slam.Reset();
+        attackData_Dash.Reset();
+
         basicAttackTimer.EndTime.Reset();
         heavyAttackTimer.EndTime.Reset();
     }

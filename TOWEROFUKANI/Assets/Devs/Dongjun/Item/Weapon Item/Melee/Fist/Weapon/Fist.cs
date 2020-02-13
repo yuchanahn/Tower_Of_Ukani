@@ -47,7 +47,7 @@ public class Fist : MeleeController<FistItem>
 
         SetLogic(ref state_Slam, () =>
         {
-            if (state_Slam.slamAnimDone || GM.Player.IsDashing)
+            if (state_Slam.slamAnimEnd || GM.Player.IsDashing || GM.Player.IsKicking)
                 return state_Basic;
 
             return null;

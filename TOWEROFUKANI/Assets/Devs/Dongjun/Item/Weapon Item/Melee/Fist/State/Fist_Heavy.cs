@@ -9,7 +9,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
     [SerializeField] private Vector2 damageSize;
     #endregion
 
-    private float chargePower = 0;
+    private float chargeTime = 0;
     private bool chargeDone = false;
 
     public bool PunchAnimEnd { get; private set; } = false;
@@ -28,7 +28,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
     }
     public override void OnExit()
     {
-        chargePower = 0;
+        chargeTime = 0;
         chargeDone = false;
         PunchAnimEnd = false;
 
@@ -48,14 +48,15 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         // Charge
         if (!chargeDone)
         {
-            chargePower += Time.deltaTime;
+            chargeTime += Time.deltaTime;
+            weapon.attackData_Heavy.damage.ModFlat = chargeTime * weapon.heavyChargePerSec;
 
             // Animation
             weapon.animator.Play("Heavy_Charge");
         }
 
         // Punch
-        if (Input.GetKeyUp(PlayerWeaponKeys.SubAbility))
+        if (!chargeDone && Input.GetKeyUp(PlayerWeaponKeys.SubAbility))
         {
             chargeDone = true;
 
@@ -63,8 +64,11 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
             var hits = Physics2D.OverlapBoxAll(damagePoint.position, damageSize, 0f, damageLayer);
             for (int i = 0; i < hits.Length; i++)
             {
-                PlayerStats.Inst.DealDamage(new AttackData(3 * chargePower), hits[i].gameObject, PlayerActions.WeaponHit);
+                PlayerStats.Inst.DealDamage(weapon.attackData_Heavy, hits[i].gameObject, PlayerActions.WeaponHit);
             }
+
+            // Reset Charged Damage
+            weapon.attackData_Heavy.damage.ModFlat = 0;
 
             // Animation
             weapon.animator.Play("Heavy_Punch");

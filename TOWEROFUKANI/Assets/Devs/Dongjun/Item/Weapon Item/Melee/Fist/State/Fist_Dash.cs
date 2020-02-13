@@ -22,7 +22,7 @@ public class Fist_Dash : Melee_State_Base<FistItem>
         overlapCheckData = new OverlapCheckData(
             onEnter: overlap => 
             {
-                PlayerStats.Inst.DealDamage(new AttackData(5), overlap.gameObject);
+                PlayerStats.Inst.DealDamage(weapon.attackData_Dash, overlap.gameObject);
             });
     }
 

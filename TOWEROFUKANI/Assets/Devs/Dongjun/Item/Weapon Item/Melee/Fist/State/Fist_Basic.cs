@@ -25,12 +25,10 @@ public class Fist_Basic : Melee_State_Base<FistItem>
     }
 
     #region Method: SSM
-    public override void OnEnter()
-    {
-        weapon.animator.Play(weapon.ANIM_Neutral);
-    }
     public override void OnExit()
     {
+        IsAnimEnded_Attack = true;
+
         GM.Player.CanDash = true;
         GM.Player.CanKick = true;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
@@ -41,7 +39,10 @@ public class Fist_Basic : Melee_State_Base<FistItem>
             return;
 
         if (PlayerStatus.Inst.IsHardCCed || GM.Player.IsKicking)
+        {
+            weapon.animator.Play(weapon.ANIM_Neutral);
             return;
+        }
 
         if (IsAnimEnded_Attack)
             weapon.animator.Play(weapon.ANIM_Neutral);
@@ -75,7 +76,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         for (int i = 0; i < hits.Length; i++)
         {
             // TODO: 무기 힛? 아님 주먹 힛? 아님 둘다?
-            PlayerStats.Inst.DealDamage(new AttackData(2), hits[i].gameObject, PlayerActions.WeaponHit);
+            PlayerStats.Inst.DealDamage(weapon.attackData, hits[i].gameObject, PlayerActions.WeaponHit);
         }
 
         // Animation
