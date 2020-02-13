@@ -4,9 +4,6 @@ using Dongjun.Helper;
 public class Player_Kick : SSM_State_wMain<Player>
 {
     #region Var: Inspector
-    [Header("Walk")]
-    [SerializeField] private PlayerWalkData walkData;
-
     [Header("Kick")]
     [SerializeField] private Transform dirTarget;
     [SerializeField] private float power;
@@ -21,15 +18,20 @@ public class Player_Kick : SSM_State_wMain<Player>
     [SerializeField] private float duration;
 
     [Header("Sprite Renderer")]
-    [SerializeField] private SpriteRenderer kickEffectSpriteRenderer;
+    [SerializeField] private SpriteRenderer effectSpriteRenderer;
     #endregion
 
     #region Var: Attack Data
     private AttackData attackData;
     #endregion
 
+    #region Var: Status
+    private PlayerStatus_Slow status_Slow;
+    #endregion
+
     #region Var: Properties
-    public bool IsKicking { get; private set; } = false;
+    public bool IsKicking
+    { get; private set; } = false;
     #endregion
 
     #region Method: Unity
@@ -38,6 +40,8 @@ public class Player_Kick : SSM_State_wMain<Player>
         base.Awake();
 
         attackData = new AttackData(1);
+
+        status_Slow = new PlayerStatus_Slow(GM.Player.statusID, GM.Player.gameObject, 50f);
     }
     #endregion
 
@@ -48,15 +52,21 @@ public class Player_Kick : SSM_State_wMain<Player>
 
         main.rb2D.velocity = main.rb2D.velocity.Change(y: main.rb2D.velocity.y * yVelPercent);
 
+        // Status Effect
+        PlayerStatus.AddEffect(status_Slow);
+
+        // Flip Sprite
+        effectSpriteRenderer.flipX = main.bodySpriteRenderer.flipX;
+
         // Play Animation
         main.animator.SetDuration(duration);
         main.animator.Play("Kick", 0, 0f);
-
-        // Flip Sprite
-        kickEffectSpriteRenderer.flipX = main.bodySpriteRenderer.flipX;
     }
     public override void OnExit()
     {
+        // Status Effect
+        PlayerStatus.RemoveEffect(status_Slow);
+
         // Animation
         main.animator.ResetSpeed();
     }
@@ -71,7 +81,7 @@ public class Player_Kick : SSM_State_wMain<Player>
             main.gravityData);
 
         // Walk
-        walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.rb2D, false);
+        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.rb2D, false);
     }
     #endregion
 

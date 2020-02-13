@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerStatus : SingletonBase<PlayerStatus>
 {
     private static Dictionary<StatusID, List<PlayerStatusEffect>> statusEffects;
 
-    #region Var: Properties
+    #region Var: Hit
     // Hit
     public static BoolCount AbsorbDamage
     { get; private set; } = new BoolCount();
     public static BoolCount IgnoreDamage
     { get; private set; } = new BoolCount();
+    #endregion
 
-    // CC
+    #region Var: CC
+    private static List<PlayerStatus_Slow> slowList;
+    public static bool IsSlowed => slowList.Count != 0;
+
     public static BoolCount IsStunned
     { get; private set; } = new BoolCount();
     public static bool IsKnockbacked
@@ -26,6 +31,8 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     {
         base.Awake();
         statusEffects = new Dictionary<StatusID, List<PlayerStatusEffect>>();
+
+        slowList = new List<PlayerStatus_Slow>();
 
         AbsorbDamage = new BoolCount();
         IgnoreDamage = new BoolCount();
@@ -153,6 +160,22 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     #endregion
 
     #region Method: CC
+    public void Slow_Add(PlayerStatus_Slow status_Slow)
+    {
+        slowList.Add(status_Slow);
+        slowList = slowList.OrderByDescending(o => o.SlowAmount).ToList();
+
+        // Apply Slow
+        PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[slowList.Count - 1].SlowAmount;
+    }
+    public void Slow_Remove(PlayerStatus_Slow status_Slow)
+    {
+        slowList.Remove(status_Slow);
+
+        // Apply Slow
+        PlayerStats.Inst.walkData.walkSpeed.ModPercent = IsSlowed ? -slowList[slowList.Count - 1].SlowAmount : 0;
+    }
+
     public void Stun_Add()
     {
         IsStunned.Set(true);

@@ -12,19 +12,33 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
     private float chargeTime = 0;
     private bool chargeDone = false;
 
-    public bool PunchAnimEnd { get; private set; } = false;
+    #region Var: Status
+    private PlayerStatus_Slow status_Slow;
+    #endregion
+
+    public bool PunchAnimEnd
+    { get; private set; } = false;
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(damagePoint.position, damageSize);
     }
+    protected override void Awake()
+    {
+        base.Awake();
+        status_Slow = new PlayerStatus_Slow(GM.Player.statusID, GM.Player.gameObject, 50f);
+    }
 
     public override void OnEnter()
     {
+        // Status Effect
+        PlayerStatus.AddEffect(status_Slow);
+
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.MeleeHeavyAttack);
 
+        // Player
         GM.Player.CanDash = false;
         GM.Player.CanKick = false;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
@@ -35,6 +49,10 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         chargeDone = false;
         PunchAnimEnd = false;
 
+        // Status Effect
+        PlayerStatus.RemoveEffect(status_Slow);
+
+        // Player
         GM.Player.CanDash = true;
         GM.Player.CanKick = true;
         GM.Player.CanChangeDir = true;
@@ -74,6 +92,9 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
 
             // Reset Charged Damage
             weapon.attackData_Heavy.damage.ModFlat = 0;
+
+            // Status Effect
+            PlayerStatus.RemoveEffect(status_Slow);
 
             // Animation
             weapon.animator.Play("Heavy_Punch");

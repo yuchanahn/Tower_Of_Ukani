@@ -12,17 +12,21 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #endregion
 
     #region Var: Current Stats
-    private FloatStat health;
-    private FloatStat stamina;
-    private FloatStat staminaRegen;
+    [HideInInspector] public FloatStat health;
+    [HideInInspector] public FloatStat stamina;
+    [HideInInspector] public FloatStat staminaRegen;
+
+    [HideInInspector] public PlayerWalkData walkData;
     #endregion
 
-    #region Var: Data Stat Change Data
+    #region Var: Stat Change Data
     [HideInInspector] public float DamageReceived;
     [HideInInspector] public float HealReceived;
     [HideInInspector] public float DamageToDeal;
-    public Mob_Base KilledMob { get; private set; }
-    public Mob_Base DamagedMob { get; private set; }
+    public Mob_Base KilledMob
+    { get; private set; }
+    public Mob_Base DamagedMob
+    { get; private set; }
     #endregion
 
     #region Var: Event for UI
@@ -46,6 +50,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
         health = new FloatStat(0, min: 0, max: base_health_Max);
         stamina = new FloatStat(0, min: 0, max: base_stamina_Max);
         staminaRegen = new FloatStat(base_staminaRegen, min: 0);
+
+        walkData = new PlayerWalkData(new FloatStat(7, min: 0), 0.2f, 0.2f);
 
         // Init
         health.ModFlat = health.Max;
@@ -105,7 +111,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
             return;
         
         // Store Damage Amount
-        DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : Mathf.Abs(amount);
+        DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : amount;
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.Damaged);
@@ -130,7 +136,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     public void Heal(float amount)
     {
         // Store Heal Amount
-        HealReceived = Mathf.Abs(amount);
+        HealReceived = amount;
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.Healed);

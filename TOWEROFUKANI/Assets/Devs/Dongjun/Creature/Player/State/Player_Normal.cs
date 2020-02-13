@@ -10,9 +10,6 @@ public class Player_Normal : SSM_State_wMain<Player>,
     [Header("Item PickUp")]
     [SerializeField] private PlayerItemPickUpData itemPickUpData;
 
-    [Header("Walk")]
-    [SerializeField] private PlayerWalkData walkData;
-
     [Header("Jump")]
     [SerializeField] private JumpData jumpData;
     #endregion
@@ -76,7 +73,7 @@ public class Player_Normal : SSM_State_wMain<Player>,
         main.groundDetectionData.FallThrough(ref fallThroughKeyPressed, main.rb2D, transform, oneWayCollider);
 
         // Walk
-        walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.rb2D, jumpData.isJumping);
+        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.rb2D, jumpData.isJumping);
 
         // Follow Moving Platform
         main.groundDetectionData.FollowMovingPlatform(main.rb2D);

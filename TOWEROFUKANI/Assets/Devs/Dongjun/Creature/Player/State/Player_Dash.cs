@@ -45,7 +45,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         // Init Value
         dashDir = PlayerInputManager.Inst.Input_DashDir;
 
-        // Player AbsorbDamage true
+        // Status Effect
         PlayerStatus.AddEffect(status_IgnoreDamage);
 
         // Trigger Item Effect
@@ -62,7 +62,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         // Reset Vel
         main.rb2D.velocity = new Vector2(0, 0);
 
-        // Player AbsorbDamage false
+        // Status Effect
         PlayerStatus.RemoveEffect(status_IgnoreDamage);
 
         // Trigger Item Effect
