@@ -35,7 +35,7 @@ public class MachineGun_EmptyShell : PlayerDropObj
     {
         base.Sleep();
 
-        showBehindObjTimer.SetTick(gameObject, TickType.None);
+        showBehindObjTimer.SetTick(gameObject, TickMode.Manual);
     }
 
     private void ShowBehindObj()

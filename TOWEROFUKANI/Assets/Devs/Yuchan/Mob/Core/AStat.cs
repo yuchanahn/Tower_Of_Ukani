@@ -34,7 +34,7 @@ public class AStat : MonoBehaviour, IDamage
 
         var id = GetComponent<Mob_Base>().StatusID;
 
-        PlayerStatus.Inst.Trigger(GetComponent<Mob_Base>(), MobAction.Hit);
+        //PlayerStatus.Inst.Trigger(GetComponent<Mob_Base>(), MobAction.Hit);
 
         GetComponent<HitColorEffect>().OnHit();
         GetComponent<IHurt>().OnHurt();

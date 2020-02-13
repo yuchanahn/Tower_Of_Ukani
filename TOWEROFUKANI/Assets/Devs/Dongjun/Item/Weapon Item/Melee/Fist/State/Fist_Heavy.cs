@@ -22,6 +22,9 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
 
     public override void OnEnter()
     {
+        // Trigger Item Effect
+        ActionEffectManager.Trigger(PlayerActions.MeleeHeavyAttack);
+
         GM.Player.CanDash = false;
         GM.Player.CanKick = false;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
@@ -42,7 +45,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsHardCCed)
+        if (PlayerStatus.IsHardCCed)
             return;
 
         // Charge
@@ -64,7 +67,9 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
             var hits = Physics2D.OverlapBoxAll(damagePoint.position, damageSize, 0f, damageLayer);
             for (int i = 0; i < hits.Length; i++)
             {
-                PlayerStats.Inst.DealDamage(weapon.attackData_Heavy, hits[i].gameObject, PlayerActions.WeaponHit);
+                PlayerStats.Inst.DealDamage(weapon.attackData_Heavy, hits[i].gameObject,
+                    PlayerActions.WeaponHit,
+                    PlayerActions.MeleeHeavyHit);
             }
 
             // Reset Charged Damage
@@ -82,7 +87,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsHardCCed)
+        if (PlayerStatus.IsHardCCed)
             return;
 
         // Look At Mouse

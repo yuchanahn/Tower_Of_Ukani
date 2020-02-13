@@ -37,7 +37,7 @@ public class PlayerWeaponHotbar : ToU_Inventory
         // Toggle Fist
         fist.Select(CurWeapon == null);
 
-        if (PlayerStatus.Inst.IsStunned.Value)
+        if (PlayerStatus.IsStunned.Value)
             return;
 
         ChangeSlot();
@@ -50,7 +50,7 @@ public class PlayerWeaponHotbar : ToU_Inventory
     {
         IsSlotLocked.Set(_this, _lock);
 
-        if (PlayerStatus.Inst.IsStunned.Value)
+        if (PlayerStatus.IsStunned.Value)
             return;
 
         LockSlotDrop(IsSlotLocked.Value);

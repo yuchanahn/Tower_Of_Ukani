@@ -38,7 +38,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsHardCCed || GM.Player.IsKicking)
+        if (PlayerStatus.IsHardCCed || GM.Player.IsKicking)
         {
             weapon.animator.Play(weapon.ANIM_Neutral);
             return;
@@ -54,7 +54,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsHardCCed)
+        if (PlayerStatus.IsHardCCed)
             return;
 
         // Look At Mouse
@@ -71,22 +71,24 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         if (!PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
             return;
 
+        // Trigger Item Effect
+        ActionEffectManager.Trigger(PlayerActions.WeaponMain);
+        ActionEffectManager.Trigger(PlayerActions.MeleeBasicAttack);
+
         // Deal Damage
         var hits = Physics2D.OverlapBoxAll(damagePoint.position, damageSize, 0f, damageLayer);
         for (int i = 0; i < hits.Length; i++)
         {
             // TODO: 무기 힛? 아님 주먹 힛? 아님 둘다?
-            PlayerStats.Inst.DealDamage(weapon.attackData, hits[i].gameObject, PlayerActions.WeaponHit);
+            PlayerStats.Inst.DealDamage(weapon.attackData, hits[i].gameObject,
+                PlayerActions.WeaponHit,
+                PlayerActions.MeleeBasicHit);
         }
 
         // Animation
         IsAnimEnded_Attack = false;
         weapon.animator.Play(prevAttackAnim == 1 ? "Basic_PunchR" : "Basic_PunchL");
         prevAttackAnim *= -1;
-
-        // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.WeaponMain);
-        ActionEffectManager.Trigger(PlayerActions.MeleeBasic);
 
         // Player
         GM.Player.CanDash = false;

@@ -34,8 +34,15 @@
     BowShoot,
 
     // Melee
-    MeleeBasic,
-    MeleeHeavy,
-    MeleeSlam,
-    MeleeDash,
+    MeleeBasicHit,
+    MeleeBasicAttack,
+
+    MeleeHeavyHit,
+    MeleeHeavyAttack,
+
+    MeleeSlamHit,
+    MeleeSlamAttack,
+
+    MeleeDashHit,
+    MeleeDashAttack,
 }

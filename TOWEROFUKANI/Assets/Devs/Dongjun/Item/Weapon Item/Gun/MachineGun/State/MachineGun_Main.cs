@@ -44,7 +44,7 @@ public class MachineGun_Main : Gun_State_Base<MachineGunItem>
         if (!weapon.IsSelected || weapon.loadedBullets <= 0)
             return;
 
-        if (PlayerStatus.Inst.IsHardCCed)
+        if (PlayerStatus.IsHardCCed)
             return;
 
         if (IsAnimEnded_Shoot)
@@ -57,7 +57,7 @@ public class MachineGun_Main : Gun_State_Base<MachineGunItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsHardCCed || !weapon.IsSelected)
+        if (PlayerStatus.IsHardCCed || !weapon.IsSelected)
             return;
 
         // Look At Mouse

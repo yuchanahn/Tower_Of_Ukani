@@ -15,9 +15,6 @@ public class PlayerStats : SingletonBase<PlayerStats>
     private FloatStat health;
     private FloatStat stamina;
     private FloatStat staminaRegen;
-
-    public bool AbsorbDamage = false;
-    public bool IgnoreDamage = false;
     #endregion
 
     #region Var: Data Stat Change Data
@@ -104,11 +101,11 @@ public class PlayerStats : SingletonBase<PlayerStats>
     public void Damage(float amount)
     {
         // Check Ignore Damage
-        if (IgnoreDamage)
+        if (PlayerStatus.IgnoreDamage.Value)
             return;
-
+        
         // Store Damage Amount
-        DamageReceived = AbsorbDamage ? 0 : Mathf.Abs(amount);
+        DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : Mathf.Abs(amount);
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.Damaged);

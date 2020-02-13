@@ -16,11 +16,11 @@ public class Player_HardCC : SSM_State_wMain<Player>
     }
     public override void OnFixedUpdate()
     {
-        if (!PlayerStatus.Inst.IsKnockbacked)
+        if (!PlayerStatus.IsKnockbacked)
             GM.Player.rb2D.velocity = GM.Player.rb2D.velocity.Change(x: 0);
 
         // Detect Ground
-        main.groundDetectionData.DetectGround(!PlayerStatus.Inst.IsKnockbacked, main.rb2D, transform);
+        main.groundDetectionData.DetectGround(!PlayerStatus.IsKnockbacked, main.rb2D, transform);
 
         // Gravity
         Gravity_Logic.ApplyGravity(main.rb2D,
@@ -30,17 +30,17 @@ public class Player_HardCC : SSM_State_wMain<Player>
 
     private void VisualEffect()
     {
-        stunnedRingEffect.SetActive(PlayerStatus.Inst.IsStunned.Value);
+        stunnedRingEffect.SetActive(PlayerStatus.IsStunned.Value);
     }
     private void Animation()
     {
-        if (PlayerStatus.Inst.IsStunned.Value)
+        if (PlayerStatus.IsStunned.Value)
         {
             main.animator.Play("Stunned");
             return;
         }
 
-        if (PlayerStatus.Inst.IsKnockbacked)
+        if (PlayerStatus.IsKnockbacked)
         {
             // TODO:
             //main.animator.Play("Knockbacked");

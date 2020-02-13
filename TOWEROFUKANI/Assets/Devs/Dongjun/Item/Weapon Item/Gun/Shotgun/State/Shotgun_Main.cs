@@ -36,7 +36,7 @@ public class Shotgun_Main : Gun_State_Base<ShotgunItem>
         if (!weapon.IsSelected || !weapon.isBulletLoaded)
             return;
 
-        if (PlayerStatus.Inst.IsHardCCed)
+        if (PlayerStatus.IsHardCCed)
             return;
 
         if (IsAnimEnded_Shoot)
@@ -49,7 +49,7 @@ public class Shotgun_Main : Gun_State_Base<ShotgunItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.Inst.IsHardCCed)
+        if (PlayerStatus.IsHardCCed)
             return;
 
         // Look At Mouse

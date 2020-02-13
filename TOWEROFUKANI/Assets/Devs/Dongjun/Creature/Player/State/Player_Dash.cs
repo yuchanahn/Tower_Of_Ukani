@@ -19,6 +19,10 @@ public class Player_Dash : SSM_State_wMain<Player>
     private bool isUsingMelee = false;
     #endregion
 
+    #region Var: Status
+    private PlayerStatus_IgnoreDamage status_IgnoreDamage;
+    #endregion
+
     #region Var: Effect
     int curTrailCount = 0;
     #endregion
@@ -31,6 +35,7 @@ public class Player_Dash : SSM_State_wMain<Player>
     protected override void Awake()
     {
         base.Awake();
+        status_IgnoreDamage = new PlayerStatus_IgnoreDamage(GM.Player.statusID, GM.Player.gameObject);
     }
     #endregion
 
@@ -41,7 +46,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         dashDir = PlayerInputManager.Inst.Input_DashDir;
 
         // Player AbsorbDamage true
-        PlayerStats.Inst.AbsorbDamage = true;
+        PlayerStatus.AddEffect(status_IgnoreDamage);
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.DashStart);
@@ -58,7 +63,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         main.rb2D.velocity = new Vector2(0, 0);
 
         // Player AbsorbDamage false
-        PlayerStats.Inst.AbsorbDamage = false;
+        PlayerStatus.RemoveEffect(status_IgnoreDamage);
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.DashEnd);

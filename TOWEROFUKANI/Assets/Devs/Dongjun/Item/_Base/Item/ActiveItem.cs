@@ -36,7 +36,7 @@ public abstract class ActiveItem : UpgradableItem
         base.OnDrop();
 
         // Stop Cooldown Timer
-        cooldownTimer.SetTick(gameObject, TickType.None);
+        cooldownTimer.SetActive(false);
         cooldownTimer.ToZero();
 
         // Deactivate Item

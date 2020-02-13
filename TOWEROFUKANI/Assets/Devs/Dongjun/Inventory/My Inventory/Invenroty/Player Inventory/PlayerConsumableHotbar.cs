@@ -17,7 +17,7 @@ public class PlayerConsumableHotbar : ToU_Inventory
 
     private void ConsumeItem()
     {
-        if (PlayerStatus.Inst.IsHardCCed || !inventoryUI.gameObject.activeInHierarchy)
+        if (PlayerStatus.IsHardCCed || !inventoryUI.gameObject.activeInHierarchy)
             return;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))

@@ -20,6 +20,9 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
 
     public override void OnEnter()
     {
+        // Trigger Item Effect
+        ActionEffectManager.Trigger(PlayerActions.MeleeSlamAttack);
+
         // Animation
         weapon.animator.Play("Slam_Airborne");
 
@@ -36,7 +39,7 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
     public override void OnFixedUpdate()
     {
         // Down Vel
-        GM.Player.rb2D.velocity = Vector2.down * 30f;
+        GM.Player.rb2D.velocity = Vector2.down * weapon.slamDownVel;
 
         // Detect Ground
         GM.Player.groundDetectionData.DetectGround(true, GM.Player.rb2D, GM.Player.transform);
@@ -51,7 +54,9 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
         for (int i = 0; i < hits.Length; i++)
         {
             // TODO: 무기 힛? 아님 주먹 힛? 아님 둘다?
-            PlayerStats.Inst.DealDamage(weapon.attackData_Slam, hits[i].gameObject, PlayerActions.WeaponHit);
+            PlayerStats.Inst.DealDamage(weapon.attackData_Slam, hits[i].gameObject,
+                PlayerActions.WeaponHit,
+                PlayerActions.MeleeSlamHit);
         }
 
         // Animation

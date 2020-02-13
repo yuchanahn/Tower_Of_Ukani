@@ -24,6 +24,8 @@ public class Player : SSM_Main
     #endregion
 
     #region Var: Properties
+    public StatusID statusID
+    { get; private set; } = new StatusID();
     public Rigidbody2D rb2D
     { get; private set; }
     public Animator animator
@@ -58,7 +60,7 @@ public class Player : SSM_Main
     {
         SetLogic(When.AnyAction, () =>
         {
-            if (PlayerStatus.Inst.IsHardCCed)
+            if (PlayerStatus.IsHardCCed)
                 return state_HardCC;
 
             if (!IsOtherMotion && PlayingOtherMotion)
@@ -69,7 +71,7 @@ public class Player : SSM_Main
 
         SetLogic(ref state_HardCC, () =>
         {
-            if (!PlayerStatus.Inst.IsHardCCed)
+            if (!PlayerStatus.IsHardCCed)
                 return state_Normal;
 
             return null;

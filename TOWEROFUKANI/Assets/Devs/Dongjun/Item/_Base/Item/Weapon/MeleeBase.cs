@@ -16,6 +16,9 @@ public abstract class MeleeItem : WeaponItem
     // Timer
     public readonly TimerStat basicAttackTimer = new TimerStat();
     public readonly TimerStat heavyAttackTimer = new TimerStat();
+
+    // Slam
+    public float slamDownVel = 30f;
     #endregion
 
     #region Method: Unity

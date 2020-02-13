@@ -27,7 +27,7 @@ public class TalismanOfProtection : ActiveItem
 
         // Init Duration
         durationTimer.EndTime = 2.5f;
-        durationTimer.SetAction(OnEnd: Deactivate);
+        durationTimer.SetTick(gameObject).SetAction(OnEnd: Deactivate);
 
         // Init Shield HP
         shieldhealth = new FloatStat(40, min: 0, max: 40);
@@ -49,8 +49,8 @@ public class TalismanOfProtection : ActiveItem
     {
         base.OnDrop();
 
-        // Remove Timers
-        durationTimer.SetTick(gameObject, TickType.None);
+        // Stop Timers
+        durationTimer.SetActive(false);
         durationTimer.ToZero();
 
         // Destroy Effect
@@ -66,7 +66,7 @@ public class TalismanOfProtection : ActiveItem
         cooldownTimer.ToZero();
 
         // Start Duration Timer
-        durationTimer.SetTick(gameObject);
+        durationTimer.SetActive(true);
         durationTimer.Restart();
 
         // Enable Shield Item Effect
@@ -84,7 +84,7 @@ public class TalismanOfProtection : ActiveItem
         cooldownTimer.Restart();
 
         // Stop Duration Timer
-        durationTimer.SetTick(gameObject, TickType.None);
+        durationTimer.SetActive(false);
         durationTimer.ToZero();
 
         // Reset Shield Health
