@@ -13,7 +13,8 @@ public class JPS_PathFinder : MonoBehaviour
 
     public Vector2[] Find( Vector2 start, Vector2 stop )
     {
-        Vector2[] dir = {
+        Vector2[] dir = 
+        {
             new Vector2( 0, 0),
             new Vector2( 0,-1),
             new Vector2( 1, 0),
@@ -44,15 +45,19 @@ public class JPS_PathFinder : MonoBehaviour
             }
         }
         List<Point> path = gridJPS.getPath( gridV.WorldToGrid(start), gridV.WorldToGrid(stop));
+        if (path.Count > 0)
+        {
+            if (path[0].column == gridV.WorldToGrid(start).column && path[0].row == gridV.WorldToGrid(start).row)
+            {
+                path.Remove(path[0]);
+            }
+        }
 
-
-        
         var v3 = new Vector2[path.Count];
         for(int i =0; i < path.Count; i++)
         {
             v3[i] = gridV.getNodePosAsWorldPos(path[i]);
         }
         return v3;
-        //return path.ToArray();
     }
 }

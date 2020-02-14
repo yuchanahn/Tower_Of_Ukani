@@ -56,7 +56,14 @@ public class Mob_FlowerBat : FlyingMob_Base
 
     public override void OnHurt()
     {
+        BTStop = true;
         base.OnHurt();
+    }
+
+    protected override void HurtEnd()
+    {
+        base.HurtEnd();
+        BTStop = false;
     }
 
     //=================================================================

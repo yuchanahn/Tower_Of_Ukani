@@ -6,11 +6,14 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
 {
     Mob_FlowerBat mMob;
 
+    public Transform MyCeiling = null;
     public float mCeilingDetectRange;
+
     public Vector2? mCeilingPos = null;
     public bool IsFollowEndToCeiling = false;
     public bool FindCeiling = false;
     public bool IsCeilingNear() => Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) < 0.1f;
+    public bool IsCeilingNearOf() => mCeilingPos is null ? true : Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) < mCeilingDetectRange;
     public static List<GameObject> HangWalls = new List<GameObject>();
 
     private void Awake()

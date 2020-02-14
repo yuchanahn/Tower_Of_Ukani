@@ -1634,6 +1634,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2113820553}
     m_Modifications:
+    - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: mPathFinder
+      value: 
+      objectReference: {fileID: 240870022}
     - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_Name
@@ -1699,6 +1704,11 @@ PrefabInstance:
       propertyPath: mPathFinder
       value: 
       objectReference: {fileID: 240870022}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AgroRange
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
 --- !u!4 &221602577 stripped
@@ -4986,12 +4996,12 @@ PrefabInstance:
     - target: {fileID: 7371128404420445768, guid: de8e575bfc7541a4cb26f729cf5133df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.49
       objectReference: {fileID: 0}
     - target: {fileID: 7371128404420445768, guid: de8e575bfc7541a4cb26f729cf5133df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 7371128404420445768, guid: de8e575bfc7541a4cb26f729cf5133df,
         type: 3}
@@ -5236,7 +5246,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &777316597
 Transform:
   m_ObjectHideFlags: 0
@@ -10029,7 +10039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1545883084
 Transform:
   m_ObjectHideFlags: 0

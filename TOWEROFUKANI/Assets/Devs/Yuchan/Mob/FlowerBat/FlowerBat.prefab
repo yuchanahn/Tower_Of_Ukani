@@ -224,8 +224,8 @@ GameObject:
   - component: {fileID: 7408284209935012267}
   - component: {fileID: 1475532417}
   - component: {fileID: 1475532418}
-  - component: {fileID: 450975516151158663}
   - component: {fileID: 2025537666354990290}
+  - component: {fileID: 450975516151158663}
   - component: {fileID: 1002320134427406415}
   - component: {fileID: 8546500476630119227}
   - component: {fileID: 4340000004817329858}
@@ -233,6 +233,7 @@ GameObject:
   - component: {fileID: 765496400}
   - component: {fileID: 2818090562661050550}
   - component: {fileID: 7510034718012629857}
+  - component: {fileID: 4835304523073473399}
   m_Layer: 8
   m_Name: FlowerBat
   m_TagString: Untagged
@@ -322,18 +323,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &450975516151158663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7408284209935012269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc04e5bb66c46bb47a98951d66325b1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2025537666354990290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +352,18 @@ MonoBehaviour:
   AgroRange: 0
   FleeRange: 0
   Size: {x: 1, y: 1}
+--- !u!114 &450975516151158663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408284209935012269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc04e5bb66c46bb47a98951d66325b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1002320134427406415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,4 +459,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mCeilingDetectRange: 2
+  IsFollowEndToCeiling: 0
   FindCeiling: 0
+--- !u!114 &4835304523073473399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408284209935012269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f71682adb84eb4d80bf0d3f5ec50ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mPathFinder: {fileID: 0}

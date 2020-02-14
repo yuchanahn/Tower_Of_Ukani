@@ -12,6 +12,7 @@ public class FlowerBatBlackBorad : BlackBoard_Base
     private FlowerBat_Task_RandomMove RandomMoveTask;
     private FlowerBat_Task_Attack AttackTask;
     private FlowerBat_Task_Hang HangTask;
+    private FlyingMob_JPS_Task_Follow JPS_FollowTask;
 
     private void Awake()
     {
@@ -19,20 +20,29 @@ public class FlowerBatBlackBorad : BlackBoard_Base
         status = GetComponent<StatusEffect_Object>();
         RandomMoveTask = GetComponent<FlowerBat_Task_RandomMove>();
         HangTask = GetComponent<FlowerBat_Task_Hang>();
+        JPS_FollowTask = GetComponent<FlyingMob_JPS_Task_Follow>();
     }
 
     public bool IsFindCeiling()
     {
+        if(HangTask.IsCeilingNearOf())
+        {
+            if (HangTask.MyCeiling != null)
+                FlowerBat_Task_Hang.HangWalls.Remove(HangTask.MyCeiling.gameObject);
+            goto NewFind;
+        }
+
         if (HangTask.FindCeiling)
         {
             HangTask.IsFollowEndToCeiling = HangTask.IsCeilingNear();
             return true;
         }
 
+        NewFind:
         var Tr = Detect.GetHitTrOrNull(transform.position, Vector2.up, HangTask.mCeilingDetectRange, GM.SoildGroundLayer);
-        if (HangTask.FindCeiling = Tr)
+        if (HangTask.FindCeiling = HangTask.MyCeiling = Tr)
         {
-            if (FlowerBat_Task_Hang.HangWalls.Contains(Tr.gameObject))
+            if (FlowerBat_Task_Hang.HangWalls.Contains(HangTask.MyCeiling.gameObject))
             {
                 return false;
             }
@@ -51,8 +61,8 @@ public class FlowerBatBlackBorad : BlackBoard_Base
 
 
 
-    public bool AgroCheck() => false;
-    public bool Follow() => false;
+    public bool AgroCheck() => Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AgroRange;
+    public bool Follow() => JPS_FollowTask.Tick();
 
 
 
@@ -61,8 +71,7 @@ public class FlowerBatBlackBorad : BlackBoard_Base
 
     public bool IsTargetInFleeRange() => false;
     public bool IsTargetInAttackRange() => false;
-    public bool StatusEffectBTStop() => status.SENoTask;
-    public bool BTStop() => false;
+    public bool BTStop() => status.SENoTask || mMob.BTStop;
     public bool RandomMove() => RandomMoveTask.Tick();
     public bool Hang() => HangTask.Tick();
     public bool Attack() => AttackTask.Tick();

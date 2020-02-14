@@ -15,10 +15,6 @@ public class BT_FlowerBat : BT_Base
     {
         root.node
         .AddNode(new Selector())
-            .AddNode(new Decorator(Bb.StatusEffectBTStop))
-                .AddNode(new Task(() => true))
-                .End()
-            .End()
             .AddNode(new Decorator(Bb.BTStop))
                 .AddNode(new Task(() => true))
                 .End()

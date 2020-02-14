@@ -7,7 +7,7 @@ using Dongjun.Helper;
 public class FlowerBat_Task_RandomMove : MonoBehaviour, ITask
 {
     [SerializeField] JPS_PathFinder mPathFinder;
-    JPS_MoveManager mMoveMgr;
+    JPS_MoveManager mMoveMgr = new JPS_MoveManager();
 
     Mob_FlowerBat mMob;
 

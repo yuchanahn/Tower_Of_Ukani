@@ -255,7 +255,7 @@ public abstract class FlyingMob_Base : Mob_Base
 
     bool mHurt = false;
 
-    protected void HurtEnd()
+    protected virtual void HurtEnd()
     {
         mHurt = false;
     }
