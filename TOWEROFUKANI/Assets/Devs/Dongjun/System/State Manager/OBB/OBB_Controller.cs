@@ -18,7 +18,7 @@ using UnityEngine;
  * 지원 되는 기능:
  * 
  * -> Objective: ForceRun
- *    조건이 맞다면 무조건(Behaviour: Wait 과  Objective: Transition 무시) 이 목표를 실행함.
+ *    조건이 맞다면 무조건(Behaviour: Wait 과 Objective: Transition 무시) 이 목표를 실행함.
  *    
  * -> Objective: Transition
  *    현재 Objective가 끝나면 Transition Objective를 실행함.
@@ -29,7 +29,7 @@ using UnityEngine;
  * 
  * ------------------------------------------------------------------------
  * 
- * 유의 사항:
+ * 초기화:
  * 
  * -> States 초기화
  *    1) State를 가져올 때 GetComponent 대신 GetState(ref State) 함수를 사용해야함.
@@ -350,7 +350,7 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
     #region Class: Objective
     protected class Objective
     {
-        protected List<OBB_Behaviour> behaviours;
+        protected List<OBB_Behaviour> behaviours = new List<OBB_Behaviour>();
 
         public Func<bool> IsPossible
         { get; protected set; }
@@ -363,8 +363,6 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
 
         public Objective(Func<bool> isPossible, bool forceRun = false)
         {
-            behaviours = new List<OBB_Behaviour>();
-
             IsPossible = isPossible;
             ForceRun = forceRun;
         }
@@ -416,20 +414,8 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
     // Data
     protected Data data => _data;
 
-    // Objective
-    protected List<Objective> objectives
-    { get; private set; } = new List<Objective>();
-    protected Objective defaultObjective
-    { get; private set; }
-    protected Objective currentObjective
-    { get; private set; }
-
-    // Behaviour
-    protected OBB_Behaviour currentBehaviour
-    { get; private set; }
-
     // State
-    protected readonly State done = null;
+    protected readonly State finish = null;
     protected State defaultState
     { get; private set; }
     protected State currentState
@@ -437,6 +423,18 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
     protected StateAction defaultStateAction
     { get; private set; }
     protected StateAction currentStateAction
+    { get; private set; }
+
+    // Behaviour
+    protected OBB_Behaviour currentBehaviour
+    { get; private set; }
+
+    // Objective
+    protected List<Objective> objectives
+    { get; private set; } = new List<Objective>();
+    protected Objective defaultObjective
+    { get; private set; }
+    protected Objective currentObjective
     { get; private set; }
     #endregion
 
@@ -517,14 +515,11 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
     {
         return this.defaultObjective = new Objective(() => true);
     }
-    protected void SetDefaultObjective(Objective defaultObjective)
+    protected Objective CreateObjective(Func<bool> isPossible, bool forceRun = false)
     {
-        this.defaultObjective = defaultObjective;
-    }
-    protected void AddObjectives(params Objective[] objectives)
-    {
-        for (int i = 0; i < objectives.Length; i++)
-            this.objectives.Add(objectives[i]);
+        Objective objective = new Objective(isPossible, forceRun);
+        objectives.Add(objective);
+        return objective;
     }
     #endregion
 

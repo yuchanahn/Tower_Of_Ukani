@@ -24,19 +24,16 @@ public class OBB_Pistol_Data : OBB_Data
     }
     public override void Init_Start(GameObject gameObject)
     {
-        Timer_Shoot.
-            SetTick(gameObject).
-            EndTime = new FloatStat(0.25f);
+        Timer_Shoot.SetTick(gameObject);
+        Timer_Shoot.EndTime = new FloatStat(1f);
         Timer_Shoot.ToEnd();
 
-        Timer_Reload.
-            SetTick(gameObject).
-            EndTime = new FloatStat(0.5f);
+        Timer_Reload.SetTick(gameObject);
+        Timer_Reload.EndTime = new FloatStat(0.5f);
         Timer_Reload.SetActive(false);
 
-        Timer_SwapMagazine.
-            SetTick(gameObject).
-            EndTime = new FloatStat(0.7f);
+        Timer_SwapMagazine.SetTick(gameObject);
+        Timer_SwapMagazine.EndTime = new FloatStat(0.7f);
         Timer_SwapMagazine.SetActive(false);
     }
 }
@@ -90,32 +87,30 @@ public class OBB_Pistol : OBB_Controller<OBB_Pistol_Data, OBB_State<OBB_Pistol_D
             () =>
             {
                 if (data.Timer_Shoot.IsEnded)
-                    return null;
+                    return finish;
 
                 return state_Main;
             }));
     }
     protected override void InitObjectives()
     {
-        Objective pause = new Objective(
+        // Pause Weapon
+        CreateObjective(
             () => !data.IsWeaponSelected, true).
             AddBehaviour(bvr_Idle);
 
-        Objective reload = new Objective(
+        // Reload
+        CreateObjective(
             () => data.loadedBullets == 0 && data.Timer_Shoot.IsEnded).
             AddBehaviour(bvr_Reload);
 
-        Objective normal = new Objective(
+        // Normal
+        CreateObjective(
             () => data.loadedBullets > 0).
             AddBehaviour(bvr_Normal, true);
 
         SetDefaultObjective().
             AddBehaviour(bvr_Idle);
-
-        AddObjectives(
-            pause,
-            reload,
-            normal);
     }
 
     // Test

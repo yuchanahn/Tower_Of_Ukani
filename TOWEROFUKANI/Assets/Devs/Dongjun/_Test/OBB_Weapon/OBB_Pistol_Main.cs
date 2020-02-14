@@ -5,9 +5,9 @@ public class OBB_Pistol_Main : OBB_State<OBB_Pistol_Data>
 {
     public override void OnEnter()
     {
-        data.Timer_Shoot.Restart();
-
         data.loadedBullets--;
+
+        data.Timer_Shoot.Restart();
 
         data.Animator.Play("Shoot");
 
