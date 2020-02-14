@@ -23,7 +23,7 @@ public static class ActionEffectExtension
     {
         return new ActionEffect(action, typeof(T_THis), typeof(T_After));
     }
-    public static ActionEffect CreateItemEffect<T_THis>(this T_THis _, Action action)
+    public static ActionEffect CreateActionEffect<T_THis>(this T_THis _, Action action)
     {
         return new ActionEffect(action, typeof(T_THis));
     }

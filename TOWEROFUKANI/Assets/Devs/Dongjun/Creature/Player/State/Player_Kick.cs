@@ -5,9 +5,11 @@ public class Player_Kick : SSM_State_wMain<Player>
 {
     #region Var: Inspector
     [Header("Kick")]
-    [SerializeField] private Transform dirTarget;
+    [SerializeField] private Transform kickObject;
     [SerializeField] private float power;
-    [SerializeField] private BoxCollider2D detectBox;
+    [SerializeField] private Transform dirTarget;
+    [SerializeField] private Transform detectPoint;
+    [SerializeField] private Vector2 detectSize;
     [SerializeField] private LayerMask blockMask;
     [SerializeField] private LayerMask mobMask;
 
@@ -16,9 +18,6 @@ public class Player_Kick : SSM_State_wMain<Player>
 
     [Header("Animation Duration")]
     [SerializeField] private float duration;
-
-    [Header("Sprite Renderer")]
-    [SerializeField] private SpriteRenderer effectSpriteRenderer;
     #endregion
 
     #region Var: Attack Data
@@ -29,12 +28,17 @@ public class Player_Kick : SSM_State_wMain<Player>
     private PlayerStatus_Slow status_Slow;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public bool IsKicking
     { get; private set; } = false;
     #endregion
 
     #region Method: Unity
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(detectPoint.position, detectSize);
+    }
     protected override void Awake()
     {
         base.Awake();
@@ -55,12 +59,15 @@ public class Player_Kick : SSM_State_wMain<Player>
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
 
-        // Flip Sprite
-        effectSpriteRenderer.flipX = main.bodySpriteRenderer.flipX;
+        // Look Dir
+        Flip_Logic.FlipXTo(GM.Player.Dir, kickObject);
 
         // Play Animation
         main.Animator.SetDuration(duration);
         main.Animator.Play("Kick", 0, 0f);
+
+        // Player
+        GM.Player.CanChangeDir = false;
     }
     public override void OnExit()
     {
@@ -69,6 +76,9 @@ public class Player_Kick : SSM_State_wMain<Player>
 
         // Animation
         main.Animator.ResetSpeed();
+
+        // Player
+        GM.Player.CanChangeDir = true;
     }
     public override void OnFixedUpdate()
     {
@@ -83,17 +93,16 @@ public class Player_Kick : SSM_State_wMain<Player>
         // Walk
         PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.RB2D, false);
     }
+    public override void OnLateUpdate()
+    {
+
+    }
     #endregion
 
     #region Method: Kick
     private void KickBlock()
     {
-        Collider2D[] blockHits = 
-            Physics2D.OverlapBoxAll(
-                transform.position + new Vector3(detectBox.offset.x * main.Dir, detectBox.offset.y), 
-                detectBox.size, 
-                0f, 
-                blockMask);
+        Collider2D[] blockHits = Physics2D.OverlapBoxAll(detectPoint.position, detectSize, 0f, blockMask);
 
         if (blockHits.Length == 0)
             return;
@@ -108,12 +117,7 @@ public class Player_Kick : SSM_State_wMain<Player>
     }
     private void KickMob()
     {
-        Collider2D[] mobHits =
-            Physics2D.OverlapBoxAll(
-                transform.position + new Vector3(detectBox.offset.x * main.Dir, detectBox.offset.y),
-                detectBox.size,
-                0f,
-                mobMask);
+        Collider2D[] mobHits = Physics2D.OverlapBoxAll(detectPoint.position, detectSize, 0f, mobMask);
 
         if (mobHits.Length == 0)
             return;

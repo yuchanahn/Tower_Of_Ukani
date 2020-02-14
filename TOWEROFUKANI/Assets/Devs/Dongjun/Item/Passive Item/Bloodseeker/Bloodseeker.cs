@@ -9,7 +9,7 @@ public class Bloodseeker : PassiveItem
     {
         base.OnAdd(inventory);
 
-        onWeaponHitEffect = this.CreateItemEffect(LifeSteal);
+        onWeaponHitEffect = this.CreateActionEffect(LifeSteal);
 
         ActionEffectManager.AddEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
     }

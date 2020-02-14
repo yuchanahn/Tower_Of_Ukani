@@ -19,7 +19,7 @@ public abstract class SSM_Main : MonoBehaviour
     private bool canRunOnLateEnter = true;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     protected SSM_State DefaultState
     { get; private set; }
     protected SSM_State CurrentState

@@ -34,7 +34,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     private readonly Dictionary<GameObject, Action<FloatStat>> OnStaminaChange = new Dictionary<GameObject, Action<FloatStat>>();
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public bool IsDead
     { get; private set; } = false;
     public FloatStat Health => health;
@@ -182,12 +182,12 @@ public class PlayerStats : SingletonBase<PlayerStats>
         // Store Damaged Mob
         DamagedMob = target.GetComponent<Mob_Base>();
 
-        // Trigger Item Effect (Hit)
+        // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.DamageDealt);
-
-        // Trigger Item Effect (Other)
         for (int i = 0; i < actionToTrigger.Length; i++)
             ActionEffectManager.Trigger(actionToTrigger[i]);
+
+        attackData.damage = new FloatStat(DamageToDeal);
 
         // Damage Mob
         float mobHP = iDamage.Hit(attackData);

@@ -27,7 +27,7 @@ public class Player_Dash : SSM_State_wMain<Player>
     int curTrailCount = 0;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public bool DashDone { get; private set; } = false;
     #endregion
 

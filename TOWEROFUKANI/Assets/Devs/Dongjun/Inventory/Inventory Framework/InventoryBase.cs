@@ -12,7 +12,7 @@ public abstract class InventoryBase : MonoBehaviour
     protected Item[] items;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public Type[] SlotTypes
     { get; private set; }
     public int Size

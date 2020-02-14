@@ -4,7 +4,7 @@ public abstract class WeaponController_Base : SSM_Main { }
 public abstract class WeaponController<T> : WeaponController_Base
     where T : WeaponItem
 {
-    #region Var: Properties
+    #region Prop: 
     protected T weaponItem
     { get; private set; }
     public Animator animator
@@ -42,7 +42,7 @@ public abstract class WeaponItem : UpgradableItem
     [SerializeField] private float pivotPointY;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public GameObject SpriteRoot => spriteRoot;
     public bool IsSelected
     { get; protected set; } = false;

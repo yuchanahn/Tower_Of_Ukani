@@ -36,10 +36,11 @@ using UnityEngine;
  *    2) SetDefaultState(State, StateAction) 함수는 무조건 실행해야 함.
  * 
  * -> Behaviour 초기화
- *    1) 하나의 State만 필요할 때는 Single을 사용함.
- *    2) 두개 이상의 State들이 한꺼번에 성공해야 한다면 Process를 사용함.
- *    3) 두개 이상의 State들을 순차적으로 하나씩 완수해야 한다면 Sequence를 사용함.
- *    4) 두개 이상의 State들이 조건에 의해 다른 State로 바뀌어야 한다면 Choice를 사용함.
+ *    1) Single: 하나의 State만 완수하면 될 때 사용함.
+ *    2) Process: 두개 이상의 State들이 순차적으로 모두 완수해야 할 때 사용함.
+ *    3) Sequence: 두개 이상의 State들을 순차적으로 완수해야 할 때 사용함.
+ *    3) Continue: 두개 이상의 State들을 순차적으로 완수해야 하며 다른 행동으로 바뀌었다가 돌아와도 이어서 진행 해야할 때 사용함.
+ *    4) Choice: 두개 이상의 State들이 조건에 의해 다른 State로 바뀌어야 할 때 사용함.
  * 
  * -> Objective 초기화
  *    1) Behaviour를 추가 할 때는 무조건 AddBehaviour() 함수를 사용해야 함.
@@ -125,20 +126,35 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
     #region Class: Behaviour -> Single
     protected sealed class Single : OBB_Behaviour
     {
-        private (State state, StateAction stateAction, Func<bool> done) data;
+        private List<(State state, StateAction stateAction, Func<bool> done)> data = 
+            new List<(State, StateAction, Func<bool>)>();
 
         // Ctor
         public Single(State state, StateAction stateAction, Func<bool> done)
         {
-            data.state = state;
-            data.stateAction = stateAction;
-            data.done = done;
+            data.Add((state, stateAction, done));
+        }
+        public Single(params (State state, StateAction stateAction, Func<bool> done)[] data)
+        {
+            for (int i = 0; i < data.Length; i++)
+                this.data.Add(data[i]);
         }
 
         // Behaviour
         public override (State state, StateAction stateAction) GetCurrent(State currentState)
         {
-            return data.done() ? (null, NULL_STATE_ACTION) : (data.state, data.stateAction);
+            if (data.Count == 1 && data[0].done())
+            {
+                return (data[0].state, data[0].stateAction);
+            }
+            else
+            {
+                for (int i = 0; i < data.Count; i++)
+                    if (data[i].done())
+                        return (data[i].state, data[i].stateAction);
+            }
+
+            return (null, NULL_STATE_ACTION);
         }
     }
     #endregion
@@ -214,10 +230,57 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
             if (data[curIndex].done())
             {
                 if (curIndex != data.Count - 1)
+                {
                     curIndex++;
-
-                if (curIndex == data.Count - 1)
+                }
+                else
+                {
                     return (null, NULL_STATE_ACTION);
+                }
+            }
+
+            return (data[curIndex].state, data[curIndex].stateAction);
+        }
+    }
+    #endregion
+
+    #region Class: Behaviour -> Sequence
+    protected sealed class Continue : OBB_Behaviour
+    {
+        private List<(State state, StateAction stateAction, Func<bool> done)> data;
+        private int curIndex = 0;
+
+        // Ctor
+        public Continue(params (State state, StateAction stateAction, Func<bool> done)[] data)
+        {
+            this.data = new List<(State state, StateAction stateAction, Func<bool> done)>();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i].state == null)
+                {
+                    Debug.LogError($"{data[i].state.GetType().Name} is Null!");
+                    continue;
+                }
+
+                this.data.Add(data[i]);
+            }
+        }
+
+        // Behaviour
+        public override (State state, StateAction stateAction) GetCurrent(State currentState)
+        {
+            if (data[curIndex].done())
+            {
+                if (curIndex != data.Count - 1)
+                {
+                    curIndex++;
+                }
+                else
+                {
+                    curIndex = 0;
+                    return (null, NULL_STATE_ACTION);
+                }
             }
 
             return (data[curIndex].state, data[curIndex].stateAction);
@@ -275,6 +338,10 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
             }
 
             State nextState = data[currentState].getNext();
+
+            if (nextState == null)
+                return (null, NULL_STATE_ACTION);
+
             return (nextState, data[nextState].stateAction);
         }
     }
@@ -345,7 +412,7 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
     private bool canRunLateEnter = true;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     // Data
     protected Data data => _data;
 
@@ -376,7 +443,7 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
     #region Method: Unity
     protected virtual void Awake()
     {
-        data.Init(gameObject);
+        data.Init_Awake(gameObject);
         InitStates();
         InitBehaviours();
         InitObjectives();
@@ -390,6 +457,10 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
 
         if (defaultObjective == null)
             Debug.LogError($"{gameObject.name} > No Default Objective!");
+    }
+    protected virtual void Start()
+    {
+        data.Init_Start(gameObject);
 
         // Update OBB
         OBB_Update();
@@ -442,6 +513,10 @@ public abstract class OBB_Controller<Data, State> : MonoBehaviour
 
     // Init Objectives
     protected abstract void InitObjectives();
+    protected Objective SetDefaultObjective()
+    {
+        return this.defaultObjective = new Objective(() => true);
+    }
     protected void SetDefaultObjective(Objective defaultObjective)
     {
         this.defaultObjective = defaultObjective;

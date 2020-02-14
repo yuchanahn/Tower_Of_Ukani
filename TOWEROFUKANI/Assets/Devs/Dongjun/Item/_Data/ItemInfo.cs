@@ -17,7 +17,7 @@ public sealed class ItemInfo
     [SerializeField] private Item_Range[] range;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     // Item Data
     public string ID
     { get; private set; } = null;

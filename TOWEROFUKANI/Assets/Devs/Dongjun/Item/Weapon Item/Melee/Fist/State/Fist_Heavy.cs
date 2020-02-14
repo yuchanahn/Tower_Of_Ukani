@@ -12,15 +12,19 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
     [SerializeField] private CameraShake.Data camShakeData_Punch;
     #endregion
 
+    #region Var: Heavy Attack
     private float chargeTime = 0;
     private bool chargeDone = false;
+    #endregion
 
     #region Var: Status
     private PlayerStatus_Slow status_Slow;
     #endregion
 
+    #region Prop: 
     public bool PunchAnimEnd
     { get; private set; } = false;
+    #endregion
 
     private void OnDrawGizmos()
     {

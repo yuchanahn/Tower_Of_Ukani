@@ -14,7 +14,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
     private int prevAttackAnim = 1;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public bool IsAnimEnded_Attack { get; private set; } = true;
     #endregion
 

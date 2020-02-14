@@ -28,7 +28,7 @@ public class PhantomPistol : PassiveItem
     {
         base.OnAdd(inventory);
 
-        onShoot = this.CreateItemEffect(OnShoot);
+        onShoot = this.CreateActionEffect(OnShoot);
 
         ActionEffectManager.AddEffect(PlayerActions.GunShoot, onShoot);
 

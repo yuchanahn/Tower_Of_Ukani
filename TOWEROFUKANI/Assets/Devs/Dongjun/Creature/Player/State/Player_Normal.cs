@@ -25,7 +25,7 @@ public class Player_Normal : SSM_State_wMain<Player>,
     private bool fallThroughKeyPressed = false;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public JumpData JumpData => jumpData;
     #endregion
 

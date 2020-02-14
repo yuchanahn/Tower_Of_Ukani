@@ -46,8 +46,8 @@ public class FlameBoots : PassiveItem
         // Init Data
         overlapCheckData = new OverlapCheckData(onEnter: OnFlameDashHit);
 
-        onDashingEffect = this.CreateItemEffect(FlameDash);
-        onDashEndEffect = this.CreateItemEffect(ResetFlameDash);
+        onDashingEffect = this.CreateActionEffect(FlameDash);
+        onDashEndEffect = this.CreateActionEffect(ResetFlameDash);
 
         ActionEffectManager.AddEffect(PlayerActions.Dashing, onDashingEffect);
         ActionEffectManager.AddEffect(PlayerActions.DashEnd, onDashEndEffect);

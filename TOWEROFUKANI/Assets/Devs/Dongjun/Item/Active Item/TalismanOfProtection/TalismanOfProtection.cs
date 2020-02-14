@@ -39,7 +39,7 @@ public class TalismanOfProtection : ActiveItem
     {
         base.OnAdd(inventory);
 
-        onDamageReceived = this.CreateItemEffect(Shield);
+        onDamageReceived = this.CreateActionEffect(Shield);
 
         // Spawn Effect
         shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));

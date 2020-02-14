@@ -13,7 +13,7 @@ public abstract class InventoryUIBase : MonoBehaviour
     [SerializeField] protected ItemRightClickAction rightClickManager;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public InventoryBase inventory
     { get; private set; }
     public int Size

@@ -30,7 +30,7 @@ public abstract class BowItem : WeaponItem
     [HideInInspector] public float drawPower = 0;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public GameObject ArrowVisual => arrowVisual;
     #endregion
 

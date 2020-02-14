@@ -2,7 +2,7 @@
 
 public abstract class UpgradableItem : Item
 {
-    #region Var: Properties
+    #region Prop: 
     public int ItemLevel
     { get; private set; } = 1;
     #endregion

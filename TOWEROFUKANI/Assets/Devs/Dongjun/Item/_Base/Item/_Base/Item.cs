@@ -11,7 +11,7 @@ public abstract class Item : MonoBehaviour
     [SerializeField] protected DroppedItem droppedItemPrefab;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     // Item Data
     public ItemInfo Info => info;
     public DroppedItem DroppedItemPrefab => droppedItemPrefab;

@@ -10,7 +10,7 @@ public abstract class DroppedItem : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public Item Item => item;
     public bool DroppedFromInventory
     { get; private set; } = false;

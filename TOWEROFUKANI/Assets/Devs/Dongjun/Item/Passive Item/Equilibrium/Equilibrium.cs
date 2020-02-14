@@ -11,8 +11,8 @@ public class Equilibrium : PassiveItem
     {
         base.OnAdd(inventory);
 
-        onDamagedEffect = this.CreateItemEffect(OnDamaged);
-        onHitEffect = this.CreateItemEffect(OnHit);
+        onDamagedEffect = this.CreateActionEffect(OnDamaged);
+        onHitEffect = this.CreateActionEffect(OnHit);
 
         ActionEffectManager.AddEffect(PlayerActions.Damaged, onDamagedEffect);
         ActionEffectManager.AddEffect(PlayerActions.DamageDealt, onHitEffect);

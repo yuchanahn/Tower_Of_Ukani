@@ -24,7 +24,7 @@ public class Player : SSM_Main,
     [HideInInspector] public bool PlayingOtherMotion = false;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public CreatureType CreatureType => CreatureType.Player;
     public StatusID StatusID
     { get; private set; } = new StatusID();

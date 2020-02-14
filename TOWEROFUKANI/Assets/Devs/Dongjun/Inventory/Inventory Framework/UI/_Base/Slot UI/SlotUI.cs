@@ -6,7 +6,7 @@ public class SlotUI : MonoBehaviour
     protected InventoryUIBase inventoryUI;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public int Index
     { get; private set; }
     #endregion

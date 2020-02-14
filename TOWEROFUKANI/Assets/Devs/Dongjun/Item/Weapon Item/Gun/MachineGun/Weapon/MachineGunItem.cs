@@ -8,7 +8,7 @@ public class MachineGunItem : GunItem
     public float ammoBeltAmmoCount;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public float AmmoBeltMaxY => 0.0625f * ammoBeltAmmoCount;
     #endregion
 

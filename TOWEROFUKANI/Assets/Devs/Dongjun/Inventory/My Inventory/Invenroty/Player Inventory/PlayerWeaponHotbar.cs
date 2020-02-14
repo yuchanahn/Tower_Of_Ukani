@@ -7,7 +7,7 @@ public class PlayerWeaponHotbar : ToU_Inventory
     [SerializeField] private FistItem fist;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public BoolSet IsSlotLocked
     { get; private set; } = new BoolSet();
 

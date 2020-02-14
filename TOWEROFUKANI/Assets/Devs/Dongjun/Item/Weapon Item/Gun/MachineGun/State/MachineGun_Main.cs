@@ -26,7 +26,7 @@ public class MachineGun_Main : Gun_State_Base<MachineGunItem>
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public bool IsAnimEnded_Shoot { get; private set; } = false;
     #endregion
 

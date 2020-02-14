@@ -11,7 +11,7 @@ public abstract class ItemUI : MonoBehaviour,
     private ItemRightClickAction rightCickManager;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public Item Item
     { get; private set; }
     #endregion

@@ -14,7 +14,7 @@ public abstract class Gun_SwapMagazine_Base<T> : Gun_State_Base<T>
     [SerializeField] protected PoolingObj droppedMagazinePrefab;
     #endregion
 
-    #region Var: Properties
+    #region Prop: 
     public bool IsAnimStarted_SwapMagazine { get; private set; } = false;
     public bool IsAnimEnded_SwapMagazine { get; private set; } = false;
     #endregion

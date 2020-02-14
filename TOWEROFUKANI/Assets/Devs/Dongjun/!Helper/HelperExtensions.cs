@@ -36,21 +36,21 @@ namespace Dongjun.Helper
 
     public static class ArrayExtensions
     {
-        public static T GetClosest<T>(this Collider2D[] hits, Transform pivot) where T : class
+        public static T GetClosest<T>(this Collider2D[] cols, Transform pivot) where T : class
         {
-            if (hits == null || hits.Length == 0)
+            if (cols == null || cols.Length == 0)
                 return null;
 
             T result = null;
 
             float dist = -1;
-            for (int i = 0; i < hits.Length; i++)
+            for (int i = 0; i < cols.Length; i++)
             {
-                float curDist = Vector2.Distance(hits[i].transform.position, pivot.position);
+                float curDist = Vector2.Distance(cols[i].transform.position, pivot.position);
 
                 if (dist == -1 || dist > curDist)
                 {
-                    T cur = hits[i].GetComponent<T>();
+                    T cur = cols[i].GetComponent<T>();
                     if (cur == null)
                         continue;
 
@@ -61,21 +61,21 @@ namespace Dongjun.Helper
 
             return result;
         }
-        public static GameObject GetClosest(this Collider2D[] hits, Transform pivot)
+        public static GameObject GetClosest(this Collider2D[] cols, Transform pivot)
         {
-            if (hits == null || hits.Length == 0)
+            if (cols == null || cols.Length == 0)
                 return null;
 
             GameObject result = null;
 
             float dist = -1;
-            for (int i = 0; i < hits.Length; i++)
+            for (int i = 0; i < cols.Length; i++)
             {
-                float curDist = Vector2.Distance(hits[i].transform.position, pivot.position);
+                float curDist = Vector2.Distance(cols[i].transform.position, pivot.position);
 
                 if (dist == -1 || dist > curDist)
                 {
-                    GameObject cur = hits[i].gameObject;
+                    GameObject cur = cols[i].gameObject;
                     if (cur == null)
                         continue;
 

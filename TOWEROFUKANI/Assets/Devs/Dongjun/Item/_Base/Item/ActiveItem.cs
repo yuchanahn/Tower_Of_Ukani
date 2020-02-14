@@ -2,7 +2,7 @@
 
 public abstract class ActiveItem : UpgradableItem
 {
-    #region Var: Properties
+    #region Prop: 
     public TimerData cooldownTimer
     { get; private set; } = new TimerData();
     public bool IsActive
