@@ -6,19 +6,19 @@ public static class PlayerMovementKeys
     public static KeyCode WalkRight => KeyCode.D;
     public static KeyCode Jump => KeyCode.Space;
     public static KeyCode FallThrough => KeyCode.S;
+    public static KeyCode Dash => KeyCode.LeftShift;
 }
 public static class PlayerActionKeys
 {
-    public static KeyCode Dash => KeyCode.LeftShift;
     public static KeyCode Kick => KeyCode.LeftControl;
     public static KeyCode PickUpItem => KeyCode.C;
-    public static KeyCode DropWeapon => KeyCode.Y;
+    public static KeyCode DropWeapon => KeyCode.V;
 }
 public static class PlayerWeaponKeys
 {
     public static KeyCode MainAbility => KeyCode.Mouse0;
     public static KeyCode SubAbility => KeyCode.Mouse1;
-    public static KeyCode SpecialAbility => KeyCode.F;
+    public static KeyCode SpecialAbility => KeyCode.E;
     public static KeyCode Reload => KeyCode.R;
 
     public static bool GetKey(KeyCode keyCode)
@@ -37,7 +37,6 @@ public static class PlayerWeaponKeys
 
 public static class PlayerUIKeys
 {
-    public static KeyCode InventoryToggle => KeyCode.E;
-    public static KeyCode PassiveInventoryToggle => KeyCode.Tab;
-    public static KeyCode PassiveHotbarToggle => KeyCode.Q;
+    public static KeyCode InventoryToggle => KeyCode.Tab;
+    public static KeyCode ActiveHotbarToggle => KeyCode.Q;
 }

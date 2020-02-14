@@ -104,7 +104,7 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     private void GetInput_Dash()
     {
         // 대쉬 키를 눌렀을 때
-        if (Input.GetKeyDown(PlayerActionKeys.Dash))
+        if (Input.GetKeyDown(PlayerMovementKeys.Dash))
         {
             Input_DashDir = Input_WalkDir;
             curDashTapCount = 0;
@@ -123,7 +123,7 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
             // After First Tap
             curDashTapCount = 
                 (prevDashInputDir == Input_WalkDir && dashInputTime <= dashInputInterval)
-                ? curDashTapCount + 1
+                ? curDashTapCount++
                 : 0;
 
             prevDashInputDir = Input_WalkDir;
@@ -136,11 +136,11 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
                 Input_DashDir = Input_WalkDir;
                 return;
             }
+
+            return;
         }
-        else
-        {
-            dashInputTime += Time.deltaTime;
-        }
+
+        dashInputTime += Time.deltaTime;
     }
     #endregion
 
