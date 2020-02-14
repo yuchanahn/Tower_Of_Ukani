@@ -110,21 +110,30 @@ public class Projectile : PoolingObj
             hitPos = hits[i].point;
             hitObj = hits[i].collider.gameObject;
 
-            if (CheckHit(hits[i]))
-                break;
+            if (hitObj.GetComponent<Creature>() != null)
+            {
+                if (CheckCreatureHit(hits[i]))
+                {
+                    break;
+                }
+                else
+                {
+                    hasHit = false;
+                }
+            }
         }
 
         if (hasHit)
             OnHit(hitPos, hitObj);
     }
-    protected virtual bool CheckHit(RaycastHit2D hit)
+    protected virtual bool CheckCreatureHit(RaycastHit2D hit)
     {
         return false;
     }
     protected virtual void OnHit(Vector2 hitPos, GameObject hitObject)
     {
         // Sleep
-        ObjPoolingManager.Sleep(this);
+        this.Sleep();
 
         // Spawn Hit Effect
         if (particle_Hit == null) return;

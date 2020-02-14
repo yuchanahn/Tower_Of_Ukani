@@ -7,3 +7,9 @@ public enum CreatureType
     ChildOfUkani,
     Mutant
 }
+
+public interface Creature
+{
+    CreatureType CreatureType { get; }
+    StatusID StatusID { get; }
+}

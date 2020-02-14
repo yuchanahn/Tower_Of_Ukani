@@ -30,7 +30,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
     protected override void Awake()
     {
         base.Awake();
-        status_Slow = new PlayerStatus_Slow(GM.Player.statusID, GM.Player.gameObject, 50f);
+        status_Slow = new PlayerStatus_Slow(GM.Player.StatusID, GM.Player.gameObject, 50f);
     }
 
     public override void OnEnter()

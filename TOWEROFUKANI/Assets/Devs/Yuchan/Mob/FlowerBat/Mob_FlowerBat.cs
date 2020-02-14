@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Mob_FlowerBat : FlyingMob_Base
 {
+    public override CreatureType CreatureType => CreatureType.Wildlife;
+
     //=================================================================
     //      ## Flee : Mob_FlowerBat
     //=================================================================

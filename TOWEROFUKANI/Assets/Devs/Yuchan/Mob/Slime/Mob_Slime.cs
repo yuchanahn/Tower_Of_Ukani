@@ -2,6 +2,8 @@
 
 public class Mob_Slime : GroundMob_Base
 {
+    public override CreatureType CreatureType => CreatureType.Wildlife;
+
     [SerializeField] float m_addSpeed = 2f;
     [SerializeField] float m_AtkActJumpHeight = 3f;
     bool m_bAtkEndActing = false;

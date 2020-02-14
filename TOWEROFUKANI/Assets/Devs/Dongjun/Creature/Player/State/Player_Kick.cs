@@ -41,7 +41,7 @@ public class Player_Kick : SSM_State_wMain<Player>
 
         attackData = new AttackData(1);
 
-        status_Slow = new PlayerStatus_Slow(GM.Player.statusID, GM.Player.gameObject, 50f);
+        status_Slow = new PlayerStatus_Slow(GM.Player.StatusID, GM.Player.gameObject, 50f);
     }
     #endregion
 
@@ -50,7 +50,7 @@ public class Player_Kick : SSM_State_wMain<Player>
     {
         IsKicking = true;
 
-        main.rb2D.velocity = main.rb2D.velocity.Change(y: main.rb2D.velocity.y * yVelPercent);
+        main.RB2D.velocity = main.RB2D.velocity.Change(y: main.RB2D.velocity.y * yVelPercent);
 
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
@@ -59,8 +59,8 @@ public class Player_Kick : SSM_State_wMain<Player>
         effectSpriteRenderer.flipX = main.bodySpriteRenderer.flipX;
 
         // Play Animation
-        main.animator.SetDuration(duration);
-        main.animator.Play("Kick", 0, 0f);
+        main.Animator.SetDuration(duration);
+        main.Animator.Play("Kick", 0, 0f);
     }
     public override void OnExit()
     {
@@ -68,20 +68,20 @@ public class Player_Kick : SSM_State_wMain<Player>
         PlayerStatus.RemoveEffect(status_Slow);
 
         // Animation
-        main.animator.ResetSpeed();
+        main.Animator.ResetSpeed();
     }
     public override void OnFixedUpdate()
     {
         // Detect Ground
-        main.groundDetectionData.DetectGround(true, main.rb2D, transform);
+        main.groundDetectionData.DetectGround(true, main.RB2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(main.rb2D, 
+        Gravity_Logic.ApplyGravity(main.RB2D, 
             main.groundDetectionData.isGrounded ? GravityData.Zero : 
             main.gravityData);
 
         // Walk
-        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.rb2D, false);
+        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.RB2D, false);
     }
     #endregion
 

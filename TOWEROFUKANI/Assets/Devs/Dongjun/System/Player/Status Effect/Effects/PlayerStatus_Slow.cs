@@ -11,19 +11,17 @@ public class PlayerStatus_Slow : PlayerStatusEffect
         StatusID id,
         GameObject caster,
         float slowAmount,
-        float endTime = 0) : base(id, caster, StatusType.Debuff, endTime, null, null)
+        float endTime = 0) : base(id, caster, StatusType.Debuff, endTime)
     {
         this.SlowAmount = slowAmount;
     }
 
     public override void OnStart()
     {
-        base.OnStart();
         PlayerStatus.Inst.Slow_Add(this);
     }
     public override void OnEnd()
     {
-        base.OnEnd();
         PlayerStatus.Inst.Slow_Remove(this);
     }
 }

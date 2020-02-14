@@ -17,6 +17,6 @@ public class Player_OtherMotion : SSM_State_wMain<Player>
             Idle = "Idle",
             Airborne = "Airborne";
 
-        main.animator.Play(main.groundDetectionData.isGrounded ? Idle : Airborne);
+        main.Animator.Play(main.groundDetectionData.isGrounded ? Idle : Airborne);
     }
 }

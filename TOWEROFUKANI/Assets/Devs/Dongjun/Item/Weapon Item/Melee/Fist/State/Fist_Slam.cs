@@ -42,10 +42,10 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
     public override void OnFixedUpdate()
     {
         // Down Vel
-        GM.Player.rb2D.velocity = Vector2.down * weapon.slamDownVel;
+        GM.Player.RB2D.velocity = Vector2.down * weapon.slamDownVel;
 
         // Detect Ground
-        GM.Player.groundDetectionData.DetectGround(true, GM.Player.rb2D, GM.Player.transform);
+        GM.Player.groundDetectionData.DetectGround(true, GM.Player.RB2D, GM.Player.transform);
         GM.Player.groundDetectionData.ExecuteOnGroundMethod(this);
     }
 

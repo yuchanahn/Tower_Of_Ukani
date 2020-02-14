@@ -68,25 +68,25 @@ public class Player_Normal : SSM_State_wMain<Player>,
     public override void OnFixedUpdate()
     {
         // Detect Ground
-        main.groundDetectionData.DetectGround(!jumpData.isJumping, main.rb2D, transform);
+        main.groundDetectionData.DetectGround(!jumpData.isJumping, main.RB2D, transform);
         main.groundDetectionData.ExecuteOnGroundMethod(this);
 
         // Fall Through
         fallThroughKeyPressed = PlayerInputManager.Inst.Input_FallThrough;
-        main.groundDetectionData.FallThrough(ref fallThroughKeyPressed, main.rb2D, transform, oneWayCollider);
+        main.groundDetectionData.FallThrough(ref fallThroughKeyPressed, main.RB2D, transform, oneWayCollider);
 
         // Walk
-        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.rb2D, jumpData.isJumping);
+        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.RB2D, jumpData.isJumping);
 
         // Follow Moving Platform
-        main.groundDetectionData.FollowMovingPlatform(main.rb2D);
+        main.groundDetectionData.FollowMovingPlatform(main.RB2D);
 
         // Jump
-        if (jumpData.Jump(ref PlayerInputManager.Inst.Input_Jump, main.rb2D, transform))
+        if (jumpData.Jump(ref PlayerInputManager.Inst.Input_Jump, main.RB2D, transform))
             ActionEffectManager.Trigger(PlayerActions.Jump);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(main.rb2D,
+        Gravity_Logic.ApplyGravity(main.RB2D,
             main.groundDetectionData.isGrounded ? GravityData.Zero : 
             !jumpData.isJumping ? main.gravityData : 
             new GravityData(accel: jumpData.jumpGravity));
@@ -110,7 +110,7 @@ public class Player_Normal : SSM_State_wMain<Player>,
         // 땅위에 있을 때
         if (main.groundDetectionData.isGrounded)
         {
-            main.animator.Play(
+            main.Animator.Play(
                 PlayerInputManager.Inst.Input_WalkDir == 0 ? IDLE :
                 PlayerInputManager.Inst.Input_WalkDir == main.Dir ? WALK_FORWARD :
                 WALK_BACKWARD);
@@ -119,11 +119,11 @@ public class Player_Normal : SSM_State_wMain<Player>,
         {
             if (!jumpData.isJumping)
             {
-                main.animator.Play(AIRBORNE);
+                main.Animator.Play(AIRBORNE);
             }
             else if (canPlayJumpAnim)
             {
-                main.animator.Play(jumpData.canJump ? JUMP : AIRJUMP);
+                main.Animator.Play(jumpData.canJump ? JUMP : AIRJUMP);
             }
             canPlayJumpAnim = jumpData.canJump;
         }

@@ -35,7 +35,7 @@ public class Player_Dash : SSM_State_wMain<Player>
     protected override void Awake()
     {
         base.Awake();
-        status_IgnoreDamage = new PlayerStatus_IgnoreDamage(GM.Player.statusID, GM.Player.gameObject);
+        status_IgnoreDamage = new PlayerStatus_IgnoreDamage(GM.Player.StatusID, GM.Player.gameObject);
     }
     #endregion
 
@@ -60,7 +60,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         curTrailCount = 0;
 
         // Reset Vel
-        main.rb2D.velocity = new Vector2(0, 0);
+        main.RB2D.velocity = new Vector2(0, 0);
 
         // Status Effect
         PlayerStatus.RemoveEffect(status_IgnoreDamage);
@@ -94,7 +94,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         }
 
         // Play Animation
-        main.animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward");
+        main.Animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward");
     }
     public override void OnFixedUpdate()
     {
@@ -107,7 +107,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         }
 
         // Dash
-        main.rb2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
+        main.RB2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
 
         // Trigger Item Effect
         ActionEffectManager.Trigger(PlayerActions.Dashing);

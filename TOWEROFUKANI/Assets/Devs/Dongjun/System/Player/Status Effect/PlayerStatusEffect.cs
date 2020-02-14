@@ -10,9 +10,6 @@ public enum StatusType
 public sealed class StatusID { }
 public abstract class PlayerStatusEffect
 {
-    private Action onStart;
-    private Action onEnd;
-
     public StatusID ID
     { get; protected set; }
     public GameObject Caster
@@ -26,15 +23,11 @@ public abstract class PlayerStatusEffect
         StatusID id,
         GameObject caster,
         StatusType statusType,
-        float endTime = 0,
-        Action onStart = null,
-        Action onEnd = null)
+        float endTime = 0)
     {
         ID = id;
         Caster = caster;
         StatusType = statusType;
-        this.onStart = onStart;
-        this.onEnd = onEnd;
 
         if (endTime < 0)
         {
@@ -46,13 +39,7 @@ public abstract class PlayerStatusEffect
         }
     }
 
-    public virtual void OnStart()
-    {
-        onStart?.Invoke();
-    }
-    public virtual void OnEnd()
-    {
-        onEnd?.Invoke();
-    }
+    public abstract void OnStart();
+    public abstract void OnEnd();
 }
 

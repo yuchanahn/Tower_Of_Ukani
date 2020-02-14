@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Mob_WeepingMist : FlyingMob_Base
 {
+    public override CreatureType CreatureType => CreatureType.Wildlife;
+
     [SerializeField, Header("Teleport"), Range(0, 100)] 
     int RandRangeOfTeleport;
 

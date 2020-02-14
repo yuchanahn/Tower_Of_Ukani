@@ -1,7 +1,8 @@
 ﻿using Dongjun.Helper;
 using UnityEngine;
 
-public class Player : SSM_Main
+public class Player : SSM_Main,
+    Creature
 {
     #region Var: Inspector
     [Header("Component")]
@@ -24,11 +25,12 @@ public class Player : SSM_Main
     #endregion
 
     #region Var: Properties
-    public StatusID statusID
+    public CreatureType CreatureType => CreatureType.Player;
+    public StatusID StatusID
     { get; private set; } = new StatusID();
-    public Rigidbody2D rb2D
+    public Rigidbody2D RB2D
     { get; private set; }
-    public Animator animator
+    public Animator Animator
     { get; private set; }
 
     public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
@@ -49,8 +51,8 @@ public class Player : SSM_Main
     #region Method: Unity
     protected override void Awake()
     {
-        rb2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        RB2D = GetComponent<Rigidbody2D>();
+        Animator = GetComponent<Animator>();
         base.Awake();
     }
     #endregion

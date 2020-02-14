@@ -17,13 +17,13 @@ public class Player_HardCC : SSM_State_wMain<Player>
     public override void OnFixedUpdate()
     {
         if (!PlayerStatus.IsKnockbacked)
-            GM.Player.rb2D.velocity = GM.Player.rb2D.velocity.Change(x: 0);
+            GM.Player.RB2D.velocity = GM.Player.RB2D.velocity.Change(x: 0);
 
         // Detect Ground
-        main.groundDetectionData.DetectGround(!PlayerStatus.IsKnockbacked, main.rb2D, transform);
+        main.groundDetectionData.DetectGround(!PlayerStatus.IsKnockbacked, main.RB2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(main.rb2D,
+        Gravity_Logic.ApplyGravity(main.RB2D,
             main.groundDetectionData.isGrounded ? GravityData.Zero :
             main.gravityData);
     }
@@ -36,7 +36,7 @@ public class Player_HardCC : SSM_State_wMain<Player>
     {
         if (PlayerStatus.IsStunned.Value)
         {
-            main.animator.Play("Stunned");
+            main.Animator.Play("Stunned");
             return;
         }
 
