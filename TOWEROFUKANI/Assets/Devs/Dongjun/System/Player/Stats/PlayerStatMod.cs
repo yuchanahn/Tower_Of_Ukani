@@ -8,38 +8,38 @@ public static class PlayerStatMod
     private static List<Action<WeaponItem>> statMod_Weapon = new List<Action<WeaponItem>>();
 
     // Mod Player Stats
-    public static void AddMod_Player(Action mod)
+    public static void Add_Player(Action mod)
     {
         statMod_Player.Add(mod);
-        ApplyMod_Player();
+        Apply_Player();
     }
-    public static void RemoveMod_Player(Action mod)
+    public static void Remove_Player(Action mod)
     {
         statMod_Player.Remove(mod);
-        ApplyMod_Player();
+        Apply_Player();
     }
 
     // Mod Weapon Stats
-    public static void AddMod_Weapon(Action<WeaponItem> mod)
+    public static void Add_Weapon(Action<WeaponItem> mod)
     {
         statMod_Weapon.Add(mod);
-        ApplyMod_Weapons();
+        Apply_Weapons();
     }
-    public static void RemoveMod_Weapon(Action<WeaponItem> mod)
+    public static void Remove_Weapon(Action<WeaponItem> mod)
     {
         statMod_Weapon.Remove(mod);
-        ApplyMod_Weapons();
+        Apply_Weapons();
     }
 
     // Apply Mod
-    public static void ApplyMod_Player()
+    public static void Apply_Player()
     {
         PlayerStats.Inst.ResetStats();
 
         for (int i = 0; i < statMod_Player.Count; i++)
             statMod_Player[i]();
     }
-    public static void ApplyMod_Weapons()
+    public static void Apply_Weapons()
     {
         // Inventory
         for (int i = 0; i < PlayerInventoryManager.inventory.Size; i++)
@@ -65,7 +65,7 @@ public static class PlayerStatMod
                 statMod_Weapon[imod](weapon);
         }
     }
-    public static void ApplyMod_Weapon(WeaponItem weapon)
+    public static void Apply_Weapon(WeaponItem weapon)
     {
         weapon.ResetStats();
 

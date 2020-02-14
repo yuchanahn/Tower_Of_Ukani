@@ -22,9 +22,9 @@ public class Overlord : PassiveItem
     }
     public override void InitStatMod()
     {
-        AddWeaponStatMod(weapon =>
+        weaponStatsMod = weapon =>
         {
             weapon.attackData.damage.ModPercent += bonusPercentDamage;
-        });
+        };
     }
 }

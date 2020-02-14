@@ -68,7 +68,10 @@ public class PlayerStats : SingletonBase<PlayerStats>
     public void ResetStats()
     {
         health.Max = base_health_Max;
+        stamina.Max = base_stamina_Max;
         staminaRegen.Reset();
+
+        walkData.walkSpeed.Reset();
     }
 
     private void RegenStamina()

@@ -160,20 +160,24 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     #endregion
 
     #region Method: CC
+    private void Slow()
+    {
+        PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[slowList.Count - 1].SlowAmount;
+    }
     public void Slow_Add(PlayerStatus_Slow status_Slow)
     {
         slowList.Add(status_Slow);
         slowList = slowList.OrderByDescending(o => o.SlowAmount).ToList();
 
         // Apply Slow
-        PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[slowList.Count - 1].SlowAmount;
+        PlayerStatMod.Add_Player(Slow);
     }
     public void Slow_Remove(PlayerStatus_Slow status_Slow)
     {
         slowList.Remove(status_Slow);
 
         // Apply Slow
-        PlayerStats.Inst.walkData.walkSpeed.ModPercent = IsSlowed ? -slowList[slowList.Count - 1].SlowAmount : 0;
+        PlayerStatMod.Remove_Player(Slow);
     }
 
     public void Stun_Add()

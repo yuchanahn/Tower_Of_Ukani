@@ -8,8 +8,8 @@ public abstract class PassiveItem : UpgradableItem
     private TowerOfUkani.Gods god;
 
     // Stats Mod
-    private Action playerStatsMod = null;
-    private Action<WeaponItem> weaponStatsMod = null;
+    protected Action playerStatsMod = null;
+    protected Action<WeaponItem> weaponStatsMod = null;
 
     // Properties
     public TowerOfUkani.Gods God => god;
@@ -26,20 +26,8 @@ public abstract class PassiveItem : UpgradableItem
     // 이 함수로 아이템 스탯 초기화
     public override void InitStats() { }
 
-    // 이 함수에서 AddPlayerStatMod(), AddWeaponStatMod() 사용
+    // 이 함수에서 playerStatsMod / weaponStatsMod 초기화
     public virtual void InitStatMod() { }
-
-    // 이 함수를 이용하여 플레이어 스탯 변경
-    protected void AddPlayerStatMod(Action playerStatsMod)
-    {
-        this.playerStatsMod = playerStatsMod;
-    }
-
-    // 이 함수를 이용하여 무기 스탯 변경
-    protected void AddWeaponStatMod(Action<WeaponItem> weaponStatsMod)
-    {
-        this.weaponStatsMod = weaponStatsMod;
-    }
     #endregion
 
     #region Method: Item
@@ -47,22 +35,22 @@ public abstract class PassiveItem : UpgradableItem
     {
         base.AddLevel(amount);
 
-        if (playerStatsMod != null) PlayerStatMod.ApplyMod_Player();
-        if (weaponStatsMod != null) PlayerStatMod.ApplyMod_Weapons();
+        if (playerStatsMod != null) PlayerStatMod.Apply_Player();
+        if (weaponStatsMod != null) PlayerStatMod.Apply_Weapons();
     }
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        if (playerStatsMod != null) PlayerStatMod.AddMod_Player(playerStatsMod);
-        if (weaponStatsMod != null) PlayerStatMod.AddMod_Weapon(weaponStatsMod);
+        if (playerStatsMod != null) PlayerStatMod.Add_Player(playerStatsMod);
+        if (weaponStatsMod != null) PlayerStatMod.Add_Weapon(weaponStatsMod);
     }
     public override void OnDrop()
     {
         base.OnDrop();
 
-        if (playerStatsMod != null) PlayerStatMod.RemoveMod_Player(playerStatsMod);
-        if (weaponStatsMod != null) PlayerStatMod.RemoveMod_Weapon(weaponStatsMod);
+        if (playerStatsMod != null) PlayerStatMod.Remove_Player(playerStatsMod);
+        if (weaponStatsMod != null) PlayerStatMod.Remove_Weapon(weaponStatsMod);
     }
     #endregion
 }

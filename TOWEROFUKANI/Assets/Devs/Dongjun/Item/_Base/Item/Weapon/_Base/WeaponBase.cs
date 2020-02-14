@@ -64,15 +64,16 @@ public abstract class WeaponItem : UpgradableItem
     #endregion
 
     #region Method: Stats
-    public override void AddLevel(int amount = 1)
-    {
-        base.AddLevel(amount);
-        PlayerStatMod.ApplyMod_Weapon(this);
-    }
     public abstract void ResetStats();
     #endregion
 
     #region Method: Item
+    public override void AddLevel(int amount = 1)
+    {
+        base.AddLevel(amount);
+
+        PlayerStatMod.Apply_Weapon(this);
+    }
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
@@ -86,7 +87,7 @@ public abstract class WeaponItem : UpgradableItem
         SelectInActiveSlot();
 
         // Apply Stat Mod
-        PlayerStatMod.ApplyMod_Weapon(this);
+        PlayerStatMod.Apply_Weapon(this);
     }
     public override void OnMove()
     {
