@@ -16,7 +16,7 @@ public class MobDamageText : Object_ObjectPool<MobDamageText>
     Vector2 mPoint;
     Vector2 mOriginPoint;
     Vector2 RandPos;
-    /*[Disable]*/ public string Damage;
+    public string Damage;
    
 
     public static MobDamageText Show(int dmg, Vector2 point)

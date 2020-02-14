@@ -11,7 +11,7 @@ struct PoolingObject
 
 public class ObjectPool : MonoBehaviour
 {
-    static ObjectPool instance;
+    static ObjectPool Inst;
 
     [SerializeField] PoolingObject[] poolingObjs;
     [SerializeField] Transform UI;
@@ -20,7 +20,7 @@ public class ObjectPool : MonoBehaviour
 
     void Awake()
     {
-        instance = this;
+        Inst = this;
 
         objects = new Queue<GameObject>[poolingObjs.Length];
         for (int i = 0; i < poolingObjs.Length; i++)
@@ -45,23 +45,23 @@ public class ObjectPool : MonoBehaviour
 
     public static GameObject create(int id, Vector2 pos)
     {
-        if (instance.objects[id].Count == 0)
+        if (Inst.objects[id].Count == 0)
         { 
-            instance.CreateObj(id);
+            Inst.CreateObj(id);
         }
 
-        GameObject GObj = instance.objects[id].Dequeue();
+        GameObject GObj = Inst.objects[id].Dequeue();
         GObj.GetComponent<Object_ObjectPool_Base>().SetOn(pos);
         return GObj;
     }
 
     public static GameObject createUI(int id, Vector2 pos)
     {
-        if (instance.objects[id].Count == 0)
-        { instance.CreateObj(id); }
+        if (Inst.objects[id].Count == 0)
+        { Inst.CreateObj(id); }
         
-        GameObject GObj = instance.objects[id].Dequeue();
-        GObj.transform.SetParent(instance.UI, false);
+        GameObject GObj = Inst.objects[id].Dequeue();
+        GObj.transform.SetParent(Inst.UI, false);
         GObj.GetComponent<Object_ObjectPool_Base>().SetOnUI(pos);
 
 
@@ -70,6 +70,6 @@ public class ObjectPool : MonoBehaviour
 
     public static void PoolingObjectDestroy(GameObject obj)
     {
-        instance.objects[obj.GetComponent<Object_ObjectPool_Base>().GetID()].Enqueue(obj);
+        Inst.objects[obj.GetComponent<Object_ObjectPool_Base>().GetID()].Enqueue(obj);
     }
 }

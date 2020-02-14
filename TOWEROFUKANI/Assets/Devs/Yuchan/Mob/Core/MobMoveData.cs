@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using Dongjun.Helper;
 
 [Serializable]
 public struct RandRange
@@ -81,11 +81,29 @@ public class MobYMoveDetect_Logic
     }
     public static bool Down(Vector2 pos, Vector2 size, ref MobMoveData data)
     {
-        var hit = Physics2D.RaycastAll(pos - new Vector2(0, size.y * 0.5f), Vector2.down, 0.1f, data.FallAbleLayer);
+        var HalfOfSizeY = size.y * 0.5f;
+
+        var hit = Physics2D.BoxCastAll(
+            pos - new Vector2(0, HalfOfSizeY + 0.05f),
+            size.Add(y: 0.1f),
+            0, 
+            Vector2.down,
+            0,
+            data.FallAbleLayer);
+
+        //var hit = Physics2D.RaycastAll(pos - new Vector2(0, size.y * 0.5f), Vector2.down, 0.1f, data.FallAbleLayer);
         Debug.DrawRay(pos - new Vector2(0, size.y * 0.5f), Vector2.down * new Vector2(0, data.FallAbleDist), Color.red);
+
         if (hit.Length == 0) return false;
 
-        hit = Physics2D.RaycastAll(pos - new Vector2(0, size.y * 0.5f), Vector2.down , data.FallAbleDist, data.FallAbleLayer);
+
+        hit = Physics2D.BoxCastAll(
+            pos - new Vector2(0, size.y),
+            size,
+            0,
+            Vector2.down,
+            0,
+            data.FallAbleLayer);
         Debug.DrawRay(pos - new Vector2(0, size.y * 0.5f), Vector2.down * new Vector2(0, data.FallAbleDist), Color.red);
         return hit.Length > 0;
     }

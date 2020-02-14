@@ -38,7 +38,7 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
 
     void OnDestroy()
     {
-        ATimer.Pop(gameObject.name + GetInstanceID());
+        ATimer.Pop(GetInstanceID() + "DestroyObj");
     }
 
     public void DestroyObj(float DistroyTime)
