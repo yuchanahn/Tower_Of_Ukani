@@ -2,19 +2,20 @@
 
 public static class CamShake_Logic
 {
+    private static float Angle360(Vector3 from, Vector3 to, Vector3 right)
+    {
+        float angle = Vector3.Angle(from, to);
+        return (Vector3.Angle(right, to) > 90f) ? 360f - angle : angle;
+    }
+
     public static void ShakeRandom(CameraShake.Data camShakeData)
     {
         camShakeData.angle = Random.Range(0f, 360f);
         Global.Inst.CamShake.StartShake(camShakeData);
     }
-    public static void ShakeBackward(CameraShake.Data camShakeData, Transform tf)
+    public static void ShakeDir(CameraShake.Data camShakeData, Transform tf, Vector2 dir)
     {
-        camShakeData.angle = tf.eulerAngles.z - 180f;
-        Global.Inst.CamShake.StartShake(camShakeData);
-    }
-    public static void ShakeForward(CameraShake.Data camShakeData, Transform tf)
-    {
-        camShakeData.angle = tf.eulerAngles.z;
+        camShakeData.angle = Angle360(tf.right, dir, Vector3.right);
         Global.Inst.CamShake.StartShake(camShakeData);
     }
 }

@@ -7,6 +7,9 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
     [SerializeField] private LayerMask damageLayer;
     [SerializeField] private Transform damagePoint;
     [SerializeField] private Vector2 damageSize;
+
+    [Header("Effect")]
+    [SerializeField] private CameraShake.Data camShakeData_Punch;
     #endregion
 
     private float chargeTime = 0;
@@ -98,6 +101,9 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
 
             // Animation
             weapon.animator.Play("Heavy_Punch");
+
+            // Effect
+            CamShake_Logic.ShakeDir(camShakeData_Punch, transform, Vector2.right);
 
             // Player
             GM.Player.CanChangeDir = false;

@@ -160,6 +160,8 @@ MonoBehaviour:
   droppedItemPrefab: {fileID: 0}
   spriteRoot: {fileID: 368671185012501391}
   pivotPointY: 0.1
+  slamDownVel: 30
+  heavyChargePerSec: 3
 --- !u!114 &700501558721978548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +208,15 @@ MonoBehaviour:
     m_Bits: 256
   damagePoint: {fileID: 6637942662529288260}
   damageSize: {x: 1.8, y: 0.5}
+  camShakeData_Punch:
+    angle: 0
+    strength: 0.35
+    maxSpeed: 20
+    minSpeed: 10
+    duration: 0.1
+    noisePercent: 0.3
+    dampingPercent: 0.1
+    rotationPercent: 0
 --- !u!114 &4946326900449880534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +234,16 @@ MonoBehaviour:
     m_Bits: 256
   damagePoint: {fileID: 8337588583469459949}
   damageSize: {x: 1, y: 0.5}
-  slamDone: 0
+  camShakeData_Slam:
+    angle: 0
+    strength: 0.35
+    maxSpeed: 20
+    minSpeed: 10
+    duration: 0.1
+    noisePercent: 0.3
+    dampingPercent: 0.1
+    rotationPercent: 0
+  slamAnimEnd: 0
 --- !u!114 &3930636927227531425
 MonoBehaviour:
   m_ObjectHideFlags: 0

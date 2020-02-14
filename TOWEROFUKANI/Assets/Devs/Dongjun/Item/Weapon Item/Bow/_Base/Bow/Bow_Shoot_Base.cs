@@ -73,7 +73,7 @@ public abstract class Bow_Shoot_Base<T> : Bow_State_Base<T>
     protected virtual void ShootEffects()
     {
         // Cam Shake
-        CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
+        CamShake_Logic.ShakeDir(camShakeData_Shoot, transform, Vector2.left);
     }
     #endregion
 

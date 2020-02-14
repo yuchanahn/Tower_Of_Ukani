@@ -92,7 +92,7 @@ public class Pistol_Main : Gun_State_Base<PistolItem>
         muzzleFlashPrefab.Spawn(shootPoint, new Vector2(0, 0), Quaternion.identity);
 
         // Cam Shake
-        CamShake_Logic.ShakeBackward(camShakeData_Shoot, transform);
+        CamShake_Logic.ShakeDir(camShakeData_Shoot, transform, Vector2.left);
     }
     #endregion
 

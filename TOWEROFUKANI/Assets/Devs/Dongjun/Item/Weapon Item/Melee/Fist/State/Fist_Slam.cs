@@ -8,6 +8,9 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
     [SerializeField] private LayerMask damageLayer;
     [SerializeField] private Transform damagePoint;
     [SerializeField] private Vector2 damageSize;
+
+    [Header("Effect")]
+    [SerializeField] private CameraShake.Data camShakeData_Slam;
     #endregion
 
     [HideInInspector] public bool slamAnimEnd = false;
@@ -61,6 +64,9 @@ public class Fist_Slam : Melee_State_Base<FistItem>,
 
         // Animation
         weapon.animator.Play("Slam");
+
+        // Effect
+        CamShake_Logic.ShakeDir(camShakeData_Slam, transform, Vector2.down);
     }
     void ICanDetectGround.OnGroundStay()
     {

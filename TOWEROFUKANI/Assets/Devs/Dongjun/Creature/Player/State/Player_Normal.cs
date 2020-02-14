@@ -12,6 +12,9 @@ public class Player_Normal : SSM_State_wMain<Player>,
 
     [Header("Jump")]
     [SerializeField] private JumpData jumpData;
+
+    const int THE_CONST = 0;
+    const int THE_CONST2 = 0;
     #endregion
 
     #region Var: Jump
@@ -97,30 +100,30 @@ public class Player_Normal : SSM_State_wMain<Player>,
     private void UpdateAnimation()
     {
         const string
-            Idle           = "Idle",
-            Walk_Forward   = "Walk_Forward",
-            Walk_Backward  = "Walk_Backward",
-            Airborne       = "Airborne",
-            Jump           = "Jump",
-            AirJump        = "AirJump";
+            IDLE           = "Idle",
+            WALK_FORWARD   = "Walk_Forward",
+            WALK_BACKWARD  = "Walk_Backward",
+            AIRBORNE       = "Airborne",
+            JUMP           = "Jump",
+            AIRJUMP        = "AirJump";
 
         // 땅위에 있을 때
         if (main.groundDetectionData.isGrounded)
         {
             main.animator.Play(
-                PlayerInputManager.Inst.Input_WalkDir == 0 ? Idle :
-                PlayerInputManager.Inst.Input_WalkDir == main.Dir ? Walk_Forward :
-                Walk_Backward);
+                PlayerInputManager.Inst.Input_WalkDir == 0 ? IDLE :
+                PlayerInputManager.Inst.Input_WalkDir == main.Dir ? WALK_FORWARD :
+                WALK_BACKWARD);
         }
         else
         {
             if (!jumpData.isJumping)
             {
-                main.animator.Play(Airborne);
+                main.animator.Play(AIRBORNE);
             }
             else if (canPlayJumpAnim)
             {
-                main.animator.Play(jumpData.canJump ? Jump : AirJump);
+                main.animator.Play(jumpData.canJump ? JUMP : AIRJUMP);
             }
             canPlayJumpAnim = jumpData.canJump;
         }
