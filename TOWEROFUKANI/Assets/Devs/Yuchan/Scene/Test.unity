@@ -487,7 +487,7 @@ PrefabInstance:
     - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
       propertyPath: poolingObjs.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
@@ -1634,16 +1634,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2113820553}
     m_Modifications:
-    - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
-        type: 3}
-      propertyPath: mPathFinder
-      value: 
-      objectReference: {fileID: 240870022}
     - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_Name
       value: FlowerBat
       objectReference: {fileID: 0}
+    - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: mPathFinder
+      value: 
+      objectReference: {fileID: 240870022}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1708,6 +1708,11 @@ PrefabInstance:
         type: 3}
       propertyPath: AgroRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: mMoveData.Speed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}

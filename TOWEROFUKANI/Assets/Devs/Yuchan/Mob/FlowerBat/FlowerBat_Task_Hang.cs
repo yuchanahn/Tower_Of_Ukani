@@ -13,7 +13,7 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
     public bool IsFollowEndToCeiling = false;
     public bool FindCeiling = false;
     public bool IsCeilingNear() => Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) < 0.1f;
-    public bool IsCeilingNearOf() => mCeilingPos is null ? true : Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) < mCeilingDetectRange;
+    public bool IsCeilingNearOf() => mCeilingPos is null ? true : Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) > mCeilingDetectRange;
     public static List<GameObject> HangWalls = new List<GameObject>();
 
     private void Awake()
