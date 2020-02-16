@@ -226,7 +226,6 @@ GameObject:
   - component: {fileID: 1475532418}
   - component: {fileID: 2025537666354990290}
   - component: {fileID: 450975516151158663}
-  - component: {fileID: 1002320134427406415}
   - component: {fileID: 8546500476630119227}
   - component: {fileID: 4340000004817329858}
   - component: {fileID: 1475532423}
@@ -234,6 +233,7 @@ GameObject:
   - component: {fileID: 2818090562661050550}
   - component: {fileID: 7510034718012629857}
   - component: {fileID: 4835304523073473399}
+  - component: {fileID: 221602579}
   m_Layer: 8
   m_Name: FlowerBat
   m_TagString: Untagged
@@ -341,15 +341,15 @@ MonoBehaviour:
   MobSize: {x: 1, y: 1}
   mAniSpeedData: []
   mMoveData:
-    Speed: 1
+    Speed: 2
     Dir2d: {x: 0, y: 0}
   mSprTr: {fileID: 7408284209274691878}
   MoveLink: []
   mCurAniST: 8
-  AttackRange: 0
+  AttackRange: 5
   MoveTimeIdle: 1
   MoveTimeMove: 3
-  AgroRange: 0
+  AgroRange: 10
   FleeRange: 0
   Size: {x: 1, y: 1}
 --- !u!114 &450975516151158663
@@ -362,18 +362,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc04e5bb66c46bb47a98951d66325b1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1002320134427406415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7408284209935012269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6565f3f65728b4db810fb61c408af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8546500476630119227
@@ -458,6 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d423fc4ef72484da54c7df1edec11e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyCeiling: {fileID: 0}
   mCeilingDetectRange: 2
   IsFollowEndToCeiling: 0
   FindCeiling: 0
@@ -474,3 +463,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mPathFinder: {fileID: 0}
+--- !u!114 &221602579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408284209935012269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6565f3f65728b4db810fb61c408af9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 10
+  CoolTime: 2

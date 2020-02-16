@@ -12,11 +12,11 @@ public class AStat : MonoBehaviour, IDamage
     private float mDmg = 0;
 
 
-    MobDamageText Dmg = null;
+    MobDamageText mDmgTextUI = null;
     public MobHPBar mHPBarUI = null;
     bool IsIgnoreHit => GetComponent<StatusEffect_IgnoreHit>();
     public float HP { get { return mHP; } set { mHP = value; if(mHP <= 0) GetComponent<IHurt>().OnDead(); } }
-
+    public int DisplayDmg => mDmg == 0 ? 0 : Mathf.Max((int)mDmg, 1);
     public float MAXHP { get => mMAXHP; }
     public float Damage => mDamage;
 
@@ -42,12 +42,12 @@ public class AStat : MonoBehaviour, IDamage
         ATimer.SetAndReset(gameObject.name + GetInstanceID().ToString(), 0.1f,
         () =>
         {
-            Dmg = null; mDmg = 0;
+            mDmgTextUI = null; mDmg = 0;
         });
-        if (Dmg == null) Dmg = MobDamageText.Show(MathD.Round(mDmg), transform.position);
-        Dmg.mText.text = MathD.Round(mDmg).ToString();
-        Dmg.SetPoint(transform.position);
-        Dmg.Begin();
+        if (mDmgTextUI == null) mDmgTextUI = MobDamageText.Show(DisplayDmg, transform.position);
+        mDmgTextUI.mText.text = DisplayDmg.ToString();
+        mDmgTextUI.SetPoint(transform.position);
+        mDmgTextUI.Begin();
 
 
         if (mHPBarUI is null)

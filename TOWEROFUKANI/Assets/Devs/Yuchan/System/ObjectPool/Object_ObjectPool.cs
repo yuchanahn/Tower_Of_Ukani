@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Object_ObjectPool<T> : Object_ObjectPool_Base
+public class Object_ObjectPool<T> : Object_ObjectPool_Base where T : Object_ObjectPool<T>
 {
     public static int ID = -1;
 
@@ -58,6 +58,11 @@ public class Object_ObjectPool<T> : Object_ObjectPool_Base
         (gameObject.transform as RectTransform).position = pos;
         gameObject.SetActive(true);
         Begin();
+    }
+
+    public override GameObject CreateThis(Vector2 pos)
+    {
+        return ObjectPool.create(ID, pos);
     }
 
     public static GameObject Create(Vector2 pos)

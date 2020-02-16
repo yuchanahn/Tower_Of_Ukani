@@ -58,6 +58,8 @@ public abstract class Mob_Base : MonoBehaviour,
     protected Dictionary<eAttackST, Action> mAttack = new Dictionary<eAttackST, Action>();
     protected Dictionary<eMobAniST, (string, float)> m_Ani = new Dictionary<eMobAniST, (string, float)>();
 
+    public int SprDirForPlayer => (GM.PlayerPos.x - transform.position.x) < 0 ? -1 : 1;
+
     protected bool CheckOverlapSlow(Vector2 size, Vector2 dir)
     {
         var o = Physics2D.OverlapBoxAll(transform.position, size, 0, CreatureLayer);

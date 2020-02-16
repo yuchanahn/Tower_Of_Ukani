@@ -4,7 +4,10 @@ using UnityEngine;
 
 public static class AEM
 {
-
+    public static float AddDT(ref this float val)
+    {
+        return val += Time.deltaTime;
+    }
     public static Vector2 Foot(this Vector2 pos, Vector2 size) => new Vector2(pos.x, pos.y - size.y / 2);
     public static Vector2 Foot(this Vector3 pos, Vector2 size) => new Vector2(pos.x, pos.y - (size.y / 2));
     public static bool RayHit(this Vector2 pos, Vector2 target, LayerMask wallLayer)

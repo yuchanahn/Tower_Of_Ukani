@@ -18,7 +18,7 @@ public abstract class FlyingMob_Base : Mob_Base
     Animator mAnimator;
     bool mAniStart;
     protected bool mMoveStop = false;
-    protected bool mHitImmunity = false;
+    public bool mHitImmunity = false;
     public eMobAniST mCurAniST;
     StatusEffect_Object mSE;
 

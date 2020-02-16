@@ -13,32 +13,7 @@ public class Mob_FlowerBat : FlyingMob_Base
     [SerializeField] float FleeRange;
     [SerializeField] public Vector2 Size;
 
-    //=================================================================
-    //      ## Attack : override
-    //=================================================================
 
-
-    override protected void PreAttack()
-    {
-        mCurAniST = eMobAniST.Attack_Post;
-    }
-    protected override void Attack()
-    {
-        mCurAniST = eMobAniST.Cry;
-    }
-    protected override void OnAttackEnd()
-    {
-
-    }
-
-    protected override void OnAttackStart()
-    {
-        base.OnAttackStart();
-    }
-    private void OnDestroy()
-    {
-        ATimer.Pop(GetInstanceID() + "AttackEndTimer");
-    }
 
     //=================================================================
     //      ## Mob_FlowerBat :: Stunned
@@ -56,6 +31,7 @@ public class Mob_FlowerBat : FlyingMob_Base
 
     public override void OnHurt()
     {
+        if (mHitImmunity) return;
         BTStop = true;
         base.OnHurt();
     }
@@ -63,6 +39,7 @@ public class Mob_FlowerBat : FlyingMob_Base
     protected override void HurtEnd()
     {
         base.HurtEnd();
+        SetAni(eMobAniST.Fly);
         BTStop = false;
     }
 

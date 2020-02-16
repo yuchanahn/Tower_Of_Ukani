@@ -21,6 +21,7 @@ public class FlowerBatBlackBorad : BlackBoard_Base
         RandomMoveTask = GetComponent<FlowerBat_Task_RandomMove>();
         HangTask = GetComponent<FlowerBat_Task_Hang>();
         JPS_FollowTask = GetComponent<FlyingMob_JPS_Task_Follow>();
+        AttackTask = GetComponent<FlowerBat_Task_Attack>();
     }
 
     public bool IsFindCeiling()
@@ -70,7 +71,11 @@ public class FlowerBatBlackBorad : BlackBoard_Base
 
 
     public bool IsTargetInFleeRange() => false;
-    public bool IsTargetInAttackRange() => false;
+    public bool IsTargetInAttackRange()
+    {
+        AttackTask.AddAttackCoolTimeT();
+        return Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AttackRange;
+    }
     public bool BTStop() => status.SENoTask || mMob.BTStop;
     public bool RandomMove() => RandomMoveTask.Tick();
     public bool Hang() => HangTask.Tick();

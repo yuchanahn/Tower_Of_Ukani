@@ -31,6 +31,7 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
         else
         {
             mMob.Dir2d = (mCeilingPos.Value - (Vector2)transform.position).normalized;
+            mMob.SetAni(eMobAniST.Fly);
         }
         
         return true;

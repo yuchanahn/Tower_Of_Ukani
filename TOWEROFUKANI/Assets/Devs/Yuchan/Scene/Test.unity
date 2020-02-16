@@ -527,8 +527,14 @@ PrefabInstance:
     - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
       propertyPath: poolingObjs.Array.data[1].Count
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: poolingObjs.Array.data[5].Object
+      value: 
+      objectReference: {fileID: 8507582946219271400, guid: f172f52446130ab46b8445f91c8505f1,
+        type: 3}
     - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
       propertyPath: Map1
@@ -1706,14 +1712,18 @@ PrefabInstance:
       objectReference: {fileID: 240870022}
     - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
-      propertyPath: AgroRange
-      value: 10
+      propertyPath: AttackRange
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+    - target: {fileID: 765496400, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
+      propertyPath: mHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 221602579, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
+      propertyPath: Projectile
+      value: 
+      objectReference: {fileID: 8507582946219271400, guid: f172f52446130ab46b8445f91c8505f1,
         type: 3}
-      propertyPath: mMoveData.Speed
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
 --- !u!4 &221602577 stripped
