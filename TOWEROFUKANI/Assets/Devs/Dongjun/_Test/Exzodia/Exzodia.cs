@@ -11,10 +11,8 @@ public class Exzodia : PassiveItem
         onHit = this.CreateActionEffect(() => PlayerStats.Inst.DamageToDeal = 99999);
         ActionEffectManager.AddEffect(PlayerActions.DamageDealt, onHit);
     }
-    public override void OnDrop()
+    protected override void OnRemovedFromInventory()
     {
-        base.OnDrop();
-
         ActionEffectManager.RemoveEffect(PlayerActions.DamageDealt, onHit);
     }
 }

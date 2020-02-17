@@ -38,7 +38,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.IsHardCCed || GM.Player.IsKicking)
+        if (PlayerStatus.Uncontrollable || GM.Player.IsKicking)
         {
             weapon.animator.Play(weapon.ANIM_Neutral);
             return;
@@ -54,7 +54,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.IsHardCCed)
+        if (PlayerStatus.Uncontrollable)
             return;
 
         // Look At Mouse
@@ -80,7 +80,7 @@ public class Fist_Basic : Melee_State_Base<FistItem>
         for (int i = 0; i < hits.Length; i++)
         {
             // TODO: 무기 힛? 아님 주먹 힛? 아님 둘다?
-            PlayerStats.Inst.DealDamage(weapon.attackData, hits[i].gameObject,
+            PlayerStats.Inst.DealDamage(weapon.AttackData, hits[i].gameObject,
                 PlayerActions.WeaponHit,
                 PlayerActions.MeleeBasicHit);
         }

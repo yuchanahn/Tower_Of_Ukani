@@ -14,6 +14,24 @@ TextureImporter:
   - first:
       213: 6025814380298432746
     second: Fist_Heavy_Charge_3
+  - first:
+      213: 628532725492359396
+    second: Fist_Heavy_Charge_4
+  - first:
+      213: 3674896605590134807
+    second: Fist_Heavy_Charge_5
+  - first:
+      213: 5545103144632538976
+    second: Fist_Heavy_Charge_6
+  - first:
+      213: -5466398982745304299
+    second: Fist_Heavy_Charge_7
+  - first:
+      213: -3479099932059131225
+    second: Fist_Heavy_Charge_8
+  - first:
+      213: 7817973809740535051
+    second: Fist_Heavy_Charge_9
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -124,7 +142,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 908af4c8c46332c44856fcce4e68ac0f
+      spriteID: 4a4e4b7501ec5de429b8bbed9603b5e6
       internalID: -853347416716571041
       vertices: []
       indices: 
@@ -145,7 +163,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e78904d2744ec184a9cc7b3cb06a36a9
+      spriteID: 51742613b4d1d8a438e1f190b456b483
       internalID: -4778198991285260237
       vertices: []
       indices: 
@@ -166,7 +184,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a21a3e0a3f6ae55459f3e2b4d940fe15
+      spriteID: cf3dfce0ce69f014b8e8878542775875
       internalID: -440301252833813273
       vertices: []
       indices: 
@@ -187,8 +205,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8a02a7bc17835244a23ccceb8019174
+      spriteID: 50f01d36bb782cd4580688c93dd791e2
       internalID: 6025814380298432746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fist_Heavy_Charge_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd07ff4d596223f4092cd254a98a3054
+      internalID: 628532725492359396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fist_Heavy_Charge_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bc03dab9da6a4849bd9f7843186961d
+      internalID: 3674896605590134807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fist_Heavy_Charge_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11a50285d1de3784d982c285b6e48be8
+      internalID: 5545103144632538976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fist_Heavy_Charge_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c77736b72ea2b674abd1969d324140f0
+      internalID: -5466398982745304299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fist_Heavy_Charge_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78ec730b6ee3b7342953d4151eff2a6e
+      internalID: -3479099932059131225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fist_Heavy_Charge_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c58791f51b565c5429199403eb97d1c9
+      internalID: 7817973809740535051
       vertices: []
       indices: 
       edges: []

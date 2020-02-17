@@ -20,7 +20,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0.376, y: 0, z: 0}
+        value: {x: 0.625, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -52,6 +52,9 @@ AnimationClip:
         type: 3}
     - time: 0.41666666
       value: {fileID: 8232396265539304050, guid: c3117d421aab9a6418e49cc1b70fcd02,
+        type: 3}
+    - time: 0.5
+      value: {fileID: 1069750389345888642, guid: c3117d421aab9a6418e49cc1b70fcd02,
         type: 3}
     attribute: m_Sprite
     path: Sprite Root
@@ -85,12 +88,13 @@ AnimationClip:
     - {fileID: -2248372870179029752, guid: c3117d421aab9a6418e49cc1b70fcd02, type: 3}
     - {fileID: 6854039674737535674, guid: c3117d421aab9a6418e49cc1b70fcd02, type: 3}
     - {fileID: 8232396265539304050, guid: c3117d421aab9a6418e49cc1b70fcd02, type: 3}
+    - {fileID: 1069750389345888642, guid: c3117d421aab9a6418e49cc1b70fcd02, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.5833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -111,7 +115,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.376
+        value: 0.625
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -167,7 +171,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.5
+  - time: 0.5833333
     functionName: OnAnimEnd_HeavyPunch
     data: 
     objectReferenceParameter: {fileID: 0}

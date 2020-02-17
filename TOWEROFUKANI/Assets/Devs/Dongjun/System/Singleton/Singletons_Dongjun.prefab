@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCam: {fileID: 0}
   camShake: {fileID: 0}
-  playerRB2D: {fileID: 0}
 --- !u!114 &4117234795505780079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de3fd72238abc74983419b5569964d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Input_Jump: 0
 --- !u!114 &8331343900168411300
 MonoBehaviour:
   m_ObjectHideFlags: 0

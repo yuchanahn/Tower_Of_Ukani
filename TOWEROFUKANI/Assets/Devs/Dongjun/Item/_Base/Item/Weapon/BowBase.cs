@@ -1,9 +1,5 @@
 ﻿using UnityEngine;
 
-public abstract class BowController<T> : WeaponController<T>
-    where T : BowItem
-{ }
-
 public abstract class BowItem : WeaponItem
 {
     #region Var: Animation Names
@@ -18,38 +14,38 @@ public abstract class BowItem : WeaponItem
     #endregion
 
     #region Var: Stats
-    // Timer
-    public readonly TimerStat shootTimer = new TimerStat();
-    public readonly TimerStat drawTimer = new TimerStat();
-
     // Arrow Data
     public ProjectileData arrowData;
-    #endregion
 
-    #region Var: Bow Data
-    [HideInInspector] public float drawPower = 0;
+    // Timer
+    public readonly TimerStat Timer_Shoot = new TimerStat();
+    public readonly TimerStat Timer_Draw = new TimerStat();
     #endregion
 
     #region Prop: 
+    public float DrawPower { get; private set; } = 0;
+
     public GameObject ArrowVisual => arrowVisual;
     #endregion
 
-    #region Method: Unity
     protected virtual void Start()
     {
         // Init Timer
-        shootTimer.SetTick(gameObject).ToEnd();
-        drawTimer.SetTick(gameObject);
+        Timer_Shoot.SetTick(gameObject).ToEnd();
+        Timer_Draw
+            .SetTick(gameObject)
+            .SetAction(
+                onStart: () => DrawPower = 0,
+                onTick: () => DrawPower = Timer_Draw.CurTime / Timer_Draw.EndTime.Value)
+            .SetActive(false);
     }
-    #endregion
 
-    #region Method: Stats
     public override void ResetStats()
     {
-        attackData.Reset();
-        shootTimer.EndTime.Reset();
-        drawTimer.EndTime.Reset();
+        base.ResetStats();
+
         arrowData.Reset();
+        Timer_Shoot.EndTime.Reset();
+        Timer_Draw.EndTime.Reset();
     }
-    #endregion
 }

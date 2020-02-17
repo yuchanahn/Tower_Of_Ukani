@@ -17,13 +17,15 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
 
     #region Var: CC
     private static List<PlayerStatus_Slow> slowList;
+    private static Action slow = () => PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[slowList.Count - 1].SlowAmount;
     public static bool IsSlowed => slowList.Count != 0;
 
     public static BoolCount IsStunned
     { get; private set; } = new BoolCount();
     public static bool IsKnockbacked
     { get; private set; } = false;
-    public static bool IsHardCCed => IsStunned.Value || IsKnockbacked;
+
+    public static bool Uncontrollable => IsStunned.Value || IsKnockbacked;
     #endregion
 
     #region Method: Unity
@@ -32,11 +34,10 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         base.Awake();
         statusEffects = new Dictionary<StatusID, List<PlayerStatusEffect>>();
 
-        slowList = new List<PlayerStatus_Slow>();
-
         AbsorbDamage = new BoolCount();
         IgnoreDamage = new BoolCount();
 
+        slowList = new List<PlayerStatus_Slow>();
         IsStunned = new BoolCount();
         IsKnockbacked = false;
     }
@@ -160,24 +161,20 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     #endregion
 
     #region Method: CC
-    private void Slow()
-    {
-        PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[slowList.Count - 1].SlowAmount;
-    }
     public void Slow_Add(PlayerStatus_Slow status_Slow)
     {
         slowList.Add(status_Slow);
         slowList = slowList.OrderByDescending(o => o.SlowAmount).ToList();
 
         // Apply Slow
-        PlayerStatMod.Add_Player(Slow);
+        PlayerStatMod.Add_Player(slow);
     }
     public void Slow_Remove(PlayerStatus_Slow status_Slow)
     {
         slowList.Remove(status_Slow);
 
         // Apply Slow
-        PlayerStatMod.Remove_Player(Slow);
+        PlayerStatMod.Remove_Player(slow);
     }
 
     public void Stun_Add()

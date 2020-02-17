@@ -33,7 +33,8 @@ public abstract class MeleeItem : WeaponItem
     #region Method: Stats
     public override void ResetStats()
     {
-        attackData.Reset();
+        base.ResetStats();
+
         attackData_Heavy.Reset();
         attackData_Slam.Reset();
         attackData_Dash.Reset();

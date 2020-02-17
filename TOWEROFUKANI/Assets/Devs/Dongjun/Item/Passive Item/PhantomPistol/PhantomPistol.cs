@@ -35,9 +35,8 @@ public class PhantomPistol : PassiveItem
         // Spawn Phantom Pistol Object
         phantomPistolObject = Instantiate(phantomPistolObjectPrefab, GM.PlayerObj.transform.position, Quaternion.identity);
     }
-    public override void OnDrop()
+    protected override void OnRemovedFromInventory()
     {
-        base.OnDrop();
         ActionEffectManager.RemoveEffect(PlayerActions.GunShoot, onShoot);
 
         // Destroy Phantom Pistol Object

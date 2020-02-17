@@ -15,12 +15,12 @@ public abstract class Item : MonoBehaviour
     // Item Data
     public ItemInfo Info => info;
     public DroppedItem DroppedItemPrefab => droppedItemPrefab;
-    public bool LockInSlot
-    { get; set; } = false;
 
     // Inventory
     public InventoryBase Inventory
     { get; private set; }
+    public bool LockItemSlot
+    { get; set; } = false;
     #endregion
 
     #region Method: Unity
@@ -40,7 +40,7 @@ public abstract class Item : MonoBehaviour
     }
     #endregion
 
-    #region Method: Add / Move / Drop / Remove
+    #region Method: Item
     public virtual void OnAdd(InventoryBase inventory)
     {
         // 패시브 아이템은 다른 인벤토리 구조를 갖고 있기 때문에 Inventory = null임.
@@ -50,12 +50,19 @@ public abstract class Item : MonoBehaviour
     {
 
     }
-    public virtual void OnDrop()
+
+    protected virtual void OnRemovedFromInventory()
     {
+
+    }
+    public void OnDrop()
+    {
+        OnRemovedFromInventory();
         this.SpawnDroppedItem();
     }
-    public virtual void OnRemove()
+    public void OnRemove()
     {
+        OnRemovedFromInventory();
         Destroy(gameObject);
     }
     #endregion

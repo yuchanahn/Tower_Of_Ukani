@@ -41,10 +41,11 @@ GameObject:
   - component: {fileID: 1077788971187178464}
   - component: {fileID: 254864248874405640}
   - component: {fileID: 7010412958038895736}
-  - component: {fileID: 3648695750760986672}
-  - component: {fileID: 337060379171144907}
-  - component: {fileID: 106689858320826181}
-  - component: {fileID: 2776416182083292487}
+  - component: {fileID: 5459001297778004496}
+  - component: {fileID: 2396346143787936844}
+  - component: {fileID: 5397219637811149108}
+  - component: {fileID: 1968792756971354302}
+  - component: {fileID: 3390339665104608378}
   m_Layer: 0
   m_Name: Shotgun
   m_TagString: Untagged
@@ -109,18 +110,7 @@ MonoBehaviour:
     type: 3}
   spriteRoot: {fileID: 1077788971484917873}
   pivotPointY: 0.162
-  weaponTags: 02000000
-  attackData: {}
-  shootTimer:
-    CurTime: 0
-  reloadTimer:
-    CurTime: 0
-  swapMagazineTimer:
-    CurTime: 0
-  bulletData: {}
-  loadedBullets: 0
-  isBulletLoaded: 1
---- !u!114 &3648695750760986672
+--- !u!114 &5459001297778004496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,11 +119,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1077788971187178467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c205d6157bf1a8844885ee613a506bc4, type: 3}
+  m_Script: {fileID: 11500000, guid: df6351963b33c7e42b74c14f10a23af3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultAction: {fileID: 337060379171144907}
---- !u!114 &337060379171144907
+--- !u!114 &2396346143787936844
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,15 +131,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1077788971187178467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81d87d7841c3a340aeae577e233be2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c864a78fabf8e94e89407350c5569ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5397219637811149108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077788971187178467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a24ee755407c44d816ce25e8c0f56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1077788971055575643}
   bulletPrefab: {fileID: 593094242138930448, guid: 8295b27559baa5a4f8dd94dcbc0f3034,
     type: 3}
-  maxShootAnimTime: 0.18
-  pelletCount: 4
-  pelletAngle: 10
+  shootAnimMaxDur: 0
   muzzleFlashPrefab: {fileID: 9204822279717750706, guid: 179a6208adf6eab45b4e01bea6d11926,
     type: 3}
   camShakeData_Shoot:
@@ -162,7 +161,7 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
---- !u!114 &106689858320826181
+--- !u!114 &1968792756971354302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,27 +170,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1077788971187178467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dad004a6c9378b646b4672c9ab6708b1, type: 3}
+  m_Script: {fileID: 11500000, guid: bb12f766683857349b2b8c1303791ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadAll: 0
-  reloadAmount: 0
---- !u!114 &2776416182083292487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077788971187178467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d144761646991784a8096cdc914ecd46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reloadAll: 1
-  reloadAmount: 0
   magazineDropPos: {fileID: 0}
   droppedMagazinePrefab: {fileID: 0}
+--- !u!114 &3390339665104608378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077788971187178467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee0016940ef4f844a067972ad2df249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1077788971484917873
 GameObject:
   m_ObjectHideFlags: 0

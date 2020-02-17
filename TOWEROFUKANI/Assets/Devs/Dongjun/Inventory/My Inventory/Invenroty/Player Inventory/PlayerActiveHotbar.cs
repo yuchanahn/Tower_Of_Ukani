@@ -17,7 +17,7 @@ public class PlayerActiveHotbar : ToU_Inventory
 
     private void ActivateItem()
     {
-        if (PlayerStatus.IsHardCCed || !inventoryUI.gameObject.activeInHierarchy)
+        if (PlayerStatus.Uncontrollable || !inventoryUI.gameObject.activeInHierarchy)
             return;
 
         ActiveItem toActivate = null;

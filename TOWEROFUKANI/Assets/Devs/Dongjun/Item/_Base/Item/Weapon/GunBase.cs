@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 
-public abstract class GunController<T> : WeaponController<T> where T : GunItem { }
 public abstract class GunItem : WeaponItem
 {
-    #region Var: Animation Names
+    #region Var: Animation
     public readonly string ANIM_Idle = "Idle";
     public readonly string ANIM_Shoot = "Shoot";
     public readonly string ANIM_Reload = "Reload";
@@ -11,42 +10,61 @@ public abstract class GunItem : WeaponItem
     #endregion
 
     #region Var: Stats
-    // Timer
-    public readonly TimerStat shootTimer = new TimerStat();
-    public readonly TimerStat reloadTimer = new TimerStat();
-    public readonly TimerStat swapMagazineTimer = new TimerStat();
-
     // Bullet Data
-    public ProjectileData bulletData;
+    public ProjectileData BulletData
+    { get; protected set; }
 
-    [Header("Ammo Data")]
-    public int loadedBullets;
-    public bool isBulletLoaded;
-    public IntStat magazineSize;
+    // Timer
+    public readonly TimerStat Timer_Shoot = new TimerStat();
+    public readonly TimerStat Timer_Reload = new TimerStat();
+    public readonly TimerStat Timer_SwapMagazine = new TimerStat();
+
+    // Ammo Data
+    public IntStat MagazineSize
+    { get; protected set; }
+    public int LoadedBullets
+    { get; protected set; }
+    public bool IsBulletLoaded => LoadedBullets != 0;
     #endregion
 
-    #region Method: Unity
     protected virtual void Start()
     {
         // Init Timer
-        shootTimer.SetTick(gameObject).ToEnd();
-        reloadTimer.SetTick(gameObject);
-        swapMagazineTimer.SetTick(gameObject);
+        Timer_Shoot.SetTick(gameObject).ToEnd();
+        Timer_Reload.SetTick(gameObject).SetActive(false);
+        Timer_SwapMagazine.SetTick(gameObject).SetActive(false);
 
         // Init Ammo
-        loadedBullets = magazineSize.Value;
+        LoadedBullets = MagazineSize.Value;
     }
-    #endregion
 
-    #region Method: Stats
     public override void ResetStats()
     {
-        attackData.Reset();
-        shootTimer.EndTime.Reset();
-        reloadTimer.EndTime.Reset();
-        swapMagazineTimer.EndTime.Reset();
-        bulletData.Reset();
-        magazineSize.Reset();
+        base.ResetStats();
+
+        BulletData.Reset();
+
+        Timer_Shoot.EndTime.Reset();
+        Timer_Reload.EndTime.Reset();
+        Timer_SwapMagazine.EndTime.Reset();
+
+        MagazineSize.Reset();
     }
-    #endregion
+
+    public virtual void ReloadFull()
+    {
+        LoadedBullets = MagazineSize.Value;
+    }
+    public virtual void Reload(int amount)
+    {
+        LoadedBullets = amount;
+        LoadedBullets = Mathf.Min(MagazineSize.Value);
+    }
+    public virtual void UseBullet(int amount)
+    {
+        amount = Mathf.Abs(amount);
+
+        if (LoadedBullets > 0)
+            LoadedBullets -= amount;
+    }
 }

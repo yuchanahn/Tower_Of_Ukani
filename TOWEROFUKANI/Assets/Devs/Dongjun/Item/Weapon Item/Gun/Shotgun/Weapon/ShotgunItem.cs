@@ -3,24 +3,27 @@ using UnityEngine;
 
 public class ShotgunItem : GunItem
 {
+    public int PelletCount { get; private set; } = 4;
+    public float PelletAngle { get; private set; } = 10f;
+
     public override void InitStats()
     {
         // Attack Data
-        attackData = new AttackData(8);
+        AttackData = new AttackData(8);
 
-        // Timer Data
-        shootTimer.EndTime = new FloatStat(0.1f, min: 0.01f);
-        reloadTimer.EndTime = new FloatStat(0.12f, min: 0.01f);
-        swapMagazineTimer.EndTime = new FloatStat(1f, min: 0.01f);
+        // Ammo Data
+        MagazineSize = new IntStat(2, min: 0);
 
         // Bullet Data
-        bulletData = new ProjectileData()
+        BulletData = new ProjectileData()
         {
             moveSpeed = new FloatStat(45f, min: 0f),
             travelDist = new FloatStat(0f, min: 0f, max: 7f)
         };
 
-        // Ammo Data
-        magazineSize = new IntStat(2, min: 0);
+        // Timer Data
+        Timer_Shoot.EndTime = new FloatStat(0.1f, min: 0.01f);
+        Timer_Reload.EndTime = new FloatStat(0.12f, min: 0.01f);
+        Timer_SwapMagazine.EndTime = new FloatStat(1f, min: 0.01f);
     }
 }

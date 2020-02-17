@@ -23,6 +23,27 @@ TextureImporter:
   - first:
       213: 3443209990932829894
     second: WoodenShortBow_Pull_6
+  - first:
+      213: -4095044174778148870
+    second: WoodenShortbow_Pull_0
+  - first:
+      213: 7170179336080428841
+    second: WoodenShortbow_Pull_1
+  - first:
+      213: 5015585904324940395
+    second: WoodenShortbow_Pull_2
+  - first:
+      213: 6538783467968721134
+    second: WoodenShortbow_Pull_3
+  - first:
+      213: -1514972370354941629
+    second: WoodenShortbow_Pull_4
+  - first:
+      213: -8695536332170869838
+    second: WoodenShortbow_Pull_5
+  - first:
+      213: -552205185682595126
+    second: WoodenShortbow_Pull_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -119,7 +140,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WoodenShortBow_Pull_0
+      name: WoodenShortbow_Pull_0
       rect:
         serializedVersion: 2
         x: 0
@@ -133,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecf39bb46b1839d438b9fd6c9f35a5ee
-      internalID: 3093934587459817507
+      spriteID: ebdee14b3e3184649a9f5e3acf14d562
+      internalID: -4095044174778148870
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Pull_1
+      name: WoodenShortbow_Pull_1
       rect:
         serializedVersion: 2
         x: 16
@@ -154,14 +175,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0a357004f8f6884482dfd7c6d090aee
-      internalID: -9017572186187491846
+      spriteID: 8980836ca53c8004aa6716f5cce8259d
+      internalID: 7170179336080428841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Pull_2
+      name: WoodenShortbow_Pull_2
       rect:
         serializedVersion: 2
         x: 32
@@ -175,14 +196,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c6853dcedb18d440ac30e470f67f57f
-      internalID: 440176983670862766
+      spriteID: f0e20aaa62ae23a42803ed51c9a9249a
+      internalID: 5015585904324940395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Pull_3
+      name: WoodenShortbow_Pull_3
       rect:
         serializedVersion: 2
         x: 48
@@ -196,14 +217,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06ef6191843e0d34ca7277054e08d90b
-      internalID: 7377924968474824706
+      spriteID: 16e5ccb972d6288479a6f9f6381901a0
+      internalID: 6538783467968721134
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Pull_4
+      name: WoodenShortbow_Pull_4
       rect:
         serializedVersion: 2
         x: 64
@@ -217,14 +238,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbefe9f8197c054409e7343e08427371
-      internalID: -7265924204478991116
+      spriteID: 9f4b4f138a613864b92897191a991952
+      internalID: -1514972370354941629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Pull_5
+      name: WoodenShortbow_Pull_5
       rect:
         serializedVersion: 2
         x: 80
@@ -238,14 +259,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9cada78fdb5b67f4baaf33509e49cdd9
-      internalID: -2307042038417925960
+      spriteID: e3c029eaa1b917047bc2338cb836bb98
+      internalID: -8695536332170869838
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Pull_6
+      name: WoodenShortbow_Pull_6
       rect:
         serializedVersion: 2
         x: 96
@@ -259,8 +280,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20eedf6a0fe84a245a2c241f48738696
-      internalID: 3443209990932829894
+      spriteID: eaa58dfeb3cbcdc40a1dcf6212fec610
+      internalID: -552205185682595126
       vertices: []
       indices: 
       edges: []

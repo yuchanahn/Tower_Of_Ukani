@@ -13,10 +13,8 @@ public class Bloodseeker : PassiveItem
 
         ActionEffectManager.AddEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
     }
-    public override void OnDrop()
+    protected override void OnRemovedFromInventory()
     {
-        base.OnDrop();
-
         ActionEffectManager.RemoveEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
     }
     #endregion
