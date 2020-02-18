@@ -25,7 +25,7 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     public static bool IsKnockbacked
     { get; private set; } = false;
 
-    public static bool Uncontrollable => IsStunned.Value || IsKnockbacked;
+    public static bool Incapacitated => IsStunned.Value || IsKnockbacked;
     #endregion
 
     #region Method: Unity

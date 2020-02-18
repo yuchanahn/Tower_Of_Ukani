@@ -28,8 +28,7 @@ public abstract class TimerData_Base<T> : I_TimerData
 
     public bool IsActive
     { get; private set; } = true;
-    public bool IsEnded
-    { get; private set; } = false;
+    public bool IsEnded => CurTime == GetEndTime;
     public bool IsZero => CurTime == 0;
 
     public T SetTick(GameObject user, TickMode tickMode = TickMode.LateUpdate)
@@ -102,12 +101,7 @@ public abstract class TimerData_Base<T> : I_TimerData
             }
         }
     }
-    public void Restart()
-    {
-        CurTime = 0;
-        IsEnded = false;
-    }
-    public void ToZero() => CurTime = 0;
+    public void Reset() => CurTime = 0;
     public void ToEnd() => CurTime = GetEndTime;
 
     public void Tick(float deltaTime)
@@ -123,9 +117,8 @@ public abstract class TimerData_Base<T> : I_TimerData
 
         if (CurTime >= GetEndTime)
         {
-            IsEnded = true;
-            onEnd?.Invoke();
             CurTime = GetEndTime;
+            onEnd?.Invoke();
         }
     }
 }

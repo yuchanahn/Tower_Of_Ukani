@@ -26,7 +26,7 @@ public class OBB_Gun_SwapMagazine_Base<D, W> : AimedWeapon_State_Base<D, W>
     {
         // Timer
         weaponItem.Timer_SwapMagazine.SetActive(false);
-        weaponItem.Timer_SwapMagazine.Restart();
+        weaponItem.Timer_SwapMagazine.Reset();
 
         // Animation
         data.Animator.ResetSpeed();

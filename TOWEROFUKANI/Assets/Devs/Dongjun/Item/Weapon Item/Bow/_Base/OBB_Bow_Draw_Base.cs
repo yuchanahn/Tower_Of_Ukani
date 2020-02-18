@@ -22,8 +22,8 @@ public class OBB_Bow_Draw_Base<D, W> : AimedWeapon_State_Base<D, W>
     {
         // Stop Timer
         weaponItem.Timer_Draw.SetActive(false);
-        weaponItem.Timer_Draw.Restart();
-        weaponItem.Timer_Shoot.Restart();
+        weaponItem.Timer_Draw.Reset();
+        weaponItem.Timer_Shoot.Reset();
 
         // Animation
         data.Animator.ResetSpeed();

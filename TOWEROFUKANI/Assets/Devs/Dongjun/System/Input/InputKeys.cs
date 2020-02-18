@@ -37,6 +37,6 @@ public static class PlayerWeaponKeys
 
 public static class PlayerUIKeys
 {
-    public static KeyCode InventoryToggle => KeyCode.Tab;
+    public static KeyCode InventoryToggle => KeyCode.E;
     public static KeyCode ActiveHotbarToggle => KeyCode.Q;
 }

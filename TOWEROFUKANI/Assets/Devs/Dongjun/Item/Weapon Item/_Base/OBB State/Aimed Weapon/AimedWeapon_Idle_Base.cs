@@ -6,7 +6,7 @@ public class AimedWeapon_Idle_Base<D, W> : Weapon_State_Base<D, W>
 {
     public override void OnLateUpdate()
     {
-        if (PlayerStatus.Uncontrollable)
+        if (PlayerStatus.Incapacitated)
             return;
 
         // Look At Mouse

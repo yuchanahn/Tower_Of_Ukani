@@ -22,7 +22,7 @@ public abstract class ActiveItem : UpgradableItem
         if (inventory is PlayerActiveHotbar)
         {
             cooldownTimer.SetActive(true);
-            cooldownTimer.Restart();
+            cooldownTimer.Reset();
         }
         // Stop Cooldown When Added to Inventory
         else
@@ -35,7 +35,7 @@ public abstract class ActiveItem : UpgradableItem
     {
         // Stop Cooldown Timer
         cooldownTimer.SetActive(false);
-        cooldownTimer.ToZero();
+        cooldownTimer.Reset();
 
         // Deactivate Item
         Deactivate();

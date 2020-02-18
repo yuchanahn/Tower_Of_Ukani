@@ -6,10 +6,10 @@ public class HorizontalWeapon_Idle_Base<D, W> : Weapon_State_Base<D, W>
 {
     public override void OnLateUpdate()
     {
-        if (PlayerStatus.Uncontrollable)
+        if (PlayerStatus.Incapacitated)
             return;
 
         // Look At Mouse
-        transform.AimMouse(Global.Inst.MainCam, transform);
+        transform.LookAtMouseFlipX(Global.Inst.MainCam, transform);
     }
 }

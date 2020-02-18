@@ -33,7 +33,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
         VisualEffect();
 
         // Timer
-        weaponItem.Timer_Shoot.Restart();
+        weaponItem.Timer_Shoot.Reset();
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_Shoot);

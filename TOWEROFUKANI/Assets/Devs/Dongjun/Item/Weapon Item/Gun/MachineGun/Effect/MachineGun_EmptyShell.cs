@@ -27,7 +27,7 @@ public class MachineGun_EmptyShell : PlayerDropObj
         rb2D.AddTorque(Mathf.Sign(transform.right.x) * Random.Range(forceMin, forceMax), ForceMode2D.Impulse);
 
         showBehindObjTimer.SetTick(gameObject);
-        showBehindObjTimer.Restart();
+        showBehindObjTimer.Reset();
 
         spriteRenderer.sortingOrder = 100;
     }

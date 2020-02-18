@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class OBB_Data_MachineGun : OBB_Data_Animator
 {
-    public override void Init_Start(GameObject gameObject)
-    {
 
-    }
 }
 
 public class OBB_MachineGun : OBB_Controller_Weapon<OBB_Data_MachineGun, MachineGunItem>
@@ -79,7 +76,7 @@ public class OBB_MachineGun : OBB_Controller_Weapon<OBB_Data_MachineGun, Machine
     {
         // Pause
         NewObjective(
-            () => !weaponItem.IsSelected || PlayerStatus.Uncontrollable, true)
+            () => !weaponItem.IsSelected || PlayerStatus.Incapacitated, true)
             .AddBehaviour(bvr_Idle);
 
         // Auto Reload

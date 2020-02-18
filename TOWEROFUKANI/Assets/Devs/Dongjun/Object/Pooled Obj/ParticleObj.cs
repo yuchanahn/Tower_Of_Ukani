@@ -12,7 +12,7 @@ public class ParticleObj : PoolingObj
     }
     public override void ResetOnSpawn()
     {
-        destroyTimer.Restart();
+        destroyTimer.Reset();
 
         for (int i = 0; i < particleSystems.Length; i++)
             particleSystems[i].Play();

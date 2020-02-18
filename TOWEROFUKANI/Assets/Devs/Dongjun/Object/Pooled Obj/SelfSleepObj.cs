@@ -13,7 +13,7 @@ public class SelfSleepObj : PoolingObj
     public override void ResetOnSpawn()
     {
         sleepTimer.CurTime = 0;
-        sleepTimer.Restart();
+        sleepTimer.Reset();
     }
 
     protected virtual void Sleep()

@@ -1,39 +1,5 @@
 ﻿using UnityEngine;
 
-public abstract class WeaponController_Base : SSM_Main { }
-public abstract class WeaponController<T> : WeaponController_Base
-    where T : WeaponItem
-{
-    #region Prop: 
-    protected T weaponItem
-    { get; private set; }
-    public Animator animator
-    { get; private set; }
-    #endregion
-
-    #region Method: Unity
-    protected override void Awake()
-    {
-        weaponItem = GetComponent<T>();
-        animator = GetComponent<Animator>();
-        base.Awake();
-    }
-    #endregion
-
-    #region Method: SSM
-    protected override void RunConditionLogic()
-    {
-        if (!weaponItem.IsSelected)
-        {
-            ChangeState(DefaultState);
-            return;
-        }
-
-        base.RunConditionLogic();
-    }
-    #endregion
-}
-
 public abstract class WeaponItem : UpgradableItem
 {
     #region Var: Inspector
@@ -43,24 +9,14 @@ public abstract class WeaponItem : UpgradableItem
     #endregion
 
     #region Prop: 
-    public Animator animator
-    { get; private set; }
-    public GameObject SpriteRoot => spriteRoot;
-
     public bool IsSelected
     { get; protected set; } = false;
+
+    public GameObject SpriteRoot => spriteRoot;
     #endregion
 
     #region Var: Stats
     public AttackData AttackData;
-    #endregion
-
-    #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-        animator = GetComponent<Animator>();
-    }
     #endregion
 
     #region Method: Stats

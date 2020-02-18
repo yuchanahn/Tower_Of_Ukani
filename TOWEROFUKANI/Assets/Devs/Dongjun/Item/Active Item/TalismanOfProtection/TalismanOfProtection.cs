@@ -49,7 +49,7 @@ public class TalismanOfProtection : ActiveItem
     {
         // Stop Timers
         durationTimer.SetActive(false);
-        durationTimer.ToZero();
+        durationTimer.Reset();
 
         // Destroy Effect
         Destroy(shieldEffect);
@@ -61,11 +61,11 @@ public class TalismanOfProtection : ActiveItem
     {
         // Stop Cooldown Timer
         cooldownTimer.SetActive(false);
-        cooldownTimer.ToZero();
+        cooldownTimer.Reset();
 
         // Start Duration Timer
         durationTimer.SetActive(true);
-        durationTimer.Restart();
+        durationTimer.Reset();
 
         // Enable Shield Item Effect
         ActionEffectManager.AddEffect(PlayerActions.Damaged, onDamageReceived);
@@ -79,11 +79,11 @@ public class TalismanOfProtection : ActiveItem
 
         // Start Cooldown Timer
         cooldownTimer.SetActive(true);
-        cooldownTimer.Restart();
+        cooldownTimer.Reset();
 
         // Stop Duration Timer
         durationTimer.SetActive(false);
-        durationTimer.ToZero();
+        durationTimer.Reset();
 
         // Reset Shield Health
         shieldhealth.ModFlat = 0;

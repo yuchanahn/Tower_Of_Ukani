@@ -25,7 +25,7 @@ class OBB_Shotgun_Main : AimedWeapon_State_Base<OBB_Data_Shotgun, ShotgunItem>
         VisualEffect();
 
         // Timer
-        weaponItem.Timer_Shoot.Restart();
+        weaponItem.Timer_Shoot.Reset();
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_Shoot);

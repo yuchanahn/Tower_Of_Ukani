@@ -2,10 +2,7 @@
 
 public class OBB_Data_WoodenShortbow : OBB_Data_Animator
 {
-    public override void Init_Start(GameObject gameObject)
-    {
 
-    }
 }
 
 public class OBB_WoodenShortbow : OBB_Controller_Weapon<OBB_Data_WoodenShortbow, WoodenShortbowItem>
@@ -48,7 +45,7 @@ public class OBB_WoodenShortbow : OBB_Controller_Weapon<OBB_Data_WoodenShortbow,
     {
         // Pause
         NewObjective(
-            () => !weaponItem.IsSelected || PlayerStatus.Uncontrollable, true)
+            () => !weaponItem.IsSelected || PlayerStatus.Incapacitated, true)
             .AddBehaviour(bvr_Idle);
 
         // Normal

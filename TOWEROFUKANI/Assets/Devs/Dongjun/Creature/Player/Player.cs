@@ -68,7 +68,7 @@ public class Player : SSM_Main,
     {
         SetLogic(When.AnyAction, () =>
         {
-            if (PlayerStatus.Uncontrollable)
+            if (PlayerStatus.Incapacitated)
                 return state_HardCC;
 
             if (!IsOtherMotion && PlayingOtherMotion)
@@ -79,7 +79,7 @@ public class Player : SSM_Main,
 
         SetLogic(ref state_HardCC, () =>
         {
-            if (!PlayerStatus.Uncontrollable)
+            if (!PlayerStatus.Incapacitated)
                 return state_Normal;
 
             return null;

@@ -2,10 +2,7 @@
 
 public class OBB_Data_Pistol : OBB_Data_Animator
 {
-    public override void Init_Start(GameObject gameObject)
-    {
 
-    }
 }
 
 public class OBB_Pistol : OBB_Controller_Weapon<OBB_Data_Pistol, PistolItem>
@@ -77,7 +74,7 @@ public class OBB_Pistol : OBB_Controller_Weapon<OBB_Data_Pistol, PistolItem>
     {
         // Pause
         NewObjective(
-            () => !weaponItem.IsSelected || PlayerStatus.Uncontrollable, true)
+            () => !weaponItem.IsSelected || PlayerStatus.Incapacitated, true)
             .AddBehaviour(bvr_Idle);
 
         // Auto Reload

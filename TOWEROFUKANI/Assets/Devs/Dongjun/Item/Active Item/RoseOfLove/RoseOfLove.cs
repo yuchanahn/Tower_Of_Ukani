@@ -21,7 +21,7 @@ public class RoseOfLove : ActiveItem
     protected override void OnActivate()
     {
         // Restart Cooldown Timer
-        cooldownTimer.Restart();
+        cooldownTimer.Reset();
 
         // Spawn Rose
         WeaponProjectile rose = roseProjectile.Spawn(GM.PlayerPos, Quaternion.identity);
