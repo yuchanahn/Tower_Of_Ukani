@@ -74,15 +74,16 @@ public class FlowerBatBlackBorad : BlackBoard_Base
     public bool IsTargetInAttackRange()
     {
         AttackTask.AddAttackCoolTimeT();
-        bool bHitPlayer = false;
 
-        if (Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AttackRange) 
+        if (Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AttackRange)
         {
-            var rayHit = Physics2D.Raycast(transform.position, (GM.PlayerPos - transform.position).normalized, 6f, (-1) - (mMob.CreatureLayer));
-            bHitPlayer = rayHit.transform ? rayHit.transform.CompareTag("Player") : false;
+            return Physics2D.Raycast(transform.position, 
+                (GM.PlayerPos - transform.position).normalized, 
+                Vector2.Distance(GM.PlayerPos, transform.position), 
+                GM.SoildGroundLayer).transform is null;
         }
 
-        return bHitPlayer;
+        return false;
     }
     public bool BTStop() => status.SENoTask || mMob.BTStop;
     public bool RandomMove() => RandomMoveTask.Tick();
