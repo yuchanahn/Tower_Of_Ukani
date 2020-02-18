@@ -550,6 +550,11 @@ PrefabInstance:
       propertyPath: soildGround.m_Bits
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 1073741824
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e6d57b930118be4eb96a8004b390a75, type: 3}
 --- !u!1 &68997657 stripped

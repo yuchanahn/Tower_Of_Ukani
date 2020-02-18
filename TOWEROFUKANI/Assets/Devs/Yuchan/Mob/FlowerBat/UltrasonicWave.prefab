@@ -99,5 +99,5 @@ MonoBehaviour:
   detectSize: {x: 1, y: 1}
   detectLayers:
     serializedVersion: 2
-    m_Bits: 1073742336
+    m_Bits: 1073741824
   ignoreTags: []
