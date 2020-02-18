@@ -207,7 +207,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   damagePoint: {fileID: 6637942662529288260}
-  damageSize: {x: 1.8, y: 0.5}
+  damageSize: {x: 2, y: 0.5}
   camShakeData_Punch:
     angle: 0
     strength: 0.35
@@ -260,7 +260,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   damagePoint: {fileID: 3708027182497472706}
-  damageSize: {x: 1, y: 0.8}
+  damageSize: {x: 1.5, y: 0.8}
 --- !u!1 &1800249171591075245
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800249171591075245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3864906082717699522}
@@ -315,7 +315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2288104045111468068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3864906082717699522}

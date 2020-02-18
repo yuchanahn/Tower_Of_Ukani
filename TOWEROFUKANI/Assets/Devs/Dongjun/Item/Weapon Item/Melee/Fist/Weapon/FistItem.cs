@@ -7,7 +7,7 @@ public class FistItem : MeleeItem
     public override void InitStats()
     {
         // Attack Data
-        attackData = new AttackData(2);
+        AttackData = new AttackData(2);
         attackData_Heavy = new AttackData()
         {
             damage = new FloatStat(1, min: 0, max: 20)

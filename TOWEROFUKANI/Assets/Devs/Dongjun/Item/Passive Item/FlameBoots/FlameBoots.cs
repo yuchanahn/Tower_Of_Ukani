@@ -56,10 +56,8 @@ public class FlameBoots : PassiveItem
         flameParticle = Instantiate(flameParticlePrefab, GM.PlayerObj.transform).GetComponent<ParticleSystem>();
         flameParticle.transform.localPosition = flameParticle.transform.localPosition.Add(y: -0.2f);
     }
-    public override void OnDrop()
+    protected override void OnRemovedFromInventory()
     {
-        base.OnDrop();
-
         // Remove Item Effect
         ActionEffectManager.RemoveEffect(PlayerActions.Dashing, onDashingEffect);
         ActionEffectManager.RemoveEffect(PlayerActions.DashEnd, onDashEndEffect);

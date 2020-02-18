@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public class Fist_Heavy : Melee_State_Base<FistItem>
 {
@@ -56,6 +57,9 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         chargeDone = false;
         PunchAnimEnd = false;
 
+        // Animation
+        weapon.animator.ResetSpeed();
+
         // Status Effect
         PlayerStatus.RemoveEffect(status_Slow);
 
@@ -70,7 +74,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.IsHardCCed)
+        if (PlayerStatus.Uncontrollable)
             return;
 
         // Charge
@@ -81,12 +85,16 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
 
             // Animation
             weapon.animator.Play("Heavy_Charge");
+            weapon.animator.speed = Mathf.Lerp(1, 4, weapon.attackData_Heavy.damage.Value / weapon.attackData_Heavy.damage.Max);
         }
 
         // Punch
         if (!chargeDone && Input.GetKeyUp(PlayerWeaponKeys.SubAbility))
         {
             chargeDone = true;
+
+            // Animation
+            weapon.animator.ResetSpeed();
 
             // Deal Damage
             var hits = Physics2D.OverlapBoxAll(damagePoint.position, damageSize, 0f, damageLayer);
@@ -118,7 +126,7 @@ public class Fist_Heavy : Melee_State_Base<FistItem>
         if (!weapon.IsSelected)
             return;
 
-        if (PlayerStatus.IsHardCCed)
+        if (PlayerStatus.Uncontrollable)
             return;
 
         // Look At Mouse

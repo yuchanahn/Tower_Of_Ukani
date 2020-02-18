@@ -31,10 +31,8 @@ public abstract class ActiveItem : UpgradableItem
             Deactivate();
         }
     }
-    public override void OnDrop()
+    protected override void OnRemovedFromInventory()
     {
-        base.OnDrop();
-
         // Stop Cooldown Timer
         cooldownTimer.SetActive(false);
         cooldownTimer.ToZero();
@@ -51,7 +49,7 @@ public abstract class ActiveItem : UpgradableItem
             return;
 
         IsActive = true;
-        LockInSlot = true;
+        LockItemSlot = true;
         OnActivate();
     }
     protected abstract void OnActivate();
@@ -59,7 +57,7 @@ public abstract class ActiveItem : UpgradableItem
     public virtual void Deactivate()
     {
         IsActive = false;
-        LockInSlot = false;
+        LockItemSlot = false;
     }
     #endregion
 }

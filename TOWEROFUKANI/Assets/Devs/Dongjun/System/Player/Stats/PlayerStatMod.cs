@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class PlayerStatMod
+// TODO : 씬에 넣어야 함.
+public class PlayerStatMod : MonoBehaviour
 {
-    private static List<Action> statMod_Player = new List<Action>();
-    private static List<Action<WeaponItem>> statMod_Weapon = new List<Action<WeaponItem>>();
+    private static List<Action> statMod_Player;
+    private static List<Action<WeaponItem>> statMod_Weapon;
+
+    private void Awake()
+    {
+        statMod_Player = new List<Action>();
+        statMod_Weapon = new List<Action<WeaponItem>>();
+    }
 
     // Mod Player Stats
     public static void Add_Player(Action mod)

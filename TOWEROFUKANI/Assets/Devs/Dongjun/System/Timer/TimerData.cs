@@ -19,8 +19,9 @@ public abstract class TimerData_Base<T> : I_TimerData
     private GameObject user;
     private TickMode tickMode;
 
-    private Action OnTick;
-    private Action OnEnd;
+    private Action onStart;
+    private Action onTick;
+    private Action onEnd;
 
     [HideInInspector] public float CurTime = 0; // 타이머의 현재 시간.
     protected abstract float GetEndTime { get; } // 타이머의 종료 시간.
@@ -63,10 +64,11 @@ public abstract class TimerData_Base<T> : I_TimerData
 
         return this as T;
     }
-    public T SetAction(Action OnTick = null, Action OnEnd = null)
+    public T SetAction(Action onStart = null, Action onTick = null, Action onEnd = null)
     {
-        this.OnTick = OnTick;
-        this.OnEnd = OnEnd;
+        this.onStart = onStart;
+        this.onTick = onTick;
+        this.onEnd = onEnd;
 
         return this as T;
     }
@@ -113,13 +115,16 @@ public abstract class TimerData_Base<T> : I_TimerData
         if (!IsActive || IsEnded)
             return;
 
+        if (CurTime == 0)
+            onStart?.Invoke();
+
         CurTime += deltaTime;
-        OnTick?.Invoke();
+        onTick?.Invoke();
 
         if (CurTime >= GetEndTime)
         {
             IsEnded = true;
-            OnEnd?.Invoke();
+            onEnd?.Invoke();
             CurTime = GetEndTime;
         }
     }

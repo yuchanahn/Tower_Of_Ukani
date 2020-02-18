@@ -3,16 +3,19 @@ using UnityEngine;
 
 public abstract class PassiveItem : UpgradableItem
 {
-    // Inspector
+    #region Var: Inspector
     [SerializeField, Header("God")]
     private TowerOfUkani.Gods god;
+    #endregion
 
-    // Stats Mod
-    protected Action playerStatsMod = null;
-    protected Action<WeaponItem> weaponStatsMod = null;
+    #region Var: Stats Mod
+    protected Action playerStatMod = null;
+    protected Action<WeaponItem> weaponStatMod = null;
+    #endregion
 
-    // Properties
+    #region Prop:
     public TowerOfUkani.Gods God => god;
+    #endregion
 
     #region Method: Unity
     protected override void Awake()
@@ -35,22 +38,20 @@ public abstract class PassiveItem : UpgradableItem
     {
         base.AddLevel(amount);
 
-        if (playerStatsMod != null) PlayerStatMod.Apply_Player();
-        if (weaponStatsMod != null) PlayerStatMod.Apply_Weapons();
+        if (playerStatMod != null) PlayerStatMod.Apply_Player();
+        if (weaponStatMod != null) PlayerStatMod.Apply_Weapons();
     }
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        if (playerStatsMod != null) PlayerStatMod.Add_Player(playerStatsMod);
-        if (weaponStatsMod != null) PlayerStatMod.Add_Weapon(weaponStatsMod);
+        if (playerStatMod != null) PlayerStatMod.Add_Player(playerStatMod);
+        if (weaponStatMod != null) PlayerStatMod.Add_Weapon(weaponStatMod);
     }
-    public override void OnDrop()
+    protected override void OnRemovedFromInventory()
     {
-        base.OnDrop();
-
-        if (playerStatsMod != null) PlayerStatMod.Remove_Player(playerStatsMod);
-        if (weaponStatsMod != null) PlayerStatMod.Remove_Weapon(weaponStatsMod);
+        if (playerStatMod != null) PlayerStatMod.Remove_Player(playerStatMod);
+        if (weaponStatMod != null) PlayerStatMod.Remove_Weapon(weaponStatMod);
     }
     #endregion
 }

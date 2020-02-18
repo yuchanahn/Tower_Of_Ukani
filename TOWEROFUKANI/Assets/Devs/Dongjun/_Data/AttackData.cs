@@ -9,7 +9,6 @@ public struct AttackData
 
     // Damage Type
     // Absorb Corpse
-    // Knockback
     // Penetration
     // Etc...
 

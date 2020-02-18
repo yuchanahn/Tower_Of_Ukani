@@ -55,6 +55,12 @@ public class Player : SSM_Main,
         Animator = GetComponent<Animator>();
         base.Awake();
     }
+
+    // Test
+    private void Start()
+    {
+        //PlayerStatus.AddEffect(new PlayerStatus_Stun(StatusID, gameObject));
+    }
     #endregion
 
     #region Method: Init States
@@ -62,7 +68,7 @@ public class Player : SSM_Main,
     {
         SetLogic(When.AnyAction, () =>
         {
-            if (PlayerStatus.IsHardCCed)
+            if (PlayerStatus.Uncontrollable)
                 return state_HardCC;
 
             if (!IsOtherMotion && PlayingOtherMotion)
@@ -73,7 +79,7 @@ public class Player : SSM_Main,
 
         SetLogic(ref state_HardCC, () =>
         {
-            if (!PlayerStatus.IsHardCCed)
+            if (!PlayerStatus.Uncontrollable)
                 return state_Normal;
 
             return null;

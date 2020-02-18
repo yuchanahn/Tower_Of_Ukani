@@ -15,7 +15,7 @@ public class MachineGun_EmptyShell : PlayerDropObj
     {
         base.Awake();
         showBehindObjTimer.SetTick(gameObject);
-        showBehindObjTimer.SetAction(OnEnd: ShowBehindObj);
+        showBehindObjTimer.SetAction(onEnd: ShowBehindObj);
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

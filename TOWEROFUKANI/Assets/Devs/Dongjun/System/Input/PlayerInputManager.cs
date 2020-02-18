@@ -8,7 +8,7 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     #endregion
 
     #region Var: Jump
-    public bool Input_Jump = false;
+    [HideInInspector] public bool Input_Jump = false;
     #endregion
 
     #region Var: FallThrough

@@ -1,16 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class OBB_State<T> : MonoBehaviour where T : OBB_Data
+public interface IOBB_State
 {
-    protected T data { get; private set; }
+    void InitData(OBB_Data data);
+    void Init();
 
-    public void InitData(T data)
-    {
-        this.data = data;
-        Init();
-    }
+    void OnEnter();
+    void OnLateEnter();
+    void OnExit();
+    void OnUpdate();
+    void OnLateUpdate();
+    void OnFixedUpdate();
+}
+public abstract class OBB_State : MonoBehaviour, IOBB_State
+{
+    public abstract void InitData(OBB_Data data);
     public virtual void Init() { }
 
     public virtual void OnEnter() { }

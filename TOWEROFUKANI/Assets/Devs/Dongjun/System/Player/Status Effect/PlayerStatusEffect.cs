@@ -34,7 +34,7 @@ public abstract class PlayerStatusEffect
             Timer = new TimerData();
             Timer.
                 SetTick(PlayerStatus.Inst.gameObject).
-                SetAction(OnEnd: () => PlayerStatus.RemoveEffect(this)).
+                SetAction(onEnd: () => PlayerStatus.RemoveEffect(this)).
                 EndTime = endTime;
         }
     }

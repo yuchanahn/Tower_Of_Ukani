@@ -151,10 +151,11 @@ GameObject:
   - component: {fileID: 4450316997164171682}
   - component: {fileID: 3512479290777371978}
   - component: {fileID: 7501912485448073292}
-  - component: {fileID: 4770636179610790158}
-  - component: {fileID: 3977191293239689903}
-  - component: {fileID: 3376335330108281838}
-  - component: {fileID: 5483000496705353710}
+  - component: {fileID: 3515187769672422909}
+  - component: {fileID: 4425132044498660916}
+  - component: {fileID: 6887202604462654709}
+  - component: {fileID: 1553038890496837333}
+  - component: {fileID: 2960900197718802737}
   m_Layer: 0
   m_Name: MachineGun
   m_TagString: Untagged
@@ -219,11 +220,9 @@ MonoBehaviour:
     type: 3}
   spriteRoot: {fileID: 4450316997529025075}
   pivotPointY: -0.025
-  loadedBullets: 0
-  isBulletLoaded: 1
   ammoBelt: {fileID: 1315789236824654805}
   ammoBeltAmmoCount: 7
---- !u!114 &4770636179610790158
+--- !u!114 &3515187769672422909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,10 +231,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4450316997164171681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9cc772650ae4414eb70f01f933de7f9, type: 3}
+  m_Script: {fileID: 11500000, guid: bd0abe54d6ba0d34e9e07a61b222b419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3977191293239689903
+--- !u!114 &4425132044498660916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,13 +243,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4450316997164171681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b640c8a2e811f148ae6eb9d338aac01, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c864a78fabf8e94e89407350c5569ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6887202604462654709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450316997164171681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6ef5003186ea446a8fbea94d7da299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 4450316996750440473}
   bulletPrefab: {fileID: 3522369012486736103, guid: 4516c39aa90b59146a00c293b77a065b,
     type: 3}
-  maxShootAnimTime: 0.25
+  shootAnimMaxDur: 0.25
   acry_YPosOffset: 0.05
   acry_ZRotOffset: 10
   muzzleFlashPrefab: {fileID: 183118761886031892, guid: 8fb702bfb2eda0847ab717287666cacb,
@@ -267,7 +278,7 @@ MonoBehaviour:
     noisePercent: 0.1
     dampingPercent: 0
     rotationPercent: 0
---- !u!114 &3376335330108281838
+--- !u!114 &1553038890496837333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -276,27 +287,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4450316997164171681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dad004a6c9378b646b4672c9ab6708b1, type: 3}
+  m_Script: {fileID: 11500000, guid: bb12f766683857349b2b8c1303791ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadAll: 1
-  reloadAmount: 0
---- !u!114 &5483000496705353710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4450316997164171681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e70f38c9fb6da574692860c3f8364269, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reloadAll: 0
-  reloadAmount: 0
   magazineDropPos: {fileID: 0}
   droppedMagazinePrefab: {fileID: 0}
+--- !u!114 &2960900197718802737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450316997164171681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee0016940ef4f844a067972ad2df249, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4450316997529025075
 GameObject:
   m_ObjectHideFlags: 0

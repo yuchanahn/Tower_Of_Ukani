@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939084213130845577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9168104331943800761}
@@ -571,6 +571,7 @@ GameObject:
   - component: {fileID: 4749230937349024608}
   - component: {fileID: 4775023531336007662}
   - component: {fileID: 1571809755}
+  - component: {fileID: 8822237045087864423}
   - component: {fileID: 560649603753229986}
   - component: {fileID: 7371128404420445766}
   - component: {fileID: 3688400116078953524}
@@ -770,6 +771,18 @@ MonoBehaviour:
   DamageReceived: 0
   HealReceived: 0
   DamageToDeal: 0
+--- !u!114 &8822237045087864423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7371128404420445770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d47dae92f2d82748a012c7251a1ee95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &560649603753229986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,7 +928,6 @@ MonoBehaviour:
     m_Bits: 256
   yVelPercent: 0.3
   duration: 0
-  effectSpriteRenderer: {fileID: 7773452921406079708}
 --- !u!114 &6830336080947489379
 MonoBehaviour:
   m_ObjectHideFlags: 0

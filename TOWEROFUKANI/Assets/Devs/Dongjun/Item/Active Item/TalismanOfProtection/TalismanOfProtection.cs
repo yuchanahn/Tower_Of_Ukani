@@ -27,7 +27,7 @@ public class TalismanOfProtection : ActiveItem
 
         // Init Duration
         durationTimer.EndTime = 2.5f;
-        durationTimer.SetTick(gameObject).SetAction(OnEnd: Deactivate);
+        durationTimer.SetTick(gameObject).SetAction(onEnd: Deactivate);
 
         // Init Shield HP
         shieldhealth = new FloatStat(40, min: 0, max: 40);
@@ -45,10 +45,8 @@ public class TalismanOfProtection : ActiveItem
         shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));
         shieldEffect.SetActive(false);
     }
-    public override void OnDrop()
+    protected override void OnRemovedFromInventory()
     {
-        base.OnDrop();
-
         // Stop Timers
         durationTimer.SetActive(false);
         durationTimer.ToZero();

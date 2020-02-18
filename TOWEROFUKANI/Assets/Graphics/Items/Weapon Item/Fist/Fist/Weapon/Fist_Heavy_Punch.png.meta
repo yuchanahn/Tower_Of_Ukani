@@ -20,6 +20,9 @@ TextureImporter:
   - first:
       213: 8232396265539304050
     second: Fist_Heavy_Punch_5
+  - first:
+      213: 1069750389345888642
+    second: Fist_Heavy_Punch_6
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -130,7 +133,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98af39088e411f849a4495c7cc6ef0d8
+      spriteID: 50685829bf79b384bb721dc3639eef8c
       internalID: -2663869077683014800
       vertices: []
       indices: 
@@ -151,7 +154,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc3e5da9be0def249ba194f6c0834241
+      spriteID: 614aa02eb8878394a81a99153a69b53d
       internalID: 4692375960269858233
       vertices: []
       indices: 
@@ -172,7 +175,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2910c730a545080478f709e4fdb0aa26
+      spriteID: a073ac420629ea74c93c42f68468c6cb
       internalID: -165204925624911006
       vertices: []
       indices: 
@@ -193,7 +196,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1a441332771f7f4b8794fb9d3b3bb48
+      spriteID: 8fe805356cc872d4c8d3b99e522832ca
       internalID: -2248372870179029752
       vertices: []
       indices: 
@@ -214,7 +217,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02d1b572d4eb15047b2e5d5f0f57da4c
+      spriteID: e0ba2040a3cdcdb4dbc893d4704253d2
       internalID: 6854039674737535674
       vertices: []
       indices: 
@@ -235,8 +238,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce36973bac5deba469f041f5ac22a4b3
+      spriteID: 159bb36aff002e64b9f5592deb94ec4b
       internalID: 8232396265539304050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fist_Heavy_Punch_6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 40
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fbb3ac126f0a9f4b9bbda3edd7d9edd
+      internalID: 1069750389345888642
       vertices: []
       indices: 
       edges: []

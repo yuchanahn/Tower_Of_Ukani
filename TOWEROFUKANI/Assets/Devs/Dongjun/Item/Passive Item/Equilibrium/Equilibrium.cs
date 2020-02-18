@@ -17,9 +17,8 @@ public class Equilibrium : PassiveItem
         ActionEffectManager.AddEffect(PlayerActions.Damaged, onDamagedEffect);
         ActionEffectManager.AddEffect(PlayerActions.DamageDealt, onHitEffect);
     }
-    public override void OnDrop()
+    protected override void OnRemovedFromInventory()
     {
-        base.OnDrop();
         ActionEffectManager.RemoveEffect(PlayerActions.Damaged, onDamagedEffect);
         ActionEffectManager.RemoveEffect(PlayerActions.DamageDealt, onHitEffect);
     }

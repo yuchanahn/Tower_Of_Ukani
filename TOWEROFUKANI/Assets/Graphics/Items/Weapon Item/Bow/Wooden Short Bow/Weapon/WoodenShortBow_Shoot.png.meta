@@ -20,6 +20,24 @@ TextureImporter:
   - first:
       213: 6299663376571629732
     second: WoodenShortBow_Shoot_5
+  - first:
+      213: -7427823925849128443
+    second: WoodenShortbow_Shoot_0
+  - first:
+      213: -3492341076285212674
+    second: WoodenShortbow_Shoot_1
+  - first:
+      213: 2994903787079164346
+    second: WoodenShortbow_Shoot_2
+  - first:
+      213: -7110805079701787173
+    second: WoodenShortbow_Shoot_3
+  - first:
+      213: 8152368990581439703
+    second: WoodenShortbow_Shoot_4
+  - first:
+      213: -6880451828592780500
+    second: WoodenShortbow_Shoot_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -116,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WoodenShortBow_Shoot_0
+      name: WoodenShortbow_Shoot_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +148,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee32394984f3b9e429da9d9a10a12a66
-      internalID: -5810878474472161691
+      spriteID: a73007ad3013c754b8ed0803abd4af80
+      internalID: -7427823925849128443
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Shoot_1
+      name: WoodenShortbow_Shoot_1
       rect:
         serializedVersion: 2
         x: 16
@@ -151,14 +169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b56b45c3fb886e646ad6771e891d3616
-      internalID: -1697119425286716344
+      spriteID: f689d6adc67ce0f458005990ba40b613
+      internalID: -3492341076285212674
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Shoot_2
+      name: WoodenShortbow_Shoot_2
       rect:
         serializedVersion: 2
         x: 32
@@ -172,14 +190,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c32b3ecbed1a6914f9d9e40514867b27
-      internalID: -3881868964115090840
+      spriteID: fb9042e4079519c4bbc7042a329c2fa7
+      internalID: 2994903787079164346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Shoot_3
+      name: WoodenShortbow_Shoot_3
       rect:
         serializedVersion: 2
         x: 48
@@ -193,14 +211,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0318a80bf4a5c9f489c5bf65e9147db6
-      internalID: 3335093261663242014
+      spriteID: 512fb2ad4c0bdd8449aa235d99cbe3ed
+      internalID: -7110805079701787173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Shoot_4
+      name: WoodenShortbow_Shoot_4
       rect:
         serializedVersion: 2
         x: 64
@@ -214,14 +232,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b430bd497a5013247b0b50f9f246c9c2
-      internalID: -3119583717415933999
+      spriteID: a5381729dd373034fa8889032528b41d
+      internalID: 8152368990581439703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WoodenShortBow_Shoot_5
+      name: WoodenShortbow_Shoot_5
       rect:
         serializedVersion: 2
         x: 80
@@ -235,8 +253,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38bfe79a2cf3a8245ba7f90a07e6e94e
-      internalID: 6299663376571629732
+      spriteID: b5d15f4fb8ed8fc4d8f44a74d8897e04
+      internalID: -6880451828592780500
       vertices: []
       indices: 
       edges: []

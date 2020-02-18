@@ -124,7 +124,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.6666667
-    functionName: AniEvent_DropMagazine
+    functionName: AnimEvent_DropMagazine
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
