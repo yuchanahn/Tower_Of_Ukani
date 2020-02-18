@@ -88,11 +88,6 @@ public class OBB_Fist_Basic : HorizontalWeapon_State_Base<OBB_Data_Fist, FistIte
             List<Collider2D> hits = new List<Collider2D>();
             hitCheck_0.OverlapCollider(contactFilter, hits);
             hitOverlapData.OverlapCheckOnce(hits);
-
-            for (int i = 0; i < hits.Count; i++)
-            {
-                Debug.Log(hits[i].gameObject.name);
-            }
         }
     }
 
