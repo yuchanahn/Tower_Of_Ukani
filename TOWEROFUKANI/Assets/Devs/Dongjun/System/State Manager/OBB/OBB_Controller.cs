@@ -111,7 +111,9 @@ public abstract partial class OBB_Controller<D, S> : MonoBehaviour
 
     #region Prop: 
     // Data
-    protected readonly D data = new D();
+    [SerializeField]
+    private D _data = new D();
+    protected D data => _data;
 
     // State
     protected readonly OBB_State END_BEHAVIOUR = null;

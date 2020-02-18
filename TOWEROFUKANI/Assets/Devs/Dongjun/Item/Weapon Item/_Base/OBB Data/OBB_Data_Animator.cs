@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Serializable]
 public class OBB_Data_Animator : OBB_Data
 {
     public Animator Animator

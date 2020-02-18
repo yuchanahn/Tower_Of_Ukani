@@ -3,8 +3,7 @@
 [System.Serializable]
 public class OBB_Data_Fist : OBB_Data_Animator
 {
-    [Header("Damage")]
-    public LayerMask DamageLayer;
+
 }
 
 public class OBB_Fist : OBB_Controller_Weapon<OBB_Data_Fist, FistItem>

@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1354091403476757613}
   - component: {fileID: 6638369603791323812}
   m_Layer: 0
-  m_Name: WoodenShortBow
+  m_Name: WoodenShortbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
