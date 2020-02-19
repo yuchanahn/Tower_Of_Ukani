@@ -29,8 +29,8 @@ public class OBB_Pistol_Main : AimedWeapon_State_Base<OBB_Data_Pistol, PistolIte
         data.Animator.Play(weaponItem.ANIM_Shoot);
 
         // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.WeaponMain);
-        ActionEffectManager.Trigger(PlayerActions.GunShoot);
+        PlayerActionEventManager.Trigger(PlayerActions.WeaponMain);
+        PlayerActionEventManager.Trigger(PlayerActions.GunShoot);
     }
     public override void OnLateEnter()
     {

@@ -21,7 +21,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
 
     [Header("Empty Shell")]
     [SerializeField] private Transform emptyShellSpawnPos;
-    [SerializeField] private PoolingObj emptyShellPrefab;
+    [SerializeField] private MachineGun_EmptyShell emptyShellPrefab;
 
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
@@ -39,8 +39,8 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
         data.Animator.Play(weaponItem.ANIM_Shoot);
 
         // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.WeaponMain);
-        ActionEffectManager.Trigger(PlayerActions.GunShoot);
+        PlayerActionEventManager.Trigger(PlayerActions.WeaponMain);
+        PlayerActionEventManager.Trigger(PlayerActions.GunShoot);
     }
     public override void OnLateEnter()
     {

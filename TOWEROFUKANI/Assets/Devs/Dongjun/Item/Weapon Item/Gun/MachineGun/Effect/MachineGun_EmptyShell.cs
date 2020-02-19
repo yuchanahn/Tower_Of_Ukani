@@ -14,11 +14,17 @@ public class MachineGun_EmptyShell : PlayerDropObj
     protected override void Awake()
     {
         base.Awake();
-        showBehindObjTimer.SetTick(gameObject);
-        showBehindObjTimer.SetAction(onEnd: ShowBehindObj);
-
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    protected override void Start()
+    {
+        base.Start();
+
+        showBehindObjTimer
+            .SetTick(gameObject)
+            .SetAction(onEnd: () => spriteRenderer.sortingOrder = -100);
+    }
+
     public override void ResetOnSpawn()
     {
         base.ResetOnSpawn();
@@ -36,10 +42,5 @@ public class MachineGun_EmptyShell : PlayerDropObj
         base.Sleep();
 
         showBehindObjTimer.SetTick(gameObject, TickMode.Manual);
-    }
-
-    private void ShowBehindObj()
-    {
-        spriteRenderer.sortingOrder = -100;
     }
 }

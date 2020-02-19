@@ -14,21 +14,54 @@ public class FlameBoots : PassiveItem
     [SerializeField] private GameObject flameParticlePrefab;
     #endregion
 
-    #region Var: Item Effect
-    private ActionEffect onDashingEffect;
-    private ActionEffect onDashEndEffect;
-    #endregion
-
-    #region Var: Collision Detection
+    #region Var: Overlap Data
     private OverlapCheckData overlapCheckData;
     #endregion
 
-    #region Var: Flame Dash
+    #region Var: Player Action Event
+    private PlayerActionEvent onDashing;
+    private PlayerActionEvent onDashEnd;
+    #endregion
+
+    #region Var: Stat
     private AttackData flameDashAttackData;
     #endregion
 
-    #region Var: Effects
+    #region Var: Effect
     private ParticleSystem flameParticle;
+    #endregion
+
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // Overlap Data
+        overlapCheckData = new OverlapCheckData(
+            onEnter: overlap =>
+            {
+                // Deal Damage
+                PlayerStats.Inst.DealDamage(flameDashAttackData, overlap.gameObject);
+            });
+
+        // Player Action Event
+        onDashing = this.NewPlayerActionEvent(() =>
+        {
+            // Check Overlap
+            overlapCheckData.OverlapCheckOnce(Physics2D.OverlapBoxAll(GM.PlayerPos, damageSize, 0f, damageLayer));
+
+            // Play Particle Effect
+            flameParticle.Play();
+        });
+        onDashEnd = this.NewPlayerActionEvent(() => 
+        {
+            // Clear Overlap Data
+            overlapCheckData.Clear();
+
+            // Stop Particle Effect
+            flameParticle.Stop();
+        });
+    }
     #endregion
 
     #region Method: Stats
@@ -38,56 +71,27 @@ public class FlameBoots : PassiveItem
     }
     #endregion
 
-    #region Method Override: Add/Remove
+    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        // Init Data
-        overlapCheckData = new OverlapCheckData(onEnter: OnFlameDashHit);
+        // Add Player Action Event
+        PlayerActionEventManager.AddEvent(PlayerActions.Dashing, onDashing);
+        PlayerActionEventManager.AddEvent(PlayerActions.DashEnd, onDashEnd);
 
-        onDashingEffect = this.CreateActionEffect(FlameDash);
-        onDashEndEffect = this.CreateActionEffect(ResetFlameDash);
-
-        ActionEffectManager.AddEffect(PlayerActions.Dashing, onDashingEffect);
-        ActionEffectManager.AddEffect(PlayerActions.DashEnd, onDashEndEffect);
-
-        // Spawn Effect
+        // Spawn Particle
         flameParticle = Instantiate(flameParticlePrefab, GM.PlayerObj.transform).GetComponent<ParticleSystem>();
         flameParticle.transform.localPosition = flameParticle.transform.localPosition.Add(y: -0.2f);
     }
     protected override void OnRemovedFromInventory()
     {
-        // Remove Item Effect
-        ActionEffectManager.RemoveEffect(PlayerActions.Dashing, onDashingEffect);
-        ActionEffectManager.RemoveEffect(PlayerActions.DashEnd, onDashEndEffect);
+        // Remove Player Action Event
+        PlayerActionEventManager.RemoveEvent(PlayerActions.Dashing, onDashing);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.DashEnd, onDashEnd);
 
-        // Destory Effect
+        // Destory Particle
         Destroy(flameParticle.gameObject);
-    }
-    #endregion
-
-    #region Method: Item Effect
-    private void FlameDash()
-    {
-        // Get Overlaps
-        overlapCheckData.OverlapCheck(Physics2D.OverlapBoxAll(GM.PlayerPos, damageSize, 0f, damageLayer));
-
-        // Show Effect
-        flameParticle.Play();
-    }
-    private void OnFlameDashHit(Collider2D overlap)
-    {
-        PlayerStats.Inst.DealDamage(flameDashAttackData, overlap.gameObject);
-    }
-
-    private void ResetFlameDash()
-    {
-        // Clear Overlaps
-        overlapCheckData.Clear();
-
-        // Hide Effect
-        flameParticle.Stop();
     }
     #endregion
 }

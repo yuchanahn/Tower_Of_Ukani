@@ -64,7 +64,7 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
         VisualEffect();
 
         // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.WeaponMain);
-        ActionEffectManager.Trigger(PlayerActions.BowShoot);
+        PlayerActionEventManager.Trigger(PlayerActions.WeaponMain);
+        PlayerActionEventManager.Trigger(PlayerActions.BowShoot);
     }
 }

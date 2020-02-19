@@ -12,7 +12,7 @@ public class TalismanOfProtection : ActiveItem
     #endregion
 
     #region Var: Item Effect
-    private ActionEffect onDamageReceived;
+    private PlayerActionEvent onDamageReceived;
     #endregion
 
     #region Var: Effect
@@ -39,7 +39,7 @@ public class TalismanOfProtection : ActiveItem
     {
         base.OnAdd(inventory);
 
-        onDamageReceived = this.CreateActionEffect(Shield);
+        onDamageReceived = this.NewPlayerActionEvent(Shield);
 
         // Spawn Effect
         shieldEffect = Instantiate(shieldEffectPrefab, GM.PlayerObj.transform.GetChild(0));
@@ -68,7 +68,7 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.Reset();
 
         // Enable Shield Item Effect
-        ActionEffectManager.AddEffect(PlayerActions.Damaged, onDamageReceived);
+        PlayerActionEventManager.AddEvent(PlayerActions.Damaged, onDamageReceived);
 
         // Show Effect
         shieldEffect.SetActive(true);
@@ -89,7 +89,7 @@ public class TalismanOfProtection : ActiveItem
         shieldhealth.ModFlat = 0;
 
         // Disable Shield Item Effect
-        ActionEffectManager.RemoveEffect(PlayerActions.Damaged, onDamageReceived);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.Damaged, onDamageReceived);
 
         // Hide Effect
         shieldEffect.SetActive(false);

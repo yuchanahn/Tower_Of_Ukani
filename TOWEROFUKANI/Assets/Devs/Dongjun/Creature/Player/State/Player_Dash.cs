@@ -49,7 +49,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         PlayerStatus.AddEffect(status_IgnoreDamage);
 
         // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.DashStart);
+        PlayerActionEventManager.Trigger(PlayerActions.DashStart);
     }
     public override void OnExit()
     {
@@ -66,7 +66,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         PlayerStatus.RemoveEffect(status_IgnoreDamage);
 
         // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.DashEnd);
+        PlayerActionEventManager.Trigger(PlayerActions.DashEnd);
 
         // When Using Melee Weapon
         if (isUsingMelee)
@@ -110,7 +110,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         main.RB2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
 
         // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.Dashing);
+        PlayerActionEventManager.Trigger(PlayerActions.Dashing);
 
         // Trail Effect
         if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))

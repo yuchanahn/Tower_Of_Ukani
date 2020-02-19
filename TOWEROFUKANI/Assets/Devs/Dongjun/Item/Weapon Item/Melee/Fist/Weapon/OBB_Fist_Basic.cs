@@ -47,8 +47,8 @@ public class OBB_Fist_Basic : HorizontalWeapon_State_Base<OBB_Data_Fist, FistIte
         prevAttackAnim *= -1;
 
         // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.WeaponMain);
-        ActionEffectManager.Trigger(PlayerActions.MeleeBasicAttack);
+        PlayerActionEventManager.Trigger(PlayerActions.WeaponMain);
+        PlayerActionEventManager.Trigger(PlayerActions.MeleeBasicAttack);
 
         // Player
         GM.Player.CanDash = false;
