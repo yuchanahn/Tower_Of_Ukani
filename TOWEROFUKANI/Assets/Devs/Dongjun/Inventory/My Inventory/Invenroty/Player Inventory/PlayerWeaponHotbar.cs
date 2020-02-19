@@ -19,10 +19,8 @@ public class PlayerWeaponHotbar : ToU_Inventory
     #region Method: Unity
     protected override void Awake()
     {
-        // Get UI
+        // Init Inventory
         inventoryUI = InGameUI_Manager.Inst.weaponHotbarUI;
-
-        // Init
         Init(3, typeof(WeaponItem));
 
         // Select Slot 0
@@ -31,8 +29,8 @@ public class PlayerWeaponHotbar : ToU_Inventory
     private void Start()
     {
         // On Stun
-        ActionEffectManager.AddEffect(PlayerActions.Stunned, new ActionEffect(() => LockSlots(this, true), typeof(PlayerWeaponHotbar)));
-        ActionEffectManager.AddEffect(PlayerActions.StunEnd, new ActionEffect(() => LockSlots(this, false), typeof(PlayerWeaponHotbar)));
+        PlayerActionEventManager.AddEvent(PlayerActions.Stunned, this.NewPlayerActionEvent(() => LockSlots(this, true)));
+        PlayerActionEventManager.AddEvent(PlayerActions.StunEnd, this.NewPlayerActionEvent(() => LockSlots(this, false)));
     }
     private void Update()
     {
@@ -52,15 +50,8 @@ public class PlayerWeaponHotbar : ToU_Inventory
     {
         IsSlotLocked.Set(_this, _lock);
 
-        if (PlayerStatus.IsStunned.Value)
-            return;
-
-        LockSlotDrop(IsSlotLocked.Value);
-    }
-    public void LockSlotDrop(bool _lock)
-    {
         for (int i = 0; i < inventoryUI.slotUIs.Length; i++)
-            (inventoryUI.slotUIs[i] as DroppableSlotUI).IsLocked = _lock;
+            (inventoryUI.slotUIs[i] as DroppableSlotUI).IsLocked = IsSlotLocked.Value;
     }
 
     private void ChangeSlot()
@@ -75,12 +66,15 @@ public class PlayerWeaponHotbar : ToU_Inventory
         {
             int prevSlot = CurSlot;
 
+            // Change Slot
             if (dir == TO_RIGHT) CurSlot = CurSlot < 2 ? CurSlot + 1 : 0;
             if (dir == TO_LEFT) CurSlot = CurSlot > 0 ? CurSlot - 1 : 2;
 
+            // Unlselect Previous
             (items[prevSlot] as WeaponItem)?.Select(false);
             (items[CurSlot] as WeaponItem)?.Select(true);
 
+            // Select Current
             (inventoryUI.slotUIs[prevSlot] as WeaponHotbarSlot).Select(false);
             (inventoryUI.slotUIs[CurSlot] as WeaponHotbarSlot).Select(true);
         }

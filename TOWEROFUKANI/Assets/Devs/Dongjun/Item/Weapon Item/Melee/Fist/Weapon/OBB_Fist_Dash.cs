@@ -28,7 +28,7 @@ public class OBB_Fist_Dash : Weapon_State_Base<OBB_Data_Fist, FistItem>
     public override void OnEnter()
     {
         // Trigger Item Effect
-        ActionEffectManager.Trigger(PlayerActions.MeleeDashAttack);
+        PlayerActionEventManager.Trigger(PlayerActions.MeleeDashAttack);
 
         // Look Dir
         Flip_Logic.FlipXTo(GM.Player.Dir, transform);

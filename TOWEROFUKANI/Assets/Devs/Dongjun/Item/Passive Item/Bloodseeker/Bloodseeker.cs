@@ -2,27 +2,34 @@
 
 public class Bloodseeker : PassiveItem
 {
-    private ActionEffect onWeaponHitEffect;
+    #region Var: Player Action Event
+    private PlayerActionEvent onWeaponHit;
+    #endregion
 
-    #region Method Override: Add/Remove
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // Player Action Event
+        onWeaponHit = this.NewPlayerActionEvent(() =>
+        {
+            // Heal
+            PlayerStats.Inst.Heal(PlayerStats.Inst.DamageToDeal);
+        });
+    }
+    #endregion
+
+    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        onWeaponHitEffect = this.CreateActionEffect(LifeSteal);
-
-        ActionEffectManager.AddEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
+        PlayerActionEventManager.AddEvent(PlayerActions.WeaponHit, onWeaponHit);
     }
     protected override void OnRemovedFromInventory()
     {
-        ActionEffectManager.RemoveEffect(PlayerActions.WeaponHit, onWeaponHitEffect);
-    }
-    #endregion
-
-    #region Method: Item Effect
-    private void LifeSteal()
-    {
-        PlayerStats.Inst.Heal(PlayerStats.Inst.DamageToDeal);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.WeaponHit, onWeaponHit);
     }
     #endregion
 }

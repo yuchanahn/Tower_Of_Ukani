@@ -83,7 +83,7 @@ public class Player_Normal : SSM_State_wMain<Player>,
 
         // Jump
         if (jumpData.Jump(ref PlayerInputManager.Inst.Input_Jump, main.RB2D, transform))
-            ActionEffectManager.Trigger(PlayerActions.Jump);
+            PlayerActionEventManager.Trigger(PlayerActions.Jump);
 
         // Gravity
         Gravity_Logic.ApplyGravity(main.RB2D,

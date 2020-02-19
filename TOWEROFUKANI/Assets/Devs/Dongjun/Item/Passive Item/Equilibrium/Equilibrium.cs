@@ -2,33 +2,43 @@
 
 public class Equilibrium : PassiveItem
 {
-    private ActionEffect onDamagedEffect;
-    private ActionEffect onHitEffect;
+    #region Var: Player Action Event
+    private PlayerActionEvent onDealDamage;
+    private PlayerActionEvent onDamaged;
+    #endregion
 
+    #region Var: Stat
     private float effectPercent = 30f;
+    #endregion
 
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+
+        onDealDamage = this.NewPlayerActionEvent(() =>
+        {
+            PlayerStats.Inst.DamageToDeal += MathD.Round(PlayerStats.Inst.DamageToDeal * (effectPercent * 0.01f));
+        });
+        onDamaged = this.NewPlayerActionEvent(() =>
+        {
+            PlayerStats.Inst.DamageReceived += MathD.Round(PlayerStats.Inst.DamageReceived * (effectPercent * 0.01f));
+        });
+    }
+    #endregion
+
+    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        onDamagedEffect = this.CreateActionEffect(OnDamaged);
-        onHitEffect = this.CreateActionEffect(OnHit);
-
-        ActionEffectManager.AddEffect(PlayerActions.Damaged, onDamagedEffect);
-        ActionEffectManager.AddEffect(PlayerActions.DamageDealt, onHitEffect);
+        PlayerActionEventManager.AddEvent(PlayerActions.Damaged, onDamaged);
+        PlayerActionEventManager.AddEvent(PlayerActions.DamageDealt, onDealDamage);
     }
     protected override void OnRemovedFromInventory()
     {
-        ActionEffectManager.RemoveEffect(PlayerActions.Damaged, onDamagedEffect);
-        ActionEffectManager.RemoveEffect(PlayerActions.DamageDealt, onHitEffect);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.Damaged, onDamaged);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.DamageDealt, onDealDamage);
     }
-
-    private void OnDamaged()
-    {
-        PlayerStats.Inst.DamageReceived += MathD.Round(PlayerStats.Inst.DamageReceived * (effectPercent * 0.01f));
-    }
-    private void OnHit()
-    {
-        PlayerStats.Inst.DamageToDeal += MathD.Round(PlayerStats.Inst.DamageToDeal * (effectPercent * 0.01f));
-    }
+    #endregion
 }

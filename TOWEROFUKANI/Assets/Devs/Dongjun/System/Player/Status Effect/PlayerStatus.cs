@@ -185,12 +185,12 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     public void Stun_Add()
     {
         IsStunned.Set(true);
-        ActionEffectManager.Trigger(PlayerActions.Stunned);
+        PlayerActionEventManager.Trigger(PlayerActions.Stunned);
     }
     public void Stun_Remove()
     {
         IsStunned.Set(false);
-        if (!IsStunned.Value) ActionEffectManager.Trigger(PlayerActions.StunEnd);
+        if (!IsStunned.Value) PlayerActionEventManager.Trigger(PlayerActions.StunEnd);
     }
     #endregion
 }

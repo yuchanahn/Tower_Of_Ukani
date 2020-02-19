@@ -2,13 +2,36 @@
 
 public class PhantomPistol : PassiveItem
 {
+    #region Var: Insepctor
     [SerializeField] private PhantomPistolObject phantomPistolObjectPrefab;
+    #endregion
 
-    private ActionEffect onShoot;
+    #region Var: Phantom Pistol Object
     private PhantomPistolObject phantomPistolObject;
+    #endregion
 
+    #region Var: Player Action Event
+    private PlayerActionEvent onShoot;
+    #endregion
+
+    #region Var: Stat
     private AttackData attackData;
     private ProjectileData projectileData;
+    #endregion
+
+    #region Method: Unity
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // Player Action Event
+        onShoot = this.NewPlayerActionEvent(() =>
+        {
+            Bullet bullet = phantomPistolObject.SpawnBullet();
+            bullet.InitData(bullet.transform.right, projectileData, attackData);
+        });
+    }
+    #endregion
 
     #region Method: Stats
     public override void InitStats()
@@ -28,27 +51,17 @@ public class PhantomPistol : PassiveItem
     {
         base.OnAdd(inventory);
 
-        onShoot = this.CreateActionEffect(OnShoot);
-
-        ActionEffectManager.AddEffect(PlayerActions.GunShoot, onShoot);
+        PlayerActionEventManager.AddEvent(PlayerActions.GunShoot, onShoot);
 
         // Spawn Phantom Pistol Object
         phantomPistolObject = Instantiate(phantomPistolObjectPrefab, GM.PlayerObj.transform.position, Quaternion.identity);
     }
     protected override void OnRemovedFromInventory()
     {
-        ActionEffectManager.RemoveEffect(PlayerActions.GunShoot, onShoot);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.GunShoot, onShoot);
 
         // Destroy Phantom Pistol Object
         Destroy(phantomPistolObject);
-    }
-    #endregion
-
-    #region Method: Item Effect
-    private void OnShoot()
-    {
-        Bullet bullet = phantomPistolObject.SpawnBullet();
-        bullet.InitData(bullet.transform.right, projectileData, attackData);
     }
     #endregion
 }
