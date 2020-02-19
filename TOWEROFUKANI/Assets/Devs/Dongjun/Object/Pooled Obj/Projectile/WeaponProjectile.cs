@@ -2,9 +2,9 @@
 
 public class WeaponProjectile : Projectile
 {
-    protected override bool CheckCreatureHit(RaycastHit2D hit)
+    protected override bool DamageCreature(GameObject hit)
     {
-        return PlayerStats.Inst.DealDamage(attackData, hit.collider.gameObject,
+        return PlayerStats.Inst.DealDamage(attackData, hit,
             PlayerActions.WeaponHit);
     }
 }

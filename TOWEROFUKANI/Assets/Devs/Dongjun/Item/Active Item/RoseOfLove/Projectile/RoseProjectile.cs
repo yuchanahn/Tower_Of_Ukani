@@ -2,12 +2,17 @@
 
 public class RoseProjectile : WeaponProjectile
 {
-    protected override void OnHit(Vector2 hitPos, GameObject hitObject)
+    protected override bool DamageCreature(GameObject hit)
     {
-        base.OnHit(hitPos, hitObject);
+        if (base.DamageCreature(hit))
+        {
+            GameObject stunnedEffect = hit.GetComponent<StatusEffect_Object>()?.StunnedObj;
+            if (stunnedEffect != null)
+                StatusEffect_Stunned.Create(hit, stunnedEffect, 3f);
 
-        GameObject stunnedEffect = hitObject.GetComponent<StatusEffect_Object>()?.StunnedObj;
-        if (stunnedEffect != null)
-            StatusEffect_Stunned.Create(hitObject, stunnedEffect, 3f);
+            return true;
+        }
+
+        return false;
     }
 }

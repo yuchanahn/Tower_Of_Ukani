@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 368671185012501390}
   - component: {fileID: 368671185012501389}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Sprite Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5594741813812874623}
   - component: {fileID: 1450700501935835787}
   - component: {fileID: 8408380920668620473}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3864906082717699522}
-  m_Layer: 30
+  m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

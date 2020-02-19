@@ -93,10 +93,23 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
 
         pool_Active[prefab].Remove(obj);
         pool_Active[prefab].Add(obj);
-
-        obj.gameObject.SetActive(true);
-
         return obj;
+    }
+    private static void InitObj<T>(T obj, Vector3 pos, Quaternion rot) where T : PoolingObj
+    {
+        obj.transform.SetParent(Inst.defaultPoolParent);
+        obj.transform.position = pos;
+        obj.transform.rotation = rot;
+        obj.ResetOnSpawn();
+        obj.gameObject.SetActive(true);
+    }
+    private static void InitObj<T>(T obj, Transform parent, Vector2 localPos, Quaternion localRot) where T : PoolingObj
+    {
+        obj.transform.SetParent(parent);
+        obj.transform.localPosition = localPos;
+        obj.transform.localRotation = localRot;
+        obj.ResetOnSpawn();
+        obj.gameObject.SetActive(true);
     }
     #endregion
 
@@ -131,41 +144,25 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
     public static T Spawn<T>(T prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true) where T : PoolingObj
     {
         T obj = ActivateObj(prefab, canCreateNew);
-        obj.transform.SetParent(Inst.defaultPoolParent);
-        obj.transform.position = pos;
-        obj.transform.rotation = rot;
-        obj.ResetOnSpawn();
-
+        InitObj(obj, pos, rot);
         return obj;
     }
     public static T Spawn<T>(T prefab, Vector2 pos, bool canCreateNew = true) where T : PoolingObj
     {
         T obj = ActivateObj(prefab, canCreateNew);
-        obj.transform.SetParent(Inst.defaultPoolParent);
-        obj.transform.position = pos;
-        obj.transform.rotation = Quaternion.identity;
-        obj.ResetOnSpawn();
-
+        InitObj(obj, pos, Quaternion.identity);
         return obj;
     }
     public static T Spawn<T>(T prefab, Transform parent, Vector2 localPos, Quaternion localRot, bool canCreateNew = true) where T : PoolingObj
     {
         T obj = ActivateObj(prefab, canCreateNew);
-        obj.transform.SetParent(parent);
-        obj.transform.localPosition = localPos;
-        obj.transform.localRotation = localRot;
-        obj.ResetOnSpawn();
-
+        InitObj(obj, parent, localPos, localRot);
         return obj;
     }
     public static T Spawn<T>(T prefab, Transform parent, Vector2 localPos, bool canCreateNew = true) where T : PoolingObj
     {
         T obj = ActivateObj(prefab, canCreateNew);
-        obj.transform.SetParent(parent);
-        obj.transform.localPosition = localPos;
-        obj.transform.rotation = Quaternion.identity;
-        obj.ResetOnSpawn();
-
+        InitObj(obj, parent, localPos, Quaternion.identity);
         return obj;
     }
     public static void Sleep(PoolingObj obj)

@@ -59,7 +59,6 @@ public abstract class WeaponItem : UpgradableItem
         Select(false);
 
         // Detach from Player
-        //gameObject.SetActive(false);
         transform.SetParent(null);
 
         // Reset Stats

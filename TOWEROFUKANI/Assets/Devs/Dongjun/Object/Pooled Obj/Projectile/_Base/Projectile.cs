@@ -1,15 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class Projectile : PoolingObj
 {
     #region Var: Inspector
-    [Header("Object Detection")]
-    [SerializeField] protected Vector2 detectSize;
-    [SerializeField] protected LayerMask detectLayers;
+    [Header("Detection: Tag")]
     [SerializeField] protected string[] ignoreTags;
 
+    [Header("Detection: Creature")]
+    [SerializeField] protected Rigidbody2D creatureDetectRB;
+
+    [Header("Detection: Wall")]
+    [SerializeField] protected Rigidbody2D wallDetectRB;
+
     [Header("Visual")]
-    [SerializeField] private bool rotateToMovingDir = true;
+    [SerializeField] protected bool rotateToMovingDir = true;
 
     [Header("Effects")]
     [SerializeField] protected PoolingObj particle_Hit;
@@ -25,7 +31,11 @@ public class Projectile : PoolingObj
     #region Method: Init PoolingObj
     public override void ResetOnSpawn()
     {
-        projectileData.travelDist.ModFlat = 0;
+        velocity = Vector2.zero;
+        projectileData.travelDist.Reset();
+
+        if (creatureDetectRB != null) creatureDetectRB.transform.localPosition = Vector2.zero;
+        if (wallDetectRB != null) wallDetectRB.transform.localPosition = Vector2.zero;
     }
     #endregion
 
@@ -45,10 +55,6 @@ public class Projectile : PoolingObj
     protected virtual void FixedUpdate()
     {
         Move();
-        DetectObject();
-
-        if (projectileData.travelDist.Value >= projectileData.travelDist.Max)
-            OnMaxDist();
     }
     #endregion
 
@@ -58,15 +64,22 @@ public class Projectile : PoolingObj
         // Set Velocity
         velocity.y -= projectileData.gravity.Value * Time.fixedDeltaTime;
 
-        // Translate
+        // Move
         transform.Translate(velocity * Time.fixedDeltaTime, Space.World);
-        
+
         // Update Travle Dist
-        projectileData.travelDist.ModFlat += velocity.magnitude * Time.fixedDeltaTime;
+        float dist = velocity.magnitude * Time.fixedDeltaTime;
+        projectileData.travelDist.ModFlat += dist;
+
+        // Detect Object
+        if (!DetectCreature(dist)) DetectWall(dist);
+
+        // On Maxt Distance
+        if (projectileData.travelDist.Value >= projectileData.travelDist.Max)
+            OnMaxDist();
 
         // Rotate Towards Moving Dir
-        if (rotateToMovingDir)
-            transform.right = velocity.normalized;
+        if (rotateToMovingDir) transform.right = velocity.normalized;
     }
     protected virtual void OnMaxDist()
     {
@@ -74,63 +87,70 @@ public class Projectile : PoolingObj
     }
     #endregion
 
-    #region Method: Hit
-    protected bool IsIgnoreTag(Component target)
+    #region Method: Detect Object
+    protected bool IsVaildTag(Component target)
     {
         for (int j = 0; j < ignoreTags.Length; j++)
             if (target.CompareTag(ignoreTags[j]))
-                return true;
+                return false;
 
+        return true;
+    }
+    protected virtual bool DamageCreature(GameObject hit)
+    {
         return false;
     }
-    protected virtual void DetectObject()
+    protected virtual bool DetectCreature(float dist)
     {
-        Vector2 pos = transform.position + (transform.right * detectSize.x * 0.5f) - (transform.right * (projectileData.moveSpeed.Value * Time.fixedDeltaTime));
-        float rot = transform.rotation.eulerAngles.z;
+        if (creatureDetectRB == null)
+            return false;
 
-        RaycastHit2D[] hits =
-            Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, projectileData.moveSpeed.Value * Time.fixedDeltaTime, detectLayers);
+        // Check Creature
+        List<RaycastHit2D> creatureHits = new List<RaycastHit2D>();
+        creatureDetectRB.transform.position = transform.position - (Vector3)(velocity.normalized * dist);
+        creatureDetectRB.Cast(velocity.normalized, creatureHits, dist);
 
-        Vector2 hitPos = transform.position;
-        GameObject hitObj = null;
-
-        if (hits.Length == 0)
-            return;
-
-        bool hasHit = false;
-
-        for (int i = 0; i < hits.Length; i++)
+        // Get Closest Creature
+        creatureHits = creatureHits.OrderByDescending(o => Vector2.SqrMagnitude((Vector2)creatureDetectRB.transform.position - o.point)).ToList();
+        for (int i = creatureHits.Count - 1; i >= 0; i--)
         {
-            // Check Ignore Tag
-            if (IsIgnoreTag(hits[i].collider))
+            if (!IsVaildTag(creatureHits[i].collider))
                 continue;
 
-            // Set Data
-            hasHit = true;
-            hitPos = hits[i].point;
-            hitObj = hits[i].collider.gameObject;
+            if (!DamageCreature(creatureHits[i].collider.gameObject))
+                continue;
 
-            if (hitObj.GetComponent<Creature>() != null)
-            {
-                if (CheckCreatureHit(hits[i]))
-                {
-                    break;
-                }
-                else
-                {
-                    hasHit = false;
-                }
-            }
+            OnHit(creatureHits[i].point);
+            return true;
         }
 
-        if (hasHit)
-            OnHit(hitPos, hitObj);
-    }
-    protected virtual bool CheckCreatureHit(RaycastHit2D hit)
-    {
         return false;
     }
-    protected virtual void OnHit(Vector2 hitPos, GameObject hitObject)
+    protected virtual bool DetectWall(float dist)
+    {
+        if (wallDetectRB == null)
+            return false;
+
+        // Check Wall
+        List<RaycastHit2D> wallHits = new List<RaycastHit2D>();
+        wallDetectRB.transform.position = transform.position - (Vector3)(velocity.normalized * dist);
+        wallDetectRB.Cast(velocity.normalized, wallHits, dist);
+
+        // Get Closest Wall
+        wallHits = wallHits.OrderByDescending(o => Vector2.SqrMagnitude((Vector2)wallDetectRB.transform.position - o.point)).ToList();
+        for (int i = wallHits.Count - 1; i >= 0; i--)
+        {
+            if (!IsVaildTag(wallHits[i].collider))
+                continue;
+
+            OnHit(wallHits[i].point);
+            return true;
+        }
+
+        return false;
+    }
+
+    protected virtual void OnHit(Vector2 hitPos)
     {
         // Sleep
         this.Sleep();
@@ -138,8 +158,8 @@ public class Projectile : PoolingObj
         // Spawn Hit Effect
         if (particle_Hit == null) return;
         Transform hitParticle = particle_Hit.Spawn(hitPos, Quaternion.identity).transform;
-        hitParticle.right = -transform.right;
-        hitParticle.position -= transform.right * particle_HitOffset;
+        hitParticle.right = -velocity.normalized;
+        hitParticle.position -= (Vector3)velocity.normalized * particle_HitOffset;
     }
     #endregion
 }

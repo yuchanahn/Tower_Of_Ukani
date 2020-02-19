@@ -16,15 +16,20 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     #endregion
 
     #region Var: CC
+    // Slow
     private static List<PlayerStatus_Slow> slowList;
-    private static Action slow = () => PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[slowList.Count - 1].SlowAmount;
+    private static Action slow = () => PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[0].SlowAmount;
     public static bool IsSlowed => slowList.Count != 0;
 
+    // Stun
     public static BoolCount IsStunned
     { get; private set; } = new BoolCount();
+
+    // Knockback
     public static bool IsKnockbacked
     { get; private set; } = false;
 
+    // Incapacitated (Hard CC)
     public static bool Incapacitated => IsStunned.Value || IsKnockbacked;
     #endregion
 
