@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class FlowerBatBlackBorad : BlackBoard_Base
 {
+    
+
     private Mob_FlowerBat mMob;
     private StatusEffect_Object status;
     private FlowerBat_Task_RandomMove RandomMoveTask;
@@ -87,7 +89,7 @@ public class FlowerBatBlackBorad : BlackBoard_Base
                 FleeTask.IsFleeAble = false;
             }
         }
-        return FleeTask.IsFleeing || r;
+        return FleeTask.FleeCollider2d.enabled = (FleeTask.IsFleeing || r);
     }
     public bool IsTargetInAttackRange()
     {

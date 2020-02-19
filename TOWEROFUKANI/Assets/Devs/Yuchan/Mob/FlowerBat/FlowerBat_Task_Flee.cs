@@ -7,6 +7,8 @@ public class FlowerBat_Task_Flee : MonoBehaviour, ITask
     [SerializeField] public float FleeRange;
     [SerializeField] public float FleeTime;
     [SerializeField] public float AddSpeed;
+    [SerializeField] public BoxCollider2D FleeCollider2d;
+
 
     private Mob_FlowerBat mMob;
 

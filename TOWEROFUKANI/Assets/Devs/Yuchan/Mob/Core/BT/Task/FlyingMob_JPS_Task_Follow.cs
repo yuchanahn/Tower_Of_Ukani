@@ -18,7 +18,6 @@ public class FlyingMob_JPS_Task_Follow : MonoBehaviour, ITask
         GridView.Inst[1].GetJPS_Path();
         mMob.Dir2d = mMoveMgr.GetDirIfUpdateTarget(mPathFinder, transform.position, GM.PlayerPos);
         mMob.SetAni(eMobAniST.Fly);
-
         return true;
     }
 }

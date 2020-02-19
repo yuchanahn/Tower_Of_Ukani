@@ -33,15 +33,37 @@ internal class JPS_MoveManager
             return (mMoveQueue.Peek() - ori).normalized;
         }
     }
-    public Vector2 GetDirIfUpdateTarget(JPS_PathFinder mPathFinder, Vector2 ori, Vector2 target)
-    {
-        var tposList = mPathFinder.Find(ori, target);
 
-        if (tposList.Length > 0)
+    Vector2? CurGoal = null;
+
+    public Vector2 GetDirIfUpdateTarget(JPS_PathFinder mPathFinder, Vector2 origin, Vector2 target)
+    {
+        var tposList = mPathFinder.Find(origin, target);
+
+        if(tposList.Length == 0)
         {
-            float val = 1;
-            return (tposList[0] - ori).normalized * Mathf.Clamp(val, 0, Vector2.Distance(tposList[0], ori) / Time.fixedDeltaTime);
+            return Vector2.zero;
         }
-        return Vector2.zero;
+
+        var Goal = tposList[0];
+
+        if (CurGoal != null && CurGoal.Value == tposList[0])
+        {
+            if (tposList.Length > 1)
+            {
+                Goal = tposList[1];
+            }
+            else
+            {
+                return Vector2.zero;
+            }
+                
+        }
+        //if (origin >= Goal)
+        {
+            CurGoal = origin;
+        }
+
+        return (Goal - origin).normalized;
     }
 }

@@ -7,11 +7,13 @@ using Dongjun.Helper;
 public class JPS_PathFinder : MonoBehaviour
 {
     [SerializeField] GridView gridV;
+    [SerializeField] GameObject pr;
+    [SerializeField] bool ShowingPath;
     [SerializeField] Grid gridJPS => gridV.grid;
 
 
-
-    public Vector2[] Find( Vector2 start, Vector2 stop )
+    static List<GameObject> pool = new List<GameObject>();
+    public Vector2[] Find(Vector2 start, Vector2 stop)
     {
         Vector2[] dir = 
         {
@@ -47,16 +49,30 @@ public class JPS_PathFinder : MonoBehaviour
         List<Point> path = gridJPS.getPath( gridV.WorldToGrid(start), gridV.WorldToGrid(stop));
         if (path.Count > 0)
         {
-            if (path[0].column == gridV.WorldToGrid(start).column && path[0].row == gridV.WorldToGrid(start).row)
-            {
-                path.Remove(path[0]);
-            }
+            //if (path[0].column == gridV.WorldToGrid(start).column && path[0].row == gridV.WorldToGrid(start).row)
+            //{
+            //    path.Remove(path[0]);
+            //}
         }
 
         var v3 = new Vector2[path.Count];
         for(int i =0; i < path.Count; i++)
         {
             v3[i] = gridV.getNodePosAsWorldPos(path[i]);
+        }
+
+        if (ShowingPath)
+        {
+            var arr = pool.ToArray();
+            pool.Clear();
+            foreach (var i in arr)
+            {
+                Destroy(i);
+            }
+            foreach (var i in v3)
+            {
+                pool.Add(Instantiate(pr, i, Quaternion.identity));
+            }
         }
         return v3;
     }

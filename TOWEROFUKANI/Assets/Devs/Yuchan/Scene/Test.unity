@@ -1715,6 +1715,33 @@ PrefabInstance:
       propertyPath: mPathFinder
       value: 
       objectReference: {fileID: 240870022}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AgroRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AttackRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 367102948323533996, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: FleeCollider2d
+      value: 
+      objectReference: {fileID: 728915291}
+    - target: {fileID: 1581783349, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581783349, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581783349, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
 --- !u!4 &221602577 stripped
@@ -1855,6 +1882,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridV: {fileID: 240870021}
+  pr: {fileID: 6025808219906693540, guid: 1e18a55bb1887d14ebaf5fec00cf4d62, type: 3}
+  ShowingPath: 1
 --- !u!1001 &249727434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4987,6 +5016,12 @@ Transform:
   m_Father: {fileID: 982439659}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &728915291 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 1581783349, guid: d5d22318019f1d34d98255fdd2e82a83,
+    type: 3}
+  m_PrefabInstance: {fileID: 221602576}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &742771844
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12139,6 +12174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridV: {fileID: 2017289405}
+  pr: {fileID: 0}
+  ShowingPath: 0
 --- !u!1001 &2018381909
 PrefabInstance:
   m_ObjectHideFlags: 0
