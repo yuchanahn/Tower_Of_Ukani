@@ -100,16 +100,16 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
         obj.transform.SetParent(Inst.defaultPoolParent);
         obj.transform.position = pos;
         obj.transform.rotation = rot;
-        obj.ResetOnSpawn();
         obj.gameObject.SetActive(true);
+        obj.ResetOnSpawn();
     }
     private static void InitObj<T>(T obj, Transform parent, Vector2 localPos, Quaternion localRot) where T : PoolingObj
     {
         obj.transform.SetParent(parent);
         obj.transform.localPosition = localPos;
         obj.transform.localRotation = localRot;
-        obj.ResetOnSpawn();
         obj.gameObject.SetActive(true);
+        obj.ResetOnSpawn();
     }
     #endregion
 

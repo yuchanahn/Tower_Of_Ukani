@@ -21,7 +21,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
 
     [Header("Empty Shell")]
     [SerializeField] private Transform emptyShellSpawnPos;
-    [SerializeField] private PoolingObj emptyShellPrefab;
+    [SerializeField] private MachineGun_EmptyShell emptyShellPrefab;
 
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
