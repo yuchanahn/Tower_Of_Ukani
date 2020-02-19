@@ -13,15 +13,17 @@ public class FlowerBatBlackBorad : BlackBoard_Base
     private FlowerBat_Task_Attack AttackTask;
     private FlowerBat_Task_Hang HangTask;
     private FlyingMob_JPS_Task_Follow JPS_FollowTask;
+    private FlowerBat_Task_Flee FleeTask;
 
     private void Awake()
     {
-        mMob = GetComponent<Mob_FlowerBat>();
-        status = GetComponent<StatusEffect_Object>();
-        RandomMoveTask = GetComponent<FlowerBat_Task_RandomMove>();
-        HangTask = GetComponent<FlowerBat_Task_Hang>();
-        JPS_FollowTask = GetComponent<FlyingMob_JPS_Task_Follow>();
-        AttackTask = GetComponent<FlowerBat_Task_Attack>();
+        mMob                = GetComponent<Mob_FlowerBat>();
+        status              = GetComponent<StatusEffect_Object>();
+        RandomMoveTask      = GetComponent<FlowerBat_Task_RandomMove>();
+        HangTask            = GetComponent<FlowerBat_Task_Hang>();
+        JPS_FollowTask      = GetComponent<FlyingMob_JPS_Task_Follow>();
+        AttackTask          = GetComponent<FlowerBat_Task_Attack>();
+        FleeTask            = GetComponent<FlowerBat_Task_Flee>();
     }
 
     public bool IsFindCeiling()
@@ -70,7 +72,23 @@ public class FlowerBatBlackBorad : BlackBoard_Base
 
 
 
-    public bool IsTargetInFleeRange() => false;
+    public bool IsTargetInFleeRange()
+    {
+        bool r = false;
+        if (FleeTask.IsFleeAble)
+        {
+            if(Vector2.Distance(transform.position, GM.PlayerPos) <= FleeTask.FleeRange)
+            {
+                r = true;
+            }
+            else
+            {
+                r = false;
+                FleeTask.IsFleeAble = false;
+            }
+        }
+        return FleeTask.IsFleeing || r;
+    }
     public bool IsTargetInAttackRange()
     {
         AttackTask.AddAttackCoolTimeT();
@@ -80,14 +98,14 @@ public class FlowerBatBlackBorad : BlackBoard_Base
             return Physics2D.Raycast(transform.position, 
                 (GM.PlayerPos - transform.position).normalized, 
                 Vector2.Distance(GM.PlayerPos, transform.position), 
-                GM.SoildGroundLayer).transform is null;
+                GM.SoildGroundLayer).transform is null && !IsTargetInFleeRange();
         }
 
-        return false;
+        return AttackTask.IsAttacking;
     }
     public bool BTStop() => status.SENoTask || mMob.BTStop;
     public bool RandomMove() => RandomMoveTask.Tick();
     public bool Hang() => HangTask.Tick();
     public bool Attack() => AttackTask.Tick();
-    public bool Flee() => false;
+    public bool Flee() => FleeTask.Tick();
 }

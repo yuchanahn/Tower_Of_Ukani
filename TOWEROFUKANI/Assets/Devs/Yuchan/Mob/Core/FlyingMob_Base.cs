@@ -8,6 +8,7 @@ public abstract class FlyingMob_Base : Mob_Base
     #region DATA
 
     [SerializeField] FlyMobMove_ mMoveData;
+    [SerializeField] public float AddSpeed = 0f;
     [SerializeField] Transform mSprTr;
     #endregion
 
@@ -47,7 +48,7 @@ public abstract class FlyingMob_Base : Mob_Base
     }
     public Vector3 Pos => transform.position - (Vector3.up * 3);
     public Vector2 Pos2d => transform.position - (Vector3.up * 3);
-    float MoveSpeed => mMoveData.Speed;
+    float MoveSpeed => mMoveData.Speed + AddSpeed;
     public bool IsHurting => mHurt;
     public int SpriteDir
     {
@@ -84,17 +85,16 @@ public abstract class FlyingMob_Base : Mob_Base
         mAttack[eAttackST.PreAttack] = PreAttack;
         mAttack[eAttackST.Attack] = Attack;
     }
-
     void Animation()
     {
         if (mSE.SEAni != eMobAniST.Last)
         {
-            // TODO : 
-            // 상태이상이 애니를 쓴다면. 다른 애니 끝내자.
-            // 
-            // 
             mCurAniST = mSE.SEAni;
-            HurtEnd();
+            mHurt = false;
+            BTStop = false;
+            AddSpeed = 0;
+            // Not Test....
+            mHitImmunity = false;
             return;
         }
 
@@ -106,8 +106,15 @@ public abstract class FlyingMob_Base : Mob_Base
         mRb2d.velocity = Dir2d * MoveSpeed * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
         Animation();
         mAnimator.SetDuration(m_Ani[mCurAniST].Item2);
-        if (mAniStart) { mAnimator.Play(m_Ani[mCurAniST].Item1, 0, 0); mAniStart = false; }
-        else mAnimator.Play(m_Ani[mCurAniST].Item1);
+        if (mAniStart)
+        {
+            mAnimator.Play(m_Ani[mCurAniST].Item1, 0, 0);
+            mAniStart = false;
+        }
+        else
+        {
+            mAnimator.Play(m_Ani[mCurAniST].Item1);
+        }
     }
 
     public virtual bool Stunned()

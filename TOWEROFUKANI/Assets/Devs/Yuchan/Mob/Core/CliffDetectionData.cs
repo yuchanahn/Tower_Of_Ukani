@@ -87,7 +87,7 @@ public class CliffDetect_Logic
         if (c.Length > 0)
         {
             c.OrderByDescending(d => d.collider.transform.position.y);
-            MaxHeightY = c[0].transform.position.Foot(Vector2.one).y;
+            MaxHeightY = c[c.Length -1].transform.position.Foot(Vector2.one).y;
         }
 
         // 벽의 Y좌표를 점프 최대 높이로 계산한 뒤 검사를 시작한다.
@@ -97,7 +97,7 @@ public class CliffDetect_Logic
 
         int NotWallStack = 0;
         
-        var point = GetGridPos(check[0]);
+        var point = GetGridPos(check[check.Length - 1]);
 
         for (var i = 0; i < (MaxHeightY - Pos1.y) + 1; i++, --point.row)
         {

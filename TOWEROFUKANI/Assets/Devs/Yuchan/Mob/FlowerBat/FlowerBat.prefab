@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &858890614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 858890615}
+  m_Layer: 8
+  m_Name: Colliders
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &858890615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858890614}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1581783348}
+  m_Father: {fileID: 7408284209935012268}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &967707026
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +162,63 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1581783347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1581783348}
+  - component: {fileID: 1581783349}
+  m_Layer: 14
+  m_Name: IW Solid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1581783348
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581783347}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 858890615}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1581783349
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581783347}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &7408284209274691879
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +322,7 @@ GameObject:
   - component: {fileID: 7510034718012629857}
   - component: {fileID: 4835304523073473399}
   - component: {fileID: 221602579}
+  - component: {fileID: 367102948323533996}
   m_Layer: 8
   m_Name: FlowerBat
   m_TagString: Untagged
@@ -254,6 +343,7 @@ Transform:
   m_Children:
   - {fileID: 7408284209274691878}
   - {fileID: 1474760259}
+  - {fileID: 858890615}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -343,15 +433,17 @@ MonoBehaviour:
   mMoveData:
     Speed: 2
     Dir2d: {x: 0, y: 0}
+  AddSpeed: 0
   mSprTr: {fileID: 7408284209274691878}
   MoveLink: []
+  mHitImmunity: 0
   mCurAniST: 8
   AttackRange: 5
   MoveTimeIdle: 1
   MoveTimeMove: 3
   AgroRange: 10
-  FleeRange: 0
   Size: {x: 1, y: 1}
+  FleeTask: {fileID: 0}
 --- !u!114 &450975516151158663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45184536e1c4dff438300eb6ff5b4019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mHP: 10
+  mHP: 100
   mDamage: 1
   mHPBarUI: {fileID: 0}
 --- !u!114 &2818090562661050550
@@ -475,5 +567,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6565f3f65728b4db810fb61c408af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 10
+  Projectile: {fileID: 8507582946219271400, guid: f172f52446130ab46b8445f91c8505f1,
+    type: 3}
   CoolTime: 2
+--- !u!114 &367102948323533996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408284209935012269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a98873a1b65e67148a4e107a116d7c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FleeRange: 3
+  FleeTime: 1
+  AddSpeed: 5
+  IsFleeing: 0
+  IsFleeAble: 0

@@ -24,6 +24,7 @@ public class FlowerBat_Task_RandomMove : MonoBehaviour, ITask
 
     public bool Tick()
     {
+        mMob.SetAni(eMobAniST.Fly);
         if(bIdel)
         {
             mMob.Dir2d = Vector2.zero;

@@ -4,35 +4,41 @@ using UnityEngine;
 
 public class FlowerBat_Task_Attack : Mob_Task_ProjectileAttack
 {
-    Mob_FlowerBat mob;
+    Mob_FlowerBat mMob;
+    public bool IsAttacking { get; set; } = false;
 
     protected override void Awake()
     {
         base.Awake();
-        mob = GetComponent<Mob_FlowerBat>();
+        mMob = GetComponent<Mob_FlowerBat>();
     }
 
     protected override void OnAttackAble()
     {
-        mob.SetAni(eMobAniST.Attack);
-        mob.mHitImmunity = true;
+        mMob.SetAni(eMobAniST.Attack);
+        mMob.mHitImmunity = true;
+        IsAttacking = true;
     }
     protected override void OnAttackEnd()
     {
-        mob.SetAni(eMobAniST.Fly);
-        mob.mHitImmunity = false;
+        mMob.mHitImmunity = false;
+        IsAttacking = false;
     }
 
 
     public override bool Tick()
     {
         Target = GM.Player.transform;
-        if(!base.Tick())
+        if (!IsAttacking)
+        {
+            mMob.SetAni(eMobAniST.Fly);
+        }
+        if (!base.Tick())
         {
             return false;
         }
-        mob.Dir2d = Vector2.zero;
-        mob.SpriteDir = mob.SprDirForPlayer;
+        mMob.Dir2d = Vector2.zero;
+        mMob.SpriteDir = mMob.SprDirForPlayer;
         return true;
     }
 }

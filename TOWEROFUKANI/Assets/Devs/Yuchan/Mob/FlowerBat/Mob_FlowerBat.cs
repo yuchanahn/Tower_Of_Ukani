@@ -5,15 +5,14 @@ using UnityEngine;
 public class Mob_FlowerBat : FlyingMob_Base
 {
     public override CreatureType CreatureType => CreatureType.Wildlife;
-
-    //=================================================================
-    //      ## Flee : Mob_FlowerBat
-    //=================================================================
-
-    [SerializeField] float FleeRange;
     [SerializeField] public Vector2 Size;
+    [SerializeField] FlowerBat_Task_Flee FleeTask;
 
-
+    protected override void Awake()
+    {
+        base.Awake();
+        FleeTask = GetComponent<FlowerBat_Task_Flee>();
+    }
 
     //=================================================================
     //      ## Mob_FlowerBat :: Stunned
@@ -31,6 +30,7 @@ public class Mob_FlowerBat : FlyingMob_Base
 
     public override void OnHurt()
     {
+        FleeTask.IsFleeAble = true;
         if (mHitImmunity) return;
         BTStop = true;
         base.OnHurt();
