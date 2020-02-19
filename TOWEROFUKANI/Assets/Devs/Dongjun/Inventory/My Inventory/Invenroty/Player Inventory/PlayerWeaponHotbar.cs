@@ -27,7 +27,9 @@ public class PlayerWeaponHotbar : ToU_Inventory
 
         // Select Slot 0
         (inventoryUI.slotUIs[CurSlot] as WeaponHotbarSlot).Select(true);
-
+    }
+    private void Start()
+    {
         // On Stun
         ActionEffectManager.AddEffect(PlayerActions.Stunned, new ActionEffect(() => LockSlots(this, true), typeof(PlayerWeaponHotbar)));
         ActionEffectManager.AddEffect(PlayerActions.StunEnd, new ActionEffect(() => LockSlots(this, false), typeof(PlayerWeaponHotbar)));

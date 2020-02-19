@@ -55,12 +55,12 @@ public abstract class WeaponItem : UpgradableItem
     }
     protected override void OnRemovedFromInventory()
     {
-        // Detach from Player
-        gameObject.SetActive(false);
-        transform.SetParent(null);
-
         // Unselect
         Select(false);
+
+        // Detach from Player
+        //gameObject.SetActive(false);
+        transform.SetParent(null);
 
         // Reset Stats
         ResetStats();

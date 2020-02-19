@@ -116,17 +116,21 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
         if (Input.GetKeyDown(PlayerMovementKeys.WalkRight) 
         || Input.GetKeyDown(PlayerMovementKeys.WalkLeft))
         {
-            // First Tap
+            // Set Tap Count
             if (curDashTapCount == 0)
+            {
                 curDashTapCount = 1;
+                prevDashInputDir = Input_WalkDir;
+            }
+            else
+            {
+                curDashTapCount =
+                    (prevDashInputDir == Input_WalkDir && dashInputTime <= dashInputInterval)
+                    ? curDashTapCount + 1
+                    : 0;
+            }
 
-            // After First Tap
-            curDashTapCount = 
-                (prevDashInputDir == Input_WalkDir && dashInputTime <= dashInputInterval)
-                ? curDashTapCount++
-                : 0;
-
-            prevDashInputDir = Input_WalkDir;
+            // Reset Variables
             dashInputTime = 0;
 
             // Check Tap Count
@@ -136,11 +140,11 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
                 Input_DashDir = Input_WalkDir;
                 return;
             }
-
-            return;
         }
 
-        dashInputTime += Time.deltaTime;
+        // Update Timer
+        if (dashInputTime < dashInputInterval)
+            dashInputTime += Time.deltaTime;
     }
     #endregion
 

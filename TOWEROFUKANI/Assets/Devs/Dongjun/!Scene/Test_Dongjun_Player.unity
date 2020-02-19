@@ -365,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 1635102216084493612, guid: 5b9390edd2da90649913d9af80641b06,
         type: 3}
       propertyPath: m_Name
-      value: '[UI] In-Game'
+      value: UI (In-Game)
       objectReference: {fileID: 0}
     - target: {fileID: 1635102216084493611, guid: 5b9390edd2da90649913d9af80641b06,
         type: 3}
@@ -2529,5 +2529,10 @@ PrefabInstance:
       propertyPath: followTarget
       value: 
       objectReference: {fileID: 238467060}
+    - target: {fileID: 4811791493229828987, guid: 8e078a41e50e29841bc94cbe8e409e3a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e078a41e50e29841bc94cbe8e409e3a, type: 3}

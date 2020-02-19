@@ -30,6 +30,7 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
     {
         // Timer
         weaponItem.Timer_Shoot.SetActive(false);
+        weaponItem.Timer_Shoot.Reset();
 
         // Animation
         data.Animator.ResetSpeed();

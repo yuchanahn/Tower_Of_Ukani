@@ -31,7 +31,9 @@ public abstract class BowItem : WeaponItem
     protected virtual void Start()
     {
         // Init Timer
-        Timer_Shoot.SetTick(gameObject).ToEnd();
+        Timer_Shoot
+            .SetTick(gameObject)
+            .SetActive(false);
         Timer_Draw
             .SetTick(gameObject)
             .SetAction(

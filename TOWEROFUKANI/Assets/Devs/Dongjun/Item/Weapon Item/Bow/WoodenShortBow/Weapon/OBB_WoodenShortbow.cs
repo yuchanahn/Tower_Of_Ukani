@@ -14,8 +14,7 @@ public class OBB_WoodenShortbow : OBB_Controller_Weapon<OBB_Data_WoodenShortbow,
 
     // Behaviours
     private Single bvr_Idle;
-    private Single bvr_Draw;
-    private Single bvr_Shoot;
+    private Sequence bvr_Shoot;
 
     protected override void InitStates()
     {
@@ -31,15 +30,13 @@ public class OBB_WoodenShortbow : OBB_Controller_Weapon<OBB_Data_WoodenShortbow,
             EMPTY_STATE_ACTION,
             () => false);
 
-        bvr_Draw = new Single(
-            state_Draw,
+        bvr_Shoot = new Sequence(
+            (state_Draw,
             EMPTY_STATE_ACTION,
-            () => PlayerWeaponKeys.GetKeyUp(PlayerWeaponKeys.MainAbility));
-
-        bvr_Shoot = new Single(
-            state_Shoot,
+            () => PlayerWeaponKeys.GetKeyUp(PlayerWeaponKeys.MainAbility)),
+            (state_Shoot,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Timer_Shoot.IsEnded);
+            () => weaponItem.Timer_Shoot.IsEnded));
     }
     protected override void InitObjectives()
     {
@@ -48,13 +45,10 @@ public class OBB_WoodenShortbow : OBB_Controller_Weapon<OBB_Data_WoodenShortbow,
             () => !weaponItem.IsSelected || PlayerStatus.Incapacitated, true)
             .AddBehaviour(bvr_Idle);
 
-        // Normal
+        // Draw & Shoot
         NewObjective(
             () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility))
-            .AddBehaviour(bvr_Draw, true)
-            .SetTransition(
-                () => true)
-                .AddBehaviour(bvr_Shoot);
+            .AddBehaviour(bvr_Shoot, true);
 
         // Default
         SetDefaultObjective()
