@@ -26,8 +26,10 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     { get; private set; } = new BoolCount();
 
     // Knockback
-    public static bool IsKnockbacked
-    { get; private set; } = false;
+    private static int currentKnockbackPower = 0;
+    public static Vector2 KnockbackVector
+    { get; private set; }
+    public static bool IsKnockbacked => KnockbackVector != Vector2.zero;
 
     // Incapacitated (Hard CC)
     public static bool Incapacitated => IsStunned.Value || IsKnockbacked;
@@ -191,6 +193,20 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     {
         IsStunned.Set(false);
         if (!IsStunned.Value) PlayerActionEventManager.Trigger(PlayerActions.StunEnd);
+    }
+
+    public void Konckback_Add(int power, Vector2 knockbackVector)
+    {
+        if (currentKnockbackPower < power)
+            KnockbackVector = knockbackVector; 
+    }
+    public void Konckback_Remove(int power)
+    {
+        if (currentKnockbackPower == power)
+        {
+            currentKnockbackPower = 0;
+            KnockbackVector = Vector2.zero;
+        }
     }
     #endregion
 }
