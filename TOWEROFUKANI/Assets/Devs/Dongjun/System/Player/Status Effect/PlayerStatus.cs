@@ -46,7 +46,6 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
 
         slowList = new List<PlayerStatus_Slow>();
         IsStunned = new BoolCount();
-        IsKnockbacked = false;
     }
     #endregion
 
