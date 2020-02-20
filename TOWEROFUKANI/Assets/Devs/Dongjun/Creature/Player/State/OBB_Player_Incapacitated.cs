@@ -1,7 +1,9 @@
 ﻿using Dongjun.Helper;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_HardCC : SSM_State_wMain<Player>
+public class OBB_Player_Incapacitated : OBB_Player_State_Base
 {
     [SerializeField] private GameObject stunnedRingEffect;
 
@@ -20,12 +22,12 @@ public class Player_HardCC : SSM_State_wMain<Player>
             GM.Player.Data.RB2D.velocity = GM.Player.Data.RB2D.velocity.Change(x: 0);
 
         // Detect Ground
-        main.groundDetectionData.DetectGround(!PlayerStatus.IsKnockbacked, main.RB2D, transform);
+        data.groundDetectionData.DetectGround(!PlayerStatus.IsKnockbacked, data.RB2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(main.RB2D,
-            main.groundDetectionData.isGrounded ? GravityData.Zero :
-            main.gravityData);
+        Gravity_Logic.ApplyGravity(data.RB2D,
+            data.groundDetectionData.isGrounded ? GravityData.Zero :
+            data.gravityData);
     }
 
     private void VisualEffect()
@@ -36,7 +38,7 @@ public class Player_HardCC : SSM_State_wMain<Player>
     {
         if (PlayerStatus.IsStunned.Value)
         {
-            main.Animator.Play("Stunned");
+            data.Animator.Play("Stunned");
             return;
         }
 

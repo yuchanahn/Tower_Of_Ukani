@@ -1,7 +1,9 @@
-﻿using UnityEngine;
-using Dongjun.Helper;
+﻿using Dongjun.Helper;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Player_Kick : SSM_State_wMain<Player>
+public class OBB_Player_Kick : OBB_Player_State_Base
 {
     #region Var: Inspector
     [Header("Kick")]
@@ -29,7 +31,7 @@ public class Player_Kick : SSM_State_wMain<Player>
     #endregion
 
     #region Prop: 
-    public bool IsKicking
+    public bool KickDone
     { get; private set; } = false;
     #endregion
 
@@ -39,63 +41,57 @@ public class Player_Kick : SSM_State_wMain<Player>
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(detectPoint.position, detectSize);
     }
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
-
         attackData = new AttackData(1);
 
-        status_Slow = new PlayerStatus_Slow(GM.Player.Data.StatusID, GM.Player.gameObject, 50f);
+        status_Slow = new PlayerStatus_Slow(data.StatusID, gameObject, 50f);
     }
     #endregion
 
     #region Method: SSM
     public override void OnEnter()
     {
-        IsKicking = true;
-
-        main.RB2D.velocity = main.RB2D.velocity.Change(y: main.RB2D.velocity.y * yVelPercent);
+        data.RB2D.velocity = data.RB2D.velocity.Change(y: data.RB2D.velocity.y * yVelPercent);
 
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
 
         // Look Dir
-        Flip_Logic.FlipXTo(GM.Player.Data.Dir, kickObject);
+        Flip_Logic.FlipXTo(data.Dir, kickObject);
 
         // Play Animation
-        main.Animator.SetDuration(duration);
-        main.Animator.Play("Kick", 0, 0f);
+        data.Animator.SetDuration(duration);
+        data.Animator.Play("Kick", 0, 0f);
 
         // Player
-        GM.Player.Data.CanChangeDir = false;
+        data.CanChangeDir = false;
     }
     public override void OnExit()
     {
+        KickDone = false;
+
         // Status Effect
         PlayerStatus.RemoveEffect(status_Slow);
 
         // Animation
-        main.Animator.ResetSpeed();
+        data.Animator.ResetSpeed();
 
         // Player
-        GM.Player.Data.CanChangeDir = true;
+        data.CanChangeDir = true;
     }
     public override void OnFixedUpdate()
     {
         // Detect Ground
-        main.groundDetectionData.DetectGround(true, main.RB2D, transform);
+        data.groundDetectionData.DetectGround(true, data.RB2D, transform);
 
         // Gravity
-        Gravity_Logic.ApplyGravity(main.RB2D, 
-            main.groundDetectionData.isGrounded ? GravityData.Zero : 
-            main.gravityData);
+        Gravity_Logic.ApplyGravity(data.RB2D,
+            data.groundDetectionData.isGrounded ? GravityData.Zero :
+            data.gravityData);
 
         // Walk
-        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, main.RB2D, false);
-    }
-    public override void OnLateUpdate()
-    {
-
+        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, data.RB2D, false);
     }
     #endregion
 
@@ -113,7 +109,7 @@ public class Player_Kick : SSM_State_wMain<Player>
 
         // Kick
         Vector2 kickDir = (dirTarget.position - transform.position).normalized;
-        hitRB2D.velocity = new Vector2(kickDir.x * main.Dir, kickDir.y) * power;
+        hitRB2D.velocity = new Vector2(kickDir.x * data.Dir, kickDir.y) * power;
     }
     private void KickMob()
     {
@@ -127,14 +123,14 @@ public class Player_Kick : SSM_State_wMain<Player>
     #endregion
 
     #region Method: Anim Event
-    private void OnKickAnim()
+    private void AnimEvent_Kick()
     {
         KickBlock();
         KickMob();
     }
-    private void OnKickFinish()
+    private void AnimEvent_KickEnd()
     {
-        IsKicking = false;
+        KickDone = true;
     }
     #endregion
 }

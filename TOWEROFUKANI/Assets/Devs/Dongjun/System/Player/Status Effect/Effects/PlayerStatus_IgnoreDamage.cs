@@ -15,6 +15,7 @@ public class PlayerStatus_IgnoreDamage : PlayerStatusEffect
     }
     public override void OnEnd()
     {
+        base.OnEnd();
         PlayerStatus.Inst.IgnoreDamage_Remove();
     }
 }

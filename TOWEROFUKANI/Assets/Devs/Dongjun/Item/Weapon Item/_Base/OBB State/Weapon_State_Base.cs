@@ -8,8 +8,10 @@ public abstract class Weapon_State_Base<D, W> : OBB_State, IOBB_State_Weapon
     where D : OBB_Data_Animator
     where W : WeaponItem
 {
-    protected D data;
-    protected W weaponItem;
+    protected D data
+    { get; private set; }
+    protected W weaponItem
+    { get; private set; }
 
     public override void InitData(OBB_Data data)
     {

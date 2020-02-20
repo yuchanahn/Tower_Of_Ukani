@@ -31,7 +31,7 @@ public class OBB_Fist_Dash : Weapon_State_Base<OBB_Data_Fist, FistItem>
         PlayerActionEventManager.Trigger(PlayerActions.MeleeDashAttack);
 
         // Look Dir
-        Flip_Logic.FlipXTo(GM.Player.Dir, transform);
+        Flip_Logic.FlipXTo(GM.Player.Data.Dir, transform);
 
         // Animation
         data.Animator.Play("Dash");

@@ -22,6 +22,7 @@ public class PlayerStatus_Slow : PlayerStatusEffect
     }
     public override void OnEnd()
     {
+        base.OnEnd();
         PlayerStatus.Inst.Slow_Remove(this);
     }
 }

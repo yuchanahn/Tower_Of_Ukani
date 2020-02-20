@@ -7,6 +7,8 @@
     DashEnd,
 
     // Status
+    Knockbacked,
+    KnockbackEnd,
     Stunned,
     StunEnd,
 

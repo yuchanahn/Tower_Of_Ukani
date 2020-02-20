@@ -41,7 +41,7 @@ public class OBB_Fist_Slam : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem
         data.Animator.Play("Slam_Airborne");
 
         // Player
-        GM.Player.PlayingOtherMotion = true;
+        GM.Player.Data.PlayingOtherMotion = true;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
     }
     public override void OnExit()
@@ -59,7 +59,7 @@ public class OBB_Fist_Slam : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem
         data.Animator.ResetSpeed();
 
         // Player
-        GM.Player.PlayingOtherMotion = false;
+        GM.Player.Data.PlayingOtherMotion = false;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
     }
     public override void OnUpdate()
@@ -77,12 +77,24 @@ public class OBB_Fist_Slam : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem
     public override void OnFixedUpdate()
     {
         // Detect Ground
-        GM.Player.groundDetectionData.DetectGround(true, GM.Player.RB2D, GM.Player.transform);
-        GM.Player.groundDetectionData.ExecuteOnGroundMethod(this);
+        GM.Player.Data.groundDetectionData.DetectGround(true, GM.Player.Data.RB2D, GM.Player.transform);
+        GM.Player.Data.groundDetectionData.ExecuteOnGroundMethod(this);
 
         // Down Vel
-        if (!GM.Player.groundDetectionData.isGrounded)
-            GM.Player.RB2D.velocity = Vector2.down * weaponItem.SlamDownVel;
+        if (!GM.Player.Data.groundDetectionData.isGrounded)
+            GM.Player.Data.RB2D.velocity = Vector2.down * weaponItem.SlamDownVel;
+
+        // Player Animation
+        UpdatePlayerAnimation();
+    }
+
+    private void UpdatePlayerAnimation()
+    {
+        const string
+            Idle = "Idle",
+            Airborne = "Airborne";
+
+        GM.Player.Data.Animator.Play(GM.Player.Data.groundDetectionData.isGrounded ? Idle : Airborne);
     }
 
     private void AnimEvent_Slam_HitCheck_0Start()

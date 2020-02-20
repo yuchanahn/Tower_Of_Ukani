@@ -15,6 +15,7 @@ public class PlayerStatus_AbsorbDamage : PlayerStatusEffect
     }
     public override void OnEnd()
     {
+        base.OnEnd();
         PlayerStatus.Inst.AbsorbDamage_Remove();
     }
 }

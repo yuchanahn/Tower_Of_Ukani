@@ -15,6 +15,7 @@ public class PlayerStatus_Stun : PlayerStatusEffect
     }
     public override void OnEnd()
     {
+        base.OnEnd();
         PlayerStatus.Inst.Stun_Remove();
     }
 }

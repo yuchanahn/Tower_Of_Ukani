@@ -31,15 +31,20 @@ public abstract class PlayerStatusEffect
 
         if (endTime < 0)
         {
-            Timer = new TimerData();
-            Timer.
-                SetTick(PlayerStatus.Inst.gameObject).
-                SetAction(onEnd: () => PlayerStatus.RemoveEffect(this)).
-                EndTime = endTime;
+            if (Timer == null)
+                Timer = new TimerData();
+
+            Timer
+                .SetTick(PlayerStatus.Inst.gameObject)
+                .SetAction(onEnd: () => PlayerStatus.RemoveEffect(this))
+                .EndTime = endTime;
         }
     }
 
     public abstract void OnStart();
-    public abstract void OnEnd();
+    public virtual void OnEnd()
+    {
+        Timer?.SetActive(false);
+    }
 }
 

@@ -111,9 +111,8 @@ public abstract partial class OBB_Controller<D, S> : MonoBehaviour
 
     #region Prop: 
     // Data
-    [SerializeField]
-    private D _data = new D();
-    protected D data => _data;
+    [SerializeField] private D _data = new D();
+    public D Data => _data;
 
     // State
     protected readonly OBB_State END_BEHAVIOUR = null;
@@ -142,7 +141,7 @@ public abstract partial class OBB_Controller<D, S> : MonoBehaviour
     #region Method: Unity
     protected virtual void Awake()
     {
-        data.Init_Awake(gameObject);
+        Data.Init_Awake(gameObject);
 
         InitStates();
         InitBehaviours();
@@ -160,7 +159,7 @@ public abstract partial class OBB_Controller<D, S> : MonoBehaviour
     }
     protected virtual void Start()
     {
-        data.Init_Start(gameObject);
+        Data.Init_Start(gameObject);
 
         // Update OBB
         OBB_Update();
@@ -198,7 +197,7 @@ public abstract partial class OBB_Controller<D, S> : MonoBehaviour
         if (state == null)
             Debug.LogError($"{gameObject.name} > Can't Find State: {typeof(TState).Name}!");
 
-        state.InitData(data);
+        state.InitData(Data);
     }
     protected void SetDefaultState(OBB_State state, StateAction stateAction)
     {

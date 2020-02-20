@@ -2,6 +2,20 @@
 using System.Linq;
 using UnityEngine;
 
+public struct ProjectileData
+{
+    public FloatStat moveSpeed;
+    public FloatStat travelDist;
+    public FloatStat gravity;
+
+    public void Reset()
+    {
+        moveSpeed.Reset();
+        travelDist.Reset();
+        gravity.Reset();
+    }
+}
+
 public class Projectile : PoolingObj
 {
     #region Var: Inspector
@@ -33,9 +47,6 @@ public class Projectile : PoolingObj
     {
         velocity = Vector2.zero;
         projectileData.travelDist.Reset();
-
-        if (creatureDetectRB != null) creatureDetectRB.transform.localPosition = Vector2.zero;
-        if (wallDetectRB != null) wallDetectRB.transform.localPosition = Vector2.zero;
     }
     #endregion
 
@@ -107,7 +118,6 @@ public class Projectile : PoolingObj
 
         // Check Creature
         List<RaycastHit2D> creatureHits = new List<RaycastHit2D>();
-        creatureDetectRB.transform.position = transform.position - (Vector3)(velocity.normalized * dist);
         creatureDetectRB.Cast(velocity.normalized, creatureHits, dist);
 
         // Get Closest Creature
@@ -133,7 +143,6 @@ public class Projectile : PoolingObj
 
         // Check Wall
         List<RaycastHit2D> wallHits = new List<RaycastHit2D>();
-        wallDetectRB.transform.position = transform.position - (Vector3)(velocity.normalized * dist);
         wallDetectRB.Cast(velocity.normalized, wallHits, dist);
 
         // Get Closest Wall

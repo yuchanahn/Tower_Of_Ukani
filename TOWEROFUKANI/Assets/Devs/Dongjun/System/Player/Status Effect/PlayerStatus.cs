@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public enum KnockbackMode
+{
+    Weak,
+    Strong,
+    Unstoppable
+}
+
 public class PlayerStatus : SingletonBase<PlayerStatus>
 {
     private static Dictionary<StatusID, List<PlayerStatusEffect>> statusEffects;
@@ -21,17 +28,20 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     private static Action slow = () => PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[0].SlowAmount;
     public static bool IsSlowed => slowList.Count != 0;
 
+    // Knockback
+    private static PlayerStatus_Knockback currentKnockback = null;
+    private static KnockbackMode curKnockbackMode = KnockbackMode.Weak;
+    public static Vector2 KnockbackDir
+    { get; private set; }
+    public static AnimationCurve KnockbackCurve
+    { get; private set; }
+    public static bool IsKnockbacked => KnockbackDir != Vector2.zero;
+
     // Stun
     public static BoolCount IsStunned
     { get; private set; } = new BoolCount();
 
-    // Knockback
-    private static int currentKnockbackPower = 0;
-    public static Vector2 KnockbackVector
-    { get; private set; }
-    public static bool IsKnockbacked => KnockbackVector != Vector2.zero;
-
-    // Incapacitated (Hard CC)
+    // Incapacitated (Hard CCed)
     public static bool Incapacitated => IsStunned.Value || IsKnockbacked;
     #endregion
 
@@ -45,6 +55,10 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         IgnoreDamage = new BoolCount();
 
         slowList = new List<PlayerStatus_Slow>();
+
+        currentKnockback = null;
+        curKnockbackMode = KnockbackMode.Weak;
+
         IsStunned = new BoolCount();
     }
     #endregion
@@ -60,20 +74,20 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         if (effects.Contains(effect))
             return;
 
-        // Add
-        effects.Add(effect);
-
         // On Start
         effect.OnStart();
+
+        // Add
+        effects.Add(effect);
     }
 
     public static void RemoveEffect(PlayerStatusEffect effect)
     {
-        if (statusEffects[effect.ID].Contains(effect))
-        {
-            statusEffects[effect.ID].Remove(effect);
-            effect.OnEnd();
-        }
+        if (effect == null || !statusEffects[effect.ID].Contains(effect))
+            return;
+
+        statusEffects[effect.ID].Remove(effect);
+        effect.OnEnd();
     }
     public static void RemoveEffect(GameObject caster)
     {
@@ -183,6 +197,34 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         PlayerStatMod.Remove_Player(slow);
     }
 
+    public void Konckback_Add(PlayerStatus_Knockback status, KnockbackMode mode, Vector2 knockbackDir, AnimationCurve speedCurve)
+    {
+        if (curKnockbackMode == KnockbackMode.Unstoppable || curKnockbackMode > mode)
+            return;
+
+        RemoveEffect(currentKnockback);
+        currentKnockback = status;
+
+        curKnockbackMode = mode;
+        KnockbackDir = knockbackDir;
+        KnockbackCurve = speedCurve;
+
+        PlayerActionEventManager.Trigger(PlayerActions.Knockbacked);
+    }
+    public void Konckback_Remove(PlayerStatus_Knockback status)
+    {
+        if (status != currentKnockback)
+            return;
+
+        currentKnockback = null;
+
+        curKnockbackMode = KnockbackMode.Weak;
+        KnockbackDir = Vector2.zero;
+        KnockbackCurve = null;
+        
+        PlayerActionEventManager.Trigger(PlayerActions.KnockbackEnd);
+    }
+
     public void Stun_Add()
     {
         IsStunned.Set(true);
@@ -192,20 +234,6 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     {
         IsStunned.Set(false);
         if (!IsStunned.Value) PlayerActionEventManager.Trigger(PlayerActions.StunEnd);
-    }
-
-    public void Konckback_Add(int power, Vector2 knockbackVector)
-    {
-        if (currentKnockbackPower < power)
-            KnockbackVector = knockbackVector; 
-    }
-    public void Konckback_Remove(int power)
-    {
-        if (currentKnockbackPower == power)
-        {
-            currentKnockbackPower = 0;
-            KnockbackVector = Vector2.zero;
-        }
     }
     #endregion
 }

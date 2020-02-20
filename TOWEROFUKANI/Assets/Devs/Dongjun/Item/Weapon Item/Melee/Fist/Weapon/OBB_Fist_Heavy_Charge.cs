@@ -5,9 +5,9 @@ public class OBB_Fist_Heavy_Charge : HorizontalWeapon_State_Base<OBB_Data_Fist, 
 {
     private PlayerStatus_Slow status_Slow;
 
-    private void Awake()
+    private void Start()
     {
-        status_Slow = new PlayerStatus_Slow(GM.Player.StatusID, GM.Player.gameObject, 50f);
+        status_Slow = new PlayerStatus_Slow(GM.Player.Data.StatusID, GM.Player.gameObject, 50f);
     }
 
     public override void OnEnter()
@@ -24,8 +24,8 @@ public class OBB_Fist_Heavy_Charge : HorizontalWeapon_State_Base<OBB_Data_Fist, 
         data.Animator.Play("Heavy_Charge");
 
         // Player
-        GM.Player.CanDash = false;
-        GM.Player.CanKick = false;
+        GM.Player.Data.CanDash = false;
+        GM.Player.Data.CanKick = false;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
     }
     public override void OnExit()
@@ -41,8 +41,8 @@ public class OBB_Fist_Heavy_Charge : HorizontalWeapon_State_Base<OBB_Data_Fist, 
         data.Animator.ResetSpeed();
 
         // Player
-        GM.Player.CanDash = true;
-        GM.Player.CanKick = true;
+        GM.Player.Data.CanDash = true;
+        GM.Player.Data.CanKick = true;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
     }
     public override void OnUpdate()

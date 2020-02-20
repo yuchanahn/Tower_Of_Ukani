@@ -55,12 +55,6 @@ public class Player : SSM_Main,
         Animator = GetComponent<Animator>();
         base.Awake();
     }
-
-    // Test
-    private void Start()
-    {
-        //PlayerStatus.AddEffect(new PlayerStatus_Stun(StatusID, gameObject));
-    }
     #endregion
 
     #region Method: Init States

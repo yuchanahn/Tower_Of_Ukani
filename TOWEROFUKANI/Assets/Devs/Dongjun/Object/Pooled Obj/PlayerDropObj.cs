@@ -13,6 +13,6 @@ public class PlayerDropObj : SelfSleepObj
     public override void ResetOnSpawn()
     {
         base.ResetOnSpawn();
-        rb2D.velocity = GM.Player.RB2D.velocity;
+        rb2D.velocity = GM.Player.Data.RB2D.velocity;
     }
 }

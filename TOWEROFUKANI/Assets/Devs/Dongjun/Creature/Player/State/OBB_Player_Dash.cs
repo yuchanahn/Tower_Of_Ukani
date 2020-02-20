@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Player_Dash : SSM_State_wMain<Player>
+public class OBB_Player_Dash : OBB_Player_State_Base
 {
     #region Var: Inspector
     [Header("Dash")]
@@ -23,7 +25,7 @@ public class Player_Dash : SSM_State_wMain<Player>
     private PlayerStatus_IgnoreDamage status_IgnoreDamage;
     #endregion
 
-    #region Var: Effect
+    #region Var: Visual Effect
     int curTrailCount = 0;
     #endregion
 
@@ -32,10 +34,10 @@ public class Player_Dash : SSM_State_wMain<Player>
     #endregion
 
     #region Method: Unity
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
-        status_IgnoreDamage = new PlayerStatus_IgnoreDamage(GM.Player.Data.StatusID, GM.Player.gameObject);
+        // Init Status
+        status_IgnoreDamage = new PlayerStatus_IgnoreDamage(data.StatusID, gameObject);
     }
     #endregion
 
@@ -60,7 +62,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         curTrailCount = 0;
 
         // Reset Vel
-        main.RB2D.velocity = new Vector2(0, 0);
+        data.RB2D.velocity = new Vector2(0, 0);
 
         // Status Effect
         PlayerStatus.RemoveEffect(status_IgnoreDamage);
@@ -86,7 +88,7 @@ public class Player_Dash : SSM_State_wMain<Player>
             if (isUsingMelee)
             {
                 // Look at Dash Dir
-                main.bodySpriteRenderer.flipX = dashDir == 1 ? false : true;
+                data.bodySpriteRenderer.flipX = dashDir == 1 ? false : true;
 
                 // Lock Slot
                 PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
@@ -94,7 +96,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         }
 
         // Play Animation
-        main.Animator.Play(dashDir == main.Dir ? "Dash_Forward" : "Dash_Backward");
+        data.Animator.Play(dashDir == data.Dir ? "Dash_Forward" : "Dash_Backward");
     }
     public override void OnFixedUpdate()
     {
@@ -107,7 +109,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         }
 
         // Dash
-        main.RB2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
+        data.RB2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
 
         // Trigger Item Effect
         PlayerActionEventManager.Trigger(PlayerActions.Dashing);
@@ -116,7 +118,7 @@ public class Player_Dash : SSM_State_wMain<Player>
         if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))
         {
             curTrailCount++;
-            main.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, main.bodySpriteRenderer.transform);
+            data.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, data.bodySpriteRenderer.transform);
         }
     }
     #endregion

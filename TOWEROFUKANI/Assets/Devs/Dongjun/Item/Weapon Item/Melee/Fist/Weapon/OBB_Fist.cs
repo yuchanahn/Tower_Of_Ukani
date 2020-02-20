@@ -78,7 +78,7 @@ public class OBB_Fist : OBB_Controller_Weapon<OBB_Data_Fist, FistItem>
         // Slam Attack
         NewObjective(
             () => !GM.Player.IsKicking
-               && !GM.Player.groundDetectionData.isGrounded
+               && !GM.Player.Data.groundDetectionData.isGrounded
                && Input.GetKey(KeyCode.S)
                && Input.GetKeyDown(PlayerWeaponKeys.MainAbility))
             .AddBehaviour(bvr_Slam, true);

@@ -10,7 +10,7 @@ public class PhantomPistolObject : MonoBehaviour
     private void FixedUpdate()
     {
         targetPos = GM.PlayerPos;
-        targetPos.x += GM.Player.Dir * -0.5f;
+        targetPos.x += GM.Player.Data.Dir * -0.5f;
         targetPos.y += 0.8f;
 
         transform.position = Vector2.MoveTowards(

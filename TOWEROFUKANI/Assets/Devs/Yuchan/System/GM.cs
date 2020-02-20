@@ -6,11 +6,11 @@ public class GM : MonoBehaviour
 {
     static GM Inst;
 
-    Player player;
+    OBB_Player player;
     [SerializeField] LayerMask soildGround;
     [SerializeField] LayerMask playerLayer;
 
-    public static Player Player => Inst.player;
+    public static OBB_Player Player => Inst.player;
     public static LayerMask SoildGroundLayer => Inst.soildGround;
     public static LayerMask PlayerLayer => Inst.playerLayer;
     public static Vector2 PlayerSize => new Vector2(0.5f,0.8f);
@@ -32,7 +32,7 @@ public class GM : MonoBehaviour
     void Awake()
     {
         Inst = this;
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<OBB_Player>();
     }
 
     private void Update()

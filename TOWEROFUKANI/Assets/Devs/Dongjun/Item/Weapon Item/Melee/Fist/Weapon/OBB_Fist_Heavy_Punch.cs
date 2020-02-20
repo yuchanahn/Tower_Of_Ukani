@@ -50,9 +50,9 @@ public class OBB_Fist_Heavy_Punch : HorizontalWeapon_State_Base<OBB_Data_Fist, F
         CamShake_Logic.ShakeDir(camShakeData_Punch, transform, Vector2.right);
 
         // Player
-        GM.Player.CanDash = false;
-        GM.Player.CanKick = false;
-        GM.Player.CanChangeDir = false;
+        GM.Player.Data.CanDash = false;
+        GM.Player.Data.CanKick = false;
+        GM.Player.Data.CanChangeDir = false;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, true);
     }
     public override void OnLateEnter()
@@ -71,9 +71,9 @@ public class OBB_Fist_Heavy_Punch : HorizontalWeapon_State_Base<OBB_Data_Fist, F
         weaponItem.Dur_Heavy.Reset();
 
         // Player
-        GM.Player.CanDash = true;
-        GM.Player.CanKick = true;
-        GM.Player.CanChangeDir = true;
+        GM.Player.Data.CanDash = true;
+        GM.Player.Data.CanKick = true;
+        GM.Player.Data.CanChangeDir = true;
         PlayerInventoryManager.weaponHotbar.LockSlots(this, false);
     }
     public override void OnUpdate()
