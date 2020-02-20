@@ -14,7 +14,7 @@ public class FlowerBat_Task_Flee : MonoBehaviour, ITask
 
     public bool IsFleeing = false;
     public bool IsFleeAble = false;
-    float fleeTimeT = 0f;
+    [SerializeField] float fleeTimeT = 0f;
 
     private void Awake()
     {

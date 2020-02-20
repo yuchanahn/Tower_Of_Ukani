@@ -34,11 +34,12 @@ public class FlowerBat_Task_RandomMove : MonoBehaviour, ITask
                 idelT = 0;
                 bIdel = false;
                 bMove = true;
+                mMoveMgr.Clear();
             }
         }
         else if(bMove)
         {
-            var dir = mMoveMgr.GetDir(mPathFinder, transform.position);
+            var dir = mMoveMgr.GetVel(mPathFinder, transform.position, speed: mMob.MoveSpeed);
             if (dir is null)
             {
                 int Range = 3;
@@ -60,9 +61,13 @@ public class FlowerBat_Task_RandomMove : MonoBehaviour, ITask
                             MoveAblePos.Add(p);
                     }
                 }
-                dir = mMoveMgr.GetDir(mPathFinder, transform.position, GridView.Inst[1].getNodePosAsWorldPos(MoveAblePos[Random.Range(0, MoveAblePos.Count)]));
+                dir = mMoveMgr.GetVel(
+                    mPathFinder, 
+                    transform.position, 
+                    GridView.Inst[1].getNodePosAsWorldPos(MoveAblePos[Random.Range(0, MoveAblePos.Count)]), 
+                    mMob.MoveSpeed);
             }
-            mMob.Dir2d = dir.GetValueOrDefault();
+            mMob.SetJPS_Vel2d(dir.GetValueOrDefault());
 
             moveT += Time.deltaTime;
             if(moveT > mMob.MoveTimeMove)

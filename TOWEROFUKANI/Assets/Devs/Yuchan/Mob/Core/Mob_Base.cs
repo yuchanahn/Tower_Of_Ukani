@@ -20,6 +20,7 @@ public enum eMobAniST
     Death,
     Attack,
     Hang,
+    Unhang,
     Flee,
 
 

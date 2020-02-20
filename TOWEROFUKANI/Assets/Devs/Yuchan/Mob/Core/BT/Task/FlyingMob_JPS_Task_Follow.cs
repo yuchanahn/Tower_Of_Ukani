@@ -16,7 +16,8 @@ public class FlyingMob_JPS_Task_Follow : MonoBehaviour, ITask
     public bool Tick()
     {
         GridView.Inst[1].GetJPS_Path();
-        mMob.Dir2d = mMoveMgr.GetDirIfUpdateTarget(mPathFinder, transform.position, GM.PlayerPos);
+        var vel = mMoveMgr.GetVelIfUpdateTarget(mPathFinder, transform.position, GM.PlayerPos, mMob.MoveSpeed);
+        mMob.SetJPS_Vel2d(vel);
         mMob.SetAni(eMobAniST.Fly);
         return true;
     }

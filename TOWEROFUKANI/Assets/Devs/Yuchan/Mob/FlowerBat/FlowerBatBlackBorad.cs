@@ -66,7 +66,7 @@ public class FlowerBatBlackBorad : BlackBoard_Base
 
 
 
-    public bool AgroCheck() => Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AgroRange;
+    public bool AgroCheck() => !HangTask.IsFollowEndToCeiling && Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AgroRange;
     public bool Follow() => JPS_FollowTask.Tick();
 
 
@@ -94,13 +94,16 @@ public class FlowerBatBlackBorad : BlackBoard_Base
     public bool IsTargetInAttackRange()
     {
         AttackTask.AddAttackCoolTimeT();
-
+        if (AttackTask.IsAttacking)
+        {
+            return true;
+        }
         if (Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AttackRange)
         {
             return Physics2D.Raycast(transform.position, 
                 (GM.PlayerPos - transform.position).normalized, 
                 Vector2.Distance(GM.PlayerPos, transform.position), 
-                GM.SoildGroundLayer).transform is null && !IsTargetInFleeRange();
+                GM.SoildGroundLayer).transform is null && !IsTargetInFleeRange() && !HangTask.IsFollowEndToCeiling;
         }
 
         return AttackTask.IsAttacking;

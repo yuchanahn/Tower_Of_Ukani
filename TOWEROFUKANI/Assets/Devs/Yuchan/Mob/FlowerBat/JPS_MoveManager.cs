@@ -4,19 +4,25 @@ using UnityEngine;
 internal class JPS_MoveManager
 {
     Queue<Vector2> mMoveQueue = new Queue<Vector2>();
-    public Vector2? GetDir(JPS_PathFinder mPathFinder, Vector2 ori, Vector2? target = null)
+
+    public void Clear()
     {
+        mMoveQueue.Clear();
+    }
+    public Vector2? GetVel(JPS_PathFinder mPathFinder, Vector2 ori, Vector2? target = null, float speed = 0f)
+    {
+        GridView.Inst[1].GetJPS_Path();
         if (mMoveQueue.Count > 0)
         {
             var tpos = mMoveQueue.Peek();
-            if (Vector2.Distance(ori, tpos) < 0.1f)
+            if (ori == tpos)
             {
                 mMoveQueue.Dequeue();
-                return (tpos - ori).normalized;
+                return (tpos - ori).normalized * Mathf.Clamp(speed, 0, Vector2.Distance(tpos, ori) / Time.fixedDeltaTime);
             }
             else
             {
-                return (tpos - ori).normalized;
+                return (tpos - ori).normalized * Mathf.Clamp(speed, 0, Vector2.Distance(tpos, ori) / Time.fixedDeltaTime);
             }
         }
         else
@@ -30,40 +36,52 @@ internal class JPS_MoveManager
             {
                 mMoveQueue.Enqueue(i);
             }
-            return (mMoveQueue.Peek() - ori).normalized;
+            return (mMoveQueue.Peek() - ori).normalized * Mathf.Clamp(speed, 0, Vector2.Distance(mMoveQueue.Peek(), ori) / Time.fixedDeltaTime);
         }
     }
 
     Vector2? CurGoal = null;
 
-    public Vector2 GetDirIfUpdateTarget(JPS_PathFinder mPathFinder, Vector2 origin, Vector2 target)
+    public Vector2 GetVelIfUpdateTarget(JPS_PathFinder mPathFinder, Vector2 origin, Vector2 target, float speed)
     {
         var tposList = mPathFinder.Find(origin, target);
 
-        if(tposList.Length == 0)
+        if (tposList.Length == 0)
         {
             return Vector2.zero;
         }
 
         var Goal = tposList[0];
 
-        if (CurGoal != null && CurGoal.Value == tposList[0])
+        bool SetGoal(int n)
         {
-            if (tposList.Length > 1)
+            if (tposList.Length > n)
             {
-                Goal = tposList[1];
+                Goal = tposList[n];
             }
             else
             {
-                return Vector2.zero;
+                return false;
             }
-                
-        }
-        //if (origin >= Goal)
-        {
-            CurGoal = origin;
+            return true;
         }
 
-        return (Goal - origin).normalized;
+        if (CurGoal != null && CurGoal.Value == Goal)
+        {
+            if (!SetGoal(1))
+            {
+                return Vector2.zero;
+            }
+        }
+        if (origin == Goal)
+        {
+            CurGoal = origin;
+            if (!SetGoal(1))
+            {
+                return Vector2.zero;
+            }
+        }
+
+        return (Goal - origin).normalized * Mathf.Clamp(speed * 2, 0, Vector2.Distance(origin, Goal) / Time.fixedDeltaTime);
     }
 }

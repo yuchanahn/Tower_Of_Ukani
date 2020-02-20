@@ -16,15 +16,38 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
     public bool IsCeilingNearOf() => mCeilingPos is null ? true : Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) > mCeilingDetectRange;
     public static List<GameObject> HangWalls = new List<GameObject>();
 
+    [SerializeField] float CeilingCoolTime = 1f;
+    float mCeilingCoolTimeT = 0;
+
+    public void SetCeilingCoolTime()
+    {
+        mCeilingCoolTimeT = 0;
+    }
+
     private void Awake()
     {
         mMob = GetComponent<Mob_FlowerBat>();
+        mCeilingCoolTimeT = CeilingCoolTime;
     }
 
     public bool Tick()
     {
+        mCeilingCoolTimeT += Time.deltaTime;
+        if (mCeilingCoolTimeT < CeilingCoolTime)
+        {
+            if (MyCeiling != null)
+                HangWalls.Remove(MyCeiling.gameObject);
+            MyCeiling = null;
+            mCeilingPos = null;
+            IsFollowEndToCeiling = false;
+            mMob.mHitImmunity = false;
+            mMob.SetAni(eMobAniST.Unhang);
+            return false;
+        }
+
         if (IsFollowEndToCeiling)
         {
+            mMob.mHitImmunity = true;
             mMob.Dir2d = Vector2.zero;
             mMob.SetAni(eMobAniST.Hang);
         }

@@ -7,11 +7,14 @@ public class Mob_FlowerBat : FlyingMob_Base
     public override CreatureType CreatureType => CreatureType.Wildlife;
     [SerializeField] public Vector2 Size;
     [SerializeField] FlowerBat_Task_Flee FleeTask;
+    [SerializeField] FlowerBat_Task_Hang HangTask;
+
 
     protected override void Awake()
     {
         base.Awake();
         FleeTask = GetComponent<FlowerBat_Task_Flee>();
+        HangTask = GetComponent<FlowerBat_Task_Hang>();
     }
 
     //=================================================================
@@ -25,12 +28,56 @@ public class Mob_FlowerBat : FlyingMob_Base
     }
 
     //=================================================================
+    //      ## Mob_FlowerBat :: SetAni
+    //=================================================================
+
+    protected override void SetStatusEffectUseAniState()
+    {
+        base.SetStatusEffectUseAniState();
+        bUnHang = false;
+    }
+
+    void UnHangEnd_AniEvent()
+    {
+        bUnHang = false;
+        mHitImmunity = false;
+    }
+
+    bool bUnHang = false;
+    eMobAniST mPrevAni = eMobAniST.Last;
+    public override void SetAni(eMobAniST ani)
+    {
+        if(mPrevAni != ani)
+        {
+            if(mPrevAni == eMobAniST.Hang)
+            {
+                base.SetAni(eMobAniST.Unhang);
+                bUnHang = true;
+                mPrevAni = ani;
+                return;
+            }
+            mPrevAni = ani;
+        }
+        if(bUnHang)
+        {
+            Dir2d = Vector2.zero;
+            mPrevAni = eMobAniST.Unhang;
+            base.SetAni(eMobAniST.Unhang);
+        }
+        else
+        {
+            base.SetAni(ani);
+        }
+    }
+
+    //=================================================================
     //      ## Mob_FlowerBat :: Hurt
     //=================================================================
 
     public override void OnHurt()
     {
         FleeTask.IsFleeAble = true;
+        HangTask.SetCeilingCoolTime();
         if (mHitImmunity) return;
         BTStop = true;
         base.OnHurt();

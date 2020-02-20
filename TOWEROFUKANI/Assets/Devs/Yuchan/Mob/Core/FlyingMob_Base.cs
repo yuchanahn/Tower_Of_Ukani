@@ -35,6 +35,7 @@ public abstract class FlyingMob_Base : Mob_Base
             return mHurt        ? Vector2.zero :
                    mAttacking   ? Vector2.zero :
                    mMoveStop    ? Vector2.zero :
+                   bJPSVel      ? JPS_Vel      :
                    !( (nextPos.x <  GM.CurMapWorldPoint.x 
                    && nextPos.x > GM.CurMapWorldPoint.x - GM.CurMapSize.width)
                    &&
@@ -48,7 +49,7 @@ public abstract class FlyingMob_Base : Mob_Base
     }
     public Vector3 Pos => transform.position - (Vector3.up * 3);
     public Vector2 Pos2d => transform.position - (Vector3.up * 3);
-    float MoveSpeed => mMoveData.Speed + AddSpeed;
+    public virtual float MoveSpeed => mMoveData.Speed + AddSpeed;
     public bool IsHurting => mHurt;
     public int SpriteDir
     {
@@ -90,20 +91,35 @@ public abstract class FlyingMob_Base : Mob_Base
         if (mSE.SEAni != eMobAniST.Last)
         {
             mCurAniST = mSE.SEAni;
-            mHurt = false;
-            BTStop = false;
-            AddSpeed = 0;
-            // Not Test....
-            mHitImmunity = false;
+            SetStatusEffectUseAniState();
             return;
         }
 
         if (!mHurt) SpriteDir = Dir2d.x > 0 ? 1 : -1;
     }
 
+
+    protected virtual void SetStatusEffectUseAniState()
+    {
+        mHurt = false;
+        BTStop = false;
+        AddSpeed = 0;
+        // Not Test....
+        mHitImmunity = false;
+    }
+
+    bool bJPSVel = false;
+    Vector2 JPS_Vel = Vector2.zero;
+    public void SetJPS_Vel2d(Vector2 vel)
+    {
+        bJPSVel = true;
+        JPS_Vel = vel;
+        SpriteDir = vel.x > 0 ? 1 : -1;
+    }
+
     void FixedUpdate()
     {
-        mRb2d.velocity = Dir2d * MoveSpeed * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
+        mRb2d.velocity = Dir2d * (bJPSVel ? 1f : MoveSpeed) * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
         Animation();
         mAnimator.SetDuration(m_Ani[mCurAniST].Item2);
         if (mAniStart)
@@ -115,6 +131,7 @@ public abstract class FlyingMob_Base : Mob_Base
         {
             mAnimator.Play(m_Ani[mCurAniST].Item1);
         }
+        bJPSVel = false;
     }
 
     public virtual bool Stunned()
@@ -123,7 +140,7 @@ public abstract class FlyingMob_Base : Mob_Base
     }
 
 
-    public void SetAni(eMobAniST ani)
+    public virtual void SetAni(eMobAniST ani)
     {
         if (mAnimator.speed == 0)
         {
