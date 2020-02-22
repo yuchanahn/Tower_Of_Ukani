@@ -33,4 +33,19 @@ public static class Gravity_Logic
 
         rb2D.velocity = new Vector2(rb2D.velocity.x, gravity);
     }
+
+    public static void ApplyGravity(ref float yVelocity, GravityData gravityData)
+    {
+        if (!gravityData.useGravity)
+            return;
+
+        float gravity;
+
+        if (gravityData.terminalVelocity != 0)
+            gravity = Mathf.Max(yVelocity - (gravityData.acceleration * Time.fixedDeltaTime), -gravityData.terminalVelocity);
+        else
+            gravity = yVelocity - (gravityData.acceleration * Time.fixedDeltaTime);
+
+        yVelocity = gravity;
+    }
 }

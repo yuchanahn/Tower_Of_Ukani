@@ -14,4 +14,13 @@ public static class Flip_Logic
         rot.x = dir == 1 ? 0f : 180f;
         tf.localRotation = Quaternion.Euler(rot);
     }
+
+    public static void FlipXTo(int dir, SpriteRenderer sr)
+    {
+        sr.flipX = dir == 1 ? false : true;
+    }
+    public static void FlipYTo(int dir, SpriteRenderer sr)
+    {
+        sr.flipY = dir == 1 ? false : true;
+    }
 }

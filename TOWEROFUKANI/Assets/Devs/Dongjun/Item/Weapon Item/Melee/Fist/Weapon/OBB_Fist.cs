@@ -61,7 +61,8 @@ public class OBB_Fist : OBB_Controller_Weapon<OBB_Data_Fist, FistItem>
         bvr_Slam = new Single(
             state_Slam,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Dur_Slam.IsEnded);
+            () => weaponItem.Dur_Slam.IsEnded
+               || PlayerInputManager.Inst.Input_DashDir != 0);
     }
     protected override void InitObjectives()
     {

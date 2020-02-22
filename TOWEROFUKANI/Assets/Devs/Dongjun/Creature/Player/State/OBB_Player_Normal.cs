@@ -67,10 +67,6 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
     }
     public override void OnFixedUpdate()
     {
-        // Detect Ground
-        data.groundDetectionData.DetectGround(!jumpData.isJumping, data.RB2D, transform);
-        data.groundDetectionData.ExecuteOnGroundMethod(this);
-
         // Fall Through
         fallThroughKeyPressed = PlayerInputManager.Inst.Input_FallThrough;
         data.groundDetectionData.FallThrough(ref fallThroughKeyPressed, data.RB2D, transform, oneWayCollider);
@@ -90,6 +86,10 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
             data.groundDetectionData.isGrounded ? GravityData.Zero :
             !jumpData.isJumping ? data.gravityData :
             new GravityData(accel: jumpData.jumpGravity));
+
+        // Detect Ground
+        data.groundDetectionData.DetectGround(!jumpData.isJumping, data.RB2D, transform);
+        data.groundDetectionData.ExecuteOnGroundMethod(this);
 
         // Update Animation
         UpdateAnimation();

@@ -6,6 +6,7 @@ using UnityEngine;
 public class OBB_Data_Player : OBB_Data_Animator,
     Creature
 {
+    #region Var: Inspector
     [Header("Component")]
     public Transform spriteRoot;
     public SpriteRenderer bodySpriteRenderer;
@@ -16,28 +17,41 @@ public class OBB_Data_Player : OBB_Data_Animator,
 
     [Header("Gravity")]
     public GravityData gravityData;
+    #endregion
 
+    // State
     [HideInInspector] public bool CanDash = true;
     [HideInInspector] public bool CanKick = true;
     [HideInInspector] public bool CanChangeDir = true;
     [HideInInspector] public bool PlayingOtherMotion = false;
+    [HideInInspector] public bool NewKnockback = false;
 
+    // Data
     public CreatureType CreatureType => CreatureType.Player;
     public StatusID StatusID
     { get; private set; } = new StatusID();
+    public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
+
+    // Component
     public Rigidbody2D RB2D
     { get; private set; }
-    public int Dir => bodySpriteRenderer.flipX ? -1 : 1;
 
     public override void Init_Awake(GameObject gameObject)
     {
         base.Init_Awake(gameObject);
         RB2D = gameObject.GetComponent<Rigidbody2D>();
     }
+    public override void Init_Start(GameObject gameObject)
+    {
+        base.Init_Start(gameObject);
+        PlayerActionEventManager.AddEvent(PlayerActions.Knockbacked, this.NewPlayerActionEvent(() => NewKnockback = true));
+    }
 }
 
 public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
 {
+    [SerializeField] private AnimationCurve testCurve;
+
     // States
     private OBB_Player_Normal state_Normal;
     private OBB_Player_Incapacitated state_Incapacitated;
@@ -52,7 +66,6 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
     private Single bvr_Dash;
     private Single bvr_Kick;
 
-    public bool IsPlayingOtherMotion => (object)currentState == state_OtherMotion;
     public bool IsDashing => (object)currentState == state_Dash;
     public bool IsKicking => (object)currentState == state_Kick;
 
@@ -121,5 +134,19 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
         // Default
         SetDefaultObjective()
             .AddBehaviour(bvr_Normal);
+    }
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            PlayerStatus.AddEffect(new PlayerStatus_Knockback(Data.StatusID, gameObject, KnockbackMode.Weak, true, new Vector2(1, 1), testCurve));
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PlayerStatus.AddEffect(new PlayerStatus_Stun(Data.StatusID, gameObject, 0.5f));
+        }
     }
 }

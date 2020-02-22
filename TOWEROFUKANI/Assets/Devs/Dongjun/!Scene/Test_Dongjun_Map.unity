@@ -10352,6 +10352,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[0].value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[0].inSlope
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[0].outSlope
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[1].time
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[1].inSlope
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[1].outSlope
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: testCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1d116c160f4e074b855b6a707d8fab1, type: 3}
 --- !u!4 &1594527253 stripped

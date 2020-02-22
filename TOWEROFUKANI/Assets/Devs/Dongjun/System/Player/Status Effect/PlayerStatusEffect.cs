@@ -29,7 +29,7 @@ public abstract class PlayerStatusEffect
         Caster = caster;
         StatusType = statusType;
 
-        if (endTime < 0)
+        if (endTime > 0)
         {
             if (Timer == null)
                 Timer = new TimerData();

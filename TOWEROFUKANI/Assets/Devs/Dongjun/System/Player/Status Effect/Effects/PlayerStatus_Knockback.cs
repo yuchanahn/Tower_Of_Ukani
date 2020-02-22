@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStatus_Knockback : PlayerStatusEffect
 {
     KnockbackMode mode;
+    bool resetGravity;
     Vector2 knockbackDir;
     AnimationCurve speedCurve;
 
@@ -12,22 +13,23 @@ public class PlayerStatus_Knockback : PlayerStatusEffect
         StatusID id,
         GameObject caster,
         KnockbackMode mode,
+        bool resetGravity,
         Vector2 knockbackDir,
-        AnimationCurve speedCurve,
-        float endTime) : base(id, caster, StatusType.Debuff, endTime)
+        AnimationCurve speedCurve) : base(id, caster, StatusType.Debuff, speedCurve.keys[speedCurve.keys.Length - 1].time)
     {
         this.mode = mode;
+        this.resetGravity = resetGravity;
         this.knockbackDir = knockbackDir;
         this.speedCurve = speedCurve;
     }
 
     public override void OnStart()
     {
-        PlayerStatus.Inst.Konckback_Add(this, mode, knockbackDir, speedCurve);
+        PlayerStatus.Inst.Konckback_Add(this, mode, resetGravity, knockbackDir, speedCurve);
     }
     public override void OnEnd()
     {
         base.OnEnd();
-        PlayerStatus.Inst.Konckback_Remove(this);
+        PlayerStatus.Inst.Konckback_Remove();
     }
 }

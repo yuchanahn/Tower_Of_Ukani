@@ -31,6 +31,8 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     // Knockback
     private static PlayerStatus_Knockback currentKnockback = null;
     private static KnockbackMode curKnockbackMode = KnockbackMode.Weak;
+    public static bool ResetGravityOnKnockback
+    { get; private set; }
     public static Vector2 KnockbackDir
     { get; private set; }
     public static AnimationCurve KnockbackCurve
@@ -197,7 +199,7 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         PlayerStatMod.Remove_Player(slow);
     }
 
-    public void Konckback_Add(PlayerStatus_Knockback status, KnockbackMode mode, Vector2 knockbackDir, AnimationCurve speedCurve)
+    public void Konckback_Add(PlayerStatus_Knockback status, KnockbackMode mode, bool resetGravity, Vector2 knockbackDir, AnimationCurve speedCurve)
     {
         if (curKnockbackMode == KnockbackMode.Unstoppable || curKnockbackMode > mode)
             return;
@@ -206,19 +208,18 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         currentKnockback = status;
 
         curKnockbackMode = mode;
+        ResetGravityOnKnockback = resetGravity;
         KnockbackDir = knockbackDir;
         KnockbackCurve = speedCurve;
 
         PlayerActionEventManager.Trigger(PlayerActions.Knockbacked);
     }
-    public void Konckback_Remove(PlayerStatus_Knockback status)
+    public void Konckback_Remove()
     {
-        if (status != currentKnockback)
-            return;
-
         currentKnockback = null;
 
         curKnockbackMode = KnockbackMode.Weak;
+        ResetGravityOnKnockback = false;
         KnockbackDir = Vector2.zero;
         KnockbackCurve = null;
         
