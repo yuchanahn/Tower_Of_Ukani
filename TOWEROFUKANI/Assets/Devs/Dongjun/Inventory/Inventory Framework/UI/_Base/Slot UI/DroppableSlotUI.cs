@@ -42,7 +42,7 @@ public class DroppableSlotUI : SlotUI,
             return;
 
         DroppableSlotUI fromSlot = droppedItem.GetComponentInParent<DroppableSlotUI>();
-        if (fromSlot == this)
+        if (fromSlot == null || fromSlot == this)
             return;
 
         if (inventoryUI == null)

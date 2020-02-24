@@ -32,6 +32,10 @@ public abstract class DraggableItemUI : ItemUI,
         mainCam = Camera.main;
         parentCanvas = GetComponentInParent<Canvas>();
     }
+    private void OnDisable()
+    {
+        FollowMouseEnd();
+    }
     #endregion
 
     #region Method: Follow Mouse
@@ -64,8 +68,8 @@ public abstract class DraggableItemUI : ItemUI,
         // TODO
         // 갓갓 유니티!!!
         // 텍스트 흐려지는 버그: https://forum.unity.com/threads/case-1172941-fuzzy-blurry-text-after-moving-visualelement-2019-3-0a10.717584/
-        gameObject.SetActive(false);
-        gameObject.SetActive(true);
+        //gameObject.SetActive(false);
+        //gameObject.SetActive(true);
     }
     #endregion
 
