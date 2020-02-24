@@ -58,7 +58,7 @@ public abstract class GunItem : WeaponItem
     public virtual void Reload(int amount)
     {
         LoadedBullets = amount;
-        LoadedBullets = Mathf.Min(MagazineSize.Value);
+        LoadedBullets = Mathf.Min(LoadedBullets, MagazineSize.Value);
     }
     public virtual void UseBullet(int amount)
     {
