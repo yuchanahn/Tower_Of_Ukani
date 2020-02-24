@@ -7,7 +7,7 @@ public class WoodenShortbowItem : BowItem
         // Attack Data
         AttackData = new AttackData(5);
 
-        // Projectile Data
+        // Arrow Data
         arrowData = new ProjectileData()
         {
             moveSpeed = new FloatStat(30f, min: 0f),

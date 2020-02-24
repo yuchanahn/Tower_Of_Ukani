@@ -118,6 +118,11 @@ public abstract class InventoryBase : MonoBehaviour
         inventoryUI?.Clear();
     }
 
+    public virtual Item[] GetItems(string itemName)
+    {
+        return Array.FindAll(items, o => o.Info.ItemName == itemName);
+    }
+
     public virtual void AddItem(Item item, int index = -1)
     {
         if (item == null || !IsValidItemType(item))
