@@ -11,6 +11,6 @@ public class Player_Effect_Object : MonoBehaviour
     void CreateWalkDust()
     {
         var obj = PlayerWalkDustEft.Create(feetPos.position);
-        obj.GetComponentInChildren<SpriteRenderer>().flipX = GM.Player.RB2D.velocity.x >= 0 ? false : true;
+        obj.GetComponentInChildren<SpriteRenderer>().flipX = GM.Player.Data.RB2D.velocity.x >= 0 ? false : true;
     }
 }
