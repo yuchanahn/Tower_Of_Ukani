@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public class DroppedPassiveItem : DroppedItem
 {
@@ -8,7 +9,7 @@ public class DroppedPassiveItem : DroppedItem
         PassiveItem passiveItem = Item as PassiveItem;
 
         // Spawn Item
-        if (!DroppedFromInventory)
+        if (passiveItem.gameObject.IsPrefab())
             passiveItem = Instantiate(passiveItem).GetComponent<PassiveItem>();
 
         // Add To Inventory
@@ -17,14 +18,13 @@ public class DroppedPassiveItem : DroppedItem
             Destroy(passiveItem.gameObject);
             goto EXIT;
         }
+
         if (PlayerInventoryManager.passiveInventory.TryAddItem(passiveItem))
-        {
             goto EXIT;
-        }
+
         return;
 
     EXIT:
         Destroy(gameObject);
-        return;
     }
 }

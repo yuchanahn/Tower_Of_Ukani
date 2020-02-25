@@ -34,39 +34,31 @@ public class ItemDB : SingletonBase<ItemDB>
     public Item SpawnItem(string name, int count = 1)
     {
         Item item = Instantiate(Items[name].gameObject).GetComponent<Item>();
-        item.transform.SetParent(Inst.transform, false);
-        item.name = name;
-
         item.Info.Init();
         item.Info.Count = count;
+
+        item.transform.SetParent(Inst.transform, false);
+        item.name = name;
         return item;
     }
     public Item CloneItem(Item item)
     {
-        Item clone = Instantiate(Items[item.Info.ItemName].gameObject).GetComponent<Item>();
-        clone.transform.SetParent(Inst.transform, false);
-        clone.name = item.Info.ItemName;
-
+        Item clone = SpawnItem(item.Info.ItemName, item.Info.Count);
         clone.SetInfo(item.Info);
+
+        clone.name = item.Info.ItemName;
         return clone;
     }
 
     public DroppedItem SpawnDroppedItem(string name, int count = 1)
     {
-        Item item = Instantiate(Items[name].gameObject).GetComponent<Item>();
-        item.transform.SetParent(Inst.transform, false);
-        item.name = name;
-
-        item.Info.Init();
-        item.Info.Count = count;
-
-        if (item is WeaponItem)
-            item.gameObject.SetActive(false);
-
-        DroppedItem droppedItem = item.SpawnDroppedItem();
-        droppedItem.name = $"Dropped {name}";
-
-        return droppedItem;
+        Item item = SpawnItem(name, count);
+        return item.OnDrop();
+    }
+    public DroppedItem SpawnDroppedItem(Vector2 pos, string name, int count = 1)
+    {
+        Item item = SpawnItem(name, count);
+        return item.OnDrop(pos);
     }
     #endregion
 }

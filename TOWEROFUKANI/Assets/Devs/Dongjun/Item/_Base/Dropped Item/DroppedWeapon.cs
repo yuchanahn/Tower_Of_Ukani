@@ -10,7 +10,7 @@ public class DroppedWeapon : DroppedItem
         WeaponItem weaponItem = Item as WeaponItem;
 
         // Spawn Item
-        if (!DroppedFromInventory)
+        if (weaponItem.gameObject.IsPrefab())
             weaponItem = Instantiate(Item).GetComponent<WeaponItem>();
 
         // Add To Inventory
