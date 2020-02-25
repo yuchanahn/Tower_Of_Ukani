@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ShopManager : SingletonBase<ShopManager>
 {
+    [HideInInspector]
     public Shop shopUI;
+    [HideInInspector]
     public Transform shopItemSpawnPoint;
 
     public float shopRange;
@@ -49,7 +51,7 @@ public class ShopManager : SingletonBase<ShopManager>
     {
         float distance = Vector3.Distance(GM.PlayerPos, shopItemSpawnPoint.position);
 
-        Debug.Log(distance.ToString() + ", " + shopRange.ToString());
+        //Debug.Log(distance.ToString() + ", " + shopRange.ToString());
         return (distance < shopRange);
     }
 }

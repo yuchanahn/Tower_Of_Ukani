@@ -83,26 +83,29 @@ public class ShopSlot : MonoBehaviour
     {
         for(int i = 0; i < itemCosts.Count; i++)
         {
+
             string itemKind = itemCosts[i].name;
             int payed = 0;
             int price = itemCosts[i].price;
 
-            //해당 화폐의 모든 묶음을 가져옴
+            //해당 화폐의 가지고 있는 모든 묶음을 가져옴
             Item[] thisItems = PlayerInventoryManager.inventory.GetItems(itemKind);
 
-
-            for (int j = 0; payed < price; j++)
+            //해당 화폐 금액 지불 루프
+            for (int j = 0; j < thisItems.Length; j++)
             {
+
                 // 바로 지불 가능 할 때
-                if(price - payed <= thisItems[j].Info.Count)
+                if((price - payed) <= thisItems[j].Info.Count)
                 {
                     PlayerInventoryManager.inventory.RemoveItem(thisItems[j], price - payed);
                     break;
                 }
 
+                payed += thisItems[j].Info.Count;
                 // 바로 지불 못하면 그 칸에 있는 모든 아이템 지불
                 PlayerInventoryManager.inventory.RemoveItem(thisItems[j], thisItems[j].Info.Count);
-
+                Debug.Log(thisItems[j].Info.Count + ", " + payed + ", " + price);
             }
         }
     }
