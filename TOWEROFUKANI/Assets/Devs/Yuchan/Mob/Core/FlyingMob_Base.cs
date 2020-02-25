@@ -1,5 +1,6 @@
 ﻿using Dongjun.Helper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ public abstract class FlyingMob_Base : Mob_Base
             return mHurt        ? Vector2.zero :
                    mAttacking   ? Vector2.zero :
                    mMoveStop    ? Vector2.zero :
-                   bJPSVel      ? JPS_Vel      :
+                   IsJPSVel      ? JPS_Vel      :
                    !( (nextPos.x <  GM.CurMapWorldPoint.x 
                    && nextPos.x > GM.CurMapWorldPoint.x - GM.CurMapSize.width)
                    &&
@@ -66,7 +67,19 @@ public abstract class FlyingMob_Base : Mob_Base
 
 
     #endregion
+    public enum MovementState
+    {
+        JPS_Follow,
+        JPS_RDMove,
+        NoJPS,
+    }
 
+    public MovementState MS = MovementState.NoJPS;
+
+    public Dictionary<MovementState, Action> MovementAction = new Dictionary<MovementState, Action>();
+
+    public bool IsJPSVel = false;
+    Vector2 JPS_Vel = Vector2.zero;
 
     virtual protected void Awake()
     {
@@ -85,6 +98,10 @@ public abstract class FlyingMob_Base : Mob_Base
 
         mAttack[eAttackST.PreAttack] = PreAttack;
         mAttack[eAttackST.Attack] = Attack;
+
+        MovementAction[MovementState.NoJPS] = () => IsJPSVel = false;
+        MovementAction[MovementState.JPS_Follow] = () => { };
+        MovementAction[MovementState.JPS_RDMove] = () => { };
     }
     void Animation()
     {
@@ -108,18 +125,27 @@ public abstract class FlyingMob_Base : Mob_Base
         mHitImmunity = false;
     }
 
-    bool bJPSVel = false;
-    Vector2 JPS_Vel = Vector2.zero;
+
+
+    
+    
+    public void MovementStop()
+    {
+        Dir2d = Vector2.zero;
+        MS = MovementState.NoJPS;
+    }
     public void SetJPS_Vel2d(Vector2 vel)
     {
-        bJPSVel = true;
+        IsJPSVel = true;
         JPS_Vel = vel;
         SpriteDir = vel.x > 0 ? 1 : -1;
     }
 
     void FixedUpdate()
     {
-        mRb2d.velocity = Dir2d * (bJPSVel ? 1f : MoveSpeed) * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
+        MovementAction[MS]();
+
+        mRb2d.velocity = Dir2d * (IsJPSVel ? 1f : MoveSpeed) * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
         Animation();
         mAnimator.SetDuration(m_Ani[mCurAniST].Item2);
         if (mAniStart)
@@ -131,8 +157,9 @@ public abstract class FlyingMob_Base : Mob_Base
         {
             mAnimator.Play(m_Ani[mCurAniST].Item1);
         }
-        bJPSVel = false;
     }
+
+
 
     public virtual bool Stunned()
     {

@@ -10,7 +10,15 @@ public class JPS_PathFinder : MonoBehaviour
     [SerializeField] GameObject pr;
     [SerializeField] bool ShowingPath;
     [SerializeField] Grid gridJPS => gridV.grid;
+    [SerializeField] int mSize;
 
+    static Dictionary<int, JPS_PathFinder> mGet = new Dictionary<int, JPS_PathFinder>();
+    public static JPS_PathFinder _1x1 => mGet[1];
+
+    private void Awake()
+    {
+        mGet[mSize] = this;
+    }
 
     static List<GameObject> pool = new List<GameObject>();
     public Vector2[] Find(Vector2 start, Vector2 stop)

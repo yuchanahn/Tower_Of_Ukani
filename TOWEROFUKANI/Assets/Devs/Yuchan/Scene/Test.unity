@@ -1650,6 +1650,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlowerBat (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: mPathFinder
@@ -1752,6 +1757,16 @@ PrefabInstance:
       propertyPath: CeilingCoolTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: CeilingPercentage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: RangeOfWakeAround
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
 --- !u!4 &172476412 stripped
@@ -1777,6 +1792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlowerBat
+      objectReference: {fileID: 0}
+    - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -1879,6 +1899,16 @@ PrefabInstance:
         type: 3}
       propertyPath: CeilingCoolTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: CeilingPercentage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: RangeOfWakeAround
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
@@ -2022,6 +2052,7 @@ MonoBehaviour:
   gridV: {fileID: 240870021}
   pr: {fileID: 6025808219906693540, guid: 1e18a55bb1887d14ebaf5fec00cf4d62, type: 3}
   ShowingPath: 0
+  mSize: 1
 --- !u!1001 &249727434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2224,6 +2255,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlowerBat (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: mPathFinder
@@ -2325,6 +2361,16 @@ PrefabInstance:
         type: 3}
       propertyPath: CeilingCoolTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: CeilingPercentage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: RangeOfWakeAround
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
@@ -7735,6 +7781,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlowerBat (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: mPathFinder
@@ -7836,6 +7887,16 @@ PrefabInstance:
         type: 3}
       propertyPath: CeilingCoolTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: CeilingPercentage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: RangeOfWakeAround
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
@@ -11484,20 +11545,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlowerBat (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
-        type: 3}
-      propertyPath: mPathFinder
-      value: 
-      objectReference: {fileID: 240870022}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.93
+      value: 7.65
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.13
+      value: 3.24
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -11549,54 +11605,11 @@ PrefabInstance:
       propertyPath: mPathFinder
       value: 
       objectReference: {fileID: 240870022}
-    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
-        type: 3}
-      propertyPath: AgroRange
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
-        type: 3}
-      propertyPath: AttackRange
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
-        type: 3}
-      propertyPath: mMoveData.Speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 367102948323533996, guid: d5d22318019f1d34d98255fdd2e82a83,
-        type: 3}
-      propertyPath: FleeCollider2d
-      value: 
-      objectReference: {fileID: 1810747088}
-    - target: {fileID: 1581783349, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581783349, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1581783349, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
-        type: 3}
-      propertyPath: CeilingCoolTime
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
 --- !u!4 &1810747087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
-    type: 3}
-  m_PrefabInstance: {fileID: 1810747086}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &1810747088 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 1581783349, guid: d5d22318019f1d34d98255fdd2e82a83,
     type: 3}
   m_PrefabInstance: {fileID: 1810747086}
   m_PrefabAsset: {fileID: 0}
@@ -12692,6 +12705,7 @@ MonoBehaviour:
   gridV: {fileID: 2017289405}
   pr: {fileID: 0}
   ShowingPath: 0
+  mSize: 2
 --- !u!1001 &2018381909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12815,6 +12829,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlowerBat (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: mPathFinder
@@ -12916,6 +12935,16 @@ PrefabInstance:
         type: 3}
       propertyPath: CeilingCoolTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: CeilingPercentage
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: RangeOfWakeAround
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}

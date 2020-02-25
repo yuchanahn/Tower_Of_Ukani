@@ -37,7 +37,7 @@ public class FlowerBat_Task_Attack : Mob_Task_ProjectileAttack
         {
             return false;
         }
-        mMob.Dir2d = Vector2.zero;
+        mMob.MovementStop();
         mMob.SpriteDir = mMob.SprDirForPlayer;
         return true;
     }

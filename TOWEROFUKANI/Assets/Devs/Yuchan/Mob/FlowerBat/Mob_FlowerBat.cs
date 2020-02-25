@@ -24,6 +24,7 @@ public class Mob_FlowerBat : FlyingMob_Base
     public override bool Stunned()
     {
         base.Stunned();
+        GetComponent<BoxCollider2D>().size = Size;
         return true;
     }
 
@@ -35,6 +36,7 @@ public class Mob_FlowerBat : FlyingMob_Base
     {
         base.SetStatusEffectUseAniState();
         bUnHang = false;
+        GetComponent<BoxCollider2D>().size = Size;
     }
 
     void UnHangEnd_AniEvent()
@@ -42,6 +44,7 @@ public class Mob_FlowerBat : FlyingMob_Base
         bUnHang = false;
         mHitImmunity = false;
     }
+
 
     bool bUnHang = false;
     eMobAniST mPrevAni = eMobAniST.Last;
@@ -52,7 +55,9 @@ public class Mob_FlowerBat : FlyingMob_Base
             if(mPrevAni == eMobAniST.Hang)
             {
                 base.SetAni(eMobAniST.Unhang);
+                GetComponent<BoxCollider2D>().size = Size;
                 bUnHang = true;
+                mHitImmunity = true;
                 mPrevAni = ani;
                 return;
             }
@@ -76,8 +81,9 @@ public class Mob_FlowerBat : FlyingMob_Base
 
     public override void OnHurt()
     {
-        FleeTask.IsFleeAble = true;
-        HangTask.SetCeilingCoolTime();
+        FleeTask.IsFleeAble = Vector2.Distance(transform.position, GM.PlayerPos) <= FleeTask.FleeRange;
+        HangTask.WakeAround();
+
         if (mHitImmunity) return;
         BTStop = true;
         base.OnHurt();

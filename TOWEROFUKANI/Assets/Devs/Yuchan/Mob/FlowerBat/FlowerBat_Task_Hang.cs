@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class FlowerBat_Task_Hang : MonoBehaviour, ITask
 {
     Mob_FlowerBat mMob;
@@ -16,22 +17,44 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
     public bool IsCeilingNearOf() => mCeilingPos is null ? true : Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) > mCeilingDetectRange;
     public static List<GameObject> HangWalls = new List<GameObject>();
 
-    [SerializeField] float CeilingCoolTime = 1f;
+    [SerializeField, Range(0, 100)] public int CeilingPercentage;
+    [SerializeField] public float CeilingCoolTime = 1f;
+    [SerializeField] Vector2 mHangSize;
+    [SerializeField] float RangeOfWakeAround;
     float mCeilingCoolTimeT = 0;
 
-    public void SetCeilingCoolTime()
+    public void WakeAround()
     {
         mCeilingCoolTimeT = 0;
+
+
+        foreach (var i in 
+            Physics2D.CircleCastAll(transform.position, RangeOfWakeAround, Vector2.zero)
+            .Map(x => x.collider.gameObject)
+            .Filter(x => x.GetComponent<FlowerBat_Task_Hang>()))
+        {
+            i.GetComponent<FlowerBat_Task_Hang>().mCeilingCoolTimeT = 0f;
+        }
     }
+
+
 
     private void Awake()
     {
         mMob = GetComponent<Mob_FlowerBat>();
         mCeilingCoolTimeT = CeilingCoolTime;
     }
-
+    void HangStart_AniEvent()
+    {
+        mMob.GetComponent<BoxCollider2D>().size = mHangSize;
+    }
+    void HangEnd_AniEvent()
+    {
+        
+    }
     public bool Tick()
     {
+        mMob.MS = FlyingMob_Base.MovementState.NoJPS;
         mCeilingCoolTimeT += Time.deltaTime;
         if (mCeilingCoolTimeT < CeilingCoolTime)
         {
@@ -48,11 +71,12 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
         if (IsFollowEndToCeiling)
         {
             mMob.mHitImmunity = true;
-            mMob.Dir2d = Vector2.zero;
+            mMob.MovementStop();
             mMob.SetAni(eMobAniST.Hang);
         }
         else
         {
+            mMob.MS = FlyingMob_Base.MovementState.NoJPS;
             mMob.Dir2d = (mCeilingPos.Value - (Vector2)transform.position).normalized;
             mMob.SetAni(eMobAniST.Fly);
         }

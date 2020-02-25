@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,36 @@ public static class AEM
     {
         return val += Time.deltaTime;
     }
+
+
+    public static List<T> Filter<T>(this List<T> l, Func<T, bool> f)
+    {
+        List<T> rl = new List<T>();
+        foreach(var i in l)
+        {
+            if (f(i)) rl.Add(i);
+        }
+        return rl;
+    }
+
+    public static T[] Filter<T>(this T[] l, Func<T, bool> f)
+    {
+        List<T> rl = new List<T>();
+        foreach (var i in l)
+        {
+            if (f(i)) rl.Add(i);
+        }
+        return rl.ToArray();
+    }
+
+    public static T2[] Map<T, T2>(this T[] l, Func<T, T2> f)
+    {
+        T2[] r = new T2[l.Length];
+        for (int i = 0; i < l.Length; i++) r[i] = f(l[i]);
+        return r;
+    }
+
+
     public static Vector2 Foot(this Vector2 pos, Vector2 size) => new Vector2(pos.x, pos.y - size.y / 2);
     public static Vector2 Foot(this Vector3 pos, Vector2 size) => new Vector2(pos.x, pos.y - (size.y / 2));
     public static bool RayHit(this Vector2 pos, Vector2 target, LayerMask wallLayer)

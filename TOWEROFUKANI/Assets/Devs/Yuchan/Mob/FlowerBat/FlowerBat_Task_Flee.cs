@@ -25,8 +25,8 @@ public class FlowerBat_Task_Flee : MonoBehaviour, ITask
     {
         mMob.SetAni(eMobAniST.Flee);
         mMob.mHitImmunity = true;
+        mMob.MS = FlyingMob_Base.MovementState.NoJPS;
         IsFleeAble = false;
-
         mMob.Dir2d = -(GM.PlayerPos - transform.position).normalized;
         mMob.AddSpeed = AddSpeed;
         IsFleeing = true;

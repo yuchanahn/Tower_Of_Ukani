@@ -15,7 +15,7 @@ internal class JPS_MoveManager
         if (mMoveQueue.Count > 0)
         {
             var tpos = mMoveQueue.Peek();
-            if (ori == tpos)
+            if (tpos == ori)
             {
                 mMoveQueue.Dequeue();
                 return (tpos - ori).normalized * Mathf.Clamp(speed, 0, Vector2.Distance(tpos, ori) / Time.fixedDeltaTime);
@@ -82,6 +82,6 @@ internal class JPS_MoveManager
             }
         }
 
-        return (Goal - origin).normalized * Mathf.Clamp(speed * 2, 0, Vector2.Distance(origin, Goal) / Time.fixedDeltaTime);
+        return (Goal - origin).normalized * Mathf.Clamp(speed, 0, Vector2.Distance(origin, Goal) / Time.fixedDeltaTime);
     }
 }

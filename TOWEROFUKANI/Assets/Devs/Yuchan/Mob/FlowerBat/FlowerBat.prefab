@@ -200,7 +200,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1581783347}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -438,12 +438,15 @@ MonoBehaviour:
   MoveLink: []
   mHitImmunity: 0
   mCurAniST: 8
-  AttackRange: 5
+  MS: 0
+  IsJPSVel: 0
+  AttackRange: 3
   MoveTimeIdle: 1
   MoveTimeMove: 3
-  AgroRange: 10
-  Size: {x: 1, y: 1}
+  AgroRange: 7
+  Size: {x: 1.5, y: 1.5}
   FleeTask: {fileID: 0}
+  HangTask: {fileID: 0}
 --- !u!114 &450975516151158663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,9 +542,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyCeiling: {fileID: 0}
-  mCeilingDetectRange: 2
+  mCeilingDetectRange: 3
   IsFollowEndToCeiling: 0
   FindCeiling: 0
+  CeilingPercentage: 50
+  CeilingCoolTime: 1
+  mHangSize: {x: 0.7, y: 1.5}
+  RangeOfWakeAround: 4
 --- !u!114 &4835304523073473399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +561,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f71682adb84eb4d80bf0d3f5ec50ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mPathFinder: {fileID: 0}
+  PathFinder: {fileID: 0}
+  IsFollowing: 0
 --- !u!114 &221602579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,5 +593,7 @@ MonoBehaviour:
   FleeRange: 3
   FleeTime: 1
   AddSpeed: 5
+  FleeCollider2d: {fileID: 1581783349}
   IsFleeing: 0
   IsFleeAble: 0
+  fleeTimeT: 0

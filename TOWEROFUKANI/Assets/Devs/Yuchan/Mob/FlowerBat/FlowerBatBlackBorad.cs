@@ -26,10 +26,19 @@ public class FlowerBatBlackBorad : BlackBoard_Base
         JPS_FollowTask      = GetComponent<FlyingMob_JPS_Task_Follow>();
         AttackTask          = GetComponent<FlowerBat_Task_Attack>();
         FleeTask            = GetComponent<FlowerBat_Task_Flee>();
+
+        FindCoolTimeT = FindCoolTime;
     }
 
+    float FindCoolTime => HangTask.CeilingCoolTime;
+    float FindCoolTimeT;
     public bool IsFindCeiling()
     {
+        FindCoolTimeT += Time.deltaTime;
+        if (FindCoolTimeT < FindCoolTime)
+        {
+            return false;
+        }
         if(HangTask.IsCeilingNearOf())
         {
             if (HangTask.MyCeiling != null)
@@ -44,11 +53,17 @@ public class FlowerBatBlackBorad : BlackBoard_Base
         }
 
         NewFind:
+
         var Tr = Detect.GetHitTrOrNull(transform.position, Vector2.up, HangTask.mCeilingDetectRange, GM.SoildGroundLayer);
         if (HangTask.FindCeiling = HangTask.MyCeiling = Tr)
         {
             if (FlowerBat_Task_Hang.HangWalls.Contains(HangTask.MyCeiling.gameObject))
             {
+                return false;
+            }
+            if (!ARandom.Get(HangTask.CeilingPercentage))
+            {
+                FindCoolTimeT = 0;
                 return false;
             }
             HangTask.mCeilingPos = Tr.position.Foot(Vector2.one).Add(y: -mMob.Size.y / 2);
@@ -71,25 +86,13 @@ public class FlowerBatBlackBorad : BlackBoard_Base
 
 
 
-
-
-
     public bool IsTargetInFleeRange()
     {
-        bool r = false;
         if (FleeTask.IsFleeAble)
         {
-            if(Vector2.Distance(transform.position, GM.PlayerPos) <= FleeTask.FleeRange)
-            {
-                r = true;
-            }
-            else
-            {
-                r = false;
-                FleeTask.IsFleeAble = false;
-            }
+            FleeTask.IsFleeing = true;
         }
-        return FleeTask.FleeCollider2d.enabled = (FleeTask.IsFleeing || r);
+        return FleeTask.FleeCollider2d.enabled = FleeTask.IsFleeing;
     }
     public bool IsTargetInAttackRange()
     {
