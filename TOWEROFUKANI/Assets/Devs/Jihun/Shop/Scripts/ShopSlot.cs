@@ -11,13 +11,30 @@ public class ShopSlot : MonoBehaviour
     public Text itemNameTxt;
     public Text itemDescTxt;
 
-    
+    public List<ItemCost> itemCosts = new List<ItemCost>();
 
-    public void SetItem(ItemInfo item)
+    public Transform itemCostsRoot;
+    [SerializeField] private ItemCostSlot itemCostPrefab;
+
+    public void SetItem(ItemInfo item, params ItemCost[] itemCosts)
     {
+        if (item == null) return;
+        
+
         this.item = item;
 
-        if (item == null) return;
+
+        // 아이템 가격 설정
+        for(int i = 0; i < itemCosts.Length; i++)
+        {
+            this.itemCosts.Add(itemCosts[i]);
+
+            ItemCostSlot slot = Instantiate<ItemCostSlot>(itemCostPrefab);
+            slot.SetPrice(itemCosts[i]);
+            slot.transform.SetParent(itemCostsRoot);
+            slot.transform.localScale = Vector3.one;
+        }
+            
 
         itemSpriteImage.gameObject.SetActive(true);
         itemSpriteImage.sprite = item.Icon;
@@ -28,21 +45,65 @@ public class ShopSlot : MonoBehaviour
 
     public void BuyItem()
     {
-        int curGold = 0;
+        if (!CheckPrice()) return;
 
-        //가격 체크
-        Item[] gold = PlayerInventoryManager.inventory.GetItems("Gold");
+        // 금액 지불
+        PayCosts();
 
-        if (gold != null)
+        ItemDB.Inst.SpawnDroppedItem(ShopManager.Inst.shopItemSpawnPoint.position, item.ItemName);
+    }
+
+    bool CheckPrice()
+    {
+        for (int i = 0; i < itemCosts.Count; i++)
         {
-            for (int i = 0; i < gold.Length; i++)
+            // 화폐 설정
+            string itemKind = itemCosts[i].name;
+            int count = 0;
+
+            // 해당 화폐 불러옴
+            Item[] items = PlayerInventoryManager.inventory.GetItems(itemKind);
+
+            for (int j = 0; j < items.Length; j++)
             {
-                curGold += gold[i].Info.Count;
+                count += items[j].Info.Count;
             }
 
-            Debug.Log(curGold + "원");
+            if (itemCosts[i].price > count)
+            {
+                Debug.Log(itemKind + " : " + itemCosts[i].price.ToString() + "/" + count.ToString());
+                return false;
+            }
         }
 
-        ItemDB.Inst.SpawnDroppedItem(item.ItemName);
+        return true;
+    }
+
+    void PayCosts()
+    {
+        for(int i = 0; i < itemCosts.Count; i++)
+        {
+            string itemKind = itemCosts[i].name;
+            int payed = 0;
+            int price = itemCosts[i].price;
+
+            //해당 화폐의 모든 묶음을 가져옴
+            Item[] thisItems = PlayerInventoryManager.inventory.GetItems(itemKind);
+
+
+            for (int j = 0; payed < price; j++)
+            {
+                // 바로 지불 가능 할 때
+                if(price - payed <= thisItems[j].Info.Count)
+                {
+                    PlayerInventoryManager.inventory.RemoveItem(thisItems[j], price - payed);
+                    break;
+                }
+
+                // 바로 지불 못하면 그 칸에 있는 모든 아이템 지불
+                PlayerInventoryManager.inventory.RemoveItem(thisItems[j], thisItems[j].Info.Count);
+
+            }
+        }
     }
 }
