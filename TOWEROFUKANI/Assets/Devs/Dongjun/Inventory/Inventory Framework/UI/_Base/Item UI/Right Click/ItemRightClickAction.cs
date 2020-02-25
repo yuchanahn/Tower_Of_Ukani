@@ -6,6 +6,14 @@ public class ItemRightClickAction : MonoBehaviour
     [SerializeField] private Transform itemContextMenuParent;
     [SerializeField] private UI_Screen_ItemContextMenu itemContextMenuPrefab;
 
+    private UI_Screen_ItemContextMenu openedContextMenu;
+
+    private void OnDisable()
+    {
+        if (openedContextMenu != null)
+            openedContextMenu.Close();
+    }
+
     public virtual void OnRightClick(Item item)
     {
         ShowContextMenu(item);
@@ -14,14 +22,14 @@ public class ItemRightClickAction : MonoBehaviour
     protected virtual void ShowContextMenu(Item item)
     {
         // Spawn Context Menu
-        UI_Screen_ItemContextMenu contextMenu = Instantiate(itemContextMenuPrefab, itemContextMenuParent, false);
-        contextMenu.Open();
+        openedContextMenu = Instantiate(itemContextMenuPrefab, itemContextMenuParent, false);
+        openedContextMenu.Open();
 
         // Set Title
-        contextMenu.SetTitle(item.Info.ItemName);
+        openedContextMenu.SetTitle(item.Info.ItemName);
 
         // Spawn Context Menu Buttons
-        SetContextMenuButtons(item, contextMenu);
+        SetContextMenuButtons(item, openedContextMenu);
     }
     protected virtual void SetContextMenuButtons(Item item, UI_Screen_ItemContextMenu contextMenu)
     {
