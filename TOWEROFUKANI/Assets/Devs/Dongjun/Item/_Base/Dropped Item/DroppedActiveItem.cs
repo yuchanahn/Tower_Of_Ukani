@@ -13,7 +13,7 @@ public class DroppedActiveItem : DroppedItem
 
         // Add To Inventory
         if (PlayerInventoryManager.inventory.TryUpgradeItem(activeItem.Info.ItemName)
-        || PlayerInventoryManager.weaponHotbar.TryUpgradeItem(activeItem.Info.ItemName))
+        || PlayerInventoryManager.activeHotbar.TryUpgradeItem(activeItem.Info.ItemName))
             goto EXIT;
 
         if (PlayerInventoryManager.activeHotbar.TryAddItem(activeItem))

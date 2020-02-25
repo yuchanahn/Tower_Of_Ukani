@@ -60,6 +60,9 @@ public class ItemDB : SingletonBase<ItemDB>
         item.Info.Init();
         item.Info.Count = count;
 
+        if (item is WeaponItem)
+            item.gameObject.SetActive(false);
+
         DroppedItem droppedItem = item.SpawnDroppedItem();
         droppedItem.name = $"Dropped {name}";
 

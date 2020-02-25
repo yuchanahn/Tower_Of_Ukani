@@ -84,6 +84,10 @@ public abstract class InventoryBase : MonoBehaviour
     {
         return items[index];
     }
+    public virtual Item[] GetItems(string itemName)
+    {
+        return Array.FindAll(items, o => o != null ? o.Info.ItemName == itemName : false);
+    }
 
     // Get Index
     public int GetIndex_ItemID(string id)
@@ -116,11 +120,6 @@ public abstract class InventoryBase : MonoBehaviour
 
         // Clear UI
         inventoryUI?.Clear();
-    }
-
-    public virtual Item[] GetItems(string itemName)
-    {
-        return Array.FindAll(items, o => o.Info.ItemName == itemName);
     }
 
     public virtual void AddItem(Item item, int index = -1)

@@ -11,12 +11,12 @@ public enum TickMode
 
 public interface I_TimerData
 {
+    GameObject User { get; }
     void Tick(float deltaTime);
 }
 public abstract class TimerData_Base<T> : I_TimerData 
     where T : TimerData_Base<T>
 {
-    private GameObject user;
     private TickMode tickMode;
 
     private Action onStart;
@@ -26,6 +26,7 @@ public abstract class TimerData_Base<T> : I_TimerData
     [HideInInspector] public float CurTime = 0; // 타이머의 현재 시간.
     protected abstract float GetEndTime { get; } // 타이머의 종료 시간.
 
+    public GameObject User { get; private set; }
     public bool IsActive
     { get; private set; } = true;
     public bool IsEnded => CurTime == GetEndTime;
@@ -33,33 +34,13 @@ public abstract class TimerData_Base<T> : I_TimerData
 
     public T SetTick(GameObject user, TickMode tickMode = TickMode.LateUpdate)
     {
-        this.user = user;
+        User = user;
         this.tickMode = tickMode;
 
-        TimerManager.Inst.RemoveTick_Update(user, this);
-        TimerManager.Inst.RemoveTick_LateUpdate(user, this);
-        TimerManager.Inst.RemoveTick_FixedUpdate(user, this);
-
-        switch (tickMode)
-        {
-            case TickMode.Update:
-                TimerManager.Inst.RemoveTick_LateUpdate(user, this);
-                TimerManager.Inst.RemoveTick_FixedUpdate(user, this);
-                TimerManager.Inst.AddTick_Update(user, this);
-                break;
-
-            case TickMode.LateUpdate:
-                TimerManager.Inst.RemoveTick_Update(user, this);
-                TimerManager.Inst.RemoveTick_FixedUpdate(user, this);
-                TimerManager.Inst.AddTick_LateUpdate(user, this);
-                break;
-
-            case TickMode.FixedUpdate:
-                TimerManager.Inst.RemoveTick_Update(user, this);
-                TimerManager.Inst.RemoveTick_LateUpdate(user, this);
-                TimerManager.Inst.AddTick_FixedUpdate(user, this);
-                break;
-        }
+        TimerManager.Inst.RemoveTimer(this, TickMode.Update);
+        TimerManager.Inst.RemoveTimer(this, TickMode.LateUpdate);
+        TimerManager.Inst.RemoveTimer(this, TickMode.FixedUpdate);
+        TimerManager.Inst.AddTimer(this, tickMode);
 
         return this as T;
     }
@@ -81,24 +62,13 @@ public abstract class TimerData_Base<T> : I_TimerData
 
         if (active == false)
         {
-            TimerManager.Inst.RemoveTick_Update(user, this);
-            TimerManager.Inst.RemoveTick_LateUpdate(user, this);
-            TimerManager.Inst.RemoveTick_FixedUpdate(user, this);
+            TimerManager.Inst.RemoveTimer(this, TickMode.Update);
+            TimerManager.Inst.RemoveTimer(this, TickMode.LateUpdate);
+            TimerManager.Inst.RemoveTimer(this, TickMode.FixedUpdate);
         }
         else
         {
-            switch (tickMode)
-            {
-                case TickMode.Update:
-                    TimerManager.Inst.AddTick_Update(user, this);
-                    break;
-                case TickMode.LateUpdate:
-                    TimerManager.Inst.AddTick_LateUpdate(user, this);
-                    break;
-                case TickMode.FixedUpdate:
-                    TimerManager.Inst.AddTick_FixedUpdate(user, this);
-                    break;
-            }
+            TimerManager.Inst.AddTimer(this, tickMode);
         }
     }
     public void Reset() => CurTime = 0;

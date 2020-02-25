@@ -1379,7 +1379,6 @@ GameObject:
   - component: {fileID: 1635102215631221657}
   - component: {fileID: 1635102215631221658}
   - component: {fileID: 1635102215631221659}
-  - component: {fileID: 1635102215631221655}
   m_Layer: 0
   m_Name: '[Screen] Active Hotbar'
   m_TagString: Untagged
@@ -1479,25 +1478,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95a3275a2aad1541aea999eac96e9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1635102215631221655
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635102215631221661}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1635102215637798459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,7 +1545,6 @@ GameObject:
   - component: {fileID: 1635102215789769809}
   - component: {fileID: 1635102215789769810}
   - component: {fileID: 1635102215789769811}
-  - component: {fileID: 1635102215789769839}
   m_Layer: 0
   m_Name: '[Screen] Consumable Hotbar'
   m_TagString: Untagged
@@ -1665,25 +1644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95a3275a2aad1541aea999eac96e9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1635102215789769839
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635102215789769813}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1635102215800312273
 GameObject:
   m_ObjectHideFlags: 0
