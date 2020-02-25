@@ -619,6 +619,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db44b2fbe64eb5e4eb6a3ac036303cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healEffectPrefab: {fileID: 7100885250870476599, guid: bfa3b5145fbbca34b9ba95c27932baed,
+    type: 3}
   walkData:
     walkAccelTime: 0
     changeDirSpeed: 0
@@ -722,6 +724,13 @@ MonoBehaviour:
     CanKick: 1
     CanChangeDir: 1
     PlayingOtherMotion: 0
+    NewKnockback: 0
+  testCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &4650456214795719251
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerStats : SingletonBase<PlayerStats>
 {
+    #region Var: Inspector
+    [SerializeField] private SelfSleepObj healEffectPrefab;
+    #endregion
+
     #region Var: Base Stats
     private float base_health_Max = 100;
     private float base_stamina_Max = 3;
@@ -179,8 +183,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
         // Invoke Event
         Invoke_OnHealthChange();
 
-        // TODO
         // Visual Effect
+        healEffectPrefab.Spawn(transform, Vector2.zero);
     }
     public void Death()
     {

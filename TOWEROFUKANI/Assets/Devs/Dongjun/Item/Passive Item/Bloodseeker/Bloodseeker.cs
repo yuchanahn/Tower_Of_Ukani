@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Bloodseeker : PassiveItem
 {
     #region Var: Player Action Event
-    private PlayerActionEvent onWeaponHit;
+    private PlayerActionEvent onKill;
     #endregion
+
+    List<GameObject> coprsePrefabs = new List<GameObject>();
 
     #region Method: Unity
     protected override void Awake()
@@ -12,10 +15,14 @@ public class Bloodseeker : PassiveItem
         base.Awake();
 
         // Player Action Event
-        onWeaponHit = this.NewPlayerActionEvent(() =>
+        onKill = this.NewPlayerActionEvent(() =>
         {
             // Heal
-            PlayerStats.Inst.Heal(PlayerStats.Inst.DamageToDeal);
+            PlayerStats.Inst.KilledMob.GetComponent<CorpseSpawner>()?.SetCorpseMode(eCorpseSpawnMode.Absorb, coprpsePrefab => 
+                {
+                    coprsePrefabs.Add(coprpsePrefab);
+                    PlayerStats.Inst.Heal(5);
+                });
         });
     }
     #endregion
@@ -25,11 +32,11 @@ public class Bloodseeker : PassiveItem
     {
         base.OnAdd(inventory);
 
-        PlayerActionEventManager.AddEvent(PlayerActions.WeaponHit, onWeaponHit);
+        PlayerActionEventManager.AddEvent(PlayerActions.Kill, onKill);
     }
     protected override void OnRemovedFromInventory()
     {
-        PlayerActionEventManager.RemoveEvent(PlayerActions.WeaponHit, onWeaponHit);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.Kill, onKill);
     }
     #endregion
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ItemDB : SingletonBase<ItemDB>
@@ -26,6 +27,19 @@ public class ItemDB : SingletonBase<ItemDB>
         for (int i = 0; i < items.Length; i++)
         {
             Items.Add(items[i].Info.ItemName, items[i]);
+        }
+    }
+    #endregion
+
+    #region Method: Editor
+    public void LoadAllItemPrefabs()
+    {
+        string[] guids = AssetDatabase.FindAssets("l:Item");
+
+        items = new Item[guids.Length];
+        for (int i = 0; i < guids.Length; i++)
+        {
+            items[i] = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guids[i])).GetComponent<Item>();
         }
     }
     #endregion

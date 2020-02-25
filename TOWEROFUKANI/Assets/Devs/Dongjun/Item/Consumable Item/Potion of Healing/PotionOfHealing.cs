@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PotionOfHealing : ConsumableItem
 {
-    [SerializeField] private SelfSleepObj healEffectPrefab;
     [SerializeField] private float healAmount;
 
     public override bool Consume()
@@ -15,9 +14,6 @@ public class PotionOfHealing : ConsumableItem
 
         // Heal Player
         PlayerStats.Inst.Heal(healAmount);
-
-        // Effect
-        healEffectPrefab.Spawn(GM.Player.transform, Vector2.zero);
         return true;
     }
 }
