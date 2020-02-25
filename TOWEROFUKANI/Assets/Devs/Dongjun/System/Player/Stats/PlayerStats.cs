@@ -136,6 +136,35 @@ public class PlayerStats : SingletonBase<PlayerStats>
         PlayerHitEft.Create(transform.position);
         GetComponent<HitColorEffect>().OnHit();
     }
+    public void Damage(AttackData attackData)
+    {
+        // Check Ignore Damage
+        if (PlayerStatus.IgnoreDamage.Value)
+            return;
+
+        // Store Damage Amount
+        DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : attackData.damage.Value;
+
+        // Trigger Item Effect
+        PlayerActionEventManager.Trigger(PlayerActions.Damaged);
+
+        // Apply Damage
+        health.ModFlat -= DamageReceived;
+
+        // Death
+        if (health.Value == 0)
+        {
+            Death();
+            return;
+        }
+
+        // Invoke Event
+        Invoke_OnHealthChange();
+
+        // Visual Effect
+        PlayerHitEft.Create(transform.position);
+        GetComponent<HitColorEffect>().OnHit();
+    }
     public void Heal(float amount)
     {
         // Store Heal Amount

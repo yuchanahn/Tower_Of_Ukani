@@ -52,4 +52,6 @@ MonoBehaviour:
     range: 
   droppedItemPrefab: {fileID: 6655503512168929108, guid: 8adfc13f093e0054db07391cdfda2acd,
     type: 3}
+  healEffectPrefab: {fileID: 7100885250870476599, guid: bfa3b5145fbbca34b9ba95c27932baed,
+    type: 3}
   healAmount: 20
