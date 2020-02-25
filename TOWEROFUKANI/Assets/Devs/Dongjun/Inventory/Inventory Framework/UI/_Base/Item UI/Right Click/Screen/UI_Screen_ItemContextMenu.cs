@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class UI_Screen_ItemContextMenu : UI_Screen_Destroy
 {
+    [Header("Sorting Order")]
+    [SerializeField] private int sortingOrder = 10;
+
     [Header("Cursor Offset")]
     [SerializeField] protected Vector2 cursorOffset;
 
@@ -16,6 +19,8 @@ public class UI_Screen_ItemContextMenu : UI_Screen_Destroy
 
     protected virtual void Start()
     {
+        thisCanvas.sortingOrder = sortingOrder;
+
         // Move To Mouse Pos
         UI_Utility.MoveTo(thisCanvas, buttonGroup, (Vector2)Input.mousePosition + cursorOffset);
     }

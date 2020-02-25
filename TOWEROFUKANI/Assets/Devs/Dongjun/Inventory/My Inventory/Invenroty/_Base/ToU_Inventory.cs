@@ -14,7 +14,7 @@ public class ToU_Inventory : InventoryBase
     }
     public override void DropItem(int index, int amount)
     {
-        amount = Math.Max(0, amount);
+        amount = Mathf.Clamp(amount, 0, GetItem(index).Info.Count);
         RemoveItem(index, amount);
         ItemDB.Inst.SpawnDroppedItem(items[index].Info.ItemName, amount);
     }

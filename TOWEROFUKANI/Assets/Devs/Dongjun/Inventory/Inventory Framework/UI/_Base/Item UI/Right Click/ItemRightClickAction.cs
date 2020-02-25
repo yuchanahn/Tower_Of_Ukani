@@ -18,40 +18,38 @@ public class ItemRightClickAction : MonoBehaviour
         contextMenu.Open();
 
         // Set Title
-        //contextMenu.SetTitle(item.Name);
+        contextMenu.SetTitle(item.Info.ItemName);
 
         // Spawn Context Menu Buttons
         SetContextMenuButtons(item, contextMenu);
     }
     protected virtual void SetContextMenuButtons(Item item, UI_Screen_ItemContextMenu contextMenu)
     {
-        //if (item is ConsumableItem)
-        //    contextMenu.AddButton("Consume", item as ConsumableItem, contextMenu, ConsumeItem);
+        if (item is ConsumableItem)
+        {
+            contextMenu.AddButton("Consume", item as ConsumableItem, contextMenu, (i, contenxtmMenu) =>
+                {
+                    if (i == null) return;
 
-        //contextMenu.AddButton("Drop", item, contextMenu, DropItem);
-        //contextMenu.AddButton("Remove", item, contextMenu, RemoveItem);
+                    if (i.Consume()) i.Inventory.RemoveItem(i);
+                    contextMenu.Close();
+                });
+        }
+
+        contextMenu.AddButton("Drop", item, contextMenu, (i, contenxtmMenu) =>
+        {
+            if (i == null) return;
+
+            i.Inventory.DropItem(i.Inventory.GetIndex_Item(i));
+            contextMenu.Close();
+        });
+
+        contextMenu.AddButton("Remove", item, contextMenu, (i, contenxtmMenu) =>
+        {
+            if (i == null) return;
+
+            i.Inventory.RemoveItem(i.Inventory.GetIndex_Item(i), i.Info.Count);
+            contextMenu.Close();
+        });
     }
-
-    //protected virtual void ConsumeItem(ConsumableItem item, UI_Screen_ItemContextMenu contextMenu)
-    //{
-    //    item.Consume();
-    //    item.Inventory.RemoveItem(item, 1);
-
-    //    if (item.Count == 0)
-    //        contextMenu.Close();
-    //}
-    //protected virtual void DropItem(Item item, UI_Screen_ItemContextMenu contextMenu)
-    //{
-    //    item.Inventory.DropItem(item, 1);
-
-    //    if (item.Count == 0)
-    //        contextMenu.Close();
-    //}
-    //protected virtual void RemoveItem(Item item, UI_Screen_ItemContextMenu contextMenu)
-    //{
-    //    item.Inventory.RemoveItem(item, 1);
-
-    //    if (item.Count == 0)
-    //        contextMenu.Close();
-    //}
 }
