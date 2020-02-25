@@ -23,15 +23,15 @@ public static class PlayerWeaponKeys
 
     public static bool GetKey(KeyCode keyCode)
     {
-        return Input.GetKey(keyCode) && PlayerInputManager.Inst.CanUseWeapon;
+        return PlayerInputManager.Inst.CanUseWeapon && Input.GetKey(keyCode);
     }
     public static bool GetKeyDown(KeyCode keyCode)
     {
-        return Input.GetKeyDown(keyCode) && PlayerInputManager.Inst.CanUseWeapon;
+        return PlayerInputManager.Inst.CanUseWeapon && Input.GetKeyDown(keyCode);
     }
     public static bool GetKeyUp(KeyCode keyCode)
     {
-        return Input.GetKeyUp(keyCode) && PlayerInputManager.Inst.CanUseWeapon;
+        return PlayerInputManager.Inst.CanUseWeapon && Input.GetKeyUp(keyCode);
     }
 }
 

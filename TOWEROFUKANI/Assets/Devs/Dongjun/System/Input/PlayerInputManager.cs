@@ -151,6 +151,8 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
     #region Method: Weapon
     private void UpdateWeaponKey()
     {
+        Debug.Log(CanUseWeapon);
+
         // UI 위에서 무기 버튼을 누르면 무기 사용 못함.
         if (UI_Utility.IsMouseOverUI() && (Input.GetKey(PlayerWeaponKeys.MainAbility) || Input.GetKey(PlayerWeaponKeys.SubAbility)))
         {
@@ -158,12 +160,9 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
             return;
         }
 
-        // UI 위에서 무기 버튼을 눌렀을 때 이후에도 버튼을 계속 누르고 있으면 무기 사용 못함.
-        if (!CanUseWeapon && (Input.GetKeyDown(PlayerWeaponKeys.MainAbility) || Input.GetKeyDown(PlayerWeaponKeys.SubAbility)))
-            return;
-
         // 다시 무기 사용 가능.
-        CanUseWeapon = true;
+        if (!(Input.GetKey(PlayerWeaponKeys.MainAbility) || Input.GetKey(PlayerWeaponKeys.SubAbility)))
+            CanUseWeapon = true;
     }
     #endregion
 }
