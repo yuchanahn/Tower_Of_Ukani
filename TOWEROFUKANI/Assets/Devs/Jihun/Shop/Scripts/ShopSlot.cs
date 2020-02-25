@@ -5,20 +5,16 @@ using UnityEngine.UI;
 
 public class ShopSlot : MonoBehaviour
 {
-    #region Var:UI
     public ItemInfo item;
 
     public Image itemSpriteImage;
     public Text itemNameTxt;
     public Text itemDescTxt;
-    #endregion
 
-    #region Var:Item Costs
     public List<ItemCost> itemCosts = new List<ItemCost>();
 
     public Transform itemCostsRoot;
     [SerializeField] private ItemCostSlot itemCostPrefab;
-    #endregion
 
     public void SetItem(ItemInfo item, params ItemCost[] itemCosts)
     {
