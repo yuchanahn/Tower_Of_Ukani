@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Dongjun.Helper;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,27 +14,39 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
     public Vector2? mCeilingPos = null;
     public bool IsFollowEndToCeiling = false;
     public bool FindCeiling = false;
-    public bool IsCeilingNear() => Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) < 0.1f;
-    public bool IsCeilingNearOf() => mCeilingPos is null ? true : Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) > mCeilingDetectRange;
+
+    public bool IsCeilingNear() => 
+        Vector2.Distance(transform.position, mCeilingPos.Value.Foot(Vector2.one).Add(y: -mMob.Size.y / 2)) < 0.1f;
+
+    public bool IsCeilingNearOf()
+    {
+        var r = mCeilingPos is null ? false :
+                                      (Vector2.Distance(transform.position, mCeilingPos.GetValueOrDefault()) < mCeilingDetectRange);
+        return r;
+    }
+
     public static List<GameObject> HangWalls = new List<GameObject>();
 
     [SerializeField, Range(0, 100)] public int CeilingPercentage;
     [SerializeField] public float CeilingCoolTime = 1f;
     [SerializeField] Vector2 mHangSize;
     [SerializeField] float RangeOfWakeAround;
-    float mCeilingCoolTimeT = 0;
+    public float mCeilingCoolTimeT = 0;
 
     public void WakeAround()
     {
+        if (!IsFollowEndToCeiling) return;
+        
         mCeilingCoolTimeT = 0;
-
-
+        
         foreach (var i in 
             Physics2D.CircleCastAll(transform.position, RangeOfWakeAround, Vector2.zero)
             .Map(x => x.collider.gameObject)
-            .Filter(x => x.GetComponent<FlowerBat_Task_Hang>()))
+            .Filter(x => x.GetComponent<FlowerBat_Task_Hang>())
+            .Map(x => x.GetComponent<FlowerBat_Task_Hang>())
+            .Filter(x => x.IsFollowEndToCeiling))
         {
-            i.GetComponent<FlowerBat_Task_Hang>().mCeilingCoolTimeT = 0f;
+            i.mCeilingCoolTimeT = 0f;
         }
     }
 
@@ -55,7 +68,7 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
     public bool Tick()
     {
         mMob.MS = FlyingMob_Base.MovementState.NoJPS;
-        mCeilingCoolTimeT += Time.deltaTime;
+        
         if (mCeilingCoolTimeT < CeilingCoolTime)
         {
             if (MyCeiling != null)
@@ -77,7 +90,7 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
         else
         {
             mMob.MS = FlyingMob_Base.MovementState.NoJPS;
-            mMob.Dir2d = (mCeilingPos.Value - (Vector2)transform.position).normalized;
+            mMob.Dir2d = (mCeilingPos.Value.Foot(Vector2.one).Add(y: -mMob.Size.y / 2) - (Vector2)transform.position).normalized;
             mMob.SetAni(eMobAniST.Fly);
         }
         

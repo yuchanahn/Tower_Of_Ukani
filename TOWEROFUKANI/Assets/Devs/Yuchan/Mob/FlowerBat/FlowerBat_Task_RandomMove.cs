@@ -22,6 +22,12 @@ public class FlowerBat_Task_RandomMove : MonoBehaviour, ITask
         mMob = GetComponent<Mob_FlowerBat>();
     }
 
+
+    public void ReSet()
+    {
+        mMoveMgr.Clear();
+    }
+
     public bool Tick()
     {
         mMob.SetAni(eMobAniST.Fly);

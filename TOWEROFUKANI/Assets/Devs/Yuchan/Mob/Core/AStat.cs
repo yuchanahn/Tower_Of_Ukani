@@ -62,4 +62,10 @@ public class AStat : MonoBehaviour, IDamage
         return mHP;
     }
 
+    public bool CheckDeath(AttackData atkData)
+    {
+        var dmg = atkData.damage.Value;
+        var r = HP - dmg;
+        return !IsIgnoreHit && r <= 0;
+    }
 }

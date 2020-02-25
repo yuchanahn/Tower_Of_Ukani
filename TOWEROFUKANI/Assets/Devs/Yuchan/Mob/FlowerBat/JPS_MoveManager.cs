@@ -4,7 +4,6 @@ using UnityEngine;
 internal class JPS_MoveManager
 {
     Queue<Vector2> mMoveQueue = new Queue<Vector2>();
-
     public void Clear()
     {
         mMoveQueue.Clear();
@@ -12,6 +11,7 @@ internal class JPS_MoveManager
     public Vector2? GetVel(JPS_PathFinder mPathFinder, Vector2 ori, Vector2? target = null, float speed = 0f)
     {
         GridView.Inst[1].GetJPS_Path();
+        
         if (mMoveQueue.Count > 0)
         {
             var tpos = mMoveQueue.Peek();
@@ -36,6 +36,10 @@ internal class JPS_MoveManager
             {
                 mMoveQueue.Enqueue(i);
             }
+            if(mMoveQueue.Count == 0)
+            {
+                return Vector2.zero;
+            }
             return (mMoveQueue.Peek() - ori).normalized * Mathf.Clamp(speed, 0, Vector2.Distance(mMoveQueue.Peek(), ori) / Time.fixedDeltaTime);
         }
     }
@@ -45,7 +49,6 @@ internal class JPS_MoveManager
     public Vector2 GetVelIfUpdateTarget(JPS_PathFinder mPathFinder, Vector2 origin, Vector2 target, float speed)
     {
         var tposList = mPathFinder.Find(origin, target);
-
         if (tposList.Length == 0)
         {
             return Vector2.zero;

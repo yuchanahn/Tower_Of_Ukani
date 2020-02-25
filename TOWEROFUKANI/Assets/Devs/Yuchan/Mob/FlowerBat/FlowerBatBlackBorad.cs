@@ -26,62 +26,77 @@ public class FlowerBatBlackBorad : BlackBoard_Base
         JPS_FollowTask      = GetComponent<FlyingMob_JPS_Task_Follow>();
         AttackTask          = GetComponent<FlowerBat_Task_Attack>();
         FleeTask            = GetComponent<FlowerBat_Task_Flee>();
-
-        FindCoolTimeT = FindCoolTime;
     }
-
-    float FindCoolTime => HangTask.CeilingCoolTime;
-    float FindCoolTimeT;
+    float FindCeilingT = 0f;
+    bool bUseTimer = true;
     public bool IsFindCeiling()
     {
-        FindCoolTimeT += Time.deltaTime;
-        if (FindCoolTimeT < FindCoolTime)
-        {
-            return false;
-        }
-        if(HangTask.IsCeilingNearOf())
+        HangTask.mCeilingCoolTimeT += Time.deltaTime;
+        if (!HangTask.IsCeilingNearOf())
         {
             if (HangTask.MyCeiling != null)
                 FlowerBat_Task_Hang.HangWalls.Remove(HangTask.MyCeiling.gameObject);
-            goto NewFind;
         }
-
-        if (HangTask.FindCeiling)
+        else if (HangTask.FindCeiling)
         {
             HangTask.IsFollowEndToCeiling = HangTask.IsCeilingNear();
             return true;
         }
 
-        NewFind:
 
-        var Tr = Detect.GetHitTrOrNull(transform.position, Vector2.up, HangTask.mCeilingDetectRange, GM.SoildGroundLayer);
-        if (HangTask.FindCeiling = HangTask.MyCeiling = Tr)
-        {
-            if (FlowerBat_Task_Hang.HangWalls.Contains(HangTask.MyCeiling.gameObject))
-            {
-                return false;
-            }
-            if (!ARandom.Get(HangTask.CeilingPercentage))
-            {
-                FindCoolTimeT = 0;
-                return false;
-            }
-            HangTask.mCeilingPos = Tr.position.Foot(Vector2.one).Add(y: -mMob.Size.y / 2);
-        }
-        else
+        if((FindCeilingT += Time.deltaTime) < HangTask.CeilingCoolTime)
         {
             return false;
         }
+        // 벽에 매달리지 않는다.
+        // 벽을 검색 하지 않는 타이머를 설정한 뒤 빠져나온다.
+        if (bUseTimer && !ARandom.Get(HangTask.CeilingPercentage))
+        {
+            FindCeilingT = 0;
+            return false;
+        }
+        else
+        {
+            var Tr = Detect.GetHitTrOrNull(transform.position, Vector2.up, HangTask.mCeilingDetectRange, GM.SoildGroundLayer);
+            if (Tr)
+            {
+                HangTask.MyCeiling = Tr;
+                // 발견한 천장이 이미 누가 매달려 있는 벽이라면?
+                if (FlowerBat_Task_Hang.HangWalls.Contains(HangTask.MyCeiling.gameObject))
+                {
+                    bUseTimer = false;
+                    return false;
+                }
 
-        FlowerBat_Task_Hang.HangWalls.Add(Tr.gameObject);
-        HangTask.IsFollowEndToCeiling = HangTask.IsCeilingNear();
+                //찾은 천장을 목적지로 설정.
+                HangTask.mCeilingPos = Tr.position;
+                //천장을 찾았다.
+                HangTask.FindCeiling = true;
+                bUseTimer = true;
+            }
+            else
+            {
+                bUseTimer = false;
+                return false;
+            }
 
-        return true;
+            FlowerBat_Task_Hang.HangWalls.Add(Tr.gameObject);
+            HangTask.IsFollowEndToCeiling = HangTask.IsCeilingNear();
+            return true;
+        }
     }
 
 
 
-    public bool AgroCheck() => !HangTask.IsFollowEndToCeiling && Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AgroRange;
+    public bool AgroCheck()
+    {
+        bool r = !HangTask.IsFollowEndToCeiling && Vector2.Distance(transform.position, GM.PlayerPos) <= mMob.AgroRange;
+        if(r)
+        {
+            RandomMoveTask.ReSet();
+        }
+        return r;
+    }
     public bool Follow() => JPS_FollowTask.Tick();
 
 

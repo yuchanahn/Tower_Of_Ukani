@@ -542,7 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyCeiling: {fileID: 0}
-  mCeilingDetectRange: 3
+  mCeilingDetectRange: 4
   IsFollowEndToCeiling: 0
   FindCeiling: 0
   CeilingPercentage: 50
@@ -561,7 +561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f71682adb84eb4d80bf0d3f5ec50ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PathFinder: {fileID: 0}
   IsFollowing: 0
 --- !u!114 &221602579
 MonoBehaviour:

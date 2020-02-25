@@ -1653,7 +1653,7 @@ PrefabInstance:
     - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -1796,7 +1796,7 @@ PrefabInstance:
     - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -2051,7 +2051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridV: {fileID: 240870021}
   pr: {fileID: 6025808219906693540, guid: 1e18a55bb1887d14ebaf5fec00cf4d62, type: 3}
-  ShowingPath: 0
+  ShowingPath: 1
   mSize: 1
 --- !u!1001 &249727434
 PrefabInstance:
@@ -2258,7 +2258,7 @@ PrefabInstance:
     - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -7784,7 +7784,7 @@ PrefabInstance:
     - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -11548,12 +11548,12 @@ PrefabInstance:
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.65
+      value: 8.45
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.24
+      value: 3.13
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -11563,17 +11563,17 @@ PrefabInstance:
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -11605,6 +11605,26 @@ PrefabInstance:
       propertyPath: mPathFinder
       value: 
       objectReference: {fileID: 240870022}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: mMoveData.Speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AgroRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: CeilingCoolTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7510034718012629857, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: CeilingPercentage
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
 --- !u!4 &1810747087 stripped
@@ -12832,7 +12852,7 @@ PrefabInstance:
     - target: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4835304523073473399, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}

@@ -146,6 +146,7 @@ public abstract class FlyingMob_Base : Mob_Base
         MovementAction[MS]();
 
         mRb2d.velocity = Dir2d * (IsJPSVel ? 1f : MoveSpeed) * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
+
         Animation();
         mAnimator.SetDuration(m_Ani[mCurAniST].Item2);
         if (mAniStart)
@@ -157,6 +158,7 @@ public abstract class FlyingMob_Base : Mob_Base
         {
             mAnimator.Play(m_Ani[mCurAniST].Item1);
         }
+        IsJPSVel = false;
     }
 
 
