@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Dongjun.Helper;
+using UnityEngine;
 
 public class DroppedActiveItem : DroppedItem
 {
@@ -8,13 +9,16 @@ public class DroppedActiveItem : DroppedItem
         ActiveItem activeItem = Item as ActiveItem;
 
         // Spawn Item
-        if (!DroppedFromInventory)
-            activeItem = Instantiate(activeItem).GetComponent<ActiveItem>();
+        if (Item.gameObject.IsPrefab())
+            activeItem = ItemDB.Inst.SpawnItem(Item.Info.ItemName).GetComponent<ActiveItem>();
 
         // Add To Inventory
         if (PlayerInventoryManager.inventory.TryUpgradeItem(activeItem.Info.ItemName)
-        || PlayerInventoryManager.weaponHotbar.TryUpgradeItem(activeItem.Info.ItemName))
+        || PlayerInventoryManager.activeHotbar.TryUpgradeItem(activeItem.Info.ItemName))
+        {
+            Destroy(activeItem.gameObject);
             goto EXIT;
+        }
 
         if (PlayerInventoryManager.activeHotbar.TryAddItem(activeItem))
             goto EXIT;

@@ -13,6 +13,10 @@ namespace Dongjun.Helper
 
     public static class General
     {
+        public static bool IsPrefab(this GameObject go)
+        {
+            return !go.scene.IsValid();
+        }
         public static void GetComponent<T>(this GameObject go, ref T variable) where T : Component
         {
             variable = go.GetComponent<T>();

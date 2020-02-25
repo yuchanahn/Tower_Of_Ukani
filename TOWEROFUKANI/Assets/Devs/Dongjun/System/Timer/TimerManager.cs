@@ -4,125 +4,75 @@ using UnityEngine;
 
 public class TimerManager : SingletonBase<TimerManager>
 {
-    private Dictionary<GameObject, List<I_TimerData>> timers_Update = new Dictionary<GameObject, List<I_TimerData>>();
-    private Dictionary<GameObject, List<I_TimerData>> timers_LateUpdate = new Dictionary<GameObject, List<I_TimerData>>();
-    private Dictionary<GameObject, List<I_TimerData>> timers_FixedUpdate = new Dictionary<GameObject, List<I_TimerData>>();
+    private List<I_TimerData> timers_Update = new List<I_TimerData>();
+    private List<I_TimerData> timers_LateUpdate = new List<I_TimerData>();
+    private List<I_TimerData> timers_FixedUpdate = new List<I_TimerData>();
 
     private void Update()
     {
-        TickTimers(timers_Update);
+        TickTimers(timers_Update, Time.deltaTime);
     }
     private void LateUpdate()
     {
-        TickTimers(timers_LateUpdate);
+        TickTimers(timers_LateUpdate, Time.deltaTime);
     }
     private void FixedUpdate()
     {
-        TickTimers(timers_FixedUpdate);
+        TickTimers(timers_FixedUpdate, Time.fixedDeltaTime);
     }
 
-    public void TickTimers(Dictionary<GameObject, List<I_TimerData>> timers)
+    public void TickTimers(List<I_TimerData> timers, float deltaTime)
     {
         if (timers.Count == 0)
             return;
 
-        GameObject curTickingObj;
         for (int i = timers.Count - 1; i >= 0; i--)
         {
-            curTickingObj = timers.ElementAt(i).Key;
-
             // Check Game Object
-            if (curTickingObj == null)
+            if (timers[i].User == null)
             {
-                timers.Remove(curTickingObj);
+                timers.RemoveAt(i);
                 continue;
             }
 
             // Run Timer
-            for (int j = timers[curTickingObj].Count - 1; j >= 0; j--)
-            {
-                if (timers[curTickingObj][j] == null)
-                {
-                    timers[curTickingObj].RemoveAt(j);
-                    continue;
-                }
-                timers[curTickingObj][j].Tick(Time.deltaTime);
-            }
+            timers[i].Tick(deltaTime);
         }
     }
-
-    // Update
-    public void AddTick_Update(GameObject go, I_TimerData data)
+    public void AddTimer(I_TimerData data, TickMode mode)
     {
-        if (timers_Update.ContainsKey(go) && timers_Update[go].Contains(data))
+        if (data == null || mode == TickMode.Manual)
             return;
 
-        if (timers_Update.ContainsKey(go))
+        switch (mode)
         {
-            timers_Update[go].Add(data);
-            return;
+            case TickMode.Update:
+                if (!timers_Update.Contains(data)) timers_Update.Add(data);
+                break;
+            case TickMode.LateUpdate:
+                if (!timers_LateUpdate.Contains(data)) timers_LateUpdate.Add(data);
+                break;
+            case TickMode.FixedUpdate:
+                if (!timers_FixedUpdate.Contains(data)) timers_FixedUpdate.Add(data);
+                break;
         }
-
-        if (!timers_Update.ContainsKey(go))
-            timers_Update.Add(go, new List<I_TimerData>());
-
-        timers_Update[go].Add(data);
     }
-    public void RemoveTick_Update(GameObject go, I_TimerData data)
+    public void RemoveTimer(I_TimerData data, TickMode mode)
     {
-        if (!timers_Update.ContainsKey(go) || !timers_Update[go].Contains(data))
+        if (data == null || mode == TickMode.Manual)
             return;
 
-        timers_Update[go].Remove(data);
-    }
-
-    // LateUpdate
-    public void AddTick_LateUpdate(GameObject go, I_TimerData data)
-    {
-        if (timers_LateUpdate.ContainsKey(go) && timers_LateUpdate[go].Contains(data))
-            return;
-
-        if (timers_LateUpdate.ContainsKey(go))
+        switch (mode)
         {
-            timers_LateUpdate[go].Add(data);
-            return;
+            case TickMode.Update:
+                if (timers_Update.Contains(data)) timers_Update.Remove(data);
+                break;
+            case TickMode.LateUpdate:
+                if (timers_LateUpdate.Contains(data)) timers_LateUpdate.Remove(data);
+                break;
+            case TickMode.FixedUpdate:
+                if (timers_FixedUpdate.Contains(data)) timers_FixedUpdate.Remove(data);
+                break;
         }
-
-        if (!timers_LateUpdate.ContainsKey(go))
-            timers_LateUpdate.Add(go, new List<I_TimerData>());
-
-        timers_LateUpdate[go].Add(data);
-    }
-    public void RemoveTick_LateUpdate(GameObject go, I_TimerData data)
-    {
-        if (!timers_LateUpdate.ContainsKey(go) || !timers_LateUpdate[go].Contains(data))
-            return;
-
-        timers_LateUpdate[go].Remove(data);
-    }
-
-    // FixedUpdate
-    public void AddTick_FixedUpdate(GameObject go, I_TimerData data)
-    {
-        if (timers_Update.ContainsKey(go) && timers_Update[go].Contains(data))
-            return;
-
-        if (timers_Update.ContainsKey(go))
-        {
-            timers_Update[go].Add(data);
-            return;
-        }
-
-        if (!timers_Update.ContainsKey(go))
-            timers_Update.Add(go, new List<I_TimerData>());
-
-        timers_Update[go].Add(data);
-    }
-    public void RemoveTick_FixedUpdate(GameObject go, I_TimerData data)
-    {
-        if (!timers_Update.ContainsKey(go) || !timers_Update[go].Contains(data))
-            return;
-
-        timers_Update[go].Remove(data);
     }
 }

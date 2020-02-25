@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Dongjun.Helper;
 using UnityEngine;
 
 public class DroppedResourceItem : DroppedItem
@@ -10,8 +9,8 @@ public class DroppedResourceItem : DroppedItem
         ResourceItem resourceItem = Item as ResourceItem;
 
         // Spawn Item
-        if (!DroppedFromInventory)
-            resourceItem = Instantiate(resourceItem).GetComponent<ResourceItem>();
+        if (Item.gameObject.IsPrefab())
+            resourceItem = ItemDB.Inst.SpawnItem(Item.Info.ItemName).GetComponent<ResourceItem>();
 
         // Add To Inventory
         if (PlayerInventoryManager.inventory.TryAddItem(resourceItem))

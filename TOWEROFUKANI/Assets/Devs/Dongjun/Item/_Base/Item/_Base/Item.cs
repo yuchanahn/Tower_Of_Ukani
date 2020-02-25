@@ -55,10 +55,21 @@ public abstract class Item : MonoBehaviour
     {
 
     }
-    public void OnDrop()
+    protected virtual DroppedItem SpawnDroppedItem(Vector2 pos)
+    {
+        DroppedItem droppedItem = Instantiate(DroppedItemPrefab, pos, Quaternion.identity).GetComponent<DroppedItem>();
+        droppedItem.SetRef_Item(this);
+        return droppedItem;
+    }
+    public DroppedItem OnDrop()
     {
         OnRemovedFromInventory();
-        this.SpawnDroppedItem();
+        return SpawnDroppedItem(GM.PlayerPos);
+    }
+    public DroppedItem OnDrop(Vector2 pos)
+    {
+        OnRemovedFromInventory();
+        return SpawnDroppedItem(pos);
     }
     public void OnRemove()
     {

@@ -14,9 +14,7 @@ public class ToU_Inventory : InventoryBase
     }
     public override void DropItem(int index, int amount)
     {
-        // ※ 주의: 개별 스탯이 없는 스택 가능한 아이템만 이 방식으로 드롭 해야함!!! 
-
-        amount = Math.Max(0, amount);
+        amount = Mathf.Clamp(amount, 0, GetItem(index).Info.Count);
         RemoveItem(index, amount);
         ItemDB.Inst.SpawnDroppedItem(items[index].Info.ItemName, amount);
     }

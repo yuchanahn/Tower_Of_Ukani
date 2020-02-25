@@ -98,6 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1635102214554800709}
   - component: {fileID: 1635102214554800708}
+  - component: {fileID: 1987117009425902907}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -141,7 +142,7 @@ MonoBehaviour:
   slotUIGroup: {fileID: 1635102215533688481}
   slotUIPrefab: {fileID: 1121119160311241372, guid: 9714c7906a904cb44b277061d33518d3,
     type: 3}
-  rightClickManager: {fileID: 0}
+  rightClickAction: {fileID: 1987117009425902907}
   weaponItemUI: {fileID: -6411987293264075731, guid: ada4f8660c7c76544989b8c33fc4035e,
     type: 3}
   activeItemUI: {fileID: 4789927352329266350, guid: 07ecc7e3db4e6e44da369822b7fbeebd,
@@ -149,6 +150,21 @@ MonoBehaviour:
   consumableItemUI: {fileID: 7326013896762184801, guid: 45ea5f7df9610334c8fed65feca335c5,
     type: 3}
   resourceItemUI: {fileID: 3984776937621524389, guid: 1f5dd496c23705147807aa836800949e,
+    type: 3}
+--- !u!114 &1987117009425902907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635102214554800710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1bff0e56f88874286cdad54fd15c76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemContextMenuParent: {fileID: 1635102214709148396}
+  itemContextMenuPrefab: {fileID: 2726148151730920399, guid: 024d351d85c665645a13404965715919,
     type: 3}
 --- !u!1 &1635102214559499923
 GameObject:
@@ -249,7 +265,7 @@ RectTransform:
   - {fileID: 1635102214559499922}
   - {fileID: 1635102215011614243}
   m_Father: {fileID: 1635102216084493611}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -445,7 +461,7 @@ Transform:
   m_Children:
   - {fileID: 1635102216374376125}
   m_Father: {fileID: 1635102216084493611}
-  m_RootOrder: 2
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1635102214709148395
 MonoBehaviour:
@@ -822,7 +838,7 @@ MonoBehaviour:
   slotUIGroup: {fileID: 1635102214615183839}
   slotUIPrefab: {fileID: 1272346218019525222, guid: ca9d59462583c4b4a984beb02f848d0e,
     type: 3}
-  rightClickManager: {fileID: 0}
+  rightClickAction: {fileID: 0}
   weaponItemUI: {fileID: -6411987293264075731, guid: ada4f8660c7c76544989b8c33fc4035e,
     type: 3}
 --- !u!1 &1635102215110589412
@@ -1019,7 +1035,7 @@ RectTransform:
   - {fileID: 1635102215800312272}
   - {fileID: 1635102216306023052}
   m_Father: {fileID: 1635102216084493611}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1379,7 +1395,6 @@ GameObject:
   - component: {fileID: 1635102215631221657}
   - component: {fileID: 1635102215631221658}
   - component: {fileID: 1635102215631221659}
-  - component: {fileID: 1635102215631221655}
   m_Layer: 0
   m_Name: '[Screen] Active Hotbar'
   m_TagString: Untagged
@@ -1400,7 +1415,7 @@ RectTransform:
   m_Children:
   - {fileID: 1635102215637798458}
   m_Father: {fileID: 1635102216084493611}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1479,25 +1494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95a3275a2aad1541aea999eac96e9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1635102215631221655
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635102215631221661}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1635102215637798459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1546,7 @@ MonoBehaviour:
   slotUIGroup: {fileID: 1635102215005197170}
   slotUIPrefab: {fileID: 5746507321375830064, guid: 698de30edb1faa34db30fb502f37a877,
     type: 3}
-  rightClickManager: {fileID: 0}
+  rightClickAction: {fileID: 0}
   activeItemUI: {fileID: 352634753, guid: 1b127baa701791e46946da5331efbee9, type: 3}
 --- !u!1 &1635102215789769813
 GameObject:
@@ -1565,7 +1561,6 @@ GameObject:
   - component: {fileID: 1635102215789769809}
   - component: {fileID: 1635102215789769810}
   - component: {fileID: 1635102215789769811}
-  - component: {fileID: 1635102215789769839}
   m_Layer: 0
   m_Name: '[Screen] Consumable Hotbar'
   m_TagString: Untagged
@@ -1586,7 +1581,7 @@ RectTransform:
   m_Children:
   - {fileID: 1635102216108526278}
   m_Father: {fileID: 1635102216084493611}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1665,25 +1660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95a3275a2aad1541aea999eac96e9cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1635102215789769839
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635102215789769813}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1635102215800312273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,12 +1787,12 @@ Transform:
   m_Children:
   - {fileID: 1635102215937112679}
   - {fileID: 1635102214872000402}
-  - {fileID: 1635102214709148396}
+  - {fileID: 1635102215259615725}
+  - {fileID: 1635102214572892215}
   - {fileID: 1635102216233267321}
   - {fileID: 1635102215631221660}
   - {fileID: 1635102215789769812}
-  - {fileID: 1635102214572892215}
-  - {fileID: 1635102215259615725}
+  - {fileID: 1635102214709148396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1872,7 +1848,7 @@ MonoBehaviour:
   slotUIGroup: {fileID: 1635102214411281993}
   slotUIPrefab: {fileID: 1121119160311241372, guid: 60d542e3dc26ba745b964938a03535d6,
     type: 3}
-  rightClickManager: {fileID: 0}
+  rightClickAction: {fileID: 0}
   consumableItemUI: {fileID: 7326013896762184801, guid: 45ea5f7df9610334c8fed65feca335c5,
     type: 3}
 --- !u!1 &1635102216227955632
@@ -2008,7 +1984,7 @@ RectTransform:
   m_Children:
   - {fileID: 1635102215021995384}
   m_Father: {fileID: 1635102216084493611}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

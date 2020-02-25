@@ -12,8 +12,6 @@ public abstract class DroppedItem : MonoBehaviour
 
     #region Prop: 
     public Item Item => item;
-    public bool DroppedFromInventory
-    { get; private set; } = false;
     #endregion
 
     #region Method: Unity
@@ -30,7 +28,6 @@ public abstract class DroppedItem : MonoBehaviour
     public void SetRef_Item(Item item)
     {
         this.item = item;
-        DroppedFromInventory = true;
     }
     #endregion
 

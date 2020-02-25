@@ -1,5 +1,4 @@
 ﻿using Dongjun.Helper;
-using System.Collections;
 using UnityEngine;
 
 public class DroppedWeapon : DroppedItem
@@ -10,8 +9,8 @@ public class DroppedWeapon : DroppedItem
         WeaponItem weaponItem = Item as WeaponItem;
 
         // Spawn Item
-        if (!DroppedFromInventory)
-            weaponItem = Instantiate(Item).GetComponent<WeaponItem>();
+        if (Item.gameObject.IsPrefab())
+            weaponItem = ItemDB.Inst.SpawnItem(Item.Info.ItemName).GetComponent<WeaponItem>();
 
         // Add To Inventory
         if (PlayerInventoryManager.inventory.TryUpgradeItem(weaponItem.Info.ItemName)

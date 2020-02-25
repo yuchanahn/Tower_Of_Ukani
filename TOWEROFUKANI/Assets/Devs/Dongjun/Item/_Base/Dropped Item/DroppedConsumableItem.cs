@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Dongjun.Helper;
 using UnityEngine;
 
 public class DroppedConsumableItem : DroppedItem
@@ -10,8 +9,8 @@ public class DroppedConsumableItem : DroppedItem
         ConsumableItem consumableItem = Item as ConsumableItem;
 
         // Spawn Item
-        if (!DroppedFromInventory)
-            consumableItem = Instantiate(consumableItem).GetComponent<ConsumableItem>();
+        if (Item.gameObject.IsPrefab())
+            consumableItem = ItemDB.Inst.SpawnItem(Item.Info.ItemName).GetComponent<ConsumableItem>();
 
         // Add To Inventory
         if (PlayerInventoryManager.consumableHotbar.TryAddItem(consumableItem))
