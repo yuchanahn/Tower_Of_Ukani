@@ -9,8 +9,8 @@ public abstract class InventoryUIBase : MonoBehaviour
     [SerializeField] protected Transform slotUIGroup;
     [SerializeField] protected SlotUI slotUIPrefab;
 
-    [Header("Right Click Manager")]
-    [SerializeField] protected ItemRightClickAction rightClickManager;
+    [Header("Right Click Action")]
+    [SerializeField] protected ItemRightClickAction rightClickAction;
     #endregion
 
     #region Prop: 

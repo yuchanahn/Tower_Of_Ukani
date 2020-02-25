@@ -81,7 +81,7 @@ public class OBB_Fist : OBB_Controller_Weapon<OBB_Data_Fist, FistItem>
             () => !GM.Player.IsKicking
                && !GM.Player.Data.groundDetectionData.isGrounded
                && Input.GetKey(KeyCode.S)
-               && Input.GetKeyDown(PlayerWeaponKeys.MainAbility))
+               && PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility))
             .AddBehaviour(bvr_Slam, true);
 
         // Basic Attack

@@ -12,7 +12,7 @@ public class ConsumableHotbarUI : InventoryUIBase
         ItemUI itemUI = Instantiate(consumableItemUI.gameObject).GetComponent<ItemUI>();
 
         if (itemUI != null)
-            itemUI.Init(item.Info.ItemName, slotUIs[slotIndex].transform, rightClickManager);
+            itemUI.Init(item.Info.ItemName, slotUIs[slotIndex].transform, rightClickAction);
 
         return itemUI;
     }

@@ -31,7 +31,7 @@ public class InventoryUI : InventoryUIBase
         }
 
         if (itemUI != null)
-            itemUI.Init(item.Info.ItemName, slotUIs[slotIndex].transform, rightClickManager);
+            itemUI.Init(item.Info.ItemName, slotUIs[slotIndex].transform, rightClickAction);
 
         return itemUI;
     }
