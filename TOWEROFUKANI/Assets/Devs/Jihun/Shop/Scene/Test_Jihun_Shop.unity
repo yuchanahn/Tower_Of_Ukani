@@ -294,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopUI: {fileID: 0}
   shopItemSpawnPoint: {fileID: 0}
+  shopRange: 10
 --- !u!1 &150252108
 GameObject:
   m_ObjectHideFlags: 0
