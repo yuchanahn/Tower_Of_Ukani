@@ -431,7 +431,7 @@ MonoBehaviour:
   MobSize: {x: 1, y: 1}
   mAniSpeedData: []
   mMoveData:
-    Speed: 2
+    Speed: 3
     Dir2d: {x: 0, y: 0}
   AddSpeed: 0
   mSprTr: {fileID: 7408284209274691878}
@@ -549,6 +549,7 @@ MonoBehaviour:
   CeilingCoolTime: 1
   mHangSize: {x: 0.7, y: 1.5}
   RangeOfWakeAround: 4
+  mCeilingCoolTimeT: 0
 --- !u!114 &4835304523073473399
 MonoBehaviour:
   m_ObjectHideFlags: 0
