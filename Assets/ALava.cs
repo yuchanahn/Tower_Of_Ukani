@@ -41,7 +41,7 @@ public class ALava : MonoBehaviour
         {
             Rigidbody2D rb2D = overlaps[i].GetComponent<Rigidbody2D>();
 
-            var mob = overlaps[i].GetComponent<GroundMob_Base>();
+            var mob = overlaps[i].GetComponent<Mob_Base>();
 
             if (mob != null && rb2D != null)
             {

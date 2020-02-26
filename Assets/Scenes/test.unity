@@ -529,7 +529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &642986950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,10 +724,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridV: {fileID: 1040578065}
-  mapData:
-    map_w: 0
-    map_h: 0
-  node_p: {fileID: 0}
 --- !u!4 &789407202 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 438370, guid: bdae4992f567bcf46a50f4df3afebff9,
@@ -1305,10 +1301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridV: {fileID: 1472499257}
-  mapData:
-    map_w: 0
-    map_h: 0
-  node_p: {fileID: 2209847865847341150, guid: 3e484e09b43cb554bbe3a86c9cd72ab5, type: 3}
 --- !u!1001 &1472783712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1553,7 +1545,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895211780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.9, y: 32.93, z: 0}
+  m_LocalPosition: {x: 29.49, y: 11.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
