@@ -49,7 +49,7 @@ public class ShopManager : SingletonBase<ShopManager>
 
     bool DistanceCheck()
     {
-        float distance = Vector3.Distance(GM.PlayerPos, shopItemSpawnPoint.position);
+        float distance = Vector2.Distance(GM.PlayerPos, shopItemSpawnPoint.position);
 
         //Debug.Log(distance.ToString() + ", " + shopRange.ToString());
         return (distance < shopRange);

@@ -13,7 +13,7 @@ public class Chest : MonoBehaviour
 
     List<ChestItemSlot> slots = new List<ChestItemSlot>();
 
-    public ChestItem selectedItem;
+    public ChestItem selectedItem = null;
 
     private void Start()
     {
@@ -22,15 +22,18 @@ public class Chest : MonoBehaviour
 
     void Init()
     {
-        SetNewItem("Machinegun", 1);
-        SetNewItem("Wooden Shortbow", 2);
+        selectedItem = null;
+        SetNewItem("Machinegun");
+        SetNewItem("Wooden Shortbow");
         SetNewItem("Potion of Healing", 5);
     }
 
     //슬롯 오브젝트를 레이아웃 그룹에 생성하고 프로퍼티 설정
-    void SetNewItem(string name, int count)
+    void SetNewItem(string name, int count = 1)
     {
         ChestItemSlot slot = Instantiate<ChestItemSlot>(slotPrefab);
+
+        slots.Add(slot);
 
         slot.transform.SetParent(slotRoot);
         slot.transform.localScale = Vector3.one;
@@ -51,6 +54,16 @@ public class Chest : MonoBehaviour
         }
     }
 
+    public void SelectItem(ChestItemSlot select)
+    {
+        foreach (ChestItemSlot slot in slots)
+        {
+            slot.transform.localScale = Vector3.one;
+        }
+        select.transform.localScale = Vector3.one * 1.1f;
+        selectedItem = select.item;
+    }
+
     public void OpenChest()
     {
         chestSelectOption.gameObject.SetActive(true);
@@ -63,6 +76,8 @@ public class Chest : MonoBehaviour
 
     public void SpawnItem()
     {
+        if (selectedItem == null) return;
+
         ItemDB.Inst.SpawnDroppedItem(transform.position, selectedItem.info.ItemName, selectedItem.count);
         isOpened = true;
         CloseChest();
@@ -70,11 +85,12 @@ public class Chest : MonoBehaviour
 }
 
 [System.Serializable]
-public struct ChestItem
+public class ChestItem
 {
     public ItemInfo info;
     public int count;
 
+    public ChestItem() { }
     public ChestItem(ItemInfo info, int count)
     {
         this.info = info;

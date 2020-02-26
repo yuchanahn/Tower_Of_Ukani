@@ -18,9 +18,8 @@ public class Shop : MonoBehaviour
     // 슬롯들을 리스트에 넣어줌.
     void Init()
     {
-        SellNewItem("Exzodia", new ItemCost("Gold", 1), new ItemCost("Silver", 3));
+        SellNewItem("Exzodia", new ItemCost("Gold", 1));
         SellNewItem("Machinegun");
-        SellNewItem("Silver");
         SellNewItem("Gold");
 
 
