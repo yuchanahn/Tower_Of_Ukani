@@ -50,6 +50,7 @@ MonoBehaviour:
     itemStackLimit: 0
     damageType: 
     range: 
-  droppedItemPrefab: {fileID: 2134229020927743989, guid: bada442b86495b04e8c2cdc4e5555bde,
+  droppedItemPrefab: {fileID: 7411933720917081589, guid: bada442b86495b04e8c2cdc4e5555bde,
     type: 3}
-  god: 2
+  shieldEffectPrefab: {fileID: 7829167238446700104, guid: 16ace71f14d8fa84ca3d8dd95f3b75a0,
+    type: 3}

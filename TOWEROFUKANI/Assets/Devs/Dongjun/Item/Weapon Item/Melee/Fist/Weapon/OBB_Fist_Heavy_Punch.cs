@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_Fist_Heavy_Punch : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem>
+public class OBB_Fist_Heavy_Punch : Weapon_State_Base<OBB_Data_Fist, FistItem>
 {
     [Header("Hit Check")]
     [SerializeField] private Rigidbody2D hitCheck_0;

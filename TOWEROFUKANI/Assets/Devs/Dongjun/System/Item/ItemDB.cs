@@ -41,6 +41,8 @@ public class ItemDB : SingletonBase<ItemDB>
         {
             items[i] = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guids[i])).GetComponent<Item>();
         }
+
+        PrefabUtility.RecordPrefabInstancePropertyModifications(this);
     }
     #endregion
 

@@ -171,6 +171,9 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
     public void Heal(float amount)
     {
+        if (amount <= 0)
+            return;
+
         // Store Heal Amount
         HealReceived = amount;
 
@@ -222,15 +225,14 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
         attackData.damage = new FloatStat(DamageToDeal);
 
-        // Damage Mob
-        float mobHP = iDamage.Hit(attackData);
-
-        // Trigger Item Effect (Kill)
-        if (mobHP <= 0)
+        if (iDamage.CheckDeath(attackData))
         {
             KilledMob = target.GetComponent<Mob_Base>();
             PlayerActionEventManager.Trigger(PlayerActions.Kill);
         }
+
+        // Damage Mob
+        iDamage.Hit(attackData);
 
         // Reset Damaged Mob
         DamagedMob = null;

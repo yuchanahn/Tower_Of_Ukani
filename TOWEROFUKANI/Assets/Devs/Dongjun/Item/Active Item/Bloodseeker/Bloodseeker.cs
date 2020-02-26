@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class TalismanOfProtection : ActiveItem
+public class Bloodseeker : ActiveItem
 {
     #region Var: Inspector
     [SerializeField] private GameObject shieldEffectPrefab;
@@ -16,6 +17,9 @@ public class TalismanOfProtection : ActiveItem
     #endregion
 
     #region Var: Item Effect
+    private PlayerActionEvent onKill;
+    List<GameObject> coprsePrefabs = new List<GameObject>();
+
     private PlayerActionEvent onDamageReceived;
     #endregion
 
@@ -25,6 +29,19 @@ public class TalismanOfProtection : ActiveItem
         base.Awake();
 
         // Player Action Event
+        onKill = this.NewPlayerActionEvent(() =>
+        {
+            // Heal
+            PlayerStats.Inst.KilledMob.GetComponent<CorpseSpawner>()?.SetCorpseMode(eCorpseSpawnMode.Absorb, coprpsePrefab =>
+            {
+                coprsePrefabs.Add(coprpsePrefab);
+                shieldhealth.ModFlat += 5;
+
+                // Show Effect
+                shieldEffect.SetActive(true);
+            });
+        });
+
         onDamageReceived = this.NewPlayerActionEvent(() =>
         {
             // Calculate Overkill Damage
@@ -36,9 +53,9 @@ public class TalismanOfProtection : ActiveItem
             // Damage Player
             PlayerStats.Inst.DamageReceived = overkillDmg;
 
-            // Deactivate Shield
+            // Hide Effect
             if (shieldhealth.Value == 0)
-                Deactivate();
+                shieldEffect.SetActive(false);
         });
     }
     #endregion
@@ -47,17 +64,21 @@ public class TalismanOfProtection : ActiveItem
     public override void InitStats()
     {
         // Init Cooldown
-        cooldownTimer.EndTime = 5f;
+        cooldownTimer.EndTime = 20f;
 
         // Init Duration
-        durationTimer.EndTime = 2.5f;
+        durationTimer.EndTime = 5f;
         durationTimer
             .SetTick(gameObject)
-            .SetAction(onEnd: Deactivate)
+            .SetAction(onEnd: () => 
+            {
+                PlayerStats.Inst.Heal(shieldhealth.Value);
+                Deactivate();
+            })
             .SetActive(false);
 
         // Init Shield HP
-        shieldhealth = new FloatStat(40, min: 0, max: 40);
+        shieldhealth = new FloatStat(0, min: 0);
     }
     #endregion
 
@@ -90,11 +111,8 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.SetActive(true);
         durationTimer.Reset();
 
-        // Enable Shield Item Effect
+        PlayerActionEventManager.AddEvent(PlayerActions.Kill, onKill);
         PlayerActionEventManager.AddEvent(PlayerActions.Damaged, onDamageReceived);
-
-        // Show Effect
-        shieldEffect.SetActive(true);
     }
     public override void Deactivate()
     {
@@ -108,14 +126,17 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.SetActive(false);
         durationTimer.Reset();
 
-        // Reset Shield Health
-        shieldhealth.ModFlat = 0;
+        // Reset Shield HP
+        shieldhealth.Reset();
 
-        // Disable Shield Item Effect
-        PlayerActionEventManager.RemoveEvent(PlayerActions.Damaged, onDamageReceived);
+        // Clear Coprse Prefabs
+        coprsePrefabs.Clear();
 
         // Hide Effect
         shieldEffect.SetActive(false);
+
+        PlayerActionEventManager.RemoveEvent(PlayerActions.Kill, onKill);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.Damaged, onDamageReceived);
     }
     #endregion
 }

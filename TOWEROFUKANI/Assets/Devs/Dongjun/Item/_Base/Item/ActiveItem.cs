@@ -33,12 +33,12 @@ public abstract class ActiveItem : UpgradableItem
     }
     protected override void OnRemovedFromInventory()
     {
+        // Deactivate Item
+        Deactivate();
+
         // Stop Cooldown Timer
         cooldownTimer.SetActive(false);
         cooldownTimer.Reset();
-
-        // Deactivate Item
-        Deactivate();
     }
     #endregion
 

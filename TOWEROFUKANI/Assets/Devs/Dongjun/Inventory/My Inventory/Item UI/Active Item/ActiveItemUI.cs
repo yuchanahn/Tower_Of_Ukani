@@ -22,7 +22,7 @@ public class ActiveItemUI : DraggableItemUI
         activeIndicator.SetActive(activeItem.IsActive);
 
         // Cooldown Indicator
-        if (!activeItem.cooldownTimer.IsEnded)
+        if (!activeItem.cooldownTimer.IsEnded && !activeItem.IsActive)
         {
             cooldownIndicator.SetActive(true);
             cooldownFill.Value = 1 - (activeItem.cooldownTimer.CurTime / activeItem.cooldownTimer.EndTime);
