@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
+    [SerializeField] Transform itemSpawnPoint;
+
     public bool isOpened = false;
 
     public Transform slotRoot;
@@ -78,7 +80,7 @@ public class Chest : MonoBehaviour
     {
         if (selectedItem == null) return;
 
-        ItemDB.Inst.SpawnDroppedItem(transform.position, selectedItem.info.ItemName, selectedItem.count);
+        ItemDB.Inst.SpawnDroppedItem(itemSpawnPoint.position, selectedItem.info.ItemName, selectedItem.count);
         isOpened = true;
         CloseChest();
     }

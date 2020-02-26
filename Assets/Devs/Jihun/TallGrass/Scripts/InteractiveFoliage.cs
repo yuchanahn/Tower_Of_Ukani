@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Prime31;
 
-[RequireComponent(typeof(MeshFilter))]
+//[RequireComponent(typeof(MeshFilter))]
 public class InteractiveFoliage : MonoBehaviour
 {
     const float BEND_FACTOR = 0.2f;
