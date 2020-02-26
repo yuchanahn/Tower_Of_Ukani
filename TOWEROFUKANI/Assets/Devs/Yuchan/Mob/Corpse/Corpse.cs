@@ -57,6 +57,7 @@ public class Corpse : PoolingObj
         rb2D.velocity = new Vector2(0, 0);
         rb2D.gravityScale = GravityScale;
         transform.localScale = Vector3.one;
+        StartAbsord = false;
     }
 
 
