@@ -75,6 +75,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -207,6 +208,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -833,7 +835,7 @@ MonoBehaviour:
   power: 10
   dirTarget: {fileID: 9129685735172451549}
   detectPoint: {fileID: 3911076027341699705}
-  detectSize: {x: 1, y: 1}
+  detectSize: {x: 1, y: 0.9}
   blockMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -980,6 +982,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1022,16 +1025,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4650456214795719256}
     m_Modifications:
-    - target: {fileID: 368671185200428079, guid: 15b4942c57991d444ad169b86961eb55,
-        type: 3}
-      propertyPath: m_Name
-      value: Fist
-      objectReference: {fileID: 0}
-    - target: {fileID: 368671185200428079, guid: 15b4942c57991d444ad169b86961eb55,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 368671185200428078, guid: 15b4942c57991d444ad169b86961eb55,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1086,6 +1079,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 368671185200428079, guid: 15b4942c57991d444ad169b86961eb55,
+        type: 3}
+      propertyPath: m_Name
+      value: Fist
+      objectReference: {fileID: 0}
+    - target: {fileID: 368671185200428079, guid: 15b4942c57991d444ad169b86961eb55,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15b4942c57991d444ad169b86961eb55, type: 3}

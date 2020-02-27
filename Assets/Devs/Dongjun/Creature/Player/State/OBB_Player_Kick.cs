@@ -49,7 +49,7 @@ public class OBB_Player_Kick : OBB_Player_State_Base
     }
     #endregion
 
-    #region Method: SSM
+    #region Method: OBB
     public override void OnEnter()
     {
         data.RB2D.velocity = data.RB2D.velocity.Change(y: data.RB2D.velocity.y * yVelPercent);
@@ -108,8 +108,7 @@ public class OBB_Player_Kick : OBB_Player_State_Base
             return;
 
         // Kick
-        Vector2 kickDir = (dirTarget.position - transform.position).normalized;
-        hitRB2D.velocity = new Vector2(kickDir.x * data.Dir, kickDir.y) * power;
+        hitRB2D.velocity = (dirTarget.position - transform.position).normalized * power;
     }
     private void KickMob()
     {
