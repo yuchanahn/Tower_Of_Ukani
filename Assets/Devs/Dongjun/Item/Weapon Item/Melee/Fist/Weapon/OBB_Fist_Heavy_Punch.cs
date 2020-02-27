@@ -48,7 +48,8 @@ public class OBB_Fist_Heavy_Punch : Weapon_State_Base<OBB_Data_Fist, FistItem>
         data.Animator.Play("Heavy_Punch");
 
         // Effect
-        Flip_Logic.FlipXTo(GM.Player.Data.Dir, dustEffect.Spawn(transform.position).transform);
+        if (GM.Player.Data.groundDetectionData.isGrounded)
+            Flip_Logic.FlipXTo(GM.Player.Data.Dir, dustEffect.Spawn(transform.position).transform);
         CamShake_Logic.ShakeDir(camShakeData_Punch, transform, Vector2.right);
 
         // Player
