@@ -45,15 +45,18 @@ public class Chest : MonoBehaviour
 
     private void Update()
     {
+        bool isCloseToPlayer = (ShopManager.Inst.shopRange > Vector2.Distance(transform.position, GM.PlayerPos));
+
         //상자 오픈
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             //거리 확인
-            if (ShopManager.Inst.shopRange < Vector2.Distance(transform.position, GM.PlayerPos)) return;
+            if (!isCloseToPlayer) return;
             //열어봤었는지 확인
             if (isOpened) return;
             OpenChest();
         }
+        if (!isCloseToPlayer) CloseChest();
     }
 
     public void SelectItem(ChestItemSlot select)
