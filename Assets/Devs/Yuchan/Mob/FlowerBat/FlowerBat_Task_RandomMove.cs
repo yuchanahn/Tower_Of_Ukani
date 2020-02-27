@@ -6,7 +6,6 @@ using Dongjun.Helper;
 
 public class FlowerBat_Task_RandomMove : MonoBehaviour, ITask
 {
-    [SerializeField] JPS_PathFinder mPathFinder;
     JPS_MoveManager mMoveMgr = new JPS_MoveManager();
 
     Mob_FlowerBat mMob;
@@ -50,11 +49,11 @@ public class FlowerBat_Task_RandomMove : MonoBehaviour, ITask
             }
             else if (bMove)
             {
-                var dir = mMoveMgr.GetVel(mPathFinder, transform.position, speed: mMob.MoveSpeed);
+                var dir = mMoveMgr.GetVel(JPS_PathFinder._1x1, transform.position, speed: mMob.MoveSpeed);
                 if (dir is null)
                 {
                     int Range = 3;
-                    var pos = GridView.Inst[1].GetNodeAtWorldPostiton(transform.position).pos;
+                    var pos = GridView.Inst[GM.CurMapName][1].GetNodeAtWorldPostiton(transform.position).pos;
 
                     List<Point> MoveAblePos = new List<Point>();
 
@@ -68,14 +67,14 @@ public class FlowerBat_Task_RandomMove : MonoBehaviour, ITask
 
                             if (p.column <= 0 || p.row <= 0 || (i == 0 && j == 0)) continue;
 
-                            if (!GridView.Inst[1].GetNodeAtWorldPostiton(p).isObstacle)
+                            if (!GridView.Inst[GM.CurMapName][1].GetNodeAtWorldPostiton(p).isObstacle)
                                 MoveAblePos.Add(p);
                         }
                     }
                     dir = mMoveMgr.GetVel(
-                        mPathFinder,
+                        JPS_PathFinder._1x1,
                         transform.position,
-                        GridView.Inst[1].getNodePosAsWorldPos(MoveAblePos[Random.Range(0, MoveAblePos.Count)]),
+                        GridView.Inst[GM.CurMapName][1].getNodePosAsWorldPos(MoveAblePos[Random.Range(0, MoveAblePos.Count)]),
                         mMob.MoveSpeed);
                 }
                 mMob.SetJPS_Vel2d(dir.GetValueOrDefault());

@@ -26,6 +26,8 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
     }
 
     public static List<GameObject> HangWalls = new List<GameObject>();
+    [SerializeField] List<GameObject> mHangWalls;
+
 
     [SerializeField, Range(0, 100)] public int CeilingPercentage;
     [SerializeField] public float CeilingCoolTime = 1f;
@@ -41,10 +43,10 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
         
         foreach (var i in 
             Physics2D.CircleCastAll(transform.position, RangeOfWakeAround, Vector2.zero)
-            .Map(x => x.collider.gameObject)
-            .Filter(x => x.GetComponent<FlowerBat_Task_Hang>())
-            .Map(x => x.GetComponent<FlowerBat_Task_Hang>())
-            .Filter(x => x.IsFollowEndToCeiling))
+            .map(x => x.collider.gameObject)
+            .filter(x => x.GetComponent<FlowerBat_Task_Hang>())
+            .map(x => x.GetComponent<FlowerBat_Task_Hang>())
+            .filter(x => x.IsFollowEndToCeiling))
         {
             i.mCeilingCoolTimeT = 0f;
         }
@@ -54,6 +56,7 @@ public class FlowerBat_Task_Hang : MonoBehaviour, ITask
 
     private void Awake()
     {
+        mHangWalls = HangWalls;
         mMob = GetComponent<Mob_FlowerBat>();
         mCeilingCoolTimeT = CeilingCoolTime;
     }

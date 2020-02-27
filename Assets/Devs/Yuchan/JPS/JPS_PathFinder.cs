@@ -12,12 +12,13 @@ public class JPS_PathFinder : MonoBehaviour
     [SerializeField] Grid gridJPS => gridV.grid;
     [SerializeField] int mSize;
 
-    static Dictionary<int, JPS_PathFinder> mGet = new Dictionary<int, JPS_PathFinder>();
-    public static JPS_PathFinder _1x1 => mGet[1];
+    static Dictionary<(string MapName, int Size), JPS_PathFinder> mGet = new Dictionary<(string, int), JPS_PathFinder>();
+    public static JPS_PathFinder _1x1 => mGet[(GM.CurMapName, 1)];
+    public static JPS_PathFinder _2x2 => mGet[(GM.CurMapName, 2)];
 
     private void Awake()
     {
-        mGet[mSize] = this;
+        mGet[(gridV.MapName, mSize)] = this;
     }
 
     static List<GameObject> pool = new List<GameObject>();

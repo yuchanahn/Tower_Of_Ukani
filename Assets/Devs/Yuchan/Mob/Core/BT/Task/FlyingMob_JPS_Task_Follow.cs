@@ -18,7 +18,7 @@ public class FlyingMob_JPS_Task_Follow : MonoBehaviour, ITask
         mMob.MS = FlyingMob_Base.MovementState.JPS_Follow;
         mMob.MovementAction[FlyingMob_Base.MovementState.JPS_Follow] = () =>
         {
-            GridView.Inst[1].GetJPS_Path();
+            GridView.Inst[GM.CurMapName][1].GetJPS_Path();
             var vel = mMoveMgr.GetVelIfUpdateTarget(JPS_PathFinder._1x1, transform.position, GM.PlayerPos, mMob.MoveSpeed);
             mMob.SetJPS_Vel2d(vel);
         };

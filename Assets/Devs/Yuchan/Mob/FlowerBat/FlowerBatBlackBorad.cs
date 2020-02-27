@@ -34,8 +34,7 @@ public class FlowerBatBlackBorad : BlackBoard_Base
         HangTask.mCeilingCoolTimeT += Time.deltaTime;
         if (!HangTask.IsCeilingNearOf())
         {
-            if (HangTask.MyCeiling != null)
-                FlowerBat_Task_Hang.HangWalls.Remove(HangTask.MyCeiling.gameObject);
+
         }
         else if (HangTask.FindCeiling)
         {

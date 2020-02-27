@@ -11,31 +11,32 @@ public static class AEM
     }
 
 
-    public static List<T> Filter<T>(this List<T> l, Func<T, bool> f)
+    public static List<T> filter<T>(this List<T> l, Func<T, bool> f)
     {
         List<T> rl = new List<T>();
-        foreach(var i in l)
-        {
-            if (f(i)) rl.Add(i);
-        }
+        foreach (var i in l) if (f(i)) rl.Add(i);
         return rl;
     }
 
-    public static T[] Filter<T>(this T[] l, Func<T, bool> f)
+    public static T[] filter<T>(this T[] l, Func<T, bool> f)
     {
         List<T> rl = new List<T>();
-        foreach (var i in l)
-        {
-            if (f(i)) rl.Add(i);
-        }
+        foreach (var i in l) if (f(i)) rl.Add(i);
         return rl.ToArray();
     }
 
-    public static T2[] Map<T, T2>(this T[] l, Func<T, T2> f)
+    public static T2[] map<T, T2>(this T[] l, Func<T, T2> f)
     {
-        T2[] r = new T2[l.Length];
-        for (int i = 0; i < l.Length; i++) r[i] = f(l[i]);
-        return r;
+        List<T2> rl = new List<T2>(l.Length);
+        foreach (var i in l) rl.Add(f(i));
+        return rl.ToArray();
+    }
+
+    public static List<T2> map<T, T2>(this List<T> l, Func<T, T2> f)
+    {
+        List<T2> rl = new List<T2>(l.Count);
+        foreach (var i in l) rl.Add(f(i));
+        return rl;
     }
 
 

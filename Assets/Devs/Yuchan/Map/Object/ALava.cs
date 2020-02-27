@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ALava : MonoBehaviour
@@ -30,6 +31,7 @@ public class ALava : MonoBehaviour
         if (maxHeight.position.y > transform.position.y + (size.y / 2))
             transform.Translate(speed * transform.up * Time.fixedDeltaTime);
     }
+    List<Corpse> corpses = new List<Corpse>();
     private void CheckOverlap()
     {
         Collider2D[] overlaps = Physics2D.OverlapBoxAll(transform.position, size, 0f, layerMask);
@@ -50,13 +52,12 @@ public class ALava : MonoBehaviour
 
             var corpse = overlaps[i].GetComponent<Corpse>();
 
-            if (corpse != null && rb2D != null)
+            if (corpse != null && rb2D != null && !corpses.Contains(corpse))
             {
                 rb2D.velocity = new Vector2(0, speed - corpseFallSpeed);
                 rb2D.isKinematic = true;
-                //overlaps[i].transform.Translate(Vector3.up * (speed - corpseFallSpeed) * Time.fixedDeltaTime);
-
-                corpse.GetComponent<Corpse>().DestroyOfTime( 3f );
+                corpses.Add(corpse);
+                corpse.DestroyOfTime( 3f, ()=> { corpses.Remove(corpse.GetComponent<Corpse>()); } );
             }
 
             if (overlaps[i].CompareTag("Player"))

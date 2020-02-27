@@ -33,6 +33,7 @@ public class GM : MonoBehaviour
     {
         Inst = this;
         player = FindObjectOfType<OBB_Player>();
+        CurMapName = Map2.activeSelf ? Map2.name : Map1.name;
     }
 
     private void Update()

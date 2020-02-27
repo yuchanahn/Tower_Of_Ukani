@@ -66,11 +66,11 @@ public class CliffDetect_Logic
 
     static Point GetGridPos(RaycastHit2D t)
     {
-        return GridView.Inst[1].GetNodeAtWorldPostiton(t.transform.position).pos;
+        return GridView.Inst[GM.CurMapName][1].GetNodeAtWorldPostiton(t.transform.position).pos;
     }
     static bool IsWall(Point point)
     {
-        return GridView.Inst[1].grid.GetNode(point).isObstacle;
+        return GridView.Inst[GM.CurMapName][1].grid.GetNode(point).isObstacle;
     }
 
     static public bool CanGo2(Vector2 Pos1, float JumpHeight, int Dir, float Speed, Vector2 size, LayerMask wallLayer, bool show = false)

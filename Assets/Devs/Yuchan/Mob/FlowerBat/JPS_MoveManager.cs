@@ -10,7 +10,7 @@ internal class JPS_MoveManager
     }
     public Vector2? GetVel(JPS_PathFinder mPathFinder, Vector2 ori, Vector2? target = null, float speed = 0f)
     {
-        GridView.Inst[1].GetJPS_Path();
+        GridView.Inst[GM.CurMapName][1].GetJPS_Path();
         
         if (mMoveQueue.Count > 0)
         {

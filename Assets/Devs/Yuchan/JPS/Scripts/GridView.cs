@@ -17,7 +17,7 @@ public class GridView : MonoBehaviour
     public float blockBuffer = 0.0f;
 
     [SerializeField] private PathLineRenderer _pathRenderer;
-
+    [SerializeField] public string MapName;
     [SerializeField] GameObject pointIMG;
 
     private int previousNumBlocks = 0;
@@ -31,12 +31,17 @@ public class GridView : MonoBehaviour
 
     private IEnumerator findPath = null;
 
-    public static GridView[] Inst = new GridView[10];
+    public static Dictionary<string, GridView[]> Inst = new Dictionary <string,GridView[]>();
     public int Target_Object_Size;
+
 
     private void Awake()
     {
-        Inst[Target_Object_Size] = this;
+        if(!Inst.ContainsKey(MapName))
+        {
+            Inst[MapName] = new GridView[10];
+        }
+        Inst[MapName][Target_Object_Size] = this;
 
         JPSState.state = eJPSState.ST_OBSTACLE_BUILDING;
         //_pathRenderer.disablePath();

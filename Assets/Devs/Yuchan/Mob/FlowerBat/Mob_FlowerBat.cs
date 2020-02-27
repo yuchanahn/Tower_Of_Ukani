@@ -55,6 +55,12 @@ public class Mob_FlowerBat : FlyingMob_Base
             if(mPrevAni == eMobAniST.Hang)
             {
                 base.SetAni(eMobAniST.Unhang);
+
+                if (HangTask.MyCeiling != null)
+                {
+                    FlowerBat_Task_Hang.HangWalls.Remove(HangTask.MyCeiling.gameObject);
+                }
+
                 GetComponent<BoxCollider2D>().size = Size;
                 bUnHang = true;
                 mHitImmunity = true;

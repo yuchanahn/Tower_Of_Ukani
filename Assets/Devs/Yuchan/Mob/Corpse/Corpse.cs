@@ -28,9 +28,16 @@ public class Corpse : PoolingObj
         mAni.Play(gameObject.name, 0, UnityEngine.Random.Range(0f,1f));
     }
 
-    public void DestroyOfTime(float t)
+    public void DestroyOfTime(float t, Action ev = null)
     {
-        ATimer.Set(GetInstanceID().ToString(), t, this.Sleep);
+        if (ev is null)
+        {
+            ATimer.Set(GetInstanceID().ToString(), t, this.Sleep);
+        }
+        else
+        {
+            ATimer.Set(GetInstanceID().ToString(), t, () => { this.Sleep(); ev(); });
+        }
     }
     private void OnDestroy()
     {

@@ -77,7 +77,8 @@ namespace BT
             node = new Selector();
         }
 
-        public int GetSvId(){
+        public int GetServiceID()
+        {
             return id++;
         }
         
@@ -170,7 +171,7 @@ namespace BT
         {
             if(!OnService){
                 OnService = true;
-                mSvId = root.GetSvId();
+                mSvId = root.GetServiceID();
                 root.SvTime[mSvId] = time_;
             }
             if (root.SvTime[mSvId] >= time_)

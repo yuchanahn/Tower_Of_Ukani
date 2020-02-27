@@ -9,8 +9,6 @@ public class PixelLevelGenerator : MonoBehaviour
     [SerializeField] private SpriteRenderer mapTempSprite;
     [SerializeField] private ColorToPrefab[] colorMappings;
     [SerializeField] private LayerMask GroundLayer;
-    [SerializeField] private int GridSize = 1;
-    [SerializeField] GameObject prefab;
 
     private void Start()
     {
@@ -35,6 +33,7 @@ public class PixelLevelGenerator : MonoBehaviour
     [SerializeField] int map_w;
     [SerializeField] int map_h;
     [SerializeField] int[] objSize;
+    [SerializeField] string mMapName;
     private void GenerateTile(int x, int y)
     {
         Color pixelColor = mapTexture.GetPixel(x, y);
@@ -63,7 +62,10 @@ public class PixelLevelGenerator : MonoBehaviour
                                 var __x = (tile.localPosition.x - offsetX) + i;
                                 var __y = (tile.localPosition.y - offsetY) - j;
                                 if (__x >= 0 && __x < map_w && __y >= 0 && __y < map_h)
-                                    GridView.Inst[osize].GetNodeAtWorldPostiton(lpfs).isObstacle = true;
+                                {
+                                    GridView.Inst[mMapName][osize].GetNodeAtWorldPostiton(lpfs).isObstacle = true;
+                                    GridView.Inst[mMapName][osize].GetNodeAtWorldPostiton(lpfs).isVirtualWall = !(i == 0 && j == 0);
+                                }
                             }
                         }
                     }

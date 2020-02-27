@@ -36,7 +36,7 @@ public class Follow : MonoBehaviour
     {
         if( GUI.Button(new Rect(500,10,100,20), "Start"))
         {
-            GridView.Inst[ObjectSize].GetJPS_Path();
+            GridView.Inst[GM.CurMapName][ObjectSize].GetJPS_Path();
             Vector2[] path = pathFinder.Find(transform.position, PlayerPos.position);
             UpdatePath(path);
         }
