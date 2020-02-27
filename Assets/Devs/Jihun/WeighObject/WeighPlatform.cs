@@ -7,11 +7,11 @@ public class WeighPlatform : WeighObject
     Rigidbody2D _rg;
 
     [SerializeField]
-    float upForce = 0;
+    int canLiftUp = 0;
     [SerializeField]
     float speed = 0;
     [SerializeField]
-    float speedRate = 1;
+    float forceRate = 1;
 
     [SerializeField]
     float maxVel = 5f;
@@ -32,9 +32,11 @@ public class WeighPlatform : WeighObject
 
     void GoUp()
     {
-        float force = (upForce - GetDownForce());
+        float force = (canLiftUp + 1 - (GetDownForce() / forceRate));
 
-        float result = force / speedRate * speed;
+        Debug.Log(force);
+
+        float result = force * speed;
         if (result > maxVel) result = maxVel;
         if (result < minVel) result = minVel;
 

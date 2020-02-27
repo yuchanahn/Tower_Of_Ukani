@@ -42,14 +42,18 @@ public class WeighObject : MonoBehaviour
 
         checkedArr.Add(this);
 
-        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(width, height), 0, Vector2.up, 1f, checkLayer);
+        RaycastHit2D[] hits = Physics2D.BoxCastAll(transform.position, new Vector2(width, height), 0, Vector2.up, 0.1f, checkLayer);
 
 
             var check =
             from hit in hits
+            //위에있는지
             where (hit.transform.position.Foot(new Vector2(0, height)).y > transform.position.y)
+            //이미 확인 했는지
             where (!checkedArr.Exists(a => a.gameObject == hit.transform.gameObject))
+            //이 컴포넌트 달려 있는지
             where (hit.transform.GetComponent<WeighObject>())
+            //y속도 0인지
             //where (Mathf.Abs(hit.transform.GetComponent<Rigidbody2D>().velocity.y) < 0.1f)
             select hit;
 
