@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Global : SingletonBase<Global>
+public class CamManager : SingletonBase<CamManager>
 {
     [SerializeField] private Camera mainCam;
     [SerializeField] private CameraShake camShake;

@@ -63,7 +63,7 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
     {
         // Character Body Look At Mouse
         if (data.CanChangeDir)
-            data.bodySpriteRenderer.LookAtMouseFlipX(Global.Inst.MainCam, transform);
+            data.bodySpriteRenderer.LookAtMouseFlipX(CamManager.Inst.MainCam, transform);
     }
     public override void OnFixedUpdate()
     {

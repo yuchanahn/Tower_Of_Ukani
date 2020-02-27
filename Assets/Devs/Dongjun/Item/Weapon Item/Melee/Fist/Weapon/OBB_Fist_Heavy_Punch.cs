@@ -8,6 +8,7 @@ public class OBB_Fist_Heavy_Punch : Weapon_State_Base<OBB_Data_Fist, FistItem>
     [SerializeField] private Rigidbody2D hitCheck_0;
 
     [Header("Effect")]
+    [SerializeField] private SelfSleepObj dustEffect;
     [SerializeField] private CameraShake.Data camShakeData_Punch;
 
     // Hit Check
@@ -47,6 +48,7 @@ public class OBB_Fist_Heavy_Punch : Weapon_State_Base<OBB_Data_Fist, FistItem>
         data.Animator.Play("Heavy_Punch");
 
         // Effect
+        Flip_Logic.FlipXTo(GM.Player.Data.Dir, dustEffect.Spawn(transform.position).transform);
         CamShake_Logic.ShakeDir(camShakeData_Punch, transform, Vector2.right);
 
         // Player

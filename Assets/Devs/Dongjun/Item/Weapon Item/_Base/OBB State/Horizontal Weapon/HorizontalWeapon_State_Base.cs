@@ -7,6 +7,6 @@ public class HorizontalWeapon_State_Base<D, W> : Weapon_State_Base<D, W>
     public override void OnLateUpdate()
     {
         // Look At Mouse
-        transform.LookAtMouseFlipX(Global.Inst.MainCam, transform);
+        transform.LookAtMouseFlipX(CamManager.Inst.MainCam, transform);
     }
 }

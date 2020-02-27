@@ -11,11 +11,11 @@ public static class CamShake_Logic
     public static void ShakeRandom(CameraShake.Data camShakeData)
     {
         camShakeData.angle = Random.Range(0f, 360f);
-        Global.Inst.CamShake.StartShake(camShakeData);
+        CamManager.Inst.CamShake.StartShake(camShakeData);
     }
     public static void ShakeDir(CameraShake.Data camShakeData, Transform tf, Vector2 dir)
     {
         camShakeData.angle = Angle360(tf.right, dir, Vector3.right);
-        Global.Inst.CamShake.StartShake(camShakeData);
+        CamManager.Inst.CamShake.StartShake(camShakeData);
     }
 }

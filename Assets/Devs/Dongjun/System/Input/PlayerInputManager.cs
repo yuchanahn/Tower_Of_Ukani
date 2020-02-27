@@ -119,18 +119,20 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
             // Set Tap Count
             if (curDashTapCount == 0)
             {
-                curDashTapCount = 1;
+                curDashTapCount++;
                 prevDashInputDir = Input_WalkDir;
             }
-            else
+            else if (prevDashInputDir != Input_WalkDir)
             {
-                curDashTapCount =
-                    (prevDashInputDir == Input_WalkDir && dashInputTime <= dashInputInterval)
-                    ? curDashTapCount + 1
-                    : 0;
+                curDashTapCount = 0;
+                prevDashInputDir = Input_WalkDir;
+            }
+            else if (dashInputTime <= dashInputInterval)
+            {
+                curDashTapCount++;
             }
 
-            // Reset Variables
+            // Reset Time
             dashInputTime = 0;
 
             // Check Tap Count

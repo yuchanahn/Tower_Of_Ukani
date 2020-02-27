@@ -18,7 +18,7 @@ public class PhantomPistolObject : MonoBehaviour
     }
     private void LateUpdate()
     {
-        transform.AimMouse(Global.Inst.MainCam, transform);
+        transform.AimMouse(CamManager.Inst.MainCam, transform);
     }
 
     public Bullet SpawnBullet()

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5681672374981750105}
+  - component: {fileID: 8215733933179261852}
   - component: {fileID: 5681672374981750104}
   m_Layer: 0
   m_Name: Main Camera Holder
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8215733933179261852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5681672374981750107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759458535d98ce84e95816a44bb07e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCam: {fileID: 5681672376404113151}
+  camShake: {fileID: 5681672376404113145}
 --- !u!114 &5681672374981750104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +235,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1764561124833923450, guid: 8a1b68b83c6d799489d74d513cfdfe39,
+    - target: {fileID: 1764561124051142914, guid: 8a1b68b83c6d799489d74d513cfdfe39,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764561124112313420, guid: 8a1b68b83c6d799489d74d513cfdfe39,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -1
@@ -235,12 +255,7 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 1764561124051142914, guid: 8a1b68b83c6d799489d74d513cfdfe39,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1764561124112313420, guid: 8a1b68b83c6d799489d74d513cfdfe39,
+    - target: {fileID: 1764561124833923450, guid: 8a1b68b83c6d799489d74d513cfdfe39,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -1

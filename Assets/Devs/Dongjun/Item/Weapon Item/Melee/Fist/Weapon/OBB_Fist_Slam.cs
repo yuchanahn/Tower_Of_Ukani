@@ -114,7 +114,7 @@ public class OBB_Fist_Slam : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem
 
         // Animation
         data.Animator.Play("Slam");
-        data.Animator.SetDuration(weaponItem.Dur_Slam.EndTime.Value);
+        data.Animator.SetDuration(weaponItem.Dur_Slam.EndTime.Value, "Slam");
 
         // Effect
         CamShake_Logic.ShakeDir(camShakeData_Slam, transform, Vector2.down);

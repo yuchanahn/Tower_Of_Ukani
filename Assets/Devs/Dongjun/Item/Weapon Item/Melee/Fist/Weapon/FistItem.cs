@@ -17,6 +17,6 @@ public class FistItem : MeleeItem
         // Timmer Data
         Dur_Basic.EndTime = new FloatStat(0.35f, min: 0.01f);
         Dur_Heavy.EndTime = new FloatStat(0.5f, min: 0.01f);
-        Dur_Slam.EndTime = new FloatStat(0.2f, min: 0.01f);
+        Dur_Slam.EndTime = new FloatStat(0.25f, min: 0.01f);
     }
 }

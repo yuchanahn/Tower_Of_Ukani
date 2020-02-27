@@ -6,6 +6,6 @@ public class PlayerInputResetter : MonoBehaviour
 {
     private void FixedUpdate()
     {
-       PlayerInputManager.Inst.ResetInput();
+        PlayerInputManager.Inst.ResetInput();
     }
 }
