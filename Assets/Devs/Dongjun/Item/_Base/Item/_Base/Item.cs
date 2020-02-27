@@ -43,7 +43,6 @@ public abstract class Item : MonoBehaviour
     #region Method: Item
     public virtual void OnAdd(InventoryBase inventory)
     {
-        // 패시브 아이템은 다른 인벤토리 구조를 갖고 있기 때문에 Inventory = null임.
         Inventory = inventory;
     }
     public virtual void OnMove()
