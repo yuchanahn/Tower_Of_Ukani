@@ -15,12 +15,7 @@ namespace Dongjun.LevelEditor
 
         private MapLayerButton curSelected = null;
 
-        private void Start()
-        {
-            Init();
-        }
-
-        private void Init()
+        public void Init()
         {
             for (int i = 0; i < Enum.GetValues(typeof(MapLayer)).Length; i++)
             {

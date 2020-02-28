@@ -14,6 +14,7 @@ public class TileItemUI : MonoBehaviour
     {
         icon.sprite = sprite;
         TilePrefab = prefab;
+        TilePrefab.Init();
         button.onClick.AddListener(() => onClick.Invoke());
     }
     public void OnClick(Action onClick)

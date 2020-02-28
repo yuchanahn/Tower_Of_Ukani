@@ -45,6 +45,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -69,13 +70,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -607710236463685471, guid: dc83fd881de996d4eb0541a681c714df,
+  m_Sprite: {fileID: -607710236463685471, guid: 4776b9e2c24f5c143b75d17488852d68,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.66, y: 1.1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -92,7 +93,7 @@ GameObject:
   - component: {fileID: 4401972013805739699}
   - component: {fileID: -7040330984463560180}
   m_Layer: 0
-  m_Name: Tile_WoodenPlatform1
+  m_Name: Tile_Main_WoodenPlatform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,4 +126,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf006fc26ad45d42aed226e6a236ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: -607710236463685471, guid: dc83fd881de996d4eb0541a681c714df, type: 3}
+  icon: {fileID: 0}

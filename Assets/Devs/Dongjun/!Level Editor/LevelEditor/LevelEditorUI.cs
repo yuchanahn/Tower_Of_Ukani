@@ -14,6 +14,9 @@ namespace Dongjun.LevelEditor
         [Header("Tile Inventory")]
         [SerializeField] private TileInventoryUI tileInventoryUI;
 
+        [Header("Map Layer UI")]
+        [SerializeField] private MapLayerUI mapLayerUI;
+
         private readonly int HotbarSize = 8;
         private Dictionary<MapLayer, List<TileItemUI>> hotbars = new Dictionary<MapLayer, List<TileItemUI>>();
         private Dictionary<MapLayer, TileItemUI> selectedItems = new Dictionary<MapLayer, TileItemUI>();
@@ -31,6 +34,7 @@ namespace Dongjun.LevelEditor
         {
             SetCurTile(null);
             InitTileInventory();
+            mapLayerUI.Init();
         }
 
         private void InitTileInventory()
