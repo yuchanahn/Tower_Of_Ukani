@@ -35,7 +35,7 @@ namespace Dongjun.LevelEditor
         }
         public void Pan()
         {
-            if (!Input.GetKey(KeyCode.Space))
+            if (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.Mouse2))
             {
                 IsPanning = false;
                 mouseDownPos = cam.ScreenToWorldPoint(Input.mousePosition);
@@ -44,10 +44,10 @@ namespace Dongjun.LevelEditor
 
             IsPanning = true;
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse2))
                 mouseDownPos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse2))
                 transform.position += mouseDownPos - cam.ScreenToWorldPoint(Input.mousePosition);
         }
     }
