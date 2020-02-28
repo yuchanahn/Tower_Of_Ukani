@@ -4057,11 +4057,10 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 0
-  GridSize: 1
-  prefab: {fileID: 0}
   map_w: 90
   map_h: 81
   objSize: 0100000002000000
+  mMapName: 
 --- !u!1001 &602416037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10876,11 +10875,10 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 0
-  GridSize: 1
-  prefab: {fileID: 0}
   map_w: 0
   map_h: 0
   objSize: 
+  mMapName: 
 --- !u!224 &1634692767 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1635102215800312272, guid: 5b9390edd2da90649913d9af80641b06,
@@ -12824,8 +12822,8 @@ MonoBehaviour:
   corpseFallSpeed: 0.7
   size: {x: 50, y: 76}
   layerMask:
-    serializedVersion: 2
     m_Bits: 1280
+  dt: 0
 --- !u!61 &1966430461
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -637,7 +637,7 @@ MonoBehaviour:
   tilePrefabs_BG:
   - {fileID: 9041971063405545909, guid: 5e3bacd0119587c4fb6974669d6a18fc, type: 3}
   tilePrefabs_Main:
-  - {fileID: 7970999221088355209, guid: 6f95758524f0cf647994b83960307c35, type: 3}
+  - {fileID: 6786828625927544996, guid: 6f95758524f0cf647994b83960307c35, type: 3}
   - {fileID: -991793320663621304, guid: cf508eeb19b5ff54c934adf9afff67df, type: 3}
   - {fileID: 7895693066403281581, guid: 0c6a376ea0965b34a81a9fc9bb0531aa, type: 3}
   - {fileID: 5074444465308149438, guid: 116b1739d28e8b14890db3ecc2a0edab, type: 3}
