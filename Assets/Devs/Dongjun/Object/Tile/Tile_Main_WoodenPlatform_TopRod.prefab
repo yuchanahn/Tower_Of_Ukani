@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 4955365150437274224}
   - component: {fileID: 4955365150437274227}
   - component: {fileID: 3426643342913320664}
+  - component: {fileID: -8420826601329412953}
   m_Layer: 10
-  m_Name: Tile_WoodenPlatform_Top
+  m_Name: Tile_WoodenPlatform_TopRod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,6 +79,19 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &-8420826601329412953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4955365150437274225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf006fc26ad45d42aed226e6a236ec4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
 --- !u!1 &4955365150518271335
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +137,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -147,7 +162,7 @@ SpriteRenderer:
   m_SortingLayerID: -649209425
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8302614438733900320, guid: 4776b9e2c24f5c143b75d17488852d68,
+  m_Sprite: {fileID: -607710236463685471, guid: 4776b9e2c24f5c143b75d17488852d68,
     type: 3}
   m_Color: {r: 0.9, g: 0.9, b: 0.9, a: 1}
   m_FlipX: 0

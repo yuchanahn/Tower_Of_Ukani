@@ -2,13 +2,14 @@
 using UnityEditor;
 using UnityEditor.ShortcutManagement;
 using System.Linq;
-using System;
+
+// https://issuetracker.unity3d.com/issues/disable-editor-keyboard-shortcuts-while-playing
 
 [InitializeOnLoad]
 public class SwitchShortcutsProfileOnPlay
 {
-    private const string PlayingProfileId = "Playing";//Make you don't already have a profile named like this
-    private static string _previousProfileId;
+    private const string PlayingProfileId = "Playing";
+    private static string _activeProfileId;
     private static bool _switched;
 
     static SwitchShortcutsProfileOnPlay()
@@ -18,7 +19,7 @@ public class SwitchShortcutsProfileOnPlay
 
     private static void SetActiveProfile(string profileId)
     {
-        //Debug.Log($"Activating Shortcut profile \"{profileId}\"");
+        Debug.Log($"Activating Shortcut profile \"{profileId}\"");
         ShortcutManager.instance.activeProfileId = profileId;
     }
 
@@ -39,39 +40,23 @@ public class SwitchShortcutsProfileOnPlay
     {
         if (!_switched)
             return;
-        SetActiveProfile(_previousProfileId);
+
         _switched = false;
+        SetActiveProfile(_activeProfileId);
     }
-    private static void CreateEmptyProfile()
-    {
-        try
-        {
-            ShortcutManager.instance.CreateProfile(PlayingProfileId);
-            ShortcutManager.instance.activeProfileId = PlayingProfileId;
-            foreach (var pid in ShortcutManager.instance.GetAvailableShortcutIds())
-                ShortcutManager.instance.RebindShortcut(pid, ShortcutBinding.empty);
-            ShortcutManager.instance.activeProfileId = ShortcutManager.defaultProfileId;
-        }
-        catch (Exception)
-        {
-            Debug.LogWarning("Couldn't create profile");
-        }
-    }
+
     private static void OnEnteredPlayMode()
     {
-        _previousProfileId = ShortcutManager.instance.activeProfileId;
+        _activeProfileId = ShortcutManager.instance.activeProfileId;
+        if (_activeProfileId.Equals(PlayingProfileId))
+            return; // Same as active
+
         var allProfiles = ShortcutManager.instance.GetAvailableProfileIds().ToList();
 
         if (!allProfiles.Contains(PlayingProfileId))
-        {
-            CreateEmptyProfile();
-        }
-
-        if (_previousProfileId.Equals(PlayingProfileId))
-            return; // Same as active
+            return; // Couldn't find PlayingProfileId
 
         _switched = true;
         SetActiveProfile(PlayingProfileId);
     }
-
 }
