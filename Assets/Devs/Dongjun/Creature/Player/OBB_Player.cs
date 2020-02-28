@@ -120,7 +120,8 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
 
         // Dash
         NewObjective(
-            () => Data.CanDash 
+            () => Data.CanDash
+               && !IsDashing
                && PlayerInputManager.Inst.Input_DashDir != 0 
                && PlayerStats.Inst.UseStamina(1))
             .AddBehaviour(bvr_Dash, true);
