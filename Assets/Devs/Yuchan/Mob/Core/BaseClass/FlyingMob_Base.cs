@@ -46,7 +46,7 @@ public abstract class FlyingMob_Base : Mob_Base
                    mMoveData.Dir2d;
         }
 
-        set { if (mSE.SEChangeDirAble) mMoveData.Dir2d = value; }
+        set { if (mSE.ChangeDirAble) mMoveData.Dir2d = value; }
     }
     public Vector3 Pos => transform.position - (Vector3.up * 3);
     public Vector2 Pos2d => transform.position - (Vector3.up * 3);
@@ -105,9 +105,9 @@ public abstract class FlyingMob_Base : Mob_Base
     }
     void Animation()
     {
-        if (mSE.SEAni != eMobAniST.Last)
+        if (mSE.Ani != eMobAniST.Last)
         {
-            mCurAniST = mSE.SEAni;
+            mCurAniST = mSE.Ani;
             SetStatusEffectUseAniState();
             return;
         }
@@ -141,11 +141,16 @@ public abstract class FlyingMob_Base : Mob_Base
         SpriteDir = vel.x > 0 ? 1 : -1;
     }
 
-    void FixedUpdate()
+    virtual protected void FixedUpdate()
     {
         MovementAction[MS]();
 
-        mRb2d.velocity = Dir2d * (IsJPSVel ? 1f : MoveSpeed) * mSE.SESpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
+        mRb2d.velocity = Dir2d * (IsJPSVel ? 1f : MoveSpeed) * mSE.SpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
+        if(mSE.EffectDir2d != Vector2.zero)
+        {
+            mRb2d.velocity = mSE.EffectDir2d * mSE.SpeedMult;
+        }
+
 
         Animation();
         mAnimator.SetDuration(m_Ani[mCurAniST].Item2);

@@ -22,7 +22,10 @@ public class StatusEffect_Base : MonoBehaviour
         value.SetValue(priority, data);
     }
 
-
+    private void OnDestroy()
+    {
+        OnSEDestroy();
+    }
     protected virtual void OnSEDestroy()
     {
         //GetComponent<StatusEffect_Object>()?.Remove(this);

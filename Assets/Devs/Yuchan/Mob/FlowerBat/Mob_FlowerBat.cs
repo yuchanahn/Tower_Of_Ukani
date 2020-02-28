@@ -82,6 +82,21 @@ public class Mob_FlowerBat : FlyingMob_Base
     }
 
     //=================================================================
+    //      ## Mob_FlowerBat :: FixedUpdate
+    //=================================================================
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        if(GetComponent<StatusEffect_Knokback>())
+        {
+            FleeTask.FleeCollider2d.enabled = true;
+        }
+    }
+
+
+
+    //=================================================================
     //      ## Mob_FlowerBat :: Hurt
     //=================================================================
 

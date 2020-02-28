@@ -61,6 +61,7 @@ public abstract class Mob_Base : MonoBehaviour,
     protected Dictionary<eMobAniST, (string, float)> m_Ani = new Dictionary<eMobAniST, (string, float)>();
 
     public int SprDirForPlayer => (GM.PlayerPos.x - transform.position.x) < 0 ? -1 : 1;
+    public Vector2 DirToPlayer => (GM.PlayerPos - transform.position).normalized;
 
     protected bool CheckOverlapSlow(Vector2 size, Vector2 dir)
     {

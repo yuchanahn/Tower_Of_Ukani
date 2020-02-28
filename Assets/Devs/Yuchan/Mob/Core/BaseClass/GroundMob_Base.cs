@@ -88,7 +88,7 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
 
     float VelY => m_rb.velocity.y;
     protected float WalkSpeed => m_MoveData.Speed * m_MoveData.Dir;
-    protected int Dir { set { if(m_SEObj.SEChangeDirAble) m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
+    protected int Dir { set { if(m_SEObj.ChangeDirAble) m_MoveData.Dir = value; } get { return m_MoveData.Dir; } }
 
     public int DirForPlayer => (GM.PlayerPos.x - transform.position.x) > 0 ? 1 : -1;
     public bool IsFollowMax { get; set; } = false;
@@ -125,12 +125,12 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
     m_followData.CantMoveGround);
 
     public virtual bool CanFollow =>
-         !m_SEObj.SEFallowAble ? false :
+         !m_SEObj.FallowAble ? false :
          Hurting() ? false :
          ((GM.PlayerPos - transform.position).magnitude < m_followData.dist);
 
     public virtual bool CanAttack =>
-        !m_SEObj.SEAttackAble ? false : 
+        !m_SEObj.AttackAble ? false : 
         m_bAttacking ? true : 
         !m_groundDetectionData.isGrounded ? false :
         m_bAttacking = ((GM.PlayerPos - transform.position).magnitude < m_AttackRange);
@@ -163,7 +163,8 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
         m_groundDetectionData.DetectGround(!m_jumpData.isJumping, m_rb, transform);
         m_groundDetectionData.ExecuteOnGroundMethod(this);
         var OverlapSlowSpeed = (CheckOverlapSlow(MobSize, new Vector2(m_MoveData.Dir, 0)) ? OverlapSlow : 1f);
-        m_rb.velocity = new Vector2(m_bFollowJump && m_jumpData.isJumping ? VelX : VelX * m_SEObj.SESpeedMult * OverlapSlowSpeed, VelY);
+        m_rb.velocity = new Vector2(m_bFollowJump && m_jumpData.isJumping ? VelX : VelX * m_SEObj.SpeedMult * OverlapSlowSpeed, VelY);
+        if(m_SEObj.EffectDir2d != Vector2.zero) m_rb.velocity = m_SEObj.EffectDir2d * m_SEObj.SpeedMult;
         m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
         
         
@@ -189,9 +190,9 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
     void Animation()
     {
         EndFollowing.Invoke();
-        if (m_SEObj.SEAni != eMobAniST.Last)
+        if (m_SEObj.Ani != eMobAniST.Last)
         {
-            m_CurAniST = m_SEObj.SEAni;
+            m_CurAniST = m_SEObj.Ani;
             m_bHurting = false;
             return;
         }
@@ -358,7 +359,7 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
     }
     public bool SENoAct()
     {
-        return m_SEObj.SENoTask;
+        return m_SEObj.NoTask;
     }
 
     public void AttackProcessStart()
@@ -380,7 +381,7 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
 
     public override void OnHurt(/* 총알 위치 */)
     {
-        if (m_SEObj.SEAni != eMobAniST.Last) return; // Ani 우선순위가 Hurt보다 커야함.
+        if (m_SEObj.Ani != eMobAniST.Last) return; // Ani 우선순위가 Hurt보다 커야함.
 
         if (m_bAttacking) return;
         if (!m_bHurting)
@@ -391,7 +392,7 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
         m_bHurting = true;
         m_bAniStart = true;
         GetComponentInChildren<AColliderMgr>().Stop();
-        if (m_SEObj.SEAni == eMobAniST.Last) // Ani 우선순위가 Hurt보다 커야함.
+        if (m_SEObj.Ani == eMobAniST.Last) // Ani 우선순위가 Hurt보다 커야함.
             m_CurAniST = eMobAniST.Hit;
     }
     public bool Hurting() => m_bHurting;

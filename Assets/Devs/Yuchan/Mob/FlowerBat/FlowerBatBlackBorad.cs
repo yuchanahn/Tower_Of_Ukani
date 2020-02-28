@@ -125,7 +125,7 @@ public class FlowerBatBlackBorad : BlackBoard_Base
 
         return AttackTask.IsAttacking;
     }
-    public bool BTStop() => status.SENoTask || mMob.BTStop;
+    public bool BTStop() => status.NoTask || mMob.BTStop;
     public bool RandomMove() => RandomMoveTask.Tick();
     public bool Hang() => HangTask.Tick();
     public bool Attack() => AttackTask.Tick();

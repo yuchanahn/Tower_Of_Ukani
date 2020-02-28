@@ -4,20 +4,11 @@ using UnityEngine;
 
 public class StatusEffect_Stunned : StatusEffect_Base
 {
-    float StunnedT = 0;
     GameObject StunnedObj;
 
     protected override void Start()
     {
         base.Start();
-    }
-    void Init()
-    {
-        ATimer.SetAndReset(gameObject.name + GetInstanceID(), StunnedT, ()=> { OnSEDestroy(); Destroy(this);  });
-    }
-    void OnDestroy()
-    {
-        ATimer.Pop(gameObject.name + GetInstanceID());
     }
 
     public static void Create(GameObject obj, GameObject StunnedObj, float StunnedTime)
@@ -35,22 +26,22 @@ public class StatusEffect_Stunned : StatusEffect_Base
 
         // 우선 순위 설정 높을수록 우선순위가 높음.
         SE_Stunned.priority = 10;
-        SE_Stunned.StunnedT = StunnedTime;
-        SE_Stunned.Init();
         SE_Stunned.StunnedObj = StunnedObj;
         StunnedObj.SetActive(true);
+
+        Destroy(SE_Stunned, StunnedTime);
     }
     void Update()
     {
         var SE_Stunned  =    GetComponent<StatusEffect_Stunned>();
         var SE_Obj      =    GetComponent<StatusEffect_Object>();
 
-        SE_Stunned.SetValue(SE_Obj.StatusEffectAni, eMobAniST.Stunned);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectSpeedMult, 0);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectAttackAble, false);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectFollowAble, false);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectChangeDirAble, false);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectNoTask, true);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_Ani, eMobAniST.Stunned);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_SpeedMult, 0);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_AttackAble, false);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_FollowAble, false);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_ChangeDirAble, false);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_NoTask, true);
     }
 
     protected override void OnSEDestroy()
@@ -58,12 +49,12 @@ public class StatusEffect_Stunned : StatusEffect_Base
         var SE_Stunned  = GetComponent<StatusEffect_Stunned>();
         var SE_Obj      = GetComponent<StatusEffect_Object>();
 
-        SE_Stunned.SetValue(SE_Obj.StatusEffectAni, eMobAniST.Last);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectSpeedMult, 1f);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectAttackAble, true);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectChangeDirAble, true);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectFollowAble, true);
-        SE_Stunned.SetValue(SE_Obj.StatusEffectNoTask, false);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_Ani, eMobAniST.Last);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_SpeedMult, 1f);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_AttackAble, true);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_ChangeDirAble, true);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_FollowAble, true);
+        SE_Stunned.SetValue(SE_Obj.StatusEffect_NoTask, false);
 
         StunnedObj.SetActive(false);
     }

@@ -31,26 +31,29 @@ public class StatusEffect_Object : MonoBehaviour
     List<StatusEffect_Base> statusEffect_s = new List<StatusEffect_Base>();
 
     private SE_Stat<float>      statusEffectSpeed = new SE_Stat<float>(1f);
+    private SE_Stat<Vector2>    statusEffectDir2d = new SE_Stat<Vector2>(Vector2.zero);
     private SE_Stat<bool>       statusEffectFallowAble = new SE_Stat<bool>(true);
     private SE_Stat<bool>       statusEffectAttackAble = new SE_Stat<bool>(true);
     private SE_Stat<bool>       statusEffectChangeDirAble = new SE_Stat<bool>(true);
     private SE_Stat<bool>       statusEffectNoTask = new SE_Stat<bool>(false);
     private SE_Stat<eMobAniST>  statusEffectAni = new SE_Stat<eMobAniST>(eMobAniST.Last);
 
-    public SE_Stat<bool> StatusEffectNoTask => statusEffectNoTask;
-    public SE_Stat<float> StatusEffectSpeedMult => statusEffectSpeed;
-    public SE_Stat<eMobAniST> StatusEffectAni => statusEffectAni;
-    public SE_Stat<bool> StatusEffectFollowAble => statusEffectFallowAble;
-    public SE_Stat<bool> StatusEffectAttackAble => statusEffectAttackAble;
-    public SE_Stat<bool> StatusEffectChangeDirAble => statusEffectChangeDirAble;
+    public SE_Stat<bool> StatusEffect_NoTask => statusEffectNoTask;
+    public SE_Stat<float> StatusEffect_SpeedMult => statusEffectSpeed;
+    public SE_Stat<Vector2> StatusEffect_Dir2d => statusEffectDir2d;
+    public SE_Stat<eMobAniST> StatusEffect_Ani => statusEffectAni;
+    public SE_Stat<bool> StatusEffect_FollowAble => statusEffectFallowAble;
+    public SE_Stat<bool> StatusEffect_AttackAble => statusEffectAttackAble;
+    public SE_Stat<bool> StatusEffect_ChangeDirAble => statusEffectChangeDirAble;
 
 
-    public bool SENoTask        => Use ? StatusEffectNoTask.Value : false;
-    public bool SEAttackAble    => Use ? statusEffectAttackAble.Value : true;
-    public bool SEFallowAble    => Use ? statusEffectFallowAble.Value : true;
-    public bool SEChangeDirAble => Use ? statusEffectChangeDirAble.Value : true;
-    public float SESpeedMult    => Use ? statusEffectSpeed .Value : 1f;
-    public eMobAniST SEAni      => Use ? statusEffectAni.Value : eMobAniST.Last;
+    public bool NoTask        => Use ? StatusEffect_NoTask.Value : false;
+    public bool AttackAble    => Use ? statusEffectAttackAble.Value : true;
+    public bool FallowAble    => Use ? statusEffectFallowAble.Value : true;
+    public bool ChangeDirAble => Use ? statusEffectChangeDirAble.Value : true;
+    public float SpeedMult    => Use ? statusEffectSpeed .Value : 1f;
+    public Vector2 EffectDir2d  => Use ? statusEffectDir2d.Value : Vector2.zero;
+    public eMobAniST Ani      => Use ? statusEffectAni.Value : eMobAniST.Last;
 
     public void Remove(StatusEffect_Base SEBase)
     {
