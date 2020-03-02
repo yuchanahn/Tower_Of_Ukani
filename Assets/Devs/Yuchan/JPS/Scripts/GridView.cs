@@ -93,6 +93,26 @@ public class GridView : MonoBehaviour
 
         return po;
     }
+
+
+
+    public Node SetGrid(Vector2 pos, bool moveable)
+    {
+        if ( (pos.x < GM.CurMapWorldPoint.x
+           && pos.x > GM.CurMapWorldPoint.x - GM.CurMapSize.width)
+           &&(pos.y <  GM.CurMapWorldPoint.y 
+           && pos.y > GM.CurMapWorldPoint.y - GM.CurMapSize.height))
+        { 
+            var node = GetNodeAtWorldPostiton(pos);
+            if (node is null) return null;
+            node.isObstacle = moveable;
+            return node;
+        }
+        IsPathFind = false;
+        return null;
+    }
+
+
     public Node GetNodeAtWorldPostiton(Vector2 position)
     {
         var point = WorldToGrid(position);

@@ -30,8 +30,6 @@ public class PixelLevelGenerator : MonoBehaviour
         GM.MapSize[GM.CurMapName] = mapTexture;
         GM.CurMapCenter = transform.position;
     }
-    [SerializeField] int map_w;
-    [SerializeField] int map_h;
     [SerializeField] int[] objSize;
     [SerializeField] string mMapName;
     private void GenerateTile(int x, int y)
@@ -61,7 +59,7 @@ public class PixelLevelGenerator : MonoBehaviour
                                 var lpfs = tile.position.Add(x: i, y: -j);
                                 var __x = (tile.localPosition.x - offsetX) + i;
                                 var __y = (tile.localPosition.y - offsetY) - j;
-                                if (__x >= 0 && __x < map_w && __y >= 0 && __y < map_h)
+                                if (__x >= 0 && __x < GM.MapSizeOf[mMapName].x && __y >= 0 && __y < GM.MapSizeOf[mMapName].y)
                                 {
                                     GridView.Inst[mMapName][osize].GetNodeAtWorldPostiton(lpfs).isObstacle = true;
                                     GridView.Inst[mMapName][osize].GetNodeAtWorldPostiton(lpfs).isVirtualWall = !(i == 0 && j == 0);

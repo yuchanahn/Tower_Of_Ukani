@@ -32,6 +32,11 @@ public static class AEM
         return rl.ToArray();
     }
 
+    public static void for_each<T>(this T[] l, Action<T> f)
+    {
+        foreach (var i in l) f(i);
+    }
+
     public static List<T2> map<T, T2>(this List<T> l, Func<T, T2> f)
     {
         List<T2> rl = new List<T2>(l.Count);
