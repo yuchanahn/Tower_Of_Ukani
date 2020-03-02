@@ -34,7 +34,7 @@ public class WeighPlatform : WeighObject
     {
         float force = (canLiftUp + 1 - (GetDownForce() / forceRate));
 
-        Debug.Log(force);
+        // Debug.Log(force);
 
         float result = force * speed;
         if (result > maxVel) result = maxVel;

@@ -54,7 +54,7 @@ public class Chest : MonoBehaviour
             if (!isCloseToPlayer) return;
             //열어봤었는지 확인
             if (isOpened) return;
-            OpenChest();
+            ToggleChest();
         }
         if (!isCloseToPlayer) CloseChest();
     }
@@ -77,6 +77,12 @@ public class Chest : MonoBehaviour
     public void CloseChest()
     {
         chestSelectOption.gameObject.SetActive(false);
+    }
+
+    public void ToggleChest()
+    {
+        if (chestSelectOption.gameObject.activeSelf) CloseChest();
+        else OpenChest();
     }
 
     public void SpawnItem()
