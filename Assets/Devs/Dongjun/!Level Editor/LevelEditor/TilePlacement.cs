@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,9 +19,14 @@ namespace Dongjun.LevelEditor
                 this.prefab = prefab;
             }
         }
+        private enum PlacementMode
+        {
+            Do,
+            Undo
+        }
         private readonly int MaxUndoRedo = 1000;
-        private List<TilePlacementData> undoList = new List<TilePlacementData>();
-        private List<TilePlacementData> redoList = new List<TilePlacementData>();
+        private List<List<TilePlacementData>> undoList = new List<List<TilePlacementData>>();
+        private List<List<TilePlacementData>> redoList = new List<List<TilePlacementData>>();
 
         private Camera mainCam;
 
@@ -40,16 +46,17 @@ namespace Dongjun.LevelEditor
 
             return true;
         }
-        private void TilePlacementLogic(TilePlacementData placementData, bool recordUndo = false)
+        private void TileEdit(in TilePlacementData placementData, in PlacementMode mode)
         {
             if (placementData.prefab != null)
             {
-                if (data.Grid[placementData.pos.x, placementData.pos.y] != null) return;
+                if (data.Grid[placementData.pos.x, placementData.pos.y] != null)
+                    return;
 
-                if (recordUndo)
-                    Push(undoList, new TilePlacementData(placementData.pos, null));
+                if (mode == PlacementMode.Do)
+                    Push(undoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, null) });
                 else
-                    Push(redoList, new TilePlacementData(placementData.pos, null));
+                    Push(redoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, null) });
 
                 data.Grid[placementData.pos.x, placementData.pos.y] = Instantiate(placementData.prefab.gameObject, data.LayerParent).GetComponent<Tile>();
                 data.Grid[placementData.pos.x, placementData.pos.y].transform.position = GridDisplay.Inst.GridToWorld(placementData.pos);
@@ -57,16 +64,118 @@ namespace Dongjun.LevelEditor
             }
             else
             {
-                if (data.Grid[placementData.pos.x, placementData.pos.y] == null) return;
+                if (data.Grid[placementData.pos.x, placementData.pos.y] == null)
+                    return;
 
-                if (recordUndo)
-                    Push(undoList, new TilePlacementData(placementData.pos, data.GetTilePrefab(this.data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name)));
+                if (mode == PlacementMode.Do)
+                    Push(undoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, data.GetTilePrefab(data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name)) });
                 else
-                    Push(redoList, new TilePlacementData(placementData.pos, data.GetTilePrefab(this.data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name)));
+                    Push(redoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, data.GetTilePrefab(data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name)) });
 
                 Destroy(data.Grid[placementData.pos.x, placementData.pos.y].gameObject);
                 data.Grid[placementData.pos.x, placementData.pos.y] = null;
             }
+        }
+        private void TileEdit(in List<TilePlacementData> placementData, in PlacementMode mode)
+        {
+            List<TilePlacementData> actionData = new List<TilePlacementData>();
+
+            foreach (var curData in placementData)
+            {
+                if (curData.prefab != null)
+                {
+                    if (data.Grid[curData.pos.x, curData.pos.y] != null)
+                        continue;
+
+                    actionData.Add(new TilePlacementData(curData.pos, null));
+
+                    data.Grid[curData.pos.x, curData.pos.y] = Instantiate(curData.prefab.gameObject, data.LayerParent).GetComponent<Tile>();
+                    data.Grid[curData.pos.x, curData.pos.y].transform.position = GridDisplay.Inst.GridToWorld(curData.pos);
+                    data.Grid[curData.pos.x, curData.pos.y].gameObject.name = curData.prefab.gameObject.name;
+                }
+                else
+                {
+                    if (data.Grid[curData.pos.x, curData.pos.y] == null)
+                        continue;
+
+                    actionData.Add(new TilePlacementData(curData.pos, data.GetTilePrefab(data.Grid[curData.pos.x, curData.pos.y].gameObject.name)));
+
+                    Destroy(data.Grid[curData.pos.x, curData.pos.y].gameObject);
+                    data.Grid[curData.pos.x, curData.pos.y] = null;
+                }
+            }
+
+            if (actionData.Count == 0)
+                return;
+
+            if (mode == PlacementMode.Do)
+                Push(undoList, actionData.Reverse<TilePlacementData>().ToList());
+            else
+                Push(redoList, actionData.Reverse<TilePlacementData>().ToList());
+        }
+        private void TileEdit_OnlyPlacement(in TilePlacementData placementData)
+        {
+            if (placementData.prefab != null)
+            {
+                if (data.Grid[placementData.pos.x, placementData.pos.y] != null)
+                    return;
+
+                data.Grid[placementData.pos.x, placementData.pos.y] = Instantiate(placementData.prefab.gameObject, data.LayerParent).GetComponent<Tile>();
+                data.Grid[placementData.pos.x, placementData.pos.y].transform.position = GridDisplay.Inst.GridToWorld(placementData.pos);
+                data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name = placementData.prefab.gameObject.name;
+            }
+            else
+            {
+                if (data.Grid[placementData.pos.x, placementData.pos.y] == null)
+                    return;
+
+                Destroy(data.Grid[placementData.pos.x, placementData.pos.y].gameObject);
+                data.Grid[placementData.pos.x, placementData.pos.y] = null;
+            }
+        }
+        private void TileEdit_OnlyPlacement(in List<TilePlacementData> placementData)
+        {
+            foreach (var curData in placementData)
+            {
+                if (curData.prefab != null)
+                {
+                    if (data.Grid[curData.pos.x, curData.pos.y] != null)
+                        continue;
+
+                    data.Grid[curData.pos.x, curData.pos.y] = Instantiate(curData.prefab.gameObject, data.LayerParent).GetComponent<Tile>();
+                    data.Grid[curData.pos.x, curData.pos.y].transform.position = GridDisplay.Inst.GridToWorld(curData.pos);
+                    data.Grid[curData.pos.x, curData.pos.y].gameObject.name = curData.prefab.gameObject.name;
+                }
+                else
+                {
+                    if (data.Grid[curData.pos.x, curData.pos.y] == null)
+                        continue;
+
+                    Destroy(data.Grid[curData.pos.x, curData.pos.y].gameObject);
+                    data.Grid[curData.pos.x, curData.pos.y] = null;
+                }
+            }
+        }
+        private void TileEdit_OnlyRecordUndoRedo(in List<TilePlacementData> placementData, in PlacementMode mode)
+        {
+            List<TilePlacementData> actionData = new List<TilePlacementData>();
+
+            foreach (var curData in placementData)
+            {
+                if (curData.prefab != null)
+                {
+                    actionData.Add(new TilePlacementData(curData.pos, null));
+                }
+                else
+                {
+                    actionData.Add(new TilePlacementData(curData.pos, data.GetTilePrefab(data.Grid[curData.pos.x, curData.pos.y].gameObject.name)));
+                }
+            }
+
+            if (mode == PlacementMode.Do)
+                Push(undoList, actionData.Reverse<TilePlacementData>().ToList());
+            else
+                Push(redoList, actionData.Reverse<TilePlacementData>().ToList());
         }
 
         public void EditTile()
@@ -89,21 +198,23 @@ namespace Dongjun.LevelEditor
             if (!IsValidMousePos(out var pos))
                 return false;
 
-            bool IsSameTile(int x, int y, string name)
+            bool IsSameTile(int x, int y, string tileName)
             {
-                if (name == null)
+                if (tileName == null)
                     return data.Grid[x, y] == null;
-                return data.Grid[x, y] != null && data.Grid[x, y].gameObject.name == name;
+
+                return data.Grid[x, y] != null && data.Grid[x, y].gameObject.name == tileName;
             }
 
             string targetTileName = data.Grid[pos.x, pos.y]?.gameObject.name ?? null;
-
             if (targetTileName == (data.CurTile?.gameObject.name ?? null))
                 return false;
 
-            Stack<Vector2Int> points = new Stack<Vector2Int>();
+            List<TilePlacementData> actionData = new List<TilePlacementData>();
 
+            Stack<Vector2Int> points = new Stack<Vector2Int>();
             points.Push(pos);
+
             while (points.Count != 0)
             {
                 Vector2Int temp = points.Pop();
@@ -118,7 +229,9 @@ namespace Dongjun.LevelEditor
                 bool spanRight = false;
                 while (y1 < data.MapData.MaxSizeY && IsSameTile(temp.x, y1, targetTileName))
                 {
-                    TilePlacementLogic(new TilePlacementData(new Vector2Int(temp.x, y1), data.CurTile), true);
+                    TilePlacementData placementData = new TilePlacementData(new Vector2Int(temp.x, y1), data.CurTile);
+                    actionData.Add(placementData);
+                    TileEdit_OnlyPlacement(placementData);
 
                     if (!spanLeft && temp.x > 0 && IsSameTile(temp.x - 1, y1, targetTileName))
                     {
@@ -143,6 +256,7 @@ namespace Dongjun.LevelEditor
                 }
             }
 
+            TileEdit_OnlyRecordUndoRedo(actionData, PlacementMode.Do);
             return true;
         }
         private bool ReplaceTile()
@@ -159,8 +273,11 @@ namespace Dongjun.LevelEditor
             if (data.GetTilePrefab(data.Grid[pos.x, pos.y].gameObject.name) == data.CurTile)
                 return false;
 
-            TilePlacementLogic(new TilePlacementData(pos, null), true);
-            TilePlacementLogic(new TilePlacementData(pos, data.CurTile), true);
+            TileEdit(new List<TilePlacementData>() 
+            { 
+                new TilePlacementData(pos, null),
+                new TilePlacementData(pos, data.CurTile) 
+            }, PlacementMode.Do);
             return true;
         }
         private bool AddTile()
@@ -171,7 +288,7 @@ namespace Dongjun.LevelEditor
             if (!IsValidMousePos(out var pos) || data.CurTile == null)
                 return false;
 
-            TilePlacementLogic(new TilePlacementData(pos, data.CurTile), true);
+            TileEdit(new TilePlacementData(pos, data.CurTile), PlacementMode.Do);
             return true;
         }
         private bool RemoveTile()
@@ -182,7 +299,7 @@ namespace Dongjun.LevelEditor
             if (!IsValidMousePos(out var pos))
                 return false;
 
-            TilePlacementLogic(new TilePlacementData(pos, null), true);
+            TileEdit(new TilePlacementData(pos, null), PlacementMode.Do);
             return true;
         }
 
@@ -196,12 +313,11 @@ namespace Dongjun.LevelEditor
                 if (undoList.Count == 0)
                     return;
 
-                TilePlacementLogic(Pop(undoList));
+                TileEdit(Pop(undoList), PlacementMode.Undo);
             }
         }
         public void Redo()
         {
-
             if (!Input.GetKey(KeyCode.LeftControl))
                 return;
 
@@ -210,17 +326,17 @@ namespace Dongjun.LevelEditor
                 if (redoList.Count == 0)
                     return;
 
-                TilePlacementLogic(Pop(redoList), true);
+                TileEdit(Pop(redoList), PlacementMode.Do);
             }
         }
 
-        private TilePlacementData Pop(List<TilePlacementData> list)
+        private List<TilePlacementData> Pop(List<List<TilePlacementData>> list)
         {
-            TilePlacementData result = list[list.Count - 1];
+            List<TilePlacementData> result = list[list.Count - 1];
             list.RemoveAt(list.Count - 1);
             return result;
         }
-        private void Push(List<TilePlacementData> list, TilePlacementData data)
+        private void Push(List<List<TilePlacementData>> list, List<TilePlacementData> data)
         {
             list.Add(data);
 

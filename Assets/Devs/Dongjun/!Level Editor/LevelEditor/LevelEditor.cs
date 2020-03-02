@@ -18,7 +18,6 @@ namespace Dongjun.LevelEditor
             camController = FindObjectOfType<CamController>();
             camController.cam.transform.position = new Vector3(data.MapData.MaxSizeX * 0.5f, data.MapData.MaxSizeY * 0.5f, camController.cam.transform.position.z);
         }
-
         private void Update()
         {
             if (!ui.IsStarted)
