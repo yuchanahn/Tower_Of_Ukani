@@ -36,15 +36,16 @@ namespace Dongjun.LevelEditor
             mainCam = Camera.main;
         }
 
-        private bool IsValidMousePos(out Vector2Int pos)
+        private void _SpawnTile(Vector2Int pos, Tile prefab)
         {
-            Vector2 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-            pos = GridDisplay.Inst.WorldToGrid(mousePos);
-
-            if (0 > pos.x || 0 > pos.y || data.Grid.GetLength(0) - 1 < pos.x || data.Grid.GetLength(1) - 1 < pos.y)
-                return false;
-
-            return true;
+            data.Grid[pos.x, pos.y] = prefab.Spawn(data.LayerParent, Vector2.zero);
+            data.Grid[pos.x, pos.y].transform.position = GridDisplay.Inst.GridToWorld(pos);
+            data.Grid[pos.x, pos.y].gameObject.name = prefab.gameObject.name;
+        }
+        private void _DestroyTile(Vector2Int pos)
+        {
+            data.Grid[pos.x, pos.y].Sleep();
+            data.Grid[pos.x, pos.y] = null;
         }
         private void TileEdit(in TilePlacementData placementData, in PlacementMode mode)
         {
@@ -53,27 +54,18 @@ namespace Dongjun.LevelEditor
                 if (data.Grid[placementData.pos.x, placementData.pos.y] != null)
                     return;
 
-                if (mode == PlacementMode.Do)
-                    Push(undoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, null) });
-                else
-                    Push(redoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, null) });
-
-                data.Grid[placementData.pos.x, placementData.pos.y] = Instantiate(placementData.prefab.gameObject, data.LayerParent).GetComponent<Tile>();
-                data.Grid[placementData.pos.x, placementData.pos.y].transform.position = GridDisplay.Inst.GridToWorld(placementData.pos);
-                data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name = placementData.prefab.gameObject.name;
+                Push(mode == PlacementMode.Do ? undoList : redoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, null) });
+                _SpawnTile(placementData.pos, placementData.prefab);
             }
             else
             {
                 if (data.Grid[placementData.pos.x, placementData.pos.y] == null)
                     return;
 
-                if (mode == PlacementMode.Do)
-                    Push(undoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, data.GetTilePrefab(data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name)) });
-                else
-                    Push(redoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, data.GetTilePrefab(data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name)) });
-
-                Destroy(data.Grid[placementData.pos.x, placementData.pos.y].gameObject);
-                data.Grid[placementData.pos.x, placementData.pos.y] = null;
+                Push(mode == PlacementMode.Do ? undoList : redoList,
+                    new List<TilePlacementData>() { 
+                        new TilePlacementData(placementData.pos, data.GetTilePrefab(data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name)) });
+                _DestroyTile(placementData.pos);
             }
         }
         private void TileEdit(in List<TilePlacementData> placementData, in PlacementMode mode)
@@ -88,10 +80,7 @@ namespace Dongjun.LevelEditor
                         continue;
 
                     actionData.Add(new TilePlacementData(curData.pos, null));
-
-                    data.Grid[curData.pos.x, curData.pos.y] = Instantiate(curData.prefab.gameObject, data.LayerParent).GetComponent<Tile>();
-                    data.Grid[curData.pos.x, curData.pos.y].transform.position = GridDisplay.Inst.GridToWorld(curData.pos);
-                    data.Grid[curData.pos.x, curData.pos.y].gameObject.name = curData.prefab.gameObject.name;
+                    _SpawnTile(curData.pos, curData.prefab);
                 }
                 else
                 {
@@ -99,19 +88,14 @@ namespace Dongjun.LevelEditor
                         continue;
 
                     actionData.Add(new TilePlacementData(curData.pos, data.GetTilePrefab(data.Grid[curData.pos.x, curData.pos.y].gameObject.name)));
-
-                    Destroy(data.Grid[curData.pos.x, curData.pos.y].gameObject);
-                    data.Grid[curData.pos.x, curData.pos.y] = null;
+                    _DestroyTile(curData.pos);
                 }
             }
 
             if (actionData.Count == 0)
                 return;
 
-            if (mode == PlacementMode.Do)
-                Push(undoList, actionData.Reverse<TilePlacementData>().ToList());
-            else
-                Push(redoList, actionData.Reverse<TilePlacementData>().ToList());
+            Push(mode == PlacementMode.Do ? undoList : redoList, actionData.Reverse<TilePlacementData>().ToList());
         }
         private void TileEdit_OnlyPlacement(in TilePlacementData placementData)
         {
@@ -120,17 +104,14 @@ namespace Dongjun.LevelEditor
                 if (data.Grid[placementData.pos.x, placementData.pos.y] != null)
                     return;
 
-                data.Grid[placementData.pos.x, placementData.pos.y] = Instantiate(placementData.prefab.gameObject, data.LayerParent).GetComponent<Tile>();
-                data.Grid[placementData.pos.x, placementData.pos.y].transform.position = GridDisplay.Inst.GridToWorld(placementData.pos);
-                data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name = placementData.prefab.gameObject.name;
+                _SpawnTile(placementData.pos, placementData.prefab);
             }
             else
             {
                 if (data.Grid[placementData.pos.x, placementData.pos.y] == null)
                     return;
 
-                Destroy(data.Grid[placementData.pos.x, placementData.pos.y].gameObject);
-                data.Grid[placementData.pos.x, placementData.pos.y] = null;
+                _DestroyTile(placementData.pos);
             }
         }
         private void TileEdit_OnlyPlacement(in List<TilePlacementData> placementData)
@@ -142,17 +123,14 @@ namespace Dongjun.LevelEditor
                     if (data.Grid[curData.pos.x, curData.pos.y] != null)
                         continue;
 
-                    data.Grid[curData.pos.x, curData.pos.y] = Instantiate(curData.prefab.gameObject, data.LayerParent).GetComponent<Tile>();
-                    data.Grid[curData.pos.x, curData.pos.y].transform.position = GridDisplay.Inst.GridToWorld(curData.pos);
-                    data.Grid[curData.pos.x, curData.pos.y].gameObject.name = curData.prefab.gameObject.name;
+                    _SpawnTile(curData.pos, curData.prefab);
                 }
                 else
                 {
                     if (data.Grid[curData.pos.x, curData.pos.y] == null)
                         continue;
 
-                    Destroy(data.Grid[curData.pos.x, curData.pos.y].gameObject);
-                    data.Grid[curData.pos.x, curData.pos.y] = null;
+                    _DestroyTile(curData.pos);
                 }
             }
         }
@@ -172,12 +150,19 @@ namespace Dongjun.LevelEditor
                 }
             }
 
-            if (mode == PlacementMode.Do)
-                Push(undoList, actionData.Reverse<TilePlacementData>().ToList());
-            else
-                Push(redoList, actionData.Reverse<TilePlacementData>().ToList());
+            Push(mode == PlacementMode.Do ? undoList : redoList, actionData.Reverse<TilePlacementData>().ToList());
         }
 
+        private bool IsValidMousePos(out Vector2Int pos)
+        {
+            Vector2 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            pos = GridDisplay.Inst.WorldToGrid(mousePos);
+
+            if (0 > pos.x || 0 > pos.y || data.Grid.GetLength(0) - 1 < pos.x || data.Grid.GetLength(1) - 1 < pos.y)
+                return false;
+
+            return true;
+        }
         public void EditTile()
         {
             if (!data.IsLayerVisable(data.Layer)
@@ -190,6 +175,7 @@ namespace Dongjun.LevelEditor
             if (AddTile()) return;
             if (RemoveTile()) return;
         }
+
         private bool FloodFill()
         {
             if (!Input.GetKey(KeyCode.F) || !Input.GetKeyDown(KeyCode.Mouse0))

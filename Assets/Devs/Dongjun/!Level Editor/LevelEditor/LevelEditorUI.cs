@@ -41,11 +41,11 @@ namespace Dongjun.LevelEditor
 
         private void Start()
         {
-            SetCurTile(null);
             InitTileInventory();
             mapLayerUI.Init();
-
             InitStartUI();
+            SetCurTile(null);
+
             onStartUI.SetActive(true);
             onEditUI.SetActive(false);
         }
@@ -56,13 +56,13 @@ namespace Dongjun.LevelEditor
             {
                 if (!mapPathField.text.IsValidateFilePath())
                 {
-                    Debug.LogError("Wrong Path!");
+                    Debug.Log("Wrong Path!");
                     return;
                 }
 
                 if (File.Exists(mapPathField.text))
                 {
-                    Debug.LogError("That Name Already Exists!");
+                    Debug.Log("That Name Already Exists!");
                     return;
                 }
 
@@ -77,7 +77,7 @@ namespace Dongjun.LevelEditor
             {
                 if (!File.Exists(mapPathField.text))
                 {
-                    Debug.LogError("That File Does Not Exists!");
+                    Debug.Log("That File Does Not Exists!");
                     return;
                 }
 
@@ -92,8 +92,6 @@ namespace Dongjun.LevelEditor
         }
         private void InitTileInventory()
         {
-            tileInventoryUI.OnLayerChange(() => curTileName.text = CurItem == null ? "None" : CurItem.TilePrefab.gameObject.name);
-
             for (int i = 0; i < Enum.GetValues(typeof(MapLayer)).Length; i++)
             {
                 var layer = (MapLayer)i;
@@ -136,6 +134,8 @@ namespace Dongjun.LevelEditor
                     });
                 }
             }
+
+            tileInventoryUI.OnLayerChange(() => curTileName.text = CurItem == null ? "None" : CurItem.TilePrefab.gameObject.name);
         }
 
         private void SetCurTile(TileItemUI tileItem)

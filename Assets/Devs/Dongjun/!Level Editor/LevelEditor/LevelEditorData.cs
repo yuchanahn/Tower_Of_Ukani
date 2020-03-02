@@ -111,7 +111,7 @@ namespace Dongjun.LevelEditor
                 {
                     for (int x = 0; x < mapData.MaxSizeX; x++)
                     {
-                        data.Append(grids[(MapLayer)layer][x, y]?.gameObject.name ?? "empty");
+                        data.Append(grids[(MapLayer)layer][x, y]?.gameObject.name ?? "null");
 
                         if (x != mapData.MaxSizeX - 1)
                             data.Append(" || ");
@@ -162,7 +162,7 @@ namespace Dongjun.LevelEditor
                     {
                         var prefab = GetTilePrefab(tiles[x].Trim());
 
-                        if (prefab == null || tiles[x] == "empty")
+                        if (prefab == null || tiles[x] == "null")
                             continue;
 
                         var tile = Instantiate(prefab.gameObject, layerParents[curLayer]).GetComponent<Tile>();

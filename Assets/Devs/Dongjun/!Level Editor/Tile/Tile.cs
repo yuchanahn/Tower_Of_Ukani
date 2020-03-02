@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Tile : MonoBehaviour
+public class Tile : PoolingObj
 {
     public Sprite icon;
+
+    public override void ResetOnSpawn()
+    {
+
+    }
 
     public void Init()
     {
