@@ -6,6 +6,8 @@ using Prime31;
 //[RequireComponent(typeof(MeshFilter))]
 public class InteractiveFoliage : MonoBehaviour
 {
+    static GameObject tempQuad;
+
     const float BEND_FACTOR = 0.2f;
     const float BEND_FORCE_ON_EXIT = 0.5f;
 
@@ -33,13 +35,26 @@ public class InteractiveFoliage : MonoBehaviour
     MeshFilter _meshFilter;
     Spring _spring = new Spring();
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _meshFilter = GetComponent<MeshFilter>();
         _colliderHalfWidth = transform.localScale.x / 2f;
         _windOffset = Random.Range(0f, 3f);
         windPeriod = Random.Range(1f, 3f);
         windForceMultiplier = 0.3f;
+
+        //쿼드 넣어줌
+        if (tempQuad == null)
+        {
+            tempQuad = GameObject.CreatePrimitive(PrimitiveType.Quad);
+        }
+        _meshFilter.mesh = tempQuad.GetComponent<MeshFilter>().mesh;
+
+    }
+
+    void Start()
+    {
+        if (tempQuad != null) Destroy(tempQuad);
     }
 
     #region OnTriggers
@@ -94,6 +109,7 @@ public class InteractiveFoliage : MonoBehaviour
     void setVertHorizontalOffset(float offset)
     {
         var verts = _meshFilter.mesh.vertices;
+
 
         verts[2].x = -0.5f + offset * BEND_FACTOR / transform.localScale.x;
         verts[3].x = 0.5f + offset * BEND_FACTOR / transform.localScale.x;

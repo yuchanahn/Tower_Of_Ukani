@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Chest : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class Chest : MonoBehaviour
     List<ChestItemSlot> slots = new List<ChestItemSlot>();
 
     public ChestItem selectedItem = null;
+
+    private void Awake()
+    {
+        if (gameObject.scene.name == "LevelEditor") enabled = false;
+    }
 
     private void Start()
     {
