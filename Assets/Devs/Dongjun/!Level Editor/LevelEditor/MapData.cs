@@ -11,4 +11,10 @@ public class MapData : MonoBehaviour
     public int MaxSizeX => maxSizeX;
     public int MaxSizeY => maxSizeY;
     public int CellSize => cellSize;
+
+    public void SetSize(int x, int y)
+    {
+        maxSizeX = x;
+        maxSizeY = y;
+    }
 }

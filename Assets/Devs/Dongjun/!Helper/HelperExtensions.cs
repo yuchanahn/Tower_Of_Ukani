@@ -1,8 +1,29 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace Dongjun.Helper
 {
+    public static class PathHelper
+    {
+        public static bool IsValidateFilePath(this string path)
+        {
+            bool exists = File.Exists(path);
+            try
+            {
+                File.Create(path).Dispose();
+                if (!exists) File.Delete(path);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+    }
+
     public static class EnumHelper
     {
         public static int Count<T>() where T : Enum
@@ -169,9 +190,9 @@ namespace Dongjun.Helper
             return target;
         }
 
-        public static Vector2 Clamp(this Vector2 target, 
-            float? minX = null, 
-            float? maxX = null, 
+        public static Vector2 Clamp(this Vector2 target,
+            float? minX = null,
+            float? maxX = null,
             float? minY = null,
             float? maxY = null)
         {

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Dongjun.Helper;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,13 +10,18 @@ namespace Dongjun.LevelEditor
 {
     public class LevelEditorUI : LevelEditorComponent
     {
-        [Header("Current State")]
+        [Header("UI Group")]
+        [SerializeField] private GameObject onStartUI;
+        [SerializeField] private GameObject onEditUI;
+
+        [Header("On Start")]
+        [SerializeField] private InputField mapPathField;
+        [SerializeField] private Button newMapBtn;
+        [SerializeField] private Button loadMapBtn;
+
+        [Header("On Edit")]
         [SerializeField] private Text curTileName;
-
-        [Header("Tile Inventory")]
         [SerializeField] private TileInventoryUI tileInventoryUI;
-
-        [Header("Map Layer UI")]
         [SerializeField] private MapLayerUI mapLayerUI;
 
         private readonly int HotbarSize = 8;
@@ -27,6 +34,8 @@ namespace Dongjun.LevelEditor
             get => selectedItems[data.Layer];
             set => selectedItems[data.Layer] = value;
         }
+        public bool IsStarted
+        { get; private set; } = false;
         public bool IsInventoryOpened
         { get; private set; } = false;
 
@@ -35,8 +44,52 @@ namespace Dongjun.LevelEditor
             SetCurTile(null);
             InitTileInventory();
             mapLayerUI.Init();
+
+            InitStartUI();
+            onStartUI.SetActive(true);
+            onEditUI.SetActive(false);
         }
 
+        private void InitStartUI()
+        {
+            newMapBtn.onClick.AddListener(() => 
+            {
+                if (!mapPathField.text.IsValidateFilePath())
+                {
+                    Debug.LogError("Wrong Path!");
+                    return;
+                }
+
+                if (File.Exists(mapPathField.text))
+                {
+                    Debug.LogError("That Name Already Exists!");
+                    return;
+                }
+
+                data.SetCurSaveLocation(mapPathField.text);
+
+                onStartUI.SetActive(false);
+                onEditUI.SetActive(true);
+
+                IsStarted = true;
+            });
+            loadMapBtn.onClick.AddListener(() =>
+            {
+                if (!File.Exists(mapPathField.text))
+                {
+                    Debug.LogError("That File Does Not Exists!");
+                    return;
+                }
+
+                data.SetCurSaveLocation(mapPathField.text);
+                data.LoadFrom(mapPathField.text);
+
+                onStartUI.SetActive(false);
+                onEditUI.SetActive(true);
+
+                IsStarted = true;
+            });
+        }
         private void InitTileInventory()
         {
             tileInventoryUI.OnLayerChange(() => curTileName.text = CurItem == null ? "None" : CurItem.TilePrefab.gameObject.name);

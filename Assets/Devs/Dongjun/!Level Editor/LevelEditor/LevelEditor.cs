@@ -21,8 +21,16 @@ namespace Dongjun.LevelEditor
 
         private void Update()
         {
+            if (!ui.IsStarted)
+                return;
+
             ui.ToggleTileSlots();
             ui.SelectHotbarItem();
+
+            if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
+            {
+                data.SaveTo(data.CurSaveLocation);
+            }
 
             if (!ui.IsInventoryOpened)
             {

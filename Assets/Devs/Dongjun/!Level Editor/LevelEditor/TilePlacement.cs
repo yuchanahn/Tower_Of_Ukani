@@ -76,9 +76,74 @@ namespace Dongjun.LevelEditor
                 || EventSystem.current.currentSelectedGameObject != null)
                 return;
 
+            if (FloodFill()) return;
             if (ReplaceTile()) return;
             if (AddTile()) return;
             if (RemoveTile()) return;
+        }
+        private bool FloodFill()
+        {
+            if (!Input.GetKey(KeyCode.F) || !Input.GetKeyDown(KeyCode.Mouse0))
+                return false;
+
+            if (!IsValidMousePos(out var pos))
+                return false;
+
+            bool IsSameTile(int x, int y, string name)
+            {
+                if (name == null)
+                    return data.Grid[x, y] == null;
+                return data.Grid[x, y] != null && data.Grid[x, y].gameObject.name == name;
+            }
+
+            string targetTileName = data.Grid[pos.x, pos.y]?.gameObject.name ?? null;
+
+            if (targetTileName == (data.CurTile?.gameObject.name ?? null))
+                return false;
+
+            Stack<Vector2Int> points = new Stack<Vector2Int>();
+
+            points.Push(pos);
+            while (points.Count != 0)
+            {
+                Vector2Int temp = points.Pop();
+                int y1 = temp.y;
+                while (y1 >= 0 && IsSameTile(temp.x, y1, targetTileName))
+                {
+                    y1--;
+                }
+
+                y1++;
+                bool spanLeft = false;
+                bool spanRight = false;
+                while (y1 < data.MapData.MaxSizeY && IsSameTile(temp.x, y1, targetTileName))
+                {
+                    TilePlacementLogic(new TilePlacementData(new Vector2Int(temp.x, y1), data.CurTile), true);
+
+                    if (!spanLeft && temp.x > 0 && IsSameTile(temp.x - 1, y1, targetTileName))
+                    {
+                        points.Push(new Vector2Int(temp.x - 1, y1));
+                        spanLeft = true;
+                    }
+                    else if (spanLeft && temp.x - 1 == 0 && !IsSameTile(temp.x - 1, y1, targetTileName))
+                    {
+                        spanLeft = false;
+                    }
+
+                    if (!spanRight && temp.x < data.MapData.MaxSizeX - 1 && IsSameTile(temp.x + 1, y1, targetTileName))
+                    {
+                        points.Push(new Vector2Int(temp.x + 1, y1));
+                        spanRight = true;
+                    }
+                    else if (spanRight && temp.x < data.MapData.MaxSizeX - 1 && !IsSameTile(temp.x + 1, y1, targetTileName))
+                    {
+                        spanRight = false;
+                    }
+                    y1++;
+                }
+            }
+
+            return true;
         }
         private bool ReplaceTile()
         {
