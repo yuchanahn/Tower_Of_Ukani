@@ -14,9 +14,11 @@ public class StatusEffect_Knokback : StatusEffect_Base
 
         StatusEffect_Knokback knokback = obj.GetComponent<StatusEffect_Knokback>();
         // 각 상태이상에 대한 초기화 설정을 해준다.
-        if (knokback is null)
-            knokback = obj.AddComponent<StatusEffect_Knokback>();
-        
+        if (knokback)
+        {
+            Destroy(knokback);
+        }
+        knokback = obj.AddComponent<StatusEffect_Knokback>();
 
         // 모든 옵션에 관한, 디폴트 우선 순위 설정, 높을수록 우선순위가 높음.
         knokback.priority = 9;

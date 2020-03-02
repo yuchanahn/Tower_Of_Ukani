@@ -39,7 +39,7 @@ public class AStat : MonoBehaviour, IDamage
         GetComponent<HitColorEffect>().OnHit();
         GetComponent<IHurt>().OnHurt();
         
-        StatusEffect_Knokback.CreateNormal(gameObject, -GetComponent<Mob_Base>().DirToPlayer);
+        //StatusEffect_Knokback.CreateNormal(gameObject, -GetComponent<Mob_Base>().DirToPlayer);
 
         ATimer.SetAndReset(gameObject.name + GetInstanceID().ToString(), 0.1f,
         () =>
