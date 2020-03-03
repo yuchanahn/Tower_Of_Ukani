@@ -6,18 +6,42 @@ using UnityEngine.EventSystems;
 
 namespace Dongjun.LevelEditor
 {
+    public static class TilePlacementExtension
+    {
+        private const int MAX_UNDO_REDO = 1000;
+
+        public static TilePlacement.TilePlacementData NewTilePlacementData(this LevelEditorData data, Vector2Int pos, Tile newTilePrefab)
+        {
+            return new TilePlacement.TilePlacementData()
+            {
+                pos = pos,
+                newTilePrefab = newTilePrefab,
+                prevTilePrefab = data.GetTilePrefab(data.Grid[pos.x, pos.y])
+            };
+        }
+
+        public static List<TilePlacement.TilePlacementData> Pop(this List<List<TilePlacement.TilePlacementData>> list)
+        {
+            List<TilePlacement.TilePlacementData> result = list[list.Count - 1];
+            list.RemoveAt(list.Count - 1);
+            return result;
+        }
+        public static void Push(this List<List<TilePlacement.TilePlacementData>> list, List<TilePlacement.TilePlacementData> data)
+        {
+            list.Add(data);
+
+            if (list.Count > MAX_UNDO_REDO)
+                list.RemoveAt(0);
+        }
+    }
+
     public class TilePlacement : LevelEditorComponent
     {
-        private struct TilePlacementData
+        public struct TilePlacementData
         {
             public Vector2Int pos;
-            public Tile prefab;
-
-            public TilePlacementData(Vector2Int pos, Tile prefab)
-            {
-                this.pos = pos;
-                this.prefab = prefab;
-            }
+            public Tile newTilePrefab;
+            public Tile prevTilePrefab;
         }
         private enum PlacementMode
         {
@@ -25,7 +49,6 @@ namespace Dongjun.LevelEditor
             Undo
         }
 
-        private readonly int MaxUndoRedo = 1000;
         private List<List<TilePlacementData>> undoList = new List<List<TilePlacementData>>();
         private List<List<TilePlacementData>> redoList = new List<List<TilePlacementData>>();
 
@@ -48,42 +71,29 @@ namespace Dongjun.LevelEditor
             data.Grid[pos.x, pos.y].Sleep();
             data.Grid[pos.x, pos.y] = null;
         }
-        private List<TilePlacementData> _Pop(List<List<TilePlacementData>> list)
-        {
-            List<TilePlacementData> result = list[list.Count - 1];
-            list.RemoveAt(list.Count - 1);
-            return result;
-        }
-        private void _Push(List<List<TilePlacementData>> list, List<TilePlacementData> data)
-        {
-            list.Add(data);
-
-            if (list.Count > MaxUndoRedo)
-                list.RemoveAt(0);
-        }
 
         private void EditTile(in TilePlacementData placementData, in PlacementMode mode)
         {
-            if (placementData.prefab != null)
+            if (placementData.newTilePrefab != null)
             {
                 if (data.Grid[placementData.pos.x, placementData.pos.y] != null)
                     return;
 
-                _Push(mode == PlacementMode.Do ? undoList : redoList, new List<TilePlacementData>() { new TilePlacementData(placementData.pos, null) });
-                _SpawnTile(placementData.pos, placementData.prefab);
+                _SpawnTile(placementData.pos, placementData.newTilePrefab);
             }
             else
             {
                 if (data.Grid[placementData.pos.x, placementData.pos.y] == null)
                     return;
 
-                _Push(mode == PlacementMode.Do ? undoList : redoList,
-                    new List<TilePlacementData>() 
-                    { 
-                        new TilePlacementData(placementData.pos, data.GetTilePrefab(data.Grid[placementData.pos.x, placementData.pos.y].gameObject.name)) 
-                    });
                 _DestroyTile(placementData.pos);
             }
+
+            TilePlacementData reverseData = placementData;
+            reverseData.newTilePrefab = placementData.prevTilePrefab;
+            reverseData.prevTilePrefab = placementData.newTilePrefab;
+
+            (mode == PlacementMode.Do ? undoList : redoList).Push(new List<TilePlacementData>() { reverseData });
         }
         private void EditTile(in List<TilePlacementData> placementData, in PlacementMode mode)
         {
@@ -91,35 +101,39 @@ namespace Dongjun.LevelEditor
 
             foreach (var curData in placementData)
             {
-                if (curData.prefab != null)
+                if (curData.newTilePrefab != null)
                 {
                     if (data.Grid[curData.pos.x, curData.pos.y] != null)
                         continue;
 
-                    actionData.Insert(0, new TilePlacementData(curData.pos, null));
-                    _SpawnTile(curData.pos, curData.prefab);
+                    _SpawnTile(curData.pos, curData.newTilePrefab);
                 }
                 else
                 {
                     if (data.Grid[curData.pos.x, curData.pos.y] == null)
                         continue;
 
-                    actionData.Insert(0, new TilePlacementData(curData.pos, data.GetTilePrefab(data.Grid[curData.pos.x, curData.pos.y].gameObject.name)));
                     _DestroyTile(curData.pos);
                 }
+
+                TilePlacementData reverseData = curData;
+                reverseData.newTilePrefab = curData.prevTilePrefab;
+                reverseData.prevTilePrefab = curData.newTilePrefab;
+
+                actionData.Insert(0, reverseData);
             }
 
             if (actionData.Count == 0)
                 return;
 
-            _Push(mode == PlacementMode.Do ? undoList : redoList, actionData);
+            (mode == PlacementMode.Do ? undoList : redoList).Push(actionData);
         }
         private void EditTile_OnlyPlaceTile(in TilePlacementData placementData)
         {
-            if (placementData.prefab != null)
+            if (placementData.newTilePrefab != null)
             {
                 if (data.Grid[placementData.pos.x, placementData.pos.y] == null)
-                    _SpawnTile(placementData.pos, placementData.prefab);
+                    _SpawnTile(placementData.pos, placementData.newTilePrefab);
             }
             else
             {
@@ -131,12 +145,12 @@ namespace Dongjun.LevelEditor
         {
             foreach (var curData in placementData)
             {
-                if (curData.prefab != null)
+                if (curData.newTilePrefab != null)
                 {
                     if (data.Grid[curData.pos.x, curData.pos.y] != null)
                         continue;
 
-                    _SpawnTile(curData.pos, curData.prefab);
+                    _SpawnTile(curData.pos, curData.newTilePrefab);
                 }
                 else
                 {
@@ -152,10 +166,15 @@ namespace Dongjun.LevelEditor
             List<TilePlacementData> actionData = new List<TilePlacementData>();
 
             foreach (var curData in placementData)
-               actionData.Insert(0,
-                   new TilePlacementData(curData.pos, curData.prefab != null ? null : data.GetTilePrefab(data.Grid[curData.pos.x, curData.pos.y].gameObject.name)));
+            {
+                TilePlacementData reverseData = curData;
+                reverseData.newTilePrefab = curData.prevTilePrefab;
+                reverseData.prevTilePrefab = curData.newTilePrefab;
 
-            _Push(mode == PlacementMode.Do ? undoList : redoList, actionData);
+                actionData.Insert(0, reverseData);
+            }
+                
+            (mode == PlacementMode.Do ? undoList : redoList).Push(actionData);
         }
 
         private bool IsSameTile(Tile tile, string tileName)
@@ -187,11 +206,11 @@ namespace Dongjun.LevelEditor
         }
 
         private enum Dir { Up, Down, Right, Left }
-        private void FillTile(Vector2Int pos)
+        private void FillTile(Vector2Int pos, Tile fillWith)
         {
             string replaceTile = data.Grid[pos.x, pos.y]?.gameObject.name ?? null;
 
-            if (IsSameTile(data.CurTile, replaceTile))
+            if (IsSameTile(fillWith, replaceTile))
                 return;
 
             List<TilePlacementData> actionData = new List<TilePlacementData>();
@@ -205,13 +224,15 @@ namespace Dongjun.LevelEditor
 
                 if (replaceTile != null)
                 {
-                    actionData.Add(new TilePlacementData(_pos, null));
-                    EditTile_OnlyPlaceTile(new TilePlacementData(_pos, null));
+                    TilePlacementData tilePlacementData = data.NewTilePlacementData(_pos, null); 
+                    actionData.Add(tilePlacementData);
+                    EditTile_OnlyPlaceTile(tilePlacementData);
                 }
-                if (data.CurTile != null)
+                if (fillWith != null)
                 {
-                    actionData.Add(new TilePlacementData(_pos, data.CurTile));
-                    EditTile_OnlyPlaceTile(new TilePlacementData(_pos, data.CurTile));
+                    TilePlacementData tilePlacementData = data.NewTilePlacementData(_pos, fillWith);
+                    actionData.Add(tilePlacementData);
+                    EditTile_OnlyPlaceTile(tilePlacementData);
                 }
             }
             bool CanbeFilled(int x, int y) => IsSameTile(x, y, replaceTile);
@@ -222,7 +243,7 @@ namespace Dongjun.LevelEditor
             }
 
             // Snake Fill Algorithm
-            void SnakeFill(Vector2Int startPos, Dir startDir = Dir.Up)
+            void SnakeFill(in Vector2Int startPos, in Dir startDir = Dir.Up)
             {
                 if (!CanbeFilled(startPos.x, startPos.y))
                     return;
@@ -313,10 +334,10 @@ namespace Dongjun.LevelEditor
                 return;
 
             EditTile(
-                new List<TilePlacementData>() 
-                { 
-                    new TilePlacementData(pos, null),
-                    new TilePlacementData(pos, data.CurTile) 
+                new List<TilePlacementData>()
+                {
+                    data.NewTilePlacementData(pos, null),
+                    data.NewTilePlacementData(pos, data.CurTile)
                 },
                 PlacementMode.Do);
         }
@@ -325,11 +346,11 @@ namespace Dongjun.LevelEditor
             if (data.CurTile == null)
                 return;
 
-            EditTile(new TilePlacementData(pos, data.CurTile), PlacementMode.Do);
+            EditTile(data.NewTilePlacementData(pos, data.CurTile), PlacementMode.Do);
         }
         private void RemoveTile(Vector2Int pos)
         {
-            EditTile(new TilePlacementData(pos, null), PlacementMode.Do);
+            EditTile(data.NewTilePlacementData(pos, null), PlacementMode.Do);
         }
 
         private void Undo()
@@ -337,14 +358,14 @@ namespace Dongjun.LevelEditor
             if (undoList.Count == 0)
                 return;
 
-            EditTile(_Pop(undoList), PlacementMode.Undo);
+            EditTile(undoList.Pop(), PlacementMode.Undo);
         }
         private void Redo()
         {
             if (redoList.Count == 0)
                 return;
 
-            EditTile(_Pop(redoList), PlacementMode.Do);
+            EditTile(redoList.Pop(), PlacementMode.Do);
         }
 
         private bool IsValidMousePos(out Vector2Int pos)
@@ -383,9 +404,13 @@ namespace Dongjun.LevelEditor
             if (!IsValidMousePos(out var pos))
                 return;
 
-            if (Input.GetKey(KeyCode.F) && Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.F))
             {
-                FillTile(pos);
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                    FillTile(pos, data.CurTile);
+                else if (Input.GetKeyDown(KeyCode.Mouse1))
+                    FillTile(pos, null);
+
                 return;
             }
 

@@ -10,11 +10,11 @@ namespace Dongjun.Helper
     {
         public static bool IsValidateFilePath(this string path)
         {
-            bool exists = File.Exists(path);
             try
             {
-                File.Create(path).Dispose();
-                if (!exists) File.Delete(path);
+                string testPath = path + ".~tmp";
+                File.Create(testPath).Dispose();
+                File.Delete(testPath);
                 return true;
             }
             catch
