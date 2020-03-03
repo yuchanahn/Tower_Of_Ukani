@@ -192,6 +192,27 @@ namespace Dongjun.LevelEditor
 
             return null;
         }
+        public Tile GetTilePrefab(Tile tile)
+        {
+            if (tile == null)
+                return null;
+
+            Tile result;
+
+            result = Array.Find(tilePrefabs_BG, i => i.gameObject.name == tile.gameObject.name);
+            if (result != null)
+                return result;
+
+            result = Array.Find(tilePrefabs_Main, i => i.gameObject.name == tile.gameObject.name);
+            if (result != null)
+                return result;
+
+            result = Array.Find(tilePrefabs_FG, i => i.gameObject.name == tile.gameObject.name);
+            if (result != null)
+                return result;
+
+            return null;
+        }
 
         public void SetCurLayer(MapLayer layer)
         {

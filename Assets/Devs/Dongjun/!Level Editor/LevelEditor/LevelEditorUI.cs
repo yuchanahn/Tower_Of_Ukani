@@ -70,7 +70,6 @@ namespace Dongjun.LevelEditor
 
                 onStartUI.SetActive(false);
                 onEditUI.SetActive(true);
-
                 IsStarted = true;
             });
             loadMapBtn.onClick.AddListener(() =>
@@ -86,7 +85,6 @@ namespace Dongjun.LevelEditor
 
                 onStartUI.SetActive(false);
                 onEditUI.SetActive(true);
-
                 IsStarted = true;
             });
         }

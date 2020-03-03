@@ -8,6 +8,7 @@ namespace Dongjun.LevelEditor
         [SerializeField] private float minScroll = 4f;
         [SerializeField] private float maxScroll = 30f;
 
+        private MapData mapData;
         private Vector3 mouseDownPos;
 
         public Camera cam
@@ -20,7 +21,18 @@ namespace Dongjun.LevelEditor
             cam = GetComponent<Camera>();
         }
 
-        public void Scroll()
+        public void Init(MapData mapData)
+        {
+            this.mapData = mapData;
+            transform.position = new Vector3(mapData.MaxSizeX * 0.5f, mapData.MaxSizeY * 0.5f, transform.position.z);
+        }
+
+        private void ToCenter()
+        {
+            if (Input.GetKeyDown(KeyCode.C))
+                transform.position = new Vector3(mapData.MaxSizeX * 0.5f, mapData.MaxSizeY * 0.5f, transform.position.z);
+        }
+        private void Scroll()
         {
             if (Input.mouseScrollDelta.y == 0)
                 return;
@@ -33,7 +45,7 @@ namespace Dongjun.LevelEditor
             // Clamp
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minScroll, maxScroll);
         }
-        public void Pan()
+        private void Pan()
         {
             if (!Input.GetKey(KeyCode.Space) && !Input.GetKey(KeyCode.Mouse2))
             {
@@ -49,6 +61,13 @@ namespace Dongjun.LevelEditor
 
             if (Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse2))
                 transform.position += mouseDownPos - cam.ScreenToWorldPoint(Input.mousePosition);
+        }
+
+        public void UserControl()
+        {
+            ToCenter();
+            Scroll();
+            Pan();
         }
     }
 }

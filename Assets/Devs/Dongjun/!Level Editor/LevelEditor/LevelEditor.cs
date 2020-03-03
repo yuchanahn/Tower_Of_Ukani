@@ -16,7 +16,7 @@ namespace Dongjun.LevelEditor
             ui = GetComponent<LevelEditorUI>();
             tilePlacement = GetComponent<TilePlacement>();
             camController = FindObjectOfType<CamController>();
-            camController.cam.transform.position = new Vector3(data.MapData.MaxSizeX * 0.5f, data.MapData.MaxSizeY * 0.5f, camController.cam.transform.position.z);
+            camController.Init(data.MapData);
         }
         private void Update()
         {
@@ -34,8 +34,7 @@ namespace Dongjun.LevelEditor
             if (!ui.IsInventoryOpened)
             {
                 // Camera
-                camController.Scroll();
-                camController.Pan();
+                camController.UserControl();
 
                 // Edit Tile
                 if (!camController.IsPanning)
