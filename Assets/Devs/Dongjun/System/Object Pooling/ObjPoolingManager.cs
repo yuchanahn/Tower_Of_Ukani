@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Dongjun.Helper;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class PoolingObj : MonoBehaviour
@@ -41,6 +42,10 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
     protected override void Awake()
     {
         base.Awake();
+
+        pool_Active = new Dictionary<PoolingObj, List<PoolingObj>>();
+        pool_Sleeping = new Dictionary<PoolingObj, Queue<PoolingObj>>();
+
         SetUpStartPool();
     }
     #endregion
@@ -48,9 +53,6 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
     #region Method: Private
     private void SetUpStartPool()
     {
-        pool_Active = new Dictionary<PoolingObj, List<PoolingObj>>();
-        pool_Sleeping = new Dictionary<PoolingObj, Queue<PoolingObj>>();
-
         if (startPoolData is null)
             return;
 
@@ -167,13 +169,19 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
     }
     public static void Sleep(PoolingObj obj)
     {
-        if (!pool_Active.ContainsKey(obj.Prefab) ||
-            !pool_Active[obj.Prefab].Contains(obj))
-            return;
+        if (obj.Prefab != null && pool_Active.ContainsKey(obj.Prefab))
+        {
+            if (pool_Active[obj.Prefab].Contains(obj))
+            {
+                pool_Active[obj.Prefab].Remove(obj);
+                pool_Sleeping[obj.Prefab].Enqueue(obj);
+                obj.gameObject.SetActive(false);
+                return;
+            }
+        }
 
-        pool_Active[obj.Prefab].Remove(obj);
-        pool_Sleeping[obj.Prefab].Enqueue(obj);
-        obj.gameObject.SetActive(false);
+        if (!obj.gameObject.IsPrefab())
+            Destroy(obj.gameObject);
     }
     #endregion
 }

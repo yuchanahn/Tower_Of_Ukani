@@ -60,13 +60,13 @@ namespace Dongjun.LevelEditor
             mainCam = Camera.main;
         }
 
-        private void _SpawnTile(Vector2Int pos, Tile prefab)
+        private void SpawnTile(Vector2Int pos, Tile prefab)
         {
             data.Grid[pos.x, pos.y] = prefab.Spawn(data.LayerParent, Vector2.zero);
             data.Grid[pos.x, pos.y].gameObject.name = prefab.gameObject.name;
-            data.Grid[pos.x, pos.y].transform.position = GridDisplay.Inst.GridToWorld(pos);
+            data.Grid[pos.x, pos.y].transform.position = GridDisplay.Inst.GridToWorld(pos) + ((prefab.size - Vector2.one) * 0.5f);
         }
-        private void _DestroyTile(Vector2Int pos)
+        private void DestroyTile(Vector2Int pos)
         {
             data.Grid[pos.x, pos.y].Sleep();
             data.Grid[pos.x, pos.y] = null;
@@ -79,14 +79,14 @@ namespace Dongjun.LevelEditor
                 if (data.Grid[placementData.pos.x, placementData.pos.y] != null)
                     return;
 
-                _SpawnTile(placementData.pos, placementData.newTilePrefab);
+                SpawnTile(placementData.pos, placementData.newTilePrefab);
             }
             else
             {
                 if (data.Grid[placementData.pos.x, placementData.pos.y] == null)
                     return;
 
-                _DestroyTile(placementData.pos);
+                DestroyTile(placementData.pos);
             }
 
             TilePlacementData reverseData = placementData;
@@ -106,14 +106,14 @@ namespace Dongjun.LevelEditor
                     if (data.Grid[curData.pos.x, curData.pos.y] != null)
                         continue;
 
-                    _SpawnTile(curData.pos, curData.newTilePrefab);
+                    SpawnTile(curData.pos, curData.newTilePrefab);
                 }
                 else
                 {
                     if (data.Grid[curData.pos.x, curData.pos.y] == null)
                         continue;
 
-                    _DestroyTile(curData.pos);
+                    DestroyTile(curData.pos);
                 }
 
                 TilePlacementData reverseData = curData;
@@ -133,12 +133,12 @@ namespace Dongjun.LevelEditor
             if (placementData.newTilePrefab != null)
             {
                 if (data.Grid[placementData.pos.x, placementData.pos.y] == null)
-                    _SpawnTile(placementData.pos, placementData.newTilePrefab);
+                    SpawnTile(placementData.pos, placementData.newTilePrefab);
             }
             else
             {
                 if (data.Grid[placementData.pos.x, placementData.pos.y] != null)
-                    _DestroyTile(placementData.pos);
+                    DestroyTile(placementData.pos);
             }
         }
         private void EditTile_OnlyPlaceTile(in List<TilePlacementData> placementData)
@@ -150,14 +150,14 @@ namespace Dongjun.LevelEditor
                     if (data.Grid[curData.pos.x, curData.pos.y] != null)
                         continue;
 
-                    _SpawnTile(curData.pos, curData.newTilePrefab);
+                    SpawnTile(curData.pos, curData.newTilePrefab);
                 }
                 else
                 {
                     if (data.Grid[curData.pos.x, curData.pos.y] == null)
                         continue;
 
-                    _DestroyTile(curData.pos);
+                    DestroyTile(curData.pos);
                 }
             }
         }
@@ -333,13 +333,17 @@ namespace Dongjun.LevelEditor
             if (IsSameTile(pos, data.CurTile.gameObject.name))
                 return;
 
-            EditTile(
-                new List<TilePlacementData>()
-                {
-                    data.NewTilePlacementData(pos, null),
-                    data.NewTilePlacementData(pos, data.CurTile)
-                },
-                PlacementMode.Do);
+            List<TilePlacementData> actionData = new List<TilePlacementData>();
+
+            TilePlacementData removeData = data.NewTilePlacementData(pos, null);
+            actionData.Add(removeData);
+            EditTile_OnlyPlaceTile(removeData);
+
+            TilePlacementData setData = data.NewTilePlacementData(pos, data.CurTile);
+            actionData.Add(setData);
+            EditTile_OnlyPlaceTile(setData);
+
+            EditTile_OnlyRecordData(actionData, PlacementMode.Do);
         }
         private void AddTile(Vector2Int pos)
         {
