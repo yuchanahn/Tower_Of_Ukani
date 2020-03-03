@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Dongjun.Helper;
 
 //[ExecuteInEditMode]
 public class GridView : MonoBehaviour
@@ -110,6 +111,39 @@ public class GridView : MonoBehaviour
         }
         IsPathFind = false;
         return null;
+    }
+
+    public List<Node> SetGridRange(Vector2 pos, Vector2Int range, bool moveable)
+    {
+        List<Node> nodes = new List<Node>();
+        Point p;
+        Node node = GetNodeAtWorldPostiton(pos);
+        for (int i = 0; i < range.x; i++)
+        {
+            for (int j = 0; j < range.y; j++)
+            {
+                if (node.IsNull())
+                {
+                    node = GetNodeAtWorldPostiton(pos.Add(i, j));
+                    continue;
+                }
+                else
+                {
+                    p = node.pos;
+                }
+                var n = grid.getNode(p.row + j, p.column + i);
+                if (n.IsNotNull())
+                {
+                    if (n.isObstacle != moveable)
+                    {
+                        nodes.Add(n);
+                        n.isObstacle = moveable;
+                    }
+                }
+            }
+        }
+        IsPathFind = false;
+        return nodes;
     }
 
 

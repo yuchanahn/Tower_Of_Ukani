@@ -76,6 +76,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -264,6 +265,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -443,7 +445,7 @@ MonoBehaviour:
   AttackRange: 3
   MoveTimeIdle: 1
   MoveTimeMove: 3
-  AgroRange: 7
+  AgroRange: 10
   Size: {x: 1.5, y: 1.5}
   FleeTask: {fileID: 0}
   HangTask: {fileID: 0}
@@ -471,7 +473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 181efa794ee11cd4f80ecdaa92216890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mPathFinder: {fileID: 0}
 --- !u!114 &4340000004817329858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,6 +546,7 @@ MonoBehaviour:
   mCeilingDetectRange: 4
   IsFollowEndToCeiling: 0
   FindCeiling: 0
+  mHangWalls: []
   CeilingPercentage: 50
   CeilingCoolTime: 1
   mHangSize: {x: 0.7, y: 1.5}

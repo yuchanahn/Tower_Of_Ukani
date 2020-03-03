@@ -17,8 +17,15 @@ public class ALava : MonoBehaviour
     private Vector2 size;
     [SerializeField]
     private LayerMask layerMask;
-
+    [SerializeField]
+    private AnimationCurve curve;
+    [SerializeField]
+    private float Damage;
     float dt = 0;
+
+    StatusID SE_ID = new StatusID();
+
+
 
     private void FixedUpdate()
     {
@@ -48,7 +55,7 @@ public class ALava : MonoBehaviour
             if (mob != null && rb2D != null)
             {
                 //Destroy(mob.gameObject);
-                mob.GetComponent<IDamage>().Hit(new AttackData(1));
+                mob.GetComponent<IDamage>().Hit(new AttackData(Damage));
                 StatusEffect_Knokback.Create(mob.gameObject, Vector2.up, 10, 0.1f);
             }
 
@@ -64,11 +71,12 @@ public class ALava : MonoBehaviour
 
             if (overlaps[i].CompareTag("Player"))
             {
+                PlayerStatus.AddEffect(new PlayerStatus_Knockback(SE_ID, gameObject, KnockbackMode.Strong, true, Vector2.up, curve));
                 dt += Time.fixedDeltaTime;
                 if (dt > 0.1f)
                 {
                     dt = 0;
-                    PlayerStats.Inst.Damage(10);
+                    PlayerStats.Inst.Damage(Damage);
                 }
                 return;
             }

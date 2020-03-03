@@ -10,6 +10,15 @@ public static class AEM
         return val += Time.deltaTime;
     }
 
+    public static bool IsNotNull(this object o)
+    {
+        return !(o is null);
+    }
+
+    public static bool IsNull(this object o)
+    {
+        return (o is null);
+    }
 
     public static List<T> filter<T>(this List<T> l, Func<T, bool> f)
     {

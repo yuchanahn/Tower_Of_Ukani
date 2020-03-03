@@ -339,6 +339,9 @@ public class Grid
 
 	public void buildPrimaryJumpPoints()
 	{
+		// TODO :
+		// 바뀐 범위만 새로 구 할 수 있도록 해봅시다.....
+
 		// foreach obstacle
 		for ( int i = 0 ; i < gridNodes.Length ; ++i )
 		{
