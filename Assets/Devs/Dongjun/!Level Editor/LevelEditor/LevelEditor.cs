@@ -23,26 +23,23 @@ namespace Dongjun.LevelEditor
             if (!ui.IsStarted)
                 return;
 
+            // UI
             ui.ToggleTileSlots();
             ui.SelectHotbarItem();
 
+            // Save
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
-            {
                 data.SaveTo(data.CurSaveLocation);
-            }
 
             if (!ui.IsInventoryOpened)
             {
+                // Camera
                 camController.Scroll();
                 camController.Pan();
 
-                tilePlacement.Undo();
-                tilePlacement.Redo();
-
+                // Edit Tile
                 if (!camController.IsPanning)
-                {
-                    tilePlacement.EditTile();
-                }
+                    tilePlacement.UserEdit();
             }
         }
     }
