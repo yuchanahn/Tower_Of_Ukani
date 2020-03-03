@@ -33,6 +33,9 @@ public static class IN
     public static Dictionary<eKeyID, KeyCode> Keys { get => keys; set { PrevSetEvent();  keys = value; SetEvent(); } }
 
     public static KeyCode PlayerAttack => Keys[eKeyID.Player_Attack];
+    public static bool Down(this eKeyID k) => Input.GetKeyDown(Keys[k]);
+    public static bool Up(this eKeyID k) => Input.GetKeyUp(Keys[k]);
+    public static bool Get(this eKeyID k) => Input.GetKey(Keys[k]);
 }
 
 public class AInputSystem : MonoBehaviour
