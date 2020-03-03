@@ -111,7 +111,10 @@ namespace Dongjun.LevelEditor
                 {
                     for (int x = 0; x < mapData.MaxSizeX; x++)
                     {
-                        data.Append(grids[(MapLayer)layer][x, y]?.gameObject.name ?? "null");
+                        if (grids[(MapLayer)layer][x, y] == null)
+                            data.Append("null");
+                        else
+                            data.Append(grids[(MapLayer)layer][x, y].gameObject.name);
 
                         if (x != mapData.MaxSizeX - 1)
                             data.Append(" || ");
