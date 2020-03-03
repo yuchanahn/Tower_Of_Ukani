@@ -24,9 +24,10 @@ public class IslandSpawner : MonoBehaviour
         parent = new GameObject().transform;
         parent.name = "Islands";
 
-        for(int i = 0; i < 9; i++)
+        for(int y = 0; y < 3; y++)
+        for(int x = 0; x < 5; x++)
         {
-            GameObject temp = SpawnIsland(i*80, 0);
+            GameObject temp = SpawnIsland(x*80, y*80);
             islands.Add(temp.GetComponent<JH_IslandComponent>());
         }
 
@@ -89,11 +90,36 @@ public class IslandSpawner : MonoBehaviour
         int yDiff = (int)(Mathf.Abs(startPos.y - endPos.y));
 
         int repeat = (int)(Vector2.Distance(startPos, endPos) / 8);
-        repeat = (yDiff / 4 > repeat) ? yDiff / 6 : repeat;
-        Vector2 newPos;
-        Vector2 interval = (endPos - startPos) / repeat;
 
-        Debug.Log($"start : {startPos.ToString()}, end : {endPos.ToString()}");
+        /*
+        //다리로 놓을 섬 갯수 설정
+        repeat = (yDiff / 4 > repeat) ? yDiff / 6 : repeat;
+
+        Vector2 newPos;
+        //갯수에 따른 간격 설정
+        Vector2 interval = (endPos - startPos) / repeat;
+        */
+
+        Vector2 interval = (endPos - startPos);
+
+        Vector2 newPos;
+
+        //다리로 놓을 섬 갯수 설정
+        for (int i = 1; true; i++)
+        {
+            if ((Mathf.Abs(interval.x) / 2 + Mathf.Abs(interval.y)) / i <= 5)
+            {
+                repeat = i;
+                break;
+            }
+        }
+        //갯수에 따른 간격 설정
+        interval /= repeat;
+
+        Debug.Log(interval.x.ToString());
+        //섬 크기
+        int minWidth = Mathf.Clamp((int)interval.x, 3, 5);
+
 
         GameObject land;
 
@@ -102,10 +128,10 @@ public class IslandSpawner : MonoBehaviour
             newPos = startPos + (interval * i);
 
 
-            int wid = Random.Range(5, 7);
-            int hei = wid / 3;
+            int wid = Random.Range(minWidth, 2);
+            int hei = wid / 2;
 
-            land = SpawnIsland((int)(newPos.x - interval.x/2+1), (int)newPos.y, wid, hei, wid, hei);
+            land = SpawnIsland((int)(newPos.x - interval.x/2+ (interval.x - wid)/2), (int)newPos.y, wid, hei, wid, hei);
             land.name = "littleIsland";
             islands.Add(land.GetComponent<JH_IslandComponent>());
         }
