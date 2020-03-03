@@ -13,6 +13,7 @@ public static class PlayerActionKeys
     public static KeyCode Kick => KeyCode.LeftControl;
     public static KeyCode PickUpItem => KeyCode.C;
     public static KeyCode DropWeapon => KeyCode.V;
+    public static KeyCode Interact => KeyCode.Z;
 }
 public static class PlayerWeaponKeys
 {
