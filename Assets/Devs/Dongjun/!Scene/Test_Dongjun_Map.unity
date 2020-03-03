@@ -9991,6 +9991,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1498595801}
+  - component: {fileID: 1498595802}
   m_Layer: 0
   m_Name: Mobs
   m_TagString: Untagged
@@ -10060,6 +10061,21 @@ Transform:
   m_Father: {fileID: 445707507}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1498595802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498595800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286062c2b79de824baadd7cbc307b1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1594527253}
+  Range: 20
+  CheckRate: 1
 --- !u!1001 &1510736832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13170,6 +13186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Size: {x: 50, y: 76}
   TargetMobSize: 1
+  mLastPos: {x: 0, y: 0}
 --- !u!114 &1966430460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13189,6 +13206,13 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1280
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Damage: 0
 --- !u!61 &1966430461
 BoxCollider2D:
   m_ObjectHideFlags: 0

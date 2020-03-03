@@ -178,6 +178,7 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
                 obj.gameObject.SetActive(false);
                 return;
             }
+            return;
         }
 
         if (!obj.gameObject.IsPrefab())
