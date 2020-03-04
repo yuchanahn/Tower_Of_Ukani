@@ -54,12 +54,15 @@ namespace Dongjun.LevelEditor
 
         private Camera mainCam;
 
+        #region Method: Unity
         protected override void Awake()
         {
             base.Awake();
             mainCam = Camera.main;
         }
+        #endregion
 
+        #region Method: Edit Tile
         private void SpawnTile(Vector2Int pos, Tile prefab)
         {
             data.Grid[pos.x, pos.y] = prefab.Spawn(data.LayerParent, Vector2.zero);
@@ -128,6 +131,28 @@ namespace Dongjun.LevelEditor
 
             (mode == PlacementMode.Do ? undoList : redoList).Push(actionData);
         }
+        private void EditTile_NewData(params TilePlacementData[] data)
+        {
+            List<TilePlacementData> actionData = new List<TilePlacementData>();
+
+            foreach (var curData in data)
+            {
+                TilePlacementData newData = this.data.NewTilePlacementData(curData.pos, curData.newTilePrefab);
+                actionData.Add(newData);
+                EditTile_OnlyPlaceTile(newData);
+            }
+
+            EditTile_OnlyRecordData(actionData, PlacementMode.Do);
+        }
+        private void EditTile_NewData(in List<TilePlacementData> actionData, params TilePlacementData[] data)
+        {
+            foreach (var curData in data)
+            {
+                TilePlacementData newData = this.data.NewTilePlacementData(curData.pos, curData.newTilePrefab);
+                actionData.Add(newData);
+                EditTile_OnlyPlaceTile(newData);
+            }
+        }
         private void EditTile_OnlyPlaceTile(in TilePlacementData placementData)
         {
             if (placementData.newTilePrefab != null)
@@ -176,7 +201,9 @@ namespace Dongjun.LevelEditor
                 
             (mode == PlacementMode.Do ? undoList : redoList).Push(actionData);
         }
+        #endregion
 
+        #region Method: Helper
         private bool IsSameTile(Tile tile, string tileName)
         {
             if (tileName == null)
@@ -204,8 +231,10 @@ namespace Dongjun.LevelEditor
 
             return data.Grid[pos.x, pos.y] != null && data.Grid[pos.x, pos.y].gameObject.name == tileName;
         }
+        #endregion
 
-        private enum Dir { Up, Down, Right, Left }
+        #region Method: Edit Action
+        private enum FourWayDir { Up, Down, Right, Left }
         private void FillTile(Vector2Int pos, Tile fillWith)
         {
             string replaceTile = data.Grid[pos.x, pos.y]?.gameObject.name ?? null;
@@ -223,17 +252,10 @@ namespace Dongjun.LevelEditor
                     snakeStartPos.Remove(_pos);
 
                 if (replaceTile != null)
-                {
-                    TilePlacementData tilePlacementData = data.NewTilePlacementData(_pos, null); 
-                    actionData.Add(tilePlacementData);
-                    EditTile_OnlyPlaceTile(tilePlacementData);
-                }
+                    EditTile_NewData(actionData, data.NewTilePlacementData(_pos, null));
+
                 if (fillWith != null)
-                {
-                    TilePlacementData tilePlacementData = data.NewTilePlacementData(_pos, fillWith);
-                    actionData.Add(tilePlacementData);
-                    EditTile_OnlyPlaceTile(tilePlacementData);
-                }
+                    EditTile_NewData(actionData, data.NewTilePlacementData(_pos, fillWith));
             }
             bool CanbeFilled(int x, int y) => IsSameTile(x, y, replaceTile);
             void AddToSnakeStartPos(Vector2Int _pos)
@@ -242,8 +264,11 @@ namespace Dongjun.LevelEditor
                     snakeStartPos.Add(_pos);
             }
 
+            // Fill Clicked Pos
+            Fill(pos);
+
             // Snake Fill Algorithm
-            void SnakeFill(in Vector2Int startPos, in Dir startDir = Dir.Up)
+            void SnakeFill(in Vector2Int startPos, in FourWayDir startDir = FourWayDir.Up)
             {
                 if (!CanbeFilled(startPos.x, startPos.y))
                     return;
@@ -253,13 +278,13 @@ namespace Dongjun.LevelEditor
                 Vector2Int dir = new Vector2Int();
                 switch (startDir)
                 {
-                    case Dir.Up: dir = new Vector2Int(0, 1);
+                    case FourWayDir.Up: dir = new Vector2Int(0, 1);
                         break;
-                    case Dir.Down: dir = new Vector2Int(0, -1);
+                    case FourWayDir.Down: dir = new Vector2Int(0, -1);
                         break;
-                    case Dir.Right: dir = new Vector2Int(1, 0);
+                    case FourWayDir.Right: dir = new Vector2Int(1, 0);
                         break;
-                    case Dir.Left: dir = new Vector2Int(-1, 0);
+                    case FourWayDir.Left: dir = new Vector2Int(-1, 0);
                         break;
                 }
 
@@ -308,15 +333,12 @@ namespace Dongjun.LevelEditor
                     Fill(curPos);
                 }
             }
-
-            // Fill Clicked Pos
-            Fill(pos);
-
+            
             // Start Initial 4 Way Snake
-            SnakeFill(new Vector2Int(pos.x, pos.y + 1), Dir.Up);
-            SnakeFill(new Vector2Int(pos.x, pos.y - 1), Dir.Down);
-            SnakeFill(new Vector2Int(pos.x + 1, pos.y), Dir.Right);
-            SnakeFill(new Vector2Int(pos.x - 1, pos.y), Dir.Left);
+            SnakeFill(new Vector2Int(pos.x, pos.y + 1), FourWayDir.Up);
+            SnakeFill(new Vector2Int(pos.x, pos.y - 1), FourWayDir.Down);
+            SnakeFill(new Vector2Int(pos.x + 1, pos.y), FourWayDir.Right);
+            SnakeFill(new Vector2Int(pos.x - 1, pos.y), FourWayDir.Left);
 
             // Start Other Snake
             while (snakeStartPos.Count != 0)
@@ -333,17 +355,9 @@ namespace Dongjun.LevelEditor
             if (IsSameTile(pos, data.CurTile.gameObject.name))
                 return;
 
-            List<TilePlacementData> actionData = new List<TilePlacementData>();
-
-            TilePlacementData removeData = data.NewTilePlacementData(pos, null);
-            actionData.Add(removeData);
-            EditTile_OnlyPlaceTile(removeData);
-
-            TilePlacementData setData = data.NewTilePlacementData(pos, data.CurTile);
-            actionData.Add(setData);
-            EditTile_OnlyPlaceTile(setData);
-
-            EditTile_OnlyRecordData(actionData, PlacementMode.Do);
+            EditTile_NewData(
+                data.NewTilePlacementData(pos, null),
+                data.NewTilePlacementData(pos, data.CurTile));
         }
         private void AddTile(Vector2Int pos)
         {
@@ -356,7 +370,9 @@ namespace Dongjun.LevelEditor
         {
             EditTile(data.NewTilePlacementData(pos, null), PlacementMode.Do);
         }
+        #endregion
 
+        #region Method: Undo / Redo
         private void Undo()
         {
             if (undoList.Count == 0)
@@ -371,7 +387,9 @@ namespace Dongjun.LevelEditor
 
             EditTile(redoList.Pop(), PlacementMode.Do);
         }
+        #endregion
 
+        #region Method: User Input
         private bool IsValidMousePos(out Vector2Int pos)
         {
             Vector2 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -382,8 +400,7 @@ namespace Dongjun.LevelEditor
 
             return true;
         }
-
-        public void UserEdit()
+        public void OnUserInput()
         {
             if (!data.IsLayerVisable(data.Layer)
                 || EventSystem.current.IsPointerOverGameObject()
@@ -436,6 +453,7 @@ namespace Dongjun.LevelEditor
                 return;
             }
         }
+        #endregion
     }
 }
 

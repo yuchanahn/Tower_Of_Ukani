@@ -5,13 +5,12 @@ using UnityEngine;
 public abstract class PoolingObj : MonoBehaviour
 {
     public PoolingObj Prefab { get; private set; }
-
-    public abstract void ResetOnSpawn();
-
+    
     public void InitPoolingObj(PoolingObj prefab)
     {
         Prefab = prefab;
     }
+    public abstract void ResetOnSpawn();
 }
 
 public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
@@ -143,6 +142,7 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
             obj.gameObject.SetActive(false);
         }
     }
+
     public static T Spawn<T>(T prefab, Vector2 pos, Quaternion rot, bool canCreateNew = true) where T : PoolingObj
     {
         T obj = ActivateObj(prefab, canCreateNew);
@@ -167,6 +167,7 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
         InitObj(obj, parent, localPos, Quaternion.identity);
         return obj;
     }
+
     public static void Sleep(PoolingObj obj)
     {
         if (obj.Prefab != null && pool_Active.ContainsKey(obj.Prefab))
@@ -181,6 +182,7 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
             return;
         }
 
+        // Destroy if there is no Active PoolingObj
         if (!obj.gameObject.IsPrefab())
             Destroy(obj.gameObject);
     }

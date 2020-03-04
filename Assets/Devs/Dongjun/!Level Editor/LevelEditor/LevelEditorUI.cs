@@ -29,7 +29,7 @@ namespace Dongjun.LevelEditor
         private Dictionary<MapLayer, TileItemUI> selectedItems = new Dictionary<MapLayer, TileItemUI>();
 
         private List<TileItemUI> CurHotbar => hotbars[data.Layer];
-        private TileItemUI CurItem 
+        private TileItemUI CurItem
         { 
             get => selectedItems[data.Layer];
             set => selectedItems[data.Layer] = value;
@@ -124,7 +124,7 @@ namespace Dongjun.LevelEditor
                         {
                             Destroy(hotbarItem.gameObject);
                             curHotbar.Remove(hotbarItem);
-                            SetCurTile(CurItem);
+                            SetCurTile(null);
                         });
 
                         // Set Current Tile
@@ -133,6 +133,7 @@ namespace Dongjun.LevelEditor
                 }
             }
 
+            // On Layer Change
             tileInventoryUI.OnLayerChange(() => curTileName.text = CurItem == null ? "None" : CurItem.TilePrefab.gameObject.name);
         }
 

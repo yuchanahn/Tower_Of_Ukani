@@ -38,7 +38,7 @@ namespace Dongjun.LevelEditor
 
                 // Edit Tile
                 if (!camController.IsPanning)
-                    tilePlacement.UserEdit();
+                    tilePlacement.OnUserInput();
             }
         }
     }
