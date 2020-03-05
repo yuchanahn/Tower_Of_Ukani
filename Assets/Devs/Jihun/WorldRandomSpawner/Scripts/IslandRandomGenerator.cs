@@ -29,7 +29,9 @@ public class IslandRandomGenerator : MonoBehaviour
     private void Start()
     {
     }
-    public JH_Island SpawnRandomIsland(int wid = 0, int hei = 0, int maxWidth = 0, int maxHeight = 0)
+
+    // 섬 한개 생성하는 함수. 매개변수로 너비 높이 받아오고, 없으면 그냥 고정 청크 사이즈로 받아옴.
+    public JH_Island GenerateIsland(int wid = 0, int hei = 0, int maxWidth = 0, int maxHeight = 0)
     {
         //넓이와 높이 설정
         wid = (wid == 0) ? Random.Range(minWidth, maxWidth) : wid;

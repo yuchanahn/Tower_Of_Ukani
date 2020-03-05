@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class JH_Island
 {
     public Transform left;
@@ -14,6 +15,9 @@ public class JH_Island
 
     public Vector2Int startPos;
     public Vector2Int endPos;
+
+    public Vector2Int midPos;
+    public Vector2Int pos;
 
     public int[,] arr;
 

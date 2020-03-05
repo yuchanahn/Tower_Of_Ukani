@@ -5,4 +5,6 @@ using UnityEngine;
 public class JH_IslandComponent : MonoBehaviour
 {
     public JH_Island landInfo;
+
+
 }
