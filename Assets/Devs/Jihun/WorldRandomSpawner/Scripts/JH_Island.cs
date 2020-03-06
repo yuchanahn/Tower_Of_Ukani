@@ -10,12 +10,14 @@ public class JH_Island
 
     public int width;
     public int height;
-    public int maxWidth;
-    public int maxHeight;
+    public int arrWidth;
+    public int arrHeight;
 
+    // 해당 청크 기준
     public Vector2Int startPos;
     public Vector2Int endPos;
 
+    // 월드 기준
     public Vector2Int midPos;
     public Vector2Int pos;
 
@@ -26,10 +28,10 @@ public class JH_Island
         width = wid;
         height = hei;
 
-        this.maxWidth = (maxWidth == 0) ? IslandRandomGenerator.WIDTH : maxWidth;
-        this.maxHeight = (maxHeight == 0) ? IslandRandomGenerator.HEIGHT : maxHeight;
+        this.arrWidth = (maxWidth == 0) ? IslandRandomGenerator.WIDTH : maxWidth;
+        this.arrHeight = (maxHeight == 0) ? IslandRandomGenerator.HEIGHT : maxHeight;
 
-        arr = new int[this.maxHeight, this.maxWidth];
+        arr = new int[this.arrHeight, this.arrWidth];
     }
 
     public void ShowArr()
@@ -38,9 +40,9 @@ public class JH_Island
 
         log += $"start pos : {startPos.ToString()}, end pos : {endPos.ToString()}\n";
 
-        for (int i = 0; i < maxHeight; i++)
+        for (int i = 0; i < arrHeight; i++)
         {
-            for (int j = 0; j < maxWidth; j++)
+            for (int j = 0; j < arrWidth; j++)
                 log += arr[i, j].ToString();
             log += "\n";
         }

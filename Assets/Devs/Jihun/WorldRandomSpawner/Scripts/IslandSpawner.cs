@@ -10,13 +10,12 @@ public class IslandSpawner : MonoBehaviour
 
     public GameObject[] tilePrefabs;
 
-    public LayerMask layer;
-
     List<JH_Island> islands = new List<JH_Island>();
     List<JH_IslandComponent> islandsInField = new List<JH_IslandComponent>();
 
     Transform islandParent;
     #endregion
+
     #region Var:최적화
     [SerializeField] float loadRate = 1f;
     [SerializeField] int loadRange = 40;
@@ -130,7 +129,7 @@ public class IslandSpawner : MonoBehaviour
 
         JH_Island land = _irg.GenerateIsland(wid,hei, maxWidth, maxHeight);
         land.pos = new Vector2Int(posX, posY);
-        land.midPos = land.pos + new Vector2Int(land.maxWidth / 2, -land.maxHeight/2);
+        land.midPos = land.pos + new Vector2Int(land.arrWidth / 2, -land.arrHeight/2);
 
         return land;
     }
@@ -144,9 +143,9 @@ public class IslandSpawner : MonoBehaviour
         map.GetComponent<JH_IslandComponent>().landInfo = land;
         map.transform.SetParent(islandParent);
 
-        for (int y = 0; y < land.maxHeight; y++)
+        for (int y = 0; y < land.arrHeight; y++)
         {
-            for (int x = 0; x < land.maxWidth; x++)
+            for (int x = 0; x < land.arrWidth; x++)
             {
                 SpawnTile(x, -y, land.arr[y, x], map.transform);
             }
@@ -173,6 +172,10 @@ public class IslandSpawner : MonoBehaviour
         temp.layer = LayerMask.NameToLayer("Solid Obj");
     }
 
+
+    #region Methods:Parts
+
+    //다리 생성 메소드
     void PutBridge(JH_Island land1, JH_Island land2)
     {
         // 다리의 시작지점과 끝지점 설정.
@@ -215,4 +218,7 @@ public class IslandSpawner : MonoBehaviour
             islands.Add(GenerateIsland((int)(newPos.x - interval.x / 2 + (interval.x - wid) / 2), (int)newPos.y, wid, hei, wid, hei));
         }
     }
+
+    
+    #endregion
 }

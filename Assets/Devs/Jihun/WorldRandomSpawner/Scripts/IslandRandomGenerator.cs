@@ -14,7 +14,9 @@ public class IslandRandomGenerator : MonoBehaviour
         GRASS,
         DIRT,
         ROCK,
-
+        WOODPLATFORM_ROD,
+        WOODPLATFORM_TOP,
+        WOODPLATFORM_TOPROD
     }
     int maxWidth = 50;
     int minWidth = 30;
@@ -47,14 +49,19 @@ public class IslandRandomGenerator : MonoBehaviour
 
         CarveUnderground(land);
 
+        for(int i = 0; i < 3; i++)
+        {
+            PutWoodenPlatform(land);
+        }
+
         return land;
     }
 
     void InitLand(JH_Island land)
     {
-        for (int y = 0; y < land.maxHeight; y++)
+        for (int y = 0; y < land.arrHeight; y++)
         {
-            for (int x = 0; x < land.maxWidth; x++)
+            for (int x = 0; x < land.arrWidth; x++)
             {
                 land.arr[y, x] = (int)Tile.AIR;
             }
@@ -66,8 +73,8 @@ public class IslandRandomGenerator : MonoBehaviour
         //그리드에서 선의 시작점의 좌표를 잡는다.
         int x, y, count = 0;
 
-        x = Random.Range(0, land.maxWidth - land.width);
-        y = Random.Range(0, land.maxHeight - land.height);
+        x = Random.Range(0, land.arrWidth - land.width);
+        y = Random.Range(0, land.arrHeight - land.height);
 
         land.startPos = new Vector2Int(x, y);
 
@@ -103,7 +110,7 @@ public class IslandRandomGenerator : MonoBehaviour
             }
             else
             {
-                if (y + slp > land.maxHeight - 1) y -= slp;
+                if (y + slp > land.arrHeight - 1) y -= slp;
                 else y+= slp;
             }
 
@@ -113,7 +120,7 @@ public class IslandRandomGenerator : MonoBehaviour
     {
         int repeat = GetPercentage(underGroundPer);
         repeat = (Random.Range(0, 2) == 0) ? repeat + land.height : -repeat + land.height;
-        repeat = Mathf.Clamp(repeat, 1, land.maxHeight-y);
+        repeat = Mathf.Clamp(repeat, 1, land.arrHeight-y);
 
         for(int i = 1; i < repeat; i++)
         {
@@ -121,8 +128,6 @@ public class IslandRandomGenerator : MonoBehaviour
         }
     }
 
-    //width = 30, height = 10
-    //width/5 = 6;
     void CarveUnderground(JH_Island land)
     {
         int x, y, j, repeat;
@@ -131,11 +136,11 @@ public class IslandRandomGenerator : MonoBehaviour
             //왼쪽 부터
             x = (int)land.startPos.x + repeat;
             //y값 구하기
-            for(y = 0; y < land.maxHeight; y++)
+            for(y = 0; y < land.arrHeight; y++)
             {
                 if (land.arr[y, x] == (int)Tile.GRASS) break;
             }
-            for (j = (int)(2 * (repeat + land.height / 5f)); (y + j) < land.maxHeight; j++)
+            for (j = (int)(2 * (repeat + land.height / 5f)); (y + j) < land.arrHeight; j++)
             {
                 land.arr[y + j, x] = (int)Tile.AIR;
             }
@@ -143,19 +148,82 @@ public class IslandRandomGenerator : MonoBehaviour
             //오른쪽 부터
             x = (int)land.endPos.x - repeat;
             //y값 구하기
-            for (y = 0; y < land.maxHeight; y++)
+            for (y = 0; y < land.arrHeight; y++)
             {
                 if (land.arr[y, x] == (int)Tile.GRASS) break;
             }
-            for (j = (int)(2 * (repeat + land.height/5f)); (y + j) < land.maxHeight; j++)
+            for (j = (int)(2 * (repeat + land.height/5f)); (y + j) < land.arrHeight; j++)
             {
                 land.arr[y + j, x] = (int)Tile.AIR;
             }
         }
     }
 
+    void PutWoodenPlatform(JH_Island land, int x = -1, int width = 0, int height = 0)
+    {
+        if (land.width < 10) return;
+
+        if (width == 0) width = Random.Range(3, 6);
+        if (height == 0) height = Random.Range(3, 6);
+        if (x == -1) x = Random.Range(land.startPos.x + 1, land.endPos.x - width - 1);
+
+        Vector2Int left = Vector2Int.right * x;
+        Vector2Int right = Vector2Int.right * (x + width);
+
+        //플랫폼 다리 위치 잡아줌
+        int i;
+        for (i = 0; i < land.arrHeight; i++)
+        {
+            Debug.Log($"x : {x}, left.x : {left.x}, i : {i}");
+            if (land.arr[i, left.x] != (int)Tile.AIR)
+            {
+                left.y = i-1;
+                break;
+            }
+        }
+        for (i = 0; i < land.arrHeight; i++)
+        {
+            if (land.arr[i, right.x] != (int)Tile.AIR)
+            {
+                right.y = i - 1;
+                break;
+            }
+        }
+        //====================
+
+        // 플랫폼 다리 놓아줌
+        Debug.Log($"height : {height}, width : {width}");
+        int highPos = (left.y < right.y) ? left.y : right.y;
+
+        //섬이 청크 기준 너무 높은곳에 있어 플랫폼을 놓지 못하는 상황일 때
+        if (highPos < height) return;
+
+        highPos = Mathf.Clamp(highPos - height + 1, 0, land.arrHeight-1);
+
+        for (i = left.y; i > highPos; i--)
+        {
+            land.arr[i, left.x] = (int)Tile.WOODPLATFORM_ROD;
+        }
+        //플랫폼 다리와 판 교차점
+        land.arr[i, left.x] = (int)Tile.WOODPLATFORM_TOPROD;
+
+        for (i = right.y; i > highPos; i--)
+        {
+            land.arr[i, right.x] = (int)Tile.WOODPLATFORM_ROD;
+        }
+        //플랫폼 다리와 판 교차점
+        land.arr[i, right.x] = (int)Tile.WOODPLATFORM_TOPROD;
+
+        //판 깔아줌
+        for(i = left.x-1; i <= right.x+1; i++)
+        {
+            if (land.arr[highPos, i] != (int)Tile.WOODPLATFORM_TOPROD) land.arr[highPos, i] = (int)Tile.WOODPLATFORM_TOP;
+        }
+    }
 
 
+
+    // 확률 테이블 관련
     int GetPercentage(int[] perArr)
     {
         int ran = Random.Range(0, 100);
