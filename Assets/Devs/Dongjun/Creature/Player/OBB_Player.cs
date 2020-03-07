@@ -99,7 +99,7 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
             state_Dash,
             EMPTY_STATE_ACTION,
             () => state_Dash.DashDone 
-               || (state_Normal.JumpData.canJump && PlayerInputManager.Inst.Input_Jump));
+               || (state_Normal.JumpData.CanJump && PlayerInputManager.Inst.Input_Jump));
 
         bvr_Kick = new Single(
             state_Kick,

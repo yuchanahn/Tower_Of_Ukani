@@ -13,7 +13,7 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
     [SerializeField] private PlayerItemPickUpData itemPickUpData;
 
     [Header("Jump")]
-    [SerializeField] private JumpData jumpData;
+    [SerializeField] private JumpCurveData jumpData;
 
     const int THE_CONST = 0;
     const int THE_CONST2 = 0;
@@ -28,7 +28,7 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
     #endregion
 
     #region Prop: 
-    public JumpData JumpData => jumpData;
+    public JumpCurveData JumpData => jumpData;
     #endregion
 
     #region Method: Unity
@@ -67,6 +67,10 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
     }
     public override void OnFixedUpdate()
     {
+        // Detect Ground
+        data.groundDetectionData.DetectGround(!jumpData.isJumping, data.RB2D, transform);
+        data.groundDetectionData.ExecuteOnGroundMethod(this);
+
         // Fall Through
         fallThroughKeyPressed = PlayerInputManager.Inst.Input_FallThrough;
         data.groundDetectionData.FallThrough(ref fallThroughKeyPressed, data.RB2D, transform, oneWayCollider);
@@ -83,13 +87,9 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
 
         // Gravity
         Gravity_Logic.ApplyGravity(data.RB2D,
-            data.groundDetectionData.isGrounded ? GravityData.Zero :
-            !jumpData.isJumping ? data.gravityData :
-            new GravityData(accel: jumpData.jumpGravity));
-
-        // Detect Ground
-        data.groundDetectionData.DetectGround(!jumpData.isJumping, data.RB2D, transform);
-        data.groundDetectionData.ExecuteOnGroundMethod(this);
+            data.groundDetectionData.isGrounded || jumpData.isJumping
+            ? GravityData.Zero
+            : data.gravityData);
 
         // Update Animation
         UpdateAnimation();
@@ -123,9 +123,9 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
             }
             else if (canPlayJumpAnim)
             {
-                data.Animator.Play(jumpData.canJump ? JUMP : AIRJUMP);
+                data.Animator.Play(jumpData.CanJump ? JUMP : AIRJUMP);
             }
-            canPlayJumpAnim = jumpData.canJump;
+            canPlayJumpAnim = jumpData.CanJump;
         }
     }
     #endregion

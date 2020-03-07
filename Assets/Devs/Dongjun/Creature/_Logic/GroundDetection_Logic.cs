@@ -76,16 +76,17 @@ public static class GroundDetection_Logic
         float castDist = scaledSize.y + (deltaYDist > offset ? deltaYDist : offset);
 
         RaycastHit2D[] hits = Physics2D.BoxCastAll(castPos, scaledSize, 0f, detectDir, castDist, data.GroundLayers);
-        if (hits.Length == 0) return;
+        if (hits.Length == 0)
+            return;
         #endregion
 
         #region Get Highest Hit Point
         float? hitPointY = null;
         GameObject hitGround = null;
+
         for (int i = 0; i < hits.Length; i++)
         {
-            if (data.IgnoreGrounds.Contains(hits[i].collider) ||
-                hits[i].point.y > tf.position.y - (scaledSize.y * 0.5f) + data.InnerSnapDist)
+            if (data.IgnoreGrounds.Contains(hits[i].collider) || hits[i].point.y > tf.position.y - (scaledSize.y * 0.5f) + data.InnerSnapDist)
                 continue;
 
             if (hitPointY is null || hitPointY < hits[i].point.y)
@@ -94,7 +95,9 @@ public static class GroundDetection_Logic
                 hitGround = hits[i].collider.gameObject;
             }
         }
-        if (hitPointY is null) return;
+
+        if (hitPointY is null)
+            return;
         #endregion
 
         #region Is Grounded

@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e914daa909b6abc459a8649ad0a8550d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryUI: {fileID: 0}
 --- !u!114 &4046854733499313259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,12 +771,55 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 4096
   jumpData:
-    curCount: 0
+    jumpCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.09732148
+        value: 1.9133939
+        inSlope: 15.26595
+        outSlope: 15.26595
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.17584142
+        outWeight: 0.16732047
+      - serializedVersion: 3
+        time: 0.23028931
+        value: 2.8780212
+        inSlope: 2.5221198
+        outSlope: 2.5221198
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.25568804
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.32
+        value: 3
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     maxCount: 2
-    height: 3
-    time: 0.33
-    apexY: 0
+    jumpInput: 0
     isJumping: 0
+    jumpCurTime: 0
+    jumpStartY: 0
+    curCount: 0
+    jumpStarted: 0
 --- !u!114 &4650456214795719249
 MonoBehaviour:
   m_ObjectHideFlags: 0

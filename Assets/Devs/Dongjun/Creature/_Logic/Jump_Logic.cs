@@ -17,8 +17,81 @@ public struct JumpData
     public bool canJump => curCount < maxCount;
 }
 
+[System.Serializable]
+public struct JumpCurveData
+{
+    public AnimationCurve jumpCurve;
+    public int maxCount;
+
+    [HideInInspector] public bool jumpInput;
+    [HideInInspector] public bool isJumping;
+    [HideInInspector] public float jumpCurTime;
+    [HideInInspector] public float jumpStartY;
+    [HideInInspector] public int curCount;
+    [HideInInspector] public bool jumpStarted;
+
+    public bool CanJump => curCount < maxCount;
+}
+
 public static class Jump_Logic
 {
+    public static bool Jump(this ref JumpCurveData jumpData, ref bool input_Jump, Rigidbody2D rb2D, in Transform tf)
+    {
+        bool justJumped = false;
+
+        // Start Jump
+        if (input_Jump)
+        {
+            input_Jump = false;
+
+            if (jumpData.CanJump)
+            {
+                // Init Jump
+                jumpData.isJumping = true;
+                jumpData.jumpCurTime = 0;
+                jumpData.jumpStartY = tf.position.y;
+                jumpData.curCount++;
+                jumpData.jumpStarted = false;
+                rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
+
+                justJumped = true;
+            }
+        }
+
+        // Jump Logic
+        if (jumpData.isJumping)
+        {
+            // Reset Jump
+            if ((jumpData.jumpStarted && rb2D.velocity.y <= 0) || jumpData.jumpCurve.keys[jumpData.jumpCurve.length - 1].time <= jumpData.jumpCurTime)
+            {
+                jumpData.isJumping = false;
+                jumpData.jumpCurTime = 0;
+                jumpData.jumpStarted = false;
+                rb2D.velocity = new Vector2(rb2D.velocity.x, 0);
+
+                return false;
+            }
+
+            // Calc Jump Distance
+            float jumpDist = jumpData.jumpStartY + jumpData.jumpCurve.Evaluate(jumpData.jumpCurTime) - tf.position.y;
+
+            // Apply Jump Velocity
+            rb2D.velocity = new Vector2(rb2D.velocity.x, jumpDist / Time.fixedDeltaTime);
+
+            // Next Step
+            jumpData.jumpCurTime += Time.fixedDeltaTime;
+
+            if (!jumpData.jumpStarted && rb2D.velocity.y > 0)
+                jumpData.jumpStarted = true;
+        }
+
+        return justJumped;
+    }
+    public static void ResetJumpCount(this ref JumpCurveData jumpData)
+    {
+        jumpData.curCount = 0;
+    }
+
     public static bool Jump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
     {
         jumpData.ResetJumpingState(rb2D, tf);
