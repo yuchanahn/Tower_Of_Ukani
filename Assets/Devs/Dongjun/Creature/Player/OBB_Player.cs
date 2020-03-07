@@ -50,8 +50,6 @@ public class OBB_Data_Player : OBB_Data_Animator,
 
 public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
 {
-    [SerializeField] private AnimationCurve testCurve;
-
     // States
     private OBB_Player_Normal state_Normal;
     private OBB_Player_Incapacitated state_Incapacitated;
@@ -135,19 +133,5 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
         // Default
         SetDefaultObjective()
             .AddBehaviour(bvr_Normal);
-    }
-    protected override void Update()
-    {
-        base.Update();
-
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            PlayerStatus.AddEffect(new PlayerStatus_Knockback(Data.StatusID, gameObject, KnockbackMode.Weak, true, new Vector2(1, 1), testCurve));
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            PlayerStatus.AddEffect(new PlayerStatus_Stun(Data.StatusID, gameObject, 0.5f));
-        }
     }
 }

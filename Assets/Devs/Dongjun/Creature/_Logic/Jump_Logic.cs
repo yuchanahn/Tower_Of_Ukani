@@ -1,6 +1,22 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
+public struct JumpCurveData
+{
+    public AnimationCurve jumpCurve;
+    public int maxCount;
+
+    [HideInInspector] public bool jumpInput;
+    [HideInInspector] public bool isJumping;
+    [HideInInspector] public float jumpCurTime;
+    [HideInInspector] public float jumpStartY;
+    [HideInInspector] public int curCount;
+    [HideInInspector] public bool jumpStarted;
+
+    public bool CanJump => curCount < maxCount;
+}
+
+[System.Serializable]
 public struct JumpData
 {
     [HideInInspector]
@@ -17,24 +33,9 @@ public struct JumpData
     public bool canJump => curCount < maxCount;
 }
 
-[System.Serializable]
-public struct JumpCurveData
-{
-    public AnimationCurve jumpCurve;
-    public int maxCount;
-
-    [HideInInspector] public bool jumpInput;
-    [HideInInspector] public bool isJumping;
-    [HideInInspector] public float jumpCurTime;
-    [HideInInspector] public float jumpStartY;
-    [HideInInspector] public int curCount;
-    [HideInInspector] public bool jumpStarted;
-
-    public bool CanJump => curCount < maxCount;
-}
-
 public static class Jump_Logic
 {
+    // Jump Using Curve
     public static bool Jump(this ref JumpCurveData jumpData, ref bool input_Jump, Rigidbody2D rb2D, in Transform tf)
     {
         bool justJumped = false;
@@ -92,6 +93,7 @@ public static class Jump_Logic
         jumpData.curCount = 0;
     }
 
+    // Jump Using Math
     public static bool Jump(this ref JumpData jumpData, ref bool input_Jump, Rigidbody2D rb2D, Transform tf)
     {
         jumpData.ResetJumpingState(rb2D, tf);
@@ -115,10 +117,7 @@ public static class Jump_Logic
     }
     public static void ResetJumpingState(this ref JumpData jumpData, Rigidbody2D rb2D, Transform tf)
     {
-        if (!jumpData.isJumping)
-            return;
-
-        if (!(tf.position.y >= jumpData.apexY || rb2D.velocity.y <= 0))
+        if (!jumpData.isJumping || !(tf.position.y >= jumpData.apexY || rb2D.velocity.y <= 0))
             return;
 
         rb2D.velocity = new Vector2(rb2D.velocity.x, 0f);

@@ -5,13 +5,6 @@ using UnityEngine;
 [Serializable]
 public struct GroundDetectionData
 {
-    [HideInInspector] public Vector2 Size;
-    [HideInInspector] public List<Collider2D> IgnoreGrounds;
-    [HideInInspector] public bool isGrounded;
-
-    [HideInInspector] public bool OnGroundEnter_Executed;
-    [HideInInspector] public bool OnGroundExit_Executed;
-
     [Header("Layers")]
     public LayerMask GroundLayers;
     public LayerMask OneWayLayer;
@@ -24,9 +17,15 @@ public struct GroundDetectionData
     public float OutterSnapDist;
     public float OffsetAmount;
 
-    [Header("GroundData")]
-    public RaycastHit2D[] hitGrounds;
-    public Rigidbody2D groundRB;
+    [HideInInspector] public Vector2 Size;
+    [HideInInspector] public List<Collider2D> IgnoreGrounds;
+    [HideInInspector] public bool isGrounded;
+
+    [HideInInspector] public bool OnGroundEnter_Executed;
+    [HideInInspector] public bool OnGroundExit_Executed;
+
+    [HideInInspector] public RaycastHit2D[] hitGrounds;
+    [HideInInspector] public Rigidbody2D groundRB;
 }
 
 public interface ICanDetectGround
