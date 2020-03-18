@@ -55,6 +55,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
     #endregion
 
+    #region Method: Reset Stats
     public void ResetStats()
     {
         // Reset Health
@@ -63,6 +64,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         staminaRegen.Reset();
         walkData.walkSpeed.Reset();
     }
+    #endregion
 
     #region Method: Change Health
     public void Damage(float amount)

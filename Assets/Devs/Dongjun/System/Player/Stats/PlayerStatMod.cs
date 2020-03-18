@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO : 씬에 넣어야 함.
 public class PlayerStatMod : MonoBehaviour
 {
     private static List<Action> statMod_Player;

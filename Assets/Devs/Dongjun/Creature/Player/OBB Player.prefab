@@ -703,11 +703,6 @@ MonoBehaviour:
     bodySpriteRenderer: {fileID: 4650456213804524496}
     oneWayCollider: {fileID: 4650456214489393319}
     groundDetectionData:
-      Size: {x: 0, y: 0}
-      IgnoreGrounds: []
-      isGrounded: 0
-      OnGroundEnter_Executed: 0
-      OnGroundExit_Executed: 0
       GroundLayers:
         serializedVersion: 2
         m_Bits: 1536
@@ -718,6 +713,11 @@ MonoBehaviour:
       InnerSnapDist: 0.2
       OutterSnapDist: 0.05
       OffsetAmount: 0
+      Size: {x: 0, y: 0}
+      IgnoreGrounds: []
+      isGrounded: 0
+      OnGroundEnter_Executed: 0
+      OnGroundExit_Executed: 0
       groundRB: {fileID: 0}
     gravityData:
       useGravity: 1
@@ -728,30 +728,6 @@ MonoBehaviour:
     CanChangeDir: 1
     PlayingOtherMotion: 0
     NewKnockback: 0
-  testCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 20
-      inSlope: -80
-      outSlope: -80
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.25
-      value: 0
-      inSlope: -80
-      outSlope: -80
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &4650456214795719251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,25 +760,25 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.11822979
-        value: 2.0097156
-        inSlope: 15.282929
-        outSlope: 15.282929
+        time: 0.13119823
+        value: 2.1904385
+        inSlope: 12.326705
+        outSlope: 12.326705
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.17396466
-        outWeight: 0.40689695
+        outWeight: 0.2703181
       - serializedVersion: 3
-        time: 0.20291857
-        value: 2.7935717
-        inSlope: 5.0926313
-        outSlope: 5.0926313
+        time: 0.21647647
+        value: 2.865861
+        inSlope: 4.0800943
+        outSlope: 4.0800943
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.39941287
-        outWeight: 0.33333334
+        outWeight: 0.4710621
       - serializedVersion: 3
-        time: 0.32
+        time: 0.28
         value: 3
         inSlope: 0
         outSlope: 0

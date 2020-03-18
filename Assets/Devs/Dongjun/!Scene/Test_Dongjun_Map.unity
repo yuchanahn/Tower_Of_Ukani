@@ -10670,61 +10670,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[3].time
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].time
-      value: 0.21647647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].value
-      value: 2.865861
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].inSlope
-      value: 4.0800943
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].outSlope
-      value: 4.0800943
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].outWeight
-      value: 0.4710621
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[1].value
-      value: 2.1904385
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[1].time
-      value: 0.13119823
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[1].inSlope
-      value: 12.326705
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[1].outSlope
-      value: 12.326705
-      objectReference: {fileID: 0}
-    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
-        type: 3}
-      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[1].outWeight
-      value: 0.2703181
-      objectReference: {fileID: 0}
     - target: {fileID: 4650456214795719256, guid: f1d116c160f4e074b855b6a707d8fab1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13260,14 +13205,32 @@ MonoBehaviour:
   size: {x: 50, y: 76}
   layerMask:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1073743104
   curve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 20
+      inSlope: -80
+      outSlope: -80
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: -80
+      outSlope: -80
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  Damage: 0
+  Damage: 15
 --- !u!61 &1966430461
 BoxCollider2D:
   m_ObjectHideFlags: 0

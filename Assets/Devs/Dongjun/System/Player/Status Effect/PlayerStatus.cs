@@ -25,11 +25,11 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     #region Var: CC
     // Slow
     private static List<PlayerStatus_Slow> slowList;
-    private static Action slow = () => PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[0].SlowAmount;
+    private static readonly Action slow = () => PlayerStats.Inst.walkData.walkSpeed.ModPercent = -slowList[0].SlowAmount;
     public static bool IsSlowed => slowList.Count != 0;
 
     // Knockback
-    private static PlayerStatus_Knockback currentKnockback = null;
+    private static PlayerStatus_Knockback curKnockback = null;
     private static KnockbackMode curKnockbackMode = KnockbackMode.Weak;
     public static bool ResetGravityOnKnockback
     { get; private set; }
@@ -51,89 +51,23 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     protected override void Awake()
     {
         base.Awake();
+
+        if (statusEffects != null)
+            RemoveAllEffect();
+
         statusEffects = new Dictionary<StatusID, List<PlayerStatusEffect>>();
 
         AbsorbDamage = new BoolCount();
         IgnoreDamage = new BoolCount();
 
         slowList = new List<PlayerStatus_Slow>();
-
-        currentKnockback = null;
+        curKnockback = null;
         curKnockbackMode = KnockbackMode.Weak;
-
         IsStunned = new BoolCount();
     }
     #endregion
 
     #region Method: Status Effect
-    public static void AddEffect(PlayerStatusEffect effect)
-    {
-        if (!statusEffects.ContainsKey(effect.ID))
-            statusEffects.Add(effect.ID, new List<PlayerStatusEffect>());
-
-        List<PlayerStatusEffect> effects = statusEffects[effect.ID];
-
-        if (effects.Contains(effect))
-            return;
-
-        // On Start
-        effect.OnStart();
-
-        // Add
-        effects.Add(effect);
-    }
-
-    public static void RemoveEffect(PlayerStatusEffect effect)
-    {
-        if (effect == null || !statusEffects[effect.ID].Contains(effect))
-            return;
-
-        statusEffects[effect.ID].Remove(effect);
-        effect.OnEnd();
-    }
-    public static void RemoveEffect(GameObject caster)
-    {
-        foreach (var entry in statusEffects)
-        {
-            for (int i = 0; i < entry.Value.Count; i++)
-            {
-                if (entry.Value[i].Caster == caster.gameObject)
-                {
-                    entry.Value.Remove(entry.Value[i]);
-                    entry.Value[i].OnEnd();
-                }
-            }
-        }
-    }
-    public static void RemoveEffect(StatusType statusType)
-    {
-        foreach (var entry in statusEffects)
-        {
-            for (int i = 0; i < entry.Value.Count; i++)
-            {
-                if (entry.Value[i].StatusType == statusType)
-                {
-                    entry.Value.Remove(entry.Value[i]);
-                    entry.Value[i].OnEnd();
-                }
-            }
-        }
-    }
-    public static void RemoveEffect(GameObject caster, StatusType statusType)
-    {
-        foreach (var entry in statusEffects)
-        {
-            for (int i = 0; i < entry.Value.Count; i++)
-            {
-                if (entry.Value[i].Caster == caster.gameObject && entry.Value[i].StatusType == statusType)
-                {
-                    entry.Value.Remove(entry.Value[i]);
-                    entry.Value[i].OnEnd();
-                }
-            }
-        }
-    }
-
     public static bool HasEffect<T>() where T : PlayerStatusEffect
     {
         foreach (var entry in statusEffects)
@@ -159,6 +93,82 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         }
 
         return false;
+    }
+
+    public static void AddEffect(PlayerStatusEffect effect)
+    {
+        if (!statusEffects.ContainsKey(effect.ID))
+            statusEffects.Add(effect.ID, new List<PlayerStatusEffect>());
+
+        List<PlayerStatusEffect> effects = statusEffects[effect.ID];
+
+        if (effects.Contains(effect))
+            return;
+
+        effects.Add(effect);
+        effect.OnStart();
+    }
+
+    public static void RemoveAllEffect()
+    {
+        foreach (var entry in statusEffects)
+        {
+            for (int i = entry.Value.Count - 1; i >= 0; i--)
+            {
+                entry.Value[i].OnEnd();
+                entry.Value.RemoveAt(i);
+            }
+        }
+    }
+    public static void RemoveEffect(PlayerStatusEffect effect)
+    {
+        if (effect == null || !statusEffects[effect.ID].Contains(effect))
+            return;
+
+        effect.OnEnd();
+        statusEffects[effect.ID].Remove(effect);
+    }
+    public static void RemoveEffect(GameObject caster)
+    {
+        foreach (var entry in statusEffects)
+        {
+            for (int i = entry.Value.Count - 1; i >= 0; i--)
+            {
+                if (entry.Value[i].Caster == caster.gameObject)
+                {
+                    entry.Value[i].OnEnd();
+                    entry.Value.RemoveAt(i);
+                }
+            }
+        }
+    }
+    public static void RemoveEffect(StatusType statusType)
+    {
+        foreach (var entry in statusEffects)
+        {
+            for (int i = entry.Value.Count - 1; i >= 0; i--)
+            {
+                if (entry.Value[i].StatusType == statusType)
+                {
+                    entry.Value[i].OnEnd();
+                    entry.Value.RemoveAt(i);
+                }
+            }
+        }
+    }
+    public static void RemoveEffect(GameObject caster, StatusType statusType)
+    {
+        foreach (var entry in statusEffects)
+        {
+            for (int i = entry.Value.Count - 1; i >= 0; i--)
+            {
+                if (entry.Value[i].Caster == caster.gameObject && entry.Value[i].StatusType == statusType)
+                {
+                    entry.Value[i].OnEnd();
+                    entry.Value.RemoveAt(i);
+                }
+            }
+        }
     }
     #endregion
 
@@ -204,8 +214,8 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         if (curKnockbackMode == KnockbackMode.Unstoppable || curKnockbackMode > mode)
             return;
 
-        RemoveEffect(currentKnockback);
-        currentKnockback = status;
+        RemoveEffect(curKnockback);
+        curKnockback = status;
 
         curKnockbackMode = mode;
         ResetGravityOnKnockback = resetGravity;
@@ -216,7 +226,7 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
     }
     public void Konckback_Remove()
     {
-        currentKnockback = null;
+        curKnockback = null;
 
         curKnockbackMode = KnockbackMode.Weak;
         ResetGravityOnKnockback = false;
