@@ -9,17 +9,10 @@ public class PlayerStats : SingletonBase<PlayerStats>
     [SerializeField] private SelfSleepObj healEffectPrefab;
     #endregion
 
-    #region Var: Base Stats
-    private float base_health_Max = 100;
-    private float base_stamina_Max = 3;
-    private float base_staminaRegen = 0.5f;
-    #endregion
-
-    #region Var: Current Stats
+    #region Var: Player Stats
     [HideInInspector] public FloatStat health;
     [HideInInspector] public FloatStat stamina;
     [HideInInspector] public FloatStat staminaRegen;
-
     [HideInInspector] public PlayerWalkData walkData;
     #endregion
 
@@ -27,22 +20,15 @@ public class PlayerStats : SingletonBase<PlayerStats>
     [HideInInspector] public float DamageReceived;
     [HideInInspector] public float HealReceived;
     [HideInInspector] public float DamageToDeal;
-    public Mob_Base KilledMob
-    { get; private set; }
+
     public Mob_Base DamagedMob
     { get; private set; }
-    #endregion
-
-    #region Var: Event for UI
-    private readonly Dictionary<GameObject, Action<FloatStat>> OnHealthChange = new Dictionary<GameObject, Action<FloatStat>>();
-    private readonly Dictionary<GameObject, Action<FloatStat>> OnStaminaChange = new Dictionary<GameObject, Action<FloatStat>>();
+    public Mob_Base KilledMob
+    { get; private set; }
     #endregion
 
     #region Prop: 
-    public bool IsDead
-    { get; private set; } = false;
-    public FloatStat Health => health;
-    public FloatStat Stamina => stamina;
+    public bool IsDead => health.Value == 0;
     #endregion
 
     #region Method: Unity
@@ -50,16 +36,17 @@ public class PlayerStats : SingletonBase<PlayerStats>
     {
         base.Awake();
 
-        // Init Stats
-        health = new FloatStat(0, min: 0, max: base_health_Max);
-        stamina = new FloatStat(0, min: 0, max: base_stamina_Max);
-        staminaRegen = new FloatStat(base_staminaRegen, min: 0);
+        // Init Health
+        health = new FloatStat(100, min: 0, max: 100);
 
+        // Init Stamina
+        stamina = new FloatStat(3, min: 0, max: 3);
+
+        // Init Stamina Regen
+        staminaRegen = new FloatStat(0.5f, min: 0);
+
+        // Init WalkData
         walkData = new PlayerWalkData(new FloatStat(7, min: 0), 0.2f, 0.2f);
-
-        // Init
-        health.ModFlat = health.Max;
-        SetStamina(stamina.Max);
     }
     private void LateUpdate()
     {
@@ -68,49 +55,16 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
     #endregion
 
-    #region Method: Change Stat (Player)
     public void ResetStats()
     {
-        health.Max = base_health_Max;
-        stamina.Max = base_stamina_Max;
+        // Reset Health
+        health.Reset();
+        stamina.Reset();
         staminaRegen.Reset();
-
         walkData.walkSpeed.Reset();
     }
 
-    private void RegenStamina()
-    {
-        if (stamina.ModFlat >= stamina.Max)
-        {
-            stamina.ModFlat = stamina.Max;
-            return;
-        }
-
-        stamina.ModFlat += staminaRegen.Value * Time.deltaTime;
-
-        // Invoke Event
-        Invoke_OnStaminaChange();
-    }
-    public void SetStamina(float amount)
-    {
-        amount = Mathf.Clamp(amount, stamina.Min, stamina.Max);
-        stamina.ModFlat = amount;
-
-        // Invoke Event
-        Invoke_OnStaminaChange();
-    }
-    public bool UseStamina(float amount)
-    {
-        if (stamina.Value < amount)
-            return false;
-
-        stamina.ModFlat -= amount;
-
-        // Invoke Event
-        Invoke_OnStaminaChange();
-        return true;
-    }
-
+    #region Method: Change Health
     public void Damage(float amount)
     {
         // Check Ignore Damage
@@ -121,7 +75,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : amount;
 
         // Trigger Item Effect
-        PlayerActionEventManager.Trigger(PlayerActions.Damaged);
+        PlayerActionEventManager.Trigger(PlayerActions.HealthDamaged);
 
         // Apply Damage
         health.ModFlat -= DamageReceived;
@@ -133,8 +87,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
             return;
         }
 
-        // Invoke Event
-        Invoke_OnHealthChange();
+        // Trigger Event
+        PlayerActionEventManager.Trigger(PlayerActions.HealthChanged);
 
         // Visual Effect
         PlayerHitEft.Create(transform.position);
@@ -150,7 +104,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : attackData.damage.Value;
 
         // Trigger Item Effect
-        PlayerActionEventManager.Trigger(PlayerActions.Damaged);
+        PlayerActionEventManager.Trigger(PlayerActions.HealthDamaged);
 
         // Apply Damage
         health.ModFlat -= DamageReceived;
@@ -162,8 +116,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
             return;
         }
 
-        // Invoke Event
-        Invoke_OnHealthChange();
+        // Trigger Event
+        PlayerActionEventManager.Trigger(PlayerActions.HealthChanged);
 
         // Visual Effect
         PlayerHitEft.Create(transform.position);
@@ -177,30 +131,59 @@ public class PlayerStats : SingletonBase<PlayerStats>
         // Store Heal Amount
         HealReceived = amount;
 
-        // Trigger Item Effect
-        PlayerActionEventManager.Trigger(PlayerActions.Healed);
+        // Trigger Event
+        PlayerActionEventManager.Trigger(PlayerActions.HealthHealed);
 
         // Apply Heal
         health.ModFlat += Mathf.Clamp(HealReceived, 0, health.Max - health.Value);
 
-        // Invoke Event
-        Invoke_OnHealthChange();
+        // Trigger Event
+        PlayerActionEventManager.Trigger(PlayerActions.HealthChanged);
 
         // Visual Effect
         healEffectPrefab.Spawn(transform, Vector2.zero);
     }
     public void Death()
     {
-        IsDead = true;
-
         // TODO
         // Play Death Animation / Effect
-
         // Show Death Screen
     }
     #endregion
 
-    #region Method: Change Stat (Mob / Other)
+    #region Method: Change Stamina
+    public void GainStamina(float amount)
+    {
+        if (amount <= 0)
+            return;
+
+        PlayerActionEventManager.Trigger(PlayerActions.StaminaGained);
+        stamina.ModFlat += amount;
+        PlayerActionEventManager.Trigger(PlayerActions.StaminaChanged);
+    }
+    public bool UseStamina(float amount)
+    {
+        if (stamina.Value < amount)
+            return false;
+
+        PlayerActionEventManager.Trigger(PlayerActions.StaminaUsed);
+        stamina.ModFlat -= amount;
+        PlayerActionEventManager.Trigger(PlayerActions.StaminaChanged);
+        return true;
+    }
+    private void RegenStamina()
+    {
+        if (stamina.ModFlat >= stamina.Max)
+        {
+            stamina.ModFlat = stamina.Max;
+            return;
+        }
+
+        GainStamina(staminaRegen.Value * Time.deltaTime);
+    }
+    #endregion
+
+    #region Method: Deal Damage
     public bool DealDamage(AttackData attackData, GameObject target, params PlayerActions[] actionToTrigger)
     {
         // Get IDamage
@@ -238,54 +221,6 @@ public class PlayerStats : SingletonBase<PlayerStats>
         DamagedMob = null;
 
         return true;
-    }
-    #endregion
-
-    #region Method: Event for UI
-    public void AddEvent_OnHealthChange(GameObject slef, Action<FloatStat> action)
-    {
-        if (OnHealthChange.ContainsKey(slef))
-            return;
-
-        OnHealthChange.Add(slef, action);
-    }
-    private void Invoke_OnHealthChange()
-    {
-        GameObject key;
-        for (int i = 0; i < OnHealthChange.Count; i++)
-        {
-            key = OnHealthChange.ElementAt(i).Key;
-            if (key == null)
-            {
-                OnHealthChange.Remove(key);
-                continue;
-            }
-
-            OnHealthChange[key].Invoke(health);
-        }
-    }
-
-    public void AddEvent_OnStaminaChange(GameObject slef, Action<FloatStat> action)
-    {
-        if (OnStaminaChange.ContainsKey(slef))
-            return;
-
-        OnStaminaChange.Add(slef, action);
-    }
-    private void Invoke_OnStaminaChange()
-    {
-        GameObject key;
-        for (int i = 0; i < OnStaminaChange.Count; i++)
-        {
-            key = OnStaminaChange.ElementAt(i).Key;
-            if (key == null)
-            {
-                OnStaminaChange.Remove(key);
-                continue;
-            }
-
-            OnStaminaChange[key].Invoke(stamina);
-        }
     }
     #endregion
 }

@@ -115,7 +115,7 @@ public class Bloodseeker : ActiveItem
         durationTimer.Reset();
 
         PlayerActionEventManager.AddEvent(PlayerActions.Kill, onKill);
-        PlayerActionEventManager.AddEvent(PlayerActions.Damaged, onDamageReceived);
+        PlayerActionEventManager.AddEvent(PlayerActions.HealthDamaged, onDamageReceived);
     }
     public override void Deactivate()
     {
@@ -139,7 +139,7 @@ public class Bloodseeker : ActiveItem
         shieldEffect.SetActive(false);
 
         PlayerActionEventManager.RemoveEvent(PlayerActions.Kill, onKill);
-        PlayerActionEventManager.RemoveEvent(PlayerActions.Damaged, onDamageReceived);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.HealthDamaged, onDamageReceived);
     }
     #endregion
 }

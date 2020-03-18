@@ -7,17 +7,12 @@ public class UI_PlayerHealthBar : MonoBehaviour
 
     private void Start()
     {
-        Init_HealthBar();
-        PlayerStats.Inst.AddEvent_OnHealthChange(gameObject, Update_HealthBar);
+        Update_HealthBar();
+        PlayerActionEventManager.AddEvent(PlayerActions.HealthChanged, this.NewPlayerActionEvent(Update_HealthBar));
     }
 
-    private void Init_HealthBar()
+    private void Update_HealthBar()
     {
-        healthBar.Value = (float)PlayerStats.Inst.Health.Value / PlayerStats.Inst.Health.Max;
-    }
-
-    private void Update_HealthBar(FloatStat health)
-    {
-        healthBar.Value = (float)health.Value / health.Max;
+        healthBar.Value = (float)PlayerStats.Inst.health.Value / PlayerStats.Inst.health.Max;
     }
 }

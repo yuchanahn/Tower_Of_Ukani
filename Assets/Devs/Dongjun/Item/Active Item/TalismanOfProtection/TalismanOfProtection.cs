@@ -91,7 +91,7 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.Reset();
 
         // Enable Shield Item Effect
-        PlayerActionEventManager.AddEvent(PlayerActions.Damaged, onDamageReceived);
+        PlayerActionEventManager.AddEvent(PlayerActions.HealthDamaged, onDamageReceived);
 
         // Show Effect
         shieldEffect.SetActive(true);
@@ -112,7 +112,7 @@ public class TalismanOfProtection : ActiveItem
         shieldhealth.ModFlat = 0;
 
         // Disable Shield Item Effect
-        PlayerActionEventManager.RemoveEvent(PlayerActions.Damaged, onDamageReceived);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.HealthDamaged, onDamageReceived);
 
         // Hide Effect
         shieldEffect.SetActive(false);

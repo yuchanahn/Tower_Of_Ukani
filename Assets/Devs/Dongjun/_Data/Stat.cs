@@ -6,6 +6,9 @@ public struct IntStat
     private bool needToCalculate;
 
     private int @base;
+    private int baseMin;
+    private int baseMax;
+
     private int min;
     private int max;
 
@@ -19,6 +22,9 @@ public struct IntStat
         get { return @base; }
         set { @base = Mathf.Clamp(value, min, max); }
     }
+    public int BaseMin => baseMin;
+    public int BaseMax => baseMax;
+
     public int Min
     {
         get { return min; }
@@ -74,17 +80,26 @@ public struct IntStat
 
     public IntStat(int @base = 0, int min = int.MinValue, int max = int.MaxValue, int modFlat = 0, int modPercent = 0)
     {
-        this.needToCalculate = true;
+        needToCalculate = true;
+
         this.@base = @base;
+        baseMin = min;
+        baseMax = max;
+
         this.min = min;
         this.max = max;
+
         this.modFlat = modFlat;
         this.modPercent = modPercent;
-        this.value = 0;
+
+        value = 0;
     }
 
     public void Reset()
     {
+        Min = baseMin;
+        Max = baseMax;
+
         ModFlat = 0;
         ModPercent = 0;
     }
@@ -95,6 +110,9 @@ public struct FloatStat
     private bool needToCalculate;
 
     private float @base;
+    private float baseMin;
+    private float baseMax;
+
     private float min;
     private float max;
 
@@ -108,6 +126,9 @@ public struct FloatStat
         get { return @base; }
         set { @base = Mathf.Clamp(value, min, max); }
     }
+    public float BaseMin => baseMin;
+    public float BaseMax => baseMax;
+
     public float Min
     {
         get { return min; }
@@ -164,16 +185,25 @@ public struct FloatStat
     public FloatStat(float @base = 0f, float min = float.MinValue, float max = float.MaxValue, float modFlat = 0, float modPercent = 0)
     {
         this.needToCalculate = true;
+
         this.@base = @base;
+        baseMin = min;
+        baseMax = max;
+
         this.min = min;
         this.max = max;
+
         this.modFlat = modFlat;
         this.modPercent = modPercent;
-        this.value = 0;
+
+        value = 0;
     }
 
     public void Reset()
     {
+        Min = baseMin;
+        Max = baseMax;
+
         ModFlat = 0;
         ModPercent = 0;
     }

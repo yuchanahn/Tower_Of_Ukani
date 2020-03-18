@@ -32,7 +32,7 @@ public abstract class WeaponItem : UpgradableItem
         base.AddLevel(amount);
 
         // Apply Stat Mod
-        PlayerStatMod.Apply_Weapon(this);
+        PlayerStatMod.ApplyMod_Weapon(this);
     }
     public override void OnAdd(InventoryBase inventory)
     {
@@ -47,7 +47,7 @@ public abstract class WeaponItem : UpgradableItem
         SelectInActiveSlot();
 
         // Apply Stat Mod
-        PlayerStatMod.Apply_Weapon(this);
+        PlayerStatMod.ApplyMod_Weapon(this);
     }
     public override void OnMove()
     {

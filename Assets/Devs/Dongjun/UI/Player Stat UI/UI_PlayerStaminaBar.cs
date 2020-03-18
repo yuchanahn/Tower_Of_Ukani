@@ -15,25 +15,24 @@ public class UI_PlayerStaminaBar : MonoBehaviour
     private void Start()
     {
         SetUp_StaminaBar();
-        PlayerStats.Inst.AddEvent_OnStaminaChange(gameObject, Update_StaminaBar);
+        PlayerActionEventManager.AddEvent(PlayerActions.StaminaChanged, this.NewPlayerActionEvent(Update_StaminaBar));
     }
 
     private void SetUp_StaminaBar()
     {
-        staminaBars = new UI_Fill[(int)PlayerStats.Inst.Stamina.Max];
+        staminaBars = new UI_Fill[(int)PlayerStats.Inst.stamina.Max];
 
         for (int i = 0; i < staminaBars.Length; i++)
         {
             staminaBars[i] = Instantiate(staminaBarPrefab, staminaBarParent).GetComponent<UI_Fill>();
-            staminaBars[i].Value = PlayerStats.Inst.Stamina.Value >= i + 1 ? 1 : PlayerStats.Inst.Stamina.Value - i;
+            staminaBars[i].Value = PlayerStats.Inst.stamina.Value >= i + 1 ? 1 : PlayerStats.Inst.stamina.Value - i;
         }
     }
-
-    private void Update_StaminaBar(FloatStat stamina)
+    private void Update_StaminaBar()
     {
         for (int i = 0; i < staminaBars.Length; i++)
         {
-            staminaBars[i].Value = stamina.Value >= i + 1 ? 1 : stamina.Value - i;
+            staminaBars[i].Value = PlayerStats.Inst.stamina.Value >= i + 1 ? 1 : PlayerStats.Inst.stamina.Value - i;
         }
     }
 }

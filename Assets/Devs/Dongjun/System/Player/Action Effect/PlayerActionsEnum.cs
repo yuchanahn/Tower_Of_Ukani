@@ -13,8 +13,14 @@
     StunEnd,
 
     // Health Change
-    Damaged,
-    Healed,
+    HealthChanged,
+    HealthDamaged,
+    HealthHealed,
+
+    // Stamina Change
+    StaminaChanged,
+    StaminaUsed,
+    StaminaGained,
 
     // Attack
     DamageDealt,

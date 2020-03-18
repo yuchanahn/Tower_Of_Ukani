@@ -9,7 +9,7 @@ public class PotionOfHealing : ConsumableItem
     public override bool Consume()
     {
         // Don't Activate When Full Health
-        if (PlayerStats.Inst.Health.Value == PlayerStats.Inst.Health.Max)
+        if (PlayerStats.Inst.health.Value == PlayerStats.Inst.health.Max)
             return false;
 
         // Heal Player

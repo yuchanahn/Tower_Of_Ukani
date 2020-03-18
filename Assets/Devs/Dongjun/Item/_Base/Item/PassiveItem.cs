@@ -38,20 +38,20 @@ public abstract class PassiveItem : UpgradableItem
     {
         base.AddLevel(amount);
 
-        if (playerStatMod != null) PlayerStatMod.Apply_Player();
-        if (weaponStatMod != null) PlayerStatMod.Apply_Weapons();
+        if (playerStatMod != null) PlayerStatMod.ApplyMod_Player();
+        if (weaponStatMod != null) PlayerStatMod.ApplyMod_Weapons();
     }
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
 
-        if (playerStatMod != null) PlayerStatMod.Add_Player(playerStatMod);
-        if (weaponStatMod != null) PlayerStatMod.Add_Weapon(weaponStatMod);
+        if (playerStatMod != null) PlayerStatMod.AddMod_Player(playerStatMod);
+        if (weaponStatMod != null) PlayerStatMod.AddMod_Weapon(weaponStatMod);
     }
     protected override void OnRemovedFromInventory()
     {
-        if (playerStatMod != null) PlayerStatMod.Remove_Player(playerStatMod);
-        if (weaponStatMod != null) PlayerStatMod.Remove_Weapon(weaponStatMod);
+        if (playerStatMod != null) PlayerStatMod.RemoveMod_Player(playerStatMod);
+        if (weaponStatMod != null) PlayerStatMod.RemoveMod_Weapon(weaponStatMod);
     }
     #endregion
 }

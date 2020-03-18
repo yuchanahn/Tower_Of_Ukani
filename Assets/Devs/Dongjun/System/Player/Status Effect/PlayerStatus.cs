@@ -189,14 +189,14 @@ public class PlayerStatus : SingletonBase<PlayerStatus>
         slowList = slowList.OrderByDescending(o => o.SlowAmount).ToList();
 
         // Apply Slow
-        PlayerStatMod.Add_Player(slow);
+        PlayerStatMod.AddMod_Player(slow);
     }
     public void Slow_Remove(PlayerStatus_Slow status_Slow)
     {
         slowList.Remove(status_Slow);
 
         // Apply Slow
-        PlayerStatMod.Remove_Player(slow);
+        PlayerStatMod.RemoveMod_Player(slow);
     }
 
     public void Konckback_Add(PlayerStatus_Knockback status, KnockbackMode mode, bool resetGravity, Vector2 knockbackDir, AnimationCurve speedCurve)

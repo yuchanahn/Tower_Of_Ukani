@@ -32,12 +32,12 @@ public class Equilibrium : PassiveItem
     {
         base.OnAdd(inventory);
 
-        PlayerActionEventManager.AddEvent(PlayerActions.Damaged, onDamaged);
+        PlayerActionEventManager.AddEvent(PlayerActions.HealthDamaged, onDamaged);
         PlayerActionEventManager.AddEvent(PlayerActions.DamageDealt, onDealDamage);
     }
     protected override void OnRemovedFromInventory()
     {
-        PlayerActionEventManager.RemoveEvent(PlayerActions.Damaged, onDamaged);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.HealthDamaged, onDamaged);
         PlayerActionEventManager.RemoveEvent(PlayerActions.DamageDealt, onDealDamage);
     }
     #endregion
