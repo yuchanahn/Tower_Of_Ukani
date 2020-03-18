@@ -1063,12 +1063,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 147340043}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &164362535 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1635102216108526279, guid: 5b9390edd2da90649913d9af80641b06,
-    type: 3}
-  m_PrefabInstance: {fileID: 1635102215281852239}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &164554018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8061879157058671587, guid: bec6504a1ddd24d4290af7cdcdf00006,
@@ -6303,12 +6297,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 859049446}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &875872779 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2254965007995943260, guid: 5b9390edd2da90649913d9af80641b06,
-    type: 3}
-  m_PrefabInstance: {fileID: 1635102215281852239}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &884481469
 GameObject:
   m_ObjectHideFlags: 0
@@ -6474,12 +6462,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7658684800277846326, guid: a834a7f1af0b01e4091caaace80c5832,
     type: 3}
   m_PrefabInstance: {fileID: 903147883}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &925962242 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1635102215637798459, guid: 5b9390edd2da90649913d9af80641b06,
-    type: 3}
-  m_PrefabInstance: {fileID: 1635102215281852239}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &927053608
 PrefabInstance:
@@ -9301,12 +9283,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1413585827}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &1421537285 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1635102214411281993, guid: 5b9390edd2da90649913d9af80641b06,
-    type: 3}
-  m_PrefabInstance: {fileID: 1635102215281852239}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1427361236 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5681672376404113145, guid: 8e078a41e50e29841bc94cbe8e409e3a,
@@ -10100,12 +10076,6 @@ MonoBehaviour:
   Target: {fileID: 1594527253}
   Range: 20
   CheckRate: 1
---- !u!224 &1506583175 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3101339904837643784, guid: 5b9390edd2da90649913d9af80641b06,
-    type: 3}
-  m_PrefabInstance: {fileID: 1635102215281852239}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1510736832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10692,12 +10662,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8252149920274535821, guid: f89dcbec5c32eac4da1f7de42de6ec42,
     type: 3}
   m_PrefabInstance: {fileID: 1618923918}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1572122607 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1635102215005197170, guid: 5b9390edd2da90649913d9af80641b06,
-    type: 3}
-  m_PrefabInstance: {fileID: 1635102215281852239}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1594527252
 PrefabInstance:
@@ -14343,36 +14307,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1635102215937112678, guid: 5b9390edd2da90649913d9af80641b06,
-        type: 3}
-      propertyPath: activeHotbar
-      value: 
-      objectReference: {fileID: 925962242}
-    - target: {fileID: 1635102215937112678, guid: 5b9390edd2da90649913d9af80641b06,
-        type: 3}
-      propertyPath: consumableHotbar
-      value: 
-      objectReference: {fileID: 164362535}
-    - target: {fileID: 1635102215937112678, guid: 5b9390edd2da90649913d9af80641b06,
-        type: 3}
-      propertyPath: activeHotbarTitle
-      value: 
-      objectReference: {fileID: 1506583175}
-    - target: {fileID: 1635102215937112678, guid: 5b9390edd2da90649913d9af80641b06,
-        type: 3}
-      propertyPath: activeHotbarSlots
-      value: 
-      objectReference: {fileID: 1572122607}
-    - target: {fileID: 1635102215937112678, guid: 5b9390edd2da90649913d9af80641b06,
-        type: 3}
-      propertyPath: consumableHotbarTitle
-      value: 
-      objectReference: {fileID: 875872779}
-    - target: {fileID: 1635102215937112678, guid: 5b9390edd2da90649913d9af80641b06,
-        type: 3}
-      propertyPath: consumableHotbarSlots
-      value: 
-      objectReference: {fileID: 1421537285}
     - target: {fileID: 1635102216084493611, guid: 5b9390edd2da90649913d9af80641b06,
         type: 3}
       propertyPath: m_LocalPosition.x
