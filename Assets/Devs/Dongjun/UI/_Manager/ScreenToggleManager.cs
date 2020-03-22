@@ -30,7 +30,7 @@ public class ScreenToggleManager : MonoBehaviour
                 title.DOAnchorPosX(2, 0.25f).SetEase(Ease.OutCubic);
 
                 slots.anchoredPosition = consumableHotbarSlots.anchoredPosition.Change(y: -20);
-                slots.DOAnchorPosY(0, 0.3f).SetEase(Ease.OutCubic);
+                slots.DOAnchorPosY(2, 0.3f).SetEase(Ease.OutCubic);
             }
 
             if (activeHotbar.gameObject.activeSelf)

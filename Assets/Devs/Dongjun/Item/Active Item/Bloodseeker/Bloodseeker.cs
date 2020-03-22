@@ -79,13 +79,13 @@ public class Bloodseeker : ActiveItem
             .SetAction(onEnd: () => 
             {
                 // Heal On End
-                PlayerStats.Inst.Heal(shieldhealth.Value);
+                PlayerStats.Inst.Heal(shieldhealth.Value * 0.6f);
                 Deactivate();
             })
             .SetActive(false);
 
         // Init Shield HP
-        shieldhealth = new FloatStat(0, min: 0);
+        shieldhealth = new FloatStat(0, min: 0, max: 20);
     }
     #endregion
 
