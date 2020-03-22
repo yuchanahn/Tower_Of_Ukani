@@ -2520,8 +2520,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd970bf848bdb94fbedddcfaf4949f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSizeX: 60
-  maxSizeY: 60
+  maxSizeX: 30
+  maxSizeY: 80
   cellSize: 1
 --- !u!1 &1354859707
 GameObject:
