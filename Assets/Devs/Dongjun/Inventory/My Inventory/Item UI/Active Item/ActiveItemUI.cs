@@ -22,12 +22,12 @@ public class ActiveItemUI : DraggableItemUI
         activeIndicator.SetActive(activeItem.IsActive);
 
         // Cooldown Indicator
-        if (!activeItem.cooldownTimer.IsEnded && !activeItem.IsActive)
+        if (!activeItem.CooldownTimer.IsEnded && !activeItem.IsActive)
         {
             cooldownIndicator.SetActive(true);
-            cooldownFill.Value = 1 - (activeItem.cooldownTimer.CurTime / activeItem.cooldownTimer.EndTime);
+            cooldownFill.Value = 1 - (activeItem.CooldownTimer.CurTime / activeItem.CooldownTimer.EndTime);
 
-            float cooldown = activeItem.cooldownTimer.EndTime - activeItem.cooldownTimer.CurTime;
+            float cooldown = activeItem.CooldownTimer.EndTime - activeItem.CooldownTimer.CurTime;
             cooldownTime.text = (cooldown >= 2) ? cooldown.ToString("0") : cooldown.ToString("0.0");
         }
         else

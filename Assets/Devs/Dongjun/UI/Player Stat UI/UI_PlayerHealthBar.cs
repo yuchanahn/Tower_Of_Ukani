@@ -13,6 +13,6 @@ public class UI_PlayerHealthBar : MonoBehaviour
 
     private void Update_HealthBar()
     {
-        healthBar.Value = (float)PlayerStats.Inst.health.Value / PlayerStats.Inst.health.Max;
+        healthBar.Value = PlayerStats.Inst.health.Value / PlayerStats.Inst.health.Max;
     }
 }

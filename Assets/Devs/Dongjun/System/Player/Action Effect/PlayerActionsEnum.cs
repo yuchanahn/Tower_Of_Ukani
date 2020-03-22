@@ -17,6 +17,11 @@
     HealthDamaged,
     HealthHealed,
 
+    // Mana Change
+    ManaChanged,
+    ManaUsed,
+    ManaGained,
+
     // Stamina Change
     StaminaChanged,
     StaminaUsed,

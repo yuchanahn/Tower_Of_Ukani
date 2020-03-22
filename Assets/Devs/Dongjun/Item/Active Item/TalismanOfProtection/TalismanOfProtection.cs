@@ -47,7 +47,7 @@ public class TalismanOfProtection : ActiveItem
     public override void InitStats()
     {
         // Init Cooldown
-        cooldownTimer.EndTime = 5f;
+        CooldownTimer.EndTime = 5f;
 
         // Init Duration
         durationTimer.EndTime = 2.5f;
@@ -83,8 +83,8 @@ public class TalismanOfProtection : ActiveItem
     protected override void OnActivate()
     {
         // Stop Cooldown Timer
-        cooldownTimer.SetActive(false);
-        cooldownTimer.Reset();
+        CooldownTimer.SetActive(false);
+        CooldownTimer.Reset();
 
         // Start Duration Timer
         durationTimer.SetActive(true);
@@ -101,8 +101,8 @@ public class TalismanOfProtection : ActiveItem
         base.Deactivate();
 
         // Start Cooldown Timer
-        cooldownTimer.SetActive(true);
-        cooldownTimer.Reset();
+        CooldownTimer.SetActive(true);
+        CooldownTimer.Reset();
 
         // Stop Duration Timer
         durationTimer.SetActive(false);

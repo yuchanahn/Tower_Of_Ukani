@@ -11,8 +11,13 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
     #region Var: Player Stats
     [HideInInspector] public FloatStat health;
+
+    [HideInInspector] public FloatStat mana;
+    [HideInInspector] public FloatStat manaRegen;
+
     [HideInInspector] public FloatStat stamina;
     [HideInInspector] public FloatStat staminaRegen;
+
     [HideInInspector] public PlayerWalkData walkData;
     #endregion
 
@@ -39,10 +44,12 @@ public class PlayerStats : SingletonBase<PlayerStats>
         // Init Health
         health = new FloatStat(100, min: 0, max: 100);
 
+        // Init Mana
+        mana = new FloatStat(50, min: 0, max: 50);
+        manaRegen = new FloatStat(0.2f, min: 0);
+
         // Init Stamina
         stamina = new FloatStat(3, min: 0, max: 3);
-
-        // Init Stamina Regen
         staminaRegen = new FloatStat(0.5f, min: 0);
 
         // Init WalkData
@@ -50,7 +57,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
     private void LateUpdate()
     {
-        // Regen Stamina
+        RegenMana();
         RegenStamina();
     }
     #endregion
@@ -60,13 +67,15 @@ public class PlayerStats : SingletonBase<PlayerStats>
     {
         // Reset Health
         health.Reset();
+        mana.Reset();
+        manaRegen.Reset();
         stamina.Reset();
         staminaRegen.Reset();
         walkData.walkSpeed.Reset();
     }
     #endregion
 
-    #region Method: Change Health
+    #region Method: Health
     public void Damage(float amount)
     {
         // Check Ignore Damage
@@ -153,7 +162,39 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
     #endregion
 
-    #region Method: Change Stamina
+    #region Method: Mana
+    public void GainMana(float amount)
+    {
+        if (amount <= 0)
+            return;
+
+        PlayerActionEventManager.Trigger(PlayerActions.ManaGained);
+        mana.ModFlat += amount;
+        PlayerActionEventManager.Trigger(PlayerActions.ManaChanged);
+    }
+    public bool UseMana(float amount)
+    {
+        if (mana.Value < amount)
+            return false;
+
+        PlayerActionEventManager.Trigger(PlayerActions.ManaUsed);
+        mana.ModFlat -= amount;
+        PlayerActionEventManager.Trigger(PlayerActions.ManaChanged);
+        return true;
+    }
+    public void RegenMana()
+    {
+        if (mana.Value >= mana.Max)
+        {
+            mana.ModFlat = 0;
+            return;
+        }
+
+        GainMana(manaRegen.Value * Time.deltaTime);
+    }
+    #endregion
+
+    #region Method: Stamina
     public void GainStamina(float amount)
     {
         if (amount <= 0)
@@ -175,9 +216,9 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
     private void RegenStamina()
     {
-        if (stamina.ModFlat >= stamina.Max)
+        if (stamina.Value >= stamina.Max)
         {
-            stamina.ModFlat = stamina.Max;
+            stamina.ModFlat = 0;
             return;
         }
 

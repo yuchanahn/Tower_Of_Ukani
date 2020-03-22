@@ -3,11 +3,14 @@
 public abstract class ActiveItem : UpgradableItem
 {
     #region Prop: 
-    public TimerData cooldownTimer
-    { get; private set; } = new TimerData();
     public bool IsActive
     { get; protected set; } = false;
-    public bool CanActivate => cooldownTimer.IsEnded && !IsActive;
+    public bool CanActivate => CooldownTimer.IsEnded && !IsActive;
+
+    public TimerData CooldownTimer
+    { get; private set; } = new TimerData();
+    public FloatStat ManaUsage
+    { get; protected set; } = new FloatStat(0, min: 0);
     #endregion
 
     #region Method Override: Add / Drop
@@ -16,18 +19,18 @@ public abstract class ActiveItem : UpgradableItem
         base.OnAdd(inventory);
 
         // Init Cooldown Timer
-        cooldownTimer.SetTick(gameObject);
+        CooldownTimer.SetTick(gameObject);
 
         // Reset Cooldown When Added to Hotbar
         if (inventory is PlayerActiveHotbar)
         {
-            cooldownTimer.SetActive(true);
-            cooldownTimer.Reset();
+            CooldownTimer.SetActive(true);
+            CooldownTimer.Reset();
         }
         // Stop Cooldown When Added to Inventory
         else
         {
-            cooldownTimer.SetActive(false);
+            CooldownTimer.SetActive(false);
             Deactivate();
         }
     }
@@ -37,15 +40,16 @@ public abstract class ActiveItem : UpgradableItem
         Deactivate();
 
         // Stop Cooldown Timer
-        cooldownTimer.SetActive(false);
-        cooldownTimer.Reset();
+        CooldownTimer.SetActive(false);
+        CooldownTimer.Reset();
     }
     #endregion
 
     #region Method: Active Item
     public void Activate()
     {
-        if (!CanActivate)
+        if (!CanActivate
+         || !PlayerStats.Inst.UseMana(ManaUsage.Value))
             return;
 
         IsActive = true;

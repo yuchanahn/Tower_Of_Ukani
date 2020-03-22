@@ -12,7 +12,7 @@ public class Bloodseeker : ActiveItem
     private FloatStat shieldhealth;
     #endregion
 
-    #region Var: Effect
+    #region Var: Visual Effect
     private GameObject shieldEffect;
     #endregion
 
@@ -67,14 +67,18 @@ public class Bloodseeker : ActiveItem
     public override void InitStats()
     {
         // Init Cooldown
-        cooldownTimer.EndTime = 20f;
+        CooldownTimer.EndTime = 10f;
+
+        // Init Mana Usage
+        ManaUsage = new FloatStat(20, min: 0);
 
         // Init Duration
-        durationTimer.EndTime = 5f;
+        durationTimer.EndTime = 10f;
         durationTimer
             .SetTick(gameObject)
             .SetAction(onEnd: () => 
             {
+                // Heal On End
                 PlayerStats.Inst.Heal(shieldhealth.Value);
                 Deactivate();
             })
@@ -107,8 +111,8 @@ public class Bloodseeker : ActiveItem
     protected override void OnActivate()
     {
         // Stop Cooldown Timer
-        cooldownTimer.SetActive(false);
-        cooldownTimer.Reset();
+        CooldownTimer.SetActive(false);
+        CooldownTimer.Reset();
 
         // Start Duration Timer
         durationTimer.SetActive(true);
@@ -122,8 +126,8 @@ public class Bloodseeker : ActiveItem
         base.Deactivate();
 
         // Start Cooldown Timer
-        cooldownTimer.SetActive(true);
-        cooldownTimer.Reset();
+        CooldownTimer.SetActive(true);
+        CooldownTimer.Reset();
 
         // Stop Duration Timer
         durationTimer.SetActive(false);
