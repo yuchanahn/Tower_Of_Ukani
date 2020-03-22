@@ -14535,10 +14535,20 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3521938294495734095, guid: 5b9390edd2da90649913d9af80641b06,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3521938294495734095, guid: 5b9390edd2da90649913d9af80641b06,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 45
+      objectReference: {fileID: 0}
     - target: {fileID: 3688570297365425588, guid: 5b9390edd2da90649913d9af80641b06,
         type: 3}
       propertyPath: m_FontData.m_MinSize
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4508558994208876006, guid: 5b9390edd2da90649913d9af80641b06,
         type: 3}
