@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class Bloodseeker : ActiveItem
@@ -9,7 +10,7 @@ public class Bloodseeker : ActiveItem
 
     #region Var: Stats
     private TimerData durationTimer = new TimerData();
-    private FloatStat shieldhealth;
+    private FloatStat shieldHealth;
     #endregion
 
     #region Var: Visual Effect
@@ -19,6 +20,8 @@ public class Bloodseeker : ActiveItem
     #region Var: Item Effect
     private PlayerActionEvent onKill;
     List<GameObject> coprsePrefabs = new List<GameObject>();
+    int toAbsorb = 0;
+    Coroutine checkAllCorpseAbsorbed;
 
     private PlayerActionEvent onDamageReceived;
     #endregion
@@ -31,14 +34,22 @@ public class Bloodseeker : ActiveItem
         // Player Action Event
         onKill = this.NewPlayerActionEvent(() =>
         {
-            // Heal
-            PlayerStats.Inst.KilledMob.GetComponent<CorpseSpawner>()?.SetCorpseMode(eCorpseSpawnMode.Absorb, coprpsePrefab =>
+            var corpseSpawner = PlayerStats.Inst.KilledMob.GetComponent<CorpseSpawner>();
+            if (corpseSpawner == null)
+                return;
+
+            // Add Corpse Count
+            toAbsorb += corpseSpawner.CorpseCount;
+
+            // On Corpse Absorb
+            corpseSpawner.SetCorpseMode(eCorpseSpawnMode.Absorb, coprpsePrefab =>
             {
                 if (!IsActive)
                     return;
 
                 coprsePrefabs.Add(coprpsePrefab);
-                shieldhealth.ModFlat += 5;
+                toAbsorb -= 1;
+                shieldHealth.ModFlat += 5;
 
                 // Show Effect
                 shieldEffect.SetActive(true);
@@ -48,18 +59,31 @@ public class Bloodseeker : ActiveItem
         onDamageReceived = this.NewPlayerActionEvent(() =>
         {
             // Calculate Overkill Damage
-            float overkillDmg = Mathf.Max(PlayerStats.Inst.DamageReceived - shieldhealth.Value, 0);
+            float overkillDmg = Mathf.Max(PlayerStats.Inst.DamageReceived - shieldHealth.Value, 0);
 
             // Damage Shield
-            shieldhealth.ModFlat -= PlayerStats.Inst.DamageReceived;
+            shieldHealth.ModFlat -= PlayerStats.Inst.DamageReceived;
 
             // Damage Player
             PlayerStats.Inst.DamageReceived = overkillDmg;
 
             // Hide Effect
-            if (shieldhealth.Value == 0)
+            if (shieldHealth.Value == 0)
                 shieldEffect.SetActive(false);
         });
+    }
+    private IEnumerator CheckAllCorpseAbsorbed()
+    {
+        yield return new WaitForEndOfFrame();
+
+        if (IsActive && durationTimer.IsEnded && toAbsorb == 0)
+        {
+            PlayerStats.Inst.Heal(shieldHealth.Value * 0.6f);
+            Deactivate();
+
+            checkAllCorpseAbsorbed = null;
+            yield return null;
+        }
     }
     #endregion
 
@@ -78,14 +102,12 @@ public class Bloodseeker : ActiveItem
             .SetTick(gameObject)
             .SetAction(onEnd: () => 
             {
-                // Heal On End
-                PlayerStats.Inst.Heal(shieldhealth.Value * 0.6f);
-                Deactivate();
+                checkAllCorpseAbsorbed = StartCoroutine(CheckAllCorpseAbsorbed());
             })
             .SetActive(false);
 
         // Init Shield HP
-        shieldhealth = new FloatStat(0, min: 0, max: 20);
+        shieldHealth = new FloatStat(0, min: 0, max: 20);
     }
     #endregion
 
@@ -134,9 +156,12 @@ public class Bloodseeker : ActiveItem
         durationTimer.Reset();
 
         // Reset Shield HP
-        shieldhealth.Reset();
+        shieldHealth.Reset();
 
-        // Clear Coprse Prefabs
+        if (checkAllCorpseAbsorbed != null)
+            StopCoroutine(checkAllCorpseAbsorbed);
+
+        toAbsorb = 0;
         coprsePrefabs.Clear();
 
         // Hide Effect

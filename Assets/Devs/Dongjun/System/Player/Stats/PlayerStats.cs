@@ -46,7 +46,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
         // Init Mana
         mana = new FloatStat(50, min: 0, max: 50);
-        manaRegen = new FloatStat(0.2f, min: 0);
+        //manaRegen = new FloatStat(0.2f, min: 0);
+        manaRegen = new FloatStat(5f, min: 0);
 
         // Init Stamina
         stamina = new FloatStat(3, min: 0, max: 3);
