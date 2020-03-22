@@ -16,6 +16,9 @@ public class CorpseSpawner : MonoBehaviour
 
     bool mCorpseModeSet = false;
 
+    int? corpse_count = null;
+    public int? CorpseCount => corpse_count;
+
     public void SetCorpseMode(eCorpseSpawnMode mode, System.Action<GameObject> modeEvent)
     {
         if(!mCorpseModeSet)
@@ -29,6 +32,6 @@ public class CorpseSpawner : MonoBehaviour
 
     public void Spawn()
     {
-        CorpseMgr.CreateCorpseOrNull(transform, mData);
+        corpse_count = CorpseMgr.CreateCorpseOrNull(transform, mData).Length;
     }
 }
