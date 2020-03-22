@@ -6,7 +6,7 @@ public class CorpseMgr : MonoBehaviour
 {
     public static GameObject[] CreateCorpseOrNull(Transform __mobPos, CorpseData corpseData)
     {
-        if (corpseData.Count == 0) return null;
+        if (corpseData.SpawnCount == 0) return null;
         var corpse = corpseData.Corpse;
 
         Vector2 mobPos = __mobPos.position;
@@ -15,7 +15,7 @@ public class CorpseMgr : MonoBehaviour
         size.x *= corpse.transform.localScale.x;
         size.y *= corpse.transform.localScale.y;
 
-        int MobCount = corpseData.Count;
+        int MobCount = corpseData.SpawnCount;
 
         GameObject[] gObj = new GameObject[MobCount];
 
