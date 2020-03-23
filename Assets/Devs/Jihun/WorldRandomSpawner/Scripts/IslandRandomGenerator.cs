@@ -174,7 +174,7 @@ public class IslandRandomGenerator : MonoBehaviour
         int i;
         for (i = 0; i < land.arrHeight; i++)
         {
-            Debug.Log($"x : {x}, left.x : {left.x}, i : {i}");
+            //Debug.Log($"x : {x}, left.x : {left.x}, i : {i}");
             if (land.arr[i, left.x] != (int)Tile.AIR)
             {
                 left.y = i-1;

@@ -16,7 +16,8 @@ public class Chest : MonoBehaviour
 
     List<ChestItemSlot> slots = new List<ChestItemSlot>();
 
-    public ChestItem selectedItem = null;
+    
+    [HideInInspector] public ChestItem selectedItem = null;
 
     private void Awake()
     {
@@ -47,22 +48,6 @@ public class Chest : MonoBehaviour
         slot.transform.localScale = Vector3.one;
 
         slot.SetItem(new ChestItem(ItemDB.Inst.Items[name].Info, count), this);
-    }
-
-    private void Update()
-    {
-        bool isCloseToPlayer = (ShopManager.Inst.shopRange > Vector2.Distance(transform.position, GM.PlayerPos));
-
-        //상자 오픈
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            //거리 확인
-            if (!isCloseToPlayer) return;
-            //열어봤었는지 확인
-            if (isOpened) return;
-            ToggleChest();
-        }
-        if (!isCloseToPlayer) CloseChest();
     }
 
     public void SelectItem(ChestItemSlot select)
@@ -97,7 +82,7 @@ public class Chest : MonoBehaviour
 
         ItemDB.Inst.SpawnDroppedItem(itemSpawnPoint.position, selectedItem.info.ItemName, selectedItem.count);
         isOpened = true;
-        CloseChest();
+        ChestManager.Inst.CloseChest();
     }
 }
 
