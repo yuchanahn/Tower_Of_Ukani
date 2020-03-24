@@ -19,11 +19,11 @@ public class Bloodseeker : ActiveItem
 
     #region Var: Item Effect
     private PlayerActionEvent onKill;
-    List<GameObject> coprsePrefabs = new List<GameObject>();
-    int toAbsorb = 0;
-    Coroutine checkAllCorpseAbsorbed;
-
     private PlayerActionEvent onDamageReceived;
+
+    int toAbsorb = 0;
+    List<GameObject> coprsePrefabs = new List<GameObject>();
+    Coroutine checkAllCorpseAbsorbed;
     #endregion
 
     #region Method: Unity
@@ -74,15 +74,18 @@ public class Bloodseeker : ActiveItem
     }
     private IEnumerator CheckAllCorpseAbsorbed()
     {
-        yield return new WaitForEndOfFrame();
-
-        if (IsActive && durationTimer.IsEnded && toAbsorb == 0)
+        while(true)
         {
-            PlayerStats.Inst.Heal(shieldHealth.Value * 0.6f);
-            Deactivate();
+            yield return new WaitForEndOfFrame();
 
-            checkAllCorpseAbsorbed = null;
-            yield return null;
+            if (IsActive && durationTimer.IsEnded && toAbsorb == 0)
+            {
+                PlayerStats.Inst.Heal(shieldHealth.Value * 0.6f);
+                Deactivate();
+
+                checkAllCorpseAbsorbed = null;
+                yield return null;
+            }
         }
     }
     #endregion
@@ -100,10 +103,12 @@ public class Bloodseeker : ActiveItem
         durationTimer.EndTime = 10f;
         durationTimer
             .SetTick(gameObject)
-            .SetAction(onEnd: () => 
-            {
-                checkAllCorpseAbsorbed = StartCoroutine(CheckAllCorpseAbsorbed());
-            })
+            .SetAction(
+                onEnd: () => 
+                {
+                    checkAllCorpseAbsorbed = StartCoroutine(CheckAllCorpseAbsorbed());
+                    PlayerActionEventManager.RemoveEvent(PlayerActions.Kill, onKill);
+                })
             .SetActive(false);
 
         // Init Shield HP
@@ -158,11 +163,11 @@ public class Bloodseeker : ActiveItem
         // Reset Shield HP
         shieldHealth.Reset();
 
-        if (checkAllCorpseAbsorbed != null)
-            StopCoroutine(checkAllCorpseAbsorbed);
-
         toAbsorb = 0;
         coprsePrefabs.Clear();
+
+        if (checkAllCorpseAbsorbed != null)
+            StopCoroutine(checkAllCorpseAbsorbed);
 
         // Hide Effect
         shieldEffect.SetActive(false);
