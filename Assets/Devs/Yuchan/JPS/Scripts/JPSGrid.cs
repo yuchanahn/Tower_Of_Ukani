@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using System.Collections;
 using System.Linq;
+using System.Diagnostics;
 
 public enum eDirections
 {
@@ -342,6 +343,7 @@ public class Grid
 		// TODO :
 		// 바뀐 범위만 새로 구 할 수 있도록 해봅시다.....
 
+
 		// foreach obstacle
 		for ( int i = 0 ; i < gridNodes.Length ; ++i )
 		{
@@ -436,6 +438,8 @@ public class Grid
 
 			}
 		}
+
+
 	}
 
 	public void buildStraightJumpPoints()

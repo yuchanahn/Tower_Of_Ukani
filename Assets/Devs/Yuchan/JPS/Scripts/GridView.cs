@@ -2,6 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using Dongjun.Helper;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
+using System.Threading;
+using System.Collections.Concurrent;
+using System;
 
 //[ExecuteInEditMode]
 public class GridView : MonoBehaviour
@@ -32,13 +37,17 @@ public class GridView : MonoBehaviour
 
     private IEnumerator findPath = null;
 
-    public static Dictionary<string, GridView[]> Inst = new Dictionary <string,GridView[]>();
+    public static Dictionary<string, GridView[]> Inst = new Dictionary<string, GridView[]>();
     public int Target_Object_Size;
+
+
 
 
     private void Awake()
     {
-        if(!Inst.ContainsKey(MapName))
+
+
+        if (!Inst.ContainsKey(MapName))
         {
             Inst[MapName] = new GridView[10];
         }
@@ -99,11 +108,11 @@ public class GridView : MonoBehaviour
 
     public Node SetGrid(Vector2 pos, bool moveable)
     {
-        if ( (pos.x < GM.CurMapWorldPoint.x
+        if ((pos.x < GM.CurMapWorldPoint.x
            && pos.x > GM.CurMapWorldPoint.x - GM.CurMapSize.width)
-           &&(pos.y <  GM.CurMapWorldPoint.y 
+           && (pos.y < GM.CurMapWorldPoint.y
            && pos.y > GM.CurMapWorldPoint.y - GM.CurMapSize.height))
-        { 
+        {
             var node = GetNodeAtWorldPostiton(pos);
             if (node is null) return null;
             node.isObstacle = moveable;
@@ -221,12 +230,16 @@ public class GridView : MonoBehaviour
 
     bool IsPathFind = false;
 
+
     public void GetJPS_Path()
     {
         if (IsPathFind) return;
-        grid.buildPrimaryJumpPoints();
-        grid.buildStraightJumpPoints();
-        grid.buildDiagonalJumpPoints();
+
+        YCThreadPool.Works.Enqueue(()=> {
+            grid.buildPrimaryJumpPoints();
+            grid.buildStraightJumpPoints();
+            grid.buildDiagonalJumpPoints();
+        });
         IsPathFind = true;
     }
 
@@ -241,7 +254,7 @@ public class GridView : MonoBehaviour
     public void CreateImage()
     {
 
-        foreach(var i in grid.gridNodes)
+        foreach (var i in grid.gridNodes)
         {
             if (i.isObstacle)
             {
@@ -250,113 +263,113 @@ public class GridView : MonoBehaviour
             else
             {
                 Instantiate(blockPrefab2, getNodePosAsWorldPos(i.pos), Quaternion.identity).transform.SetParent(transform);
-			}
+            }
         }
     }
 
-	public void CalcPrimaryJumpPoints()
-	{
-		grid.buildPrimaryJumpPoints();    // Build primary Jump Points
-		JPSState.state = eJPSState.ST_PRIMARY_JPS_BUILDING; // transition state to Primary Jump Point Building State
+    public void CalcPrimaryJumpPoints()
+    {
+        grid.buildPrimaryJumpPoints();    // Build primary Jump Points
+        JPSState.state = eJPSState.ST_PRIMARY_JPS_BUILDING; // transition state to Primary Jump Point Building State
 
-		// Tell each child object to re-evaulte their rendering info
-		//foreach ( GameObject child in childObjects )
-		{
-			//BlockScript block_component = child.GetComponent<BlockScript>();
-			//block_component.setupDisplay();	
-		}
-	}
+        // Tell each child object to re-evaulte their rendering info
+        //foreach ( GameObject child in childObjects )
+        {
+            //BlockScript block_component = child.GetComponent<BlockScript>();
+            //block_component.setupDisplay();	
+        }
+    }
 
-	public void CalcStraightJPDistances()
-	{
-		grid.buildStraightJumpPoints();    // Build primary Jump Points
-		JPSState.state = eJPSState.ST_STRAIGHT_JPS_BUILDING; // transition state to Primary Jump Point Building State
+    public void CalcStraightJPDistances()
+    {
+        grid.buildStraightJumpPoints();    // Build primary Jump Points
+        JPSState.state = eJPSState.ST_STRAIGHT_JPS_BUILDING; // transition state to Primary Jump Point Building State
 
-		// Tell each child object to re-evaulte their rendering info
-		//foreach ( GameObject child in childObjects )
-		{
-			//BlockScript block_component = child.GetComponent<BlockScript>();
-			//block_component.setupDisplay();	
-		}
-	}
+        // Tell each child object to re-evaulte their rendering info
+        //foreach ( GameObject child in childObjects )
+        {
+            //BlockScript block_component = child.GetComponent<BlockScript>();
+            //block_component.setupDisplay();	
+        }
+    }
 
-	public void CalcDiagonalJPDistances()
-	{
-		grid.buildDiagonalJumpPoints();    // Build primary Jump Points
-		JPSState.state = eJPSState.ST_DIAGONAL_JPS_BUILDING; // transition state to Primary Jump Point Building State
+    public void CalcDiagonalJPDistances()
+    {
+        grid.buildDiagonalJumpPoints();    // Build primary Jump Points
+        JPSState.state = eJPSState.ST_DIAGONAL_JPS_BUILDING; // transition state to Primary Jump Point Building State
 
-		// Tell each child object to re-evaulte their rendering info
-		//foreach ( GameObject child in childObjects )
-		{
-			//BlockScript block_component = child.GetComponent<BlockScript>();
-			//block_component.setupDisplay();	
-		}
-	}
+        // Tell each child object to re-evaulte their rendering info
+        //foreach ( GameObject child in childObjects )
+        {
+            //BlockScript block_component = child.GetComponent<BlockScript>();
+            //block_component.setupDisplay();	
+        }
+    }
 
-	public void CalcWallDistances()
-	{
-		//grid.buildDiagonalJumpPoints();    // Build primary Jump Points
-		JPSState.state = eJPSState.ST_WALL_DISTANCES_BUILT; // transition state to Primary Jump Point Building State
+    public void CalcWallDistances()
+    {
+        //grid.buildDiagonalJumpPoints();    // Build primary Jump Points
+        JPSState.state = eJPSState.ST_WALL_DISTANCES_BUILT; // transition state to Primary Jump Point Building State
 
-		// Tell each child object to re-evaulte their rendering info
-		///foreach ( GameObject child in childObjects )
-		{
-			//BlockScript block_component = child.GetComponent<BlockScript>();
-			//block_component.setupDisplay();	
-		}
-	}
+        // Tell each child object to re-evaulte their rendering info
+        ///foreach ( GameObject child in childObjects )
+        {
+            //BlockScript block_component = child.GetComponent<BlockScript>();
+            //block_component.setupDisplay();	
+        }
+    }
 
-	// This button just enters the path search mode where the user can select the start and end points
-	public void PlaceSearchEndPoints()
-	{
-		JPSState.state = eJPSState.ST_PLACE_SEARCH_ENDPOINTS; // transition state to Primary Jump Point Building State
+    // This button just enters the path search mode where the user can select the start and end points
+    public void PlaceSearchEndPoints()
+    {
+        JPSState.state = eJPSState.ST_PLACE_SEARCH_ENDPOINTS; // transition state to Primary Jump Point Building State
 
-		// Disable existing paths if we are restarting
-		foreach ( var block_script in selectedPathPoints )
-		{
-			block_script.isPathEndPoint = false;
-		}
+        // Disable existing paths if we are restarting
+        foreach (var block_script in selectedPathPoints)
+        {
+            block_script.isPathEndPoint = false;
+        }
 
-		selectedPathPoints.Clear();
+        selectedPathPoints.Clear();
 
-		// Disable path view
-		_pathRenderer.disablePath();
-		findPath = null;
+        // Disable path view
+        _pathRenderer.disablePath();
+        findPath = null;
 
-		// Tell each child object to re-evaulte their rendering info
-		//foreach ( GameObject child in childObjects )
-		{
-			//BlockScript block_component = child.GetComponent<BlockScript>();
-			//block_component.setupDisplay();	
-		}
-	}
+        // Tell each child object to re-evaulte their rendering info
+        //foreach ( GameObject child in childObjects )
+        {
+            //BlockScript block_component = child.GetComponent<BlockScript>();
+            //block_component.setupDisplay();	
+        }
+    }
 
-	public void BeginPathFind()
-	{
-		// Verify at least TWO END POINTS ARE SET!
-		if ( this.selectedPathPoints.Count != 2 ) return;
+    public void BeginPathFind()
+    {
+        // Verify at least TWO END POINTS ARE SET!
+        if (this.selectedPathPoints.Count != 2) return;
 
-		JPSState.state = eJPSState.ST_FIND_PATH; // transition state to Primary Jump Point Building State
+        JPSState.state = eJPSState.ST_FIND_PATH; // transition state to Primary Jump Point Building State
 
-		// Tell each child object to re-evaulte their rendering info
-		//foreach ( GameObject child in childObjects )
-		{
-			//BlockScript block_component = child.GetComponent<BlockScript>();
-			//block_component.setupDisplay();	
-		}
+        // Tell each child object to re-evaulte their rendering info
+        //foreach ( GameObject child in childObjects )
+        {
+            //BlockScript block_component = child.GetComponent<BlockScript>();
+            //block_component.setupDisplay();	
+        }
 
-		BlockScript[] points = this.selectedPathPoints.ToArray();
+        BlockScript[] points = this.selectedPathPoints.ToArray();
 
-		Point start = points[ 0 ].nodeReference.pos;
-		Point stop  = points[ 1 ].nodeReference.pos;
+        Point start = points[0].nodeReference.pos;
+        Point stop = points[1].nodeReference.pos;
 
-		List<Point> path = grid.getPath( start, stop );
+        List<Point> path = grid.getPath(start, stop);
 
-		if ( path != null && path.Count != 0 )
-		{
-			_pathRenderer.drawPath( path );    // Draw Path on Screen
-		}
-	}
+        if (path != null && path.Count != 0)
+        {
+            _pathRenderer.drawPath(path);    // Draw Path on Screen
+        }
+    }
 
     public void StepThroughPath()
     {
@@ -413,7 +426,7 @@ public class GridView : MonoBehaviour
         findPath = null;
         JPSState.state = eJPSState.ST_PATH_FIND_COMPLETE;
     }
-    
 
-#endregion
+
+    #endregion
 }
