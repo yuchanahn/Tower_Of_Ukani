@@ -32,6 +32,7 @@ public class ItemDB : SingletonBase<ItemDB>
     #endregion
 
     #region Method: Editor
+#if UNITY_EDITOR
     public void LoadAllItemPrefabs()
     {
         string[] guids = AssetDatabase.FindAssets("l:Item");
@@ -44,6 +45,7 @@ public class ItemDB : SingletonBase<ItemDB>
 
         PrefabUtility.RecordPrefabInstancePropertyModifications(this);
     }
+#endif
     #endregion
 
     #region Method: Spawn Item

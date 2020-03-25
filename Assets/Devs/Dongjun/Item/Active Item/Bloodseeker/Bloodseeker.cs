@@ -10,6 +10,8 @@ public class Bloodseeker : ActiveItem
 
     #region Var: Stats
     private TimerData durationTimer = new TimerData();
+
+    private int shieldIndex = -1;
     private FloatStat shieldHealth;
     #endregion
 
@@ -19,7 +21,7 @@ public class Bloodseeker : ActiveItem
 
     #region Var: Item Effect
     private PlayerActionEvent onKill;
-    private PlayerActionEvent onDamageReceived;
+    private PlayerActionEvent onShieldChanged;
 
     int toAbsorb = 0;
     List<GameObject> coprsePrefabs = new List<GameObject>();
@@ -49,27 +51,20 @@ public class Bloodseeker : ActiveItem
 
                 coprsePrefabs.Add(coprpsePrefab);
                 toAbsorb -= 1;
-                shieldHealth.ModFlat += 5;
+                PlayerStats.Inst.GetShieldAt(shieldIndex).shieldHealth.ModFlat += 5;
 
                 // Show Effect
                 shieldEffect.SetActive(true);
             });
         });
 
-        onDamageReceived = this.NewPlayerActionEvent(() =>
+        onShieldChanged = this.NewPlayerActionEvent(() =>
         {
-            // Calculate Overkill Damage
-            float overkillDmg = Mathf.Max(PlayerStats.Inst.DamageReceived - shieldHealth.Value, 0);
-
-            // Damage Shield
-            shieldHealth.ModFlat -= PlayerStats.Inst.DamageReceived;
-
-            // Damage Player
-            PlayerStats.Inst.DamageReceived = overkillDmg;
-
-            // Hide Effect
-            if (shieldHealth.Value == 0)
+            // Check Shield Health
+            if (PlayerStats.Inst.GetShieldAt(shieldIndex).shieldHealth.Value == 0)
+            {
                 shieldEffect.SetActive(false);
+            }
         });
     }
     private IEnumerator CheckAllCorpseAbsorbed()
@@ -145,8 +140,11 @@ public class Bloodseeker : ActiveItem
         durationTimer.SetActive(true);
         durationTimer.Reset();
 
+        // Get Shield Index
+        shieldIndex = PlayerStats.Inst.AddShield(shieldHealth);
+
         PlayerActionEventManager.AddEvent(PlayerActions.Kill, onKill);
-        PlayerActionEventManager.AddEvent(PlayerActions.HealthDamaged, onDamageReceived);
+        PlayerActionEventManager.AddEvent(PlayerActions.ShieldChanged, onShieldChanged);
     }
     public override void Deactivate()
     {
@@ -160,8 +158,10 @@ public class Bloodseeker : ActiveItem
         durationTimer.SetActive(false);
         durationTimer.Reset();
 
-        // Reset Shield HP
-        shieldHealth.Reset();
+        // Remove Shield
+        if (shieldIndex != -1)
+            PlayerStats.Inst.RemoveShield(shieldIndex);
+        shieldIndex = -1;
 
         toAbsorb = 0;
         coprsePrefabs.Clear();
@@ -173,7 +173,7 @@ public class Bloodseeker : ActiveItem
         shieldEffect.SetActive(false);
 
         PlayerActionEventManager.RemoveEvent(PlayerActions.Kill, onKill);
-        PlayerActionEventManager.RemoveEvent(PlayerActions.HealthDamaged, onDamageReceived);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.ShieldChanged, onShieldChanged);
     }
     #endregion
 }

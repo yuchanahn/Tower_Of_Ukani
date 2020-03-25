@@ -8,15 +8,17 @@ public class TalismanOfProtection : ActiveItem
 
     #region Var: Stats
     private TimerData durationTimer = new TimerData();
+
+    private int shieldIndex = -1;
     private FloatStat shieldhealth;
     #endregion
 
-    #region Var: Effect
+    #region Var: Visual Effect
     private GameObject shieldEffect;
     #endregion
 
     #region Var: Item Effect
-    private PlayerActionEvent onDamageReceived;
+    private PlayerActionEvent onShieldChanged;
     #endregion
 
     #region Method: Unity
@@ -25,20 +27,13 @@ public class TalismanOfProtection : ActiveItem
         base.Awake();
 
         // Player Action Event
-        onDamageReceived = this.NewPlayerActionEvent(() =>
+        onShieldChanged = this.NewPlayerActionEvent(() =>
         {
-            // Calculate Overkill Damage
-            float overkillDmg = Mathf.Max(PlayerStats.Inst.DamageReceived - shieldhealth.Value, 0);
-
-            // Damage Shield
-            shieldhealth.ModFlat -= PlayerStats.Inst.DamageReceived;
-
-            // Damage Player
-            PlayerStats.Inst.DamageReceived = overkillDmg;
-
-            // Deactivate Shield
-            if (shieldhealth.Value == 0)
+            // Check Shield Health
+            if (PlayerStats.Inst.GetShieldAt(shieldIndex).shieldHealth.Value == 0)
+            {
                 Deactivate();
+            }
         });
     }
     #endregion
@@ -90,8 +85,11 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.SetActive(true);
         durationTimer.Reset();
 
+        // Get Shield Index
+        shieldIndex = PlayerStats.Inst.AddShield(shieldhealth);
+
         // Enable Shield Item Effect
-        PlayerActionEventManager.AddEvent(PlayerActions.HealthDamaged, onDamageReceived);
+        PlayerActionEventManager.AddEvent(PlayerActions.ShieldChanged, onShieldChanged);
 
         // Show Effect
         shieldEffect.SetActive(true);
@@ -108,11 +106,13 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.SetActive(false);
         durationTimer.Reset();
 
-        // Reset Shield Health
-        shieldhealth.ModFlat = 0;
+        // Remove Shield
+        if (shieldIndex != -1)
+            PlayerStats.Inst.RemoveShield(shieldIndex);
+        shieldIndex = -1;
 
         // Disable Shield Item Effect
-        PlayerActionEventManager.RemoveEvent(PlayerActions.HealthDamaged, onDamageReceived);
+        PlayerActionEventManager.RemoveEvent(PlayerActions.ShieldChanged, onShieldChanged);
 
         // Hide Effect
         shieldEffect.SetActive(false);

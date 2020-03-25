@@ -12,10 +12,18 @@
     Stunned,
     StunEnd,
 
+    // Damaged
+    Damaged,
+
     // Health Change
     HealthChanged,
     HealthDamaged,
     HealthHealed,
+
+    // Shield Change
+    ShieldChanged,
+    ShieldDamaged,
+    ShieldGained,
 
     // Mana Change
     ManaChanged,

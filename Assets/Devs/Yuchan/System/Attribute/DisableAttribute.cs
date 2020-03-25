@@ -2,6 +2,8 @@
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
+
 public class DisableAttribute : PropertyAttribute
 {
 
@@ -34,3 +36,5 @@ public class Test
     [Disable] public Material c;
     [Disable] public List<int> d = new List<int>();
 }
+
+#endif
