@@ -229,12 +229,20 @@ public class GridView : MonoBehaviour
     #region Button Callbacks
 
     bool IsPathFind = false;
-
+    static bool once_f = true;
 
     public void GetJPS_Path()
     {
         if (IsPathFind) return;
-
+        if (once_f)
+        {
+            grid.buildPrimaryJumpPoints();
+            grid.buildStraightJumpPoints();
+            grid.buildDiagonalJumpPoints();
+            once_f = false;
+            IsPathFind = true;
+            return;
+        }
         YCThreadPool.Works.Enqueue(()=> {
             grid.buildPrimaryJumpPoints();
             grid.buildStraightJumpPoints();

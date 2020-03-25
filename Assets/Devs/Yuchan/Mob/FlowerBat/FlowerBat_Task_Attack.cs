@@ -15,7 +15,7 @@ public class FlowerBat_Task_Attack : Mob_Task_ProjectileAttack
 
     protected override void OnAttackAble()
     {
-        mMob.SetAni(eMobAniST.Attack);
+        
         mMob.mHitImmunity = true;
         IsAttacking = true;
     }
@@ -29,10 +29,7 @@ public class FlowerBat_Task_Attack : Mob_Task_ProjectileAttack
     public override bool Tick()
     {
         Target = GM.Player.transform;
-        if (!IsAttacking)
-        {
-            mMob.SetAni(eMobAniST.Fly);
-        }
+        mMob.SetAni(IsAttacking ? eMobAniST.Attack : eMobAniST.Fly);
         if (!base.Tick())
         {
             return false;

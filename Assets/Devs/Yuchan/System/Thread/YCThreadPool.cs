@@ -24,7 +24,7 @@ public class YCThreadPool : MonoBehaviour
             t1 = new Thread(() =>
             {
                 Action act;
-                Debug.Log("Thread_Start");
+                //Debug.Log("Thread_Start");
                 while (!t1_stop)
                 {
                     while (!Works.IsEmpty)
@@ -33,7 +33,7 @@ public class YCThreadPool : MonoBehaviour
                         act.Invoke();
                     }
                 }
-                Debug.Log("Thread_End");
+                //Debug.Log("Thread_End");
             });
             t1.Start();
         }
