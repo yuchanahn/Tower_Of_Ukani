@@ -87,22 +87,25 @@ public class Projectile : PoolingObj
 
         // On Maxt Distance
         if (projectileData.travelDist.Value >= projectileData.travelDist.Max)
+        {
             OnMaxDist();
+            ObjPoolingManager.Sleep(this);
+        }
 
         // Rotate Towards Moving Dir
         if (rotateToMovingDir) transform.right = velocity.normalized;
     }
     protected virtual void OnMaxDist()
     {
-        ObjPoolingManager.Sleep(this);
+
     }
     #endregion
 
     #region Method: Detect Object
     protected bool IsVaildTag(Component target)
     {
-        for (int j = 0; j < ignoreTags.Length; j++)
-            if (target.CompareTag(ignoreTags[j]))
+        foreach (var tag in ignoreTags)
+            if (target.CompareTag(tag))
                 return false;
 
         return true;
@@ -120,17 +123,16 @@ public class Projectile : PoolingObj
         List<RaycastHit2D> creatureHits = new List<RaycastHit2D>();
         creatureDetectRB.Cast(velocity.normalized, creatureHits, dist);
 
-        // Get Closest Creature
-        creatureHits = creatureHits.OrderByDescending(o => Vector2.SqrMagnitude((Vector2)creatureDetectRB.transform.position - o.point)).ToList();
-        for (int i = creatureHits.Count - 1; i >= 0; i--)
+        // Run Logic from Closest Creature
+        foreach (var hit in creatureHits.OrderByDescending(o => Vector2.SqrMagnitude((Vector2)creatureDetectRB.transform.position - o.point)).Reverse())
         {
-            if (!IsVaildTag(creatureHits[i].collider))
+            if (!IsVaildTag(hit.collider))
                 continue;
 
-            if (!DamageCreature(creatureHits[i].collider.gameObject))
+            if (!DamageCreature(hit.collider.gameObject))
                 continue;
 
-            OnHit(creatureHits[i].point);
+            OnHit(hit.point);
             return true;
         }
 
@@ -145,27 +147,27 @@ public class Projectile : PoolingObj
         List<RaycastHit2D> wallHits = new List<RaycastHit2D>();
         wallDetectRB.Cast(velocity.normalized, wallHits, dist);
 
-        // Get Closest Wall
-        wallHits = wallHits.OrderByDescending(o => Vector2.SqrMagnitude((Vector2)wallDetectRB.transform.position - o.point)).ToList();
-        for (int i = wallHits.Count - 1; i >= 0; i--)
+        // Run Logic from Closest Wall
+        foreach (var hit in wallHits.OrderByDescending(o => Vector2.SqrMagnitude((Vector2)wallDetectRB.transform.position - o.point)).Reverse())
         {
-            if (!IsVaildTag(wallHits[i].collider))
+            if (!IsVaildTag(hit.collider))
                 continue;
 
-            OnHit(wallHits[i].point);
+            OnHit(hit.point);
             return true;
         }
 
         return false;
     }
-
     protected virtual void OnHit(Vector2 hitPos)
     {
         // Sleep
         this.Sleep();
 
         // Spawn Hit Effect
-        if (particle_Hit == null) return;
+        if (particle_Hit == null)
+            return;
+
         Transform hitParticle = particle_Hit.Spawn(hitPos, Quaternion.identity).transform;
         hitParticle.right = -velocity.normalized;
         hitParticle.position -= (Vector3)velocity.normalized * particle_HitOffset;

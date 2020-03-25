@@ -12749,44 +12749,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
-      propertyPath: poolingObjs.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
-        type: 3}
       propertyPath: UI
       value: 
       objectReference: {fileID: 1634692767}
-    - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
-        type: 3}
-      propertyPath: poolingObjs.Array.data[0].Object
-      value: 
-      objectReference: {fileID: 1818273435109030253, guid: f1dc467a38e7c404892d7f37530809bb,
-        type: 3}
-    - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
-        type: 3}
-      propertyPath: poolingObjs.Array.data[1].Object
-      value: 
-      objectReference: {fileID: 2873601986208158672, guid: b01f8aae05ca2624491dd9425e98fa4e,
-        type: 3}
-    - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
-        type: 3}
-      propertyPath: poolingObjs.Array.data[2].Object
-      value: 
-      objectReference: {fileID: 2437834748253572632, guid: f6e54eb8519b1564f8594e9815fe8477,
-        type: 3}
-    - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
-        type: 3}
-      propertyPath: poolingObjs.Array.data[3].Object
-      value: 
-      objectReference: {fileID: 4904883902665282281, guid: 69517cc1ae08e9c4888236357d66b458,
-        type: 3}
-    - target: {fileID: 350722368244542528, guid: 1e6d57b930118be4eb96a8004b390a75,
-        type: 3}
-      propertyPath: poolingObjs.Array.data[4].Object
-      value: 
-      objectReference: {fileID: 1173779807699850722, guid: 108b6dd0ba5873d43818d41208f488a4,
-        type: 3}
     - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
       propertyPath: MapSizeDefult.Array.size

@@ -12,6 +12,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #region Var: Player Stats
     [HideInInspector] public FloatStat health;
 
+    [HideInInspector] public List<FloatStat> shields;
+
     [HideInInspector] public FloatStat mana;
     [HideInInspector] public FloatStat manaRegen;
 
@@ -44,6 +46,9 @@ public class PlayerStats : SingletonBase<PlayerStats>
         // Init Health
         health = new FloatStat(100, min: 0, max: 100);
 
+        // Init Shield
+        shields = new List<FloatStat>(); // TODO!
+
         // Init Mana
         mana = new FloatStat(50, min: 0, max: 50);
         //manaRegen = new FloatStat(0.2f, min: 0);
@@ -67,11 +72,14 @@ public class PlayerStats : SingletonBase<PlayerStats>
     public void ResetStats()
     {
         // Reset Health
-        health.Reset();
-        mana.Reset();
+        health.ResetMinMax();
+
+        mana.ResetMinMax();
         manaRegen.Reset();
-        stamina.Reset();
+
+        stamina.ResetMinMax();
         staminaRegen.Reset();
+
         walkData.walkSpeed.Reset();
     }
     #endregion

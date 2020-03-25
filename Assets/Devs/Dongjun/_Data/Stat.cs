@@ -103,6 +103,16 @@ public struct IntStat
         ModFlat = 0;
         ModPercent = 0;
     }
+    public void ResetMinMax()
+    {
+        Min = baseMin;
+        Max = baseMax;
+    }
+    public void ResetMod()
+    {
+        ModFlat = 0;
+        ModPercent = 0;
+    }
 }
 
 public struct FloatStat
@@ -204,6 +214,16 @@ public struct FloatStat
         Min = baseMin;
         Max = baseMax;
 
+        ModFlat = 0;
+        ModPercent = 0;
+    }
+    public void ResetMinMax()
+    {
+        Min = baseMin;
+        Max = baseMax;
+    }
+    public void ResetMod()
+    {
         ModFlat = 0;
         ModPercent = 0;
     }
