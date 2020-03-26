@@ -31,7 +31,7 @@ public class OBB_Fist_Heavy_Punch : Weapon_State_Base<OBB_Data_Fist, FistItem>
 
                 AttackData attackDataPunch = weaponItem.AttackData_Heavy;
                 attackDataPunch.damage 
-                    = new FloatStat(@base: Mathf.Lerp(1, weaponItem.AttackData_Heavy.damage.Value, weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime));
+                    = new FloatStat(baseValue: Mathf.Lerp(1, weaponItem.AttackData_Heavy.damage.Value, weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime));
 
                 PlayerStats.Inst.DealDamage(attackDataPunch, overlap.gameObject,
                     PlayerActions.WeaponHit,

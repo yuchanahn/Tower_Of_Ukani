@@ -52,5 +52,5 @@ MonoBehaviour:
     range: 
   droppedItemPrefab: {fileID: 7411933720917081589, guid: bada442b86495b04e8c2cdc4e5555bde,
     type: 3}
-  shieldEffectPrefab: {fileID: 7829167238446700104, guid: 16ace71f14d8fa84ca3d8dd95f3b75a0,
+  shieldEffectPrefab: {fileID: 7829167238446700104, guid: 778b0ad6dbe59f6479fd3cc0ca75e150,
     type: 3}

@@ -22,15 +22,13 @@ public abstract class PassiveItem : UpgradableItem
     {
         base.Awake();
         InitStatMod();
+        InitEvents();
     }
     #endregion
 
     #region Method: Stats
-    // 이 함수로 아이템 스탯 초기화
-    public override void InitStats() { }
-
-    // 이 함수에서 playerStatsMod / weaponStatsMod 초기화
-    public virtual void InitStatMod() { }
+    protected virtual void InitStatMod() { }
+    protected virtual void InitEvents() { }
     #endregion
 
     #region Method: Item

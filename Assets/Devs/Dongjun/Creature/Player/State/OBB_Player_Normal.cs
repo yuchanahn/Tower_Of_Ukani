@@ -39,7 +39,7 @@ public class OBB_Player_Normal : OBB_Player_State_Base,
     }
     #endregion
 
-    #region Method: SSM
+    #region Method: OBB
     public override void OnEnter()
     {
         if (data.groundDetectionData.isGrounded)

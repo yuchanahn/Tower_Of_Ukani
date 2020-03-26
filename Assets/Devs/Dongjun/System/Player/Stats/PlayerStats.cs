@@ -13,10 +13,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     [HideInInspector] public FloatStat health;
 
     private int shieldCount = 0;
-    public class ShieldHealth
-    {
-        public FloatStat shieldHealth;
-    }
+    public class ShieldHealth { public FloatStat shieldHealth; }
     [HideInInspector] public SortedDictionary<int, ShieldHealth> shields = new SortedDictionary<int, ShieldHealth>();
 
     [HideInInspector] public FloatStat mana;
@@ -47,21 +44,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
     protected override void Awake()
     {
         base.Awake();
-
-        // Init Health
-        health = new FloatStat(100, min: 0, max: 100);
-
-        // Init Mana
-        mana = new FloatStat(50, min: 0, max: 50);
-        //manaRegen = new FloatStat(0.2f, min: 0);
-        manaRegen = new FloatStat(5f, min: 0);
-
-        // Init Stamina
-        stamina = new FloatStat(3, min: 0, max: 3);
-        staminaRegen = new FloatStat(0.5f, min: 0);
-
-        // Init WalkData
-        walkData = new PlayerWalkData(new FloatStat(7, min: 0), 0.2f, 0.2f);
+        InitStats();
     }
     private void LateUpdate()
     {
@@ -70,7 +53,24 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
     #endregion
 
-    #region Method: Reset Stats
+    #region Method: General
+    private void InitStats()
+    {
+        // Health
+        health = new FloatStat(100, min: 0, max: 100);
+
+        // Mana
+        mana = new FloatStat(50, min: 0, max: 50);
+        //manaRegen = new FloatStat(0.2f, min: 0);
+        manaRegen = new FloatStat(5f, min: 0);
+
+        // Stamina
+        stamina = new FloatStat(3, min: 0, max: 3);
+        staminaRegen = new FloatStat(0.5f, min: 0);
+
+        // Walk
+        walkData = new PlayerWalkData(new FloatStat(7, min: 0), 0.2f, 0.2f);
+    }
     public void ResetStats()
     {
         // Reset Health
@@ -96,7 +96,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
         // Store Damage Amount
         DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : amount;
 
-        // Trigger Item Effect
+        // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.Damaged);
 
         if (DamageReceived == 0)
@@ -104,19 +104,21 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
         foreach (var shield in shields.Reverse())
         {
-            if (shield.Value.shieldHealth.Value == 0)
+            ShieldHealth box = shield.Value;
+
+            if (box.shieldHealth.Value == 0)
                 continue;
 
             // Calculate Overkill Damage
-            float overkillDmg = Mathf.Max(DamageReceived - shield.Value.shieldHealth.Value, 0);
+            float overkillDmg = Mathf.Max(DamageReceived - box.shieldHealth.Value, 0);
 
-            // Trigger Item Effect
+            // Trigger Event
             PlayerActionEventManager.Trigger(PlayerActions.ShieldDamaged);
 
             // Damage Shield
-            shield.Value.shieldHealth.ModFlat -= DamageReceived;
+            box.shieldHealth.ModFlat -= DamageReceived;
 
-            // Trigger Item Effect
+            // Trigger Event
             PlayerActionEventManager.Trigger(PlayerActions.ShieldChanged);
 
             // Damage Player
@@ -126,7 +128,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
                 return;
         }
 
-        // Trigger Item Effect
+        // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.HealthDamaged);
 
         // Apply Damage
@@ -155,24 +157,29 @@ public class PlayerStats : SingletonBase<PlayerStats>
         // Store Damage Amount
         DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : attackData.damage.Value;
 
+        // Trigger Event
+        PlayerActionEventManager.Trigger(PlayerActions.Damaged);
+
         if (DamageReceived == 0)
             return;
 
         foreach (var shield in shields.Reverse())
         {
-            if (shield.Value.shieldHealth.Value == 0)
+            ShieldHealth box = shield.Value;
+
+            if (box.shieldHealth.Value == 0)
                 continue;
 
             // Calculate Overkill Damage
-            float overkillDmg = Mathf.Max(DamageReceived - shield.Value.shieldHealth.Value, 0);
+            float overkillDmg = Mathf.Max(DamageReceived - box.shieldHealth.Value, 0);
 
-            // Trigger Item Effect
+            // Trigger Event
             PlayerActionEventManager.Trigger(PlayerActions.ShieldDamaged);
 
             // Damage Shield
-            shield.Value.shieldHealth.ModFlat -= DamageReceived;
+            box.shieldHealth.ModFlat -= DamageReceived;
 
-            // Trigger Item Effect
+            // Trigger Event
             PlayerActionEventManager.Trigger(PlayerActions.ShieldChanged);
 
             // Damage Player
@@ -182,7 +189,7 @@ public class PlayerStats : SingletonBase<PlayerStats>
                 return;
         }
 
-        // Trigger Item Effect
+        // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.HealthDamaged);
 
         // Apply Damage
@@ -233,19 +240,55 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #region Method: Shield
     public int AddShield(FloatStat shieldHealth)
     {
+        // Trigger Event
+        PlayerActionEventManager.Trigger(PlayerActions.ShieldGained);
+
         shields.Add(shieldCount, new ShieldHealth() { shieldHealth = shieldHealth });
+
+        // Trigger Event
+        PlayerActionEventManager.Trigger(PlayerActions.ShieldChanged);
+
         return shieldCount++;
     }
-    public void RemoveShield(int shieldIndex)
+    public void RemoveShield(ref int shieldIndex)
     {
+        if (shieldIndex < 0)
+            return;
+
+        if (shields[shieldIndex].shieldHealth.Value > 0)
+        {
+            // Trigger Event
+            PlayerActionEventManager.Trigger(PlayerActions.ShieldChanged);
+        }
+
         shields.Remove(shieldIndex);
+
+        shieldIndex = -1;
 
         if (shields.Count == 0)
             shieldCount = 0;
     }
-    public ShieldHealth GetShieldAt(int shieldIndex)
+    public ref FloatStat GetShieldAt(int shieldIndex)
     {
-        return shields[shieldIndex];
+        return ref shields[shieldIndex].shieldHealth;
+    }
+    public float GetCurTotalShield()
+    {
+        if (shields.Count == 0)
+            return 0;
+
+        float total = 0;
+        foreach (var shield in shields)
+        {
+            ShieldHealth box = shield.Value;
+
+            if (box.shieldHealth.Value == 0)
+                continue;
+
+            total += box.shieldHealth.Value;
+        }
+
+        return total;
     }
     #endregion
 

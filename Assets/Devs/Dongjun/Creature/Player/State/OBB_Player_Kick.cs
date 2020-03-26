@@ -85,13 +85,16 @@ public class OBB_Player_Kick : OBB_Player_State_Base
         // Detect Ground
         data.groundDetectionData.DetectGround(true, data.RB2D, transform);
 
+        // Walk
+        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, data.RB2D, false);
+
+        // Follow Moving Platform
+        data.groundDetectionData.FollowMovingPlatform(data.RB2D);
+
         // Gravity
         Gravity_Logic.ApplyGravity(data.RB2D,
             data.groundDetectionData.isGrounded ? GravityData.Zero :
             data.gravityData);
-
-        // Walk
-        PlayerStats.Inst.walkData.Walk(PlayerInputManager.Inst.Input_WalkDir, data.RB2D, false);
     }
     #endregion
 

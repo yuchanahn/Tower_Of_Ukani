@@ -14,29 +14,27 @@ public class FlameBoots : PassiveItem
     [SerializeField] private GameObject flameParticlePrefab;
     #endregion
 
-    #region Var: Overlap Data
+    #region Var: Item Stats
+    private AttackData flameDashAttackData;
     private OverlapCheckData overlapCheckData;
     #endregion
 
-    #region Var: Player Action Event
+    #region Var: Item Effect
     private PlayerActionEvent onDashing;
     private PlayerActionEvent onDashEnd;
     #endregion
 
-    #region Var: Stat
-    private AttackData flameDashAttackData;
-    #endregion
-
-    #region Var: Effect
+    #region Var: Visual Effect
     private ParticleSystem flameParticle;
     #endregion
 
-    #region Method: Unity
-    protected override void Awake()
+    #region Method: Item
+    public override void InitStats()
     {
-        base.Awake();
-
-        // Overlap Data
+        flameDashAttackData = new AttackData(5);
+    }
+    protected override void InitEvents()
+    {
         overlapCheckData = new OverlapCheckData(
             onEnter: overlap =>
             {
@@ -44,7 +42,6 @@ public class FlameBoots : PassiveItem
                 PlayerStats.Inst.DealDamage(flameDashAttackData, overlap.gameObject);
             });
 
-        // Player Action Event
         onDashing = this.NewPlayerActionEvent(() =>
         {
             // Check Overlap
@@ -53,7 +50,8 @@ public class FlameBoots : PassiveItem
             // Play Particle Effect
             flameParticle.Play();
         });
-        onDashEnd = this.NewPlayerActionEvent(() => 
+
+        onDashEnd = this.NewPlayerActionEvent(() =>
         {
             // Clear Overlap Data
             overlapCheckData.Clear();
@@ -62,16 +60,7 @@ public class FlameBoots : PassiveItem
             flameParticle.Stop();
         });
     }
-    #endregion
 
-    #region Method: Stats
-    public override void InitStats()
-    {
-        flameDashAttackData = new AttackData(5);
-    }
-    #endregion
-
-    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);

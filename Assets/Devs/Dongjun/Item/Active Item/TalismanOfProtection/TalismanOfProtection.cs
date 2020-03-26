@@ -6,39 +6,22 @@ public class TalismanOfProtection : ActiveItem
     [SerializeField] private GameObject shieldEffectPrefab;
     #endregion
 
-    #region Var: Stats
+    #region Var: Item Stats
     private TimerData durationTimer = new TimerData();
 
     private int shieldIndex = -1;
-    private FloatStat shieldhealth;
-    #endregion
-
-    #region Var: Visual Effect
-    private GameObject shieldEffect;
+    private FloatStat shieldHealth;
     #endregion
 
     #region Var: Item Effect
     private PlayerActionEvent onShieldChanged;
     #endregion
 
-    #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-
-        // Player Action Event
-        onShieldChanged = this.NewPlayerActionEvent(() =>
-        {
-            // Check Shield Health
-            if (PlayerStats.Inst.GetShieldAt(shieldIndex).shieldHealth.Value == 0)
-            {
-                Deactivate();
-            }
-        });
-    }
+    #region Var: Visual Effect
+    private GameObject shieldEffect;
     #endregion
 
-    #region Method: Stats
+    #region Method: Item
     public override void InitStats()
     {
         // Init Cooldown
@@ -52,11 +35,21 @@ public class TalismanOfProtection : ActiveItem
             .SetActive(false);
 
         // Init Shield HP
-        shieldhealth = new FloatStat(40, min: 0, max: 40);
+        shieldHealth = new FloatStat(40, min: 0, max: 40);
     }
-    #endregion
+    protected override void InitEvents()
+    {
+        onShieldChanged = this.NewPlayerActionEvent(() =>
+        {
+            // Check Shield Health
+            if (PlayerStats.Inst.GetShieldAt(shieldIndex).IsMin)
+            {
+                // Deactivate Item
+                Deactivate();
+            }
+        });
+    }
 
-    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
@@ -72,9 +65,7 @@ public class TalismanOfProtection : ActiveItem
         // Destroy Effect
         Destroy(shieldEffect);
     }
-    #endregion
 
-    #region Method: Activate / Deactivate
     protected override void OnActivate()
     {
         // Stop Cooldown Timer
@@ -86,7 +77,7 @@ public class TalismanOfProtection : ActiveItem
         durationTimer.Reset();
 
         // Get Shield Index
-        shieldIndex = PlayerStats.Inst.AddShield(shieldhealth);
+        shieldIndex = PlayerStats.Inst.AddShield(shieldHealth);
 
         // Enable Shield Item Effect
         PlayerActionEventManager.AddEvent(PlayerActions.ShieldChanged, onShieldChanged);
@@ -94,22 +85,14 @@ public class TalismanOfProtection : ActiveItem
         // Show Effect
         shieldEffect.SetActive(true);
     }
-    public override void Deactivate()
+    protected override void OnDeactivate()
     {
-        base.Deactivate();
-
-        // Start Cooldown Timer
-        CooldownTimer.SetActive(true);
-        CooldownTimer.Reset();
-
         // Stop Duration Timer
         durationTimer.SetActive(false);
         durationTimer.Reset();
 
         // Remove Shield
-        if (shieldIndex != -1)
-            PlayerStats.Inst.RemoveShield(shieldIndex);
-        shieldIndex = -1;
+        PlayerStats.Inst.RemoveShield(ref shieldIndex);
 
         // Disable Shield Item Effect
         PlayerActionEventManager.RemoveEvent(PlayerActions.ShieldChanged, onShieldChanged);

@@ -20,7 +20,7 @@ public class Overlord : PassiveItem
                 break;
         }
     }
-    public override void InitStatMod()
+    protected override void InitStatMod()
     {
         weaponStatMod = weapon =>
         {

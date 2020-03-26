@@ -2,32 +2,33 @@
 
 public class Equilibrium : PassiveItem
 {
-    #region Var: Player Action Event
+    #region Var: Item Effect
     private PlayerActionEvent onDealDamage;
     private PlayerActionEvent onDamaged;
     #endregion
 
-    #region Var: Stat
+    #region Var: Item Stats
     private float effectPercent = 30f;
     #endregion
 
-    #region Method: Unity
-    protected override void Awake()
+    #region Method: Item
+    public override void InitStats()
     {
-        base.Awake();
 
+    }
+    protected override void InitEvents()
+    {
         onDealDamage = this.NewPlayerActionEvent(() =>
         {
             PlayerStats.Inst.DamageToDeal += MathD.Round(PlayerStats.Inst.DamageToDeal * (effectPercent * 0.01f));
         });
+
         onDamaged = this.NewPlayerActionEvent(() =>
         {
             PlayerStats.Inst.DamageReceived += MathD.Round(PlayerStats.Inst.DamageReceived * (effectPercent * 0.01f));
         });
     }
-    #endregion
 
-    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);

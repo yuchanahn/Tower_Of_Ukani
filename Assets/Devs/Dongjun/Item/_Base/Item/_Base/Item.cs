@@ -45,6 +45,7 @@ public abstract class Item : MonoBehaviour
     {
         Inventory = inventory;
     }
+
     public virtual void OnMove()
     {
 
@@ -54,6 +55,7 @@ public abstract class Item : MonoBehaviour
     {
 
     }
+
     protected virtual DroppedItem SpawnDroppedItem(Vector2 pos)
     {
         DroppedItem droppedItem = Instantiate(DroppedItemPrefab, pos, Quaternion.identity).GetComponent<DroppedItem>();
@@ -70,6 +72,7 @@ public abstract class Item : MonoBehaviour
         OnRemovedFromInventory();
         return SpawnDroppedItem(pos);
     }
+
     public void OnRemove()
     {
         OnRemovedFromInventory();

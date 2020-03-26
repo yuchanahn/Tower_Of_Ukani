@@ -17,17 +17,22 @@ public class RoseOfLove : ActiveItem
             gravity = new FloatStat(30f, min: 0)
         };
     }
+    protected override void InitEvents()
+    {
+
+    }
 
     protected override void OnActivate()
     {
-        // Restart Cooldown Timer
-        CooldownTimer.Reset();
-
         // Spawn Rose
         WeaponProjectile rose = roseProjectile.Spawn(GM.PlayerPos, Quaternion.identity);
         rose.InitData(CamManager.Inst.MainCam.ScreenToWorldPoint(Input.mousePosition) - GM.PlayerPos, roseProjectileData);
 
         // Deactivate Item
         Deactivate();
+    }
+    protected override void OnDeactivate()
+    {
+
     }
 }

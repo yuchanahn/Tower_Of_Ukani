@@ -3,27 +3,29 @@ using UnityEngine;
 
 public struct IntStat
 {
-    private bool needToCalculate;
+    private bool recalculate;
 
-    private int @base;
-    private int baseMin;
-    private int baseMax;
+    // Base Value
+    private int baseValue;
 
+    // Cur Min Max
     private int min;
     private int max;
 
+    // Cur Mod
     private int modFlat;
     private float modPercent;
 
+    // Cur Value
     private int value;
 
+    public int BaseMin { get; }
+    public int BaseMax { get; }
     public int Base
     {
-        get { return @base; }
-        set { @base = Mathf.Clamp(value, min, max); }
+        get { return baseValue; }
+        set { baseValue = Mathf.Clamp(value, min, max); }
     }
-    public int BaseMin => baseMin;
-    public int BaseMax => baseMax;
 
     public int Min
     {
@@ -31,8 +33,8 @@ public struct IntStat
         set
         {
             min = Math.Min(value, max);
-            @base = Math.Max(@base, min);
-            needToCalculate = true;
+            baseValue = Math.Max(baseValue, min);
+            recalculate = true;
         }
     }
     public int Max
@@ -41,8 +43,8 @@ public struct IntStat
         set
         {
             max = Math.Max(value, min);
-            @base = Math.Min(@base, max);
-            needToCalculate = true;
+            baseValue = Math.Min(baseValue, max);
+            recalculate = true;
         }
     }
 
@@ -52,7 +54,7 @@ public struct IntStat
         set
         {
             modFlat = value;
-            needToCalculate = true;
+            recalculate = true;
         }
     }
     public float ModPercent
@@ -61,7 +63,7 @@ public struct IntStat
         set
         {
             modPercent = value;
-            needToCalculate = true;
+            recalculate = true;
         }
     }
 
@@ -69,22 +71,22 @@ public struct IntStat
     {
         get
         {
-            if (needToCalculate)
+            if (recalculate)
             {
-                value = Mathf.Clamp((int)(@base * (1 + (modPercent * 0.01f)) + 0.5f) + modFlat, min, max);
-                needToCalculate = false;
+                value = Mathf.Clamp((int)(baseValue * (1 + (modPercent * 0.01f)) + 0.5f) + modFlat, min, max);
+                recalculate = false;
             }
             return value;
         }
     }
+    public bool IsMin => Value == Min;
+    public bool IsMax => Value == Max;
 
-    public IntStat(int @base = 0, int min = int.MinValue, int max = int.MaxValue, int modFlat = 0, int modPercent = 0)
+    public IntStat(int baseValue = 0, int min = int.MinValue, int max = int.MaxValue, int modFlat = 0, int modPercent = 0)
     {
-        needToCalculate = true;
-
-        this.@base = @base;
-        baseMin = min;
-        baseMax = max;
+        BaseMin = min;
+        BaseMax = max;
+        this.baseValue = baseValue;
 
         this.min = min;
         this.max = max;
@@ -93,20 +95,22 @@ public struct IntStat
         this.modPercent = modPercent;
 
         value = 0;
+        
+        recalculate = true;
     }
 
     public void Reset()
     {
-        Min = baseMin;
-        Max = baseMax;
+        Min = BaseMin;
+        Max = BaseMax;
 
         ModFlat = 0;
         ModPercent = 0;
     }
     public void ResetMinMax()
     {
-        Min = baseMin;
-        Max = baseMax;
+        Min = BaseMin;
+        Max = BaseMax;
     }
     public void ResetMod()
     {
@@ -117,27 +121,29 @@ public struct IntStat
 
 public struct FloatStat
 {
-    private bool needToCalculate;
+    private bool recalculate;
 
-    private float @base;
-    private float baseMin;
-    private float baseMax;
+    // Base Value
+    private float baseValue;
 
+    // Cur Min Max
     private float min;
     private float max;
 
+    // Cur Mod
     private float modFlat;
     private float modPercent;
 
+    // Cur Value
     private float value;
 
+    public float BaseMin { get; }
+    public float BaseMax { get; }
     public float Base
     {
-        get { return @base; }
-        set { @base = Mathf.Clamp(value, min, max); }
+        get { return baseValue; }
+        set { baseValue = Mathf.Clamp(value, min, max); }
     }
-    public float BaseMin => baseMin;
-    public float BaseMax => baseMax;
 
     public float Min
     {
@@ -145,8 +151,8 @@ public struct FloatStat
         set
         {
             min = Math.Min(value, max);
-            @base = Math.Max(@base, min);
-            needToCalculate = true;
+            baseValue = Math.Max(baseValue, min);
+            recalculate = true;
         }
     }
     public float Max
@@ -155,8 +161,8 @@ public struct FloatStat
         set
         {
             max = Math.Max(value, min);
-            @base = Math.Min(@base, max);
-            needToCalculate = true;
+            baseValue = Math.Min(baseValue, max);
+            recalculate = true;
         }
     }
 
@@ -166,7 +172,7 @@ public struct FloatStat
         set
         {
             modFlat = value;
-            needToCalculate = true;
+            recalculate = true;
         }
     }
     public float ModPercent
@@ -175,7 +181,7 @@ public struct FloatStat
         set
         {
             modPercent = value;
-            needToCalculate = true;
+            recalculate = true;
         }
     }
 
@@ -183,22 +189,22 @@ public struct FloatStat
     {
         get
         {
-            if (needToCalculate)
+            if (recalculate)
             {
-                value = Mathf.Clamp((@base * (1 + modPercent * 0.01f)) + modFlat, min, max);
-                needToCalculate = false;
+                value = Mathf.Clamp((baseValue * (1 + modPercent * 0.01f)) + modFlat, min, max);
+                recalculate = false;
             }
             return value;
         }
     }
+    public bool IsMin => Value == Min;
+    public bool IsMax => Value == Max;
 
-    public FloatStat(float @base = 0f, float min = float.MinValue, float max = float.MaxValue, float modFlat = 0, float modPercent = 0)
+    public FloatStat(float baseValue = 0f, float min = float.MinValue, float max = float.MaxValue, float modFlat = 0, float modPercent = 0)
     {
-        this.needToCalculate = true;
-
-        this.@base = @base;
-        baseMin = min;
-        baseMax = max;
+        BaseMin = min;
+        BaseMax = max;
+        this.baseValue = baseValue;
 
         this.min = min;
         this.max = max;
@@ -207,20 +213,22 @@ public struct FloatStat
         this.modPercent = modPercent;
 
         value = 0;
+
+        recalculate = true;
     }
 
     public void Reset()
     {
-        Min = baseMin;
-        Max = baseMax;
+        Min = BaseMin;
+        Max = BaseMax;
 
         ModFlat = 0;
         ModPercent = 0;
     }
     public void ResetMinMax()
     {
-        Min = baseMin;
-        Max = baseMax;
+        Min = BaseMin;
+        Max = BaseMax;
     }
     public void ResetMod()
     {

@@ -8,72 +8,34 @@ public class Bloodseeker : ActiveItem
     [SerializeField] private GameObject shieldEffectPrefab;
     #endregion
 
-    #region Var: Stats
+    #region Var: Item Stats
     private TimerData durationTimer = new TimerData();
 
     private int shieldIndex = -1;
     private FloatStat shieldHealth;
     #endregion
 
-    #region Var: Visual Effect
-    private GameObject shieldEffect;
-    #endregion
-
     #region Var: Item Effect
     private PlayerActionEvent onKill;
     private PlayerActionEvent onShieldChanged;
 
-    int toAbsorb = 0;
+    int corpsesToAbsorb = 0;
     List<GameObject> coprsePrefabs = new List<GameObject>();
     Coroutine checkAllCorpseAbsorbed;
     #endregion
 
+    #region Var: Visual Effect
+    private GameObject shieldEffect;
+    #endregion
+
     #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-
-        // Player Action Event
-        onKill = this.NewPlayerActionEvent(() =>
-        {
-            var corpseSpawner = PlayerStats.Inst.KilledMob.GetComponent<CorpseSpawner>();
-            if (corpseSpawner == null)
-                return;
-
-            // Add Corpse Count
-            toAbsorb += corpseSpawner.CorpseCount;
-
-            // On Corpse Absorb
-            corpseSpawner.SetCorpseMode(eCorpseSpawnMode.Absorb, coprpsePrefab =>
-            {
-                if (!IsActive)
-                    return;
-
-                coprsePrefabs.Add(coprpsePrefab);
-                toAbsorb -= 1;
-                PlayerStats.Inst.GetShieldAt(shieldIndex).shieldHealth.ModFlat += 5;
-
-                // Show Effect
-                shieldEffect.SetActive(true);
-            });
-        });
-
-        onShieldChanged = this.NewPlayerActionEvent(() =>
-        {
-            // Check Shield Health
-            if (PlayerStats.Inst.GetShieldAt(shieldIndex).shieldHealth.Value == 0)
-            {
-                shieldEffect.SetActive(false);
-            }
-        });
-    }
     private IEnumerator CheckAllCorpseAbsorbed()
     {
         while(true)
         {
             yield return new WaitForEndOfFrame();
 
-            if (IsActive && durationTimer.IsEnded && toAbsorb == 0)
+            if (IsActive && durationTimer.IsEnded && corpsesToAbsorb == 0)
             {
                 PlayerStats.Inst.Heal(shieldHealth.Value * 0.6f);
                 Deactivate();
@@ -85,7 +47,7 @@ public class Bloodseeker : ActiveItem
     }
     #endregion
 
-    #region Method: Stats
+    #region Method: Item
     public override void InitStats()
     {
         // Init Cooldown
@@ -99,7 +61,7 @@ public class Bloodseeker : ActiveItem
         durationTimer
             .SetTick(gameObject)
             .SetAction(
-                onEnd: () => 
+                onEnd: () =>
                 {
                     checkAllCorpseAbsorbed = StartCoroutine(CheckAllCorpseAbsorbed());
                     PlayerActionEventManager.RemoveEvent(PlayerActions.Kill, onKill);
@@ -109,9 +71,46 @@ public class Bloodseeker : ActiveItem
         // Init Shield HP
         shieldHealth = new FloatStat(0, min: 0, max: 20);
     }
-    #endregion
+    protected override void InitEvents()
+    {
+        onKill = this.NewPlayerActionEvent(() =>
+        {
+            // Check Corpse Spawner
+            var corpseSpawner = PlayerStats.Inst.KilledMob.GetComponent<CorpseSpawner>();
+            if (corpseSpawner == null)
+                return;
 
-    #region Method: Item
+            // Add Corpse Count
+            corpsesToAbsorb += corpseSpawner.CorpseCount;
+
+            // On Corpse Absorb
+            corpseSpawner.SetCorpseMode(eCorpseSpawnMode.Absorb, coprpsePrefab =>
+            {
+                if (!IsActive)
+                    return;
+
+                coprsePrefabs.Add(coprpsePrefab);
+                corpsesToAbsorb -= 1;
+
+                // Add Shield
+                PlayerStats.Inst.GetShieldAt(shieldIndex).ModFlat += 5;
+
+                // Show Visual Effect
+                shieldEffect.SetActive(true);
+            });
+        });
+
+        onShieldChanged = this.NewPlayerActionEvent(() =>
+        {
+            // Check Shield Health
+            if (PlayerStats.Inst.GetShieldAt(shieldIndex).IsMin)
+            {
+                // Hide Visual Effect
+                shieldEffect.SetActive(false);
+            }
+        });
+    }
+
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
@@ -127,9 +126,7 @@ public class Bloodseeker : ActiveItem
         // Destroy Effect
         Destroy(shieldEffect);
     }
-    #endregion
 
-    #region Method: Activate / Deactivate
     protected override void OnActivate()
     {
         // Stop Cooldown Timer
@@ -146,24 +143,16 @@ public class Bloodseeker : ActiveItem
         PlayerActionEventManager.AddEvent(PlayerActions.Kill, onKill);
         PlayerActionEventManager.AddEvent(PlayerActions.ShieldChanged, onShieldChanged);
     }
-    public override void Deactivate()
+    protected override void OnDeactivate()
     {
-        base.Deactivate();
-
-        // Start Cooldown Timer
-        CooldownTimer.SetActive(true);
-        CooldownTimer.Reset();
-
         // Stop Duration Timer
         durationTimer.SetActive(false);
         durationTimer.Reset();
 
         // Remove Shield
-        if (shieldIndex != -1)
-            PlayerStats.Inst.RemoveShield(shieldIndex);
-        shieldIndex = -1;
+        PlayerStats.Inst.RemoveShield(ref shieldIndex);
 
-        toAbsorb = 0;
+        corpsesToAbsorb = 0;
         coprsePrefabs.Clear();
 
         if (checkAllCorpseAbsorbed != null)

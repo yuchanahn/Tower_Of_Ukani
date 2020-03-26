@@ -41,11 +41,14 @@ public class OBB_Player_Dash : OBB_Player_State_Base
     }
     #endregion
 
-    #region Method: SSM
+    #region Method: OBB
     public override void OnEnter()
     {
         // Init Value
         dashDir = PlayerInputManager.Inst.Input_DashDir;
+
+        // Don't Detect Ground
+        data.groundDetectionData.DetectGround(false, data.RB2D, transform);
 
         // Status Effect
         PlayerStatus.AddEffect(status_IgnoreDamage);

@@ -13,13 +13,22 @@ public abstract class ActiveItem : UpgradableItem
     { get; protected set; } = new FloatStat(0, min: 0);
     #endregion
 
-    #region Method Override: Add / Drop
-    public override void OnAdd(InventoryBase inventory)
+    #region Method: Unity
+    protected override void Awake()
     {
-        base.OnAdd(inventory);
+        base.Awake();
 
         // Init Cooldown Timer
         CooldownTimer.SetTick(gameObject);
+
+        InitEvents();
+    }
+    #endregion
+
+    #region Method: Item
+    public override void OnAdd(InventoryBase inventory)
+    {
+        base.OnAdd(inventory);
 
         // Reset Cooldown When Added to Hotbar
         if (inventory is PlayerActiveHotbar)
@@ -46,6 +55,8 @@ public abstract class ActiveItem : UpgradableItem
     #endregion
 
     #region Method: Active Item
+    protected abstract void InitEvents();
+
     public void Activate()
     {
         if (!CanActivate
@@ -58,10 +69,17 @@ public abstract class ActiveItem : UpgradableItem
     }
     protected abstract void OnActivate();
 
-    public virtual void Deactivate()
+    public void Deactivate()
     {
         IsActive = false;
         LockItemSlot = false;
+
+        // Start Cooldown Timer
+        CooldownTimer.SetActive(true);
+        CooldownTimer.Reset();
+
+        OnDeactivate();
     }
+    protected abstract void OnDeactivate();
     #endregion
 }

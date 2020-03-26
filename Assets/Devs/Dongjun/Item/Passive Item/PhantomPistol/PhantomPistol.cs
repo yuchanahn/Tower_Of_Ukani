@@ -10,30 +10,16 @@ public class PhantomPistol : PassiveItem
     private PhantomPistolObject phantomPistolObject;
     #endregion
 
-    #region Var: Player Action Event
+    #region Var: Item Effect
     private PlayerActionEvent onShoot;
     #endregion
 
-    #region Var: Stat
+    #region Var: Item Stats
     private AttackData attackData;
     private ProjectileData projectileData;
     #endregion
 
-    #region Method: Unity
-    protected override void Awake()
-    {
-        base.Awake();
-
-        // Player Action Event
-        onShoot = this.NewPlayerActionEvent(() =>
-        {
-            Bullet bullet = phantomPistolObject.SpawnBullet();
-            bullet.InitData(bullet.transform.right, projectileData, attackData);
-        });
-    }
-    #endregion
-
-    #region Method: Stats
+    #region Method: Item
     public override void InitStats()
     {
         attackData = new AttackData(3);
@@ -44,9 +30,15 @@ public class PhantomPistol : PassiveItem
             travelDist = new FloatStat(0f, min: 0f, max: 6f)
         };
     }
-    #endregion
+    protected override void InitEvents()
+    {
+        onShoot = this.NewPlayerActionEvent(() =>
+        {
+            Bullet bullet = phantomPistolObject.SpawnBullet();
+            bullet.InitData(bullet.transform.right, projectileData, attackData);
+        });
+    }
 
-    #region Method: Item
     public override void OnAdd(InventoryBase inventory)
     {
         base.OnAdd(inventory);
