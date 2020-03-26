@@ -379,6 +379,11 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
     }
 
 
+    void OnStunnedEnd_AniEvent()
+    {
+        m_bAttacking = false;
+    }
+
     public override void OnHurt(/* 총알 위치 */)
     {
         if (m_SEObj.Ani != eMobAniST.Last) return; // Ani 우선순위가 Hurt보다 커야함.

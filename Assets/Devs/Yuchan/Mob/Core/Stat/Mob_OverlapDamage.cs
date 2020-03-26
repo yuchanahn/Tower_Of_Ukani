@@ -36,6 +36,6 @@ public class Mob_OverlapDamage : MonoBehaviour
 
     void OnOverlap()
     {
-        PlayerStats.Inst.Damage(Stat.Damage);
+        PlayerStats.Inst.Damage(new AttackData(Stat.Damage));
     }   
 }

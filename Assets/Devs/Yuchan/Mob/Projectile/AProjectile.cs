@@ -38,7 +38,7 @@ public class AProjectile<T> : Object_ObjectPool<AProjectile<T>>
     }
     protected virtual bool CheckCreatureHit(RaycastHit2D hit2d)
     {
-        PlayerStats.Inst.Damage(Damage);
+        PlayerStats.Inst.Damage(new AttackData(Damage));
         return true;
     }
     protected virtual void DetectObject()

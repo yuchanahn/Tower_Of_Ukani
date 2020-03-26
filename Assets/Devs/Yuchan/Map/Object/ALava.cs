@@ -76,7 +76,7 @@ public class ALava : MonoBehaviour
                 if (dt > 0.1f)
                 {
                     dt = 0;
-                    PlayerStats.Inst.Damage(Damage);
+                    PlayerStats.Inst.Damage(new AttackData(Damage));
                 }
                 return;
             }
