@@ -87,67 +87,6 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #endregion
 
     #region Method: Health
-    public void Damage(float amount)
-    {
-        // Check Ignore Damage
-        if (PlayerStatus.IgnoreDamage.Value)
-            return;
-
-        // Store Damage Amount
-        DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : amount;
-
-        // Trigger Event
-        PlayerActionEventManager.Trigger(PlayerActions.Damaged);
-
-        if (DamageReceived == 0)
-            return;
-
-        foreach (var shield in shields.Reverse())
-        {
-            ShieldHealth box = shield.Value;
-
-            if (box.shieldHealth.Value == 0)
-                continue;
-
-            // Calculate Overkill Damage
-            float overkillDmg = Mathf.Max(DamageReceived - box.shieldHealth.Value, 0);
-
-            // Trigger Event
-            PlayerActionEventManager.Trigger(PlayerActions.ShieldDamaged);
-
-            // Damage Shield
-            box.shieldHealth.ModFlat -= DamageReceived;
-
-            // Trigger Event
-            PlayerActionEventManager.Trigger(PlayerActions.ShieldChanged);
-
-            // Damage Player
-            DamageReceived = overkillDmg;
-
-            if (DamageReceived == 0)
-                return;
-        }
-
-        // Trigger Event
-        PlayerActionEventManager.Trigger(PlayerActions.HealthDamaged);
-
-        // Apply Damage
-        health.ModFlat -= DamageReceived;
-
-        // Death
-        if (health.Value == 0)
-        {
-            Death();
-            return;
-        }
-
-        // Trigger Event
-        PlayerActionEventManager.Trigger(PlayerActions.HealthChanged);
-
-        // Visual Effect
-        PlayerHitEft.Create(transform.position);
-        GetComponent<HitColorEffect>().OnHit();
-    }
     public void Damage(AttackData attackData)
     {
         // Check Ignore Damage
@@ -197,13 +136,13 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
         // Death
         if (health.Value == 0)
-        {
             Death();
-            return;
-        }
 
         // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.HealthChanged);
+
+        if (IsDead)
+            return;
 
         // Visual Effect
         PlayerHitEft.Create(transform.position);
