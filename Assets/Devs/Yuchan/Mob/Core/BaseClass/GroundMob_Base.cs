@@ -279,7 +279,6 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
 
     float FallAndJumpCoolTime = 1f;
     float FallAndJumpCoolTimeT = 1f;
-
     public bool Follow()
     {
         IsFollowMax = Mathf.Abs(GM.PlayerPos.x - transform.position.x) <= 0.1f;
@@ -291,6 +290,7 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
             && (IsCliff))
         {
             IsKeepFollowing = true;
+            if (Fall()) { return true; }
             return true;
         }
         if ((transform.position.y - GM.PlayerPos.y) > m_groundDetectionData.Size.y * 0.9f)
