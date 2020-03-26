@@ -25,11 +25,11 @@ public class PlayerStats : SingletonBase<PlayerStats>
     [HideInInspector] public PlayerWalkData walkData;
     #endregion
 
-    #region Var: Stat Change Data
-    [HideInInspector] public float DamageReceived;
-    [HideInInspector] public float HealReceived;
-    [HideInInspector] public float DamageToDeal;
+    #region Var: Stat Data
+    [HideInInspector] public float DamageToReceive;
+    [HideInInspector] public float HealToReceive;
 
+    [HideInInspector] public float DamageToDeal;
     public Mob_Base DamagedMob
     { get; private set; }
     public Mob_Base KilledMob
@@ -94,45 +94,24 @@ public class PlayerStats : SingletonBase<PlayerStats>
             return;
 
         // Store Damage Amount
-        DamageReceived = PlayerStatus.AbsorbDamage.Value ? 0 : attackData.damage.Value;
+        DamageToReceive = PlayerStatus.AbsorbDamage.Value ? 0 : attackData.damage.Value;
 
         // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.Damaged);
 
-        if (DamageReceived == 0)
+        if (DamageToReceive == 0)
             return;
 
-        foreach (var shield in shields.Reverse())
-        {
-            ShieldHealth box = shield.Value;
+        DamageToReceive = DamageShield(DamageToReceive);
 
-            if (box.shieldHealth.Value == 0)
-                continue;
-
-            // Calculate Overkill Damage
-            float overkillDmg = Mathf.Max(DamageReceived - box.shieldHealth.Value, 0);
-
-            // Trigger Event
-            PlayerActionEventManager.Trigger(PlayerActions.ShieldDamaged);
-
-            // Damage Shield
-            box.shieldHealth.ModFlat -= DamageReceived;
-
-            // Trigger Event
-            PlayerActionEventManager.Trigger(PlayerActions.ShieldChanged);
-
-            // Damage Player
-            DamageReceived = overkillDmg;
-
-            if (DamageReceived == 0)
-                return;
-        }
+        if (DamageToReceive == 0)
+            return;
 
         // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.HealthDamaged);
 
         // Apply Damage
-        health.ModFlat -= DamageReceived;
+        health.ModFlat -= DamageToReceive;
 
         // Death
         if (health.Value == 0)
@@ -154,13 +133,13 @@ public class PlayerStats : SingletonBase<PlayerStats>
             return;
 
         // Store Heal Amount
-        HealReceived = amount;
+        HealToReceive = amount;
 
         // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.HealthHealed);
 
         // Apply Heal
-        health.ModFlat += Mathf.Clamp(HealReceived, 0, health.Max - health.Value);
+        health.ModFlat += Mathf.Clamp(HealToReceive, 0, health.Max - health.Value);
 
         // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.HealthChanged);
@@ -211,7 +190,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
     {
         return ref shields[shieldIndex].shieldHealth;
     }
-    public float GetCurTotalShield()
+
+    public float GetTotalShieldHealth()
     {
         if (shields.Count == 0)
             return 0;
@@ -228,6 +208,44 @@ public class PlayerStats : SingletonBase<PlayerStats>
         }
 
         return total;
+    }
+    private float DamageShield(float damageAmount)
+    {
+        foreach (var shield in shields.Reverse())
+        {
+            ShieldHealth box = shield.Value;
+
+            if (box.shieldHealth.Value == 0)
+                continue;
+
+            // Calculate Overkill Damage
+            float overkillDmg = Mathf.Max(damageAmount - box.shieldHealth.Value, 0);
+
+            // Trigger Event
+            PlayerActionEventManager.Trigger(PlayerActions.ShieldDamaged);
+
+            // Damage Shield
+            box.shieldHealth.ModFlat -= damageAmount;
+
+            // Trigger Event
+            PlayerActionEventManager.Trigger(PlayerActions.ShieldChanged);
+
+            // Damage Player
+            damageAmount = overkillDmg;
+
+            if (damageAmount == 0)
+                return 0;
+        }
+
+        return damageAmount;
+    }
+    public void KillAllShields()
+    {
+        float shieldTotal = GetTotalShieldHealth();
+        if (shieldTotal == 0)
+            return;
+
+        DamageShield(shieldTotal);
     }
     #endregion
 

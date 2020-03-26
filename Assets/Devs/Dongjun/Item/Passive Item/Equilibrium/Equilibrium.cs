@@ -25,7 +25,7 @@ public class Equilibrium : PassiveItem
 
         onDamaged = this.NewPlayerActionEvent(() =>
         {
-            PlayerStats.Inst.DamageReceived += MathD.Round(PlayerStats.Inst.DamageReceived * (effectPercent * 0.01f));
+            PlayerStats.Inst.DamageToReceive += MathD.Round(PlayerStats.Inst.DamageToReceive * (effectPercent * 0.01f));
         });
     }
 
