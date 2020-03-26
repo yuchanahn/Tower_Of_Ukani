@@ -48,4 +48,9 @@ public class JH_Island
         }
         Debug.Log(log);
     }
+
+    public void LogThis()
+    {
+        Debug.Log($"pos.x : {pos.x.ToString()} pos.y : {pos.y.ToString()}");
+    }
 }

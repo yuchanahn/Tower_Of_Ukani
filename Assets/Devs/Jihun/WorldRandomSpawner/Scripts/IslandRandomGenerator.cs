@@ -28,6 +28,7 @@ public class IslandRandomGenerator : MonoBehaviour
     int[] underGroundPer = { 33,66,100 };
     #endregion
 
+
     private void Start()
     {
     }
@@ -192,7 +193,7 @@ public class IslandRandomGenerator : MonoBehaviour
         //====================
 
         // 플랫폼 다리 놓아줌
-        Debug.Log($"height : {height}, width : {width}");
+        //Debug.Log($"height : {height}, width : {width}");
         int highPos = (left.y < right.y) ? left.y : right.y;
 
         //섬이 청크 기준 너무 높은곳에 있어 플랫폼을 놓지 못하는 상황일 때

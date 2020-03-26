@@ -84,10 +84,9 @@ public class ChestManager : SingletonBase<ChestManager>
             where !(chest.isOpened)
             orderby Vector2.Distance(chest.transform.position, player.position)
             select chest;
-
         //가장 가까운 상자가
-        Chest closest = chestsByDist.First();
-
+        Chest closest = chestsByDist.DefaultIfEmpty().First();
+        
         //존재하면
         if (closest != null)
         {

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class WeighPlatform : WeighObject
 {
+    public float minYPos;
+    public float maxYPos;
+
     Rigidbody2D _rg;
 
     [SerializeField]
@@ -37,9 +40,14 @@ public class WeighPlatform : WeighObject
         // Debug.Log(force);
 
         float result = force * speed;
-        if (result > maxVel) result = maxVel;
-        if (result < minVel) result = minVel;
 
+        
+        result = Mathf.Min(result, maxVel);
+        result = Mathf.Max(result, minVel);
+
+        if (transform.position.y > maxYPos) result = Mathf.Min(result, 0);
+        else if (transform.position.y < minYPos) result = Mathf.Max(result, 0);
+        
         _rg.velocity = new Vector2(_rg.velocity.x, result);
     }
 }
