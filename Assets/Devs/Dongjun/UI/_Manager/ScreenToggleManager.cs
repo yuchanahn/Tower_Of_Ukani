@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScreenToggleManager : MonoBehaviour
 {
     [Header("Closeable UI")]
+    [SerializeField] private UI_Screen cli;
     [SerializeField] private UI_Screen inventory;
 
     [Header("Active Hotbar")]
@@ -19,9 +20,34 @@ public class ScreenToggleManager : MonoBehaviour
 
     void Update()
     {
+        ToggleCLI();
+        ToggleInventory();
+        ToggleHotbar();
+    }
+
+    private void ToggleCLI()
+    {
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            cli.Toggle();
+
+            if (cli.gameObject.activeSelf)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+        }
+    }
+    private void ToggleInventory()
+    {
         if (Input.GetKeyDown(PlayerUIKeys.InventoryToggle))
             inventory.Toggle();
-
+    }
+    private void ToggleHotbar()
+    {
         if (Input.GetKeyDown(PlayerUIKeys.ActiveHotbarToggle))
         {
             void AnimateHotbar(RectTransform title, RectTransform slots)
