@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Post Processing
   - Player
   - Pixel
   m_SortingLayers:
