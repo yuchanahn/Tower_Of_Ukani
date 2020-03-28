@@ -25,6 +25,11 @@ public class FlowerBat_Task_Attack : Mob_Task_ProjectileAttack
         IsAttacking = false;
     }
 
+    protected override void Mob_Task_ProjectileAttack_AttackStart_AniEvent()
+    {
+        var o = Mob_Task_ProjectileAttack_Attack();
+        o.GetComponent<Projectile_UltrasonicWave>().Damage = GetComponent<AStat>().Damage;
+    }
 
     public override bool Tick()
     {

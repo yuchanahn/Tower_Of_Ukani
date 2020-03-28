@@ -7,7 +7,7 @@ public class AProjectile<T> : Object_ObjectPool<AProjectile<T>>
     Vector2 mVel = Vector2.zero;
     [SerializeField] int Speed;
     [SerializeField] float DestroyT;
-    [SerializeField] int Damage;
+    [SerializeField] public float Damage;
 
     public override void Begin()
     {
@@ -25,7 +25,9 @@ public class AProjectile<T> : Object_ObjectPool<AProjectile<T>>
 
     [Header("Object Detection")]
     [SerializeField] protected Vector2 detectSize;
-    [SerializeField] protected LayerMask detectLayers;
+    [SerializeField] protected Vector2 detect_Wall_Size;
+    [SerializeField] protected LayerMask detect_Wall_Layers;
+    [SerializeField] protected LayerMask PlayerLayers;
     [SerializeField] protected string[] ignoreTags;
 
     protected bool IsIgnoreTag(Component target)
@@ -41,13 +43,48 @@ public class AProjectile<T> : Object_ObjectPool<AProjectile<T>>
         PlayerStats.Inst.Damage(new AttackData(Damage));
         return true;
     }
+    protected virtual void DetectWall()
+    {
+        Vector2 pos = transform.position + (transform.right * detect_Wall_Size.x * 0.5f) - (transform.right * (Speed * Time.fixedDeltaTime));
+        float rot = transform.rotation.eulerAngles.z;
+
+        RaycastHit2D[] hits =
+            Physics2D.BoxCastAll(pos, detect_Wall_Size, rot, transform.right, Speed * Time.fixedDeltaTime, detect_Wall_Layers);
+
+        Vector2 hitPos = transform.position;
+        GameObject hitObj = null;
+
+        if (hits.Length == 0)
+            return;
+
+        bool hasHit = false;
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            // Check Ignore Tag
+            if (IsIgnoreTag(hits[i].collider))
+                continue;
+
+            // Set Data
+            hasHit = true;
+            hitPos = hits[i].point;
+            hitObj = hits[i].collider.gameObject;
+            break;
+        }
+
+        if (hasHit)
+        {
+            OnHit(hitPos, hitObj);
+        }
+    }
+
     protected virtual void DetectObject()
     {
         Vector2 pos = transform.position + (transform.right * detectSize.x * 0.5f) - (transform.right * (Speed * Time.fixedDeltaTime));
         float rot = transform.rotation.eulerAngles.z;
 
         RaycastHit2D[] hits =
-            Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, Speed * Time.fixedDeltaTime, detectLayers);
+            Physics2D.BoxCastAll(pos, detectSize, rot, transform.right, Speed * Time.fixedDeltaTime, PlayerLayers);
 
         Vector2 hitPos = transform.position;
         GameObject hitObj = null;
@@ -68,7 +105,7 @@ public class AProjectile<T> : Object_ObjectPool<AProjectile<T>>
             hitPos = hits[i].point;
             hitObj = hits[i].collider.gameObject;
 
-            if (hitObj.GetComponent<Creature>() != null)
+            if (hitObj.GetComponent<OBB_Player>() != null)
             {
                 if (CheckCreatureHit(hits[i]))
                 {
@@ -97,5 +134,6 @@ public class AProjectile<T> : Object_ObjectPool<AProjectile<T>>
     private void FixedUpdate()
     {
         DetectObject();
+        DetectWall();
     }
 }

@@ -17,7 +17,7 @@ public class Mob_Task_ProjectileAttack : MonoBehaviour, ITask
         coolTimeT = CoolTime;
     }
 
-    void Mob_Task_ProjectileAttack_AttackStart_AniEvent()
+    virtual protected void Mob_Task_ProjectileAttack_AttackStart_AniEvent()
     {
         Mob_Task_ProjectileAttack_Attack();
     }
@@ -26,10 +26,11 @@ public class Mob_Task_ProjectileAttack : MonoBehaviour, ITask
         OnAttackEnd();
     }
 
-    protected virtual void Mob_Task_ProjectileAttack_Attack()
+    protected virtual GameObject Mob_Task_ProjectileAttack_Attack()
     {
         var o = Projectile.GetComponent<IObjectPool>().CreateThis(transform.position);
         o.GetComponent<IObjectPool>().Init((GM.PlayerPos - transform.position).normalized);
+        return o;
     }
     protected virtual void OnAttackEnd()
     {
