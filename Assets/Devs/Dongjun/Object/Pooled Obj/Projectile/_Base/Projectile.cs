@@ -45,6 +45,11 @@ public class Projectile : PoolingObj
     #region Method: Init PoolingObj
     public override void ResetOnSpawn()
     {
+        // 왜 리지드 바디 위치가 아래를 보고 발사하면 0, 0 인건지는 모르겠음....
+        // 아무튼 여기서 이니셜라이즈 해야함.
+        if (creatureDetectRB != null) creatureDetectRB.position = transform.position;
+        if (wallDetectRB != null) wallDetectRB.position = transform.position;
+
         velocity = Vector2.zero;
         projectileData.travelDist.Reset();
     }
@@ -59,11 +64,6 @@ public class Projectile : PoolingObj
 
         // Init Velocity
         velocity = projectileData.moveSpeed.Value * startDir;
-
-        // 왜 리지드 바디 위치가 아래를 보고 발사하면 0, 0 인건지는 모르겠음....
-        // 아무튼 여기서 이니셜라이즈 해야함.
-        creatureDetectRB.position = transform.position;
-        wallDetectRB.position = transform.position;
     }
     #endregion
 

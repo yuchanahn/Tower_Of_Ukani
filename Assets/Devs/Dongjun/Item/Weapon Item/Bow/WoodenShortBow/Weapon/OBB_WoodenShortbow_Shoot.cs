@@ -4,14 +4,16 @@ using UnityEngine;
 public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenShortbow, WoodenShortbowItem>
 {
     [Header("Shoot")]
-    [SerializeField] protected Transform shootPoint;
-    [SerializeField] protected Arrow arrowPrefab;
+    [SerializeField] private Transform shootPoint;
+    [SerializeField] private Arrow arrowPrefab;
 
     [Header("Shoot Animation")]
-    [SerializeField] protected float shootAnimMaxDur;
+    [SerializeField] private float shootAnimMaxDur;
 
     [Header("Camera Shake")]
-    [SerializeField] protected CameraShake.Data camShakeData_Shoot;
+    [SerializeField] private CameraShake.Data camShakeData_Shoot;
+
+    private ShootCheckWallData shootCheckWallData = new ShootCheckWallData(0.8755f);
 
     public override void OnEnter()
     {
@@ -36,8 +38,12 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
         data.Animator.ResetSpeed();
     }
 
-    protected virtual void SpawnArrow()
+    private void SpawnArrow()
     {
+        // Check Wall
+        if (!shootCheckWallData.CanShoot(transform))
+            return;
+
         // Set Attack Data
         AttackData curAttackData = weaponItem.AttackData;
         curAttackData.damage = new FloatStat(Mathf.Max(weaponItem.AttackData.damage.Value * weaponItem.DrawPower, 1));
@@ -52,13 +58,13 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
         // Set Arrow Data
         arrow.InitData(arrow.transform.right, curArrowData, curAttackData);
     }
-    protected virtual void VisualEffect()
+    private void VisualEffect()
     {
         // Cam Shake
         CamShake_Logic.ShakeDir(camShakeData_Shoot, transform, Vector2.left);
     }
 
-    protected virtual void AnimEvent_ShootArrow()
+    private void AnimEvent_ShootArrow()
     {
         SpawnArrow();
         VisualEffect();

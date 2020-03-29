@@ -26,6 +26,8 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
 
+    private ShootCheckWallData shootCheckWallData = new ShootCheckWallData(0.937f);
+
     public override void OnEnter()
     {
         // Shoot
@@ -55,16 +57,20 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
 
     private void SpawnBullet()
     {
+        // Consume Bullet
+        weaponItem.UseBullet(1);
+
+        // Check Wall
+        if (!shootCheckWallData.CanShoot(transform))
+            return;
+
         // Spawn Bullet
         Bullet bullet = bulletPrefab.Spawn(
-            shootPoint.position + (shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset)),
-            Quaternion.Euler(transform.eulerAngles.Add(z: Random.Range(-acry_ZRotOffset, acry_ZRotOffset))));
+        shootPoint.position + (shootPoint.up * Random.Range(-acry_YPosOffset, acry_YPosOffset)),
+        Quaternion.Euler(transform.eulerAngles.Add(z: Random.Range(-acry_ZRotOffset, acry_ZRotOffset))));
 
         // Set Bullet Data
         bullet.InitData(bullet.transform.right, weaponItem.BulletData, weaponItem.AttackData);
-
-        // Consume Bullet
-        weaponItem.UseBullet(1);
     }
     private void VisualEffect()
     {
