@@ -2,6 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using Dongjun.Helper;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class PixelLevelGenerator : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class PixelLevelGenerator : MonoBehaviour
     [SerializeField] private SpriteRenderer mapTempSprite;
     [SerializeField] private ColorToPrefab[] colorMappings;
     [SerializeField] private LayerMask GroundLayer;
+    [SerializeField] UnityEvent OnGenTile;
 
     private void Start()
     {
         GenerateLevel();
+        OnGenTile.Invoke();
     }
 
     public void GenerateLevel()
@@ -30,8 +33,6 @@ public class PixelLevelGenerator : MonoBehaviour
         GM.MapSize[GM.CurMapName] = mapTexture;
         GM.CurMapCenter = transform.position;
     }
-    [SerializeField] int[] objSize;
-    [SerializeField] string mMapName;
     private void GenerateTile(int x, int y)
     {
         Color pixelColor = mapTexture.GetPixel(x, y);
@@ -47,27 +48,6 @@ public class PixelLevelGenerator : MonoBehaviour
             {
                 Transform tile = Instantiate(colorMapping.prefab, transform).transform;
                 tile.localPosition = new Vector2(x + offsetX, y + offsetY);
-
-                if (((1 << colorMapping.prefab.layer) & GroundLayer) != 0)
-                {
-                    foreach (var osize in objSize)
-                    {
-                        for (int i = 0; i < osize; i++)
-                        {
-                            for (int j = 0; j < osize; j++)
-                            {
-                                var lpfs = tile.position.Add(x: i, y: -j);
-                                var __x = (tile.localPosition.x - offsetX) + i;
-                                var __y = (tile.localPosition.y - offsetY) - j;
-                                if (__x >= 0 && __x < GM.MapSizeOf[mMapName].x && __y >= 0 && __y < GM.MapSizeOf[mMapName].y)
-                                {
-                                    GridView.Inst[mMapName][osize].GetNodeAtWorldPostiton(lpfs).isObstacle = true;
-                                    GridView.Inst[mMapName][osize].GetNodeAtWorldPostiton(lpfs).isVirtualWall = !(i == 0 && j == 0);
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
     }

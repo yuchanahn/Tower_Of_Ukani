@@ -6,20 +6,26 @@ using Dongjun.Helper;
 
 public class JPS_PathFinder : MonoBehaviour
 {
-    [SerializeField] GridView gridV;
+    GridView gridV;
     [SerializeField] GameObject pr;
     [SerializeField] bool ShowingPath;
-    [SerializeField] Grid gridJPS => gridV.grid;
     [SerializeField] int mSize;
 
-    static Dictionary<(string MapName, int Size), JPS_PathFinder> mGet = new Dictionary<(string, int), JPS_PathFinder>();
+    public static Dictionary<(string MapName, int Size), JPS_PathFinder> mGet = new Dictionary<(string, int), JPS_PathFinder>();
     public static JPS_PathFinder _1x1 => mGet[(GM.CurMapName, 1)];
     public static JPS_PathFinder _2x2 => mGet[(GM.CurMapName, 2)];
 
+    private void OnDestroy()
+    {
+        mGet.Clear();
+    }
+
     private void Awake()
     {
+        gridV = GetComponent<GridView>();
         mGet[(gridV.MapName, mSize)] = this;
     }
+
 
     static List<GameObject> pool = new List<GameObject>();
     public Vector2[] Find(Vector2 start, Vector2 stop)
@@ -55,7 +61,8 @@ public class JPS_PathFinder : MonoBehaviour
                 continue;
             }
         }
-        List<Point> path = gridJPS.getPath( gridV.WorldToGrid(start), gridV.WorldToGrid(stop));
+        List<Point> path = gridV.grid.getPath( gridV.WorldToGrid(start), gridV.WorldToGrid(stop));
+
         if (path.Count > 0)
         {
             //if (path[0].column == gridV.WorldToGrid(start).column && path[0].row == gridV.WorldToGrid(start).row)

@@ -42,11 +42,12 @@ public class GridView : MonoBehaviour
 
 
 
-
+    private void OnDestroy()
+    {
+        Inst.Clear();
+    }
     private void Awake()
     {
-
-
         if (!Inst.ContainsKey(MapName))
         {
             Inst[MapName] = new GridView[10];

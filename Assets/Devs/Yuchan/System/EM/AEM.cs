@@ -5,6 +5,13 @@ using UnityEngine;
 
 public static class AEM
 {
+
+
+    public static int ToLayer(this LayerMask l)
+    {
+        return Mathf.RoundToInt(Mathf.Log(l.value, 2));
+    }
+
     public static float AddDT(ref this float val)
     {
         return val += Time.deltaTime;
