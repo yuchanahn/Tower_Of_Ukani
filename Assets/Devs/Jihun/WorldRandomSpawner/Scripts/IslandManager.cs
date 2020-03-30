@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class IslandSpawner : MonoBehaviour
+public class IslandManager : MonoBehaviour
 {
     #region Var:기본
     IslandRandomGenerator _irg;
@@ -33,16 +33,18 @@ public class IslandSpawner : MonoBehaviour
     #endregion
 
     #region Var:최적화
-    [SerializeField] float loadRate = 1f;
+    [SerializeField] static float loadRate = 1f;
     [SerializeField] int loadRange = 40;
 
     Transform target;
 
-    WaitForSeconds wait => new WaitForSeconds(loadRate);
+    WaitForSeconds wait = new WaitForSeconds(loadRate);
     #endregion
 
 
     #region New최적화
+    [SerializeField] int loadFrames = 30;
+    [SerializeField] int itemsPerFrame = 60;
     public static int CHUNKSCALE = 20;
 
     public int[,] allTiles;
@@ -133,16 +135,34 @@ public class IslandSpawner : MonoBehaviour
         }
         */
         //
-        for(int i = 0; i < islands.Count; i++)
-        {
-            PutIslandInArr(islands[i]);
-        }
         
         StartCoroutine(LoadTemp());
     }
 
     IEnumerator LoadTemp()
     {
+        for (int i = 0; i < islands.Count; i++)
+        {
+            PutIslandInArr(islands[i]);
+        }
+
+        //게임 시작시 주변 바로 로드
+        Vector2 pos = WorldToArr(GM.PlayerPos);
+        //로딩 범위 설정
+
+        //플레이어 청크 좌표
+        int playerX = (int)pos.x / CHUNKSCALE;
+        int playerY = (int)pos.y / CHUNKSCALE;
+
+        //청크 로딩
+        for(int x = -1; x <= 1; x++)
+        {
+            for(int y = -1; y <= 1; y++)
+            {
+                InstLoadChunk(playerX + x, playerY + y);
+            }
+        }
+
         //게임 진행중에만 반복할 것
         while (true)
         {
@@ -150,6 +170,39 @@ public class IslandSpawner : MonoBehaviour
             
 
             yield return wait;
+        }
+    }
+
+
+    void ChunkLoading()
+    {
+        Vector2 pos = WorldToArr(GM.PlayerPos);
+        //로딩 범위 설정
+
+        //플레이어 청크 좌표
+        int playerX = (int)pos.x / CHUNKSCALE;
+        int playerY = (int)pos.y / CHUNKSCALE;
+
+        //청크 로딩
+        //자신이 있는 청크는 한번에 로딩
+        InstLoadChunk(playerX, playerY);
+
+        //주변 청크들은 몇프레임 걸쳐서 로딩
+        for(int x = -1; x <= 1; x++)
+        {
+            StartCoroutine(LoadChunk(x + playerX, playerY + 1, loadFrames));
+            StartCoroutine(LoadChunk(x + playerX, playerY - 1, loadFrames));
+        }
+        StartCoroutine(LoadChunk(playerX + 1, playerY, loadFrames));
+        StartCoroutine(LoadChunk(playerX - 1, playerY, loadFrames));
+        
+        //청크 언로딩
+        for (int i = -1; i <= 1; i++)
+        {
+            UnLoadChunk(playerX + i, playerY + 2);
+            UnLoadChunk(playerX - 2, playerY + i);
+            UnLoadChunk(playerX + i, playerY - 2);
+            UnLoadChunk(playerX + 2, playerY + i);
         }
     }
 
@@ -168,35 +221,12 @@ public class IslandSpawner : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }*/
-
-    void ChunkLoading()
-    {
-        Vector2 pos = WorldToArr(GM.PlayerPos);
-        //로딩 범위 설정
-
-        //플레이어 청크 좌표
-        int playerX = (int)pos.x / CHUNKSCALE;
-        int playerY = (int)pos.y / CHUNKSCALE;
-
-        for(int x = -1; x <= 1; x++)
-        {
-            for(int y = -1; y <= 1; y++)
-            {
-                LoadChunk(x + playerX, y + playerY);
-            }
-        }
-        for(int i = -1; i <= 1; i++)
-        {
-            UnLoadChunk(playerX + i, playerY + 2);
-            UnLoadChunk(playerX - 2, playerY + i);
-            UnLoadChunk(playerX + i, playerY - 2);
-            UnLoadChunk(playerX + 2, playerY + i);
-        }
-    }
-
     // 배열에서 해당 청크의 부분을 전부 돌면서 타일을 생성함
-    void LoadChunk(int chunkX, int chunkY)
+    IEnumerator LoadChunk(int chunkX, int chunkY, int frames)
     {
+        int x, y;
+
+
         Vector2 pos = new Vector2(chunkX * CHUNKSCALE, chunkY * CHUNKSCALE);
         GameObject obj;
         //로딩 범위 설정
@@ -211,9 +241,10 @@ public class IslandSpawner : MonoBehaviour
         maxY = Mathf.Clamp(maxY, 0, arrHei);
         //로딩 범위 설정
 
-        for (int x = minX; x < maxX; x++)
+        int spawnedInThisFrame = 0;
+        for ( x = minX; x < maxX; x++)
         {
-            for (int y = minY; y < maxY; y++)
+            for ( y = minY; y < maxY; y++)
             {
                 // 공백이면 넘어감
                 if (allTiles[y, x] < 0) continue;
@@ -226,7 +257,78 @@ public class IslandSpawner : MonoBehaviour
                 //생성 해놓은거 킴
                 if (obj)
                 {
+                    //이게 이미 켜져있으면 더 루프를 돌릴 필요가 없음
+                    if (obj.activeSelf) yield break;
+
+
+                    obj.SetActive(true);
+
+                    loadedTiles.Enqueue(obj);
+
+                    spawnedInThisFrame++;
+
+                }
+                //새로 생성함
+                else
+                {
+                    //Debug.Log($"x : {x} y : {y} allTiles[y, x] : {allTiles[y, x].ToString()}");
+                    obj = Instantiate(tilePrefabs[allTiles[y, x]]);
+                    spawnedTiles.Add(obj);
+                    obj.transform.position = ArrToWorld(pos);
+
+                    loadedTiles.Enqueue(obj);
+                    spawnedInThisFrame++;
+                }
+
+                //해당 프레임에 로딩이 끝나면 다음 프레임으로 로딩을 넘김
+                if (spawnedInThisFrame >= itemsPerFrame)
+                {
+                    Debug.Log($"spawned in this frame : {spawnedInThisFrame}");
+                    yield return new WaitForEndOfFrame();
+                    spawnedInThisFrame = 0;
+                }
+
+            }
+        }
+    }
+    void InstLoadChunk(int chunkX, int chunkY)
+    {
+        int x, y;
+
+
+        Vector2 pos = new Vector2(chunkX * CHUNKSCALE, chunkY * CHUNKSCALE);
+        GameObject obj;
+        //로딩 범위 설정
+        int minX = (int)pos.x;
+        int maxX = (int)pos.x + CHUNKSCALE;
+        int minY = (int)pos.y;
+        int maxY = (int)pos.y + CHUNKSCALE;
+
+        minX = Mathf.Clamp(minX, 0, arrWid);
+        maxX = Mathf.Clamp(maxX, 0, arrWid);
+        minY = Mathf.Clamp(minY, 0, arrHei);
+        maxY = Mathf.Clamp(maxY, 0, arrHei);
+        //로딩 범위 설정
+
+        for (x = minX; x < maxX; x++)
+        {
+            for (y = minY; y < maxY; y++)
+            {
+                // 공백이면 넘어감
+                if (allTiles[y, x] < 0) continue;
+
+                //해당 위치에 타일이 있는지 체크
+                //pos : 배열에서의 좌표
+                pos = new Vector2(x, y);
+                obj = spawnedTiles.Find(temp => WorldToArr(temp.transform.position) == pos);
+
+                //생성 해놓은거 킴
+                if (obj)
+                {
+                    //이게 이미 켜져있으면 더 루프를 돌릴 필요가 없음
                     if (obj.activeSelf) return;
+
+
                     obj.SetActive(true);
 
                     loadedTiles.Enqueue(obj);
