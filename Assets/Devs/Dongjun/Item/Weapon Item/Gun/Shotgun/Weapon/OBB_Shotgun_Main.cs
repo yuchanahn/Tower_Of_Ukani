@@ -18,6 +18,8 @@ class OBB_Shotgun_Main : AimedWeapon_State_Base<OBB_Data_Shotgun, ShotgunItem>
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
 
+    private ShootCheckWallData shootCheckWallData = new ShootCheckWallData(1.3125f);
+
     public override void OnEnter()
     {
         // Shoot
@@ -47,6 +49,13 @@ class OBB_Shotgun_Main : AimedWeapon_State_Base<OBB_Data_Shotgun, ShotgunItem>
 
     private void SpawnBullet()
     {
+        // Consume Bullet
+        weaponItem.UseBullet(1);
+
+        // Check Wall
+        if (!shootCheckWallData.CanShoot(transform))
+            return;
+
         // Set Attack Data
         AttackData curAttackData = weaponItem.AttackData;
         curAttackData.damage = new FloatStat(weaponItem.AttackData.damage.Value / weaponItem.PelletCount);
@@ -62,9 +71,6 @@ class OBB_Shotgun_Main : AimedWeapon_State_Base<OBB_Data_Shotgun, ShotgunItem>
             // Set Bullet Data
             bullet.InitData(bullet.transform.right, weaponItem.BulletData, curAttackData);
         }
-
-        // Consume Bullet
-        weaponItem.UseBullet(1);
     }
     private void VisualEffect()
     {
