@@ -4094,8 +4094,16 @@ MonoBehaviour:
   - {fileID: 4955365150437274225, guid: c082b0cd61b135f43acfdc64f4dcab13, type: 3}
   - {fileID: 4955365150437274225, guid: af7cb70c5ee4a31459c99abfe3d75709, type: 3}
   - {fileID: 3680020755693919084, guid: 6f95758524f0cf647994b83960307c35, type: 3}
-  loadRate: 0.5
   loadRange: 40
+  playerChunk:
+    tiles: []
+    pos: {x: 0, y: 0}
+    startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
+    active: 0
+  itemsPerFrame: 60
+  spawnedChunks: []
+  loadedChunks: []
 --- !u!114 &1225254894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4116,111 +4124,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: weapons.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: nameText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: ammoText
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weaponIcon.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weaponIcon.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weaponIcon.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weapons.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weapons.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: weapons.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: emptyImage
-      value: 
-      objectReference: {fileID: 21300000, guid: 8751664f8cc66864591b816d3e860cc5,
-        type: 3}
-    - target: {fileID: 0}
-      propertyPath: img_WeaponSlots.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: img_WeaponSlots.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: img_WeaponSlots.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: go_WeaponSelected.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: go_WeaponSelected.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: go_WeaponSelected.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: txt_WeaponName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: txt_AmmoInfo
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: txt_WeaponName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: txt_AmmoInfo
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: img_WeaponSlots.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: img_WeaponSlots.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: img_WeaponSlots.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: go_WeaponSelected.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: go_WeaponSelected.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: go_WeaponSelected.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3009825679752861486, guid: 4481dd2a3fe0dce40ad7628ca110315a,
         type: 3}
       propertyPath: items.Array.size
@@ -4555,12 +4458,12 @@ PrefabInstance:
     - target: {fileID: 5681672374981750105, guid: 8e078a41e50e29841bc94cbe8e409e3a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 29.7
       objectReference: {fileID: 0}
     - target: {fileID: 5681672374981750105, guid: 8e078a41e50e29841bc94cbe8e409e3a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5681672374981750105, guid: 8e078a41e50e29841bc94cbe8e409e3a,
         type: 3}
@@ -5112,7 +5015,7 @@ PrefabInstance:
     - target: {fileID: 4650456214795719256, guid: f1d116c160f4e074b855b6a707d8fab1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.34
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4650456214795719256, guid: f1d116c160f4e074b855b6a707d8fab1,
         type: 3}
