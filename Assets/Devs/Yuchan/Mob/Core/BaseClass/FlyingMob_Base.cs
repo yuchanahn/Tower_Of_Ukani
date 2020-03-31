@@ -141,6 +141,10 @@ public abstract class FlyingMob_Base : Mob_Base
         SpriteDir = vel.x > 0 ? 1 : -1;
     }
 
+
+
+    eMobAniST prevAni = eMobAniST.Last;
+
     virtual protected void FixedUpdate()
     {
         MovementAction[MS]();
@@ -161,10 +165,16 @@ public abstract class FlyingMob_Base : Mob_Base
         }
         else
         {
-            mAnimator.Play(m_Ani[mCurAniST].Item1);
+            if (prevAni != mCurAniST)
+            {
+                prevAni = mCurAniST;
+                mAnimator.Play(m_Ani[mCurAniST].Item1);
+            }
         }
         IsJPSVel = false;
     }
+
+
 
 
 
