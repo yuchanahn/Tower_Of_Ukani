@@ -414,6 +414,7 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
 
     public override void OnDead()
     {
+        base.OnDead();
         Destroy(gameObject);
     }
     #endregion

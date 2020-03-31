@@ -9,4 +9,5 @@ public class ARandom
 
     //0~100 %d의 확률로 True False를 반환.
     public static bool Get(int chance) => Random.Range(0, 100) <= chance ? true : false;
+    public static bool Get(float chance) => Random.Range(0f, 100f) <= chance ? true : false;
 }

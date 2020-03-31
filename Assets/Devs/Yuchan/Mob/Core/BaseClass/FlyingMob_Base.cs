@@ -349,6 +349,7 @@ public abstract class FlyingMob_Base : Mob_Base
 
     public override void OnDead()
     {
+        base.OnDead();
         Destroy(gameObject);
     }
 }

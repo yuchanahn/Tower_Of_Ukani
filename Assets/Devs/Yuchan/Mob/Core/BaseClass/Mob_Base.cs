@@ -89,6 +89,12 @@ public abstract class Mob_Base : MonoBehaviour,
     }
 
     public abstract void OnSuccessfulAttack();
-    public abstract void OnDead();
+    public virtual void OnDead()
+    {
+        if(GetComponent<Mob_DropItem>())
+        {
+            GetComponent<Mob_DropItem>().OnDead();
+        }
+    }
     public abstract void OnHurt();
 }
