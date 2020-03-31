@@ -47,8 +47,8 @@ public class OBB_Player_Dash : OBB_Player_State_Base
         // Init Value
         dashDir = PlayerInputManager.Inst.Input_DashDir;
 
-        // Don't Detect Ground
-        data.groundDetectionData.DetectGround(false, data.RB2D, transform);
+        // Reset Collider Size
+        data.groundDetectionData.Reset_IW_Solid_Col_Size();
 
         // Status Effect
         PlayerStatus.AddEffect(status_IgnoreDamage);
