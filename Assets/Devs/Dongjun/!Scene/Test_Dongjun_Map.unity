@@ -2966,6 +2966,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 445707507}
+  - component: {fileID: 445707509}
+  - component: {fileID: 445707508}
   m_Layer: 0
   m_Name: 'Map: Explore'
   m_TagString: Untagged
@@ -2991,6 +2993,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &445707508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445707506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30277f6999a44d84eb6870fc4138ac5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &445707509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445707506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938c4e8e09adfe041ae0ed39ce67fbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &446101683 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8252149920274535821, guid: 7557fee260af581439569f4d0515ab9f,
@@ -5401,6 +5427,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 784393717}
+  - component: {fileID: 784393719}
+  - component: {fileID: 784393718}
   m_Layer: 0
   m_Name: 'Map: Lava'
   m_TagString: Untagged
@@ -5427,6 +5455,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &784393718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784393716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30277f6999a44d84eb6870fc4138ac5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &784393719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784393716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938c4e8e09adfe041ae0ed39ce67fbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &786951001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11859,8 +11911,31 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 512
-  objSize: 0100000002000000
-  mMapName: 'Map: Explore'
+  OnGenTile:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 445707509}
+        m_MethodName: Build
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 445707508}
+        m_MethodName: SetCurrentMapName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1763488487
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14104,8 +14179,31 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 512
-  objSize: 0100000002000000
-  mMapName: 'Map: Lava'
+  OnGenTile:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 784393719}
+        m_MethodName: Build
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 784393718}
+        m_MethodName: SetCurrentMapName
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &2075702759
 PrefabInstance:
   m_ObjectHideFlags: 0
