@@ -110,9 +110,9 @@ public class GridView : MonoBehaviour
     public Node SetGrid(Vector2 pos, bool moveable)
     {
         if ((pos.x < GM.CurMapWorldPoint.x
-           && pos.x > GM.CurMapWorldPoint.x - GM.CurMapSize.width)
+           && pos.x > GM.CurMapWorldPoint.x - GM.CurMapSize_Width)
            && (pos.y < GM.CurMapWorldPoint.y
-           && pos.y > GM.CurMapWorldPoint.y - GM.CurMapSize.height))
+           && pos.y > GM.CurMapWorldPoint.y - GM.CurMapSize_Height))
         {
             var node = GetNodeAtWorldPostiton(pos);
             if (node is null) return null;

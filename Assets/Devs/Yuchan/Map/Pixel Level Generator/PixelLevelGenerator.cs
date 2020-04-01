@@ -30,7 +30,6 @@ public class PixelLevelGenerator : MonoBehaviour
 
         mapTempSprite.sprite = null;
         GM.CurMapName = transform.root.name;
-        GM.MapSize[GM.CurMapName] = mapTexture;
         GM.CurMapCenter = transform.position;
     }
     private void GenerateTile(int x, int y)

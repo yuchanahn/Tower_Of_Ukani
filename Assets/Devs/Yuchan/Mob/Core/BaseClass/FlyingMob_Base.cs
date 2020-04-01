@@ -38,10 +38,10 @@ public abstract class FlyingMob_Base : Mob_Base
                    mMoveStop    ? Vector2.zero :
                    IsJPSVel      ? JPS_Vel      :
                    !( (nextPos.x <  GM.CurMapWorldPoint.x 
-                   && nextPos.x > GM.CurMapWorldPoint.x - GM.CurMapSize.width)
+                   && nextPos.x > GM.CurMapWorldPoint.x - GM.CurMapSize_Width)
                    &&
                    (nextPos.y <  GM.CurMapWorldPoint.y 
-                   && nextPos.y > GM.CurMapWorldPoint.y - GM.CurMapSize.height)) ? Vector2.zero :
+                   && nextPos.y > GM.CurMapWorldPoint.y - GM.CurMapSize_Height)) ? Vector2.zero :
 
                    mMoveData.Dir2d;
         }

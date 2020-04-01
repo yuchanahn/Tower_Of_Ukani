@@ -28,16 +28,14 @@ public class GM : MonoBehaviour
     public static int[] JPSObjSizes => Inst.JPS_UseableObjectSizes;
 
 
-    public static Dictionary<string, Texture2D> MapSize = new Dictionary<string, Texture2D>();
     [SerializeField] _mapsize_data_raw[] MapSizeDefult;
     public static Dictionary<string, Vector2Int> MapSizeOf = new Dictionary<string, Vector2Int>();
-    public static Texture2D CurMapSize => MapSize[CurMapName];
     public static int CurMapSize_Width => MapSizeOf[CurMapName].x;
-    public static int CurMapSize_Heigth => MapSizeOf[CurMapName].y;
+    public static int CurMapSize_Height => MapSizeOf[CurMapName].y;
 
     public static string CurMapName;
     public static Vector2 CurMapCenter;
-    public static Vector2 CurMapWorldPoint => CurMapCenter + new Vector2((CurMapSize.width / 2) + ((CurMapSize.width % 2 == 0) ? 0.5f : 0), (CurMapSize.height / 2) + ((CurMapSize.height % 2 == 0) ? 0.5f : 0));
+    public static Vector2 CurMapWorldPoint => CurMapCenter + new Vector2((CurMapSize_Width / 2) + ((CurMapSize_Width % 2 == 0) ? 0.5f : 0), (CurMapSize_Height / 2) + ((CurMapSize_Height % 2 == 0) ? 0.5f : 0));
 
     public float pos;
 
