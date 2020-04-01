@@ -231,7 +231,8 @@ public class GridView : MonoBehaviour
 
     bool IsPathFind = false;
     static bool once_f = true;
-
+    public float last_jps_ms = 0f;
+    Stopwatch stopwatch = new Stopwatch();
     public void GetJPS_Path()
     {
         if (IsPathFind) return;
@@ -244,10 +245,14 @@ public class GridView : MonoBehaviour
             IsPathFind = true;
             return;
         }
+
         YCThreadPool.Works.Enqueue(()=> {
+            stopwatch.Start(); // 시간측정 시작
             grid.buildPrimaryJumpPoints();
             grid.buildStraightJumpPoints();
             grid.buildDiagonalJumpPoints();
+            stopwatch.Stop(); //시간측정 끝
+            last_jps_ms = stopwatch.ElapsedMilliseconds * 1000f;
         });
         IsPathFind = true;
     }

@@ -145,6 +145,19 @@ public abstract class FlyingMob_Base : Mob_Base
 
     eMobAniST prevAni = eMobAniST.Last;
 
+
+
+    float ani_noamltime_of_last = 0f;
+    private void OnEnable()
+    {
+        mAnimator.Play(m_Ani[mCurAniST].Item1, 0, ani_noamltime_of_last);
+    }
+
+    private void OnDisable()
+    {
+        ani_noamltime_of_last = mAnimator.GetNormalizedTime();
+    }
+
     virtual protected void FixedUpdate()
     {
         MovementAction[MS]();

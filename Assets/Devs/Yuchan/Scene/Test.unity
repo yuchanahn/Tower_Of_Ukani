@@ -680,14 +680,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 513499549, guid: 1e6d57b930118be4eb96a8004b390a75, type: 3}
-      propertyPath: ShowingPath
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 513499549, guid: 1e6d57b930118be4eb96a8004b390a75, type: 3}
-      propertyPath: gridV
-      value: 
-      objectReference: {fileID: 1261863253}
     - target: {fileID: 350722367519165501, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
       propertyPath: m_Name
@@ -755,28 +747,53 @@ PrefabInstance:
       objectReference: {fileID: 1924293385}
     - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
-      propertyPath: JPS_UseableObjectSizes.Array.size
-      value: 2
+      propertyPath: MapSizeDefult.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
-      propertyPath: Map1
-      value: 
-      objectReference: {fileID: 1758955350}
-    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
-        type: 3}
-      propertyPath: Map2
-      value: 
-      objectReference: {fileID: 533755996}
-    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
-        type: 3}
-      propertyPath: JPS_UseableObjectSizes.Array.data[0]
-      value: 1
+      propertyPath: MapSizeDefult.Array.data[1].MapName
+      value: 'Map: Lava'
       objectReference: {fileID: 0}
     - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
         type: 3}
-      propertyPath: JPS_UseableObjectSizes.Array.data[1]
-      value: 2
+      propertyPath: MapSizeDefult.Array.data[1].MapSize.x
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: MapSizeDefult.Array.data[1].MapSize.y
+      value: 63
+      objectReference: {fileID: 0}
+    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: MapSizeDefult.Array.data[2].MapName
+      value: Elevator Map
+      objectReference: {fileID: 0}
+    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: MapSizeDefult.Array.data[2].MapSize.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: MapSizeDefult.Array.data[2].MapSize.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: MapSizeDefult.Array.data[0].MapName
+      value: 'Map: Explore'
+      objectReference: {fileID: 0}
+    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: MapSizeDefult.Array.data[0].MapSize.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 350722369162630155, guid: 1e6d57b930118be4eb96a8004b390a75,
+        type: 3}
+      propertyPath: MapSizeDefult.Array.data[0].MapSize.y
+      value: 81
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e6d57b930118be4eb96a8004b390a75, type: 3}
@@ -1201,6 +1218,11 @@ PrefabInstance:
     - target: {fileID: 765496400, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
       propertyPath: mHP
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AgroRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -4565,6 +4587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30277f6999a44d84eb6870fc4138ac5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapCenter: {x: 0, y: 0}
 --- !u!1 &535502377
 GameObject:
   m_ObjectHideFlags: 0
@@ -4907,6 +4930,11 @@ PrefabInstance:
     - target: {fileID: 765496400, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
       propertyPath: mHP
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AgroRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -8531,6 +8559,11 @@ PrefabInstance:
       propertyPath: mHP
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AgroRange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11080,6 +11113,11 @@ PrefabInstance:
     - target: {fileID: 765496400, guid: d5d22318019f1d34d98255fdd2e82a83, type: 3}
       propertyPath: mHP
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AgroRange
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
@@ -13781,6 +13819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30277f6999a44d84eb6870fc4138ac5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapCenter: {x: 0, y: 0}
 --- !u!1 &1802142478 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
