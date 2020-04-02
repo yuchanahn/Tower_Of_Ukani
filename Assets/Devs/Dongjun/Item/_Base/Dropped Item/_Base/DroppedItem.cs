@@ -25,7 +25,7 @@ public abstract class DroppedItem : MonoBehaviour
     }
     protected virtual void Start()
     {
-        spriteRenderer.transform.DOLocalMoveY(0.5f, 0.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        spriteRenderer.transform.DOLocalMoveY(0.3f, 0.35f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
     }
     #endregion
 
