@@ -45,9 +45,6 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
         // Animation
         data.Animator.Play("Heavy_Attack");
 
-        // Visual Effect
-        CamShake_Logic.ShakeDir(camShakeData_Punch, transform, transform.right);
-
         // Player
         GM.Player.Data.CanDash = false;
         GM.Player.Data.CanKick = false;
@@ -90,6 +87,9 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
     private void AnimEvent_Heavy_HitCheck_0Start()
     {
         hitCheck_Start = true;
+
+        // Visual Effect
+        CamShake_Logic.ShakeDir(camShakeData_Punch, transform, transform.right);
     }
     private void AnimEvent_Heavy_HitCheck_0End()
     {
