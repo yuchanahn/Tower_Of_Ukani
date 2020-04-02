@@ -12,10 +12,8 @@ public class OBB_Fist_Heavy_Charge : HorizontalWeapon_State_Base<OBB_Data_Fist, 
 
     public override void OnEnter()
     {
-        weaponItem.HeavyChargeTime = 0;
-
         // Timer
-        weaponItem.Dur_Heavy.SetActive(true);
+        weaponItem.HeavyChargeTime = 0;
 
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
@@ -30,10 +28,6 @@ public class OBB_Fist_Heavy_Charge : HorizontalWeapon_State_Base<OBB_Data_Fist, 
     }
     public override void OnExit()
     {
-        // Timer
-        weaponItem.Dur_Heavy.SetActive(false);
-        weaponItem.Dur_Heavy.Reset();
-
         // Status Effect
         PlayerStatus.RemoveEffect(status_Slow);
 

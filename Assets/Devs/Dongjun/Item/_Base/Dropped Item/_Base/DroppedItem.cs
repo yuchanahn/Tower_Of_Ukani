@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public abstract class DroppedItem : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public abstract class DroppedItem : MonoBehaviour
 
         // Initialize Icon
         spriteRenderer.sprite = Item.Info.Icon;
+    }
+    protected virtual void Start()
+    {
+        spriteRenderer.transform.DOLocalMoveY(0.5f, 0.5f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
     }
     #endregion
 

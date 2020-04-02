@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -152,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    icon: {fileID: 21300000, guid: 787a57ef333f52b449ce2e66bb892119, type: 3}
+    icon: {fileID: 21300000, guid: 97b6c138e24d8144fbf0f1b0ea3812d7, type: 3}
     itemName: Pistol
     itemDesc: This is an Item
     itemStackLimit: 1
