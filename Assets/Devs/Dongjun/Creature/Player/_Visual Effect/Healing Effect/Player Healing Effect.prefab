@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7100885250870476596}
   - component: {fileID: 7100885250870476599}
   m_Layer: 0
-  m_Name: Healing Effect
+  m_Name: Player Healing Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,6 +47,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -70,10 +71,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 832114591
   m_SortingLayer: 7
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -365836355844911753, guid: a8f596cfa6b7fc649a208c502353b720,
-    type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 950659152189772912, guid: bc53190afdd45494594220e860050ef3, type: 3}
+  m_Color: {r: 0.80569124, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 7100885250870476603}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4d4a54e70f8fdf04bbbfd213bebc1556, type: 2}
+  m_Controller: {fileID: 9100000, guid: 28e50e2fd19eb8c4aabc67f2e93c765c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -116,4 +116,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sleepTimer:
     CurTime: 0
-    EndTime: 0.2916667
+    EndTime: 0.5833334

@@ -63,7 +63,7 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     }
     public override void OnUpdate()
     {
-        // Hit Check 0
+        // Hit Check
         if (hitCheck_Start)
         {
             hitCheck_Start = !hitCheck_End;
@@ -123,6 +123,10 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     }
     void ICanDetectGround.OnGroundStay()
     {
+        if (weaponItem.Dur_Slam.IsActive == false)
+        {
+            (this as ICanDetectGround).OnGroundEnter();
+        }
     }
     void ICanDetectGround.OnGroundExit()
     {

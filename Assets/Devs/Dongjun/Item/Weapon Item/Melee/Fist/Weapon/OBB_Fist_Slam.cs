@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_Fist_Slam : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem>,
+public class OBB_Fist_Slam : Weapon_State_Base<OBB_Data_Fist, FistItem>,
      ICanDetectGround
 {
     [Header("Hit Check")]
@@ -62,7 +62,7 @@ public class OBB_Fist_Slam : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem
     }
     public override void OnUpdate()
     {
-        // Hit Check 0
+        // Hit Check
         if (hitCheck_Start)
         {
             hitCheck_Start = !hitCheck_End;
@@ -74,7 +74,6 @@ public class OBB_Fist_Slam : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem
     }
     public override void OnLateUpdate()
     {
-        base.OnLateUpdate();
         data.Animator.SetDuration(weaponItem.Dur_Slam.EndTime.Value, "Slam");
     }
     public override void OnFixedUpdate()
@@ -123,6 +122,10 @@ public class OBB_Fist_Slam : HorizontalWeapon_State_Base<OBB_Data_Fist, FistItem
     }
     void ICanDetectGround.OnGroundStay()
     {
+        if (weaponItem.Dur_Slam.IsActive == false)
+        {
+            (this as ICanDetectGround).OnGroundEnter();
+        }
     }
     void ICanDetectGround.OnGroundExit()
     {
