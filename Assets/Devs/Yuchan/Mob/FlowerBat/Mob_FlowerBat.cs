@@ -124,6 +124,7 @@ public class Mob_FlowerBat : FlyingMob_Base
     public override void OnDead()
     {
         base.OnDead();
+        GetComponent<CorpseSpawner>().Spawn();
     }
 
     public override void OnSuccessfulAttack()

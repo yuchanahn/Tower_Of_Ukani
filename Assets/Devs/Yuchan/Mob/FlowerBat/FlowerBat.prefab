@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 4835304523073473399}
   - component: {fileID: 221602579}
   - component: {fileID: 367102948323533996}
+  - component: {fileID: 2824940412973418309}
   m_Layer: 8
   m_Name: FlowerBat
   m_TagString: Untagged
@@ -599,3 +600,21 @@ MonoBehaviour:
   IsFleeing: 0
   IsFleeAble: 0
   fleeTimeT: 0
+--- !u!114 &2824940412973418309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408284209935012269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a24ee746b5dc1d448fa8741df306d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mData:
+    cntMin: 4
+    cntMax: 5
+    CurrentMode: 0
+    Corpse: {fileID: 6080232800678302098, guid: 362c31f89ed39ba4495246ca3954ab1c,
+      type: 3}
