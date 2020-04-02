@@ -10,6 +10,9 @@ public class WeaponItemUI : DraggableItemUI
     {
         base.OnUpdateUI(item);
         iconImage.sprite = item.Info.Icon;
+
+        float imgSize = Mathf.Max(iconImage.sprite.rect.width, iconImage.sprite.rect.height) / 16f;
+        iconImage.GetComponent<RectTransform>().localScale = new Vector3(imgSize, imgSize, 1);
     }
 
     public override void ShowTooltip()
