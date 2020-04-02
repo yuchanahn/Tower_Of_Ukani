@@ -73,6 +73,10 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
             hitOverlapData.OverlapCheckOnce(hits);
         }
     }
+    public override void OnLateUpdate()
+    {
+        data.Animator.SetDuration(weaponItem.Dur_Slam.EndTime.Value, "Slam");
+    }
     public override void OnFixedUpdate()
     {
         // Detect Ground
@@ -113,7 +117,6 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
 
         // Animation
         data.Animator.Play("Slam");
-        data.Animator.SetDuration(weaponItem.Dur_Slam.EndTime.Value, "Slam");
 
         // Effect
         CamShake_Logic.ShakeDir(camShakeData_Slam, transform, Vector2.down);
