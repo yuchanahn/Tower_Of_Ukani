@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info:
-    icon: {fileID: 21300000, guid: 8713c2c7f655ec1478bc2f0dc3b3459b, type: 3}
+    icon: {fileID: 21300000, guid: 63542625dc534e147b896304bb5e28fc, type: 3}
     itemName: Shotgun
     itemDesc: This is an Item
     itemStackLimit: 1
@@ -233,6 +233,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
