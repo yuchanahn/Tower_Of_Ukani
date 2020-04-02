@@ -9,7 +9,7 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     [Header("Hit Check")]
     [SerializeField] private Rigidbody2D hitCheck_0;
 
-    [Header("Effect")]
+    [Header("Visual Effect")]
     [SerializeField] private CameraShake.Data camShakeData_Slam;
 
     // Hit Check

@@ -3,21 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_RustyGreatsword_Heavy_Charge : Weapon_State_Base<OBB_Data_RustyGreatsword, RustyGreatswordItem>
+public class OBB_RustyGreatsword_Heavy_Charge : HorizontalWeapon_State_Base<OBB_Data_RustyGreatsword, RustyGreatswordItem>
 {
     private PlayerStatus_Slow status_Slow;
 
     private void Start()
     {
-        status_Slow = new PlayerStatus_Slow(GM.Player.Data.StatusID, GM.Player.gameObject, 50f);
+        status_Slow = new PlayerStatus_Slow(GM.Player.Data.StatusID, GM.Player.gameObject, 60f);
     }
 
     public override void OnEnter()
     {
-        weaponItem.HeavyChargeTime = 0;
-
         // Timer
-        weaponItem.Dur_Heavy.SetActive(true);
+        weaponItem.HeavyChargeTime = 0;
 
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
@@ -32,10 +30,6 @@ public class OBB_RustyGreatsword_Heavy_Charge : Weapon_State_Base<OBB_Data_Rusty
     }
     public override void OnExit()
     {
-        // Timer
-        weaponItem.Dur_Heavy.SetActive(false);
-        weaponItem.Dur_Heavy.Reset();
-
         // Status Effect
         PlayerStatus.RemoveEffect(status_Slow);
 
@@ -53,8 +47,5 @@ public class OBB_RustyGreatsword_Heavy_Charge : Weapon_State_Base<OBB_Data_Rusty
             weaponItem.HeavyChargeTime += Time.deltaTime;
         else
             weaponItem.HeavyChargeTime = weaponItem.HeavyFullChargeTime;
-
-        // Animation
-        data.Animator.speed = Mathf.Lerp(1, 4, weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime);
     }
 }

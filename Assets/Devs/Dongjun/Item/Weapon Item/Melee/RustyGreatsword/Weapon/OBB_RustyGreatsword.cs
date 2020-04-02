@@ -73,10 +73,10 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
             () => !weaponItem.IsSelected || PlayerStatus.Incapacitated, true)
             .AddBehaviour(bvr_Idle);
 
-        //// Dash Attack
-        //NewObjective(
-        //    () => GM.Player.IsDashing)
-        //    .AddBehaviour(bvr_Dash);
+        // Dash Attack
+        NewObjective(
+            () => GM.Player.IsDashing)
+            .AddBehaviour(bvr_Dash);
 
         //// Slam Attack
         //NewObjective(
@@ -93,20 +93,13 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
             })
             .AddBehaviour(bvr_Basic, true);
 
-        //// Heavy Attack
-        //NewObjective(
-        //    () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.SubAbility))
-        //    .AddBehaviour(bvr_Heavy, true);
+        // Heavy Attack
+        NewObjective(
+            () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.SubAbility))
+            .AddBehaviour(bvr_Heavy, true);
 
         // Default
         SetDefaultObjective()
             .AddBehaviour(bvr_Idle);
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-
-        weaponItem.Select(true);
     }
 }

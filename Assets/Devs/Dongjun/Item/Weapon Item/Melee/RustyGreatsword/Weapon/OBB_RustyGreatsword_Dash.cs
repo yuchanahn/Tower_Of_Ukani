@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using Dongjun.Helper;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class OBB_RustyGreatsword_Dash : Weapon_State_Base<OBB_Data_RustyGreatsword, RustyGreatswordItem>
 {
     [Header("Hit Check")]
-    [SerializeField] private Rigidbody2D hitCheck_0;
+    [SerializeField] private Rigidbody2D hitCheck_RB;
 
     // Hit Check
     private ContactFilter2D contactFilter;
@@ -37,6 +38,11 @@ public class OBB_RustyGreatsword_Dash : Weapon_State_Base<OBB_Data_RustyGreatswo
         // Animation
         data.Animator.Play("Dash");
     }
+    public override void OnLateEnter()
+    {
+        // Animation
+        data.Animator.SetDuration(0.25f, "Dash");
+    }
     public override void OnExit()
     {
         // Hit Check
@@ -46,7 +52,7 @@ public class OBB_RustyGreatsword_Dash : Weapon_State_Base<OBB_Data_RustyGreatswo
     {
         // Hit Check 0
         List<Collider2D> hits = new List<Collider2D>();
-        hitCheck_0.OverlapCollider(contactFilter, hits);
+        hitCheck_RB.OverlapCollider(contactFilter, hits);
         hitOverlapData.OverlapCheckOnce(hits);
     }
 }

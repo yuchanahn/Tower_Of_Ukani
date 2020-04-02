@@ -6,24 +6,19 @@ using UnityEngine;
 public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_RustyGreatsword, RustyGreatswordItem>
 {
     [Header("Hit Check")]
-    [SerializeField] private Rigidbody2D hitCheck_0;
+    [SerializeField] private Rigidbody2D hitCheck_RB;
 
-    [Header("Effect")]
-    [SerializeField] private SelfSleepObj dustEffect;
+    [Header("Visual Effect")]
     [SerializeField] private CameraShake.Data camShakeData_Punch;
 
     // Hit Check
     private ContactFilter2D contactFilter;
     private OverlapCheckData hitOverlapData;
-
-    private bool hitCheck_0Start = false;
-    private bool hitCheck_0End = false;
+    private bool hitCheck_Start = false;
+    private bool hitCheck_End = false;
 
     private void Awake()
     {
-        contactFilter = new ContactFilter2D();
-        contactFilter.useTriggers = false;
-
         hitOverlapData = new OverlapCheckData(
             onEnter: overlap =>
             {
@@ -38,6 +33,8 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
                     PlayerActions.WeaponHit,
                     PlayerActions.MeleeHeavyHit);
             });
+
+        contactFilter = new ContactFilter2D { useTriggers = false };
     }
 
     public override void OnEnter()
@@ -48,10 +45,8 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
         // Animation
         data.Animator.Play("Heavy_Attack");
 
-        // Effect
-        if (GM.Player.Data.groundDetectionData.isGrounded)
-            Flip_Logic.FlipXTo(GM.Player.Data.Dir, dustEffect.Spawn(transform.position).transform);
-        CamShake_Logic.ShakeDir(camShakeData_Punch, transform, Vector2.right);
+        // Visual Effect
+        CamShake_Logic.ShakeDir(camShakeData_Punch, transform, transform.right);
 
         // Player
         GM.Player.Data.CanDash = false;
@@ -67,8 +62,8 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
     {
         // Hit Check
         hitOverlapData.Clear();
-        hitCheck_0Start = false;
-        hitCheck_0End = false;
+        hitCheck_Start = false;
+        hitCheck_End = false;
 
         // Timer
         weaponItem.Dur_Heavy.SetActive(false);
@@ -83,22 +78,21 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
     public override void OnUpdate()
     {
         // Hit Check 0
-        if (hitCheck_0Start)
+        if (hitCheck_Start)
         {
-            hitCheck_0Start = !hitCheck_0End;
-
+            hitCheck_Start = !hitCheck_End;
             List<Collider2D> hits = new List<Collider2D>();
-            hitCheck_0.OverlapCollider(contactFilter, hits);
+            hitCheck_RB.OverlapCollider(contactFilter, hits);
             hitOverlapData.OverlapCheckOnce(hits);
         }
     }
 
     private void AnimEvent_Heavy_HitCheck_0Start()
     {
-        hitCheck_0Start = true;
+        hitCheck_Start = true;
     }
     private void AnimEvent_Heavy_HitCheck_0End()
     {
-        hitCheck_0End = true;
+        hitCheck_End = true;
     }
 }
