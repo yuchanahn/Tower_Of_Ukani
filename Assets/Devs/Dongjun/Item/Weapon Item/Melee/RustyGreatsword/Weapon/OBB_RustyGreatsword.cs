@@ -83,7 +83,8 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
             () => !GM.Player.IsKicking
                && !GM.Player.Data.groundDetectionData.isGrounded
                && Input.GetKey(KeyCode.S)
-               && PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility))
+               && PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility)
+               && PlayerStats.Inst.UseStamina(weaponItem.SlamAttack_StaminaUsage.Value))
             .AddBehaviour(bvr_Slam, true);
 
         // Basic Attack
@@ -93,7 +94,8 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
 
         // Heavy Attack
         NewObjective(
-            () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.SubAbility))
+            () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.SubAbility)
+               && PlayerStats.Inst.UseStamina(weaponItem.HeavyAttack_StaminaUsage.Value))
             .AddBehaviour(bvr_Heavy, true);
 
         // Default
