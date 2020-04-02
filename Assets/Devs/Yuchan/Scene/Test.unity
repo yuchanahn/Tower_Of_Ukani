@@ -9080,6 +9080,7 @@ MonoBehaviour:
   Size: {x: 45, y: 1}
   TargetMobSize: 1
   mLastPos: {x: 0, y: 0}
+  vel: {x: 0, y: 0}
 --- !u!1001 &1091941901
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15402,6 +15403,7 @@ MonoBehaviour:
   Size: {x: 10, y: 1}
   TargetMobSize: 1
   mLastPos: {x: 0, y: 0}
+  vel: {x: 0, y: 0}
 --- !u!61 &2045994795
 BoxCollider2D:
   m_ObjectHideFlags: 0
