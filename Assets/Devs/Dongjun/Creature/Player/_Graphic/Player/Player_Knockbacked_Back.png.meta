@@ -1,27 +1,27 @@
 fileFormatVersion: 2
-guid: 867170b5d730fc54d8f5d2d9ded00464
+guid: c635b893a330bd44190ca7b7c078d8e0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 267677433549683660
-    second: Player_Knockback_0
+      213: 2247839693421121315
+    second: Player_Knockback_Back_0
   - first:
-      213: 1626534850624206322
-    second: Player_Knockback_1
+      213: -8816983695344672889
+    second: Player_Knockback_Back_1
   - first:
-      213: -2811506922340437395
-    second: Player_Knockback_2
+      213: -8699627761850274577
+    second: Player_Knockback_Back_2
   - first:
-      213: 3233360280065577934
-    second: Player_Knockback_3
+      213: 2489013302054080953
+    second: Player_Knockback_Back_3
   - first:
-      213: 951901314701974104
-    second: Player_Knockback_4
+      213: 51082506272781886
+    second: Player_Knockback_Back_4
   - first:
-      213: -700915841119113794
-    second: Player_Knockback_5
+      213: -8459388497249907781
+    second: Player_Knockback_Back_5
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -75,6 +75,7 @@ TextureImporter:
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -100,23 +101,11 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Knockback_0
+      name: Player_Knockback_Back_0
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f32bcef3b002b874e80b4bd3f8ba580b
-      internalID: 267677433549683660
+      spriteID: 32f8366aa4ee13f10800000000000000
+      internalID: 2247839693421121315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Knockback_1
+      name: Player_Knockback_Back_1
       rect:
         serializedVersion: 2
         x: 16
@@ -151,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 460ac11cff47b6141b55bbd65cdcebd8
-      internalID: 1626534850624206322
+      spriteID: 78fd1902b08c3a580800000000000000
+      internalID: -8816983695344672889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Knockback_2
+      name: Player_Knockback_Back_2
       rect:
         serializedVersion: 2
         x: 32
@@ -172,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: caf1130fbcb56ed4c8cf41549430d536
-      internalID: -2811506922340437395
+      spriteID: feca9c8a4a6b44780800000000000000
+      internalID: -8699627761850274577
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Knockback_3
+      name: Player_Knockback_Back_3
       rect:
         serializedVersion: 2
         x: 48
@@ -193,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed88c63770245d64684df128ffc8cd27
-      internalID: 3233360280065577934
+      spriteID: 9b1d72e2960ca8220800000000000000
+      internalID: 2489013302054080953
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Knockback_4
+      name: Player_Knockback_Back_4
       rect:
         serializedVersion: 2
         x: 64
@@ -214,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 241eb6f199a56d04cbef2a44ac5d5017
-      internalID: 951901314701974104
+      spriteID: e3630a0d44b75b000800000000000000
+      internalID: 51082506272781886
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Knockback_5
+      name: Player_Knockback_Back_5
       rect:
         serializedVersion: 2
         x: 80
@@ -235,8 +224,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b004c7dc875ce2d4184e300d6e8eabd1
-      internalID: -700915841119113794
+      spriteID: bbbc4644bf63a9a80800000000000000
+      internalID: -8459388497249907781
       vertices: []
       indices: 
       edges: []

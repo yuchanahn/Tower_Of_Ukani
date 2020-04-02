@@ -10769,6 +10769,66 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[0].inSlope
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[0].outSlope
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[1].time
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[1].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[1].inSlope
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[1].outSlope
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719250, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: _data.kbCurve.m_Curve.Array.data[0].value
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4650456214795719256, guid: f1d116c160f4e074b855b6a707d8fab1,
         type: 3}
       propertyPath: m_LocalPosition.x

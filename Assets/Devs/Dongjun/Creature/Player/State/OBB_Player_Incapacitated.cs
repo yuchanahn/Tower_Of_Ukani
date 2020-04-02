@@ -81,24 +81,25 @@ public class OBB_Player_Incapacitated : OBB_Player_State_Base
     {
         // Stun Spinning Star Effect
         stunnedRingEffect.SetActive(PlayerStatus.IsStunned.Value);
-
-        if (PlayerStatus.IsKnockbacked)
-        {
-            // Look Knockback Dir
-            Flip_Logic.FlipXTo(-(int)Mathf.Sign(PlayerStatus.KnockbackDir.x), data.bodySpriteRenderer);
-        }
     }
     private void Animation()
     {
+        string GetKnockbackAnim()
+        {
+            return (PlayerStatus.KnockbackDir.x == data.Dir && PlayerStatus.KnockbackDir.x != 0
+                ? "Knockbacked_Back"
+                : "Knockbacked_Front");
+        }
+
         if (playKnockbackAnim)
         {
             playKnockbackAnim = false;
-            data.Animator.Play("Knockbacked", 0, 0);
+            data.Animator.Play(GetKnockbackAnim(), 0, 0);
             return;
         }
         if (PlayerStatus.IsKnockbacked)
         {
-            data.Animator.Play("Knockbacked");
+            data.Animator.Play(GetKnockbackAnim());
             return;
         }
 

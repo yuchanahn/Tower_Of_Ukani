@@ -17,6 +17,9 @@ public class OBB_Data_Player : OBB_Data_Animator,
 
     [Header("Gravity")]
     public GravityData gravityData;
+
+    [Header("Temp")]
+    public AnimationCurve kbCurve;
     #endregion
 
     // State
@@ -133,5 +136,14 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
         // Default
         SetDefaultObjective()
             .AddBehaviour(bvr_Normal);
+    }
+    protected override void Update()
+    {
+        base.Update();
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            PlayerStatus.AddEffect(new PlayerStatus_Knockback(Data.StatusID, gameObject, KnockbackMode.Strong, true, Vector2.one, Data.kbCurve));
+        }
     }
 }
