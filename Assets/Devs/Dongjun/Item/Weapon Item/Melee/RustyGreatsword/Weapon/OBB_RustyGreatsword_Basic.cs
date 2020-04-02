@@ -56,6 +56,9 @@ public class OBB_RustyGreatsword_Basic : Weapon_State_Base<OBB_Data_RustyGreatsw
         // Timer
         weaponItem.Dur_Basic.SetActive(true);
 
+        weaponItem.Cooldown_Basic.SetActive(false);
+        weaponItem.Cooldown_Basic.Reset();
+
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
 
@@ -82,6 +85,8 @@ public class OBB_RustyGreatsword_Basic : Weapon_State_Base<OBB_Data_RustyGreatsw
         weaponItem.Dur_Basic.SetActive(false);
         weaponItem.Dur_Basic.Reset();
 
+        weaponItem.Cooldown_Basic.SetActive(true);
+
         // Status Effect
         PlayerStatus.RemoveEffect(status_Slow);
 
@@ -106,13 +111,13 @@ public class OBB_RustyGreatsword_Basic : Weapon_State_Base<OBB_Data_RustyGreatsw
     {
         void HitCheck(int index)
         {
-            if (hitCheck_Start[index])
-            {
-                hitCheck_Start[index] = !hitCheck_End[index];
-                List<Collider2D> hits = new List<Collider2D>();
-                hitCheck_RB[index].OverlapCollider(contactFilter, hits);
-                hitOverlapData.OverlapCheckOnce(hits);
-            }
+            if (!hitCheck_Start[index])
+                return;
+
+            hitCheck_Start[index] = !hitCheck_End[index];
+            List<Collider2D> hits = new List<Collider2D>();
+            hitCheck_RB[index].OverlapCollider(contactFilter, hits);
+            hitOverlapData.OverlapCheckOnce(hits);
         }
 
         for (int i = 0; i < hitCheck_RB.Length; i++)

@@ -88,9 +88,7 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
 
         // Basic Attack
         NewObjective(
-            () => {
-                return PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility);
-            })
+            () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility) && weaponItem.Cooldown_Basic.IsEnded)
             .AddBehaviour(bvr_Basic, true);
 
         // Heavy Attack
