@@ -78,13 +78,13 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
             () => GM.Player.IsDashing)
             .AddBehaviour(bvr_Dash);
 
-        //// Slam Attack
-        //NewObjective(
-        //    () => !GM.Player.IsKicking
-        //       && !GM.Player.Data.groundDetectionData.isGrounded
-        //       && Input.GetKey(KeyCode.S)
-        //       && PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility))
-        //    .AddBehaviour(bvr_Slam, true);
+        // Slam Attack
+        NewObjective(
+            () => !GM.Player.IsKicking
+               && !GM.Player.Data.groundDetectionData.isGrounded
+               && Input.GetKey(KeyCode.S)
+               && PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility))
+            .AddBehaviour(bvr_Slam, true);
 
         // Basic Attack
         NewObjective(

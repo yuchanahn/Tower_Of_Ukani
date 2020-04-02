@@ -7,7 +7,7 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     ICanDetectGround
 {
     [Header("Hit Check")]
-    [SerializeField] private Rigidbody2D hitCheck_0;
+    [SerializeField] private Rigidbody2D hitCheck_RB;
 
     [Header("Visual Effect")]
     [SerializeField] private CameraShake.Data camShakeData_Slam;
@@ -15,14 +15,12 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     // Hit Check
     private ContactFilter2D contactFilter;
     private OverlapCheckData hitOverlapData;
-
-    private bool hitCheck_0Start = false;
-    private bool hitCheck_0End = false;
+    private bool hitCheck_Start = false;
+    private bool hitCheck_End = false;
 
     private void Awake()
     {
-        contactFilter = new ContactFilter2D();
-        contactFilter.useTriggers = false;
+        contactFilter = new ContactFilter2D { useTriggers = false };
 
         hitOverlapData = new OverlapCheckData(
             onEnter: overlap =>
@@ -49,8 +47,8 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     {
         // Hit Check
         hitOverlapData.Clear();
-        hitCheck_0Start = false;
-        hitCheck_0End = false;
+        hitCheck_Start = false;
+        hitCheck_End = false;
 
         // Timer
         weaponItem.Dur_Slam.SetActive(false);
@@ -66,12 +64,12 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     public override void OnUpdate()
     {
         // Hit Check 0
-        if (hitCheck_0Start)
+        if (hitCheck_Start)
         {
-            hitCheck_0Start = !hitCheck_0End;
+            hitCheck_Start = !hitCheck_End;
 
             List<Collider2D> hits = new List<Collider2D>();
-            hitCheck_0.OverlapCollider(contactFilter, hits);
+            hitCheck_RB.OverlapCollider(contactFilter, hits);
             hitOverlapData.OverlapCheckOnce(hits);
         }
     }
@@ -100,11 +98,11 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
 
     private void AnimEvent_Slam_HitCheck_0Start()
     {
-        hitCheck_0Start = true;
+        hitCheck_Start = true;
     }
     private void AnimEvent_Slam_HitCheck_0End()
     {
-        hitCheck_0End = true;
+        hitCheck_End = true;
     }
 
     #region Interface: ICanDetectGround
