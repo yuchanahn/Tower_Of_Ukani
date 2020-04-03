@@ -164,6 +164,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera Holder
       objectReference: {fileID: 0}
+    - target: {fileID: 5845774332164052806, guid: 8e078a41e50e29841bc94cbe8e409e3a,
+        type: 3}
+      propertyPath: antialiasingMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6243572457631163769, guid: 8e078a41e50e29841bc94cbe8e409e3a,
         type: 3}
       propertyPath: m_Size.x

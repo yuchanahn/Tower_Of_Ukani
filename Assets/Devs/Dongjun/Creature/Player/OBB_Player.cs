@@ -102,7 +102,7 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
 
         bvr_Dash = new Single(
             state_Dash,
-            EMPTY_STATE_ACTION,
+            new StateAction(start: () => { PlayerStats.Inst.UseStamina(1); }),
             () => state_Dash.DashDone 
                || (state_Normal.JumpData.CanJump && PlayerInputManager.Inst.Input_Jump));
 
@@ -128,7 +128,7 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
             () => Data.CanDash
                && !IsDashing
                && PlayerInputManager.Inst.Input_DashDir != 0 
-               && PlayerStats.Inst.UseStamina(1))
+               && PlayerStats.Inst.stamina.Value >= 1)
             .AddBehaviour(bvr_Dash, true);
 
         // Kick
