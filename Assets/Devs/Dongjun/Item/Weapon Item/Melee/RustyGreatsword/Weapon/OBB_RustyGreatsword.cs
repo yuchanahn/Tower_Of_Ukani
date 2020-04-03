@@ -54,7 +54,11 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
 
         bvr_Heavy = new Sequence(
             (state_Heavy_Charge,
-            EMPTY_STATE_ACTION,
+            new StateAction(
+                start: () => 
+                {
+                    PlayerStats.Inst.UseStamina(weaponItem.HeavyAttack_StaminaUsage.Value); 
+                }),
             () => Input.GetKeyUp(PlayerWeaponKeys.SubAbility)),
             (state_Heavy_Punch,
             EMPTY_STATE_ACTION,
@@ -62,7 +66,11 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
 
         bvr_Slam = new Single(
             state_Slam,
-            EMPTY_STATE_ACTION,
+            new StateAction(
+                start: () =>
+                {
+                    PlayerStats.Inst.UseStamina(weaponItem.HeavyAttack_StaminaUsage.Value);
+                }),
             () => weaponItem.Dur_Slam.IsEnded
                || PlayerInputManager.Inst.Input_DashDir != 0);
     }
@@ -82,20 +90,21 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
         NewObjective(
             () => !GM.Player.IsKicking
                && !GM.Player.Data.groundDetectionData.isGrounded
-               && Input.GetKey(KeyCode.S)
+               && Input.GetKey(PlayerMovementKeys.FallThrough)
                && PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility)
-               && PlayerStats.Inst.UseStamina(weaponItem.SlamAttack_StaminaUsage.Value))
+               && PlayerStats.Inst.stamina.Value >= weaponItem.SlamAttack_StaminaUsage.Value)
             .AddBehaviour(bvr_Slam, true);
 
         // Basic Attack
         NewObjective(
-            () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility) && weaponItem.Cooldown_Basic.IsEnded)
+            () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility)
+               && weaponItem.Cooldown_Basic.IsEnded)
             .AddBehaviour(bvr_Basic, true);
 
         // Heavy Attack
         NewObjective(
             () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.SubAbility)
-               && PlayerStats.Inst.UseStamina(weaponItem.HeavyAttack_StaminaUsage.Value))
+               && PlayerStats.Inst.stamina.Value >= weaponItem.HeavyAttack_StaminaUsage.Value)
             .AddBehaviour(bvr_Heavy, true);
 
         // Default

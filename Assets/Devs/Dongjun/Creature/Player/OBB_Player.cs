@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,12 +23,15 @@ public class OBB_Data_Player : OBB_Data_Animator,
     public AnimationCurve kbCurve;
     #endregion
 
-    // State
+    // State: Player
+    [HideInInspector] public bool CanChangeDir = true;
     [HideInInspector] public bool CanDash = true;
     [HideInInspector] public bool CanKick = true;
-    [HideInInspector] public bool CanChangeDir = true;
-    [HideInInspector] public bool PlayingOtherMotion = false;
+    // State: CC
     [HideInInspector] public bool NewKnockback = false;
+    // State: Other Motion
+    [HideInInspector] public bool PlayingOtherMotion = false;
+    [HideInInspector] public Func<bool> EndOtherMotion = null;
 
     // Data
     public CreatureType CreatureType => CreatureType.Player;
@@ -54,16 +58,16 @@ public class OBB_Data_Player : OBB_Data_Animator,
 public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
 {
     // States
-    private OBB_Player_Normal state_Normal;
     private OBB_Player_Incapacitated state_Incapacitated;
     private OBB_Player_OtherMotion state_OtherMotion;
+    private OBB_Player_Normal state_Normal;
     private OBB_Player_Dash state_Dash;
     private OBB_Player_Kick state_Kick;
 
     // Behaviours
-    private Single bvr_Normal;
     private Single bvr_Incapacitated;
     private Single bvr_OtherMotion;
+    private Single bvr_Normal;
     private Single bvr_Dash;
     private Single bvr_Kick;
 
@@ -72,20 +76,15 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
 
     protected override void InitStates()
     {
-        GetState(ref state_Normal);
         GetState(ref state_Incapacitated);
         GetState(ref state_OtherMotion);
+        GetState(ref state_Normal);
         GetState(ref state_Dash);
         GetState(ref state_Kick);
         SetDefaultState(state_Normal, EMPTY_STATE_ACTION);
     }
     protected override void InitBehaviours()
     {
-        bvr_Normal = new Single(
-            state_Normal,
-            EMPTY_STATE_ACTION,
-            () => false);
-
         bvr_Incapacitated = new Single(
             state_Incapacitated,
             EMPTY_STATE_ACTION,
@@ -95,6 +94,11 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
             state_OtherMotion,
             EMPTY_STATE_ACTION,
             () => !Data.PlayingOtherMotion);
+
+        bvr_Normal = new Single(
+            state_Normal,
+            EMPTY_STATE_ACTION,
+            () => false);
 
         bvr_Dash = new Single(
             state_Dash,
