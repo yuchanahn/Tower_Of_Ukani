@@ -72,7 +72,8 @@ public class OBB_RustyGreatsword : OBB_Controller_Weapon<OBB_Data_RustyGreatswor
                     PlayerStats.Inst.UseStamina(weaponItem.HeavyAttack_StaminaUsage.Value);
                 }),
             () => weaponItem.Dur_Slam.IsEnded
-               || PlayerInputManager.Inst.Input_DashDir != 0);
+               || PlayerInputManager.Inst.Input_DashDir != 0
+               || (!weaponItem.Dur_Slam.IsActive && Input.GetKeyDown(PlayerActionKeys.Kick)));
     }
     protected override void InitObjectives()
     {

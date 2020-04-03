@@ -62,7 +62,8 @@ public class OBB_Fist : OBB_Controller_Weapon<OBB_Data_Fist, FistItem>
             state_Slam,
             EMPTY_STATE_ACTION,
             () => weaponItem.Dur_Slam.IsEnded
-               || PlayerInputManager.Inst.Input_DashDir != 0);
+               || PlayerInputManager.Inst.Input_DashDir != 0
+               || (!weaponItem.Dur_Slam.IsActive && Input.GetKeyDown(PlayerActionKeys.Kick)));
     }
     protected override void InitObjectives()
     {
