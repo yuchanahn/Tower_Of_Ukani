@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 1362207583}
   - component: {fileID: 7555408727852874607}
   - component: {fileID: 10251628}
+  - component: {fileID: 8323386312861915037}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Untagged
@@ -298,11 +299,6 @@ MonoBehaviour:
     acceleration: 40
     terminalVelocity: 0
   m_groundDetectionData:
-    Size: {x: 0, y: 0}
-    IgnoreGrounds: []
-    isGrounded: 0
-    OnGroundEnter_Executed: 0
-    OnGroundExit_Executed: 0
     GroundLayers:
       serializedVersion: 2
       m_Bits: 1536
@@ -313,6 +309,11 @@ MonoBehaviour:
     InnerSnapDist: 0.2
     OutterSnapDist: 0.2
     OffsetAmount: 0
+    Size: {x: 0, y: 0}
+    IgnoreGrounds: []
+    isGrounded: 0
+    OnGroundEnter_Executed: 0
+    OnGroundExit_Executed: 0
     groundRB: {fileID: 0}
   OnFollowing:
     m_PersistentCalls:
@@ -360,6 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHP: 20
   mDamage: 10
+  mHPBarUI: {fileID: 0}
 --- !u!114 &3417997360494488752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,11 +419,23 @@ MonoBehaviour:
   mData:
     cntMin: 4
     cntMax: 5
-    fCntMin: 0
-    fCntMax: 4
     CurrentMode: 0
     Corpse: {fileID: 3864375849378008672, guid: 3eb9ba50ec5f39141a7628c8196b7f4e,
       type: 3}
+--- !u!114 &8323386312861915037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569291923833692112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e5537c917e10a4698edee5c0703d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropCount: 0
+  DropInfos: []
 --- !u!1 &6529837628258330815
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +513,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -653,6 +668,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

@@ -65,6 +65,7 @@ public class Corpse : PoolingObj
         rb2D.gravityScale = GravityScale;
         transform.localScale = Vector3.one;
         StartAbsord = false;
+        mMode = eCorpseSpawnMode.None;
     }
 
 

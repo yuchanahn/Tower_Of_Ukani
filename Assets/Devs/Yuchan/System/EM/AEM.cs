@@ -27,6 +27,18 @@ public static class AEM
         return (o is null);
     }
 
+    public static void IF(this bool o, Action ev)
+    {
+        if(o) ev();
+    }
+    public static T IF<T>(this bool o, Func<T> ev)
+    {
+        if (o)
+            return ev();
+        else
+            return default(T);
+    }
+
     public static List<T> filter<T>(this List<T> l, Func<T, bool> f)
     {
         List<T> rl = new List<T>();

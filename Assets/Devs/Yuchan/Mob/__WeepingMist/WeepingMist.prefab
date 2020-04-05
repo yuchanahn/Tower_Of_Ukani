@@ -122,6 +122,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -225,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHP: 0
   mDamage: 5
+  mHPBarUI: {fileID: 0}
 --- !u!1 &2018358931423771165
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +246,7 @@ GameObject:
   - component: {fileID: 208608847839365501}
   - component: {fileID: 1528643971}
   - component: {fileID: 487823510}
+  - component: {fileID: -6986739167791224115}
   m_Layer: 8
   m_Name: WeepingMist
   m_TagString: Untagged
@@ -357,9 +360,13 @@ MonoBehaviour:
   mMoveData:
     Speed: 4
     Dir2d: {x: 0, y: 0}
+  AddSpeed: 0
   mSprTr: {fileID: 5283869461139039952}
   MoveLink: []
+  mHitImmunity: 0
   mCurAniST: 0
+  MS: 2
+  IsJPSVel: 0
   AttackRange: 1
   MoveTimeIdle: 1
   MoveTimeMove: 3
@@ -408,6 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mHP: 40
   mDamage: 10
+  mHPBarUI: {fileID: 0}
 --- !u!114 &208608847839365501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +464,20 @@ MonoBehaviour:
     CurrentMode: 0
     Corpse: {fileID: 8546638897159743268, guid: 48d257210bec05142be48d1a37927f43,
       type: 3}
+--- !u!114 &-6986739167791224115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018358931423771165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e5537c917e10a4698edee5c0703d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropCount: 0
+  DropInfos: []
 --- !u!1 &3281447207712922554
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +575,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -653,6 +676,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
