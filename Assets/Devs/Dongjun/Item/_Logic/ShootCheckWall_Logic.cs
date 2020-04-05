@@ -12,8 +12,8 @@ public struct ShootCheckWallData
 	public ShootCheckWallData(float checkLength)
 	{
 		this.CheckLength = checkLength;
-		this.UpY = 0.3f;
-		this.DownY = 0.3f;
+		this.UpY = 0.4f;
+		this.DownY = 0.4f;
 	}
 	public ShootCheckWallData(float checkLength, float upY, float downY)
 	{
@@ -27,19 +27,11 @@ public static class ShootCheckWall_Logic
 {
 	public static bool CanShoot(this ShootCheckWallData data, Transform tf)
 	{
-		const int CHECK_UP = 0;
-		const int CHECK_DOWN = 1;
-
-		bool NoWallDetected(int dir)
+		bool NoWallDetected(float yOffset)
 		{
-			float yOffset = dir == CHECK_UP ? data.UpY : -data.DownY;
-
 			return Physics2D.Raycast(GM.PlayerPos.Add(y: yOffset), tf.right, data.CheckLength, GM.SoildGroundLayer).collider == null;
 		}
 
-		// When Aiming Up
-		if (tf.right.y > 0) return NoWallDetected(CHECK_DOWN);
-		// When Aiming Down
-		else return NoWallDetected(CHECK_UP);
+		return NoWallDetected(data.DownY) || NoWallDetected(data.UpY);
 	}
 }

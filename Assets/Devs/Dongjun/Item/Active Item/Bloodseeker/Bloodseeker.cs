@@ -60,6 +60,16 @@ public class Bloodseeker : ActiveItem
                 if (IsActive && durationTimer.IsEnded && corpsesToAbsorb == 0)
                 {
                     PlayerStats.Inst.Heal(PlayerStats.Inst.GetShieldAt(shieldIndex).Value * healMultiplier);
+
+                    // TODO
+                    // 시체 블록 풀링하기 때문에 소환할때 리셋 해야함!!!
+                    //for (int i = 0; i < Mathf.FloorToInt(PlayerStats.Inst.GetShieldAt(shieldIndex).Value / shieldGainPerKill); i++)
+                    //{
+                    //    coprsePrefabs[i].
+                    //        GetComponent<PoolingObj>().Spawn(GM.PlayerPos).
+                    //        GetComponent<Rigidbody2D>().AddForce(Vector2.right * GM.Player.Data.Dir * 50f, ForceMode2D.Impulse);
+                    //}
+
                     Deactivate();
 
                     corutine_CheckAllCorpseAbsorbed = null;
