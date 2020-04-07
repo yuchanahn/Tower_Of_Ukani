@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_Player_Kick : OBB_Player_State_Base
+public class OBB_Player_Kick : OBB_Player_State
 {
     #region Var: Inspector
     [Header("Kick")]

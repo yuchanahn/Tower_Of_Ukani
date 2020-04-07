@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_Player_State_Base : OBB_State, IOBB_State
+public class OBB_Player_State : OBB_State, IOBB_State
 {
     protected OBB_Data_Player data
     { get; private set; }

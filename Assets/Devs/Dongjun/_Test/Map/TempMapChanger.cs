@@ -27,16 +27,15 @@ public class TempMapChanger : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerStats.Inst.IsDead)
-        {
-            PlayerStats.Inst.Heal(PlayerStats.Inst.health.Max);
-            ReloadScene();
-        }
+        ReloadScene();
     }
 
     private void ReloadScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (PlayerStats.Inst.IsDead && Input.GetKeyDown(KeyCode.Return))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void ToMap1()

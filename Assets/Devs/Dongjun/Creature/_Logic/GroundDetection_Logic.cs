@@ -39,7 +39,7 @@ public static class GroundDetection_Logic
 {
     public static Vector2 detectDir = Vector2.down;
 
-    public static void Reset_IW_Solid_Col_Size(this ref GroundDetectionData data)
+    public static void Reset_IWSolid_ColSize(this ref GroundDetectionData data)
     {
         data.IW_Solid.offset = Vector2.zero;
         data.IW_Solid.size = data.Size;
@@ -62,7 +62,7 @@ public static class GroundDetection_Logic
 
         if (!canDetect)
         {
-            data.Reset_IW_Solid_Col_Size();
+            data.Reset_IWSolid_ColSize();
             return;
         }
         #endregion

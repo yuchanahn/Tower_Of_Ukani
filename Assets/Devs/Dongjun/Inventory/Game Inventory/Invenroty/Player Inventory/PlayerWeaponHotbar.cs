@@ -34,6 +34,13 @@ public class PlayerWeaponHotbar : ToU_Inventory
     }
     private void Update()
     {
+        if (PlayerStats.Inst.IsDead)
+        {
+            fist.Select(false);
+            CurWeapon?.Select(false);
+            return;
+        }
+
         // Toggle Fist
         fist.Select(CurWeapon == null);
 

@@ -55,9 +55,10 @@ public class OBB_Data_Player : OBB_Data_Animator,
     }
 }
 
-public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
+public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State>
 {
     // States
+    private OBB_Player_Death state_Death;
     private OBB_Player_Incapacitated state_Incapacitated;
     private OBB_Player_OtherMotion state_OtherMotion;
     private OBB_Player_Normal state_Normal;
@@ -65,6 +66,7 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
     private OBB_Player_Kick state_Kick;
 
     // Behaviours
+    private Single bvr_Death;
     private Single bvr_Incapacitated;
     private Single bvr_OtherMotion;
     private Single bvr_Normal;
@@ -76,6 +78,7 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
 
     protected override void InitStates()
     {
+        GetState(ref state_Death);
         GetState(ref state_Incapacitated);
         GetState(ref state_OtherMotion);
         GetState(ref state_Normal);
@@ -85,6 +88,11 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
     }
     protected override void InitBehaviours()
     {
+        bvr_Death = new Single(
+            state_Death,
+            EMPTY_STATE_ACTION,
+            () => false);
+
         bvr_Incapacitated = new Single(
             state_Incapacitated,
             EMPTY_STATE_ACTION,
@@ -113,6 +121,11 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
     }
     protected override void InitObjectives()
     {
+        // Death
+        NewObjective(
+            () => PlayerStats.Inst.IsDead, true)
+            .AddBehaviour(bvr_Death, true);
+
         // Incapacitated
         NewObjective(
             () => PlayerStatus.Incapacitated, true)
@@ -141,10 +154,11 @@ public class OBB_Player : OBB_Controller<OBB_Data_Player, OBB_Player_State_Base>
         SetDefaultObjective()
             .AddBehaviour(bvr_Normal);
     }
+
+    // Test
     protected override void Update()
     {
         base.Update();
-
         if (Input.GetKeyDown(KeyCode.G))
         {
             PlayerStatus.AddEffect(new PlayerStatus_Knockback(Data.StatusID, gameObject, KnockbackMode.Strong, true, Vector2.one, Data.kbCurve));

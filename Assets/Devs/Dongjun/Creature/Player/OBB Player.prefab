@@ -543,9 +543,10 @@ GameObject:
   - component: {fileID: 8649168620649545331}
   - component: {fileID: 2792864482354239595}
   - component: {fileID: 4650456214795719250}
-  - component: {fileID: 4650456214795719251}
+  - component: {fileID: 7183810906069415269}
   - component: {fileID: 4650456214795719249}
   - component: {fileID: 4650456214795719254}
+  - component: {fileID: 4650456214795719251}
   - component: {fileID: 4650456214795719252}
   - component: {fileID: 4650456214795719253}
   m_Layer: 30
@@ -661,8 +662,8 @@ MonoBehaviour:
     curWalkSpeed: 0
     oldWalkDir: 0
     time: 0
-  DamageReceived: 0
-  HealReceived: 0
+  DamageToReceive: 0
+  HealToReceive: 0
   DamageToDeal: 0
 --- !u!114 &6677957172194497143
 MonoBehaviour:
@@ -754,11 +755,54 @@ MonoBehaviour:
       useGravity: 1
       acceleration: 40
       terminalVelocity: 20
+    kbCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    CanChangeDir: 1
     CanDash: 1
     CanKick: 1
-    CanChangeDir: 1
-    PlayingOtherMotion: 0
     NewKnockback: 0
+    PlayingOtherMotion: 0
+--- !u!114 &7183810906069415269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650456214795719258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6cafb376c2b02545a8e70ebeeb9599c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4650456214795719249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650456214795719258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a284feb643309498483937ddc2edec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunnedRingEffect: {fileID: 3155461408783239577}
+--- !u!114 &4650456214795719254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650456214795719258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883fbae6b88428d458d769e32a6a4020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4650456214795719251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -827,31 +871,6 @@ MonoBehaviour:
     jumpStartY: 0
     curCount: 0
     jumpStarted: 0
---- !u!114 &4650456214795719249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4650456214795719258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40a284feb643309498483937ddc2edec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stunnedRingEffect: {fileID: 3155461408783239577}
---- !u!114 &4650456214795719254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4650456214795719258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883fbae6b88428d458d769e32a6a4020, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4650456214795719252
 MonoBehaviour:
   m_ObjectHideFlags: 0

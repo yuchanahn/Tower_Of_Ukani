@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_Player_Incapacitated : OBB_Player_State_Base
+public class OBB_Player_Incapacitated : OBB_Player_State
 {
     // Stun
     [SerializeField] private GameObject stunnedRingEffect;

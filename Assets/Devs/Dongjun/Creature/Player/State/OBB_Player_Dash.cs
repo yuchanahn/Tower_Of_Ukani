@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_Player_Dash : OBB_Player_State_Base
+public class OBB_Player_Dash : OBB_Player_State
 {
     #region Var: Inspector
     [Header("Dash")]
@@ -48,7 +48,7 @@ public class OBB_Player_Dash : OBB_Player_State_Base
         dashDir = PlayerInputManager.Inst.Input_DashDir;
 
         // Reset Collider Size
-        data.groundDetectionData.Reset_IW_Solid_Col_Size();
+        data.groundDetectionData.Reset_IWSolid_ColSize();
 
         // Status Effect
         PlayerStatus.AddEffect(status_IgnoreDamage);
