@@ -56,7 +56,7 @@ public class ALava : MonoBehaviour
             {
                 //Destroy(mob.gameObject);
                 mob.GetComponent<IDamage>().Hit(new AttackData(Damage));
-                StatusEffect_Knokback.Create(mob.gameObject, Vector2.up, 10, 0.1f);
+                StatusEffect_Knokback.Create(mob.gameObject, Vector2.up, curve);
             }
 
             var corpse = overlaps[i].GetComponent<Corpse>();
