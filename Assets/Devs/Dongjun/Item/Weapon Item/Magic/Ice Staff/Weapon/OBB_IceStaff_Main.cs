@@ -44,7 +44,7 @@ public class OBB_IceStaff_Main : Weapon_State_Base<OBB_IceStaff_Data, IceStaffIt
         transform.LookAtMouseFlipX(CamManager.Inst.MainCam, transform);
 
         // Look At Mouse
-        shootPoint.LookAtMouse(CamManager.Inst.MainCam, transform);
+        shootPoint.LookAtMouse(CamManager.Inst.MainCam, shootPoint);
     }
 
     private void SpawnBullet()
