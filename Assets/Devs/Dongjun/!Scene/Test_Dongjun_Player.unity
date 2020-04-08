@@ -3425,6 +3425,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2103099105}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &222222381512958702
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7851166635224683577, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_Name
+      value: Dropped Ice Staff
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851166635224683578, guid: 7c85bc47345ab8d4090009b640be8117,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7c85bc47345ab8d4090009b640be8117, type: 3}
 --- !u!1001 &2792864482815706653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3432,6 +3501,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2585056350700580358, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2585056351017021860, guid: f1d116c160f4e074b855b6a707d8fab1,
         type: 3}
       propertyPath: m_IsActive

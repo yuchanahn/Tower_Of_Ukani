@@ -36,7 +36,8 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
                 float kbDur = (weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime) * 0.25f;
                 float kbPow = (weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime) * 10f;
 
-                StatusEffect_Knokback.Create(overlap.gameObject, ((Vector2)transform.right + Vector2.up).normalized, kbPow, kbDur);
+                // TODO
+                //StatusEffect_Knokback.Create(overlap.gameObject, ((Vector2)transform.right + Vector2.up).normalized, kbPow, kbDur);
 
                 GameObject stunnedEffect = overlap.GetComponent<StatusEffect_Object>()?.StunnedObj;
                 if (stunnedEffect != null)

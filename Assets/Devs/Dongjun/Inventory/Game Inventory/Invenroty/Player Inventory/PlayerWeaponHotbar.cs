@@ -92,7 +92,7 @@ public class PlayerWeaponHotbar : ToU_Inventory
     }
     private void DropWeapon()
     {
-        if (Input.GetKeyDown(PlayerActionKeys.DropWeapon) && CurWeapon != null)
+        if (Input.GetKeyDown(PlayerActionKeys.DropWeapon) && !IsSlotLocked.Value && CurWeapon != null)
             DropItem(CurSlot);
     }
     #endregion
