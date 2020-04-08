@@ -567,6 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsFollowing: 0
+  offset_y: 2
 --- !u!114 &221602579
 MonoBehaviour:
   m_ObjectHideFlags: 0
