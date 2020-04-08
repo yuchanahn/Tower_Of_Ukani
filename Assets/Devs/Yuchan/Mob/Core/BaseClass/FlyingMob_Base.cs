@@ -36,7 +36,7 @@ public abstract class FlyingMob_Base : Mob_Base
             return mHurt        ? Vector2.zero :
                    mAttacking   ? Vector2.zero :
                    mMoveStop    ? Vector2.zero :
-                   IsJPSVel      ? JPS_Vel      :
+                   IsJPSVel     ? JPS_Vel      :
                    !( (nextPos.x <  GM.CurMapWorldPoint.x 
                    && nextPos.x > GM.CurMapWorldPoint.x - GM.CurMapSize_Width)
                    &&
@@ -158,16 +158,22 @@ public abstract class FlyingMob_Base : Mob_Base
         ani_noamltime_of_last = mAnimator.GetNormalizedTime();
     }
 
+    float CurveTime = 0f;
     virtual protected void FixedUpdate()
     {
         MovementAction[MS]();
 
         mRb2d.velocity = Dir2d * (IsJPSVel ? 1f : MoveSpeed) * mSE.SpeedMult * (CheckOverlapSlow(MobSize, Dir2d) ? OverlapSlow : 1f);
-        if(mSE.EffectDir2d != Vector2.zero)
+        if(mSE.UseSEVel)
         {
             mRb2d.velocity = mSE.EffectDir2d * mSE.SpeedMult;
         }
-
+        if (!mSE.UseSEVelCurve) CurveTime = 0f;
+        if (mSE.UseSEVelCurve)
+        {
+            mRb2d.velocity = mSE.EffectDir2d * mSE.VelCurve.Evaluate(CurveTime);
+            CurveTime += Time.fixedDeltaTime;
+        }
 
         Animation();
         mAnimator.SetDuration(m_Ani[mCurAniST].Item2);

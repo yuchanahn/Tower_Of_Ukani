@@ -158,13 +158,21 @@ public abstract class GroundMob_Base : Mob_Base, ICanDetectGround
 
         m_jumpHeight = m_jumpData.height;
     }
+    float CurveTime = 0f;
     private void FixedUpdate()
     {
         m_groundDetectionData.DetectGround(!m_jumpData.isJumping, m_rb, transform);
         m_groundDetectionData.ExecuteOnGroundMethod(this);
         var OverlapSlowSpeed = (CheckOverlapSlow(MobSize, new Vector2(m_MoveData.Dir, 0)) ? OverlapSlow : 1f);
         m_rb.velocity = new Vector2(m_bFollowJump && m_jumpData.isJumping ? VelX : VelX * m_SEObj.SpeedMult * OverlapSlowSpeed, VelY);
-        if(m_SEObj.EffectDir2d != Vector2.zero) m_rb.velocity = m_SEObj.EffectDir2d * m_SEObj.SpeedMult;
+        if(m_SEObj.UseSEVel) 
+            m_rb.velocity = m_SEObj.EffectDir2d * m_SEObj.SpeedMult;
+        if (!m_SEObj.UseSEVelCurve) CurveTime = 0f;
+        if (m_SEObj.UseSEVelCurve)
+        {
+            m_rb.velocity = m_SEObj.EffectDir2d * m_SEObj.VelCurve.Evaluate(CurveTime);
+            CurveTime += Time.fixedDeltaTime;
+        }
         m_groundDetectionData.FallThrough(ref m_bFallStart, m_rb, transform, m_OneWayCollider);
         
         

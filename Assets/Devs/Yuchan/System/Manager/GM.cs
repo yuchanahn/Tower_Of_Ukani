@@ -18,6 +18,7 @@ public class GM : MonoBehaviour
     [SerializeField] LayerMask soildGround;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] int[] JPS_UseableObjectSizes;
+    [SerializeField] AnimationCurve test_cur;
 
     public static OBB_Player Player => Inst.player;
     public static LayerMask SoildGroundLayer => Inst.soildGround;
@@ -34,6 +35,7 @@ public class GM : MonoBehaviour
     public static int CurMapSize_Height => MapSizeOf[CurMapName].y;
 
     public static string CurMapName;
+    public static AnimationCurve testcur;
     public static Vector2 CurMapCenter;
     public static Vector2 CurMapWorldPoint => CurMapCenter + new Vector2((CurMapSize_Width / 2) + ((CurMapSize_Width % 2 == 0) ? 0.5f : 0), (CurMapSize_Height / 2) + ((CurMapSize_Height % 2 == 0) ? 0.5f : 0));
 
@@ -46,6 +48,7 @@ public class GM : MonoBehaviour
         player = FindObjectOfType<OBB_Player>();
 
         MapSizeDefult.for_each( x => MapSizeOf[x.MapName] = x.MapSize );
+        testcur = test_cur;
     }
 
     private void OnGUI()
