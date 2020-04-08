@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Dongjun.Helper;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,9 +16,11 @@ public class Mob_WeepingMist : FlyingMob_Base
 
     [SerializeField, Header("AttackDuration")] float AttackDuration;
     [SerializeField] GameObject RainObject;
+    [SerializeField] GameObject OverlapDmgObj;
     [SerializeField] SpriteRenderer mRainRenderer;
     [SerializeField] BoxCollider2D RainCollider;
     [SerializeField] Vector2 RainSize;
+    
 
     override protected void PreAttack()
     {
@@ -30,17 +33,18 @@ public class Mob_WeepingMist : FlyingMob_Base
         mCurAniST = eMobAniST.Cry;
 
         RainObject.SetActive(true);
+        OverlapDmgObj.SetActive(false);
         RainObject.transform.localPosition = new Vector3(0, -RainSize.y/2);
-        RainCollider.size = RainSize;
+        RainCollider.size = RainSize.Add(y: 1f);
         mRainRenderer.size = RainSize;
     }
     protected override void OnAttackEnd()
     {
-        
     }
 
     void AttackStop()
     {
+        OverlapDmgObj.SetActive(true);
         mHitImmunity = false;
         base.OnAttackEnd();
         RainObject.SetActive(false);

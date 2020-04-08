@@ -33,7 +33,6 @@ public class FlyingMob_JPS_Task_Follow : MonoBehaviour, ITask
                     if (gv.GetNodeAtWorldPostiton(p).isObstacle) break;
                 }
                 p.row++;
-                Debug.Log($"{p1.row}, {p.row}");
             }
 
             var vel = mMoveMgr.GetVelIfUpdateTarget(JPS_PathFinder._1x1, transform.position, gv.getNodePosAsWorldPos(p), mMob.MoveSpeed);

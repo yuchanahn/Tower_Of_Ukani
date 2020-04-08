@@ -16,9 +16,9 @@ public class MoveableGround : MonoBehaviour
 
     private void Awake()
     {
-        
+
     }
-    
+
     void UpdateJPS(Vector3 vel, float dt)
     {
         mLastNode.ForEach(x => x.isObstacle = false);
@@ -27,19 +27,19 @@ public class MoveableGround : MonoBehaviour
 
         //TODO : 타겟 사이즈 별로 다 해줘야함....
         // 어쩔수 없다. 걍 박쥐에 콜라이더를 넣자............쉣!!!
-        
+        // 쓰레드 오류나는 거 못고침!!!
+
         p += vel * (1f / dt);
         p += vel * (JPS_PathFinder._1x1.GetComponent<GridView>().last_jps_ms);
 
-        mLastNode = mCached_GV.SetGridRange(
-                            p,
-                            new Vector2Int(Size.x, Size.y), 
-                            true);
+        mLastNode = mCached_GV.SetGridRange(p,
+                                            new Vector2Int(Size.x, Size.y),
+                                            true);
     }
     float dt = 0f;
     private void Update()
     {
-        if(mCached_GV.IsNull()) mCached_GV = GridView.Inst[GM.CurMapName][TargetMobSize];
+        if (mCached_GV.IsNull()) mCached_GV = GridView.Inst[GM.CurMapName][TargetMobSize];
         dt += Time.deltaTime;
         if (Mathf.Abs(mLastPos.x - transform.position.x) >= 0.5f || Mathf.Abs(mLastPos.y - transform.position.y) >= 0.5f)
         {
