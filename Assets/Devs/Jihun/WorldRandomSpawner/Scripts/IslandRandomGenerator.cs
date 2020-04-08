@@ -23,7 +23,7 @@ public class IslandRandomGenerator : MonoBehaviour
     int maxHeight = 30;
     int minHeight = 10;
 
-    int[] groundPer = {0, 0, 30, 50, 70, 100 };
+    int[] groundPer = {0, 0, 0, 0, 30, 50, 70, 100 };
     int[] groundSlpPer = {0, 50, 100 };
     int[] underGroundPer = { 33,66,100 };
     #endregion
@@ -33,6 +33,7 @@ public class IslandRandomGenerator : MonoBehaviour
     {
     }
 
+    #region Methods:Island
     // 섬 한개 생성하는 함수. 매개변수로 너비 높이 받아오고, 없으면 그냥 고정 청크 사이즈로 받아옴.
     public JH_Island GenerateIsland(int wid = 0, int hei = 0, int maxWidth = 0, int maxHeight = 0)
     {
@@ -57,6 +58,7 @@ public class IslandRandomGenerator : MonoBehaviour
 
         return land;
     }
+
 
     void InitLand(JH_Island land)
     {
@@ -221,7 +223,62 @@ public class IslandRandomGenerator : MonoBehaviour
             if (land.arr[highPos, i] != (int)Tile.WOODPLATFORM_TOPROD) land.arr[highPos, i] = (int)Tile.WOODPLATFORM_TOP;
         }
     }
+    #endregion
 
+    #region Methods:Bridge
+    //사이즈는 적당히 
+    public JH_Island GenerateBridge(int posX, int posY, int wid, int hei)
+    {
+        JH_Island land = new JH_Island(wid, hei, wid, hei + 2);
+        InitLand(land);
+
+        land.pos = new Vector2Int(posX, posY);
+        land.midPos = land.pos + new Vector2Int(land.arrWidth / 2, -land.arrHeight / 2);
+
+        Vector2Int startPos = Vector2Int.up;
+        land.startPos = startPos;
+        land.endPos = startPos + Vector2Int.right * wid;
+        int diffStart = Random.Range(0, wid/3*2);
+        if (diffStart == 1) diffStart = 0;
+        int diffEnd = Random.Range(diffStart, wid);
+        if (diffEnd == wid-1) diffEnd = wid;
+        int upDown = Random.Range(0, 2) == 0 ? 1 : -1;
+        int x, y;
+
+        // 표면 깔기
+        for(x = 0; x < diffStart; x++)
+        {
+            land.arr[startPos.y, x] = (int)Tile.GRASS;
+        }
+        startPos.y += upDown;
+        for(x = diffStart; x < diffEnd; x++)
+        {
+            land.arr[startPos.y, x] = (int)Tile.GRASS;
+        }
+        startPos.y -= upDown;
+        for (x = diffEnd; x < wid; x++)
+        {
+            land.arr[startPos.y, x] = (int)Tile.GRASS;
+        }
+        // 표면 깔기
+        if (upDown == -1) upDown = 0;
+        //지하 채우기
+        int left = 0, right = 0;
+        for(y = 0; y < hei; y++)
+        {
+            left += Random.Range(y, 2);
+            right += Random.Range(y, 2);
+            for (x = left; x < wid - right; x++)
+            {
+                if(land.arr[y + 1 + upDown, x] < 0)
+                    land.arr[y + 1 + upDown, x] = (int)Tile.DIRT;
+            }
+        }
+
+
+        return land;
+    }
+    #endregion
 
 
     // 확률 테이블 관련

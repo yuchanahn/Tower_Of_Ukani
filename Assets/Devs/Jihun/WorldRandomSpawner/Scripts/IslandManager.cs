@@ -33,14 +33,12 @@ public class IslandManager : SingletonBase<IslandManager>
     #endregion
 
     #region Var:최적화
-    [SerializeField] static float loadRate = 1f;
-    [SerializeField] int loadRange = 40;
+    [SerializeField] static float loadRate = 0.5f;
 
     Transform target;
 
     WaitForSeconds wait = new WaitForSeconds(loadRate);
     #endregion
-
 
     #region New최적화
     public JH_Chunk playerChunk;
@@ -72,22 +70,30 @@ public class IslandManager : SingletonBase<IslandManager>
         int x = land.pos.x;
         int y = land.pos.y + intervalY - 1;
 
-        for(int i = 0; i < land.arrWidth; i++)
+        int maxX = land.arrWidth;
+        int maxY = land.arrHeight;
+
+        //Debug.Log($"maxX : {maxX} maxY : {maxY} y : {y} arrheight : {arrHei}");
+
+        maxX = Mathf.Clamp(maxX, 0, arrWid - x);
+        y = Mathf.Clamp(y, 0, arrHei-1);
+
+        //Debug.Log($"maxX : {maxX} maxY : {maxY}");
+
+
+        for (int i = 0; i < maxX; i++)
         {
-            for(int j = 0; j < land.arrHeight; j++)
+            for(int j = 0; j < maxY; j++)
             {
                 posX = x + i;
                 posY = y - j;
 
-               // Debug.Log($"posX = {posX} posY = {posY} x = {x} y = {y} j = {j} i = {i}");
+                //Debug.Log($"posX = {posX} posY = {posY} x = {x} y = {y} j = {j} i = {i}");
 
-                allTiles[posY, posX] = land.arr[j, i];
+                if(land.arr[j, i] >= 0) allTiles[posY, posX] = land.arr[j, i];
             }
         }
     }
-
-
-    #endregion
 
 
     void Init()
@@ -329,6 +335,7 @@ public class IslandManager : SingletonBase<IslandManager>
     /// <param name="chunk"></param>
     IEnumerator UnLoadChunk(JH_Chunk chunk)
     {
+        if (chunk == null) yield break;
         Vector2 diff = chunk.pos - playerChunk.pos;
         // 플레이어와 근접한 청크라면 언로딩 하지 않음.
         if (Mathf.Abs(diff.x) < 2 && Mathf.Abs(diff.y) < 2) yield break;
@@ -351,72 +358,25 @@ public class IslandManager : SingletonBase<IslandManager>
         loadedChunks.Remove(chunk);
         chunk.active = false;
     }
+#endregion
 
-    #region 일단 지금 안쓰는거
-    void Load()
-    {
-        JH_Island land;
-        JH_IslandComponent landComp;
-
-        for (int i = 0; i < islands.Count; i++)
-        {
-            land = islands[i];
-
-            landComp = islandsInField.Find(x => x.landInfo == land);
-
-            //이미 생성 해 놓은 섬들 처리
-            if (landComp)
-            {
-                landComp.gameObject.SetActive(Vector2.Distance(target.position, land.midPos) < loadRange);
-                continue;
-            }
-
-            //범위 안에 있고 아직 생성되지 않은 섬들 로딩
-            if (Vector2.Distance(target.position, land.midPos) < loadRange)
-            {
-                islandsInField.Add(SpawnIsland(land));
-            }
-        }
-    }
-
-    // 섬을 매개변수로 받아와서 그 섬의 타일을 깔아줌.
-    public JH_IslandComponent SpawnIsland(JH_Island land)
-    {
-        GameObject map = new GameObject();
-        map.name = "NewIsland";
-        map.AddComponent<JH_IslandComponent>();
-        map.GetComponent<JH_IslandComponent>().landInfo = land;
-        map.transform.SetParent(islandParent);
-
-        for (int y = 0; y < land.arrHeight; y++)
-        {
-            for (int x = 0; x < land.arrWidth; x++)
-            {
-                SpawnTile(x, -y, land.arr[y, x]);
-            }
-        }
-
-        map.transform.position = (Vector2)land.pos;
-
-        return map.GetComponent<JH_IslandComponent>();
-    }
-
-    #endregion
     // 초기 월드 생성하는 함수.
     // 내부 반복문에서 청크 갯수 설정하고 그 청크들 사이에 다리를 깔아줌.
+
+    #region 월드 생성
     public void GenerateWorld()
     {
         int x, y;
 
         islandParent = new GameObject().transform;
-        islandParent.name = "Islands";
+        islandParent.gameObject.name = "Islands";
 
         for (y = 0; y < row; y++)
             for (x = 0; x < col; x++)
             {
                 islands.Add(GenerateIsland(x * intervalX, y * intervalY));
             }
-
+        
         //섬간 다리 생성
         for(y = 0; y < row; y++)
         {
@@ -434,6 +394,7 @@ public class IslandManager : SingletonBase<IslandManager>
 
     public JH_Island GenerateIsland(int posX, int posY, int wid = 0, int hei = 0, int maxWidth = 0, int maxHeight = 0)
     {
+        //Debug.Log($"posX : {posX} , posY : {posY}");
         if(wid == 0) wid = Random.Range(30, 50);
         if(hei == 0) hei = wid / 2;
         maxWidth = (maxWidth == 0) ? IslandRandomGenerator.WIDTH : maxWidth;
@@ -459,10 +420,10 @@ public class IslandManager : SingletonBase<IslandManager>
 
         //레이어 설정
         temp.GetComponentInChildren(typeof(SpriteRenderer)).GetComponent<SpriteRenderer>().sortingLayerID = SortingLayer.NameToID("Tile_Block");
-        temp.layer = LayerMask.NameToLayer("Solid Obj");
 
         return temp;
     }
+    #endregion
 
 
     #region Methods:Parts
@@ -475,39 +436,67 @@ public class IslandManager : SingletonBase<IslandManager>
         Vector2 startPos = new Vector2(land1.pos.x + land1.endPos.x, land1.pos.y - land1.endPos.y);
         Vector2 endPos = new Vector2(land2.pos.x + land2.startPos.x, land2.pos.y - land2.startPos.y);
 
+        Debug.Log($"startPos : {startPos}, endPos : {endPos}");
+
+
         //Debug.Log($"startpos : {startPos.ToString()}, endpos : {endPos.ToString()}");
 
-        int repeat = 0;
+        int repeat = 0, i, wid, hei;
 
         Vector2 interval = (endPos - startPos);
 
-        Vector2 newPos;
+        Vector2 newPos = startPos;
+
+        float interX = Mathf.Abs(interval.x);
+        float interY = Mathf.Abs(interval.y);
 
         //다리로 놓을 섬 갯수 설정
-        for (int i = 1; true; i++)
+        int re1, re2;
+        for (i = 1; true; i++)
         {
-            if ((Mathf.Abs(interval.x) / 2 + Mathf.Abs(interval.y)) / i <= 5)
+            if (interX / i <= 20)
             {
-                repeat = i;
+                re1 = i;
                 break;
             }
         }
+        for (i = 1; true; i++)
+        {
+            if (interY / i <= 5)
+            {
+                re2 = i;
+                break;
+            }
+        }
+        repeat = Mathf.Max(re1, re2);
+
         //갯수에 따른 간격 설정
         interval /= repeat;
 
-        //Debug.Log(interval.x.ToString());
-        //섬 크기
-        int minWidth = Mathf.Clamp((int)interval.x, 3, 5);
+        Debug.Log( "repeat : " + repeat.ToString());
 
         //실질적으로 다리 생성하는 반복문
-        for (int i = 1; i < repeat; i++)
+        for(i = 0; i < repeat; i++)
         {
-            newPos = startPos + (interval * i);
+            wid = Random.Range(10, 15);
+            //마지막만 크기 조절 다시
+            if(i == repeat-2)
+            {
+                if (endPos.x - newPos.x < 20) break;
+            }
+            if(i == repeat-1)
+            {
+                wid = (int)(endPos.x - newPos.x - 7);
+            }
+            hei = wid / 3;
 
-            int wid = Random.Range(minWidth, 2);
-            int hei = wid / 2;
+            JH_Island land = _irg.GenerateBridge((int)newPos.x + 5, (int)newPos.y, wid, hei);
 
-            islands.Add(GenerateIsland((int)(newPos.x - interval.x / 2 + (interval.x - wid) / 2), (int)newPos.y, wid, hei, wid, hei));
+            islands.Add(land);
+
+            //SpawnTile((int)newPos.x, (int)newPos.y + 70, (int)IslandRandomGenerator.Tile.GRASS);
+
+            newPos += interval;
         }
     }
 
