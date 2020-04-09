@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 6690830061205965791}
   - component: {fileID: 4884454994905372324}
   m_Layer: 11
-  m_Name: Ice Staff Ice Bolt
+  m_Name: Ice Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   creatureDetectRB: {fileID: 2489550024100341096}
   wallDetectRB: {fileID: 6786331609434194116}
   rotateToMovingDir: 1
-  particle_Hit: {fileID: 1036255023471385981, guid: 29a4720308044564a9f0ee58eed9cb7c,
+  particle_Hit: {fileID: 1036255023471385981, guid: d04ab28e69018c442a5efcc80712ac08,
     type: 3}
   particle_HitOffset: 0.15
 --- !u!1 &7913690715990205613
