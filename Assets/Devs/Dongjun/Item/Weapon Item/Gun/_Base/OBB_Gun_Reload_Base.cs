@@ -8,7 +8,7 @@ public class OBB_Gun_Reload_Base<D, W> : AimedWeapon_State_Base<D, W>
     public override void OnEnter()
     {
         // Timer
-        weaponItem.Timer_Reload.SetActive(true);
+        weaponItem.Dur_Main_Reload.SetActive(true);
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_Reload);
@@ -16,16 +16,16 @@ public class OBB_Gun_Reload_Base<D, W> : AimedWeapon_State_Base<D, W>
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.Timer_Reload.EndTime.Value);
+        data.Animator.SetDuration(weaponItem.Dur_Main_Reload.EndTime.Value);
     }
     public override void OnExit()
     {
-        if (weaponItem.Timer_Reload.IsEnded)
+        if (weaponItem.Dur_Main_Reload.IsEnded)
             weaponItem.ReloadFull();
 
         // Timer
-        weaponItem.Timer_Reload.SetActive(false);
-        weaponItem.Timer_Reload.Reset();
+        weaponItem.Dur_Main_Reload.SetActive(false);
+        weaponItem.Dur_Main_Reload.Reset();
 
         // Animation
         data.Animator.ResetSpeed();

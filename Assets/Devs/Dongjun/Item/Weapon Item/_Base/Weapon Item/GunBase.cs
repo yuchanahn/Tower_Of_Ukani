@@ -10,14 +10,14 @@ public abstract class GunItem : WeaponItem
     #endregion
 
     #region Var: Stats
+    // Timer
+    public readonly TimerStat CD_Main_Shoot = new TimerStat();
+    public readonly TimerStat Dur_Main_Reload = new TimerStat();
+    public readonly TimerStat Dur_Main_SwapMagazine = new TimerStat();
+
     // Bullet Data
     public ProjectileData BulletData
     { get; protected set; }
-
-    // Timer
-    public readonly TimerStat Timer_Shoot = new TimerStat();
-    public readonly TimerStat Timer_Reload = new TimerStat();
-    public readonly TimerStat Timer_SwapMagazine = new TimerStat();
 
     // Ammo Data
     public IntStat MagazineSize
@@ -30,9 +30,9 @@ public abstract class GunItem : WeaponItem
     protected virtual void Start()
     {
         // Init Timer
-        Timer_Shoot.SetTick(gameObject).ToEnd();
-        Timer_Reload.SetTick(gameObject).SetActive(false);
-        Timer_SwapMagazine.SetTick(gameObject).SetActive(false);
+        CD_Main_Shoot.SetTick(gameObject).ToEnd();
+        Dur_Main_Reload.SetTick(gameObject).SetActive(false);
+        Dur_Main_SwapMagazine.SetTick(gameObject).SetActive(false);
 
         // Init Ammo
         LoadedBullets = MagazineSize.Value;
@@ -41,13 +41,11 @@ public abstract class GunItem : WeaponItem
     public override void ResetStats()
     {
         base.ResetStats();
+        CD_Main_Shoot.EndTime.Reset();
+        Dur_Main_Reload.EndTime.Reset();
+        Dur_Main_SwapMagazine.EndTime.Reset();
 
         BulletData.Reset();
-
-        Timer_Shoot.EndTime.Reset();
-        Timer_Reload.EndTime.Reset();
-        Timer_SwapMagazine.EndTime.Reset();
-
         MagazineSize.Reset();
     }
 

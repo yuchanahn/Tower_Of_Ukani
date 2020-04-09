@@ -232,7 +232,7 @@ MonoBehaviour:
   shootPoint: {fileID: 4874016443703363522}
   bulletPrefab: {fileID: 4884454994905372324, guid: 14efff22274086446ba101f7ec4df48b,
     type: 3}
-  shootAnimMaxDur: 0
+  shootAnimMaxDur: 0.5
 --- !u!114 &4874016444632863974
 MonoBehaviour:
   m_ObjectHideFlags: 0

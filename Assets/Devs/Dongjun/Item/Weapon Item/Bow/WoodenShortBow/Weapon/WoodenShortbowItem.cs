@@ -5,7 +5,7 @@ public class WoodenShortbowItem : BowItem
     public override void InitStats()
     {
         // Attack Data
-        AttackData = new AttackData(5);
+        AttackData = new AttackData(25);
 
         // Arrow Data
         arrowData = new ProjectileData()
@@ -16,7 +16,7 @@ public class WoodenShortbowItem : BowItem
         };
 
         // Timer Data
-        Timer_Shoot.EndTime = new FloatStat(0.2f, min: 0f);
-        Timer_Draw.EndTime = new FloatStat(0.5f, min: 0.01f);
+        CD_Main_Shoot.EndTime = new FloatStat(0.2f, min: 0f);
+        Dur_Main_Draw.EndTime = new FloatStat(0.5f, min: 0.01f);
     }
 }

@@ -14,12 +14,12 @@ public abstract class BowItem : WeaponItem
     #endregion
 
     #region Var: Stats
+    // Timer
+    public readonly TimerStat CD_Main_Shoot = new TimerStat();
+    public readonly TimerStat Dur_Main_Draw = new TimerStat();
+
     // Arrow Data
     public ProjectileData arrowData;
-
-    // Timer
-    public readonly TimerStat Timer_Shoot = new TimerStat();
-    public readonly TimerStat Timer_Draw = new TimerStat();
     #endregion
 
     #region Prop: 
@@ -31,14 +31,14 @@ public abstract class BowItem : WeaponItem
     protected virtual void Start()
     {
         // Init Timer
-        Timer_Shoot
+        CD_Main_Shoot
             .SetTick(gameObject)
             .SetActive(false);
-        Timer_Draw
+        Dur_Main_Draw
             .SetTick(gameObject)
             .SetAction(
                 onStart: () => DrawPower = 0,
-                onTick: () => DrawPower = Timer_Draw.CurTime / Timer_Draw.EndTime.Value)
+                onTick: () => DrawPower = Dur_Main_Draw.CurTime / Dur_Main_Draw.EndTime.Value)
             .SetActive(false);
     }
 
@@ -47,7 +47,7 @@ public abstract class BowItem : WeaponItem
         base.ResetStats();
 
         arrowData.Reset();
-        Timer_Shoot.EndTime.Reset();
-        Timer_Draw.EndTime.Reset();
+        CD_Main_Shoot.EndTime.Reset();
+        Dur_Main_Draw.EndTime.Reset();
     }
 }

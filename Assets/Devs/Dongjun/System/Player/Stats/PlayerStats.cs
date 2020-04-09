@@ -60,13 +60,12 @@ public class PlayerStats : SingletonBase<PlayerStats>
         health = new FloatStat(100, min: 0, max: 100);
 
         // Mana
-        mana = new FloatStat(50, min: 0, max: 50);
-        //manaRegen = new FloatStat(0.2f, min: 0);
-        manaRegen = new FloatStat(5f, min: 0);
+        mana = new FloatStat(150, min: 0, max: 150);
+        manaRegen = new FloatStat(2f, min: 0);
 
         // Stamina
         stamina = new FloatStat(3, min: 0, max: 3);
-        staminaRegen = new FloatStat(0.5f, min: 0);
+        staminaRegen = new FloatStat(0.3f, min: 0);
 
         // Walk
         walkData = new PlayerWalkData(new FloatStat(7, min: 0), 0.2f, 0.2f);
@@ -250,6 +249,10 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #endregion
 
     #region Method: Mana
+    public bool HasMana(float amount)
+    {
+        return mana.Value >= amount;
+    }
     public void GainMana(float amount)
     {
         if (amount <= 0)
@@ -282,6 +285,10 @@ public class PlayerStats : SingletonBase<PlayerStats>
     #endregion
 
     #region Method: Stamina
+    public bool HasStamina(float amount)
+    {
+        return stamina.Value >= amount;
+    }
     public void GainStamina(float amount)
     {
         if (amount <= 0)

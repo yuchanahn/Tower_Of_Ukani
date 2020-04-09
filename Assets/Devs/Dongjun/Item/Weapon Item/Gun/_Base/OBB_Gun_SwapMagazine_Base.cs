@@ -12,7 +12,7 @@ public class OBB_Gun_SwapMagazine_Base<D, W> : AimedWeapon_State_Base<D, W>
     public override void OnEnter()
     {
         // Timer
-        weaponItem.Timer_SwapMagazine.SetActive(true);
+        weaponItem.Dur_Main_SwapMagazine.SetActive(true);
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_SwapMagazine);
@@ -20,13 +20,13 @@ public class OBB_Gun_SwapMagazine_Base<D, W> : AimedWeapon_State_Base<D, W>
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.Timer_SwapMagazine.EndTime.Value);
+        data.Animator.SetDuration(weaponItem.Dur_Main_SwapMagazine.EndTime.Value);
     }
     public override void OnExit()
     {
         // Timer
-        weaponItem.Timer_SwapMagazine.SetActive(false);
-        weaponItem.Timer_SwapMagazine.Reset();
+        weaponItem.Dur_Main_SwapMagazine.SetActive(false);
+        weaponItem.Dur_Main_SwapMagazine.Reset();
 
         // Animation
         data.Animator.ResetSpeed();

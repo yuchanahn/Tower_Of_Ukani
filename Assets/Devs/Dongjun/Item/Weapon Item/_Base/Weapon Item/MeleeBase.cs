@@ -7,6 +7,11 @@ public abstract class MeleeItem : WeaponItem
     #endregion
 
     #region Var: Stats
+    // Timer
+    public readonly TimerStat Dur_Basic = new TimerStat();
+    public readonly TimerStat Dur_Heavy = new TimerStat();
+    public readonly TimerStat Dur_Slam = new TimerStat();
+
     // Attack Data
     public AttackData AttackData_Heavy;
     public AttackData AttackData_Slam;
@@ -14,11 +19,6 @@ public abstract class MeleeItem : WeaponItem
 
     // Slam
     public readonly float SlamDownVel = 30f;
-
-    // Timer
-    public readonly TimerStat Dur_Basic = new TimerStat();
-    public readonly TimerStat Dur_Heavy = new TimerStat();
-    public readonly TimerStat Dur_Slam = new TimerStat();
     #endregion
 
     #region Method: Unity
@@ -35,13 +35,12 @@ public abstract class MeleeItem : WeaponItem
     public override void ResetStats()
     {
         base.ResetStats();
+        Dur_Basic.EndTime.Reset();
+        Dur_Heavy.EndTime.Reset();
 
         AttackData_Heavy.Reset();
         AttackData_Slam.Reset();
         AttackData_Dash.Reset();
-
-        Dur_Basic.EndTime.Reset();
-        Dur_Heavy.EndTime.Reset();
     }
     #endregion
 }

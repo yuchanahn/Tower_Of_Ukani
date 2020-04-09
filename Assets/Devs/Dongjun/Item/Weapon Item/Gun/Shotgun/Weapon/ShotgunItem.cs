@@ -9,7 +9,7 @@ public class ShotgunItem : GunItem
     public override void InitStats()
     {
         // Attack Data
-        AttackData = new AttackData(8);
+        AttackData = new AttackData(15);
 
         // Ammo Data
         MagazineSize = new IntStat(2, min: 0);
@@ -22,8 +22,8 @@ public class ShotgunItem : GunItem
         };
 
         // Timer Data
-        Timer_Shoot.EndTime = new FloatStat(0.1f, min: 0.01f);
-        Timer_Reload.EndTime = new FloatStat(0.12f, min: 0.01f);
-        Timer_SwapMagazine.EndTime = new FloatStat(1f, min: 0.01f);
+        CD_Main_Shoot.EndTime = new FloatStat(0.1f, min: 0.01f);
+        Dur_Main_Reload.EndTime = new FloatStat(0.12f, min: 0.01f);
+        Dur_Main_SwapMagazine.EndTime = new FloatStat(1f, min: 0.01f);
     }
 }

@@ -755,12 +755,6 @@ MonoBehaviour:
       useGravity: 1
       acceleration: 40
       terminalVelocity: 20
-    kbCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     CanChangeDir: 1
     CanDash: 1
     CanKick: 1
@@ -885,6 +879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashDist: 4
   dashTime: 0.25
+  staminaUsage: 1
   spriteTrailObject: {fileID: 7287980144595261149, guid: 2604182f55f4d654b93a54d6b8afb46a,
     type: 3}
   trailDuration: 0.12

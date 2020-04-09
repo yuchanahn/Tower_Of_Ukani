@@ -15,7 +15,7 @@ public class MachineGunItem : GunItem
     public override void InitStats()
     {
         // Attack Data
-        AttackData = new AttackData(1);
+        AttackData = new AttackData(5);
 
         // Ammo Data
         MagazineSize = new IntStat(20, min: 0);
@@ -28,20 +28,21 @@ public class MachineGunItem : GunItem
         };
 
         // Timmer Data
-        Timer_Shoot.EndTime = new FloatStat(0.15f, min: 0.01f);
-        Timer_Reload.EndTime = new FloatStat(0.5f, min: 0.01f);
-        Timer_SwapMagazine.EndTime = new FloatStat(1f, min: 0.01f);
+        CD_Main_Shoot.EndTime = new FloatStat(0.15f, min: 0.01f);
+        Dur_Main_Reload.EndTime = new FloatStat(0.5f, min: 0.01f);
+        Dur_Main_SwapMagazine.EndTime = new FloatStat(1f, min: 0.01f);
 
         // Upgrade
         switch (ItemLevel)
         {
-            case 1:
-                break;
+            case 1: break;
+
             case 2:
-                Timer_Shoot.EndTime.Base = 0.1f;
+                CD_Main_Shoot.EndTime.Base = 0.1f;
                 break;
+
             default:
-                Timer_Shoot.EndTime.Base = 0.05f;
+                CD_Main_Shoot.EndTime.Base = 0.05f;
                 break;
         }
     }

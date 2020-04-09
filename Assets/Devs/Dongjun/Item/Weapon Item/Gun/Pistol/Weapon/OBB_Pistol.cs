@@ -37,25 +37,25 @@ public class OBB_Pistol : OBB_Controller_Weapon<OBB_Data_Pistol, PistolItem>
         bvr_AutoReload = new Continue(
             (state_SwapMagazine,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Timer_SwapMagazine.IsEnded),
+            () => weaponItem.Dur_Main_SwapMagazine.IsEnded),
             (state_Reload,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Timer_Reload.IsEnded));
+            () => weaponItem.Dur_Main_Reload.IsEnded));
 
         bvr_ManualReload = new Sequence(
             (state_SwapMagazine,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Timer_SwapMagazine.IsEnded),
+            () => weaponItem.Dur_Main_SwapMagazine.IsEnded),
             (state_Reload,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Timer_Reload.IsEnded));
+            () => weaponItem.Dur_Main_Reload.IsEnded));
 
         bvr_Normal = new Choice(
             (state_Idle,
             EMPTY_STATE_ACTION,
             () => 
             {
-                if (PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility) && weaponItem.Timer_Shoot.IsEnded)
+                if (PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility) && weaponItem.CD_Main_Shoot.IsEnded)
                     return state_Main;
 
                 return state_Idle;
@@ -64,7 +64,7 @@ public class OBB_Pistol : OBB_Controller_Weapon<OBB_Data_Pistol, PistolItem>
             EMPTY_STATE_ACTION,
             () =>
             {
-                if (weaponItem.Timer_Shoot.IsEnded)
+                if (weaponItem.CD_Main_Shoot.IsEnded)
                     return END_BEHAVIOUR;
 
                 return state_Main;
@@ -79,7 +79,7 @@ public class OBB_Pistol : OBB_Controller_Weapon<OBB_Data_Pistol, PistolItem>
 
         // Auto Reload
         NewObjective(
-            () => weaponItem.LoadedBullets == 0 && weaponItem.Timer_Shoot.IsEnded)
+            () => weaponItem.LoadedBullets == 0 && weaponItem.CD_Main_Shoot.IsEnded)
             .AddBehaviour(bvr_AutoReload);
 
         // Manual Reload

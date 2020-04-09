@@ -38,7 +38,8 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
 
         bvr_Main = new Single(
             state_Main,
-            EMPTY_STATE_ACTION,
+            new StateAction(
+                start: () => PlayerStats.Inst.UseMana(weaponItem.ManaUsage_Main_Shoot.Value)),
             () => state_Main.IsAnimEnded);
 
         //bvr_Sub = new Single();
@@ -55,7 +56,8 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
         // Main
         NewObjective(
             () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility)
-               && weaponItem.Cooldown_Main.IsEnded)
+               && PlayerStats.Inst.HasMana(weaponItem.ManaUsage_Main_Shoot.Value)
+               && weaponItem.CD_Main_Shoot.IsEnded)
             .AddBehaviour(bvr_Main, true);
 
         SetDefaultObjective()

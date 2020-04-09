@@ -36,7 +36,7 @@ public class OBB_WoodenShortbow : OBB_Controller_Weapon<OBB_Data_WoodenShortbow,
             () => PlayerWeaponKeys.GetKeyUp(PlayerWeaponKeys.MainAbility)),
             (state_Shoot,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Timer_Shoot.IsEnded));
+            () => weaponItem.CD_Main_Shoot.IsEnded));
     }
     protected override void InitObjectives()
     {

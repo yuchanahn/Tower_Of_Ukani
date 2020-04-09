@@ -4,27 +4,39 @@ using UnityEngine;
 
 public class IceStaffItem : MagicBase
 {
-    public readonly TimerStat Cooldown_Main = new TimerStat();
+    // Timer
+    public readonly TimerStat CD_Main_Shoot = new TimerStat();
 
-    // Bullet Data
     public ProjectileData BulletData
     { get; private set; }
 
+    public FloatStat ManaUsage_Main_Shoot;
+
     private void Start()
     {
-        Cooldown_Main.SetTick(gameObject).ToEnd();
-        Cooldown_Main.SetActive(true);
+        CD_Main_Shoot.SetTick(gameObject).ToEnd();
     }
     public override void InitStats()
     {
-        AttackData = new AttackData(4);
+        CD_Main_Shoot.EndTime = new FloatStat(1f, min: 0.01f);
 
-        Cooldown_Main.EndTime = new FloatStat(0.6f, min: 0.01f);
+        AttackData = new AttackData(15);
 
         BulletData = new ProjectileData()
         {
             moveSpeed = new FloatStat(25f, min: 0f),
             travelDist = new FloatStat(0f, min: 0f, max: 10f)
         };
+
+        ManaUsage_Main_Shoot = new FloatStat(5, min: 0);
+    }
+    public override void ResetStats()
+    {
+        CD_Main_Shoot.EndTime.ResetMinMax();
+
+        AttackData.Reset();
+
+        BulletData.Reset();
+        ManaUsage_Main_Shoot.Reset();
     }
 }

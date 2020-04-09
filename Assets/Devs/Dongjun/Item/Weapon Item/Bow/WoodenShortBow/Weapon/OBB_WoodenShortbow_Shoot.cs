@@ -13,12 +13,10 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
 
-    private ShootCheckWallData shootCheckWallData = new ShootCheckWallData(0.8755f);
-
     public override void OnEnter()
     {
         // Timer
-        weaponItem.Timer_Shoot.SetActive(true);
+        weaponItem.CD_Main_Shoot.SetActive(true);
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_Shoot);
@@ -26,13 +24,13 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.Timer_Shoot.EndTime.Value, shootAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.CD_Main_Shoot.EndTime.Value, shootAnimMaxDur);
     }
     public override void OnExit()
     {
         // Timer
-        weaponItem.Timer_Shoot.SetActive(false);
-        weaponItem.Timer_Shoot.Reset();
+        weaponItem.CD_Main_Shoot.SetActive(false);
+        weaponItem.CD_Main_Shoot.Reset();
 
         // Animation
         data.Animator.ResetSpeed();
@@ -41,7 +39,7 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
     private void SpawnArrow()
     {
         // Check Wall
-        if (!shootCheckWallData.CanShoot(transform))
+        if (!ShootCheckWall_Logic.CanShoot(transform, shootPoint))
             return;
 
         // Set Attack Data

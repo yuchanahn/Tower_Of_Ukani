@@ -8,6 +8,7 @@ public class OBB_Player_Dash : OBB_Player_State
     [Header("Dash")]
     [SerializeField] private float dashDist;
     [SerializeField] private float dashTime;
+    [SerializeField] private float staminaUsage = 1;
 
     [Header("Effect")]
     [SerializeField] private SpriteTrailObject spriteTrailObject;
@@ -30,6 +31,7 @@ public class OBB_Player_Dash : OBB_Player_State
     #endregion
 
     #region Prop: 
+    public float StaminaUsage => staminaUsage;
     public bool DashDone { get; private set; } = false;
     #endregion
 

@@ -26,8 +26,6 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
     [Header("Camera Shake")]
     [SerializeField] private CameraShake.Data camShakeData_Shoot;
 
-    private ShootCheckWallData shootCheckWallData = new ShootCheckWallData(0.937f);
-
     public override void OnEnter()
     {
         // Shoot
@@ -35,7 +33,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
         VisualEffect();
 
         // Timer
-        weaponItem.Timer_Shoot.Reset();
+        weaponItem.CD_Main_Shoot.Reset();
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_Shoot);
@@ -47,7 +45,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.Timer_Shoot.EndTime.Value, shootAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.CD_Main_Shoot.EndTime.Value, shootAnimMaxDur);
     }
     public override void OnExit()
     {
@@ -61,7 +59,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
         weaponItem.UseBullet(1);
 
         // Check Wall
-        if (!shootCheckWallData.CanShoot(transform))
+        if (!ShootCheckWall_Logic.CanShoot(transform, shootPoint))
             return;
 
         // Spawn Bullet

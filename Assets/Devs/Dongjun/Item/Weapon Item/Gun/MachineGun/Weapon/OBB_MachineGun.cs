@@ -39,25 +39,25 @@ public class OBB_MachineGun : OBB_Controller_Weapon<OBB_Data_MachineGun, Machine
         bvr_AutoReload = new Continue(
             (state_SwapMagazine,
             new StateAction(start: () => weaponItem.HideAmmoBelt()),
-            () => weaponItem.Timer_SwapMagazine.IsEnded),
+            () => weaponItem.Dur_Main_SwapMagazine.IsEnded),
             (state_Reload,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Timer_Reload.IsEnded));
+            () => weaponItem.Dur_Main_Reload.IsEnded));
 
         bvr_ManualReload = new Sequence(
             (state_SwapMagazine,
             new StateAction(start: () => weaponItem.HideAmmoBelt()),
-            () => weaponItem.Timer_SwapMagazine.IsEnded),
+            () => weaponItem.Dur_Main_SwapMagazine.IsEnded),
             (state_Reload,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Timer_Reload.IsEnded));
+            () => weaponItem.Dur_Main_Reload.IsEnded));
 
         bvr_Normal = new Choice(
             (state_Idle,
             new StateAction(start: () => weaponItem.UpdateAmmoBeltPos()),
             () =>
             {
-                if (PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility) && weaponItem.Timer_Shoot.IsEnded)
+                if (PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility) && weaponItem.CD_Main_Shoot.IsEnded)
                     return state_Main;
 
                 return state_Idle;
@@ -66,7 +66,7 @@ public class OBB_MachineGun : OBB_Controller_Weapon<OBB_Data_MachineGun, Machine
             EMPTY_STATE_ACTION,
             () =>
             {
-                if (weaponItem.Timer_Shoot.IsEnded)
+                if (weaponItem.CD_Main_Shoot.IsEnded)
                     return END_BEHAVIOUR;
 
                 return state_Main;
@@ -81,7 +81,7 @@ public class OBB_MachineGun : OBB_Controller_Weapon<OBB_Data_MachineGun, Machine
 
         // Auto Reload
         NewObjective(
-            () => weaponItem.LoadedBullets == 0 && weaponItem.Timer_Shoot.IsEnded)
+            () => weaponItem.LoadedBullets == 0 && weaponItem.CD_Main_Shoot.IsEnded)
             .AddBehaviour(bvr_AutoReload);
 
         // Manual Reload
