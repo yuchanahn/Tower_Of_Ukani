@@ -231,7 +231,7 @@ public class GridView : MonoBehaviour
 
     bool IsPathFind = false;
     static bool once_f = true;
-    public float last_jps_ms = 0f;
+    public float last_jps_time = 0f;
     Stopwatch stopwatch = new Stopwatch();
     public void GetJPS_Path()
     {
@@ -252,7 +252,7 @@ public class GridView : MonoBehaviour
             grid.buildStraightJumpPoints();
             grid.buildDiagonalJumpPoints();
             stopwatch.Stop(); //시간측정 끝
-            last_jps_ms = stopwatch.ElapsedMilliseconds * 1000f;
+            last_jps_time = stopwatch.ElapsedMilliseconds * 0.0001f;
         });
         IsPathFind = true;
     }

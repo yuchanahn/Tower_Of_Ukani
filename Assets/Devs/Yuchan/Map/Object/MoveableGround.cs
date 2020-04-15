@@ -30,7 +30,7 @@ public class MoveableGround : MonoBehaviour
         // 쓰레드 오류나는 거 못고침!!!
 
         p += vel * (1f / dt);
-        p += vel * (JPS_PathFinder._1x1.GetComponent<GridView>().last_jps_ms);
+        p += vel * (JPS_PathFinder._1x1.GetComponent<GridView>().last_jps_time);
 
         mLastNode = mCached_GV.SetGridRange(p,
                                             new Vector2Int(Size.x, Size.y),
