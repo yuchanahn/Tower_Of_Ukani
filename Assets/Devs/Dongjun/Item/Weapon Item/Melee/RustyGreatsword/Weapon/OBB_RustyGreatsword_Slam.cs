@@ -28,7 +28,7 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
                 if (overlap.CompareTag("Player"))
                     return;
 
-                PlayerStats.Inst.DealDamage(weaponItem.AttackData_Slam, overlap.gameObject,
+                PlayerStats.Inst.DealDamage(weaponItem.Slam_AttackData, overlap.gameObject,
                     PlayerActions.WeaponHit,
                     PlayerActions.MeleeSlamHit);
             });
@@ -51,8 +51,8 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
         hitCheck_End = false;
 
         // Timer
-        weaponItem.Dur_Slam.SetActive(false);
-        weaponItem.Dur_Slam.Reset();
+        weaponItem.Slam_Dur.SetActive(false);
+        weaponItem.Slam_Dur.Reset();
 
         // Animation
         data.Animator.ResetSpeed();
@@ -75,7 +75,7 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     }
     public override void OnLateUpdate()
     {
-        data.Animator.SetDuration(weaponItem.Dur_Slam.EndTime.Value, "Slam");
+        data.Animator.SetDuration(weaponItem.Slam_Dur.EndTime.Value, "Slam");
     }
     public override void OnFixedUpdate()
     {
@@ -113,7 +113,7 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     void ICanDetectGround.OnGroundEnter()
     {
         // Timer
-        weaponItem.Dur_Slam.SetActive(true);
+        weaponItem.Slam_Dur.SetActive(true);
 
         // Animation
         data.Animator.Play("Slam");
@@ -123,7 +123,7 @@ public class OBB_RustyGreatsword_Slam : Weapon_State_Base<OBB_Data_RustyGreatswo
     }
     void ICanDetectGround.OnGroundStay()
     {
-        if (weaponItem.Dur_Slam.IsActive == false)
+        if (weaponItem.Slam_Dur.IsActive == false)
         {
             (this as ICanDetectGround).OnGroundEnter();
         }

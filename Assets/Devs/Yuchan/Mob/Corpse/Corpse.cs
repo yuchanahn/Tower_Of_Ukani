@@ -50,7 +50,7 @@ public class Corpse : PoolingObj
     float GravityScale = 0;
 
 
-    public override void ResetOnSpawn()
+    public override void OnSpawn()
     {
         if (rb2D == null)
         {

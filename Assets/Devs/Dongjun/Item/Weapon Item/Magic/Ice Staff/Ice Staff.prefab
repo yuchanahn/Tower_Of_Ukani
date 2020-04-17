@@ -258,9 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a66ad987b2e2d194d9c6c1230582b1d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iceBlockPrefab: {fileID: 604988481746377460, guid: c5f4ce54f4183be49a60ab8ceee37df1,
+  iceBlockPrefab: {fileID: 8739487183726803305, guid: c5f4ce54f4183be49a60ab8ceee37df1,
     type: 3}
-  shootPower: 100
+  shootPower: 120
 --- !u!114 &4874016444632863960
 MonoBehaviour:
   m_ObjectHideFlags: 0

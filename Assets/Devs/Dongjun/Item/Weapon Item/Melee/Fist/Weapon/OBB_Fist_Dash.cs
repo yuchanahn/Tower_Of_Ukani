@@ -19,7 +19,7 @@ public class OBB_Fist_Dash : Weapon_State_Base<OBB_Data_Fist, FistItem>
         hitOverlapData = new OverlapCheckData(
             onEnter: overlap =>
             {
-                PlayerStats.Inst.DealDamage(weaponItem.AttackData_Dash, overlap.gameObject,
+                PlayerStats.Inst.DealDamage(weaponItem.Dash_AttackData, overlap.gameObject,
                     PlayerActions.WeaponHit,
                     PlayerActions.MeleeDashHit);
             });

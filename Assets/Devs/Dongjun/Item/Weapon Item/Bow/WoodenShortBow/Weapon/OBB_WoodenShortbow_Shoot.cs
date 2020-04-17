@@ -16,7 +16,7 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
     public override void OnEnter()
     {
         // Timer
-        weaponItem.CD_Main_Shoot.SetActive(true);
+        weaponItem.Main_Shoot_CD.SetActive(true);
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_Shoot);
@@ -24,13 +24,13 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.CD_Main_Shoot.EndTime.Value, shootAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.Main_Shoot_CD.EndTime.Value, shootAnimMaxDur);
     }
     public override void OnExit()
     {
         // Timer
-        weaponItem.CD_Main_Shoot.SetActive(false);
-        weaponItem.CD_Main_Shoot.Reset();
+        weaponItem.Main_Shoot_CD.SetActive(false);
+        weaponItem.Main_Shoot_CD.Reset();
 
         // Animation
         data.Animator.ResetSpeed();
@@ -47,7 +47,7 @@ public class OBB_WoodenShortbow_Shoot : AimedWeapon_State_Base<OBB_Data_WoodenSh
         curAttackData.damage = new FloatStat(Mathf.Max(weaponItem.AttackData.damage.Value * weaponItem.DrawPower, 1));
 
         // Set Projectile Data
-        ProjectileData curArrowData = weaponItem.arrowData;
+        ProjectileData curArrowData = weaponItem.Main_ArrowData;
         curArrowData.moveSpeed.Base *= weaponItem.DrawPower;
 
         // Spawn Arrow

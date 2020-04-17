@@ -25,16 +25,16 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
                 if (overlap.CompareTag("Player"))
                     return;
 
-                AttackData attackDataPunch = weaponItem.AttackData_Heavy;
+                AttackData attackDataPunch = weaponItem.Heavy_AttackData;
                 attackDataPunch.damage
-                    = new FloatStat(baseValue: Mathf.Lerp(1, weaponItem.AttackData_Heavy.damage.Value, weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime));
+                    = new FloatStat(baseValue: Mathf.Lerp(1, weaponItem.Heavy_AttackData.damage.Value, weaponItem.Heavy_CurChargeTime / weaponItem.Heavy_FullChargeTime));
 
                 PlayerStats.Inst.DealDamage(attackDataPunch, overlap.gameObject,
                     PlayerActions.WeaponHit,
                     PlayerActions.MeleeHeavyHit);
 
-                float kbDur = (weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime) * 0.25f;
-                float kbPow = (weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime) * 10f;
+                float kbDur = (weaponItem.Heavy_CurChargeTime / weaponItem.Heavy_FullChargeTime) * 0.25f;
+                float kbPow = (weaponItem.Heavy_CurChargeTime / weaponItem.Heavy_FullChargeTime) * 10f;
 
                 // TODO
                 //StatusEffect_Knokback.Create(overlap.gameObject, ((Vector2)transform.right + Vector2.up).normalized, kbPow, kbDur);
@@ -50,7 +50,7 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
     public override void OnEnter()
     {
         // Timer
-        weaponItem.Dur_Heavy.SetActive(true);
+        weaponItem.Heavy_Dur.SetActive(true);
 
         // Animation
         data.Animator.Play("Heavy_Attack");
@@ -63,7 +63,7 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
     }
     public override void OnLateEnter()
     {
-        data.Animator.SetDuration(weaponItem.Dur_Heavy.EndTime.Value);
+        data.Animator.SetDuration(weaponItem.Heavy_Dur.EndTime.Value);
     }
     public override void OnExit()
     {
@@ -73,8 +73,8 @@ public class OBB_RustyGreatsword_Heavy_Attack : Weapon_State_Base<OBB_Data_Rusty
         hitCheck_End = false;
 
         // Timer
-        weaponItem.Dur_Heavy.SetActive(false);
-        weaponItem.Dur_Heavy.Reset();
+        weaponItem.Heavy_Dur.SetActive(false);
+        weaponItem.Heavy_Dur.Reset();
 
         // Player
         GM.Player.Data.CanDash = true;

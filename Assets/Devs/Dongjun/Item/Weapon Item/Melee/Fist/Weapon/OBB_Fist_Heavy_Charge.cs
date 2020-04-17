@@ -13,7 +13,7 @@ public class OBB_Fist_Heavy_Charge : HorizontalWeapon_State_Base<OBB_Data_Fist, 
     public override void OnEnter()
     {
         // Timer
-        weaponItem.HeavyChargeTime = 0;
+        weaponItem.Heavy_CurChargeTime = 0;
 
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
@@ -41,12 +41,12 @@ public class OBB_Fist_Heavy_Charge : HorizontalWeapon_State_Base<OBB_Data_Fist, 
     }
     public override void OnUpdate()
     {
-        if (weaponItem.HeavyChargeTime < weaponItem.HeavyFullChargeTime)
-            weaponItem.HeavyChargeTime += Time.deltaTime;
+        if (weaponItem.Heavy_CurChargeTime < weaponItem.Heavy_FullChargeTime)
+            weaponItem.Heavy_CurChargeTime += Time.deltaTime;
         else
-            weaponItem.HeavyChargeTime = weaponItem.HeavyFullChargeTime;
+            weaponItem.Heavy_CurChargeTime = weaponItem.Heavy_FullChargeTime;
 
         // Animation
-        data.Animator.speed = Mathf.Lerp(1, 4, weaponItem.HeavyChargeTime / weaponItem.HeavyFullChargeTime);
+        data.Animator.speed = Mathf.Lerp(1, 4, weaponItem.Heavy_CurChargeTime / weaponItem.Heavy_FullChargeTime);
     }
 }

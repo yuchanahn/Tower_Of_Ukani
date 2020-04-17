@@ -14,23 +14,18 @@ public class MachineGunItem : GunItem
 
     public override void InitStats()
     {
-        // Attack Data
         AttackData = new AttackData(5);
 
-        // Ammo Data
-        MagazineSize = new IntStat(20, min: 0);
-
-        // Bullet Data
-        BulletData = new ProjectileData()
+        // Main
+        Main_Shoot_CD.EndTime = new FloatStat(0.15f, min: 0.01f);
+        Main_Reload_Dur.EndTime = new FloatStat(0.5f, min: 0.01f);
+        Main_SwapMagazine_Dur.EndTime = new FloatStat(1f, min: 0.01f);
+        Main_MagazineSize = new IntStat(20, min: 0);
+        Main_BulletData = new ProjectileData()
         {
             moveSpeed = new FloatStat(45f, min: 0f),
             travelDist = new FloatStat(min: 0f, max: 10f)
         };
-
-        // Timmer Data
-        CD_Main_Shoot.EndTime = new FloatStat(0.15f, min: 0.01f);
-        Dur_Main_Reload.EndTime = new FloatStat(0.5f, min: 0.01f);
-        Dur_Main_SwapMagazine.EndTime = new FloatStat(1f, min: 0.01f);
 
         // Upgrade
         switch (ItemLevel)
@@ -38,11 +33,11 @@ public class MachineGunItem : GunItem
             case 1: break;
 
             case 2:
-                CD_Main_Shoot.EndTime.Base = 0.1f;
+                Main_Shoot_CD.EndTime.Base = 0.1f;
                 break;
 
             default:
-                CD_Main_Shoot.EndTime.Base = 0.05f;
+                Main_Shoot_CD.EndTime.Base = 0.05f;
                 break;
         }
     }
@@ -50,7 +45,7 @@ public class MachineGunItem : GunItem
     public void UpdateAmmoBeltPos()
     {
         ammoBelt.localPosition =
-            new Vector2(0, Mathf.Lerp(0, AmmoBeltMaxY, 1 - ((float)LoadedBullets / MagazineSize.Value)));
+            new Vector2(0, Mathf.Lerp(0, AmmoBeltMaxY, 1 - ((float)LoadedBullets / Main_MagazineSize.Value)));
     }
     public void HideAmmoBelt()
     {

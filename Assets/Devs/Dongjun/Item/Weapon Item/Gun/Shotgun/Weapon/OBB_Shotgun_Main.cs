@@ -25,7 +25,7 @@ class OBB_Shotgun_Main : AimedWeapon_State_Base<OBB_Data_Shotgun, ShotgunItem>
         VisualEffect();
 
         // Timer
-        weaponItem.CD_Main_Shoot.Reset();
+        weaponItem.Main_Shoot_CD.Reset();
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_Shoot);
@@ -37,7 +37,7 @@ class OBB_Shotgun_Main : AimedWeapon_State_Base<OBB_Data_Shotgun, ShotgunItem>
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.CD_Main_Shoot.EndTime.Value, shootAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.Main_Shoot_CD.EndTime.Value, shootAnimMaxDur);
     }
     public override void OnExit()
     {
@@ -67,7 +67,7 @@ class OBB_Shotgun_Main : AimedWeapon_State_Base<OBB_Data_Shotgun, ShotgunItem>
             Bullet bullet = bulletPrefab.Spawn(shootPoint.position, Quaternion.Euler(rot));
 
             // Set Bullet Data
-            bullet.InitData(bullet.transform.right, weaponItem.BulletData, curAttackData);
+            bullet.InitData(bullet.transform.right, weaponItem.Main_BulletData, curAttackData);
         }
     }
     private void VisualEffect()

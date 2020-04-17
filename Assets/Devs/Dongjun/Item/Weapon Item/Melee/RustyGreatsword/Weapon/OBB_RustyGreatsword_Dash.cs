@@ -21,7 +21,7 @@ public class OBB_RustyGreatsword_Dash : Weapon_State_Base<OBB_Data_RustyGreatswo
         hitOverlapData = new OverlapCheckData(
             onEnter: overlap =>
             {
-                PlayerStats.Inst.DealDamage(weaponItem.AttackData_Dash, overlap.gameObject,
+                PlayerStats.Inst.DealDamage(weaponItem.Dash_AttackData, overlap.gameObject,
                     PlayerActions.WeaponHit,
                     PlayerActions.MeleeDashHit);
             });

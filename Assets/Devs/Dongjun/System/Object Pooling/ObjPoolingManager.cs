@@ -10,7 +10,7 @@ public abstract class PoolingObj : MonoBehaviour
     {
         Prefab = prefab;
     }
-    public abstract void ResetOnSpawn();
+    public abstract void OnSpawn();
 }
 
 public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
@@ -102,7 +102,7 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
         obj.transform.position = pos;
         obj.transform.rotation = rot;
         obj.gameObject.SetActive(true);
-        obj.ResetOnSpawn();
+        obj.OnSpawn();
     }
     private static void InitObj<T>(T obj, Transform parent, Vector2 localPos, Quaternion localRot) where T : PoolingObj
     {
@@ -110,7 +110,7 @@ public class ObjPoolingManager : SingletonBase<ObjPoolingManager>
         obj.transform.localPosition = localPos;
         obj.transform.localRotation = localRot;
         obj.gameObject.SetActive(true);
-        obj.ResetOnSpawn();
+        obj.OnSpawn();
     }
     #endregion
 

@@ -33,7 +33,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
         VisualEffect();
 
         // Timer
-        weaponItem.CD_Main_Shoot.Reset();
+        weaponItem.Main_Shoot_CD.Reset();
 
         // Animation
         data.Animator.Play(weaponItem.ANIM_Shoot);
@@ -45,7 +45,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.CD_Main_Shoot.EndTime.Value, shootAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.Main_Shoot_CD.EndTime.Value, shootAnimMaxDur);
     }
     public override void OnExit()
     {
@@ -68,7 +68,7 @@ public class OBB_MachineGun_Main : AimedWeapon_State_Base<OBB_Data_MachineGun, M
         Quaternion.Euler(transform.eulerAngles.Add(z: Random.Range(-acry_ZRotOffset, acry_ZRotOffset))));
 
         // Set Bullet Data
-        bullet.InitData(bullet.transform.right, weaponItem.BulletData, weaponItem.AttackData);
+        bullet.InitData(bullet.transform.right, weaponItem.Main_BulletData, weaponItem.AttackData);
     }
     private void VisualEffect()
     {

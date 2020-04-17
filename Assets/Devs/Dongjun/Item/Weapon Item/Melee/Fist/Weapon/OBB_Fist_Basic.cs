@@ -40,7 +40,7 @@ public class OBB_Fist_Basic : HorizontalWeapon_State_Base<OBB_Data_Fist, FistIte
     public override void OnEnter()
     {
         // Timer
-        weaponItem.Dur_Basic.SetActive(true);
+        weaponItem.Basic_Dur.SetActive(true);
 
         // Animation
         data.Animator.Play(prevAttackAnim == 1 ? "Basic_PunchR" : "Basic_PunchL");
@@ -57,7 +57,7 @@ public class OBB_Fist_Basic : HorizontalWeapon_State_Base<OBB_Data_Fist, FistIte
     }
     public override void OnLateEnter()
     {
-        data.Animator.SetDuration(weaponItem.Dur_Basic.EndTime.Value, attackAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.Basic_Dur.EndTime.Value, attackAnimMaxDur);
     }
     public override void OnExit()
     {
@@ -67,8 +67,8 @@ public class OBB_Fist_Basic : HorizontalWeapon_State_Base<OBB_Data_Fist, FistIte
         hitCheck_0End = false;
 
         // Timer
-        weaponItem.Dur_Basic.SetActive(false);
-        weaponItem.Dur_Basic.Reset();
+        weaponItem.Basic_Dur.SetActive(false);
+        weaponItem.Basic_Dur.Reset();
 
         // Animtaion
         data.Animator.ResetSpeed();

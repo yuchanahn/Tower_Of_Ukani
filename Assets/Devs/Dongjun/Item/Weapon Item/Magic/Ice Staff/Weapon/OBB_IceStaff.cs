@@ -46,13 +46,13 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
         bvr_Special = new Sequence(
             (state_Cast,
             new StateAction(
-                start: () => weaponItem.Spec_CastDur.SetActive(true),
+                start: () => weaponItem.Spec_CastTime.SetActive(true),
                 end: () => 
                 {
-                    weaponItem.Spec_CastDur.Reset();
-                    weaponItem.Spec_CastDur.SetActive(false);
+                    weaponItem.Spec_CastTime.Reset();
+                    weaponItem.Spec_CastTime.SetActive(false);
                 }),
-            () => weaponItem.Spec_CastDur.IsEnded),
+            () => weaponItem.Spec_CastTime.IsEnded),
             (state_Special,
             EMPTY_STATE_ACTION,
             () => true));
@@ -68,7 +68,7 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
         NewObjective(
             () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility)
                && PlayerStats.Inst.HasMana(weaponItem.Main_ManaUsage.Value)
-               && weaponItem.Main_Cooldown.IsEnded)
+               && weaponItem.Main_CD.IsEnded)
             .AddBehaviour(bvr_Main, true);
 
         // Sub

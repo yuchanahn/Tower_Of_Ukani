@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_IceStaff_Main : Weapon_State_Base<OBB_IceStaff_Data, IceStaffItem>
+public class OBB_IceStaff_Main : HorizontalWeapon_State_Base<OBB_IceStaff_Data, IceStaffItem>
 {
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
@@ -17,7 +17,7 @@ public class OBB_IceStaff_Main : Weapon_State_Base<OBB_IceStaff_Data, IceStaffIt
     public override void OnEnter()
     {
         // Timer
-        weaponItem.Main_Cooldown.Reset();
+        weaponItem.Main_CD.Reset();
 
         // Animation
         data.Animator.Play("Main_Attack");
@@ -28,19 +28,13 @@ public class OBB_IceStaff_Main : Weapon_State_Base<OBB_IceStaff_Data, IceStaffIt
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.Main_Cooldown.EndTime.Value, shootAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.Main_CD.EndTime.Value, shootAnimMaxDur);
     }
     public override void OnExit()
     {
         // Animation
         IsAnimEnded = false;
         data.Animator.ResetSpeed();
-    }
-    public override void OnLateUpdate()
-    {
-        // Look At Mouse
-        transform.LookAtMouseFlipX(CamManager.Inst.MainCam, transform);
-        shootPoint.LookAtMouse(CamManager.Inst.MainCam, shootPoint);
     }
 
     private void SpawnBullet()
@@ -49,11 +43,14 @@ public class OBB_IceStaff_Main : Weapon_State_Base<OBB_IceStaff_Data, IceStaffIt
         if (!ShootCheckWall_Logic.CanShoot(transform, shootPoint))
             return;
 
+        // Look At Mouse
+        shootPoint.LookAtMouse(CamManager.Inst.MainCam, shootPoint);
+
         // Spawn Bullet
         Bullet bullet = bulletPrefab.Spawn(shootPoint.position, shootPoint.rotation);
 
         // Set Bullet Data
-        bullet.InitData(bullet.transform.right, weaponItem.Main_BulletData, weaponItem.AttackData);
+        bullet.InitData(bullet.transform.right, weaponItem.Main_IceBoltData, weaponItem.AttackData);
     }
 
     public void OnAnim_Main_Attack()

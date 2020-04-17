@@ -48,7 +48,7 @@ public class OBB_Fist : OBB_Controller_Weapon<OBB_Data_Fist, FistItem>
         bvr_Basic = new Single(
             state_Basic,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Dur_Basic.IsEnded);
+            () => weaponItem.Basic_Dur.IsEnded);
 
         bvr_Heavy = new Sequence(
             (state_Heavy_Charge,
@@ -56,14 +56,14 @@ public class OBB_Fist : OBB_Controller_Weapon<OBB_Data_Fist, FistItem>
             () => Input.GetKeyUp(PlayerWeaponKeys.SubAbility)),
             (state_Heavy_Punch,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Dur_Heavy.IsEnded));
+            () => weaponItem.Heavy_Dur.IsEnded));
 
         bvr_Slam = new Single(
             state_Slam,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Dur_Slam.IsEnded
+            () => weaponItem.Slam_Dur.IsEnded
                || PlayerInputManager.Inst.Input_DashDir != 0
-               || (!weaponItem.Dur_Slam.IsActive && Input.GetKeyDown(PlayerActionKeys.Kick)));
+               || (!weaponItem.Slam_Dur.IsActive && Input.GetKeyDown(PlayerActionKeys.Kick)));
     }
     protected override void InitObjectives()
     {

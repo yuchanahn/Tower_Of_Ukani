@@ -37,25 +37,25 @@ public class OBB_Pistol : OBB_Controller_Weapon<OBB_Data_Pistol, PistolItem>
         bvr_AutoReload = new Continue(
             (state_SwapMagazine,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Dur_Main_SwapMagazine.IsEnded),
+            () => weaponItem.Main_SwapMagazine_Dur.IsEnded),
             (state_Reload,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Dur_Main_Reload.IsEnded));
+            () => weaponItem.Main_Reload_Dur.IsEnded));
 
         bvr_ManualReload = new Sequence(
             (state_SwapMagazine,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Dur_Main_SwapMagazine.IsEnded),
+            () => weaponItem.Main_SwapMagazine_Dur.IsEnded),
             (state_Reload,
             EMPTY_STATE_ACTION,
-            () => weaponItem.Dur_Main_Reload.IsEnded));
+            () => weaponItem.Main_Reload_Dur.IsEnded));
 
         bvr_Normal = new Choice(
             (state_Idle,
             EMPTY_STATE_ACTION,
             () => 
             {
-                if (PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility) && weaponItem.CD_Main_Shoot.IsEnded)
+                if (PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.MainAbility) && weaponItem.Main_Shoot_CD.IsEnded)
                     return state_Main;
 
                 return state_Idle;
@@ -64,7 +64,7 @@ public class OBB_Pistol : OBB_Controller_Weapon<OBB_Data_Pistol, PistolItem>
             EMPTY_STATE_ACTION,
             () =>
             {
-                if (weaponItem.CD_Main_Shoot.IsEnded)
+                if (weaponItem.Main_Shoot_CD.IsEnded)
                     return END_BEHAVIOUR;
 
                 return state_Main;
@@ -79,13 +79,13 @@ public class OBB_Pistol : OBB_Controller_Weapon<OBB_Data_Pistol, PistolItem>
 
         // Auto Reload
         NewObjective(
-            () => weaponItem.LoadedBullets == 0 && weaponItem.CD_Main_Shoot.IsEnded)
+            () => weaponItem.LoadedBullets == 0 && weaponItem.Main_Shoot_CD.IsEnded)
             .AddBehaviour(bvr_AutoReload);
 
         // Manual Reload
         NewObjective(
             () => PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.Reload)
-            && weaponItem.LoadedBullets < weaponItem.MagazineSize.Value, true)
+            && weaponItem.LoadedBullets < weaponItem.Main_MagazineSize.Value, true)
             .AddBehaviour(bvr_ManualReload, true);
 
         // Normal

@@ -15,7 +15,7 @@ public class OBB_RustyGreatsword_Heavy_Charge : HorizontalWeapon_State_Base<OBB_
     public override void OnEnter()
     {
         // Timer
-        weaponItem.HeavyChargeTime = 0;
+        weaponItem.Heavy_CurChargeTime = 0;
 
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
@@ -43,9 +43,9 @@ public class OBB_RustyGreatsword_Heavy_Charge : HorizontalWeapon_State_Base<OBB_
     }
     public override void OnUpdate()
     {
-        if (weaponItem.HeavyChargeTime < weaponItem.HeavyFullChargeTime)
-            weaponItem.HeavyChargeTime += Time.deltaTime;
+        if (weaponItem.Heavy_CurChargeTime < weaponItem.Heavy_FullChargeTime)
+            weaponItem.Heavy_CurChargeTime += Time.deltaTime;
         else
-            weaponItem.HeavyChargeTime = weaponItem.HeavyFullChargeTime;
+            weaponItem.Heavy_CurChargeTime = weaponItem.Heavy_FullChargeTime;
     }
 }

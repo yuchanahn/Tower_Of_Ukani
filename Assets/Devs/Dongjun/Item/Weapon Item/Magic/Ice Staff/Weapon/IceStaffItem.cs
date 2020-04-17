@@ -4,71 +4,88 @@ using UnityEngine;
 
 public class IceStaffItem : MagicBase
 {
-    // Timer
-    public readonly TimerStat Main_Cooldown = new TimerStat();
-
     // Main
+    public readonly TimerStat Main_CD = new TimerStat();
     public FloatStat Main_ManaUsage;
-    public ProjectileData Main_BulletData
+    public ProjectileData Main_IceBoltData
     { get; private set; }
 
     // Sub
-    public FloatStat Sub_Damage;
-    public FloatStat Sub_ManaUsagePerSec;
-    public TimerStat Sub_CastDur = new TimerStat();
-    public TimerStat Sub_ManaUsageTick = new TimerStat();
+    public TimerStat Sub_CastTime = new TimerStat();
+    public FloatStat Sub_DamagePerTick;
+    public FloatStat Sub_ManaUsagePerTick;
     public TimerStat Sub_DamageTick = new TimerStat();
+    public TimerStat Sub_ManaUsageTick = new TimerStat();
 
     // Special
+    public TimerStat Spec_CastTime = new TimerStat();
     public IntStat Spec_FrozenSoulUsage;
-    public TimerStat Spec_CastDur = new TimerStat();
     public TimerStat Spec_IceBlockDur = new TimerStat();
 
     private void Start()
     {
-        // Main
-        Main_Cooldown.SetTick(gameObject).ToEnd();
+        // Main Timer
+        Main_CD.SetTick(gameObject).ToEnd();
 
-        // Sub
-        Sub_CastDur.SetTick(gameObject).SetActive(false);
+        // Sub Timer
+        Sub_CastTime.SetTick(gameObject).SetActive(false);
         Sub_DamageTick.SetTick(gameObject).SetActive(false);
         Sub_ManaUsageTick.SetTick(gameObject).SetActive(false);
 
-        // Special
-        Spec_CastDur.SetTick(gameObject).SetActive(false);
+        // Special Timer
+        Spec_CastTime.SetTick(gameObject).SetActive(false);
         Spec_IceBlockDur.SetTick(gameObject).SetActive(false);
     }
     public override void InitStats()
     {
-        // Main
         AttackData = new AttackData(15);
-        Main_Cooldown.EndTime = new FloatStat(1f, min: 0.01f);
+
+        // Main: Cooldown
+        Main_CD.EndTime = new FloatStat(1f, min: 0.01f);
+        // Main: Mana Usage
         Main_ManaUsage = new FloatStat(5, min: 0);
-        Main_BulletData = new ProjectileData()
+        // Main: Ice Bolt
+        Main_IceBoltData = new ProjectileData()
         {
             moveSpeed = new FloatStat(25f, min: 0f),
             travelDist = new FloatStat(0f, min: 0f, max: 10f)
         };
 
-        // Sub
+        // Sub: Cast Time
+        Sub_CastTime.EndTime = new FloatStat(0.15f, min: 0f);
+        // Sub: Damage
+        Sub_DamagePerTick = new FloatStat(2, min: 0f);
+        Sub_DamageTick.EndTime = new FloatStat(0.5f, min: 0f);
+        // Sub: Mana Usage
+        Sub_ManaUsagePerTick = new FloatStat(0.5f, min: 0f);
+        Sub_ManaUsageTick.EndTime = new FloatStat(0.25f, min: 0f);
 
-        // Special
-        Spec_CastDur.EndTime = new FloatStat(0.15f);
+        // Special: Cast Time
+        Spec_CastTime.EndTime = new FloatStat(0.15f, min: 0f);
+        // Special: Frozen Soul Usage
+        Spec_FrozenSoulUsage = new IntStat(5, min: 0);
+        // Special: Ice Block
+        Spec_IceBlockDur.EndTime = new FloatStat(3, min: 0f);
     }
     public override void ResetStats()
     {
-        // Main
         AttackData.Reset();
-        Main_Cooldown.EndTime.ResetMinMax();
+
+        // Main
+        Main_CD.EndTime.ResetMinMax();
         Main_ManaUsage.Reset();
-        Main_BulletData.Reset();
+        Main_IceBoltData.Reset();
 
         // Sub
-        Sub_Damage.Reset();
+        Sub_CastTime.EndTime.ResetMinMax();
+        Sub_DamagePerTick.Reset();
         Sub_DamageTick.EndTime.ResetMinMax();
-        Sub_ManaUsagePerSec.Reset();
+        Sub_ManaUsagePerTick.Reset();
+        Sub_ManaUsageTick.EndTime.ResetMinMax();
 
         // Sepcial
-        Spec_CastDur.EndTime.ResetMinMax();
+        Spec_CastTime.EndTime.ResetMinMax();
+        Spec_FrozenSoulUsage.Reset();
+        Spec_IceBlockDur.EndTime.ResetMinMax();
     }
 }

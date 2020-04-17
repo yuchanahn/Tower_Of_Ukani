@@ -11,9 +11,13 @@ public class OBB_IceStaff_Cast : HorizontalWeapon_State_Base<OBB_IceStaff_Data, 
     }
     public override void OnLateEnter()
     {
-        if (weaponItem.Sub_CastDur.IsActive)
-            data.Animator.SetDuration(weaponItem.Sub_CastDur.EndTime.Value);
-        else if (weaponItem.Spec_CastDur.IsActive)
-            data.Animator.SetDuration(weaponItem.Spec_CastDur.EndTime.Value);
+        if (weaponItem.Sub_CastTime.IsActive)
+        {
+            data.Animator.SetDuration(weaponItem.Sub_CastTime.EndTime.Value);
+        }
+        else if (weaponItem.Spec_CastTime.IsActive)
+        {
+            data.Animator.SetDuration(weaponItem.Spec_CastTime.EndTime.Value);
+        }
     }
 }

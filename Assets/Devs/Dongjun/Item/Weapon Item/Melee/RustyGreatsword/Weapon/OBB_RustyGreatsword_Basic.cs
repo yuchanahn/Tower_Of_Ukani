@@ -54,10 +54,10 @@ public class OBB_RustyGreatsword_Basic : Weapon_State_Base<OBB_Data_RustyGreatsw
     public override void OnEnter()
     {
         // Timer
-        weaponItem.Dur_Basic.SetActive(true);
+        weaponItem.Basic_Dur.SetActive(true);
 
-        weaponItem.CD_Basic.SetActive(false);
-        weaponItem.CD_Basic.Reset();
+        weaponItem.Basic_CD.SetActive(false);
+        weaponItem.Basic_CD.Reset();
 
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
@@ -77,15 +77,15 @@ public class OBB_RustyGreatsword_Basic : Weapon_State_Base<OBB_Data_RustyGreatsw
     }
     public override void OnLateEnter()
     {
-        data.Animator.SetDuration(weaponItem.Dur_Basic.EndTime.Value, attackAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.Basic_Dur.EndTime.Value, attackAnimMaxDur);
     }
     public override void OnExit()
     {
         // Timer
-        weaponItem.Dur_Basic.SetActive(false);
-        weaponItem.Dur_Basic.Reset();
+        weaponItem.Basic_Dur.SetActive(false);
+        weaponItem.Basic_Dur.Reset();
 
-        weaponItem.CD_Basic.SetActive(true);
+        weaponItem.Basic_CD.SetActive(true);
 
         // Status Effect
         PlayerStatus.RemoveEffect(status_Slow);

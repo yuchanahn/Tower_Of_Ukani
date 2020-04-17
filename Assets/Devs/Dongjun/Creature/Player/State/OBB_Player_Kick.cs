@@ -8,10 +8,9 @@ public class OBB_Player_Kick : OBB_Player_State
     #region Var: Inspector
     [Header("Kick")]
     [SerializeField] private Transform kickObject;
-    [SerializeField] private float power;
+    [SerializeField] private BoxCollider2D kickArea;
     [SerializeField] private Transform dirTarget;
-    [SerializeField] private Transform detectPoint;
-    [SerializeField] private Vector2 detectSize;
+    [SerializeField] private float kickPower;
     [SerializeField] private LayerMask blockMask;
     [SerializeField] private LayerMask mobMask;
 
@@ -36,15 +35,9 @@ public class OBB_Player_Kick : OBB_Player_State
     #endregion
 
     #region Method: Unity
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(detectPoint.position, detectSize);
-    }
     private void Start()
     {
         attackData = new AttackData(1);
-
         status_Slow = new PlayerStatus_Slow(data.StatusID, gameObject, 50f);
     }
     #endregion
@@ -52,20 +45,21 @@ public class OBB_Player_Kick : OBB_Player_State
     #region Method: OBB
     public override void OnEnter()
     {
+        // Reduce Y Velocity
         data.RB2D.velocity = data.RB2D.velocity.Change(y: data.RB2D.velocity.y * yVelPercent);
+
+        // Flip Kick Object
+        Flip_Logic.FlipXTo(data.Dir, kickObject);
 
         // Status Effect
         PlayerStatus.AddEffect(status_Slow);
 
-        // Look Dir
-        Flip_Logic.FlipXTo(data.Dir, kickObject);
+        // Player State
+        data.CanChangeDir = false;
 
         // Play Animation
         data.Animator.SetDuration(duration);
         data.Animator.Play("Kick", 0, 0f);
-
-        // Player
-        data.CanChangeDir = false;
     }
     public override void OnExit()
     {
@@ -74,11 +68,11 @@ public class OBB_Player_Kick : OBB_Player_State
         // Status Effect
         PlayerStatus.RemoveEffect(status_Slow);
 
+        // Player State
+        data.CanChangeDir = true;
+
         // Animation
         data.Animator.ResetSpeed();
-
-        // Player
-        data.CanChangeDir = true;
     }
     public override void OnFixedUpdate()
     {
@@ -101,26 +95,35 @@ public class OBB_Player_Kick : OBB_Player_State
     #region Method: Kick
     private void KickBlock()
     {
-        Collider2D[] blockHits = Physics2D.OverlapBoxAll(detectPoint.position, detectSize, 0f, blockMask);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(
+            kickArea.transform.position,
+            kickArea.size * kickArea.transform.lossyScale,
+            0f,
+            blockMask);
 
-        if (blockHits.Length == 0)
+        if (hits.Length == 0)
             return;
 
-        Rigidbody2D hitRB2D = blockHits.GetClosest<Rigidbody2D>(transform);
+        Rigidbody2D hitRB2D = hits.GetClosest<Rigidbody2D>(transform);
         if (hitRB2D == null)
             return;
 
-        // Kick
-        hitRB2D.velocity = (dirTarget.position - transform.position).normalized * power;
+        // Kick Block
+        hitRB2D.velocity = (dirTarget.position - transform.position).normalized * kickPower;
     }
     private void KickMob()
     {
-        Collider2D[] mobHits = Physics2D.OverlapBoxAll(detectPoint.position, detectSize, 0f, mobMask);
+        Collider2D[] hits = Physics2D.OverlapBoxAll(
+            kickArea.transform.position,
+            kickArea.size * kickArea.transform.lossyScale,
+            0f,
+            mobMask);
 
-        if (mobHits.Length == 0)
+        if (hits.Length == 0)
             return;
 
-        PlayerStats.Inst.DealDamage(attackData, mobHits.GetClosest(transform));
+        // Damage Mob
+        PlayerStats.Inst.DealDamage(attackData, hits.GetClosest(transform));
     }
     #endregion
 
