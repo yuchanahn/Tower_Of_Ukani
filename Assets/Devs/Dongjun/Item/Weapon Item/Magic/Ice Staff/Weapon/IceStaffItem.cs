@@ -34,7 +34,6 @@ public class IceStaffItem : MagicBase
 
         // Special Timer
         Spec_CastTime.SetTick(gameObject).SetActive(false);
-        Spec_IceBlockDur.SetTick(gameObject).SetActive(false);
     }
     public override void InitStats()
     {
@@ -43,7 +42,7 @@ public class IceStaffItem : MagicBase
         // Main: Cooldown
         Main_CD.EndTime = new FloatStat(1f, min: 0.01f);
         // Main: Mana Usage
-        Main_ManaUsage = new FloatStat(5, min: 0);
+        Main_ManaUsage = new FloatStat(5f, min: 0);
         // Main: Ice Bolt
         Main_IceBoltData = new ProjectileData()
         {
@@ -54,7 +53,7 @@ public class IceStaffItem : MagicBase
         // Sub: Cast Time
         Sub_CastTime.EndTime = new FloatStat(0.15f, min: 0f);
         // Sub: Damage
-        Sub_DamagePerTick = new FloatStat(2, min: 0f);
+        Sub_DamagePerTick = new FloatStat(2f, min: 0f);
         Sub_DamageTick.EndTime = new FloatStat(0.5f, min: 0f);
         // Sub: Mana Usage
         Sub_ManaUsagePerTick = new FloatStat(0.5f, min: 0f);
@@ -65,7 +64,7 @@ public class IceStaffItem : MagicBase
         // Special: Frozen Soul Usage
         Spec_FrozenSoulUsage = new IntStat(5, min: 0);
         // Special: Ice Block
-        Spec_IceBlockDur.EndTime = new FloatStat(3, min: 0f);
+        Spec_IceBlockDur.EndTime = new FloatStat(5f, min: 0f);
     }
     public override void ResetStats()
     {
