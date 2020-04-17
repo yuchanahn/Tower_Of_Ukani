@@ -53,4 +53,9 @@ public static class LookAtMouse_Logic
         // Flip X
         target.transform.LookAtMouseFlipX(cam, pivot);
     }
+
+    public static Vector2 GetMouseDir(Camera cam, Vector2 pivot)
+    {
+        return (cam.ScreenToWorldPoint(Input.mousePosition) - (Vector3)pivot).normalized;
+    }
 }

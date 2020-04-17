@@ -19,7 +19,7 @@ public static class PlayerWeaponKeys
 {
     public static KeyCode MainAbility => KeyCode.Mouse0;
     public static KeyCode SubAbility => KeyCode.Mouse1;
-    public static KeyCode SpecialAbility => KeyCode.E;
+    public static KeyCode SpecialAbility => KeyCode.F;
     public static KeyCode Reload => KeyCode.R;
 
     public static bool GetKey(KeyCode keyCode)

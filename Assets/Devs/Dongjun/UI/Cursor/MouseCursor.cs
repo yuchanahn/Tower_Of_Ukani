@@ -7,7 +7,10 @@ public class MouseCursor : MonoBehaviour
     private void Awake()
     {
         Cursor.visible = false;
+
+#if UNITY_STANDALONE && !UNITY_EDITOR
         Cursor.lockState = CursorLockMode.Confined;
+#endif
     }
     private void LateUpdate()
     {

@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 7c85bc47345ab8d4090009b640be8117
-labels:
-- DroppedItem
-PrefabImporter:
+guid: 09dbc28a6c51a1b40a49d6322abb77d5
+folderAsset: yes
+DefaultImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 

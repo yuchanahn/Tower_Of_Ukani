@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OBB_IceStaff_Sub : MonoBehaviour
+public class OBB_IceStaff_Sub : Weapon_State_Base<OBB_IceStaff_Data, IceStaffItem>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject blizzardEffect;
 
-    // Update is called once per frame
-    void Update()
+    public override void OnEnter()
     {
-        
+        blizzardEffect.SetActive(true);
+    }
+    public override void OnExit()
+    {
+        blizzardEffect.SetActive(false);
     }
 }

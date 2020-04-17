@@ -17,7 +17,7 @@ public class OBB_IceStaff_Main : Weapon_State_Base<OBB_IceStaff_Data, IceStaffIt
     public override void OnEnter()
     {
         // Timer
-        weaponItem.CD_Main_Shoot.Reset();
+        weaponItem.Main_Cooldown.Reset();
 
         // Animation
         data.Animator.Play("Main_Attack");
@@ -28,7 +28,7 @@ public class OBB_IceStaff_Main : Weapon_State_Base<OBB_IceStaff_Data, IceStaffIt
     public override void OnLateEnter()
     {
         // Animation
-        data.Animator.SetDuration(weaponItem.CD_Main_Shoot.EndTime.Value, shootAnimMaxDur);
+        data.Animator.SetDuration(weaponItem.Main_Cooldown.EndTime.Value, shootAnimMaxDur);
     }
     public override void OnExit()
     {
@@ -53,7 +53,7 @@ public class OBB_IceStaff_Main : Weapon_State_Base<OBB_IceStaff_Data, IceStaffIt
         Bullet bullet = bulletPrefab.Spawn(shootPoint.position, shootPoint.rotation);
 
         // Set Bullet Data
-        bullet.InitData(bullet.transform.right, weaponItem.BulletData, weaponItem.AttackData);
+        bullet.InitData(bullet.transform.right, weaponItem.Main_BulletData, weaponItem.AttackData);
     }
 
     public void OnAnim_Main_Attack()

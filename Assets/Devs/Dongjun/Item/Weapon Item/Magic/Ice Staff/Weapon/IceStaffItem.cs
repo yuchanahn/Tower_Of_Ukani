@@ -5,38 +5,70 @@ using UnityEngine;
 public class IceStaffItem : MagicBase
 {
     // Timer
-    public readonly TimerStat CD_Main_Shoot = new TimerStat();
+    public readonly TimerStat Main_Cooldown = new TimerStat();
 
-    public ProjectileData BulletData
+    // Main
+    public FloatStat Main_ManaUsage;
+    public ProjectileData Main_BulletData
     { get; private set; }
 
-    public FloatStat ManaUsage_Main_Shoot;
+    // Sub
+    public FloatStat Sub_Damage;
+    public FloatStat Sub_ManaUsagePerSec;
+    public TimerStat Sub_CastDur = new TimerStat();
+    public TimerStat Sub_ManaUsageTick = new TimerStat();
+    public TimerStat Sub_DamageTick = new TimerStat();
+
+    // Special
+    public IntStat Spec_FrozenSoulUsage;
+    public TimerStat Spec_CastDur = new TimerStat();
+    public TimerStat Spec_IceBlockDur = new TimerStat();
 
     private void Start()
     {
-        CD_Main_Shoot.SetTick(gameObject).ToEnd();
+        // Main
+        Main_Cooldown.SetTick(gameObject).ToEnd();
+
+        // Sub
+        Sub_CastDur.SetTick(gameObject).SetActive(false);
+        Sub_DamageTick.SetTick(gameObject).SetActive(false);
+        Sub_ManaUsageTick.SetTick(gameObject).SetActive(false);
+
+        // Special
+        Spec_CastDur.SetTick(gameObject).SetActive(false);
+        Spec_IceBlockDur.SetTick(gameObject).SetActive(false);
     }
     public override void InitStats()
     {
-        CD_Main_Shoot.EndTime = new FloatStat(1f, min: 0.01f);
-
+        // Main
         AttackData = new AttackData(15);
-
-        BulletData = new ProjectileData()
+        Main_Cooldown.EndTime = new FloatStat(1f, min: 0.01f);
+        Main_ManaUsage = new FloatStat(5, min: 0);
+        Main_BulletData = new ProjectileData()
         {
             moveSpeed = new FloatStat(25f, min: 0f),
             travelDist = new FloatStat(0f, min: 0f, max: 10f)
         };
 
-        ManaUsage_Main_Shoot = new FloatStat(5, min: 0);
+        // Sub
+
+        // Special
+        Spec_CastDur.EndTime = new FloatStat(0.15f);
     }
     public override void ResetStats()
     {
-        CD_Main_Shoot.EndTime.ResetMinMax();
-
+        // Main
         AttackData.Reset();
+        Main_Cooldown.EndTime.ResetMinMax();
+        Main_ManaUsage.Reset();
+        Main_BulletData.Reset();
 
-        BulletData.Reset();
-        ManaUsage_Main_Shoot.Reset();
+        // Sub
+        Sub_Damage.Reset();
+        Sub_DamageTick.EndTime.ResetMinMax();
+        Sub_ManaUsagePerSec.Reset();
+
+        // Sepcial
+        Spec_CastDur.EndTime.ResetMinMax();
     }
 }

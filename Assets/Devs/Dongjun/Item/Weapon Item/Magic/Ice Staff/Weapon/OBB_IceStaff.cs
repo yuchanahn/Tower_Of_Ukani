@@ -25,8 +25,8 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
         GetState(ref state_Idle);
         GetState(ref state_Main);
         //GetState(ref state_Sub);
-        //GetState(ref state_Special);
-        //GetState(ref state_Cast);
+        GetState(ref state_Special);
+        GetState(ref state_Cast);
         SetDefaultState(state_Idle, EMPTY_STATE_ACTION);
     }
     protected override void InitBehaviours()
@@ -38,13 +38,24 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
 
         bvr_Main = new Single(
             state_Main,
-            new StateAction(
-                start: () => PlayerStats.Inst.UseMana(weaponItem.ManaUsage_Main_Shoot.Value)),
+            new StateAction(start: () => PlayerStats.Inst.UseMana(weaponItem.Main_ManaUsage.Value)),
             () => state_Main.IsAnimEnded);
 
         //bvr_Sub = new Single();
 
-        //bvr_Special = new Single();
+        bvr_Special = new Sequence(
+            (state_Cast,
+            new StateAction(
+                start: () => weaponItem.Spec_CastDur.SetActive(true),
+                end: () => 
+                {
+                    weaponItem.Spec_CastDur.Reset();
+                    weaponItem.Spec_CastDur.SetActive(false);
+                }),
+            () => weaponItem.Spec_CastDur.IsEnded),
+            (state_Special,
+            EMPTY_STATE_ACTION,
+            () => true));
     }
     protected override void InitObjectives()
     {
@@ -56,10 +67,18 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
         // Main
         NewObjective(
             () => PlayerWeaponKeys.GetKey(PlayerWeaponKeys.MainAbility)
-               && PlayerStats.Inst.HasMana(weaponItem.ManaUsage_Main_Shoot.Value)
-               && weaponItem.CD_Main_Shoot.IsEnded)
+               && PlayerStats.Inst.HasMana(weaponItem.Main_ManaUsage.Value)
+               && weaponItem.Main_Cooldown.IsEnded)
             .AddBehaviour(bvr_Main, true);
 
+        // Sub
+
+        // Special
+        NewObjective(
+            () => Input.GetKeyDown(PlayerWeaponKeys.SpecialAbility))
+            .AddBehaviour(bvr_Special, true);
+
+        // Default
         SetDefaultObjective()
             .AddBehaviour(bvr_Idle);
     }

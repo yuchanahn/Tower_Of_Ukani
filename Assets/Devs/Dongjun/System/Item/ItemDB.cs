@@ -37,11 +37,15 @@ public class ItemDB : SingletonBase<ItemDB>
     {
         string[] guids = AssetDatabase.FindAssets("l:Item");
 
-        items = new Item[guids.Length];
+        List<Item> foundItems = new List<Item>();
         for (int i = 0; i < guids.Length; i++)
         {
-            items[i] = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guids[i])).GetComponent<Item>();
+            var item = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guids[i])).GetComponent<Item>();
+            if (item != null)
+                foundItems.Add(item);
         }
+
+        items = foundItems.ToArray();
 
         PrefabUtility.RecordPrefabInstancePropertyModifications(this);
     }
