@@ -112,41 +112,41 @@ public sealed class PlayerInputManager : SingletonBase<PlayerInputManager>
             return;
         }
 
-        // 더블 탭 했을 때
-        if (Input.GetKeyDown(PlayerMovementKeys.WalkRight) 
-        || Input.GetKeyDown(PlayerMovementKeys.WalkLeft))
-        {
-            // Set Tap Count
-            if (curDashTapCount == 0)
-            {
-                curDashTapCount++;
-                prevDashInputDir = Input_WalkDir;
-            }
-            else if (prevDashInputDir != Input_WalkDir)
-            {
-                curDashTapCount = 0;
-                prevDashInputDir = Input_WalkDir;
-            }
-            else if (dashInputTime <= dashInputInterval)
-            {
-                curDashTapCount++;
-            }
+        //// 더블 탭 했을 때
+        //if (Input.GetKeyDown(PlayerMovementKeys.WalkRight) 
+        //|| Input.GetKeyDown(PlayerMovementKeys.WalkLeft))
+        //{
+        //    // Set Tap Count
+        //    if (curDashTapCount == 0)
+        //    {
+        //        curDashTapCount++;
+        //        prevDashInputDir = Input_WalkDir;
+        //    }
+        //    else if (prevDashInputDir != Input_WalkDir)
+        //    {
+        //        curDashTapCount = 0;
+        //        prevDashInputDir = Input_WalkDir;
+        //    }
+        //    else if (dashInputTime <= dashInputInterval)
+        //    {
+        //        curDashTapCount++;
+        //    }
 
-            // Reset Time
-            dashInputTime = 0;
+        //    // Reset Time
+        //    dashInputTime = 0;
 
-            // Check Tap Count
-            if (curDashTapCount == dashTapCount)
-            {
-                curDashTapCount = 0;
-                Input_DashDir = Input_WalkDir;
-                return;
-            }
-        }
+        //    // Check Tap Count
+        //    if (curDashTapCount == dashTapCount)
+        //    {
+        //        curDashTapCount = 0;
+        //        Input_DashDir = Input_WalkDir;
+        //        return;
+        //    }
+        //}
 
-        // Update Timer
-        if (dashInputTime < dashInputInterval)
-            dashInputTime += Time.deltaTime;
+        //// Update Timer
+        //if (dashInputTime < dashInputInterval)
+        //    dashInputTime += Time.deltaTime;
     }
     #endregion
 

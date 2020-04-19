@@ -72,7 +72,8 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
                 }),
             () => weaponItem.Spec_CastTime.IsEnded),
             (state_Special,
-            EMPTY_STATE_ACTION,
+            new StateAction(
+                start: () => PlayerInventoryManager.inventory.RemoveItem("Frozen Soul", weaponItem.Spec_FrozenSoulUsage.Value)),
             () => true));
     }
     protected override void InitObjectives()
@@ -97,7 +98,8 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
 
         // Special
         NewObjective(
-            () => Input.GetKeyDown(PlayerWeaponKeys.SpecialAbility))
+            () => Input.GetKeyDown(PlayerWeaponKeys.SpecialAbility)
+               && PlayerInventoryManager.inventory.GetItemCount("Frozen Soul") >= weaponItem.Spec_FrozenSoulUsage.Value)
             .AddBehaviour(bvr_Special, true);
 
         // Default

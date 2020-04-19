@@ -53,14 +53,8 @@ public class IceStaffBlizzard : MonoBehaviour
         {
             iceStaffItem.Sub_ManaUsageTick.Reset();
 
-            if (PlayerStats.Inst.HasMana(iceStaffItem.Sub_ManaUsagePerTick.Value))
-            {
-                PlayerStats.Inst.UseMana(iceStaffItem.Sub_ManaUsagePerTick.Value);
-            }
-            else
-            {
+            if (!PlayerStats.Inst.UseMana(iceStaffItem.Sub_ManaUsagePerTick.Value))
                 data.IsBlizzardActive = false;
-            }
         }
     }
 }

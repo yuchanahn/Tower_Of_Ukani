@@ -7,7 +7,7 @@ public class OBB_IceStaff_Main : HorizontalWeapon_State_Base<OBB_IceStaff_Data, 
 {
     [Header("Shoot")]
     [SerializeField] private Transform shootPoint;
-    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private IceBolt iceBoltPrefab;
 
     [Header("Shoot Animation")]
     [SerializeField] private float shootAnimMaxDur;
@@ -47,10 +47,10 @@ public class OBB_IceStaff_Main : HorizontalWeapon_State_Base<OBB_IceStaff_Data, 
         shootPoint.LookAtMouse(CamManager.Inst.MainCam, shootPoint);
 
         // Spawn Bullet
-        Bullet bullet = bulletPrefab.Spawn(shootPoint.position, shootPoint.rotation);
+        IceBolt iceBolt = iceBoltPrefab.Spawn(shootPoint.position, shootPoint.rotation);
 
         // Set Bullet Data
-        bullet.InitData(bullet.transform.right, weaponItem.Main_IceBoltData, weaponItem.AttackData);
+        iceBolt.InitData(iceBolt.transform.right, weaponItem.Main_IceBoltData, weaponItem.AttackData);
     }
 
     public void OnAnim_Main_Attack()

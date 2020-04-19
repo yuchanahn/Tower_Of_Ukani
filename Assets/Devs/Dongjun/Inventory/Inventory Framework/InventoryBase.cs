@@ -88,6 +88,18 @@ public abstract class InventoryBase : MonoBehaviour
     {
         return Array.FindAll(items, o => o != null ? o.Info.ItemName == itemName : false);
     }
+    public virtual int GetItemCount(string itemName)
+    {
+        var fountItems = Array.FindAll(items, o => o != null ? o.Info.ItemName == itemName : false);
+
+        int result = 0;
+        foreach (var item in fountItems)
+        {
+            result += item.Info.Count;
+        }
+
+        return result;
+    }
 
     // Get Index
     public int GetIndex_ItemID(string id)
@@ -282,6 +294,42 @@ public abstract class InventoryBase : MonoBehaviour
 
         // Update UI
         inventoryUI?.UpdateSlot(index);
+    }
+    public virtual void RemoveItem(string itemName, int amount = 1)
+    {
+        var foundItems = GetItems(itemName);
+        if (foundItems == null || foundItems.Length == 0)
+            return;
+
+        int toRemove = amount;
+        foreach (var item in foundItems)
+        {
+            if (toRemove <= 0)
+                return;
+
+            int index = GetIndex_Item(item);
+
+            if (items[index].Info.Count >= toRemove)
+            {
+                items[index].Info.Count -= toRemove;
+                toRemove = 0;
+            }
+            else if (items[index].Info.Count < toRemove)
+            {
+                toRemove -= items[index].Info.Count;
+                items[index].Info.Count = 0;
+            }
+
+            if (items[index].Info.Count == 0)
+            {
+                items[index].OnRemove();
+                items[index] = null;
+                EmptySlots++;
+            }
+
+            // Update UI
+            inventoryUI?.UpdateSlot(index);
+        }
     }
     public virtual void DeleteItem(int index, bool destroy = true)
     {
