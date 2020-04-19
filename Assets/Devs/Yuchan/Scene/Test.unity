@@ -8714,6 +8714,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 825921886}
     m_Modifications:
+    - target: {fileID: 2025537666354990290, guid: d5d22318019f1d34d98255fdd2e82a83,
+        type: 3}
+      propertyPath: AttackRange
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7408284209935012268, guid: d5d22318019f1d34d98255fdd2e82a83,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11770,7 +11775,7 @@ MonoBehaviour:
         m_MethodName: Create
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 3569291923833692112, guid: 2f05f784829525c47b67d27b41cf2622,
+          m_ObjectArgument: {fileID: 7408284209935012269, guid: d5d22318019f1d34d98255fdd2e82a83,
             type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
