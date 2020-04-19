@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class IceBlock : SelfSleepObj
 {
-    public override void OnSpawn()
-    {
-        base.OnSpawn();
-    }
+
 }

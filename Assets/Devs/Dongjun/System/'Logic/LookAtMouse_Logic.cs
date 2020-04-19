@@ -15,13 +15,13 @@ public static class LookAtMouse_Logic
     {
         Vector3 lookRot = target.localEulerAngles;
         lookRot.y = cam.ScreenToWorldPoint(Input.mousePosition).x - pivot.position.x > 0 ? 0f : 180f;
-        target.localRotation = Quaternion.Euler(lookRot);
+        target.rotation = Quaternion.Euler(lookRot);
     }
     public static void LookAtMouseFlipY(this Transform target, Camera mainCam, Transform pivot)
     {
         Vector3 lookRot = target.localEulerAngles;
         lookRot.x = mainCam.ScreenToWorldPoint(Input.mousePosition).y - pivot.position.y > 0 ? 0f : 180f;
-        target.localRotation = Quaternion.Euler(lookRot);
+        target.rotation = Quaternion.Euler(lookRot);
     }
 
     public static void LookAtMouse(this Transform target, Camera cam, Transform pivot)
@@ -29,7 +29,7 @@ public static class LookAtMouse_Logic
         target.right = (Vector2)(cam.ScreenToWorldPoint(Input.mousePosition) - pivot.position).normalized;
 
         if ((Vector2)target.right == Vector2.left)
-            target.localRotation = Quaternion.Euler(0f, 0f, 180f);
+            target.rotation = Quaternion.Euler(0f, 0f, 180f);
     }
 
     public static void AimMouse(this Transform target, Camera cam, Transform pivot)

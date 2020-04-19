@@ -14,8 +14,10 @@ public class OBB_RustyGreatsword_Dash : Weapon_State_Base<OBB_Data_RustyGreatswo
 
     private void Awake()
     {
-        contactFilter = new ContactFilter2D();
-        contactFilter.useTriggers = false;
+        contactFilter = new ContactFilter2D
+        {
+            useTriggers = false
+        };
 
         // Deal Damage
         hitOverlapData = new OverlapCheckData(

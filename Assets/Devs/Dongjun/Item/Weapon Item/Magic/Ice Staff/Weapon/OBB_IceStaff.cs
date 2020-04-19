@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OBB_IceStaff_Data : OBB_Data_Animator
 {
-
+    public bool IsBlizzardActive = false;
 }
 
 public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffItem>
@@ -15,6 +15,7 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
     private OBB_IceStaff_Special state_Special;
     private OBB_IceStaff_Cast state_Cast;
 
+    private Single bvr_Stop;
     private Single bvr_Idle;
     private Single bvr_Main;
     private Sequence bvr_Sub;
@@ -24,13 +25,18 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
     {
         GetState(ref state_Idle);
         GetState(ref state_Main);
-        //GetState(ref state_Sub);
+        GetState(ref state_Sub);
         GetState(ref state_Special);
         GetState(ref state_Cast);
         SetDefaultState(state_Idle, EMPTY_STATE_ACTION);
     }
     protected override void InitBehaviours()
     {
+        bvr_Stop = new Single(
+            state_Idle,
+            new StateAction(start: () => Data.IsBlizzardActive = false),
+            () => false);
+
         bvr_Idle = new Single(
             state_Idle,
             EMPTY_STATE_ACTION,
@@ -41,7 +47,19 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
             new StateAction(start: () => PlayerStats.Inst.UseMana(weaponItem.Main_ManaUsage.Value)),
             () => state_Main.IsAnimEnded);
 
-        //bvr_Sub = new Single();
+        bvr_Sub = new Sequence(
+            (state_Cast,
+            new StateAction(
+                start: () => weaponItem.Sub_CastTime.SetActive(true),
+                end: () =>
+                {
+                    weaponItem.Sub_CastTime.Reset();
+                    weaponItem.Sub_CastTime.SetActive(false);
+                }),
+            () => weaponItem.Sub_CastTime.IsEnded),
+            (state_Sub,
+            EMPTY_STATE_ACTION,
+            () => true));
 
         bvr_Special = new Sequence(
             (state_Cast,
@@ -59,10 +77,10 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
     }
     protected override void InitObjectives()
     {
-        // Pause
+        // Stop
         NewObjective(
             () => !weaponItem.IsSelected || PlayerStatus.Incapacitated, true)
-            .AddBehaviour(bvr_Idle);
+            .AddBehaviour(bvr_Stop);
 
         // Main
         NewObjective(
@@ -72,6 +90,10 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
             .AddBehaviour(bvr_Main, true);
 
         // Sub
+        NewObjective(
+            () => PlayerWeaponKeys.GetKeyDown(PlayerWeaponKeys.SubAbility)
+               && PlayerStats.Inst.HasMana(weaponItem.Sub_ManaUsagePerTick.Value))
+            .AddBehaviour(bvr_Sub, true);
 
         // Special
         NewObjective(

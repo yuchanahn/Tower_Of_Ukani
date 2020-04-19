@@ -245,7 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ad17063fa3afe43956fdff2bc5480f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blizzardEffect: {fileID: 0}
+  blizzardPrefab: {fileID: -656302614352662629, guid: a659a66b7855bc347b6d822c1d89145f,
+    type: 3}
 --- !u!114 &4874016444632863975
 MonoBehaviour:
   m_ObjectHideFlags: 0

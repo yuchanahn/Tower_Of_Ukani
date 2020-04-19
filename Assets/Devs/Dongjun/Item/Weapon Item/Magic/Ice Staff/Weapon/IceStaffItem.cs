@@ -12,10 +12,10 @@ public class IceStaffItem : MagicBase
 
     // Sub
     public TimerStat Sub_CastTime = new TimerStat();
-    public FloatStat Sub_DamagePerTick;
-    public FloatStat Sub_ManaUsagePerTick;
     public TimerStat Sub_DamageTick = new TimerStat();
+    public AttackData Sub_DamagePerTick;
     public TimerStat Sub_ManaUsageTick = new TimerStat();
+    public FloatStat Sub_ManaUsagePerTick;
 
     // Special
     public TimerStat Spec_CastTime = new TimerStat();
@@ -40,9 +40,9 @@ public class IceStaffItem : MagicBase
         AttackData = new AttackData(15);
 
         // Main: Cooldown
-        Main_CD.EndTime = new FloatStat(1f, min: 0.01f);
+        Main_CD.EndTime = new FloatStat(0.7f, min: 0.01f);
         // Main: Mana Usage
-        Main_ManaUsage = new FloatStat(5f, min: 0);
+        Main_ManaUsage = new FloatStat(4f, min: 0);
         // Main: Ice Bolt
         Main_IceBoltData = new ProjectileData()
         {
@@ -51,13 +51,13 @@ public class IceStaffItem : MagicBase
         };
 
         // Sub: Cast Time
-        Sub_CastTime.EndTime = new FloatStat(0.15f, min: 0f);
+        Sub_CastTime.EndTime = new FloatStat(0.2f, min: 0f);
         // Sub: Damage
-        Sub_DamagePerTick = new FloatStat(2f, min: 0f);
         Sub_DamageTick.EndTime = new FloatStat(0.5f, min: 0f);
+        Sub_DamagePerTick = new AttackData(2f);
         // Sub: Mana Usage
-        Sub_ManaUsagePerTick = new FloatStat(0.5f, min: 0f);
         Sub_ManaUsageTick.EndTime = new FloatStat(0.25f, min: 0f);
+        Sub_ManaUsagePerTick = new FloatStat(0.5f, min: 0f);
 
         // Special: Cast Time
         Spec_CastTime.EndTime = new FloatStat(0.15f, min: 0f);
@@ -77,10 +77,10 @@ public class IceStaffItem : MagicBase
 
         // Sub
         Sub_CastTime.EndTime.ResetMinMax();
-        Sub_DamagePerTick.Reset();
         Sub_DamageTick.EndTime.ResetMinMax();
-        Sub_ManaUsagePerTick.Reset();
+        Sub_DamagePerTick.Reset();
         Sub_ManaUsageTick.EndTime.ResetMinMax();
+        Sub_ManaUsagePerTick.Reset();
 
         // Sepcial
         Spec_CastTime.EndTime.ResetMinMax();
