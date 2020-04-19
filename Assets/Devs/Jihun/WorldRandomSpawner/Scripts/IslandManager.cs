@@ -29,7 +29,7 @@ public class IslandManager : SingletonBase<IslandManager>
     /// <summary>
     /// y
     /// </summary>
-    int row = 9;
+    int row = 1;
     #endregion
 
     #region Var:최적화
@@ -66,6 +66,7 @@ public class IslandManager : SingletonBase<IslandManager>
 
     void PutIslandInArr(JH_Island land)
     {
+        if (land == null) return;
         int posX, posY;
         int x = land.pos.x;
         int y = land.pos.y + intervalY - 1;
@@ -436,7 +437,7 @@ public class IslandManager : SingletonBase<IslandManager>
         Vector2 startPos = new Vector2(land1.pos.x + land1.endPos.x, land1.pos.y - land1.endPos.y);
         Vector2 endPos = new Vector2(land2.pos.x + land2.startPos.x, land2.pos.y - land2.startPos.y);
 
-        Debug.Log($"startPos : {startPos}, endPos : {endPos}");
+        //Debug.Log($"startPos : {startPos}, endPos : {endPos}");
 
 
         //Debug.Log($"startpos : {startPos.ToString()}, endpos : {endPos.ToString()}");
@@ -447,8 +448,8 @@ public class IslandManager : SingletonBase<IslandManager>
 
         Vector2 newPos = startPos;
 
-        float interX = Mathf.Abs(interval.x);
-        float interY = Mathf.Abs(interval.y);
+        int interX = (int)Mathf.Abs(interval.x);
+        int interY = (int)Mathf.Abs(interval.y);
 
         //다리로 놓을 섬 갯수 설정
         int re1, re2;
@@ -462,7 +463,7 @@ public class IslandManager : SingletonBase<IslandManager>
         }
         for (i = 1; true; i++)
         {
-            if (interY / i <= 5)
+            if (interY / i <= 4)
             {
                 re2 = i;
                 break;
@@ -473,24 +474,25 @@ public class IslandManager : SingletonBase<IslandManager>
         //갯수에 따른 간격 설정
         interval /= repeat;
 
+        interX = Mathf.Max(13, (int)Mathf.Abs(interval.x));
+
         Debug.Log( "repeat : " + repeat.ToString());
 
+        newPos += interval/4;
         //실질적으로 다리 생성하는 반복문
-        for(i = 0; i < repeat; i++)
+        for (i = 0; i < repeat; i++)
         {
-            wid = Random.Range(10, 15);
-            //마지막만 크기 조절 다시
-            if(i == repeat-2)
-            {
-                if (endPos.x - newPos.x < 20) break;
-            }
+            
+            wid = Random.Range(interX - 6, interX - 3);
+
             if(i == repeat-1)
             {
-                wid = (int)(endPos.x - newPos.x - 7);
+                wid = (int)(endPos.x - newPos.x - 5);
+                Debug.Log("b");
             }
             hei = wid / 3;
 
-            JH_Island land = _irg.GenerateBridge((int)newPos.x + 5, (int)newPos.y, wid, hei);
+            JH_Island land = _irg.GenerateBridge((int)newPos.x, (int)newPos.y, wid, hei);
 
             islands.Add(land);
 

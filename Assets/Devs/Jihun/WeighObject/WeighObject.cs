@@ -3,7 +3,6 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class WeighObject : MonoBehaviour
 {
@@ -12,8 +11,7 @@ public class WeighObject : MonoBehaviour
     float width = 0;
     float height = 0;
 
-    float mass;
-    float gravityScale;
+    [SerializeField] float mass;
 
     private void Awake()
     {
@@ -23,10 +21,7 @@ public class WeighObject : MonoBehaviour
     // 변수 초기화
     void Init()
     {
-        Rigidbody2D _rg = GetComponent<Rigidbody2D>();
         BoxCollider2D _bc = GetComponent<BoxCollider2D>();
-        mass = _rg.mass;
-        gravityScale = _rg.gravityScale;
         width = _bc.size.x * transform.lossyScale.x;
         height = _bc.size.y * transform.lossyScale.y;
     }
@@ -64,12 +59,12 @@ public class WeighObject : MonoBehaviour
                 downForce += hit.transform.GetComponent<WeighObject>().GetDownForce(checkedArr);
             else
             {
-                downForce += 100;
+                downForce++;
                 checkedArr.Add(hit.transform.GetComponent<WeighObject>());
             }
         }
 
-        downForce += (gravityScale * mass);
+        downForce += mass;
 
         return downForce;
     }

@@ -13,13 +13,11 @@ public class WeighPlatform : WeighObject
     int canLiftUp = 0;
     [SerializeField]
     float speed = 0;
-    [SerializeField]
-    float forceRate = 1;
 
     [SerializeField]
     float maxVel = 5f;
     [SerializeField]
-    float minVel = -5f;
+    float minVel = -0f;
 
 
     private void Start()
@@ -35,7 +33,7 @@ public class WeighPlatform : WeighObject
 
     void GoUp()
     {
-        float force = (canLiftUp + 1 - (GetDownForce() / forceRate));
+        float force = (canLiftUp + 1 - GetDownForce());
 
         // Debug.Log(force);
 
@@ -45,9 +43,19 @@ public class WeighPlatform : WeighObject
         result = Mathf.Min(result, maxVel);
         result = Mathf.Max(result, minVel);
 
-        if (transform.position.y > maxYPos) result = Mathf.Min(result, 0);
-        else if (transform.position.y < minYPos) result = Mathf.Max(result, 0);
+        if (transform.position.y >= maxYPos) result = Mathf.Min(result, 0);
+        else if (transform.position.y <= minYPos) result = Mathf.Max(result, 0);
         
         _rg.velocity = new Vector2(_rg.velocity.x, result);
+
+        ClampYPos();
+    }
+
+    void ClampYPos()
+    {
+        float y = transform.position.y;
+        y = Mathf.Clamp(y, minYPos, maxYPos);
+
+        transform.position = new Vector3(transform.position.x, y, transform.position.z);
     }
 }

@@ -229,6 +229,8 @@ public class IslandRandomGenerator : MonoBehaviour
     //사이즈는 적당히 
     public JH_Island GenerateBridge(int posX, int posY, int wid, int hei)
     {
+        if (wid <= 0 || hei <= 0) return null;
+
         JH_Island land = new JH_Island(wid, hei, wid, hei + 2);
         InitLand(land);
 
@@ -239,9 +241,9 @@ public class IslandRandomGenerator : MonoBehaviour
         land.startPos = startPos;
         land.endPos = startPos + Vector2Int.right * wid;
         int diffStart = Random.Range(0, wid/3*2);
-        if (diffStart == 1) diffStart = 0;
+        if (diffStart <= 1) diffStart = 0;
         int diffEnd = Random.Range(diffStart, wid);
-        if (diffEnd == wid-1) diffEnd = wid;
+        if (diffEnd >= wid-1) diffEnd = wid;
         int upDown = Random.Range(0, 2) == 0 ? 1 : -1;
         int x, y;
 
