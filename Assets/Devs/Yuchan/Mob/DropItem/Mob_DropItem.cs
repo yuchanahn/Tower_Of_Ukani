@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -24,6 +25,18 @@ public class Mob_DropItem : MonoBehaviour
     [SerializeField] int DropCount;
     [SerializeField] ItemDropInfo[] DropInfos;
 
+    public void add_drop_table(Item item, float chance, RangeInt count)
+    {
+        var l = DropInfos.ToList();
+        var new_item = new ItemDropInfo();
+        new_item.item = item;
+        new_item.drop_chance = chance;
+        new_item.DropCount = count;
+
+        l.Add(new_item);
+        DropInfos = l.ToArray();
+        DropCount++;
+    }
 
     public void OnDead()
     {
