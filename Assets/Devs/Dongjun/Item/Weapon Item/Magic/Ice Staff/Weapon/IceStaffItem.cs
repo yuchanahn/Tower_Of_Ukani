@@ -37,7 +37,7 @@ public class IceStaffItem : MagicBase
     }
     public override void InitStats()
     {
-        AttackData = new AttackData(15, typeof(IceStaffItem));
+        AttackData = new AttackData(15);
 
         // Main: Cooldown
         Main_CD.EndTime = new FloatStat(0.7f, min: 0.01f);
@@ -54,7 +54,7 @@ public class IceStaffItem : MagicBase
         Sub_CastTime.EndTime = new FloatStat(0.2f, min: 0f);
         // Sub: Damage
         Sub_DamageTick.EndTime = new FloatStat(0.5f, min: 0f);
-        Sub_DamagePerTick = new AttackData(2f, typeof(IceStaffItem));
+        Sub_DamagePerTick = new AttackData(2f, gameObject);
         // Sub: Mana Usage
         Sub_ManaUsageTick.EndTime = new FloatStat(0.25f, min: 0f);
         Sub_ManaUsagePerTick = new FloatStat(0.5f, min: 0f);

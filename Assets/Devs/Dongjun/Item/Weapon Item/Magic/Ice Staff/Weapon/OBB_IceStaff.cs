@@ -73,7 +73,7 @@ public class OBB_IceStaff : OBB_Controller_Weapon<OBB_IceStaff_Data, IceStaffIte
             () => weaponItem.Spec_CastTime.IsEnded),
             (state_Special,
             new StateAction(
-                start: () => PlayerInventoryManager.inventory.RemoveItem("Frozen Soul", weaponItem.Spec_FrozenSoulUsage.Value)),
+                start: () => PlayerInventoryManager.inventory.RemoveItem<FrozenSoul>(weaponItem.Spec_FrozenSoulUsage.Value)),
             () => true));
     }
     protected override void InitObjectives()

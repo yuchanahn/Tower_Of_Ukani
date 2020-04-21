@@ -50,7 +50,9 @@ public class OBB_IceStaff_Main : HorizontalWeapon_State_Base<OBB_IceStaff_Data, 
         IceBolt iceBolt = iceBoltPrefab.Spawn(shootPoint.position, shootPoint.rotation);
 
         // Set Bullet Data
-        iceBolt.InitData(iceBolt.transform.right, weaponItem.Main_IceBoltData, weaponItem.AttackData);
+        AttackData attackData = weaponItem.AttackData;
+        attackData.damageDealer = iceBolt.gameObject;
+        iceBolt.InitData(iceBolt.transform.right, weaponItem.Main_IceBoltData, attackData);
     }
 
     public void OnAnim_Main_Attack()

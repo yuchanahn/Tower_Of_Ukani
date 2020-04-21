@@ -5,6 +5,7 @@ using UnityEngine;
 public class OBB_IceStaff_Sub : Weapon_State_Base<OBB_IceStaff_Data, IceStaffItem>
 {
     [SerializeField] private IceStaffBlizzard blizzardPrefab;
+
     private IceStaffBlizzard blizzard;
 
     public override void OnEnter()

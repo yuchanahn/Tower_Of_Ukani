@@ -88,6 +88,11 @@ public abstract class InventoryBase : MonoBehaviour
     {
         return Array.FindAll(items, o => o != null ? o.Info.ItemName == itemName : false);
     }
+    public virtual Item[] GetItems<T>() where T: Item
+    {
+        var type = typeof(T);
+        return Array.FindAll(items, o => o != null ? o.GetType() == type : false);
+    }
     public virtual int GetItemCount(string itemName)
     {
         var fountItems = Array.FindAll(items, o => o != null ? o.Info.ItemName == itemName : false);
@@ -295,9 +300,9 @@ public abstract class InventoryBase : MonoBehaviour
         // Update UI
         inventoryUI?.UpdateSlot(index);
     }
-    public virtual void RemoveItem(string itemName, int amount = 1)
+    public virtual void RemoveItem<T>(int amount = 1) where T: Item
     {
-        var foundItems = GetItems(itemName);
+        var foundItems = GetItems<T>();
         if (foundItems == null || foundItems.Length == 0)
             return;
 
@@ -331,6 +336,7 @@ public abstract class InventoryBase : MonoBehaviour
             inventoryUI?.UpdateSlot(index);
         }
     }
+
     public virtual void DeleteItem(int index, bool destroy = true)
     {
         if (IsEmpty || !IsValidIndex(index) || items[index] == null)

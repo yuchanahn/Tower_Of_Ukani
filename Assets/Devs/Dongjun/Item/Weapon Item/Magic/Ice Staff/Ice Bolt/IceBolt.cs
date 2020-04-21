@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class IceBolt : WeaponProjectile
 {
-    PlayerActionEvent onKill;
+    private PlayerActionEvent onKill;
 
     private void Start()
     {
         onKill = this.NewPlayerActionEvent(() =>
         {
-            if (PlayerStats.Inst.CurAttackData.HasValue && PlayerStats.Inst.CurAttackData.Value.damageDealer == typeof(IceStaffItem))
+            if (PlayerStats.Inst.CurAttackData.HasValue && PlayerStats.Inst.CurAttackData.Value.damageDealer == gameObject)
             {
                 var dropTable = PlayerStats.Inst.KilledMob.GetComponent<Mob_DropItem>();
                 if (dropTable == null)
