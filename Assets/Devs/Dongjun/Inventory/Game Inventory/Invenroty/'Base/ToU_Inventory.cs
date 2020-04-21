@@ -16,7 +16,7 @@ public class ToU_Inventory : InventoryBase
     {
         amount = Mathf.Clamp(amount, 0, GetItem(index).Info.Count);
         RemoveItem(index, amount);
-        ItemDB.Inst.SpawnDroppedItem(items[index].Info.ItemName, amount);
+        ItemDB.Inst.SpawnDroppedItem(items[index], GM.PlayerPos, amount);
     }
     #endregion
 

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class IceBolt : WeaponProjectile
 {
-    protected override bool DamageCreature(GameObject hit)
+    PlayerActionEvent onKill;
+
+    private void Start()
     {
-        bool hasHit = base.DamageCreature(hit);
-
-        if (hasHit)
+        onKill = this.NewPlayerActionEvent(() =>
         {
+            if (PlayerStats.Inst.CurAttackData.HasValue && PlayerStats.Inst.CurAttackData.Value.damageDealer == typeof(IceStaffItem))
+            {
+                var dropTable = PlayerStats.Inst.KilledMob.GetComponent<Mob_DropItem>();
+                if (dropTable == null)
+                    return;
 
-        }
+                dropTable.add_drop_table(ItemDB.Inst.GetItemPrefab<FrozenSoul>(), 100f, new RangeInt() { min = 1, max = 1 });
+            }
+        });
 
-        return hasHit;
+        PlayerActionEventManager.AddEvent(PlayerActions.Kill, onKill);
     }
 }

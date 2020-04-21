@@ -9,6 +9,7 @@ public class OBB_Player_Death : OBB_Player_State
         data.Animator.Play("Death");
         data.groundDetectionData.Reset_IWSolid_ColSize();
 
+        // TODO: 딴데로 옮겨!!!
         Time.timeScale = 0.4f;
         Camera.main.DOOrthoSize(4f, 0.25f).SetEase(Ease.InOutElastic);
     }

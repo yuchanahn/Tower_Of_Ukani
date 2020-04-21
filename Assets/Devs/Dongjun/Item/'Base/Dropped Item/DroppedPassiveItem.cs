@@ -10,7 +10,7 @@ public class DroppedPassiveItem : DroppedItem
 
         // Spawn Item
         if (Item.gameObject.IsPrefab())
-            passiveItem = ItemDB.Inst.SpawnItem(Item.Info.ItemName).GetComponent<PassiveItem>();
+            passiveItem = ItemDB.Inst.SpawnItem(Item.GetType()).GetComponent<PassiveItem>();
 
         // Add To Inventory
         if (PlayerInventoryManager.passiveInventory.TryUpgradeItem(passiveItem.Info.ItemName))

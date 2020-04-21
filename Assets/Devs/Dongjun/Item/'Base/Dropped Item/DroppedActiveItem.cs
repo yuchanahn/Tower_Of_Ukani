@@ -10,7 +10,7 @@ public class DroppedActiveItem : DroppedItem
 
         // Spawn Item
         if (Item.gameObject.IsPrefab())
-            activeItem = ItemDB.Inst.SpawnItem(Item.Info.ItemName).GetComponent<ActiveItem>();
+            activeItem = ItemDB.Inst.SpawnItem(Item.GetType()).GetComponent<ActiveItem>();
 
         // Add To Inventory
         if (PlayerInventoryManager.inventory.TryUpgradeItem(activeItem.Info.ItemName)

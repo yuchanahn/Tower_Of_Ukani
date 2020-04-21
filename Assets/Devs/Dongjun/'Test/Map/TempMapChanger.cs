@@ -34,6 +34,7 @@ public class TempMapChanger : MonoBehaviour
     {
         if (PlayerStats.Inst.IsDead && Input.GetKeyDown(KeyCode.Return))
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }

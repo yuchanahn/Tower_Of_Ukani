@@ -30,6 +30,8 @@ public class PlayerStats : SingletonBase<PlayerStats>
     [HideInInspector] public float HealToReceive;
 
     [HideInInspector] public float DamageToDeal;
+
+    public AttackData? CurAttackData = null;
     public Mob_Base DamagedMob
     { get; private set; }
     public Mob_Base KilledMob
@@ -335,6 +337,9 @@ public class PlayerStats : SingletonBase<PlayerStats>
         // Store Damage
         DamageToDeal = attackData.damage.Value;
 
+        // Store Attack Data
+        CurAttackData = attackData;
+
         // Store Damaged Mob
         DamagedMob = target.GetComponent<Mob_Base>();
 
@@ -353,6 +358,9 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
         // Damage Mob
         iDamage.Hit(attackData);
+
+        // Reset Attack Data
+        CurAttackData = null;
 
         // Reset Damaged Mob
         DamagedMob = null;

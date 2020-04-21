@@ -10,7 +10,7 @@ public class DroppedResourceItem : DroppedItem
 
         // Spawn Item
         if (Item.gameObject.IsPrefab())
-            resourceItem = ItemDB.Inst.SpawnItem(Item.Info.ItemName).GetComponent<ResourceItem>();
+            resourceItem = ItemDB.Inst.SpawnItem(Item.GetType()).GetComponent<ResourceItem>();
 
         // Add To Inventory
         if (PlayerInventoryManager.inventory.TryAddItem(resourceItem))

@@ -10,7 +10,7 @@ public class DroppedConsumableItem : DroppedItem
 
         // Spawn Item
         if (Item.gameObject.IsPrefab())
-            consumableItem = ItemDB.Inst.SpawnItem(Item.Info.ItemName).GetComponent<ConsumableItem>();
+            consumableItem = ItemDB.Inst.SpawnItem(Item.GetType()).GetComponent<ConsumableItem>();
 
         // Add To Inventory
         if (PlayerInventoryManager.consumableHotbar.TryAddItem(consumableItem))

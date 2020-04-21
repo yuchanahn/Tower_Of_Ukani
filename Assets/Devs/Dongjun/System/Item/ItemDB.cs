@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class ItemDB : SingletonBase<ItemDB>
     #endregion
 
     #region Var: Propertis
-    public Dictionary<string, Item> Items
+    public Dictionary<Type, Item> Items
     { get; private set; }
     #endregion
 
@@ -20,13 +21,13 @@ public class ItemDB : SingletonBase<ItemDB>
         base.Awake();
 
         if (Items == null)
-            Items = new Dictionary<string, Item>();
+            Items = new Dictionary<Type, Item>();
         else
             Items.Clear();
 
         for (int i = 0; i < items.Length; i++)
         {
-            Items.Add(items[i].Info.ItemName, items[i]);
+            Items.Add(items[i].GetType(), items[i]);
         }
     }
     #endregion
@@ -52,10 +53,17 @@ public class ItemDB : SingletonBase<ItemDB>
 #endif
     #endregion
 
-    #region Method: Spawn Item
-    public Item SpawnItem(string name, int count = 1)
+    #region Method: Get Item
+    public Item GetItemPrefab<T>() where T: Item
     {
-        Item item = Instantiate(Items[name].gameObject).GetComponent<Item>();
+        return Items[typeof(T)];
+    }
+    #endregion
+
+    #region Method: Spawn Item
+    public Item SpawnItem<T>(int count = 1) where T : Item
+    {
+        Item item = Instantiate(Items[typeof(T)].gameObject).GetComponent<Item>();
         item.Info.Init();
         item.Info.Count = count;
 
@@ -63,24 +71,31 @@ public class ItemDB : SingletonBase<ItemDB>
         item.name = name;
         return item;
     }
-    public Item CloneItem(Item item)
+    public Item SpawnItem(Type itemType, int count = 1)
     {
-        Item clone = SpawnItem(item.Info.ItemName, item.Info.Count);
-        clone.SetInfo(item.Info);
+        Item item = Instantiate(Items[itemType].gameObject).GetComponent<Item>();
+        item.Info.Init();
+        item.Info.Count = count;
 
+        item.transform.SetParent(Inst.transform, false);
+        item.name = name;
+        return item;
+    }
+    public Item SpawnCloneItem(Item item)
+    {
+        Item clone = SpawnItem(item.GetType(), item.Info.Count);
+        clone.SetInfo(item.Info);
         clone.name = item.Info.ItemName;
         return clone;
     }
 
-    public DroppedItem SpawnDroppedItem(string name, int count = 1)
+    public DroppedItem SpawnDroppedItem<T>(Vector2 pos, int count = 1) where T : Item
     {
-        Item item = SpawnItem(name, count);
-        return item.OnDrop();
+        return SpawnItem<T>(count).OnDrop(pos);
     }
-    public DroppedItem SpawnDroppedItem(Vector2 pos, string name, int count = 1)
+    public DroppedItem SpawnDroppedItem(Item item, Vector2 pos, int count = 1)
     {
-        Item item = SpawnItem(name, count);
-        return item.OnDrop(pos);
+        return SpawnItem(item.GetType(), count).OnDrop(pos);
     }
     #endregion
 }
