@@ -51,8 +51,8 @@ public class Mob_DropItem : MonoBehaviour
         }
         foreach (var i in r)
             ItemDB.Inst.SpawnDroppedItem(
+                i.item,
                 transform.position, 
-                i.item.Info.ItemName, 
                 Random.Range(i.DropCount.min, i.DropCount.max)
                 ).GetComponent<Rigidbody2D>().AddForce(Random.insideUnitCircle * Random.Range(100f,200f));
     }
