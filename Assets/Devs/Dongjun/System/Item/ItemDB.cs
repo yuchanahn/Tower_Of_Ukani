@@ -6,6 +6,12 @@ using UnityEngine;
 
 public class ItemDB : SingletonBase<ItemDB>
 {
+    public enum SpawnMode
+    {
+        Clone,
+        Fresh
+    }
+
     #region Var: Inspector
     [SerializeField] private Item[] items;
     #endregion
@@ -84,8 +90,18 @@ public class ItemDB : SingletonBase<ItemDB>
     public Item SpawnCloneItem(Item item)
     {
         Item clone = SpawnItem(item.GetType(), item.Info.Count);
-        clone.SetInfo(item.Info);
         clone.name = item.Info.ItemName;
+
+        // Clone Info
+        clone.SetInfo(item.Info);
+        
+        // Clone Level
+        if (item as UpgradableItem != null)
+        {
+            UpgradableItem upgradableItem = item as UpgradableItem;
+            UpgradableItem upgradableClone = clone as UpgradableItem;
+            upgradableClone.SetLevel(upgradableItem.ItemLevel);
+        }
         return clone;
     }
 
@@ -93,9 +109,12 @@ public class ItemDB : SingletonBase<ItemDB>
     {
         return SpawnItem<T>(count).OnDrop(pos);
     }
-    public DroppedItem SpawnDroppedItem(Item item, Vector2 pos, int count = 1)
+    public DroppedItem SpawnDroppedItem(Item item, Vector2 pos, int count = 1, SpawnMode spawnMode = SpawnMode.Fresh)
     {
-        return SpawnItem(item.GetType(), count).OnDrop(pos);
+        if (spawnMode == SpawnMode.Fresh)
+            return SpawnItem(item.GetType(), count).OnDrop(pos);
+        else
+            return SpawnCloneItem(item).OnDrop(pos);
     }
     #endregion
 }

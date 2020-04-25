@@ -33,7 +33,7 @@ public abstract class Item : MonoBehaviour
     #endregion
 
     #region Method: Data
-    public void SetInfo(ItemInfo other)
+    public virtual void SetInfo(ItemInfo other)
     {
         info.SetID(other.ID);
         info.Count = other.Count;

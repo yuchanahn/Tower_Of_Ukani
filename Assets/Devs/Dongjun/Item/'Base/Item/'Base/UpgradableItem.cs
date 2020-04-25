@@ -20,6 +20,11 @@ public abstract class UpgradableItem : Item
     #endregion
 
     #region Method: Add Level
+    public virtual void SetLevel(int level)
+    {
+        ItemLevel = level;
+        InitStats();
+    }
     public virtual void AddLevel(int amount = 1)
     {
         ItemLevel += amount;
