@@ -25,7 +25,7 @@ public class ItemCostSlot : MonoBehaviour
 
     void UpdateText()
     {
-        string str = (itemCost.price.ToString() + " / " + GetItemCount(itemCost.item.Info.ItemName).ToString());
+        string str = (itemCost.count.ToString() + " / " + GetItemCount(itemCost.item.Info.ItemName).ToString());
         itemPriceTxt.text = str;
     }
 

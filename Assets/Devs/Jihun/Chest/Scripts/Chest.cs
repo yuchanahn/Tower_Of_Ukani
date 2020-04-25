@@ -30,7 +30,7 @@ public class Chest : InteractiveObj
     void Init()
     {
         selectedItem = null;
-        SetNewItem(new ChestItem(GetItem<MachineGunItem>(), 1, 2), new ChestItem(GetItem<WoodenShortbowItem>()));
+        SetNewItem(new ChestItem(GetItem<MachineGunItem>(), 1, 3), new ChestItem(GetItem<WoodenShortbowItem>()));
     }
     Item GetItem<T>() where T : Item
     {
@@ -95,9 +95,13 @@ public class Chest : InteractiveObj
     {
         if (selectedItem == null) return;
 
-        UpgradableItem temp = ItemDB.Inst.SpawnDroppedItem(selectedItem.item, itemSpawnPoint.position, selectedItem.count).Item as UpgradableItem;
-        temp.AddLevel(selectedItem.level);
-        
+        Debug.Log((selectedItem.item as UpgradableItem)?.ItemLevel.ToString());
+
+        UpgradableItem temp = ItemDB.Inst.SpawnDroppedItem(selectedItem.item,
+            itemSpawnPoint.position, selectedItem.item.Info.Count,
+            ItemDB.SpawnMode.Clone).Item as UpgradableItem;
+        Debug.Log((temp as UpgradableItem)?.ItemLevel.ToString());
+
         isInteractive = false;
         ChestManager.Inst.StopInteract();
         CloseChest();
@@ -110,14 +114,13 @@ public class Chest : InteractiveObj
 public class ChestItem
 {
     public Item item;
-    public int level;
-    public int count;
 
     public ChestItem() { }
     public ChestItem(Item item, int count = 1, int level = 0)
     {
         this.item = item;
-        this.level = level;
-        this.count = count;
+        UpgradableItem temp = item as UpgradableItem;
+        if(temp)    temp.SetLevel(level);
+        item.Info.Count = count;
     }
 }

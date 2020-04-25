@@ -29,8 +29,8 @@ public class ChestItemSlot : MonoBehaviour
 
         //아이템의 이름 칸에 넣을 문자열
         string nameStr = info.ItemName;
-        if(item.count > 1)
-            nameStr += (" x" + item.count.ToString());
+        if(item.item.Info.Count > 1)
+            nameStr += (" x" + item.item.Info.Count.ToString());
         itemNameTxt.text = nameStr;
         //===========================
         itemDescTxt.text = info.ItemDesc;

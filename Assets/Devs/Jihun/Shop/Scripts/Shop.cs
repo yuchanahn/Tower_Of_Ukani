@@ -29,7 +29,7 @@ public class Shop : InteractiveObj
     void Init()
     {
         Item i1 = GetItem<MachineGunItem>();
-        SellNewItem(i1, 2);
+        SellNewItem(i1, 2, new ItemCost(GetItem<Gold>(), 30));
         SellNewItem(GetItem<Gold>());
 
         int slotCnt = slotRoot.childCount;
@@ -83,11 +83,11 @@ public class Shop : InteractiveObj
 public class ItemCost
 {
     public Item item;
-    public int price;
+    public int count;
 
     public ItemCost(Item item, int price = 0)
     {
         this.item = item;
-        this.price = price;
+        this.count = price;
     }
 }

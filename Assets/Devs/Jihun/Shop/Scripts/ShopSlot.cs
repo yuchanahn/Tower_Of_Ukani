@@ -68,8 +68,7 @@ public class ShopSlot : MonoBehaviour
         // 금액 지불
         PayCosts();
 
-        UpgradableItem temp = ItemDB.Inst.SpawnDroppedItem(item, shopItemSpawnPos).Item as UpgradableItem;
-        temp.AddLevel(level);
+        UpgradableItem temp = ItemDB.Inst.SpawnDroppedItem(item, shopItemSpawnPos, spawnMode:ItemDB.SpawnMode.Clone).Item as UpgradableItem;
     }
 
     bool CheckPrice()
@@ -80,44 +79,25 @@ public class ShopSlot : MonoBehaviour
             Item itemKind = itemCosts[i].item;
             int count = PlayerInventoryManager.inventory.GetItemCount(itemKind.Info.ItemName);
 
-            if (itemCosts[i].price > count)
+            if (itemCosts[i].count > count)
             {
-                Debug.Log(itemKind + " : " + itemCosts[i].price.ToString() + "/" + count.ToString());
+                Debug.Log(itemKind + " : " + itemCosts[i].count.ToString() + "/" + count.ToString());
                 return false;
             }
         }
 
         return true;
     }
+    Item GetItem<T>() where T : Item
+    {
+        return ItemDB.Inst.GetItemPrefab<T>();
+    }
 
     void PayCosts()
     {
         for(int i = 0; i < itemCosts.Count; i++)
         {
-
-            string itemKind = itemCosts[i].item.Info.ItemName;
-            int payed = 0;
-            int price = itemCosts[i].price;
-
-            //해당 화폐의 가지고 있는 모든 묶음을 가져옴
-            Item[] thisItems = PlayerInventoryManager.inventory.GetItems(itemKind);
-
-            //해당 화폐 금액 지불 루프
-            for (int j = 0; j < thisItems.Length; j++)
-            {
-
-                // 바로 지불 가능 할 때
-                if((price - payed) <= thisItems[j].Info.Count)
-                {
-                    PlayerInventoryManager.inventory.RemoveItem(thisItems[j], price - payed);
-                    break;
-                }
-
-                payed += thisItems[j].Info.Count;
-                // 바로 지불 못하면 그 칸에 있는 모든 아이템 지불
-                PlayerInventoryManager.inventory.RemoveItem(thisItems[j], thisItems[j].Info.Count);
-                Debug.Log(thisItems[j].Info.Count + ", " + payed + ", " + price);
-            }
+            PlayerInventoryManager.inventory.RemoveItem(itemCosts[i].item.GetType(), itemCosts[i].count);
         }
     }
 }
