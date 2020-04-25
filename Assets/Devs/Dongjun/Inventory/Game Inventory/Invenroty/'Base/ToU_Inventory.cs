@@ -21,9 +21,9 @@ public class ToU_Inventory : InventoryBase
     #endregion
 
     #region Method: Upgrade Item
-    public bool TryUpgradeItem(string itemName)
+    public bool TryUpgradeItem(Type itemType)
     {
-        int index = GetIndex_ItemName(itemName);
+        int index = GetIndex_ItemType(itemType);
         if (index == -1)
             return false;
 

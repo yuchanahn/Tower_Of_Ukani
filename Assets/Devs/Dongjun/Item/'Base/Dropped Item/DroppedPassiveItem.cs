@@ -13,7 +13,7 @@ public class DroppedPassiveItem : DroppedItem
             passiveItem = ItemDB.Inst.SpawnItem(Item.GetType()).GetComponent<PassiveItem>();
 
         // Add To Inventory
-        if (PlayerInventoryManager.passiveInventory.TryUpgradeItem(passiveItem.Info.ItemName))
+        if (PlayerInventoryManager.passiveInventory.TryUpgradeItem(passiveItem.GetType()))
         {
             Destroy(passiveItem.gameObject);
             goto EXIT;

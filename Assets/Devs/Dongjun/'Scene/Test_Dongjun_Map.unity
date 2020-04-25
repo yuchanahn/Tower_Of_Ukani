@@ -10845,6 +10845,51 @@ PrefabInstance:
       propertyPath: _data.kbCurve.m_Curve.Array.data[0].value
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[1].time
+      value: 0.17481928
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[1].value
+      value: 2.5639324
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].time
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].value
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4650456214795719251, guid: f1d116c160f4e074b855b6a707d8fab1,
+        type: 3}
+      propertyPath: jumpData.jumpCurve.m_Curve.Array.data[2].outWeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4650456214795719256, guid: f1d116c160f4e074b855b6a707d8fab1,
         type: 3}
       propertyPath: m_LocalPosition.x

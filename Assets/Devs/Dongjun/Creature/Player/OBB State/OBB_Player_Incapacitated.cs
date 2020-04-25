@@ -46,9 +46,9 @@ public class OBB_Player_Incapacitated : OBB_Player_State
         // Knockbacked
         else
         {
-            if (data.NewKnockback)
+            if (data.KnockbackStarted)
             {
-                data.NewKnockback = false;
+                data.KnockbackStarted = false;
 
                 // Reset knockback time
                 curKnockbackTime = 0;

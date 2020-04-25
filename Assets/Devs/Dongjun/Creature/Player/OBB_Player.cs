@@ -25,10 +25,9 @@ public class OBB_Data_Player : OBB_Data_Animator,
     [HideInInspector] public bool CanDash = true;
     [HideInInspector] public bool CanKick = true;
     // State: CC
-    [HideInInspector] public bool NewKnockback = false;
+    [HideInInspector] public bool KnockbackStarted = false;
     // State: Other Motion
     [HideInInspector] public bool PlayingOtherMotion = false;
-    [HideInInspector] public Func<bool> EndOtherMotion = null;
 
     // Data
     public CreatureType CreatureType => CreatureType.Player;
@@ -48,7 +47,9 @@ public class OBB_Data_Player : OBB_Data_Animator,
     public override void Init_Start(GameObject gameObject)
     {
         base.Init_Start(gameObject);
-        PlayerActionEventManager.AddEvent(PlayerActions.Knockbacked, this.NewPlayerActionEvent(() => NewKnockback = true));
+
+        // For Checking When Player Gets Knockbacked
+        PlayerActionEventManager.AddEvent(PlayerActions.Knockbacked, this.NewPlayerActionEvent(() => KnockbackStarted = true));
     }
 }
 

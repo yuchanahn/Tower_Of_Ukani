@@ -93,9 +93,25 @@ public abstract class InventoryBase : MonoBehaviour
         var type = typeof(T);
         return Array.FindAll(items, o => o != null ? o.GetType() == type : false);
     }
+    public virtual Item[] GetItems(Type itemType)
+    {
+        return Array.FindAll(items, o => o != null ? o.GetType() == itemType : false);
+    }
     public virtual int GetItemCount(string itemName)
     {
         var fountItems = Array.FindAll(items, o => o != null ? o.Info.ItemName == itemName : false);
+
+        int result = 0;
+        foreach (var item in fountItems)
+        {
+            result += item.Info.Count;
+        }
+
+        return result;
+    }
+    public virtual int GetItemCount(Type itemType)
+    {
+        var fountItems = Array.FindAll(items, o => o != null ? o.GetType() == itemType : false);
 
         int result = 0;
         foreach (var item in fountItems)
@@ -111,9 +127,9 @@ public abstract class InventoryBase : MonoBehaviour
     {
         return Array.FindIndex(items, i => i != null ? i.Info.ID == id : false);
     }
-    public int GetIndex_ItemName(string itemName)
+    public int GetIndex_ItemType(Type itemType)
     {
-        return Array.FindIndex(items, i => i != null ? i.Info.ItemName == itemName : false);
+        return Array.FindIndex(items, i => i != null ? i.GetType() == itemType : false);
     }
     public int GetIndex_Item(Item item)
     {
@@ -303,6 +319,42 @@ public abstract class InventoryBase : MonoBehaviour
     public virtual void RemoveItem<T>(int amount = 1) where T: Item
     {
         var foundItems = GetItems<T>();
+        if (foundItems == null || foundItems.Length == 0)
+            return;
+
+        int toRemove = amount;
+        foreach (var item in foundItems)
+        {
+            if (toRemove <= 0)
+                return;
+
+            int index = GetIndex_Item(item);
+
+            if (items[index].Info.Count >= toRemove)
+            {
+                items[index].Info.Count -= toRemove;
+                toRemove = 0;
+            }
+            else if (items[index].Info.Count < toRemove)
+            {
+                toRemove -= items[index].Info.Count;
+                items[index].Info.Count = 0;
+            }
+
+            if (items[index].Info.Count == 0)
+            {
+                items[index].OnRemove();
+                items[index] = null;
+                EmptySlots++;
+            }
+
+            // Update UI
+            inventoryUI?.UpdateSlot(index);
+        }
+    }
+    public virtual void RemoveItem(Type itemType, int amount = 1)
+    {
+        var foundItems = GetItems(itemType);
         if (foundItems == null || foundItems.Length == 0)
             return;
 

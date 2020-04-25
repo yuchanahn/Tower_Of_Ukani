@@ -13,8 +13,8 @@ public class DroppedActiveItem : DroppedItem
             activeItem = ItemDB.Inst.SpawnItem(Item.GetType()).GetComponent<ActiveItem>();
 
         // Add To Inventory
-        if (PlayerInventoryManager.inventory.TryUpgradeItem(activeItem.Info.ItemName)
-        || PlayerInventoryManager.activeHotbar.TryUpgradeItem(activeItem.Info.ItemName))
+        if (PlayerInventoryManager.inventory.TryUpgradeItem(activeItem.GetType())
+        || PlayerInventoryManager.activeHotbar.TryUpgradeItem(activeItem.GetType()))
         {
             Destroy(activeItem.gameObject);
             goto EXIT;

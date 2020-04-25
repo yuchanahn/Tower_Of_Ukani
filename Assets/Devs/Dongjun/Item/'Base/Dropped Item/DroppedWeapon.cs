@@ -13,8 +13,8 @@ public class DroppedWeapon : DroppedItem
             weaponItem = ItemDB.Inst.SpawnItem(Item.GetType()).GetComponent<WeaponItem>();
 
         // Add To Inventory
-        if (PlayerInventoryManager.inventory.TryUpgradeItem(weaponItem.Info.ItemName)
-        || PlayerInventoryManager.weaponHotbar.TryUpgradeItem(weaponItem.Info.ItemName))
+        if (PlayerInventoryManager.inventory.TryUpgradeItem(weaponItem.GetType())
+        || PlayerInventoryManager.weaponHotbar.TryUpgradeItem(weaponItem.GetType()))
         {
             Destroy(weaponItem.gameObject);
             goto EXIT;
