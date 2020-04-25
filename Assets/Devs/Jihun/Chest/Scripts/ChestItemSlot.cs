@@ -18,7 +18,7 @@ public class ChestItemSlot : MonoBehaviour
         if (item == null) return;
 
         //넣을 아이템의 정보
-        ItemInfo info = item.info;
+        ItemInfo info = item.item.Info;
 
         this.item = item;
         this.chest = chest;

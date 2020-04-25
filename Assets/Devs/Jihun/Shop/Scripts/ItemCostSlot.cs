@@ -13,7 +13,7 @@ public class ItemCostSlot : MonoBehaviour
 
     public void SetPrice(ItemCost itemCost)
     {
-        itemSpriteImage.sprite = ItemDB.Inst.Items[itemCost.name].Info.Icon;
+        itemSpriteImage.sprite = itemCost.item.Info.Icon;
 
         this.itemCost = itemCost;
     }
@@ -25,7 +25,7 @@ public class ItemCostSlot : MonoBehaviour
 
     void UpdateText()
     {
-        string str = (itemCost.price.ToString() + " / " + GetItemCount(itemCost.name).ToString());
+        string str = (itemCost.price.ToString() + " / " + GetItemCount(itemCost.item.Info.ItemName).ToString());
         itemPriceTxt.text = str;
     }
 

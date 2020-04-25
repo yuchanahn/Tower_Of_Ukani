@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class ShopSlot : MonoBehaviour
 {
     #region Var:UI
-    public ItemInfo item;
+    public Item item;
+    public int level;
 
     public Image itemSpriteImage;
     public Text itemNameTxt;
@@ -19,28 +20,34 @@ public class ShopSlot : MonoBehaviour
     public Transform itemCostsRoot;
     [SerializeField] private ItemCostSlot itemCostPrefab;
 
-    Vector3 shopItemSpawnPoint;
+    Vector3 shopItemSpawnPos;
     #endregion
 
     public void SetSpawnPos(Vector3 pos)
     {
-        shopItemSpawnPoint = pos;
+        shopItemSpawnPos = pos;
     }
 
-    public void SetItem(ItemInfo item, params ItemCost[] itemCosts)
+    /// <summary>
+    /// 상점에 새로운 품목을 추가할 때 상점 슬롯 객체를 초기화 해주는 메소드.
+    /// </summary>
+    /// <param name="item">아이템 프리팹</param>
+    /// <param name="itemCosts">가격</param>
+    public void SetItem(Item item, int level = 0, params ItemCost[] itemCosts)
     {
         if (item == null) return;
-        
+
+        ItemCostSlot slot;
 
         this.item = item;
-
+        this.level = level;
 
         // 아이템 가격 설정
         for(int i = 0; i < itemCosts.Length; i++)
         {
             this.itemCosts.Add(itemCosts[i]);
 
-            ItemCostSlot slot = Instantiate<ItemCostSlot>(itemCostPrefab);
+            slot = Instantiate<ItemCostSlot>(itemCostPrefab);
             slot.SetPrice(itemCosts[i]);
             slot.transform.SetParent(itemCostsRoot);
             slot.transform.localScale = Vector3.one;
@@ -48,10 +55,10 @@ public class ShopSlot : MonoBehaviour
             
 
         itemSpriteImage.gameObject.SetActive(true);
-        itemSpriteImage.sprite = item.Icon;
+        itemSpriteImage.sprite = item.Info.Icon;
 
-        itemNameTxt.text = item.ItemName;
-        itemDescTxt.text = item.ItemDesc;
+        itemNameTxt.text = item.Info.ItemName;
+        itemDescTxt.text = item.Info.ItemDesc;
     }
 
     public void BuyItem()
@@ -61,7 +68,8 @@ public class ShopSlot : MonoBehaviour
         // 금액 지불
         PayCosts();
 
-        ItemDB.Inst.SpawnDroppedItem(shopItemSpawnPoint, item.ItemName);
+        UpgradableItem temp = ItemDB.Inst.SpawnDroppedItem(item, shopItemSpawnPos).Item as UpgradableItem;
+        temp.AddLevel(level);
     }
 
     bool CheckPrice()
@@ -69,16 +77,8 @@ public class ShopSlot : MonoBehaviour
         for (int i = 0; i < itemCosts.Count; i++)
         {
             // 화폐 설정
-            string itemKind = itemCosts[i].name;
-            int count = 0;
-
-            // 해당 화폐 불러옴
-            Item[] items = PlayerInventoryManager.inventory.GetItems(itemKind);
-
-            for (int j = 0; j < items.Length; j++)
-            {
-                count += items[j].Info.Count;
-            }
+            Item itemKind = itemCosts[i].item;
+            int count = PlayerInventoryManager.inventory.GetItemCount(itemKind.Info.ItemName);
 
             if (itemCosts[i].price > count)
             {
@@ -95,7 +95,7 @@ public class ShopSlot : MonoBehaviour
         for(int i = 0; i < itemCosts.Count; i++)
         {
 
-            string itemKind = itemCosts[i].name;
+            string itemKind = itemCosts[i].item.Info.ItemName;
             int payed = 0;
             int price = itemCosts[i].price;
 

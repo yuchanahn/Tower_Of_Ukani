@@ -30,22 +30,14 @@ public class Chest : InteractiveObj
     void Init()
     {
         selectedItem = null;
-        SetNewItem(new ChestItem("Machinegun"), new ChestItem("Wooden Shortbow"));
-        SetNewItem("Potion of Healing", 5);
+        SetNewItem(new ChestItem(GetItem<MachineGunItem>(), 1, 2), new ChestItem(GetItem<WoodenShortbowItem>()));
+    }
+    Item GetItem<T>() where T : Item
+    {
+        return ItemDB.Inst.GetItemPrefab<T>();
     }
 
     //슬롯 오브젝트를 레이아웃 그룹에 생성하고 프로퍼티 설정
-    void SetNewItem(string name, int count = 1)
-    {
-        ChestItemSlot slot = Instantiate<ChestItemSlot>(slotPrefab);
-
-        slots.Add(slot);
-
-        slot.transform.SetParent(slotRoot);
-        slot.transform.localScale = Vector3.one;
-
-        slot.SetItem(new ChestItem(ItemDB.Inst.Items[name].Info, count), this);
-    }
     void SetNewItem(params ChestItem[] item)
     {
         ChestItemSlot slot;
@@ -103,7 +95,9 @@ public class Chest : InteractiveObj
     {
         if (selectedItem == null) return;
 
-        ItemDB.Inst.SpawnDroppedItem(itemSpawnPoint.position, selectedItem.info.ItemName, selectedItem.count);
+        UpgradableItem temp = ItemDB.Inst.SpawnDroppedItem(selectedItem.item, itemSpawnPoint.position, selectedItem.count).Item as UpgradableItem;
+        temp.AddLevel(selectedItem.level);
+        
         isInteractive = false;
         ChestManager.Inst.StopInteract();
         CloseChest();
@@ -115,18 +109,15 @@ public class Chest : InteractiveObj
 [System.Serializable]
 public class ChestItem
 {
-    public ItemInfo info;
+    public Item item;
+    public int level;
     public int count;
 
     public ChestItem() { }
-    public ChestItem(ItemInfo info, int count)
+    public ChestItem(Item item, int count = 1, int level = 0)
     {
-        this.info = info;
-        this.count = count;
-    }
-    public ChestItem(string name, int count = 1)
-    {
-        this.info = ItemDB.Inst.Items[name].Info;
+        this.item = item;
+        this.level = level;
         this.count = count;
     }
 }

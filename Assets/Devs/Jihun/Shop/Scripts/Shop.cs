@@ -19,14 +19,18 @@ public class Shop : InteractiveObj
         Init();
     }
 
+
+    Item GetItem<T>() where T: Item
+    {
+        return ItemDB.Inst.GetItemPrefab<T>();
+    }
+
     // 슬롯들을 리스트에 넣어줌.
     void Init()
     {
-        SellNewItem("Overlord", new ItemCost("Gold", 3));
-        SellNewItem("Machinegun");
-        SellNewItem("Phantom Pistol");
-        SellNewItem("Equilibrium");
-
+        Item i1 = GetItem<MachineGunItem>();
+        SellNewItem(i1, 2);
+        SellNewItem(GetItem<Gold>());
 
         int slotCnt = slotRoot.childCount;
 
@@ -42,14 +46,14 @@ public class Shop : InteractiveObj
     }
 
     // 판매 아이템 목록에 아이템 추가.
-    public void SellNewItem(string name, params ItemCost[] itemCosts)
+    public void SellNewItem(Item item, int level = 0, params ItemCost[] itemCosts)
     {
         ShopSlot slot = Instantiate<ShopSlot>(slotPrefab);
 
         slot.transform.SetParent(slotRoot);
         slot.transform.localScale = Vector3.one;
 
-        slot.SetItem(ItemDB.Inst.Items[name].Info, itemCosts);
+        slot.SetItem(item, level, itemCosts);
     }
 
     public override InteractiveObj Interact()
@@ -78,12 +82,12 @@ public class Shop : InteractiveObj
 
 public class ItemCost
 {
-    public string name;
+    public Item item;
     public int price;
 
-    public ItemCost(string name, int price)
+    public ItemCost(Item item, int price = 0)
     {
-        this.name = name;
+        this.item = item;
         this.price = price;
     }
 }
