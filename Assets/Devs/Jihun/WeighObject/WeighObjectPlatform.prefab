@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2863071182154797368}
   - component: {fileID: 2863071182154797371}
   - component: {fileID: 2863071182154797319}
+  - component: {fileID: 736988703}
   m_Layer: 9
   m_Name: WeighObjectPlatform
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2863071182154797370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.26, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalScale: {x: 20, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: -649209425
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bb5928b8d48da85409222f96756ea656, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: b62a5cae3b3ed7c43999acca97f07231, type: 3}
+  m_Color: {r: 0.23113209, g: 0.37117103, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,7 +93,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2863071182154797370}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -120,13 +121,13 @@ MonoBehaviour:
   checkLayer:
     serializedVersion: 2
     m_Bits: 1073743104
-  minYPos: -1
-  maxYPos: 3
-  canLiftUp: 0
-  speed: 1
-  forceRate: 100
-  maxVel: 5
-  minVel: -5
+  mass: 0
+  minYPos: -2
+  maxYPos: 86
+  canLiftUp: 5
+  speed: 3
+  maxVel: 1
+  minVel: -1
 --- !u!61 &2863071182154797319
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,12 +145,28 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.2503726, y: 0.81933594}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1.2503726, y: 0.81933594}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2503726, y: 0.81933594}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &736988703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2863071182154797370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d485eeba58d074dba7525a1f5211c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Size: {x: 22, y: 3}
+  TargetMobSize: 1
+  mLastPos: {x: 0, y: 0}
+  vel: {x: 0, y: 0}

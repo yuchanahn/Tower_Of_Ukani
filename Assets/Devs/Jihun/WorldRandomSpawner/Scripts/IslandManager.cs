@@ -435,7 +435,7 @@ public class IslandManager : SingletonBase<IslandManager>
         // 다리의 시작지점과 끝지점 설정.
         // 배열에서의 Y좌표 반전때문에 startPos와 endPos에 -를 곱해서 넣어야 함.
         Vector2 startPos = new Vector2(land1.pos.x + land1.endPos.x, land1.pos.y - land1.endPos.y);
-        Vector2 endPos = new Vector2(land2.pos.x + land2.startPos.x, land2.pos.y - land2.startPos.y);
+        Vector2 endPos = new Vector2(land2.pos.x + land2.startPos.x - 8, land2.pos.y - land2.startPos.y);
 
         //Debug.Log($"startPos : {startPos}, endPos : {endPos}");
 
@@ -470,26 +470,25 @@ public class IslandManager : SingletonBase<IslandManager>
             }
         }
         repeat = Mathf.Max(re1, re2);
-
+        repeat++;
         //갯수에 따른 간격 설정
         interval /= repeat;
 
         interX = Mathf.Max(13, (int)Mathf.Abs(interval.x));
 
-        Debug.Log( "repeat : " + repeat.ToString());
 
-        newPos += interval/4;
+        newPos += interval/2;
         //실질적으로 다리 생성하는 반복문
         for (i = 0; i < repeat; i++)
         {
             
             wid = Random.Range(interX - 6, interX - 3);
-
+            /*
             if(i == repeat-1)
             {
-                wid = (int)(endPos.x - newPos.x - 5);
-                Debug.Log("b");
-            }
+                wid = (int)(endPos.x - newPos.x - 3);
+            }*/
+
             hei = wid / 3;
 
             JH_Island land = _irg.GenerateBridge((int)newPos.x, (int)newPos.y, wid, hei);

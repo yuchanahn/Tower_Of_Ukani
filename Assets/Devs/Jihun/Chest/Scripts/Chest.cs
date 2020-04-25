@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Chest : MonoBehaviour
+public class Chest : InteractiveObj
 {
+    //아이템 생성 관련
     [SerializeField] Transform itemSpawnPoint;
 
-    public bool isOpened = false;
-
+    //UI관련
+    public Transform chestUI;
+    [SerializeField] ChestItemSlot slotPrefab;
     public Transform slotRoot;
-    public Transform chestSelectOption;
 
-    [SerializeField] private ChestItemSlot slotPrefab;
-
+    //상자 고유
     List<ChestItemSlot> slots = new List<ChestItemSlot>();
-
-    
-    [HideInInspector] public ChestItem selectedItem = null;
+    [HideInInspector] ChestItem selectedItem = null;
 
     private void Awake()
     {
@@ -32,8 +30,7 @@ public class Chest : MonoBehaviour
     void Init()
     {
         selectedItem = null;
-        SetNewItem("Machinegun");
-        SetNewItem("Wooden Shortbow");
+        SetNewItem(new ChestItem("Machinegun"), new ChestItem("Wooden Shortbow"));
         SetNewItem("Potion of Healing", 5);
     }
 
@@ -49,6 +46,23 @@ public class Chest : MonoBehaviour
 
         slot.SetItem(new ChestItem(ItemDB.Inst.Items[name].Info, count), this);
     }
+    void SetNewItem(params ChestItem[] item)
+    {
+        ChestItemSlot slot;
+
+        for(int i = 0; i < item.Length; i++)
+        {
+            slot = Instantiate<ChestItemSlot>(slotPrefab);
+
+            slots.Add(slot);
+
+            slot.transform.SetParent(slotRoot);
+            slot.transform.localScale = Vector3.one;
+
+            slot.SetItem(item[i], this);
+        }
+
+    }
 
     public void SelectItem(ChestItemSlot select)
     {
@@ -62,27 +76,39 @@ public class Chest : MonoBehaviour
 
     public void OpenChest()
     {
-        chestSelectOption.gameObject.SetActive(true);
+        chestUI.gameObject.SetActive(true);
     }
 
     public void CloseChest()
     {
-        chestSelectOption.gameObject.SetActive(false);
+        chestUI.gameObject.SetActive(false);
     }
 
-    public void ToggleChest()
+    public override InteractiveObj Interact()
     {
-        if (chestSelectOption.gameObject.activeSelf) CloseChest();
-        else OpenChest();
+        if (chestUI.gameObject.activeSelf)
+        {
+            CloseChest();
+            return null;
+        }
+        else
+        {
+            OpenChest();
+            return this;
+        }
     }
+
 
     public void SpawnItem()
     {
         if (selectedItem == null) return;
 
         ItemDB.Inst.SpawnDroppedItem(itemSpawnPoint.position, selectedItem.info.ItemName, selectedItem.count);
-        isOpened = true;
-        ChestManager.Inst.CloseChest();
+        isInteractive = false;
+        ChestManager.Inst.StopInteract();
+        CloseChest();
+
+        gameObject.SetActive(false);
     }
 }
 
@@ -96,6 +122,11 @@ public class ChestItem
     public ChestItem(ItemInfo info, int count)
     {
         this.info = info;
+        this.count = count;
+    }
+    public ChestItem(string name, int count = 1)
+    {
+        this.info = ItemDB.Inst.Items[name].Info;
         this.count = count;
     }
 }

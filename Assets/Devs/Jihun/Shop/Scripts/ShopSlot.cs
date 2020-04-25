@@ -18,7 +18,14 @@ public class ShopSlot : MonoBehaviour
 
     public Transform itemCostsRoot;
     [SerializeField] private ItemCostSlot itemCostPrefab;
+
+    Vector3 shopItemSpawnPoint;
     #endregion
+
+    public void SetSpawnPos(Vector3 pos)
+    {
+        shopItemSpawnPoint = pos;
+    }
 
     public void SetItem(ItemInfo item, params ItemCost[] itemCosts)
     {
@@ -54,7 +61,7 @@ public class ShopSlot : MonoBehaviour
         // 금액 지불
         PayCosts();
 
-        ItemDB.Inst.SpawnDroppedItem(ShopManager.Inst.shopItemSpawnPoint.position, item.ItemName);
+        ItemDB.Inst.SpawnDroppedItem(shopItemSpawnPoint, item.ItemName);
     }
 
     bool CheckPrice()

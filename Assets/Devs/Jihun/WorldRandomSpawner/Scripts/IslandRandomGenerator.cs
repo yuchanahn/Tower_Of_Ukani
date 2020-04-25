@@ -23,8 +23,8 @@ public class IslandRandomGenerator : MonoBehaviour
     int maxHeight = 30;
     int minHeight = 10;
 
-    int[] groundPer = {0, 0, 0, 0, 30, 50, 70, 100 };
-    int[] groundSlpPer = {0, 50, 100 };
+    int[] groundPer = {0,0,0, 0, 0, 0, 30, 50, 70, 100 };
+    int[] groundSlpPer = {0, 80, 100 };
     int[] underGroundPer = { 33,66,100 };
     #endregion
 

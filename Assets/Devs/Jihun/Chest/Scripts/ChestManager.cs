@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class ChestManager : SingletonBase<ChestManager>
 {
-    List<Chest> chests = new List<Chest>();
+    List<InteractiveObj> interactiveObjs = new List<InteractiveObj>();
 
-    Chest openedChest = null;
+    public InteractiveObj curObj = null;
 
     Transform player;
 
@@ -30,17 +30,17 @@ public class ChestManager : SingletonBase<ChestManager>
     /// </summary>
     void ListInit()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("Chest");
-        Chest chest;
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Interactive");
+        InteractiveObj interObj;
         for(int i = 0;i < objs.Length; i++)
         {
-            chest = objs[i].GetComponent<Chest>();
-            if (chest)
-                chests.Add(chest);
+            interObj = objs[i].GetComponent<InteractiveObj>();
+            if (interObj)
+                interactiveObjs.Add(interObj);
         }
     }
 
-    bool IsCloseToPlayer(Chest chest)
+    bool IsCloseToPlayer(InteractiveObj chest)
     {
         return (Vector2.Distance(player.position, chest.transform.position) < chestRange);
     }
@@ -57,11 +57,11 @@ public class ChestManager : SingletonBase<ChestManager>
 
     void CheckOpenedChestPos()
     {
-        if (openedChest == null) return;
+        if (curObj == null) return;
 
-        if(!IsCloseToPlayer(openedChest))
+        if(!IsCloseToPlayer(curObj))
         {
-            CloseChest();
+            curObj = curObj.Interact();
         }
     }
 
@@ -69,41 +69,37 @@ public class ChestManager : SingletonBase<ChestManager>
     {
         //입력 받았을 때
         if (!Input.GetKeyDown(PlayerActionKeys.Interact)) return;
+
         //이미 열려있는 상자가 있으면
-        if(openedChest)
+        if(curObj)
         {
             //그 상자 닫고 함수 종료
-            CloseChest();
+            curObj = curObj.Interact();
             return;
         }
 
         //열려있지 않은 상자들을 거리순으로 정렬
         var chestsByDist =
-            from chest in chests
+            from chest in interactiveObjs
             where Vector2.Distance(chest.transform.position, player.position) < chestRange
-            where !(chest.isOpened)
+            where chest.isInteractive
             orderby Vector2.Distance(chest.transform.position, player.position)
             select chest;
         //가장 가까운 상자가
-        Chest closest = chestsByDist.DefaultIfEmpty().First();
+        InteractiveObj closest = chestsByDist.DefaultIfEmpty().First();
         
         //존재하면
         if (closest != null)
         {
+            if (curObj)
+                Debug.Log(curObj.name);
             //열린상자 갱신하고 엶
-            OpenChest(closest);
+            curObj = closest.Interact();
         }
     }
 
-    public void CloseChest()
+    public void StopInteract()
     {
-        openedChest.CloseChest();
-        openedChest = null;
-    }
-
-    public void OpenChest(Chest chest)
-    {
-        openedChest = chest;
-        openedChest.OpenChest();
+        curObj = null;
     }
 }

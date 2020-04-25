@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shop : MonoBehaviour
+public class Shop : InteractiveObj
 {
+    [SerializeField] Transform shopUI;
+    [SerializeField] Transform itemSpawnPoint;
+
+
     public Transform slotRoot;
 
     [SerializeField] private ShopSlot slotPrefab;
@@ -18,7 +22,7 @@ public class Shop : MonoBehaviour
     // 슬롯들을 리스트에 넣어줌.
     void Init()
     {
-        SellNewItem("Overlord");
+        SellNewItem("Overlord", new ItemCost("Gold", 3));
         SellNewItem("Machinegun");
         SellNewItem("Phantom Pistol");
         SellNewItem("Equilibrium");
@@ -29,6 +33,7 @@ public class Shop : MonoBehaviour
         for(int i = 0; i < slotCnt; i++)
         {
             ShopSlot slot = slotRoot.GetChild(i).GetComponent<ShopSlot>();
+            slot.SetSpawnPos(itemSpawnPoint.position);
 
             slots.Add(slot);
         }
@@ -45,6 +50,29 @@ public class Shop : MonoBehaviour
         slot.transform.localScale = Vector3.one;
 
         slot.SetItem(ItemDB.Inst.Items[name].Info, itemCosts);
+    }
+
+    public override InteractiveObj Interact()
+    {
+        if(shopUI.gameObject.activeSelf)
+        {
+            CloseShop();
+            return null;
+        }
+        else
+        {
+            OpenShop();
+            return this;
+        }
+    }
+
+    public void CloseShop()
+    {
+        shopUI.gameObject.SetActive(false);
+    }
+    public void OpenShop()
+    {
+        shopUI.gameObject.SetActive(true);
     }
 }
 

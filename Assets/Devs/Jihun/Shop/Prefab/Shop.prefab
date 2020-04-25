@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9173525553335020768}
+  - component: {fileID: 915664814609012504}
   m_Layer: 0
   m_Name: Shop
-  m_TagString: Untagged
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,6 +33,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &915664814609012504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390380353208022169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112b8c5a9505dc84a9abbf02d8895be7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isInteractive: 1
+  shopUI: {fileID: 6392242121017010907}
+  itemSpawnPoint: {fileID: 6392242120746529643}
+  slotRoot: {fileID: 6392242120406951615}
+  slotPrefab: {fileID: 8325372413852916403, guid: b20eba8e640aa2a429296d0e4982c27e,
+    type: 3}
 --- !u!1 &6392242119396926331
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +455,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6392242121017010907}
-  - component: {fileID: 6392242121017010906}
   m_Layer: 0
   m_Name: ShopUI
   m_TagString: Untagged
@@ -459,18 +477,3 @@ Transform:
   m_Father: {fileID: 9173525553335020768}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6392242121017010906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6392242121017010900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112b8c5a9505dc84a9abbf02d8895be7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slotRoot: {fileID: 6392242120406951615}
-  slotPrefab: {fileID: 8325372413852916403, guid: b20eba8e640aa2a429296d0e4982c27e,
-    type: 3}

@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 2833519416421870604}
   m_Layer: 0
   m_Name: Chest
-  m_TagString: Chest
+  m_TagString: Interactive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -203,21 +203,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d1aec4ecf263f43a496864868a51ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInteractive: 1
   itemSpawnPoint: {fileID: 8447162586727560467}
-  isOpened: 0
-  slotRoot: {fileID: 2833519417070854753}
-  chestSelectOption: {fileID: 2833519417272225169}
+  chestUI: {fileID: 2833519417272225169}
   slotPrefab: {fileID: 1822472806681531585, guid: 41a50ecfd055ca44e8858fdba24b7b33,
     type: 3}
-  selectedItem:
-    info:
-      icon: {fileID: 0}
-      itemName: Item Name
-      itemDesc: This is an Item
-      itemStackLimit: 1
-      damageType: 
-      range: 
-    count: 0
+  slotRoot: {fileID: 2833519417070854753}
 --- !u!1 &2833519416592556164
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2833519417272225169}
   m_Layer: 0
-  m_Name: Chest_SelectOption
+  m_Name: ChestUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
