@@ -34,7 +34,8 @@ public class StatusEffect_Knokback : StatusEffect_Base
     void Update()
     {
         //넉백을 수행 시킬 코드블럭.
-        
+
+        SetValue(SE_Obj.StatusEffect_Ani, eMobAniST.Stunned);
         SetValue(SE_Obj.StatusEffect_Dir2d, mDir2d);
         SetValue(SE_Obj.StatusEffect_NoTask, true);
         SetValue(SE_Obj.StatusEffect_UseSEVelCurve, true);
@@ -43,6 +44,7 @@ public class StatusEffect_Knokback : StatusEffect_Base
 
     protected override void OnSEDestroy()
     {
+        SetValue(SE_Obj.StatusEffect_Ani, eMobAniST.Last);
         SetValue(SE_Obj.StatusEffect_Dir2d, Vector2.zero);
         SetValue(SE_Obj.StatusEffect_NoTask, false);
         SetValue(SE_Obj.StatusEffect_UseSEVelCurve, false);
