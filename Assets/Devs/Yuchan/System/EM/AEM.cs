@@ -6,7 +6,15 @@ using UnityEngine;
 public static class AEM
 {
 
-
+    public static void HasKey<T1, T2>(this Dictionary<T1,T2> d, T1 key, Action act)
+    {
+        if(d.ContainsKey(key)) act();
+    }
+    public static void HasKeyOr<T1, T2>(this Dictionary<T1, T2> d, T1 key, Action act, Action or)
+    {
+        if (d.ContainsKey(key)) act();
+        else or();
+    }
     public static int ToLayer(this LayerMask l)
     {
         return Mathf.RoundToInt(Mathf.Log(l.value, 2));

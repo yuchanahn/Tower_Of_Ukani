@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 350722369162630154}
   - component: {fileID: 68997658}
   - component: {fileID: 1288140563}
+  - component: {fileID: 6466587292385650810}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -368,7 +369,44 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1073741824
   JPS_UseableObjectSizes: 0100000002000000
+  test_cur:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.051529247
+      value: 29.920156
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.10295446
+      value: 0.10525322
+      inSlope: 91.81825
+      outSlope: 91.81825
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   MapSizeDefult:
+  - MapName: 'Map: Explore'
+    MapSize: {x: 90, y: 81}
+  - MapName: 'Map: Lava'
+    MapSize: {x: 45, y: 63}
   - MapName: Elevator Map
     MapSize: {x: 50, y: 100}
   pos: 0
@@ -399,8 +437,34 @@ MonoBehaviour:
   DefaultKeys:
   - Key: 97
     MappingTo: 0
-  - Key: 101
+  - Key: 100
     MappingTo: 1
+  - Key: 32
+    MappingTo: 2
+  - Key: 115
+    MappingTo: 3
+  - Key: 304
+    MappingTo: 4
+  - Key: 306
+    MappingTo: 5
+  - Key: 99
+    MappingTo: 6
+  - Key: 118
+    MappingTo: 7
+  - Key: 122
+    MappingTo: 8
+  - Key: 323
+    MappingTo: 9
+  - Key: 324
+    MappingTo: 10
+  - Key: 102
+    MappingTo: 11
+  - Key: 114
+    MappingTo: 12
+  - Key: 101
+    MappingTo: 13
+  - Key: 113
+    MappingTo: 14
 --- !u!114 &1288140563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,6 +475,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 598f3bfd4c81143408bff257a1f700c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6466587292385650810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350722369162630152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9982e62c7f3709c4eaed8afcddc09dbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &172470426
