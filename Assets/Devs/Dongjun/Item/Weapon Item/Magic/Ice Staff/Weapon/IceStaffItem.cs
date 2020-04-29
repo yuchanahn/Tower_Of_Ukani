@@ -29,8 +29,8 @@ public class IceStaffItem : MagicBase
 
         // Sub Timer
         Sub_CastTime.SetTick(gameObject).SetActive(false);
-        Sub_DamageTick.SetTick(gameObject).SetActive(false);
-        Sub_ManaUsageTick.SetTick(gameObject).SetActive(false);
+        Sub_DamageTick.SetTick(gameObject).SetActive(false).ToEnd();
+        Sub_ManaUsageTick.SetTick(gameObject).SetActive(false).ToEnd();
 
         // Special Timer
         Spec_CastTime.SetTick(gameObject).SetActive(false);

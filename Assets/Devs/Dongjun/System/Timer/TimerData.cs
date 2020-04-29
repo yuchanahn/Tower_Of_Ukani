@@ -53,12 +53,12 @@ public abstract class TimerData_Base<T> : I_TimerData
         return this as T;
     }
 
-    public void SetActive(bool active)
+    public T SetActive(bool active)
     {
         IsActive = active;
 
         if (tickMode == TickMode.Manual)
-            return;
+            return this as T;
 
         if (active == false)
         {
@@ -70,6 +70,8 @@ public abstract class TimerData_Base<T> : I_TimerData
         {
             TimerManager.Inst.AddTimer(this, tickMode);
         }
+
+        return this as T;
     }
     public void Reset() => CurTime = 0;
     public void ToEnd() => CurTime = GetEndTime;

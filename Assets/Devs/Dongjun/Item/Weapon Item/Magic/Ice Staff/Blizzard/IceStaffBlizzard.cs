@@ -35,17 +35,15 @@ public class IceStaffBlizzard : MonoBehaviour
     }
     public void End()
     {
-        iceStaffItem.Sub_DamageTick.Reset();
-        iceStaffItem.Sub_DamageTick.SetActive(false);
-        iceStaffItem.Sub_ManaUsageTick.Reset();
-        iceStaffItem.Sub_ManaUsageTick.SetActive(false);
+        iceStaffItem.Sub_DamageTick.SetActive(false).ToEnd();
+        iceStaffItem.Sub_ManaUsageTick.SetActive(false).ToEnd();
 
         PlayerActionEventManager.RemoveEvent(PlayerActions.Kill, onKill);
 
         Destroy(gameObject);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!data.IsBlizzardActive)
         {
@@ -53,28 +51,41 @@ public class IceStaffBlizzard : MonoBehaviour
             return;
         }
 
-        DealDamage();
+        var hits = Physics2D.OverlapCircleAll(transform.position, hitArea.radius, hitLayer);
+
+        SlowEnemy(hits);
+        DealDamage(hits);
         UseMana();
     }
 
-    private void DealDamage()
+    private void SlowEnemy(in Collider2D[] hits)
+    {
+        if (hits.Length == 0)
+            return;
+
+        foreach (var hit in hits)
+        {
+            // TODO: 왜 이상하냐 유찬아;;;;;;
+            StatusEffect_Slow.Create(hit.gameObject, 0.3f, 0.3f);
+        }
+    }
+    private void DealDamage(in Collider2D[] hits)
     {
         if (!iceStaffItem.Sub_DamageTick.IsEnded)
             return;
 
         iceStaffItem.Sub_DamageTick.Reset();
 
-        var hits = Physics2D.OverlapCircleAll(transform.position, hitArea.radius, hitLayer);
-        if (hits.Length != 0)
-        {
-            AttackData attackData = iceStaffItem.Sub_DamagePerTick;
-            attackData.damageDealer = gameObject;
+        if (hits.Length == 0)
+            return;
 
-            foreach (var hit in hits)
-            {
-                PlayerStats.Inst.DealDamage(attackData, hit.gameObject,
-                    PlayerActions.WeaponHit);
-            }
+        AttackData attackData = iceStaffItem.Sub_DamagePerTick;
+        attackData.damageDealer = gameObject;
+
+        foreach (var hit in hits)
+        {
+            PlayerStats.Inst.DealDamage(attackData, hit.gameObject,
+                PlayerActions.WeaponHit);
         }
     }
     private void UseMana()
