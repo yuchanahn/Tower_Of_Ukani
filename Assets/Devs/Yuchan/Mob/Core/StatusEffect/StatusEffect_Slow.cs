@@ -14,16 +14,19 @@ public class StatusEffect_Slow : StatusEffect_Base
 
         power = Mathf.Min(power, 1f);
         StatusEffect_Slow slow = obj.GetComponent<StatusEffect_Slow>();
+
         // 각 상태이상에 대한 초기화 설정을 해준다.
         if (slow.IsNotNull() && slow.pow > power) return;
-        else { Destroy(slow); }
-        slow = obj.AddComponent<StatusEffect_Slow>();
+        else if(slow.IsNull())
+        {
+            slow = obj.AddComponent<StatusEffect_Slow>();
+            slow.destroy_timer = new YCTimerData(time, () => Destroy(slow));
+        }
 
         // 모든 옵션에 관한, 디폴트 우선 순위 설정, 높을수록 우선순위가 높음.
         slow.priority = 8;
         slow.pow = power;
-
-        Destroy(slow, time);
+        YCTimer.Add(slow.destroy_timer);
     }
 
     void Update()

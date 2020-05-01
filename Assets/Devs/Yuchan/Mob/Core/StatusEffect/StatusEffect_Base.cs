@@ -6,7 +6,7 @@ public class StatusEffect_Base : MonoBehaviour
 {
     [SerializeField] protected int priority;
     protected StatusEffect_Object SE_Obj;
-
+    protected YCTimerData destroy_timer = null;
     protected virtual void Start()
     {
         SE_Obj = GetComponent<StatusEffect_Object>();
@@ -24,7 +24,7 @@ public class StatusEffect_Base : MonoBehaviour
 
     private void OnDestroy()
     {
-        OnSEDestroy();
+        if(SE_Obj) OnSEDestroy();
     }
     protected virtual void OnSEDestroy()
     {

@@ -13,19 +13,18 @@ public class StatusEffect_Knokback : StatusEffect_Base
         if (SE_Obj is null) return;
 
         StatusEffect_Knokback knokback = obj.GetComponent<StatusEffect_Knokback>();
-        // 각 상태이상에 대한 초기화 설정을 해준다.
-        if (knokback)
-        {
-            Destroy(knokback);
-        }
-        knokback = obj.AddComponent<StatusEffect_Knokback>();
 
-        // 모든 옵션에 관한, 디폴트 우선 순위 설정, 높을수록 우선순위가 높음.
+        if (knokback.IsNull())
+        {
+            knokback = obj.AddComponent<StatusEffect_Knokback>();
+            knokback.destroy_timer = new YCTimerData(power.keys[power.length - 1].time, () => Destroy(knokback));
+        }
+
         knokback.priority = 9;
         knokback.mDir2d = dir;
         knokback.pow = power;
-
-        Destroy(knokback, power.keys[power.length - 1].time);
+        
+        YCTimer.Add(knokback.destroy_timer);
     }
 
     Vector2 mDir2d;

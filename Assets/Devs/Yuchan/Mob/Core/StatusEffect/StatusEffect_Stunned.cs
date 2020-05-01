@@ -18,18 +18,18 @@ public class StatusEffect_Stunned : StatusEffect_Base
 
         StatusEffect_Stunned SE_Stunned = obj.GetComponent<StatusEffect_Stunned>();
         // 각 상태이상에 대한 초기화 설정을 해준다.
-        if (SE_Stunned is null)
-            SE_Stunned      = obj.AddComponent<StatusEffect_Stunned>();
-
-
-
+        if (SE_Stunned.IsNull())
+        {
+            SE_Stunned = obj.AddComponent<StatusEffect_Stunned>();
+            SE_Stunned.destroy_timer = new YCTimerData(StunnedTime, () => Destroy(SE_Stunned));
+        }
 
         // 우선 순위 설정 높을수록 우선순위가 높음.
         SE_Stunned.priority = 10;
         SE_Stunned.StunnedObj = StunnedObj;
         StunnedObj.SetActive(true);
 
-        Destroy(SE_Stunned, StunnedTime);
+        YCTimer.Add(SE_Stunned.destroy_timer);
     }
     void Update()
     {
