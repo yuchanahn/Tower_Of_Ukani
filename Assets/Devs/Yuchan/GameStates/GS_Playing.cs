@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GS_Playing : MonoBehaviour, IGameState
 {
@@ -10,8 +11,12 @@ public class GS_Playing : MonoBehaviour, IGameState
         GS.transition_event<GS_GameOver, GS_Playing>(()=> { Debug.Log("상태 바뀜."); });
     }
 
+
+    Text state = null;
+
     public void run()
     {
-        Debug.Log("playing");
+        state.IsNull().IF(()=> state = GameObject.Find("GameState").GetComponent<Text>());
+        state.text = GetType().Name;
     }
 }

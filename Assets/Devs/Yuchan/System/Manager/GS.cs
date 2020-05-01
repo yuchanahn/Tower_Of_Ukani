@@ -8,23 +8,48 @@ public interface IGameState
     void run();
 }
 
+
+public struct GSValue_t
+{
+    public bool 무기_에임;
+    public bool 아이템_드롭_엔드_픽업;
+    public bool 액티브_사용;
+    public bool 플레이어_움직임_인풋_허용;
+}
+
 public class GS : MonoBehaviour
 {
     static Dictionary<Type, Action> events = new Dictionary<Type, Action>();
+    static Dictionary<Type, Action> end_events = new Dictionary<Type, Action>();
     static Dictionary<string, Action> tevents = new Dictionary<string, Action>();
     static YCCE<IGameState> cur_state = new YCCE<IGameState>();
-    Type pt = null;
+    Type prev_type = null;
     internal static IGameState CurState { get => cur_state.Value; set => cur_state.Value = value; }
+
+    public static GSValue_t SV;
 
     private void Awake()
     {
-        cur_state.add_prev_event(()=> { if(cur_state.Value != null) pt = cur_state.Value.GetType(); });
+        // set GS value Defult
+        SV.무기_에임 = true;
+        SV.아이템_드롭_엔드_픽업 = true;
+        SV.액티브_사용 = true;
+        SV.플레이어_움직임_인풋_허용 = true;
+
+
+        cur_state.add_prev_event(()=> { 
+            if (cur_state.Value != null)
+            {
+                end_events.HasKey(CurState.GetType(), () => end_events[CurState.GetType()]());
+                prev_type = cur_state.Value.GetType();
+            }
+        });
         cur_state.add_event(() =>
         {
             events.HasKey(CurState.GetType(), () => events[CurState.GetType()]());
-            if (pt != null)
+            if (prev_type != null)
             {
-                var key = pt.Name + CurState.GetType().Name;
+                var key = prev_type.Name + CurState.GetType().Name;
                 tevents.HasKey(key, ()=>tevents[key]());
             }
         });
@@ -49,5 +74,10 @@ public class GS : MonoBehaviour
     public static void start_event<T>(Action f2)
     {
         events.HasKeyOr(typeof(T), () => events[typeof(T)] += f2, () => events[typeof(T)] = f2);
+    }
+
+    public static void end_event<T>(Action f2)
+    {
+        end_events.HasKeyOr(typeof(T), () => end_events[typeof(T)] += f2, () => end_events[typeof(T)] = f2);
     }
 }

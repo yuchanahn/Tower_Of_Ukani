@@ -37,7 +37,7 @@ public class AStat : MonoBehaviour, IDamage
         //PlayerStatus.Inst.Trigger(GetComponent<Mob_Base>(), MobAction.Hit);
 
         GetComponent<HitColorEffect>().OnHit();
-        if(/* atk data : play_hit_ani */ true)
+        if(/* atk data : play_hit_ani */ false)
         {
             GetComponent<IHurt>().OnHurt();
         }
