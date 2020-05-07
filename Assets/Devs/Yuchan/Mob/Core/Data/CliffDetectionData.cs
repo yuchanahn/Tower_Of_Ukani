@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System;
 using Dongjun.Helper;
+using UnityEditor.PackageManager;
 
 public class CliffDetect_Logic
 {
@@ -68,6 +69,12 @@ public class CliffDetect_Logic
     {
         return GridView.Inst[GM.CurMapName][1].GetNodeAtWorldPostiton(t.transform.position).pos;
     }
+
+    static Vector2 GetPointToPos(Point p)
+    {
+        return GridView.Inst[GM.CurMapName][1].getNodePosAsWorldPos(p);
+    }
+
     static bool IsWall(Point point)
     {
         return GridView.Inst[GM.CurMapName][1].grid.GetNode(point).isObstacle;
@@ -99,14 +106,22 @@ public class CliffDetect_Logic
         
         var point = GetGridPos(check[check.Length - 1]);
 
-        for (var i = 0; i < (MaxHeightY - Pos1.y) + 1; i++, --point.row)
+
+        if(JumpHeight <= check.Length)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < JumpHeight + size.y; i++, --point.row)
         {
             if (!IsWall(point))
             {
+                //GameObject.Instantiate(GM.test_mark_, GetPointToPos(point), Quaternion.identity);
                 Possible = Possible ? true : (size.y <= ++NotWallStack);
             }
             else
             {
+                //GameObject.Instantiate(GM.test_mark_2, GetPointToPos(point), Quaternion.identity);
                 NotWallStack = 0;
             }
         }

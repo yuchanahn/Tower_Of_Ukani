@@ -41,12 +41,17 @@ public class GM : MonoBehaviour
 
     public float pos;
 
+    [SerializeField] public GameObject test_mark;
+    [SerializeField] public GameObject test_mark2;
+    static public GameObject test_mark_;
+    static public GameObject test_mark_2;
 
     void Awake()
     {
         Inst = this;
         player = FindObjectOfType<OBB_Player>();
-
+        test_mark_ = test_mark;
+        test_mark_2 = test_mark2;
         MapSizeDefult.for_each( x => MapSizeOf[x.MapName] = x.MapSize );
         testcur = test_cur;
     }
