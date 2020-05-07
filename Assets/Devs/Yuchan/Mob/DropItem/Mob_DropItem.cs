@@ -12,6 +12,13 @@ public struct RangeInt
 }
 
 [System.Serializable]
+public struct RangeFloat
+{
+    public float min;
+    public float max;
+}
+
+[System.Serializable]
 public struct ItemDropInfo
 {
     public Item item;
