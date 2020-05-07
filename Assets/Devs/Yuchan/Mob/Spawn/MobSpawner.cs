@@ -6,38 +6,19 @@ using UnityEngine;
 public struct SpawnData
 {
     public Mob_Base mob;
-    public float mob_spawn_rate;
-    public AnimationCurve start_jump;
-    public Transform start_dir;
+    public int chance;
 }
 
 
 public class MobSpawner : MonoBehaviour
 {
     public SpawnData[] table;
-    Vector2 dir(Transform d) => (d.position - transform.position).normalized;
 
-
-    private void Start()
+    public void Spawn(Vector2 pos)
     {
-        table.for_each(x => start_spawn(x));
-    }
-    private void OnDestroy()
-    {
-        table.for_each(d => ATimer.Pop("" + GetInstanceID() + d.GetHashCode()));
-
-    }
-
-    void start_spawn(SpawnData d)
-    {
-        StatusEffect_Knokback.Create(Instantiate(d.mob.gameObject, transform.position, Quaternion.identity), dir(d.start_dir), d.start_jump);
-        StartCoroutine(one_frame(() => ATimer.SetAndReset("" + GetInstanceID() + d.GetHashCode(), d.mob_spawn_rate, () => start_spawn(d))));
-    }
-
-
-    IEnumerator one_frame(System.Action act)
-    {
-        yield return new WaitForEndOfFrame();
-        act();
+        var gv = GridView.Inst[GM.CurMapName][1];
+        while(gv.GetNodeAtWorldPostiton(pos).isObstacle) pos.x += 1;
+        
+        table.for_each(x=>ARandom.Get(x.chance).IF(()=>Instantiate(x.mob, pos, Quaternion.identity)));
     }
 }
