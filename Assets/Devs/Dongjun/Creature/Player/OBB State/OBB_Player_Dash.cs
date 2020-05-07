@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class OBB_Player_Dash : OBB_Player_State
@@ -17,8 +18,11 @@ public class OBB_Player_Dash : OBB_Player_State
     #endregion
 
     #region Var: Dash
-    private float dashTime_Cur = 0;
+    private readonly TimerData dashTimer = new TimerData();
     private int dashDir = 0;
+    private float curDist = 0;
+    private float curSpeed = 0;
+    private float curTime = 0;
     private bool isUsingMelee = false;
     #endregion
 
@@ -40,6 +44,39 @@ public class OBB_Player_Dash : OBB_Player_State
     {
         // Init Status
         status_IgnoreDamage = new PlayerStatus_IgnoreDamage(data.StatusID, gameObject);
+
+        // Init Timer
+        dashTimer.EndTime = dashTime;
+        dashTimer
+            .SetTick(gameObject, TickMode.FixedUpdate)
+            .SetActive(false)
+            .SetAction(
+                onTick: () =>
+                {
+                    float distLeft = dashDist - curDist;
+                    float timeLeft = dashTime - curTime;
+                    float clampedDeltaTime = Mathf.Min(Time.fixedDeltaTime, timeLeft);
+
+                    curSpeed = distLeft / timeLeft;
+                    curTime = Mathf.Min(dashTime, curTime + clampedDeltaTime);
+                    curDist = Mathf.Min(dashDist, curDist + (curSpeed * clampedDeltaTime));
+
+                    data.RB2D.velocity = Vector2.right * dashDir * (curSpeed * clampedDeltaTime / Time.fixedDeltaTime);
+
+                    // Trigger Event
+                    PlayerActionEventManager.Trigger(PlayerActions.Dashing);
+
+                    // Trail Effect
+                    if (curTime >= dashTime * (curTrailCount / trailCount))
+                    {
+                        curTrailCount++;
+                        data.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, data.bodySpriteRenderer.transform);
+                    }
+                },
+                onEnd: () =>
+                {
+                    DashDone = true;
+                });
     }
     #endregion
 
@@ -48,31 +85,38 @@ public class OBB_Player_Dash : OBB_Player_State
     {
         // Init Value
         dashDir = PlayerInputManager.Inst.Input_DashDir;
+        dashTimer.SetActive(true);
 
         // Reset Collider Size
-        data.groundDetectionData.Reset_IWSolid_ColSize();
+        //data.groundDetectionData.Reset_IWSolid_ColSize();
 
-        // Status Effect
+        // Reset Velocity
+        data.RB2D.velocity = Vector2.zero;
+
+        // Apply Status Effect
         PlayerStatus.AddEffect(status_IgnoreDamage);
 
-        // Trigger Item Effect
+        // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.DashStart);
     }
     public override void OnExit()
     {
         // Reset Value
-        DashDone = false;
+        dashTimer.SetActive(false).Reset();
         dashDir = 0;
-        dashTime_Cur = 0;
+        curDist = 0;
+        curSpeed = 0;
+        curTime = 0;
         curTrailCount = 0;
+        DashDone = false;
 
-        // Reset Vel
-        data.RB2D.velocity = new Vector2(0, 0);
+        // Reset Velocity
+        data.RB2D.velocity = Vector2.zero;
 
-        // Status Effect
+        // Remove Status Effect
         PlayerStatus.RemoveEffect(status_IgnoreDamage);
 
-        // Trigger Item Effect
+        // Trigger Event
         PlayerActionEventManager.Trigger(PlayerActions.DashEnd);
 
         // When Using Melee Weapon
@@ -102,29 +146,6 @@ public class OBB_Player_Dash : OBB_Player_State
 
         // Play Animation
         data.Animator.Play(dashDir == data.Dir ? "Dash_Forward" : "Dash_Backward");
-    }
-    public override void OnFixedUpdate()
-    {
-        // Timer
-        dashTime_Cur += Time.fixedDeltaTime;
-        if (dashTime_Cur >= dashTime)
-        {
-            DashDone = true;
-            return;
-        }
-
-        // Dash
-        data.RB2D.velocity = new Vector2(dashDir * (dashDist / dashTime), 0);
-
-        // Trigger Item Effect
-        PlayerActionEventManager.Trigger(PlayerActions.Dashing);
-
-        // Trail Effect
-        if (dashTime_Cur >= dashTime * (curTrailCount / trailCount))
-        {
-            curTrailCount++;
-            data.bodySpriteRenderer.SpawnTrail(spriteTrailObject, trailDuration, data.bodySpriteRenderer.transform);
-        }
     }
     #endregion
 }

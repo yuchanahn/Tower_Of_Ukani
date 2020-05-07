@@ -27,17 +27,21 @@ public class ScreenToggleManager : MonoBehaviour
 
     private void ToggleCLI()
     {
+        // TODO:
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
+            //if (GS.CurState == FindObjectOfType<GS_GameOver>())
+            //    return;
+
             cli.Toggle();
 
             if (cli.gameObject.activeSelf)
             {
-                Time.timeScale = 0;
+                //GS.CurState = FindObjectOfType<GS_Pause>();
             }
             else
             {
-                Time.timeScale = 1;
+                //GS.CurState = 이전 상태
             }
         }
     }
